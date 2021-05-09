@@ -1,0 +1,19 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+footer {
+  background-color: #009a66;
+}
+
+nav {
+  background-color: #a01010;
+}
+
+.navbar a {
+  color: black;
+  font-size: x-large;
+}
