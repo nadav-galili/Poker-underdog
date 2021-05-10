@@ -2,37 +2,33 @@ const Joi = require("@hapi/joi");
 const mongoose = require("mongoose");
 
 const gameSchema = new mongoose.Schema({
-  players: {
-    user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    cashing: {
-      type: Number,
-      required: true,
-    },
-    profit: {
-      type: Number,
-      required: true,
-    },
-    rank: {
-      type: Number,
-      required: true,
-    },
+  group: {
+    type: String,
   },
-  createdAt: { type: Date, default: Date.now },
+  players: {
+    type: Array,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now(),
+  },
 });
+
+//   createdAt: { type: Date, default: Date.now },
+// });
 
 const Game = mongoose.model("Game", gameSchema);
 
-function validateGame(game) {
-  const schema = Joi.object({
-    players: {
-      cashing: Joi.number().required(),
-      profit: Joi.number().required(),
-      rank: Joi.number().required(),
-    },
-  });
+// function validateGame(game) {
+//   const schema = Joi.object({
+//     players_list: Joi.array().items(
+//       Joi.Number(),
+//       Joi.Mongoose.Schema.Types.ObjectId()
+//     ),
+//   });
 
-  return schema.validate(game);
-}
-
+//   return schema.validate(game);
+// }
 exports.Game = Game;
-exports.validateGame = validateGame;
+
+// module.exports = mongoose.model("game", gameSchema);
