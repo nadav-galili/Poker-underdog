@@ -1,8 +1,8 @@
 const Joi = require("@hapi/joi");
 const mongoose = require("mongoose");
 
-const gameSchema = new mongoose.Schema({
-  team: {
+const teamSchema = new mongoose.Schema({
+  name: {
     type: String,
     required: true,
     minlength: 2,
@@ -18,14 +18,15 @@ const gameSchema = new mongoose.Schema({
   },
 });
 
-const Game = mongoose.model("Game", gameSchema);
+const Team = mongoose.model("Team", teamSchema);
 
-function validateGame(game) {
+function validateTeam(team) {
   const schema = Joi.object({
-    team: Joi.string().min(2).max(255).required(),
+    name: Joi.string().min(2).max(255).required(),
     players: Joi.array().required(),
   });
-  return schema.validate(game);
+  return schema.validate(team);
 }
-exports.Game = Game;
-exports.validate = validateGame;
+
+exports.Team = Team;
+exports.validate = validateTeam;
