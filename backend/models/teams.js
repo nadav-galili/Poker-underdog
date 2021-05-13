@@ -1,5 +1,6 @@
 const Joi = require("@hapi/joi");
 const mongoose = require("mongoose");
+const _ = require("lodash");
 
 const teamSchema = new mongoose.Schema({
   name: {
@@ -12,10 +13,24 @@ const teamSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
+  teamImage: {
+    type: String,
+    required: true,
+    minlength: 11,
+    maxlength: 1024,
+  },
+  teamNumber: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 99999999999,
+    unique: true,
+  },
   created_at: {
     type: Date,
     default: Date.now(),
   },
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
 const Team = mongoose.model("Team", teamSchema);
@@ -28,5 +43,13 @@ function validateTeam(team) {
   return schema.validate(team);
 }
 
+async function generateTeamNumber(Team) {
+  while (true) {
+    let randomNumber = _.random(1000, 999999);
+    let team = await Team.findOne({ teamNumber: randomNumber });
+    if (!team) return String(randomNumber);
+  }
+}
 exports.Team = Team;
-exports.validate = validateTeam;
+exports.validateTeam = validateTeam;
+exports.generateTeamNumber = generateTeamNumber;

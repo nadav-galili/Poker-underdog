@@ -5,6 +5,8 @@ import Form from "./common/form";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
 import { toast } from "react-toastify";
+import userService from "../services/userService";
+import { Redirect } from "react-router-dom";
 
 class Signup extends Form {
   state = {
@@ -24,7 +26,8 @@ class Signup extends Form {
     try {
       await http.post(`${apiUrl}/users`, data);
       toast("A new acoount is opened");
-      this.props.history.replace("/signin");
+      await userService.login(data.email, data.password);
+      window.location = "/create-team";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         this.setState({ errors: { email: "Email is taken" } });
@@ -33,6 +36,8 @@ class Signup extends Form {
   };
 
   render() {
+    if (userService.getCurrentUser()) return <Redirect to="/" />;
+
     return (
       <div className="container">
         <PageHeader titleText="Signup for Poker Underdog" />

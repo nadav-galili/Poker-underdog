@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
     maxlength: 1024,
   },
   createdAt: { type: Date, default: Date.now },
+  teams: Array,
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -43,5 +44,12 @@ function validateUser(user) {
   return schema.validate(user);
 }
 
+function validateTeams(data) {
+  const schema = Joi.object({
+    teams: Joi.array().min(1).required(),
+  });
+  return schema.validate(data);
+}
 exports.User = User;
 exports.validate = validateUser;
+exports.validateTeams = validateTeams;

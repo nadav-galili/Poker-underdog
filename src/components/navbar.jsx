@@ -34,6 +34,13 @@ class Navbar extends Component {
                   Demo
                 </Link>
               </li>
+              <li className="nav-item">
+                {user && (
+                  <NavLink className="nav-item nav-link" to="/my-teams">
+                    My Teams
+                  </NavLink>
+                )}
+              </li>
             </ul>
             <ul className="navbar-nav ms-auto">
               {!user && (
@@ -48,6 +55,11 @@ class Navbar extends Component {
                       Signup
                     </NavLink>
                   </li>
+                  {/* <li className="nav-item">
+                    <NavLink className="nav-item nav-link" to="/teamSignup">
+                      Teams
+                    </NavLink>
+                  </li> */}
                 </React.Fragment>
               )}
               {user && (

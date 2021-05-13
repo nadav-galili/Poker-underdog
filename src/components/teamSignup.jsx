@@ -2,40 +2,47 @@ import React from "react";
 import PageHeader from "./common/pageHeader";
 import Joi from "joi-browser";
 import Form from "./common/form";
+import http from "../services/httpService";
+import { apiUrl } from "../config.json";
 import userService from "../services/userService";
 import { Redirect } from "react-router-dom";
 
-class Signin extends Form {
+class TeamSignup extends Form {
   state = {
-    data: { email: "", password: "" },
+    data: { email: "", password: "", name: "" },
     errors: {},
   };
 
   schema = {
     email: Joi.string().required().email().label("Email"),
     password: Joi.string().required().min(6).label("Password"),
+    name: Joi.string().required().min(2).label("Name"),
   };
 
   doSubmit = async () => {
-    const { email, password } = this.state.data;
+    const { data } = this.state;
+    data.team = true;
+
     try {
-      await userService.login(email, password);
-      window.location = "/";
+      await http.post(`${apiUrl}/users`, data);
+      await userService.login(data.email, data.password);
+      window.location = "/createTeam";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
-        this.setState({ errors: { email: ex.response.data } });
+        this.setState({ errors: { email: "Email is taken" } });
       }
     }
   };
 
   render() {
     if (userService.getCurrentUser()) return <Redirect to="/" />;
+
     return (
       <div className="container">
-        <PageHeader titleText="Signin to Poker Underdog" />
+        <PageHeader titleText="Teams Registration Form" />
         <div className="row">
           <div className="col-12">
-            <p>You can signin here with your account!</p>
+            <p>Open a new team for free!</p>
           </div>
         </div>
         <div className="row">
@@ -43,7 +50,8 @@ class Signin extends Form {
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
               {this.renderInput("email", "Email", "email")}
               {this.renderInput("password", "Password", "password")}
-              {this.renderButton("Signin")}
+              {this.renderInput("name", "Name")}
+              {this.renderButton("Next")}
             </form>
           </div>
         </div>
@@ -52,4 +60,4 @@ class Signin extends Form {
   }
 }
 
-export default Signin;
+export default TeamSignup;

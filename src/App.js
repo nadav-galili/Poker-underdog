@@ -6,10 +6,15 @@ import Home from "./components/home";
 import Signup from "./components/signup";
 import Signin from "./components/signin";
 import Logout from "./components/logout";
+import TeamSignup from "./components/teamSignup";
+import CreateTeam from "./components/createTeam";
 import { Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import userService from "./services/userService";
+import ProtectedRoute from "./components/common/protectedRoutes";
+import MyTeams from "./components/myTeams";
+import { createTeam } from "./services/teamService";
 
 class App extends Component {
   state = {};
@@ -30,10 +35,12 @@ class App extends Component {
         </header>
         <main style={{ minHeight: 900 }}>
           <Switch>
+            <ProtectedRoute path="/my-teams" component={MyTeams} />
+            <ProtectedRoute path="/create-team" component={createTeam} />
+            <Route path="/teamSignup" component={TeamSignup} />
             <Route path="/logout" component={Logout} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
-            {/* <Route path="/about" component={About} /> */}
             <Route path="/" exact component={Home} />
           </Switch>
         </main>
