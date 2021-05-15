@@ -4,6 +4,12 @@ const { Team, validateTeam, generateTeamNumber } = require("../models/teams");
 const auth = require("../middleware/auth");
 const router = express.Router();
 
+//get all the teams of a specific user
+router.get("/my-teams", auth, async (req, res) => {
+  const teams = await Team.find({ user_id: req.user._id });
+  res.send(teams);
+});
+
 // specific team
 router.get("/:teamId", auth, async (req, res) => {
   const team = await Team.findById(req.params.teamId);
@@ -12,8 +18,8 @@ router.get("/:teamId", auth, async (req, res) => {
 
 // gets back all the teams
 router.get("/", auth, async (req, res) => {
-  const team = await Team.find();
-  res.send(team);
+  const teams = await Team.find({ user_id: req.user._id });
+  res.send(teams);
 });
 
 // submits a new team

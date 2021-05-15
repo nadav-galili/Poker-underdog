@@ -1,27 +1,34 @@
-import React from "react";
+import React, { Component } from "react";
 import PageHeader from "./common/pageHeader";
+import teamService from "../services/teamService";
+import Team from "./team";
 
-const MyTeam = () => {
-  return (
-    <div className="container mt-5">
-      <PageHeader titleText="My Teams Page" />
-      <div className="row">
-        <div className="col-12 teams">
-          <p>Here you can create a new team or join an existing team</p>
-          <p>Your teams in the list below...</p>
+class MyTeams extends Component {
+  state = {
+    teams: [],
+  };
 
-          <div className="team-buttons">
-            <button type="button" class="btn btn-primary btn-lg">
-              Open a new team
-            </button>
-            <button type="button" class="btn btn-primary btn-lg">
-              Join a team
-            </button>
+  async componentDidMount() {
+    const { data } = await teamService.getMyTeam();
+    if (data.length > 0) this.setState({ teams: data });
+  }
+  render() {
+    const { teams } = this.state;
+    return (
+      <div className="container">
+        <PageHeader titleText="My Teams Page" />
+        <div className="row">
+          <div className="col-12">
+            <p>Your teams in the list below...</p>
           </div>
         </div>
+        <div className="row">
+          {teams.length > 0 &&
+            teams.map((team) => <Team key={team._id} team={team} />)}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default MyTeam;
+export default MyTeams;
