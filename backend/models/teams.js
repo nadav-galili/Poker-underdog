@@ -39,6 +39,7 @@ function validateTeam(team) {
   const schema = Joi.object({
     name: Joi.string().min(2).max(255).required(),
     players: Joi.array().required(),
+    teamImage: Joi.string().min(11).max(1025),
   });
   return schema.validate(team);
 }

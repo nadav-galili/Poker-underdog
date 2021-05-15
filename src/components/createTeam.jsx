@@ -19,10 +19,11 @@ class CreateTeam extends Form {
 
   doSubmit = async () => {
     const { data } = this.state;
+
     if (!data.teamImage) delete data.teamImage;
     await teamService.createTeam(this.state.data);
     toast("A new Team is opened");
-    this.props.history.replace("/my-team");
+    this.props.history.replace("/my-teams");
   };
 
   render() {
