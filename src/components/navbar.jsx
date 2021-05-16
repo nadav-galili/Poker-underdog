@@ -5,10 +5,11 @@ class Navbar extends Component {
   state = {};
   render() {
     const { user } = this.props;
+
     return (
       <nav className="navbar navbar-expand-lg shadow-sm ">
         <div className="container">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/#">
             Poker-underdog
           </Link>
           <button
@@ -25,12 +26,16 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink className="nav-link active" aria-current="page" to="/">
+                <NavLink
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/#"
+                >
                   About
                 </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/">
+                <Link className="nav-link" aria-current="page" to="/#">
                   Demo
                 </Link>
               </li>
@@ -55,15 +60,15 @@ class Navbar extends Component {
                       Signup
                     </NavLink>
                   </li>
-                  <li className="nav-item">
-                    <NavLink className="nav-item nav-link" to="/create-team">
-                      Teams
-                    </NavLink>
-                  </li>
                 </React.Fragment>
               )}
               {user && (
                 <React.Fragment>
+                  <li className="nav-item">
+                    <NavLink className="nav-item nav-link" to="/#">
+                      {user._id}
+                    </NavLink>
+                  </li>
                   <li className="nav-item">
                     <NavLink className="nav-item nav-link" to="/logout">
                       Logout

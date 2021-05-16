@@ -6,7 +6,6 @@ import Home from "./components/home";
 import Signup from "./components/signup";
 import Signin from "./components/signin";
 import Logout from "./components/logout";
-import TeamSignup from "./components/teamSignup";
 import CreateTeam from "./components/createTeam";
 import { Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -15,6 +14,7 @@ import userService from "./services/userService";
 import ProtectedRoute from "./components/common/protectedRoutes";
 import MyTeams from "./components/myTeams";
 import EditTeam from "./components/editTeam";
+import SelectPlayers from "./components/selectPlayers";
 
 class App extends Component {
   state = {};
@@ -41,7 +41,11 @@ class App extends Component {
             />
             <ProtectedRoute path="/my-teams" component={MyTeams} />
             <ProtectedRoute path="/create-team" component={CreateTeam} />
-            <Route path="/teamSignup" component={TeamSignup} />
+            <ProtectedRoute
+              path="/new-game/:teamId"
+              component={SelectPlayers}
+            />
+
             <Route path="/logout" component={Logout} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
