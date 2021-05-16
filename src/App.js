@@ -14,7 +14,6 @@ import "react-toastify/dist/ReactToastify.css";
 import userService from "./services/userService";
 import ProtectedRoute from "./components/common/protectedRoutes";
 import MyTeams from "./components/myTeams";
-import editTeam from "./components/editTeam";
 import EditTeam from "./components/editTeam";
 
 class App extends Component {

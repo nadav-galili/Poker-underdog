@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Team = ({ team }) => {
+const Team = ({ team, removeTeam }) => {
   return (
     <div className="col-md-6 col-lg-4 mt-3">
       <div className="card">
@@ -12,10 +12,26 @@ const Team = ({ team }) => {
           <p className="card-text border-top pt-2">
             Created At:{team.created_at}
           </p>
-          <Link to={`/my-teams/edit/${team._id}`}>Edit</Link> |
-          <Link className="ml-2" to={`/my-teams/delete/${team._id}`}>
+          <p>
+            <Link to={`/my-teams/edit/${team._id}`}>
+              <i className="fas fa-edit ms-1"></i>
+              Edit
+            </Link>{" "}
+          </p>
+          <p>
+            <i className="fas fa-trash-alt me-1 "></i>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={removeTeam}
+            >
+              Delete Team
+            </button>
+          </p>
+          {/* <Link className="ml-2" to={`/my-teams/delete/${team._id}`}>
+            <i className="fas fa-trash-alt me-1 "></i>
             Delete
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

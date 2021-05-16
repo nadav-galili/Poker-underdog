@@ -15,12 +15,18 @@ export function createTeam(team) {
   return http.post(`${apiUrl}/teams`, team);
 }
 
-function getMyTeam() {
+export function getMyTeam() {
   return http.get(`${apiUrl}/teams/my-teams`);
 }
+
+export function deleteTeam(teamId) {
+  return http.delete(`${apiUrl}/teams/${teamId}`);
+}
+
 export default {
   createTeam,
   getMyTeam,
   getTeam,
   editTeam,
+  deleteTeam,
 };
