@@ -14,6 +14,8 @@ import "react-toastify/dist/ReactToastify.css";
 import userService from "./services/userService";
 import ProtectedRoute from "./components/common/protectedRoutes";
 import MyTeams from "./components/myTeams";
+import editTeam from "./components/editTeam";
+import EditTeam from "./components/editTeam";
 
 class App extends Component {
   state = {};
@@ -34,6 +36,10 @@ class App extends Component {
         </header>
         <main style={{ minHeight: 900 }}>
           <Switch>
+            <ProtectedRoute
+              path="/my-teams/edit/:teamId"
+              component={EditTeam}
+            />
             <ProtectedRoute path="/my-teams" component={MyTeams} />
             <ProtectedRoute path="/create-team" component={CreateTeam} />
             <Route path="/teamSignup" component={TeamSignup} />
