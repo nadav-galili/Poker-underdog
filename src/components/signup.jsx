@@ -40,7 +40,7 @@ class Signup extends Form {
 
     return (
       <div className="container">
-        <PageHeader titleText="Signup for Poker Underdog" />
+        <PageHeader titleText="Join an existing team" />
         <div className="row">
           <div className="col-12">
             <p>You can open new account for free!</p>

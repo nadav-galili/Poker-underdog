@@ -10,6 +10,12 @@ router.get("/my-teams", auth, async (req, res) => {
   res.send(teams);
 });
 
+//get by number
+router.get("/numbers/:teamNumber", auth, async (req, res) => {
+  const teams = await Team.find({ teamNumber: req.params.teamNumber });
+  res.send(teams);
+});
+
 // specific team
 router.get("/:teamId", auth, async (req, res) => {
   const team = await Team.findById(req.params.teamId);
@@ -38,19 +44,12 @@ router.post("/", auth, async (req, res) => {
 
   let post = await team.save();
   res.send(post);
-
-  // let team = await Team.findOne({ name: req.body.name });
-  // if (team) return res.status(400).send("Team already registered");
-  // team = new Team(_.pick(req.body, ["name", "players"]));
-  // const randomNumber = await generateTeamNumber(Team);
-  // await team.save();
-  // res.send(_.pick(team, ["_id", "name", "players"]), randomNumber);
 });
 
-//edit a specific team
+//edit a specific team by id
 router.put("/:teamId", auth, async (req, res) => {
-  const { error } = validateTeam(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  // const { error } = validateTeam(req.body);
+  // if (error) return res.status(400).send(error.details[0].message);
 
   let team = await Team.findOneAndUpdate(
     { _id: req.params.teamId, user_id: req.user._id },
@@ -63,7 +62,6 @@ router.put("/:teamId", auth, async (req, res) => {
   res.send(team);
 });
 
-//delete a team
 router.delete("/:teamId", auth, async (req, res) => {
   const team = await Team.findOneAndRemove({
     _id: req.params.teamId,

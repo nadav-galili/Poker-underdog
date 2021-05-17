@@ -29,7 +29,12 @@ class MyTeams extends Component {
           <div className="col-12">
             <p className="my-2">
               <Link className="btn btn-primary ms-2" to="/create-team">
-                +Add Team
+                +Add A New Team
+              </Link>
+            </p>
+            <p className="my-2">
+              <Link className="btn btn-primary ms-2" to="/join-team">
+                Join An Existing Team
               </Link>
             </p>
             {teams.length > 0 && <p>Your teams in the list below</p>}

@@ -60,11 +60,11 @@ class EditTeam extends Form {
           <div className="col-lg-6">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
               {this.renderInput("name", "Team Name")}
-              {this.renderInput("players", "Players")}
+              {/* {this.renderInput("players", "Players")} */}
               {this.renderInput("teamImage", "Team Image")}
               {this.renderButton("Update Team")}
               <button
-                className="btn btn-secondary ms-2 "
+                className="btn btn-secondary ms-2 mt-3"
                 onClick={this.handleCancel}
               >
                 Cancel

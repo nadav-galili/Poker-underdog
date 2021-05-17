@@ -24,8 +24,6 @@ export function getCurrentUser() {
 export async function login(email, password) {
   const { data } = await http.post(`${apiUrl}/auth`, { email, password });
   localStorage.setItem(tokenKey, data.token);
-  //setname to storage
-  localStorage.setItem("email", email);
 }
 
 export default {

@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/common/protectedRoutes";
 import MyTeams from "./components/myTeams";
 import EditTeam from "./components/editTeam";
 import SelectPlayers from "./components/selectPlayers";
+import JoinTeam from "./components/joinTeam";
 
 class App extends Component {
   state = {};
@@ -44,6 +45,11 @@ class App extends Component {
             <ProtectedRoute
               path="/new-game/:teamId"
               component={SelectPlayers}
+            />
+            <ProtectedRoute
+              path="/join-team"
+              component={JoinTeam}
+              user={user}
             />
 
             <Route path="/logout" component={Logout} />
