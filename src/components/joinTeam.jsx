@@ -27,6 +27,7 @@ class JoinTeam extends Form {
     console.log("team after:", team);
     await user.data.teams.push(team.data[0]._id);
     console.log("user", user);
+    await userService.editUserDetails(user.data);
 
     // if (!data.teamImage) delete data.teamImage;
     // await teamService.createTeam(this.state.data);

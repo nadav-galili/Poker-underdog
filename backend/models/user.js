@@ -23,8 +23,10 @@ const userSchema = new mongoose.Schema({
     minlength: 6,
     maxlength: 1024,
   },
+  teams: {
+    type: Array,
+  },
   createdAt: { type: Date, default: Date.now },
-  teams: Array,
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -39,6 +41,7 @@ function validateUser(user) {
     name: Joi.string().min(2).max(255).required(),
     email: Joi.string().min(6).max(255).required().email(),
     password: Joi.string().min(6).max(1024).required(),
+    teams: Joi.array(),
   });
 
   return schema.validate(user);
