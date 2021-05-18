@@ -37,7 +37,9 @@ router.patch("/teams", auth, async (req, res) => {
 });
 
 router.get("/me", auth, async (req, res) => {
-  const user = await User.findById(req.user._id).select("-password");
+  let user = await User.findById(req.user._id)
+    .select("-createdAt")
+    .select("-__v");
   res.send(user);
 });
 
@@ -54,6 +56,20 @@ router.post("/", async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();
   res.send(_.pick(user, ["_id", "name", "email"]));
+});
+
+router.put("/:id", auth, async (req, res) => {
+  console.log("body", req.body);
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  let user = await User.findOneAndUpdate(
+    { _id: req.params.id, user_id: req.user.id },
+    req.body
+  );
+  if (!user)
+    return res.status(404).send("The user with the given ID was not found");
+  user = await User.findOne({ _id: req.params.id, user_id: req.user.id });
+  res.send(user);
 });
 
 module.exports = router;

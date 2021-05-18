@@ -21,11 +21,19 @@ export function getCurrentUser() {
   }
 }
 
+export function getUserDetails() {
+  return http.get(`${apiUrl}/users/me`);
+}
+
+export function editUserDetails(user) {
+  const uId = user._id;
+  delete user._id;
+  return http.put(`${apiUrl}/users/${uId}`, user);
+}
+
 export async function login(email, password) {
   const { data } = await http.post(`${apiUrl}/auth`, { email, password });
   localStorage.setItem(tokenKey, data.token);
-  //setname to storage
-  localStorage.setItem("email", email);
 }
 
 export default {
@@ -33,4 +41,6 @@ export default {
   getCurrentUser,
   logout,
   getJwt,
+  getUserDetails,
+  editUserDetails,
 };

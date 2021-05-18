@@ -5,6 +5,11 @@ export function getTeam(teamId) {
   return http.get(`${apiUrl}/teams/${teamId}`);
 }
 
+//
+export function getTeamByNumber(teamNumber) {
+  return http.get(`${apiUrl}/teams/numbers/${teamNumber}`);
+}
+
 export function editTeam(team) {
   const teamId = team._id;
   delete team._id;
@@ -29,4 +34,5 @@ export default {
   getTeam,
   editTeam,
   deleteTeam,
+  getTeamByNumber,
 };
