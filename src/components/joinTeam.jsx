@@ -34,7 +34,8 @@ class JoinTeam extends Form {
       console.log("user", user);
       await userService.editUserDetails(user.data);
       await teamService.editTeam(team.data);
-      window.location = "/my-teams";
+
+      this.props.history.push("/my-teams");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         this.setState({
@@ -60,6 +61,13 @@ class JoinTeam extends Form {
             <form onSubmit={this.handleSubmit} autoComplete="off" method="PUT">
               {this.renderInput("teamNumber", "Team Number")}
               {this.renderButton("Join Team")}
+              <button
+                type="button"
+                className="btn btn-secondary mt-3 ms-3"
+                to="my-teams"
+              >
+                Cancel
+              </button>
             </form>
           </div>
         </div>
