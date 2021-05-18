@@ -12,7 +12,11 @@ router.get("/my-teams", auth, async (req, res) => {
 
 //get by number
 router.get("/numbers/:teamNumber", auth, async (req, res) => {
-  let teams = await Team.findOne({ teamNumber: req.params.teamNumber });
+  let teams = await Team.findOne({ teamNumber: req.params.teamNumber })
+    .select("-created_at")
+    .select("-__v")
+    .select("-teamNumber")
+    .select("-user_id");
   if (!teams) return res.status(400).send("No teams found with this number");
   res.send(teams);
 });
@@ -49,13 +53,11 @@ router.post("/", auth, async (req, res) => {
 
 //edit a specific team by id
 router.put("/:teamId", auth, async (req, res) => {
-  // const { error } = validateTeam(req.body);
-  // if (error) return res.status(400).send(error.details[0].message);
+  const { error } = validateTeam(req.body);
+  if (error) console.log(error.details[0].message);
+  //if (error) return res.status(400).send(error.details[0].message);
 
-  let team = await Team.findOneAndUpdate(
-    { _id: req.params.teamId, user_id: req.user._id },
-    req.body
-  );
+  let team = await Team.findOneAndUpdate({ _id: req.params.teamId }, req.body);
   if (!team)
     return res.status(404).send("The team with the given Id was not found");
 

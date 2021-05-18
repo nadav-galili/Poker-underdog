@@ -62,7 +62,6 @@ router.put("/:id", auth, async (req, res) => {
   console.log("body", req.body);
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  if (error) console.log(error.details[0].message);
   let user = await User.findOneAndUpdate(
     { _id: req.params.id, user_id: req.user.id },
     req.body
