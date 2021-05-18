@@ -12,7 +12,8 @@ router.get("/my-teams", auth, async (req, res) => {
 
 //get by number
 router.get("/numbers/:teamNumber", auth, async (req, res) => {
-  const teams = await Team.find({ teamNumber: req.params.teamNumber });
+  let teams = await Team.findOne({ teamNumber: req.params.teamNumber });
+  if (!teams) return res.status(400).send("No teams found with this number");
   res.send(teams);
 });
 

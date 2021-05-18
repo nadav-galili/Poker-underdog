@@ -18,16 +18,23 @@ class JoinTeam extends Form {
 
   doSubmit = async () => {
     const { data } = this.state;
-    const team = await teamService.getTeamByNumber(data.teamNumber);
-    // console.log(team);
-    let user = await userService.getCurrentUser();
-    user = await userService.getUserDetails();
-    // console.log("u", user.data);
-    await team.data[0].players.push(user.data);
-    console.log("team after:", team);
-    await user.data.teams.push(team.data[0]._id);
-    console.log("user", user);
-    await userService.editUserDetails(user.data);
+
+    try {
+      const team = await teamService.getTeamByNumber(data.teamNumber);
+      let user = await userService.getCurrentUser();
+      user = await userService.getUserDetails();
+      await team.data[0].players.push(user.data);
+      console.log("team after:", team);
+      await user.data.teams.push(team.data[0]._id);
+      console.log("user", user);
+      await userService.editUserDetails(user.data);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        this.setState({
+          errors: { teamNumber: "No team was found with this team number" },
+        });
+      }
+    }
 
     // if (!data.teamImage) delete data.teamImage;
     // await teamService.createTeam(this.state.data);
