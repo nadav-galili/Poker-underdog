@@ -21,6 +21,10 @@ export function getCurrentUser() {
   }
 }
 
+export function getUserDetails() {
+  return http.get(`${apiUrl}/users/me`);
+}
+
 export async function login(email, password) {
   const { data } = await http.post(`${apiUrl}/auth`, { email, password });
   localStorage.setItem(tokenKey, data.token);
@@ -31,4 +35,5 @@ export default {
   getCurrentUser,
   logout,
   getJwt,
+  getUserDetails,
 };

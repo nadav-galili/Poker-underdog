@@ -13,18 +13,21 @@ class JoinTeam extends Form {
   };
 
   schema = {
-    teamNumber: Joi.string().required().min(6).max(60).label("Team Number"),
+    teamNumber: Joi.string().required().min(6).max(6).label("Team Number"),
   };
 
   doSubmit = async () => {
     const { data } = this.state;
+    const team = await teamService.getTeamByNumber(data.teamNumber);
+    // console.log(team);
+    let user = await userService.getCurrentUser();
+    user = await userService.getUserDetails();
+    // console.log("u", user.data);
+    await team.data[0].players.push(user.data);
+    console.log("team after:", team);
+    await user.data.teams.push(team.data[0]._id);
+    console.log("user", user);
 
-    const d = await teamService.getTeamByNumber(data.teamNumber);
-    d.data[0].players.push("f22");
-    console.log(d.data[0]);
-    console.log("id", d.data[0]._id);
-    console.log(d.data[0].players);
-    await teamService.editTeam(d.data[0]);
     // if (!data.teamImage) delete data.teamImage;
     // await teamService.createTeam(this.state.data);
 
@@ -32,6 +35,8 @@ class JoinTeam extends Form {
   };
 
   render() {
+    const { user } = this.props;
+    console.log(user);
     return (
       <div className="container">
         <PageHeader titleText="Join an existing team" />
@@ -44,7 +49,7 @@ class JoinTeam extends Form {
           <div className="col-lg-6">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="PUT">
               {this.renderInput("teamNumber", "Team Number")}
-              {this.renderButton("Create Team")}
+              {this.renderButton("Join Team")}
             </form>
           </div>
         </div>
