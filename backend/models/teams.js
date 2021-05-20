@@ -44,6 +44,16 @@ function validateTeam(team) {
   return schema.validate(team);
 }
 
+function validateTeamWithId(team) {
+  const schema = Joi.object({
+    name: Joi.string().min(2).max(255).required(),
+    players: Joi.array().required(),
+    teamImage: Joi.string().min(11).max(1025),
+    user_id: Joi.string(),
+  });
+  return schema.validate(team);
+}
+
 async function generateTeamNumber(Team) {
   while (true) {
     let randomNumber = _.random(1000, 999999);
@@ -53,4 +63,5 @@ async function generateTeamNumber(Team) {
 }
 exports.Team = Team;
 exports.validateTeam = validateTeam;
+exports.validateTeamWithId = validateTeamWithId;
 exports.generateTeamNumber = generateTeamNumber;

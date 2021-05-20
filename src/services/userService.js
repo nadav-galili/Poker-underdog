@@ -27,7 +27,7 @@ export function getUserDetails() {
 
 export function editUserDetails(user) {
   const uId = user._id;
-  delete user._id;
+  // delete user._id;
   return http.put(`${apiUrl}/users/${uId}`, user);
 }
 

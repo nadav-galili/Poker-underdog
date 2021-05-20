@@ -1,12 +1,17 @@
 const express = require("express");
 const _ = require("lodash");
-const { Team, validateTeam, generateTeamNumber } = require("../models/teams");
+const {
+  Team,
+  validateTeam,
+  validateTeamWithId,
+  generateTeamNumber,
+} = require("../models/teams");
 const auth = require("../middleware/auth");
 const router = express.Router();
 
 //get all the teams of a specific user
 router.get("/my-teams", auth, async (req, res) => {
-  const teams = await Team.find({ user_id: req.user._id });
+  const teams = await Team.find({ "players._id": req.user._id });
   res.send(teams);
 });
 
@@ -15,8 +20,8 @@ router.get("/numbers/:teamNumber", auth, async (req, res) => {
   let teams = await Team.findOne({ teamNumber: req.params.teamNumber })
     .select("-created_at")
     .select("-__v")
-    .select("-teamNumber")
-    .select("-user_id");
+    .select("-teamNumber");
+  // .select("-user_id");
   if (!teams) return res.status(400).send("No teams found with this number");
   res.send(teams);
 });
@@ -53,7 +58,7 @@ router.post("/", auth, async (req, res) => {
 
 //edit a specific team by id
 router.put("/:teamId", auth, async (req, res) => {
-  const { error } = validateTeam(req.body);
+  const { error } = validateTeamWithId(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   let team = await Team.findOneAndUpdate({ _id: req.params.teamId }, req.body);
