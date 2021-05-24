@@ -62,10 +62,12 @@ router.put("/:teamId", auth, async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   let team = await Team.findOneAndUpdate({ _id: req.params.teamId }, req.body);
+  console.log(team);
   if (!team)
     return res.status(404).send("The team with the given Id was not found");
 
-  team = await Team.findOne({ _id: req.params.teamId, user_id: req.user._id });
+  team = await Team.findOne({ _id: req.params.teamId });
+  console.log(team);
   res.send(team);
 });
 

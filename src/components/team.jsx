@@ -22,7 +22,7 @@ const Team = ({ team, removeTeam }) => {
               return players.name + ",";
             })}
           </p>
-          <Link className="btn btn-info" to={`/new-game/${team._id}`}>
+          <Link className="btn btn-info mb-2" to={`/new-game/${team._id}`}>
             Start a new game
           </Link>
           <p className="card-text border-top pt-2">

@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const _ = require("lodash");
-const { User, validate, validateTeams } = require("../models/user");
+const { User, validate, validateUserWithId } = require("../models/user");
 const auth = require("../middleware/auth");
 const { Team } = require("../models/teams");
 const router = express.Router();
@@ -22,19 +22,19 @@ router.get("/teams", auth, async (req, res) => {
 });
 
 //update and add teams to certain user
-router.patch("/teams", auth, async (req, res) => {
-  const { error } = validateTeams(req.body);
-  if (error) res.status(400).send(error.details[0].message);
+// router.patch("/teams", auth, async (req, res) => {
+//   const { error } = validateTeams(req.body);
+//   if (error) res.status(400).send(error.details[0].message);
 
-  const teams = await getTeams(req.body.teams);
-  if (teams.length !== req.body.teams.length)
-    res.status(400).send("Teams numbers doesent match");
+//   const teams = await getTeams(req.body.teams);
+//   if (teams.length !== req.body.teams.length)
+//     res.status(400).send("Teams numbers doesent match");
 
-  let user = await User.findById(req.user._id);
-  user.teams = req.body.teams;
-  user = await user.save();
-  res.send(user);
-});
+//   let user = await User.findById(req.user._id);
+//   user.teams = req.body.teams;
+//   user = await user.save();
+//   res.send(user);
+// });
 
 router.get("/me", auth, async (req, res) => {
   let user = await User.findById(req.user._id)
@@ -59,12 +59,10 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:id", auth, async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-  let user = await User.findOneAndUpdate(
-    { _id: req.params.id, user_id: req.user.id },
-    req.body
-  );
+  const { error } = validateUserWithId(req.body);
+  if (error) console.log(error.details[0].message);
+  // if (error) return res.status(400).send(error.details[0].message);
+  let user = await User.findOneAndUpdate({ _id: req.params.id }, req.body);
   if (!user)
     return res.status(404).send("The user with the given ID was not found");
   user = await User.findOne({ _id: req.params.id, user_id: req.user.id });

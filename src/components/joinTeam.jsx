@@ -21,14 +21,18 @@ class JoinTeam extends Form {
 
     try {
       const team = await teamService.getTeamByNumber(data.teamNumber);
+      //get user details from token
       let user = await userService.getCurrentUser();
+      //get full user details
       user = await userService.getUserDetails();
-      console.log(user);
+      //add the team id to the user in db
+      user.data.teams.push(team.data._id);
+      await userService.editUserDetails(user.data);
+
+      delete user.data.password;
+      //add the user details to team in db
       await team.data.players.push(user.data);
       await teamService.editTeam(team.data);
-      delete user.data._id;
-      await user.data.teams.push(team.data._id);
-      await userService.editUserDetails(user.data);
       this.props.history.push("/my-teams");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
