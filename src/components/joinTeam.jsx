@@ -4,7 +4,7 @@ import Joi from "joi-browser";
 import Form from "./common/form";
 import teamService from "../services/teamService";
 import userService from "../services/userService";
-// import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 class JoinTeam extends Form {
   state = {
@@ -59,13 +59,13 @@ class JoinTeam extends Form {
             <form onSubmit={this.handleSubmit} autoComplete="off" method="PUT">
               {this.renderInput("teamNumber", "Team Number")}
               {this.renderButton("Join Team")}
-              <button
+              <Link
                 type="button"
                 className="btn btn-secondary mt-3 ms-3"
-                to="my-teams"
+                to="/my-teams"
               >
                 Cancel
-              </button>
+              </Link>
             </form>
           </div>
         </div>

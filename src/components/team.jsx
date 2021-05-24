@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SelectPlayers from "./selectPlayers";
+// import SelectPlayers from "./selectPlayers";
 
 const Team = ({ team, removeTeam }) => {
   return (
@@ -19,6 +19,7 @@ const Team = ({ team, removeTeam }) => {
           <p className="card-text">
             Players:
             {team.players.map((players) => {
+              console.log(players);
               return players.name + ",";
             })}
           </p>

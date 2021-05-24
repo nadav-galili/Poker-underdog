@@ -10,7 +10,7 @@ import { Redirect } from "react-router-dom";
 
 class Signup extends Form {
   state = {
-    data: { email: "", password: "", name: "" },
+    data: { email: "", password: "", name: "", userImage: "" },
     errors: {},
   };
 
@@ -18,12 +18,16 @@ class Signup extends Form {
     email: Joi.string().required().email().label("Email"),
     password: Joi.string().required().min(6).label("Password"),
     name: Joi.string().required().min(2).label("Name"),
+    userImage: Joi.string().min(11).max(1024).uri().allow(""),
   };
 
   doSubmit = async () => {
     const { data } = this.state;
 
     try {
+      console.log("$", data);
+      if (!data.userImage) delete data.userImage;
+      console.log("aff", data);
       await http.post(`${apiUrl}/users`, data);
       toast("A new acoount is opened");
       await userService.login(data.email, data.password);
@@ -40,7 +44,7 @@ class Signup extends Form {
 
     return (
       <div className="container">
-        <PageHeader titleText="Join an existing team" />
+        <PageHeader titleText="User Registration Form" />
         <div className="row">
           <div className="col-12">
             <p>You can open new account for free!</p>
@@ -52,6 +56,7 @@ class Signup extends Form {
               {this.renderInput("email", "Email", "email")}
               {this.renderInput("password", "Password", "password")}
               {this.renderInput("name", "Name")}
+              {this.renderInput("userImage", "Image-Please enter url")}
               {this.renderButton("Signup")}
             </form>
           </div>

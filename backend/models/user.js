@@ -23,6 +23,12 @@ const userSchema = new mongoose.Schema({
     minlength: 6,
     maxlength: 1024,
   },
+  userImage: {
+    type: String,
+    required: true,
+    minlength: 11,
+    maxlength: 1024,
+  },
   teams: {
     type: Array,
   },
@@ -42,6 +48,7 @@ function validateUser(user) {
     email: Joi.string().min(6).max(255).required().email(),
     password: Joi.string().min(6).max(1024).required(),
     teams: Joi.array(),
+    userImage: Joi.string().min(11).max(1025),
   });
 
   return schema.validate(user);
@@ -54,6 +61,7 @@ function validateUserWithId(user) {
     email: Joi.string().min(6).max(255).required().email(),
     password: Joi.string().min(6).max(1024).required(),
     teams: Joi.array(),
+    userImage: Joi.string().min(11).max(1025),
   });
 
   return schema.validate(user);

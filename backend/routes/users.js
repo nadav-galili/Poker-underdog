@@ -46,22 +46,31 @@ router.get("/me", auth, async (req, res) => {
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-
-  let user = await User.findOne({ email: req.body.email });
+  var user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User already registered.");
 
-  //   check if need to add biz, cards, gamess....
-  user = new User(_.pick(req.body, ["name", "email", "password", "teams"]));
+  user = new User({
+    name: req.body.name,
+    email: req.body.email,
+    userImage: req.body.userImage
+      ? req.body.userImage
+      : "https://cdn.pixabay.com/photo/2017/11/16/09/31/matrix-2953863_960_720.jpg",
+    password: req.body.password,
+    teams: [],
+  });
+
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
+  console.log("req", req.body);
+
   await user.save();
-  res.send(_.pick(user, ["_id", "name", "email"]));
+
+  res.send(_.pick(user, ["_id", "name", "email", "userImage"]));
 });
 
 router.put("/:id", auth, async (req, res) => {
   const { error } = validateUserWithId(req.body);
-  if (error) console.log(error.details[0].message);
-  // if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send(error.details[0].message);
   let user = await User.findOneAndUpdate({ _id: req.params.id }, req.body);
   if (!user)
     return res.status(404).send("The user with the given ID was not found");

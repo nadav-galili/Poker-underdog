@@ -4,6 +4,7 @@ import Joi from "joi-browser";
 import Form from "./common/form";
 import teamService from "../services/teamService";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 class CreateTeam extends Form {
   state = {
@@ -41,6 +42,9 @@ class CreateTeam extends Form {
               {this.renderInput("name", "Team Name")}
               {this.renderInput("teamImage", "Team Image")}
               {this.renderButton("Create Team")}
+              <Link className="btn btn-secondary mt-3 ms-3" to="/my-teams">
+                Cancel
+              </Link>
             </form>
           </div>
         </div>
