@@ -27,6 +27,7 @@ class JoinTeam extends Form {
       user = await userService.getUserDetails();
       //add the team id to the user in db
       user.data.teams.push(team.data._id);
+      console.log(user.data);
       await userService.editUserDetails(user.data);
 
       delete user.data.password;

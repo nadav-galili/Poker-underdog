@@ -16,13 +16,18 @@ const Team = ({ team, removeTeam }) => {
         <div className="card-body">
           <h5 className="card-title">{team.name}</h5>
           <p className="card-text">Team Number:{team.teamNumber}</p>
-          <p className="card-text">
+          <div className="card-text">
             Players:
-            {team.players.map((players) => {
-              console.log(players);
-              return players.name + ",";
-            })}
-          </p>
+            <ul>
+              {team.players.map((player) => (
+                <li key={player._id}>
+                  {player.name}
+                  <br></br>
+                  <img src={player.userImage} width="70" alt="user" />
+                </li>
+              ))}
+            </ul>
+          </div>
           <Link className="btn btn-info mb-2" to={`/new-game/${team._id}`}>
             Start a new game
           </Link>
