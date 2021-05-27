@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PageHeader from "./common/pageHeader";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -43,13 +43,13 @@ const columns = [
 
 function createData(
   name,
+  image,
   add_cashing,
   ammount_cashed,
   cash_in_hand,
-  cancel_cashing,
-  image
+  cancel_cashing
 ) {
-  const profit = -ammount_cashed + cash_in_hand;
+  const profit = cash_in_hand - ammount_cashed;
   return {
     name,
     image,
@@ -61,24 +61,6 @@ function createData(
   };
 }
 
-const rows = [
-  createData("Bibs", "", 50, 63, ""),
-  createData("Bibs", "", 50, 63, ""),
-
-  createData("Bibs", "", 50, 63, ""),
-  createData("Bibs", "", 50, 63, ""),
-  createData("Bibs", "", 50, 63, ""),
-  createData("Bibs", "", 50, 63, ""),
-  createData("Bibs", "", 50, 63, ""),
-  createData("Bibs", "", 50, 63, ""),
-  createData("Bibs", "", 50, 63, ""),
-  createData("Bibs", "", 50, 63, ""),
-  createData("Bibs", "", 50, 63, ""),
-  createData("Bibs", "", 50, 63, ""),
-  createData("Bibs", "", 50, 63, ""),
-  createData("Bibs", "", 50, 63, ""),
-];
-
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -89,6 +71,8 @@ const useStyles = makeStyles({
 });
 
 export default function Game(props) {
+  const selected = props.location.selected.selected;
+
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -101,6 +85,15 @@ export default function Game(props) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const rows = [];
+  selected.forEach((e) => {
+    rows.push(createData(e.name, e.image, "", "", ""));
+  });
+  // selected.forEach(
+  //   // rows.push(createData(selected.name, selected.image, 0, 0, 0))
+  //   console.log("e", selected)
+  // );
 
   return (
     <div className="container">
