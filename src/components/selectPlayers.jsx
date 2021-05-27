@@ -16,10 +16,25 @@ const SelectPlayers = (props) => {
     fetchPlayers();
   }, []);
 
-  function selectPlayers(playerId) {
-    selected.includes(playerId)
-      ? setSelected(selected.filter((item) => item !== playerId))
-      : setSelected([...selected, playerId]);
+  function selectPlayers(playerId, name, image) {
+    const player = {
+      id: playerId,
+      name: name,
+      image: image,
+    };
+    // console.log(player.id);
+    // console.log(typeof selected[0].id);
+
+    selected.find((e) => player.id === e.id)
+      ? setSelected(selected.filter((item) => item.id !== player.id))
+      : setSelected([...selected, player]);
+
+    // ? setSelected(selected.filter((item) => item !== player.id))
+    // :
+
+    // selected.includes(player.id)
+    //   ? setSelected(selected.filter((item) => item !== player.id))
+    //   : setSelected([...selected, player]);
   }
 
   return (
@@ -37,7 +52,7 @@ const SelectPlayers = (props) => {
               player={player}
               key={player._id}
               selectPlayers={() => {
-                selectPlayers(player._id);
+                selectPlayers(player._id, player.name, player.userImage);
               }}
             />
           ))}
