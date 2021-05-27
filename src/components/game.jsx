@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PageHeader from "./common/pageHeader";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -9,6 +9,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
+import Avatar from "@material-ui/core/Avatar";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -88,12 +89,10 @@ export default function Game(props) {
 
   const rows = [];
   selected.forEach((e) => {
-    rows.push(createData(e.name, e.image, "", "", ""));
+    rows.push(
+      createData(e.name, <Avatar src={e.image} alt={e.name} />, "", "", "")
+    );
   });
-  // selected.forEach(
-  //   // rows.push(createData(selected.name, selected.image, 0, 0, 0))
-  //   console.log("e", selected)
-  // );
 
   return (
     <div className="container">
