@@ -5,6 +5,7 @@ import Player from "./player";
 
 const SelectPlayers = (props) => {
   const [data, setData] = useState([props.match.params.teamId]);
+  const [selected, setSelected] = useState([]);
 
   useEffect(() => {
     const fetchPlayers = async () => {
@@ -14,15 +15,31 @@ const SelectPlayers = (props) => {
     fetchPlayers();
   }, []);
 
+  function selectPlayers(playerId) {
+    selected.includes(playerId)
+      ? setSelected(selected.filter((item) => item !== playerId))
+      : setSelected([...selected, playerId]);
+  }
+
   return (
     <div className="container">
-      <PageHeader titleText="Select players for current game" />
       <h2>{data.name}</h2>
       <h3>Team Number:{data.teamNumber}</h3>
       <img src={data.teamImage} alt={data.name} width="200" height="200"></img>
+      <PageHeader titleText="Select players for current game" />
+      <div className="playersInGame"></div>
       <div className="row">
         {data.players &&
-          data.players.map((player) => <Player player={player} key={player} />)}
+          data.players.map((player) => (
+            <Player
+              selected={selected}
+              player={player}
+              key={player._id}
+              selectPlayers={() => {
+                selectPlayers(player._id);
+              }}
+            />
+          ))}
       </div>
     </div>
   );

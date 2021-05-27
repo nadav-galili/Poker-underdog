@@ -30,3 +30,7 @@ nav {
 .teams p {
   font-size: larger;
 }
+
+.card-body .selected {
+  background-color: $basecolorGreen;
+}
