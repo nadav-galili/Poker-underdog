@@ -16,6 +16,7 @@ import MyTeams from "./components/myTeams";
 import EditTeam from "./components/editTeam";
 import SelectPlayers from "./components/selectPlayers";
 import JoinTeam from "./components/joinTeam";
+import Game from "./components/game";
 
 class App extends Component {
   state = {};
@@ -51,7 +52,7 @@ class App extends Component {
               component={JoinTeam}
               user={user}
             />
-
+            <Route path="/game" component={Game} />
             <Route path="/logout" component={Logout} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />

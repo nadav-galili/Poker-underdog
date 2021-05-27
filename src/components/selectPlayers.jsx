@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageHeader from "./common/pageHeader";
 import teamService from "../services/teamService";
 import Player from "./player";
+import { Link } from "react-router-dom";
 
 const SelectPlayers = (props) => {
   const [data, setData] = useState([props.match.params.teamId]);
@@ -41,6 +42,15 @@ const SelectPlayers = (props) => {
             />
           ))}
       </div>
+      <Link
+        to={{
+          pathname: "/game",
+          selected: { selected },
+        }}
+        className="btn btn-primary btn-lg m-3"
+      >
+        Continue to game
+      </Link>
     </div>
   );
 };
