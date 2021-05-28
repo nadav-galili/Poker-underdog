@@ -21,9 +21,10 @@ const SelectPlayers = (props) => {
       id: playerId,
       name: name,
       image: image,
+      cashing: 0,
+      cashInHand: 0,
+      profit: 0,
     };
-    // console.log(player.id);
-    // console.log(typeof selected[0].id);
 
     selected.find((e) => player.id === e.id)
       ? setSelected(selected.filter((item) => item.id !== player.id))

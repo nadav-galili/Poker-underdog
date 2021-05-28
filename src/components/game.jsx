@@ -48,9 +48,10 @@ function createData(
   add_cashing,
   ammount_cashed,
   cash_in_hand,
+  profit,
   cancel_cashing
 ) {
-  const profit = cash_in_hand - ammount_cashed;
+  //const profit = cash_in_hand - ammount_cashed;
   return {
     name,
     image,
@@ -87,10 +88,29 @@ export default function Game(props) {
     setPage(0);
   };
 
+  function addCashing(playerId) {
+    let player = selected.find((e) => playerId === e.id);
+    player.cashing += 50;
+    console.log(player);
+  }
+
   const rows = [];
   selected.forEach((e) => {
     rows.push(
-      createData(e.name, <Avatar src={e.image} alt={e.name} />, "", "", "")
+      createData(
+        e.name,
+        <Avatar src={e.image} alt={e.name} />,
+        <i
+          className="fas fa-money-bill-wave  "
+          onClick={() => addCashing(e.id)}
+        >
+          Add 50$
+        </i>,
+        0,
+        <input type="number"></input>,
+        0,
+        <i className="fas fa-minus-circle">Cancel cashing</i>
+      )
     );
   });
 
@@ -122,7 +142,7 @@ export default function Game(props) {
                       hover
                       role="checkbox"
                       tabIndex={-1}
-                      key={row.code}
+                      key={row.name}
                     >
                       {columns.map((column) => {
                         const value = row[column.id];
