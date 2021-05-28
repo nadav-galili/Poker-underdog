@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PageHeader from "./common/pageHeader";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -75,6 +75,7 @@ const useStyles = makeStyles({
 export default function Game(props) {
   const selected = props.location.selected.selected;
 
+  const [cashing, setCashing] = useState(props.location.selected.selected);
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -89,9 +90,16 @@ export default function Game(props) {
   };
 
   function addCashing(playerId) {
+    // console.log("c", cashing);
     let player = selected.find((e) => playerId === e.id);
-    player.cashing += 50;
-    console.log(player);
+    setCashing((player.cashing += 50));
+  }
+
+  function undoCashing(playerId) {
+    let player = selected.find((e) => playerId === e.id);
+    if (player.cashing > 0) {
+      setCashing((player.cashing -= 50));
+    }
   }
 
   const rows = [];
@@ -106,10 +114,12 @@ export default function Game(props) {
         >
           Add 50$
         </i>,
-        0,
+        e.cashing,
         <input type="number"></input>,
         0,
-        <i className="fas fa-minus-circle">Cancel cashing</i>
+        <i className="fas fa-minus-circle" onClick={() => undoCashing(e.id)}>
+          Cancel cashing
+        </i>
       )
     );
   });
