@@ -29,13 +29,6 @@ const SelectPlayers = (props) => {
     selected.find((e) => player.id === e.id)
       ? setSelected(selected.filter((item) => item.id !== player.id))
       : setSelected([...selected, player]);
-
-    // ? setSelected(selected.filter((item) => item !== player.id))
-    // :
-
-    // selected.includes(player.id)
-    //   ? setSelected(selected.filter((item) => item !== player.id))
-    //   : setSelected([...selected, player]);
   }
 
   return (

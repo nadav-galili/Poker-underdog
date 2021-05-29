@@ -76,6 +76,12 @@ export default function Game(props) {
   const selected = props.location.selected.selected;
 
   const [cashing, setCashing] = useState(props.location.selected.selected);
+  const [cashInHand, setCashInHand] = useState(
+    props.location.selected.selected
+  );
+  const [update, setUpdate] = useState(props.location.selected.selected);
+
+  // const [profit, setProfit] = useState(props.location.selected.selected);
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -90,7 +96,6 @@ export default function Game(props) {
   };
 
   function addCashing(playerId) {
-    // console.log("c", cashing);
     let player = selected.find((e) => playerId === e.id);
     setCashing((player.cashing += 50));
   }
@@ -100,6 +105,20 @@ export default function Game(props) {
     if (player.cashing > 0) {
       setCashing((player.cashing -= 50));
     }
+  }
+
+  function handleChange(cash, playerId) {
+    let player = selected.find((e) => playerId === e.id);
+    cash = parseInt(cash);
+    setCashInHand((player.cashInHand = cash));
+  }
+
+  function updateGame() {
+    update.map((player) => {
+      player.profit = player.cashInHand - player.cashing;
+      player.numOfcashing = player.cashing / 50;
+      return setUpdate(player);
+    });
   }
 
   const rows = [];
@@ -115,8 +134,11 @@ export default function Game(props) {
           Add 50$
         </i>,
         e.cashing,
-        <input type="number"></input>,
-        0,
+        <input
+          type="number"
+          onChange={(input) => handleChange(input.target.value, e.id)}
+        ></input>,
+        e.cashInHand - e.cashing,
         <i className="fas fa-minus-circle" onClick={() => undoCashing(e.id)}>
           Cancel cashing
         </i>
@@ -180,18 +202,13 @@ export default function Game(props) {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
+      <button
+        type="button"
+        onClick={updateGame}
+        className="btn btn-primary btn-lg mt-3 border"
+      >
+        Update results
+      </button>
     </div>
   );
 }
-
-// const Game = (props) => {
-//   return (
-//     <div className="container">
-//       <PageHeader titleText="Start a new game" />
-//       <p>{props.location.selected.selected[0]}</p>
-//       <p>{console.log(props.location.selected.selected)}</p>
-//     </div>
-//   );
-// };
-
-// export default Game;
