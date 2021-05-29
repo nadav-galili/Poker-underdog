@@ -123,6 +123,7 @@ export default function Game(props) {
     });
     let teamInfo = {};
     teamInfo.team_name = props.location.data.data.name;
+    teamInfo.team_id = props.location.data.data._id;
     teamInfo.players = update;
     await http.post(`${apiUrl}/games`, teamInfo);
   }
