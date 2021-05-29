@@ -10,6 +10,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Avatar from "@material-ui/core/Avatar";
+import http from "../services/httpService";
+import { apiUrl } from "../config.json";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -113,12 +115,16 @@ export default function Game(props) {
     setCashInHand((player.cashInHand = cash));
   }
 
-  function updateGame() {
+  async function updateGame() {
     update.map((player) => {
       player.profit = player.cashInHand - player.cashing;
       player.numOfcashing = player.cashing / 50;
       return setUpdate(player);
     });
+    let teamInfo = {};
+    teamInfo.team_name = props.location.data.data.name;
+    teamInfo.players = update;
+    await http.post(`${apiUrl}/games`, teamInfo);
   }
 
   const rows = [];

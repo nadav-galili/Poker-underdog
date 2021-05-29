@@ -42,6 +42,7 @@ const SelectPlayers = (props) => {
         {data.players &&
           data.players.map((player) => (
             <Player
+              teamName={data.name}
               selected={selected}
               player={player}
               key={player._id}
@@ -55,6 +56,7 @@ const SelectPlayers = (props) => {
         to={{
           pathname: "/game",
           selected: { selected },
+          data: { data },
         }}
         className="btn btn-primary btn-lg m-3"
       >

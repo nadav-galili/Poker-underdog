@@ -2,7 +2,7 @@ const Joi = require("@hapi/joi");
 const mongoose = require("mongoose");
 
 const gameSchema = new mongoose.Schema({
-  team: {
+  team_name: {
     type: String,
     required: true,
     minlength: 2,
@@ -22,7 +22,7 @@ const Game = mongoose.model("Game", gameSchema);
 
 function validateGame(game) {
   const schema = Joi.object({
-    team: Joi.string().min(2).max(255).required(),
+    team_name: Joi.string().min(2).max(255).required(),
     players: Joi.array().required(),
   });
   return schema.validate(game);
