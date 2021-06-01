@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PageHeader from "./common/pageHeader";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import teamService from "../services/teamService";
+import userService from "../services/userService";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
@@ -18,10 +19,18 @@ class CreateTeam extends Form {
     teamImage: Joi.string().min(11).max(1024).uri().allow(""),
   };
 
+  async componentDidMount() {
+    const { data } = this.state;
+    let player = await userService.getUserDetails();
+    delete player.data.password;
+    data.players.push(player.data);
+    this.setState({ data });
+  }
+
   doSubmit = async () => {
     const { data } = this.state;
-
     if (!data.teamImage) delete data.teamImage;
+
     await teamService.createTeam(this.state.data);
     toast("A new Team is opened");
     this.props.history.replace("/my-teams");
