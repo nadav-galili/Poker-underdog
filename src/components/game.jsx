@@ -133,10 +133,10 @@ export default function Game(props) {
     data = JSON.parse(data);
     let teamInfo = {};
     teamInfo.team_name = data.name;
-    console.log(update);
     teamInfo.team_id = data._id;
-
     teamInfo.players = update;
+    localStorage.removeItem("playersInGame");
+    localStorage.removeItem("data");
     await http.post(`${apiUrl}/games`, teamInfo);
   }
 
@@ -226,7 +226,6 @@ export default function Game(props) {
       >
         Update results
       </button>
-      <div>selected</div>
     </div>
   );
 }

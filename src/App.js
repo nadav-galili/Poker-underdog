@@ -22,13 +22,24 @@ function App() {
   useEffect(() => {
     setUser(userService.getCurrentUser());
   }, []);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const details = await userService.getUserDetails();
+      console.log("uu", details.data.name);
+      await setUserDetails(details.data.name);
+      console.log("t444", userDetails);
+    };
+    fetchUser();
+  }, []);
   const [user, setUser] = useState({});
+  const [userDetails, setUserDetails] = useState("");
 
+  console.log("err", userDetails);
   return (
     <React.Fragment>
       <ToastContainer />
       <header>
-        <Navbar user={user} />
+        <Navbar user={user} userdetails={userDetails} />
       </header>
       <main style={{ minHeight: 900 }}>
         <Switch>
@@ -38,7 +49,7 @@ function App() {
           <ProtectedRoute path="/new-game/:teamId" component={SelectPlayers} />
           <ProtectedRoute path="/join-team" component={JoinTeam} user={user} />
 
-          <Route path="/game" component={Game} />
+          <ProtectedRoute path="/game" component={Game} />
 
           <Route path="/logout" component={Logout} />
           <Route path="/signin" component={Signin} />
