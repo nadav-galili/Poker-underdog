@@ -4,7 +4,7 @@ import Joi from "joi-browser";
 import Form from "./common/form";
 import teamService from "../services/teamService";
 import userService from "../services/userService";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class JoinTeam extends Form {
   state = {
@@ -27,7 +27,7 @@ class JoinTeam extends Form {
       user = await userService.getUserDetails();
       //add the team id to the user in db
       user.data.teams.push(team.data._id);
-      console.log(user.data);
+
       await userService.editUserDetails(user.data);
 
       delete user.data.password;

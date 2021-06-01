@@ -18,11 +18,13 @@ router.get("/", auth, async (req, res) => {
 
 // submits a new game
 router.post("/", auth, async (req, res) => {
+  console.log("req", req.body);
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  let game = new Game(_.pick(req.body, ["team", "players"]));
+  //if (error) console.log(error.details[0].message);
+  let game = new Game(_.pick(req.body, ["team_name", "team_id", "players"]));
   await game.save();
-  res.send(_.pick(game, ["_id", "team", "players"]));
+  res.send(_.pick(game, ["_id", "team_name", "players"]));
 });
 
 module.exports = router;

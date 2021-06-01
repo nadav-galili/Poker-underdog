@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import "../src/css/main.css";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
@@ -7,7 +7,7 @@ import Signup from "./components/signup";
 import Signin from "./components/signin";
 import Logout from "./components/logout";
 import CreateTeam from "./components/createTeam";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, HashRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import userService from "./services/userService";
@@ -18,53 +18,50 @@ import SelectPlayers from "./components/selectPlayers";
 import JoinTeam from "./components/joinTeam";
 import Game from "./components/game";
 
-class App extends Component {
-  state = {};
+function App() {
+  useEffect(() => {
+    setUser(userService.getCurrentUser());
+  }, []);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const details = await userService.getUserDetails();
+      console.log("uu", details.data.name);
+      await setUserDetails(details.data.name);
+      console.log("t444", userDetails);
+    };
+    fetchUser();
+  }, []);
+  const [user, setUser] = useState({});
+  const [userDetails, setUserDetails] = useState("");
 
-  componentDidMount() {
-    const user = userService.getCurrentUser();
-    this.setState({ user });
-  }
+  console.log("err", userDetails);
+  return (
+    <React.Fragment>
+      <ToastContainer />
+      <header>
+        <Navbar user={user} userdetails={userDetails} />
+      </header>
+      <main style={{ minHeight: 900 }}>
+        <Switch>
+          <ProtectedRoute path="/my-teams/edit/:teamId" component={EditTeam} />
+          <ProtectedRoute path="/my-teams" component={MyTeams} />
+          <ProtectedRoute path="/create-team" component={CreateTeam} />
+          <ProtectedRoute path="/new-game/:teamId" component={SelectPlayers} />
+          <ProtectedRoute path="/join-team" component={JoinTeam} user={user} />
 
-  render() {
-    const { user } = this.state;
+          <ProtectedRoute path="/game" component={Game} />
 
-    return (
-      <React.Fragment>
-        <ToastContainer />
-        <header>
-          <Navbar user={user} />
-        </header>
-        <main style={{ minHeight: 900 }}>
-          <Switch>
-            <ProtectedRoute
-              path="/my-teams/edit/:teamId"
-              component={EditTeam}
-            />
-            <ProtectedRoute path="/my-teams" component={MyTeams} />
-            <ProtectedRoute path="/create-team" component={CreateTeam} />
-            <ProtectedRoute
-              path="/new-game/:teamId"
-              component={SelectPlayers}
-            />
-            <ProtectedRoute
-              path="/join-team"
-              component={JoinTeam}
-              user={user}
-            />
-            <Route path="/game" component={Game} />
-            <Route path="/logout" component={Logout} />
-            <Route path="/signin" component={Signin} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/" exact component={Home} />
-          </Switch>
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </React.Fragment>
-    );
-  }
+          <Route path="/logout" component={Logout} />
+          <Route path="/signin" component={Signin} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/" exact component={Home} />
+        </Switch>
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </React.Fragment>
+  );
 }
 
 export default App;

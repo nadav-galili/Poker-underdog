@@ -5,6 +5,7 @@ class Navbar extends Component {
   state = {};
   render() {
     const { user } = this.props;
+    const { userDetails } = this.props;
 
     return (
       <nav className="navbar navbar-expand-lg shadow-sm ">
@@ -66,7 +67,7 @@ class Navbar extends Component {
                 <React.Fragment>
                   <li className="nav-item">
                     <NavLink className="nav-item nav-link" to="/#">
-                      {user._id}
+                      {/* name {this.props.userDetails} */}
                     </NavLink>
                   </li>
                   <li className="nav-item">
