@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PageHeader from "./common/pageHeader";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -75,15 +75,22 @@ const useStyles = makeStyles({
 });
 
 export default function Game(props) {
-  const selected = props.location.selected.selected;
+  const [livePlayers, setLivePlayers] = useState([]);
 
-  const [cashing, setCashing] = useState(props.location.selected.selected);
-  const [cashInHand, setCashInHand] = useState(
-    props.location.selected.selected
-  );
-  const [update, setUpdate] = useState(props.location.selected.selected);
+  useEffect(() => {
+    let players = localStorage.getItem("playersInGame");
+    players = JSON.parse(players);
 
-  // const [profit, setProfit] = useState(props.location.selected.selected);
+    setLivePlayers(players);
+    setUpdate(players);
+  }, []);
+
+  const rows = [];
+
+  const [cashing, setCashing] = useState(livePlayers);
+  const [cashInHand, setCashInHand] = useState(livePlayers);
+  const [update, setUpdate] = useState(livePlayers);
+
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -98,19 +105,20 @@ export default function Game(props) {
   };
 
   function addCashing(playerId) {
-    let player = selected.find((e) => playerId === e.id);
+    let player = livePlayers.find((e) => playerId === e.id);
+
     setCashing((player.cashing += 50));
   }
 
   function undoCashing(playerId) {
-    let player = selected.find((e) => playerId === e.id);
+    let player = livePlayers.find((e) => playerId === e.id);
     if (player.cashing > 0) {
       setCashing((player.cashing -= 50));
     }
   }
 
   function handleChange(cash, playerId) {
-    let player = selected.find((e) => playerId === e.id);
+    let player = livePlayers.find((e) => playerId === e.id);
     cash = parseInt(cash);
     setCashInHand((player.cashInHand = cash));
   }
@@ -121,15 +129,18 @@ export default function Game(props) {
       player.numOfcashing = player.cashing / 50;
       return setUpdate(player);
     });
+    let data = localStorage.getItem("data");
+    data = JSON.parse(data);
     let teamInfo = {};
-    teamInfo.team_name = props.location.data.data.name;
-    teamInfo.team_id = props.location.data.data._id;
+    teamInfo.team_name = data.name;
+    console.log(update);
+    teamInfo.team_id = data._id;
+
     teamInfo.players = update;
     await http.post(`${apiUrl}/games`, teamInfo);
   }
 
-  const rows = [];
-  selected.forEach((e) => {
+  livePlayers.forEach((e) => {
     rows.push(
       createData(
         e.name,
@@ -152,7 +163,6 @@ export default function Game(props) {
       )
     );
   });
-
   return (
     <div className="container">
       <PageHeader titleText="Start a new game" />
@@ -216,6 +226,7 @@ export default function Game(props) {
       >
         Update results
       </button>
+      <div>selected</div>
     </div>
   );
 }

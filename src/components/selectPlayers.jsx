@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import PageHeader from "./common/pageHeader";
 import teamService from "../services/teamService";
 import Player from "./player";
 import { Link } from "react-router-dom";
+
+export const PlayersProvider = createContext(
+  localStorage.getItem("playersInGame")
+);
+console.log(typeof PlayersProvider, PlayersProvider);
 
 const SelectPlayers = (props) => {
   const [data, setData] = useState([props.match.params.teamId]);
@@ -16,6 +21,11 @@ const SelectPlayers = (props) => {
     fetchPlayers();
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("playersInGame", JSON.stringify(selected));
+    localStorage.setItem("data", JSON.stringify(data));
+  });
+
   function selectPlayers(playerId, name, image) {
     const player = {
       id: playerId,
@@ -25,7 +35,6 @@ const SelectPlayers = (props) => {
       cashInHand: 0,
       profit: 0,
     };
-
     selected.find((e) => player.id === e.id)
       ? setSelected(selected.filter((item) => item.id !== player.id))
       : setSelected([...selected, player]);
@@ -52,16 +61,19 @@ const SelectPlayers = (props) => {
             />
           ))}
       </div>
-      <Link
-        to={{
-          pathname: "/game",
-          selected: { selected },
-          data: { data },
-        }}
-        className="btn btn-primary btn-lg m-3"
-      >
-        Continue to game
-      </Link>
+      {selected.length > 1 && (
+        <Link
+          to={{
+            pathname: "/game",
+
+            data: { data },
+          }}
+          className="btn btn-primary btn-lg m-3"
+        >
+          Continue to game
+        </Link>
+      )}
+      {selected.length <= 1 && <p>*Please select at least 2 players</p>}
     </div>
   );
 };
