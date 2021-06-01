@@ -12,6 +12,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Avatar from "@material-ui/core/Avatar";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -124,20 +126,42 @@ export default function Game(props) {
   }
 
   async function updateGame() {
-    update.map((player) => {
-      player.profit = player.cashInHand - player.cashing;
-      player.numOfcashing = player.cashing / 50;
-      return setUpdate(player);
+    Swal.fire({
+      title: "Are you sure you ended the game?",
+      text: "you wont be able to cancel",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        update.map((player) => {
+          player.profit = player.cashInHand - player.cashing;
+          player.numOfcashing = player.cashing / 50;
+          return setUpdate(player);
+        });
+        let data = localStorage.getItem("data");
+        data = JSON.parse(data);
+        let teamInfo = {};
+        teamInfo.team_name = data.name;
+        teamInfo.team_id = data._id;
+        teamInfo.players = update;
+        localStorage.removeItem("playersInGame");
+        localStorage.removeItem("data");
+        http.post(`${apiUrl}/games`, teamInfo);
+      }
     });
-    let data = localStorage.getItem("data");
-    data = JSON.parse(data);
-    let teamInfo = {};
-    teamInfo.team_name = data.name;
-    teamInfo.team_id = data._id;
-    teamInfo.players = update;
-    localStorage.removeItem("playersInGame");
-    localStorage.removeItem("data");
-    await http.post(`${apiUrl}/games`, teamInfo);
+    props.history.push("/last-game");
+    toast.success("GAME OVER", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 
   livePlayers.forEach((e) => {
