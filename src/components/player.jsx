@@ -7,7 +7,9 @@ const Player = ({ player, selectPlayers, selected }) => {
         <img className="p-2" width="100" src={player.userImage} alt="" />
         <div
           className={
-            selected.includes(player._id) ? "card-body selected" : "card-body"
+            selected.find((e) => player._id === e.id)
+              ? "card-body selected"
+              : "card-body"
           }
         >
           <h5 className="card-title">{player.name}</h5>

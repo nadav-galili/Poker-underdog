@@ -31,6 +31,13 @@ nav {
   font-size: larger;
 }
 
-.card-body .selected {
+.card-body.selected {
   background-color: $basecolorGreen;
+}
+
+.fa-money-bill-wave {
+  color: $basecolorGreen;
+}
+.fa-minus-circle {
+  color: $basecolorRed;
 }
