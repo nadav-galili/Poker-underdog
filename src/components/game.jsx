@@ -150,9 +150,11 @@ export default function Game(props) {
         localStorage.removeItem("playersInGame");
         localStorage.removeItem("data");
         http.post(`${apiUrl}/games`, teamInfo);
+
+        //localStorage.setItem("last-game", teamInfo);
+        props.history.push(`/last-game/${teamInfo.team_id}`);
       }
     });
-    props.history.push("/last-game");
     toast.success("GAME OVER", {
       position: "top-left",
       autoClose: 5000,

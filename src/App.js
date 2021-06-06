@@ -23,24 +23,23 @@ function App() {
   useEffect(() => {
     setUser(userService.getCurrentUser());
   }, []);
-  useEffect(() => {
-    const fetchUser = async () => {
-      const details = await userService.getUserDetails();
-      console.log("uu", details.data.name);
-      await setUserDetails(details.data.name);
-      console.log("t444", userDetails);
-    };
-    fetchUser();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     const details = await userService.getUserDetails();
+  //     console.log("uu", details.data.name);
+  //     await setUserDetails(details.data.name);
+  //     console.log("t444", userDetails);
+  //   };
+  //   fetchUser();
+  // }, []);
   const [user, setUser] = useState({});
-  const [userDetails, setUserDetails] = useState("");
+  //const [userDetails, setUserDetails] = useState("");
 
-  console.log("err", userDetails);
   return (
     <React.Fragment>
       <ToastContainer />
       <header>
-        <Navbar user={user} userdetails={userDetails} />
+        <Navbar user={user} />
       </header>
       <main style={{ minHeight: 900 }}>
         <Switch>
@@ -52,7 +51,7 @@ function App() {
 
           <ProtectedRoute path="/game" component={Game} />
 
-          <Route path="/last-game" component={LastGame} />
+          <Route path="/last-game/:teamId" component={LastGame} />
           <Route path="/logout" component={Logout} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />

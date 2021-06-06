@@ -4,10 +4,9 @@ import teamService from "../services/teamService";
 import Player from "./player";
 import { Link } from "react-router-dom";
 
-export const PlayersProvider = createContext(
-  localStorage.getItem("playersInGame")
-);
-console.log(typeof PlayersProvider, PlayersProvider);
+// export const PlayersProvider = createContext(
+//   localStorage.getItem("playersInGame")
+// );
 
 const SelectPlayers = (props) => {
   const [data, setData] = useState([props.match.params.teamId]);
