@@ -4,9 +4,53 @@ const { Game, validate } = require("../models/games");
 const auth = require("../middleware/auth");
 const router = express.Router();
 
+//gets aggregated results of the team
+router.get("/table/:teamId", auth, async (req, res) => {
+  const table = await Game.aggregate([
+    {
+      $unwind: {
+        path: "$players",
+        includeArrayIndex: "string",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $match: {
+        team_id: "60ab617001c5d43e1c62aa92",
+      },
+    },
+    {
+      $group: {
+        _id: "$players.name",
+        totalProfit: {
+          $sum: "$players.profit",
+        },
+        avgProfit: {
+          $avg: "$players.profit",
+        },
+        numOfGames: {
+          $sum: 1,
+        },
+        avgCashing: {
+          $avg: "$players.numOfcashing",
+        },
+        lastGame: {
+          $max: "$created_at",
+        },
+      },
+    },
+    {
+      $sort: {
+        totalProfit: -1,
+      },
+    },
+  ]);
+
+  res.send(table);
+});
+
 //gets the latest game
 router.get("/last-game/:teamId", auth, async (req, res) => {
-  console.log("j", req.params.teamid);
   const game = await Game.find({ team_id: req.params.teamId })
     .sort({ created_at: -1 })
     .limit(1);
@@ -26,7 +70,6 @@ router.get("/", auth, async (req, res) => {
 
 // submits a new game
 router.post("/", auth, async (req, res) => {
-  console.log("req", req.body);
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
