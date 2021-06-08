@@ -5,10 +5,9 @@ class Navbar extends Component {
   state = {};
   render() {
     const { user } = this.props;
-    const { userDetails } = this.props;
 
     return (
-      <nav className="navbar navbar-expand-lg shadow-sm ">
+      <nav className="navbar navbar-expand-lg navbar-light shadow-sm ">
         <div className="container">
           <Link className="navbar-brand" to="/#">
             Poker-underdog
@@ -40,6 +39,7 @@ class Navbar extends Component {
                   Demo
                 </Link>
               </li>
+
               <li className="nav-item">
                 {user && (
                   <NavLink className="nav-item nav-link" to="/my-teams">
