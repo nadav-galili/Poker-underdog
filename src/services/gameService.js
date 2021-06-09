@@ -5,6 +5,11 @@ export function lastGame(teamId) {
   return http.get(`${apiUrl}/games/last-game/${teamId}`);
 }
 
+export function table(teamId) {
+  return http.get(`${apiUrl}/games/table/${teamId}`);
+}
+
 export default {
   lastGame,
+  table,
 };

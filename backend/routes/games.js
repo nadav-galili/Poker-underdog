@@ -10,18 +10,23 @@ router.get("/table/:teamId", auth, async (req, res) => {
     {
       $unwind: {
         path: "$players",
-        includeArrayIndex: "string",
         preserveNullAndEmptyArrays: true,
       },
     },
     {
       $match: {
-        team_id: "60ab617001c5d43e1c62aa92",
+        team_id: req.params.teamId,
       },
     },
     {
       $group: {
-        _id: "$players.name",
+        _id: {
+          name: "$players.name",
+          image: "$players.image",
+          player_id: "$players.id",
+          team_id: "$team_id",
+          team_name: "$team_name",
+        },
         totalProfit: {
           $sum: "$players.profit",
         },

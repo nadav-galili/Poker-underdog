@@ -18,6 +18,7 @@ import SelectPlayers from "./components/selectPlayers";
 import JoinTeam from "./components/joinTeam";
 import Game from "./components/game";
 import LastGame from "./components/lastGame";
+import MainTable from "./components/mainTable";
 
 function App() {
   useEffect(() => {
@@ -51,7 +52,9 @@ function App() {
 
           <ProtectedRoute path="/game" component={Game} />
 
-          <Route path="/last-game/:teamId" component={LastGame} />
+          <ProtectedRoute path="/last-game/:teamId" component={LastGame} />
+          <ProtectedRoute path="/main-table/:teamId" component={MainTable} />
+
           <Route path="/logout" component={Logout} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />

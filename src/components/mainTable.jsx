@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
-import { lighten, makeStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from "react";
+import gameService from "../services/gameService";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
-//import TablePagination from "@material-ui/core/TablePagination";
+import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import TableSortLabel from "@material-ui/core/TableSortLabel";
-//import Toolbar from "@material-ui/core/Toolbar";
-//import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-//import Checkbox from "@material-ui/core/Checkbox";
-//import IconButton from "@material-ui/core/IconButton";
-//import Tooltip from "@material-ui/core/Tooltip";
-////import FormControlLabel from "@material-ui/core/FormControlLabel";
-//import Switch from "@material-ui/core/Switch";
-//import DeleteIcon from "@material-ui/icons/Delete";
-//import FilterListIcon from "@material-ui/icons/FilterList";
-import gameService from "../services/gameService";
 import { Avatar } from "@material-ui/core";
 
 const columns = [
   { id: "rank", label: "Rank", minWidth: 50 },
+
   { id: "player", label: "Player", minWidth: 100 },
+
   {
     id: "image",
     label: "Image",
@@ -39,15 +29,51 @@ const columns = [
     align: "right",
   },
   {
-    id: "num_of_cashing",
-    label: "Num of cashing",
+    id: "avgProfit",
+    label: "Average Profit",
     minWidth: 50,
-    align: "right",
+    align: "center",
+  },
+  {
+    id: "numOfGames",
+    label: "Number Of Games",
+    minWidth: 50,
+    align: "center",
+  },
+  {
+    id: "avgCashing",
+    label: "Average Cashing",
+    minWidth: 50,
+    align: "center",
+  },
+  {
+    id: "lastGame",
+    label: "Last Game Played",
+    minWidth: 50,
+    align: "center",
   },
 ];
 
-function createData(rank, player, image, profit, num_of_cashing) {
-  return { rank, player, image, profit, num_of_cashing };
+function createData(
+  rank,
+  player,
+  image,
+  profit,
+  avgProfit,
+  numOfGames,
+  avgCashing,
+  lastGame
+) {
+  return {
+    rank,
+    player,
+    image,
+    profit,
+    avgProfit,
+    numOfGames,
+    avgCashing,
+    lastGame,
+  };
 }
 
 const useStyles = makeStyles({
@@ -59,43 +85,59 @@ const useStyles = makeStyles({
   },
 });
 
-export default function LastGame(props) {
+export default function MainTable(props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const getLastGame = async () => {
-      let game = await gameService.lastGame(props.match.params.teamId);
-      game = game.data[0];
-      setData(game.players);
+    const getTable = async () => {
+      let table = await gameService.table(props.match.params.teamId);
+      table = table.data;
+      setData(table);
     };
 
-    getLastGame();
+    getTable();
   }, [setData, props.match.params.teamId]);
 
   const classes = useStyles();
-
   const rows = [];
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  if (data.length > 0) {
-    let rank = 1;
-    data.forEach((e) => {
-      rows.push(
-        createData(
-          rank++,
-          e.name,
-          <Avatar src={e.image} />,
-          e.profit,
-          e.numOfcashing
-        )
-      );
-    });
-  }
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  let rank = 1;
+  data.forEach((player) => {
+    const playerDate = new Date(player.lastGame);
+    const day = playerDate.getDate();
+    const month = playerDate.getMonth() + 1;
+    const year = playerDate.getFullYear();
+    const formated = `${day}/${month}/${year}`;
+
+    rows.push(
+      createData(
+        rank++,
+        player._id.name,
+        <Avatar src={player._id.image} />,
+        player.totalProfit,
+        player.avgProfit.toFixed(2),
+        player.numOfGames,
+        player.avgCashing.toFixed(2),
+        formated
+      )
+    );
+  });
   return (
     <div className="container mt-3">
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
-          <Table stickyHeader aria-label="sticky table" size="medium">
+          <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
@@ -111,7 +153,7 @@ export default function LastGame(props) {
             </TableHead>
             <TableBody>
               {rows
-                //.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
                     <TableRow
@@ -136,7 +178,7 @@ export default function LastGame(props) {
             </TableBody>
           </Table>
         </TableContainer>
-        {/* <TablePagination
+        <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
           count={rows.length}
@@ -144,7 +186,7 @@ export default function LastGame(props) {
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
-        /> */}
+        />
       </Paper>
     </div>
   );
