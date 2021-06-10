@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import gameService from "../services/gameService";
 import { makeStyles } from "@material-ui/core/styles";
+import PageHeader from "./common/pageHeader";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,6 +12,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { Avatar } from "@material-ui/core";
+import { data } from "jquery";
 
 const columns = [
   { id: "rank", label: "Rank", minWidth: 50 },
@@ -76,6 +79,11 @@ function createData(
   };
 }
 
+// const styles = StyleSheet.create({
+//   plus: { backgroundColor: "lime" },
+//   minus: { backgroundColor: "red" },
+// });
+
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -87,7 +95,15 @@ const useStyles = makeStyles({
 
 export default function MainTable(props) {
   const [data, setData] = useState([]);
+  let inputStyles = {
+    color: "blue",
+  };
 
+  //test it
+
+  if (data.totalProfit < 0) {
+    inputStyles = { color: "lime" };
+  }
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.table(props.match.params.teamId);
@@ -124,7 +140,7 @@ export default function MainTable(props) {
       createData(
         rank++,
         player._id.name,
-        <Avatar src={player._id.image} />,
+        <Avatar src={player._id.image} className={classes.large} />,
         player.totalProfit,
         player.avgProfit.toFixed(2),
         player.numOfGames,
@@ -135,11 +151,23 @@ export default function MainTable(props) {
   });
   return (
     <div className="container mt-3">
+      <PageHeader titleText="Main Table" />
+      {data.length < 1 && (
+        <div className="start">
+          <h2>No Games Played Yet!</h2>
+          <Link
+            className="btn btn-info mb-2"
+            to={`/new-game/${props.match.params.teamId}`}
+          >
+            Start a new game
+          </Link>
+        </div>
+      )}
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
-              <TableRow>
+              <TableRow style={inputStyles}>
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
@@ -165,7 +193,11 @@ export default function MainTable(props) {
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align={column.align}>
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            style={inputStyles}
+                          >
                             {column.format && typeof value === "number"
                               ? column.format(value)
                               : value}

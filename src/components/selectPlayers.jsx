@@ -4,10 +4,6 @@ import teamService from "../services/teamService";
 import Player from "./player";
 import { Link } from "react-router-dom";
 
-// export const PlayersProvider = createContext(
-//   localStorage.getItem("playersInGame")
-// );
-
 const SelectPlayers = (props) => {
   const [data, setData] = useState([props.match.params.teamId]);
   const [selected, setSelected] = useState([]);
@@ -40,7 +36,10 @@ const SelectPlayers = (props) => {
   }
 
   return (
-    <div className="container">
+    <div className="container mt-3">
+      <h1>
+        <u>Start A New Game Here</u>
+      </h1>
       <h2>{data.name}</h2>
       <h3>Team Number:{data.teamNumber}</h3>
       <img src={data.teamImage} alt={data.name} width="200" height="200"></img>

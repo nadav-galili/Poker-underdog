@@ -1,0 +1,14 @@
+.MuiAvatar-root {
+  border: 2px solid black;
+  height: 60px !important;
+  width: 60px !important;
+}
+
+.MuiTableCell-stickyHeader {
+  background-color: $headerColorBlue !important;
+}
+
+.MuiTableCell-head {
+  font-size: 20px !important;
+  text-decoration: underline;
+}

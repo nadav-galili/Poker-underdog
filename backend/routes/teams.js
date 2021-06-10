@@ -47,7 +47,7 @@ router.post("/", auth, async (req, res) => {
     players: req.body.players,
     teamImage: req.body.teamImage
       ? req.body.teamImage
-      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      : "https://cdn.pixabay.com/photo/2013/07/13/10/42/casino-157595_960_720.png",
     teamNumber: await generateTeamNumber(Team),
     user_id: req.user._id,
   });

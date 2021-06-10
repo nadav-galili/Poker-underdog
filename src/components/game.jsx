@@ -151,7 +151,6 @@ export default function Game(props) {
         localStorage.removeItem("data");
         http.post(`${apiUrl}/games`, teamInfo);
 
-        //localStorage.setItem("last-game", teamInfo);
         props.history.push(`/last-game/${teamInfo.team_id}`);
       }
     });
@@ -192,6 +191,25 @@ export default function Game(props) {
   return (
     <div className="container">
       <PageHeader titleText="Start a new game" />
+      <p>Steps for starting a new game:</p>
+      <ol>
+        <li>
+          Add an initial cashing for each player participating (usually just
+          50$).
+        </li>
+        <li>
+          Start playing poker with your friends and each time a player cashes in
+          , press the "add 50" icon.
+        </li>
+        <li>
+          After you finished playing , insert the total ammount of cash each
+          player has in the "Cash in hand" field.
+        </li>
+        <li>
+          Press the update results button and get a summary of your latest game.
+        </li>
+        <li>All In!!!</li>
+      </ol>
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">

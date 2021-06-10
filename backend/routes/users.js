@@ -54,7 +54,7 @@ router.post("/", async (req, res) => {
     email: req.body.email,
     userImage: req.body.userImage
       ? req.body.userImage
-      : "https://cdn.pixabay.com/photo/2017/11/16/09/31/matrix-2953863_960_720.jpg",
+      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     password: req.body.password,
     teams: [],
   });

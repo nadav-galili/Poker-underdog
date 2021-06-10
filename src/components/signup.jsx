@@ -47,16 +47,19 @@ class Signup extends Form {
         <PageHeader titleText="User Registration Form" />
         <div className="row">
           <div className="col-12">
-            <p>You can open new account for free!</p>
+            <p>You can open a new account for free!</p>
           </div>
         </div>
         <div className="row">
           <div className="col-lg-6">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
-              {this.renderInput("email", "Email", "email")}
-              {this.renderInput("password", "Password", "password")}
-              {this.renderInput("name", "Name")}
-              {this.renderInput("userImage", "Image-Please enter url")}
+              {this.renderInput("email", "*Email", "email")}
+              {this.renderInput("password", "*Password", "password")}
+              {this.renderInput("name", "*Name")}
+              {this.renderInput(
+                "userImage",
+                "Image (Optional)-Please enter url for your image"
+              )}
               {this.renderButton("Signup")}
             </form>
           </div>

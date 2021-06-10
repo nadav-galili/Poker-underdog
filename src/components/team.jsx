@@ -1,8 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+//import MainTable from "./mainTable";
 // import SelectPlayers from "./selectPlayers";
 
 const Team = ({ team, removeTeam }) => {
+  const teamDate = new Date(team.created_at);
+  const day = teamDate.getDate();
+  const month = teamDate.getMonth() + 1;
+  const year = teamDate.getFullYear();
+  const formated = `${day}/${month}/${year}`;
+
   return (
     <div className="col-md-6 col-lg-4 mt-3">
       <div className="card">
@@ -16,6 +23,9 @@ const Team = ({ team, removeTeam }) => {
         <div className="card-body">
           <h5 className="card-title">{team.name}</h5>
           <p className="card-text">Team Number:{team.teamNumber}</p>
+          <Link className="btn btn-primary" to={`/main-table/${team._id}`}>
+            Team Tables & Statistics
+          </Link>
           <div className="card-text">
             Players:
             <ul>
@@ -31,9 +41,7 @@ const Team = ({ team, removeTeam }) => {
           <Link className="btn btn-info mb-2" to={`/new-game/${team._id}`}>
             Start a new game
           </Link>
-          <p className="card-text border-top pt-2">
-            Created At:{team.created_at}
-          </p>
+          <p className="card-text border-top pt-2">Created At:{formated}</p>
           <p>
             <Link to={`/my-teams/edit/${team._id}`}>
               <i className="fas fa-edit ms-1"></i>

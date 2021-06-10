@@ -24,6 +24,7 @@ function App() {
   useEffect(() => {
     setUser(userService.getCurrentUser());
   }, []);
+
   // useEffect(() => {
   //   const fetchUser = async () => {
   //     const details = await userService.getUserDetails();
@@ -34,6 +35,7 @@ function App() {
   //   fetchUser();
   // }, []);
   const [user, setUser] = useState({});
+
   //const [userDetails, setUserDetails] = useState("");
 
   return (
