@@ -26,18 +26,16 @@ class MyTeams extends Component {
       <div className="container">
         <PageHeader titleText="My Teams Page" />
         <div className="row">
-          <div className="col-12">
-            <p className="my-2">
-              <Link className="btn btn-primary ms-2" to="/create-team">
-                +Add A New Team
-              </Link>
+          <div className="col-12 ">
+            <Link className="btn btn-primary ms-2" to="/create-team">
+              +Add A New Team
+            </Link>
+            <Link className="btn btn-primary ms-2" to="/join-team">
+              Join An Existing Team
+            </Link>
+            <p className="mt-3 team-list">
+              {teams.length > 0 && <p>Your teams in the list below:</p>}
             </p>
-            <p className="my-2">
-              <Link className="btn btn-primary ms-2" to="/join-team">
-                Join An Existing Team
-              </Link>
-            </p>
-            {teams.length > 0 && <p>Your teams in the list below</p>}
           </div>
         </div>
         <div className="row">

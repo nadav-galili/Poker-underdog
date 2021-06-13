@@ -22,6 +22,7 @@ import Paper from "@material-ui/core/Paper";
 //import FilterListIcon from "@material-ui/icons/FilterList";
 import gameService from "../services/gameService";
 import { Avatar } from "@material-ui/core";
+import PageHeader from "../components/common/pageHeader";
 
 const columns = [
   { id: "rank", label: "Rank", minWidth: 50 },
@@ -61,12 +62,14 @@ const useStyles = makeStyles({
 
 export default function LastGame(props) {
   const [data, setData] = useState([]);
+  const [lastGame, setLastGame] = useState([]);
 
   useEffect(() => {
     const getLastGame = async () => {
       let game = await gameService.lastGame(props.match.params.teamId);
       game = game.data[0];
       setData(game.players);
+      setLastGame(game);
     };
 
     getLastGame();
@@ -91,8 +94,16 @@ export default function LastGame(props) {
     });
   }
 
+  const gameDate = new Date(lastGame.created_at);
+  const day = gameDate.getDate();
+  const month = gameDate.getMonth() + 1;
+  const year = gameDate.getFullYear();
+  const formated = `${day}/${month}/${year}`;
+
   return (
     <div className="container mt-3">
+      <PageHeader titleText="Last Game" />
+      <h3 className="mb-4">Played at:{formated}</h3>
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table" size="medium">

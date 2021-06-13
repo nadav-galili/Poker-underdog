@@ -52,7 +52,10 @@ class JoinTeam extends Form {
         <PageHeader titleText="Join an existing team" />
         <div className="row">
           <div className="col-12">
-            <p>Please enter team number</p>
+            <p>
+              <strong>Please enter team number</strong> <br />
+              *Ask team members for the number
+            </p>
           </div>
         </div>
         <div className="row">
@@ -65,9 +68,10 @@ class JoinTeam extends Form {
                 className="btn btn-secondary mt-3 ms-3"
                 to="/my-teams"
               >
-                Cancel
+                Not right now
               </Link>
             </form>
+            <p className="mt-2">*To join a demo team, enter:42392</p>
           </div>
         </div>
       </div>

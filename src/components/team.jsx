@@ -21,13 +21,19 @@ const Team = ({ team, removeTeam }) => {
           height="100"
         />
         <div className="card-body">
-          <h5 className="card-title">{team.name}</h5>
-          <p className="card-text">Team Number:{team.teamNumber}</p>
+          <h5 className="card-title ">
+            <u>{team.name}</u>
+          </h5>
+          <p className="card-text">
+            <strong>Team Number:{team.teamNumber}</strong>
+            <br />
+            *Share this number with your friends and let them join your team
+          </p>
           <Link className="btn btn-primary" to={`/main-table/${team._id}`}>
             Team Tables & Statistics
           </Link>
           <div className="card-text">
-            Players:
+            <strong>Players:</strong>
             <ul>
               {team.players.map((player) => (
                 <li key={player._id}>

@@ -58,6 +58,22 @@ h1 {
   text-decoration: underline;
 }
 
+.MuiTableCell-body {
+  font-weight: 900 !important;
+}
+
+.team-list {
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+.navbar-brand img {
+  border: 1px solid black;
+  border-radius: 15px;
+  height: 100px;
+  width: 140px;
+}
+
 footer {
   background-color: #009a66;
 }
@@ -69,18 +85,6 @@ nav {
 .navbar a {
   color: black;
   font-size: x-large;
-}
-
-.team-buttons button:first-child {
-  position: absolute;
-  top: 35%;
-  left: 20%;
-}
-
-.team-buttons button:nth-child(2) {
-  position: absolute;
-  top: 50%;
-  left: 20%;
 }
 
 .teams p {

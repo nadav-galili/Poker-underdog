@@ -12,7 +12,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { Avatar } from "@material-ui/core";
-import { data } from "jquery";
 
 const columns = [
   { id: "rank", label: "Rank", minWidth: 50 },
@@ -95,15 +94,15 @@ const useStyles = makeStyles({
 
 export default function MainTable(props) {
   const [data, setData] = useState([]);
-  let inputStyles = {
-    color: "blue",
-  };
+  // let inputStyles = {
+  //   color: "blue",
+  // };
 
   //test it
 
-  if (data.totalProfit < 0) {
-    inputStyles = { color: "lime" };
-  }
+  // if (data.totalProfit < 0) {
+  //   inputStyles = { color: "lime" };
+  // }
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.table(props.match.params.teamId);
@@ -167,7 +166,7 @@ export default function MainTable(props) {
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
-              <TableRow style={inputStyles}>
+              <TableRow>
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
@@ -196,7 +195,7 @@ export default function MainTable(props) {
                           <TableCell
                             key={column.id}
                             align={column.align}
-                            style={inputStyles}
+                            // style={inputStyles}
                           >
                             {column.format && typeof value === "number"
                               ? column.format(value)

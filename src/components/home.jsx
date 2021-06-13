@@ -10,7 +10,7 @@ const Home = () => {
           <div className="col">
             <p>
               Poker Underdog is an interactive platform for poker groups playing
-              together.
+              together home games.
               <br />
               In this app you can keep scores for your games and display
               statistics for the whole group or individual stats.
@@ -22,6 +22,12 @@ const Home = () => {
             <p>
               Join us now and <br />
               <Link to="/signup">Create A New Account For Free</Link>
+            </p>
+            <p>Already registerd?</p>
+            <p>
+              <Link to="/my-teams">
+                Pick a team and start a new game...ALL IN!
+              </Link>
             </p>
           </div>
           <div className="col">

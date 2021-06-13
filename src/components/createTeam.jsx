@@ -52,7 +52,7 @@ class CreateTeam extends Form {
               {this.renderInput("teamImage", "Team Image")}
               {this.renderButton("Create Team")}
               <Link className="btn btn-secondary mt-3 ms-3" to="/my-teams">
-                Cancel
+                Do it later
               </Link>
             </form>
           </div>

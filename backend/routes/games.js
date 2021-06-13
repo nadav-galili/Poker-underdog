@@ -60,6 +60,7 @@ router.get("/last-game/:teamId", auth, async (req, res) => {
     .sort({ created_at: -1 })
     .limit(1);
   res.send(game);
+  console.log(game);
 });
 // specific game
 router.get("/:gameId", auth, async (req, res) => {

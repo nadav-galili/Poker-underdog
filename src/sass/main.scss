@@ -1,6 +1,8 @@
 @import "config";
 @import "home";
 @import "table";
+@import "team";
+@import "navbar";
 
 footer {
   background-color: $basecolorGreen;
@@ -16,18 +18,18 @@ nav {
     font-size: x-large;
   }
 }
-.team-buttons {
-  button:first-child {
-    position: absolute;
-    top: 35%;
-    left: 20%;
-  }
-  button:nth-child(2) {
-    position: absolute;
-    top: 50%;
-    left: 20%;
-  }
-}
+// .team-buttons {
+//   button:first-child {
+//     //position: absolute;
+//     //top: 35%;
+//     //left: 20%;
+//   }
+//   button:nth-child(2) {
+//     //position: absolute;
+//     // top: 50%;
+//     // left: 20%;
+//   }
+// }
 
 .teams p {
   font-size: larger;
