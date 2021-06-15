@@ -21,11 +21,20 @@ mongoose
   .then(() => console.log("Connected to MongoDB..."))
   .catch((err) => console.error("Could not connect to MongoDB..."));
 
-app.use(cors());
+let corsOptions = {
+  origin: "https://poker-underdog.com",
+};
+//app.use(cors());
+app.use(cors(corsOptions));
+
 app.use(express.json());
+
 app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/games", games);
 app.use("/api/teams", teams);
-const port = 3900;
-http.listen(port, () => console.log(`Listening on port ${port}...`));
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to Poker-Underground applicationnnnn." });
+});
+const PORT = process.env.PORT || 3900;
+http.listen(PORT, () => console.log(`Listening on port ${PORT}...`));

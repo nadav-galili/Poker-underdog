@@ -25,9 +25,8 @@ class Signup extends Form {
     const { data } = this.state;
 
     try {
-      console.log("$", data);
       if (!data.userImage) delete data.userImage;
-      console.log("aff", data);
+
       await http.post(`${apiUrl}/users`, data);
       toast("A new acoount is opened");
       await userService.login(data.email, data.password);

@@ -71,7 +71,7 @@ class JoinTeam extends Form {
                 Not right now
               </Link>
             </form>
-            <p className="mt-2">*To join a demo team, enter:42392</p>
+            <p className="mt-2">*To join a demo team, enter:235950</p>
           </div>
         </div>
       </div>

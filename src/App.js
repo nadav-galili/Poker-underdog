@@ -19,6 +19,8 @@ import JoinTeam from "./components/joinTeam";
 import Game from "./components/game";
 import LastGame from "./components/lastGame";
 import MainTable from "./components/mainTable";
+import Demo from "./components/demo";
+import About from "./components/about";
 
 function App() {
   useEffect(() => {
@@ -45,24 +47,39 @@ function App() {
         <Navbar user={user} />
       </header>
       <main style={{ minHeight: 900 }}>
-        <Switch>
-          <ProtectedRoute path="/my-teams/edit/:teamId" component={EditTeam} />
-          <ProtectedRoute path="/my-teams" component={MyTeams} />
-          <ProtectedRoute path="/create-team" component={CreateTeam} />
-          <ProtectedRoute path="/new-game/:teamId" component={SelectPlayers} />
-          <ProtectedRoute path="/join-team" component={JoinTeam} user={user} />
+        <HashRouter>
+          <Switch>
+            <ProtectedRoute
+              path="/my-teams/edit/:teamId"
+              component={EditTeam}
+            />
+            <ProtectedRoute path="/my-teams" component={MyTeams} />
+            <ProtectedRoute path="/create-team" component={CreateTeam} />
+            <ProtectedRoute
+              path="/new-game/:teamId"
+              component={SelectPlayers}
+            />
+            <ProtectedRoute
+              path="/join-team"
+              component={JoinTeam}
+              user={user}
+            />
 
-          <ProtectedRoute path="/game" component={Game} />
+            <ProtectedRoute path="/game" component={Game} />
 
-          <ProtectedRoute path="/last-game/:teamId" component={LastGame} />
-          <ProtectedRoute path="/main-table/:teamId" component={MainTable} />
+            <ProtectedRoute path="/last-game/:teamId" component={LastGame} />
+            <ProtectedRoute path="/main-table/:teamId" component={MainTable} />
 
-          <Route path="/logout" component={Logout} />
-          <Route path="/signin" component={Signin} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/" exact component={Home} />
-        </Switch>
+            <Route path="/demo" component={Demo} />
+            <Route path="/about" component={About} />
+            <Route path="/logout" component={Logout} />
+            <Route path="/signin" component={Signin} />
+            <Route path="/signup" component={Signup} />
+            <Route exact path="/" component={Home} />
+          </Switch>
+        </HashRouter>
       </main>
+
       <footer>
         <Footer />
       </footer>

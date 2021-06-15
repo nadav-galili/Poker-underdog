@@ -152,16 +152,16 @@ export default function Game(props) {
         http.post(`${apiUrl}/games`, teamInfo);
 
         props.history.push(`/last-game/${teamInfo.team_id}`);
+        toast.success("GAME OVER", {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
-    });
-    toast.success("GAME OVER", {
-      position: "top-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
     });
   }
 
