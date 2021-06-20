@@ -8,6 +8,15 @@ h1 {
   font-size: 1.5em;
 }
 
+.col p:nth-child(4) {
+  color: $basecolorRed;
+  font-weight: bolder;
+}
+.col p:nth-child(5) {
+  color: $basecolorGreen;
+  font-weight: bolder;
+}
+
 .col img:nth-child(1) {
   border: 3px solid black;
   border-radius: 15px;

@@ -21,32 +21,29 @@ import LastGame from "./components/lastGame";
 import MainTable from "./components/mainTable";
 import Demo from "./components/demo";
 import About from "./components/about";
+import { Opacity } from "@material-ui/icons";
 
 function App() {
   useEffect(() => {
-    setUser(userService.getCurrentUser());
+    const fetchUser = async () => {
+      const me = await userService.getCurrentUser();
+      setUser(me);
+    };
+    fetchUser();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     const details = await userService.getUserDetails();
-  //     console.log("uu", details.data.name);
-  //     await setUserDetails(details.data.name);
-  //     console.log("t444", userDetails);
-  //   };
-  //   fetchUser();
-  // }, []);
   const [user, setUser] = useState({});
-
-  //const [userDetails, setUserDetails] = useState("");
-
+  const style = {
+    minHeight: 900,
+    backgroundImage: `url(${process.env.PUBLIC_URL + "background.jpg"})`,
+  };
   return (
     <React.Fragment>
       <ToastContainer />
       <header>
         <Navbar user={user} />
       </header>
-      <main style={{ minHeight: 900 }}>
+      <main style={style}>
         <HashRouter>
           <Switch>
             <ProtectedRoute
@@ -54,7 +51,11 @@ function App() {
               component={EditTeam}
             />
             <ProtectedRoute path="/my-teams" component={MyTeams} />
-            <ProtectedRoute path="/create-team" component={CreateTeam} />
+            <ProtectedRoute
+              path="/create-team"
+              user={user}
+              component={CreateTeam}
+            />
             <ProtectedRoute
               path="/new-game/:teamId"
               component={SelectPlayers}
@@ -74,7 +75,7 @@ function App() {
             <Route path="/about" component={About} />
             <Route path="/logout" component={Logout} />
             <Route path="/signin" component={Signin} />
-            <Route path="/signup" component={Signup} />
+            <Route path="/signup" component={Signup} user={user} />
             <Route exact path="/" component={Home} />
           </Switch>
         </HashRouter>

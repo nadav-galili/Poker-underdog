@@ -15,11 +15,15 @@ const Demo = () => {
             team" and follow instuctions
           </li>
 
-          <img
+          {/* <img
             src={process.env.PUBLIC_URL + `demo/myTeams.JPG`}
             alt="demo img"
             className="demo-img"
-          />
+          /> */}
+          {/* <video src={process.env.PUBLIC_URL + "demo/demo1.mp4"}></video> */}
+          <video width="400" height="240" controls>
+            <source src={process.env.PUBLIC_URL + "demo/demo1.mp4"} />
+          </video>
           <li>
             In this page you can:
             <ul>
@@ -31,22 +35,21 @@ const Demo = () => {
             </ul>
           </li>
           <li>Table & statistics</li>
-          <img
+          {/* <img
             src={process.env.PUBLIC_URL + `demo/table.JPG`}
             alt="team table"
             className="demo-img"
-          />
+          /> */}
+          <video width="400" height="240" controls>
+            <source src={process.env.PUBLIC_URL + "demo/demo2.mp4"} />
+          </video>
           <li>Start a new game:</li>
           <ul>
             <li>Select the players that will play in the game</li>
             <li>*Note that you need to select at least 2 players</li>
             <li>*Note that you need to select at least 2 players</li>
           </ul>
-          <img
-            src={process.env.PUBLIC_URL + `demo/select.JPG`}
-            alt="start a game"
-            className="demo-img"
-          />
+
           <li>
             Start your game, compete with your amigos for the chance to be poker
             champions
@@ -59,11 +62,7 @@ const Demo = () => {
             At the end of the match , count each players cash and input the
             ammount to the "cash in hand" field.
           </li>
-          <img
-            src={process.env.PUBLIC_URL + `demo/game.JPG`}
-            alt="game"
-            className="demo-img"
-          />
+
           <li>
             To finish the game press "Update Results" & you will be transferd to
             the leading boards of the latest game

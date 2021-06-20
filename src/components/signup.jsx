@@ -26,11 +26,11 @@ class Signup extends Form {
 
     try {
       if (!data.userImage) delete data.userImage;
-
       await http.post(`${apiUrl}/users`, data);
-      toast("A new acoount is opened");
       await userService.login(data.email, data.password);
-      window.location = "/create-team";
+
+      window.location = "/";
+      toast("A new acoount is opened");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         this.setState({ errors: { email: "Email is taken" } });

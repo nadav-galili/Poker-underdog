@@ -20,8 +20,13 @@ class CreateTeam extends Form {
   };
 
   async componentDidMount() {
+    //const { user } = this.props;
+    console.log(this.props);
+    //if (!user) window.location.reload();
     const { data } = this.state;
+
     let player = await userService.getUserDetails();
+    // if (!player) window.location.reload();
     delete player.data.password;
     data.players.push(player.data);
     this.setState({ data });
@@ -30,7 +35,6 @@ class CreateTeam extends Form {
   doSubmit = async () => {
     const { data } = this.state;
     if (!data.teamImage) delete data.teamImage;
-
     await teamService.createTeam(this.state.data);
     toast("A new Team is opened");
     this.props.history.replace("/my-teams");

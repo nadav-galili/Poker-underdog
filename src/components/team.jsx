@@ -22,9 +22,9 @@ const Team = ({ team, removeTeam }) => {
           height="100"
         />
         <div className="card-body">
-          <h5 className="card-title ">
+          <h3 className="card-title ">
             <u>{team.name}</u>
-          </h5>
+          </h3>
           <p className="card-text">
             <strong>Team Number:{team.teamNumber}</strong>
             <br />

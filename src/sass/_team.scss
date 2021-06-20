@@ -2,3 +2,12 @@
   font-weight: 700;
   font-size: 1.5em;
 }
+
+h3 {
+  color: $basecolorGreen;
+  font-weight: bolder;
+}
+
+p strong {
+  color: $basecolorRed;
+}

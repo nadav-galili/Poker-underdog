@@ -4,21 +4,23 @@ import PageHeader from "./common/pageHeader";
 const Home = () => {
   return (
     <section>
-      <div className="container mt-5">
+      <div className="container pt-3">
         <PageHeader titleText="Poker-Underdog" />
         <div className="row">
           <div className="col">
-            <p>
+            <p className="mt-4">
               Poker Underdog is an interactive platform for poker groups playing
               together home games.
-              <br />
+            </p>
+            <p className="mt-4">
               In this app you can keep scores for your games and display
               statistics for the whole group or individual stats.
-              <br />
-              <br />
+            </p>
+            <p className="mt-4">
               You can open or join as many groups as you like and stay updated
               on each group individually and all these features are FREE!
             </p>
+
             <p>
               Join us now and <br />
               <Link to="/signup">Create A New Account For Free</Link>
