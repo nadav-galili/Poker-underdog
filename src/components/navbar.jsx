@@ -10,7 +10,7 @@ class Navbar extends Component {
       <nav className="navbar navbar-expand-lg navbar-light shadow-sm ">
         <div className="container">
           <Link className="navbar-brand" to="/#">
-            <img src={process.env.PUBLIC_URL + `logo.JPG`} alt="logo"></img>
+            <img src={process.env.PUBLIC_URL + `logo-red.png`} alt="logo"></img>
           </Link>
           <button
             className="navbar-toggler"

@@ -21,7 +21,6 @@ import LastGame from "./components/lastGame";
 import MainTable from "./components/mainTable";
 import Demo from "./components/demo";
 import About from "./components/about";
-import { Opacity } from "@material-ui/icons";
 
 function App() {
   useEffect(() => {
@@ -35,7 +34,7 @@ function App() {
   const [user, setUser] = useState({});
   const style = {
     minHeight: 900,
-    backgroundImage: `url(${process.env.PUBLIC_URL + "background.jpg"})`,
+    backgroundImage: `url(${process.env.PUBLIC_URL + "background1.jpg"})`,
   };
   return (
     <React.Fragment>
@@ -43,7 +42,7 @@ function App() {
       <header>
         <Navbar user={user} />
       </header>
-      <main style={style}>
+      <main style={style} className="main">
         <HashRouter>
           <Switch>
             <ProtectedRoute
@@ -76,7 +75,7 @@ function App() {
             <Route path="/logout" component={Logout} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} user={user} />
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={Home} user={user} />
           </Switch>
         </HashRouter>
       </main>

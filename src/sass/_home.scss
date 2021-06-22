@@ -1,3 +1,22 @@
+.container.pt-3 {
+  animation-name: cont;
+  animation-duration: 1500ms;
+  transition-timing-function: ease-in;
+  animation-delay: 0ms;
+  opacity: 1;
+  //animation-fill-mode: both;
+}
+
+@keyframes cont {
+  0% {
+    opacity: 0;
+    transform: translate3d(0px, 100%, 0px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
 h1 {
   text-decoration: underline;
   font-size: 3.5em !important;

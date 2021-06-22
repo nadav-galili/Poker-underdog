@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "./common/pageHeader";
-const Home = () => {
+const Home = (props) => {
   return (
     <section>
       <div className="container pt-3">
