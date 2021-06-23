@@ -1,0 +1,25 @@
+.userImage {
+  width: 200px !important;
+  height: 200px;
+  border: 2px solid black;
+  padding: 0 !important;
+}
+.me {
+  background-color: $basecolorPurple;
+}
+
+.totalP {
+  background-color: $backgroundGreen;
+  height: 400px;
+}
+
+.card.m-5 {
+  width: 200px !important;
+  height: 200px;
+  border: 3px solid black;
+  border-radius: 20px;
+}
+
+.card-text {
+  text-decoration: underline;
+}

@@ -21,6 +21,7 @@ import LastGame from "./components/lastGame";
 import MainTable from "./components/mainTable";
 import Demo from "./components/demo";
 import About from "./components/about";
+import MyStats from "./components/personalStats/myStats";
 
 function App() {
   useEffect(() => {
@@ -53,6 +54,11 @@ function App() {
       <main style={style} className="main">
         <HashRouter>
           <Switch>
+            <ProtectedRoute
+              path="/my-stats/:id"
+              component={MyStats}
+              user={user}
+            />
             <ProtectedRoute
               path="/my-teams/edit/:teamId"
               component={EditTeam}

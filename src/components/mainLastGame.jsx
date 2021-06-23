@@ -105,8 +105,6 @@ export default function MainLastGame({ team }) {
   const year = gameDate.getFullYear();
   const formated = `${day}/${month}/${year}`;
 
-  console.log("tttt", lastGame);
-
   return (
     <div className="container mt-3">
       <PageHeader titleText="Last Game" />
@@ -128,6 +126,7 @@ export default function MainLastGame({ team }) {
                         key={column.id}
                         align={column.align}
                         style={{ minWidth: column.minWidth }}
+                        className="lastGame-head"
                       >
                         {column.label}
                       </TableCell>

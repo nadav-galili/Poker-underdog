@@ -20,6 +20,7 @@ import Paper from "@material-ui/core/Paper";
 //import Switch from "@material-ui/core/Switch";
 //import DeleteIcon from "@material-ui/icons/Delete";
 //import FilterListIcon from "@material-ui/icons/FilterList";
+import { Link } from "react-router-dom";
 import gameService from "../services/gameService";
 import { Avatar } from "@material-ui/core";
 import PageHeader from "../components/common/pageHeader";
@@ -108,7 +109,7 @@ export default function LastGame(props) {
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table" size="medium">
             <TableHead>
-              <TableRow>
+              <TableRow className="last-head">
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
@@ -157,6 +158,13 @@ export default function LastGame(props) {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         /> */}
       </Paper>
+
+      <Link
+        to={`/main-table/${props.match.params.teamId}`}
+        className="btn btn-primary btn-lg mt-5"
+      >
+        See Team's Statistics
+      </Link>
     </div>
   );
 }

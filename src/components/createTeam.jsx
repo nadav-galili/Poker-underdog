@@ -20,13 +20,8 @@ class CreateTeam extends Form {
   };
 
   async componentDidMount() {
-    //const { user } = this.props;
-    console.log(this.props);
-    //if (!user) window.location.reload();
     const { data } = this.state;
-
     let player = await userService.getUserDetails();
-    // if (!player) window.location.reload();
     delete player.data.password;
     data.players.push(player.data);
     this.setState({ data });
