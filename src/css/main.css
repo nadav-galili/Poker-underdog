@@ -13,8 +13,8 @@
           animation-duration: 1500ms;
   -webkit-transition-timing-function: ease-in;
           transition-timing-function: ease-in;
-  -webkit-animation-delay: 0ms;
-          animation-delay: 0ms;
+  -webkit-animation-delay: 0.8ms;
+          animation-delay: 0.8ms;
   opacity: 1;
 }
 
@@ -112,6 +112,10 @@ h1 {
   font-weight: 900 !important;
 }
 
+.noGames {
+  color: #a01010;
+}
+
 .team-list {
   font-weight: 700;
   font-size: 1.5em;
@@ -166,6 +170,7 @@ main {
 
 footer {
   background-color: #0c6b4a;
+  color: #fcfcfc;
 }
 
 nav {

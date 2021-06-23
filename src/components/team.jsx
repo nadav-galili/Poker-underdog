@@ -45,12 +45,12 @@ const Team = ({ team, removeTeam }) => {
               ))}
             </ul>
           </div>
-          <Link className="btn btn-info mb-2" to={`/new-game/${team._id}`}>
+          <Link className="btn btn-success mb-2" to={`/new-game/${team._id}`}>
             Start a new game
           </Link>
           <p className="card-text border-top pt-2">Created At:{formated}</p>
           <p>
-            <Link to={`/my-teams/edit/${team._id}`}>
+            <Link className="ml-2" to={`/my-teams/edit/${team._id}`}>
               <i className="fas fa-edit ms-1"></i>
               Edit
             </Link>

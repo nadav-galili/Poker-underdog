@@ -12,7 +12,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { Avatar } from "@material-ui/core";
+import MainLastGame from "./mainLastGame";
 
+//set headers for the tables
 const columns = [
   { id: "rank", label: "Rank", minWidth: 50 },
 
@@ -56,6 +58,7 @@ const columns = [
   },
 ];
 
+///func to get the data 4 the table
 function createData(
   rank,
   player,
@@ -78,11 +81,6 @@ function createData(
   };
 }
 
-// const styles = StyleSheet.create({
-//   plus: { backgroundColor: "lime" },
-//   minus: { backgroundColor: "red" },
-// });
-
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -93,16 +91,10 @@ const useStyles = makeStyles({
 });
 
 export default function MainTable(props) {
+  //get the data for the table
   const [data, setData] = useState([]);
-  // let inputStyles = {
-  //   color: "blue",
-  // };
 
-  //test it
-
-  // if (data.totalProfit < 0) {
-  //   inputStyles = { color: "lime" };
-  // }
+  //fetch data from DB
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.table(props.match.params.teamId);
@@ -153,9 +145,9 @@ export default function MainTable(props) {
       <PageHeader titleText="Main Table" />
       {data.length < 1 && (
         <div className="start">
-          <h2>No Games Played Yet!</h2>
+          <h2 className="noGames">No Games Played Yet!</h2>
           <Link
-            className="btn btn-info mb-2"
+            className="btn btn-success mb-2"
             to={`/new-game/${props.match.params.teamId}`}
           >
             Start a new game
@@ -219,6 +211,9 @@ export default function MainTable(props) {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
+
+      {/* Display last game played */}
+      <MainLastGame team={props.match.params.teamId} />
     </div>
   );
 }

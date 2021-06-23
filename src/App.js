@@ -31,6 +31,14 @@ function App() {
     fetchUser();
   }, []);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const me = await userService.getUserDetails();
+      setUser(me);
+    };
+    fetchUser();
+  }, []);
+
   const [user, setUser] = useState({});
   const style = {
     minHeight: 900,
