@@ -5,6 +5,7 @@ const { User, validate, validateUserWithId } = require("../models/user");
 const auth = require("../middleware/auth");
 const { Team } = require("../models/teams");
 const router = express.Router();
+const { Game } = require("../models/games");
 
 const getTeams = async (teamsArray) => {
   const teams = await Team.find({ teamNumber: { $in: teamsArray } });

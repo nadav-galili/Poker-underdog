@@ -54,6 +54,47 @@ router.get("/table/:teamId", auth, async (req, res) => {
   res.send(table);
 });
 
+router.get("/stats/:uId", auth, async (req, res) => {
+  const stats = await Game.aggregate([
+    {
+      $unwind: {
+        path: "$players",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $match: {
+        "players.id": req.params.uId,
+      },
+    },
+    {
+      $group: {
+        _id: {
+          name: "$players.name",
+          image: "$players.image",
+          player_id: "$players.id",
+        },
+        totalProfit: {
+          $sum: "$players.profit",
+        },
+        avgProfit: {
+          $avg: "$players.profit",
+        },
+        numOfGames: {
+          $sum: 1,
+        },
+        avgCashing: {
+          $avg: "$players.numOfcashing",
+        },
+        lastGame: {
+          $max: "$created_at",
+        },
+      },
+    },
+  ]);
+  res.send(stats);
+});
+
 //gets the latest game
 router.get("/last-game/:teamId", auth, async (req, res) => {
   const game = await Game.find({ team_id: req.params.teamId })

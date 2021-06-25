@@ -5,10 +5,14 @@
 @import "navbar";
 @import "demo";
 @import "user";
+@import "sign";
+@import "about";
+@import "mediaQueries";
 
 main {
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: #1c1515;
 }
 footer {
   background-color: $basecolorGreen;

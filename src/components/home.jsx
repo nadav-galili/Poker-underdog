@@ -4,10 +4,10 @@ import PageHeader from "./common/pageHeader";
 const Home = (props) => {
   return (
     <section>
-      <div className="container pt-3">
+      <div className="container-fluid  pt-3">
         <PageHeader titleText="Poker-Underdog" />
-        <div className="row">
-          <div className="col">
+        <div className="row home">
+          <div className="col-12 col-md-8 homeText">
             <p className="mt-4">
               Poker Underdog is an interactive platform for poker groups playing
               together home games.
@@ -32,7 +32,7 @@ const Home = (props) => {
               </Link>
             </p>
           </div>
-          <div className="col">
+          <div className="col-6 col-md-4 homeImg">
             <img
               src="https://neconnected.co.uk/wp-content/uploads/2021/03/vcs_should_invest_like_poker_player-bf365a82-1280x640.jpg"
               alt=""

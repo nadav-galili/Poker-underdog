@@ -5,6 +5,7 @@ class Navbar extends Component {
   state = {};
   render() {
     const { user } = this.props;
+    console.log(user);
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light shadow-sm ">
@@ -47,18 +48,29 @@ class Navbar extends Component {
                   </NavLink>
                 )}
               </li>
+
+              <li className="nav-item">
+                {user && (
+                  <NavLink
+                    className="nav-item nav-link"
+                    to={`/my-stats/${user._id}`}
+                  >
+                    Personal Stats
+                  </NavLink>
+                )}
+              </li>
             </ul>
             <ul className="navbar-nav ms-auto">
               {!user && (
                 <React.Fragment>
                   <li className="nav-item">
                     <NavLink className="nav-item nav-link" to="/signin">
-                      Signin
+                      Sign-In
                     </NavLink>
                   </li>
                   <li className="nav-item">
                     <NavLink className="nav-item nav-link" to="/signup">
-                      Signup
+                      Sign-Up
                     </NavLink>
                   </li>
                 </React.Fragment>

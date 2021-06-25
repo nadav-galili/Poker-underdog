@@ -32,10 +32,10 @@ class Signin extends Form {
     if (userService.getCurrentUser()) return <Redirect to="/" />;
     return (
       <div className="container">
-        <PageHeader titleText="Signin to Poker Underdog" />
+        <PageHeader titleText="Sign-In to Poker Underdog" />
         <div className="row">
           <div className="col-12">
-            <p>You can signin here with your account!</p>
+            <p>You can sign-in here with your account!</p>
           </div>
         </div>
         <div className="row">
@@ -43,7 +43,7 @@ class Signin extends Form {
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
               {this.renderInput("email", "Email", "email")}
               {this.renderInput("password", "Password", "password")}
-              {this.renderButton("Signin")}
+              {this.renderButton("Sign-In")}
             </form>
           </div>
         </div>
