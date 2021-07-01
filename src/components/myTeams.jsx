@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PageHeader from "./common/pageHeader";
 import teamService from "../services/teamService";
+import userService from "../services/userService";
 import Team from "./team";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -8,12 +9,19 @@ import { toast } from "react-toastify";
 
 const MyTeams = () => {
   const [teams, setTeams] = useState([]);
+  //console.log("teete", teams);
+  // userService.getCurrentUser();
 
   useEffect(() => {
     const fetchTeams = async () => {
+      // await userService.getCurrentUser();
       const { data } = await teamService.getMyTeam();
-
-      if (data.length > 0) setTeams(data);
+      setTeams(data);
+      // if (data.length > 0) {
+      //   setTeams(data);
+      // } else {
+      //   setTeams([]);
+      // }
     };
     fetchTeams();
   }, []);
@@ -37,8 +45,13 @@ const MyTeams = () => {
     });
   };
   return (
-    <div className="container">
+    <div className="container-fluid about">
       <PageHeader titleText="My Teams Page" />
+      <img
+        src={process.env.PUBLIC_URL + "/icons/teams.png"}
+        alt="teams icon"
+        className="aboutIcon"
+      />
       <div className="row">
         <div className="col-12 ">
           <Link className="btn btn-primary ms-2" to="/create-team">
@@ -47,7 +60,7 @@ const MyTeams = () => {
           <Link className="btn btn-primary ms-2" to="/join-team">
             Join An Existing Team
           </Link>
-          <div>
+          <div className="teamText">
             You can try a test team.
             <br /> enter "Join an existing team" and try out
           </div>

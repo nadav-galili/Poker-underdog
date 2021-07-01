@@ -23,13 +23,13 @@ class Signup extends Form {
 
   doSubmit = async () => {
     const { data } = this.state;
+    //data.teams = true;
 
     try {
       if (!data.userImage) delete data.userImage;
       await http.post(`${apiUrl}/users`, data);
       await userService.login(data.email, data.password);
-
-      window.location = "/";
+      window.location = "/#/create-team";
       toast("A new acoount is opened");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -42,7 +42,7 @@ class Signup extends Form {
     if (userService.getCurrentUser()) return <Redirect to="/" />;
 
     return (
-      <div className="container">
+      <div className="container-fluid">
         <PageHeader titleText="User Registration Form" />
         <div className="row">
           <div className="col-12">
@@ -59,7 +59,7 @@ class Signup extends Form {
                 "userImage",
                 "Image (Optional)-Please enter url for your image"
               )}
-              {this.renderButton("Signup")}
+              {this.renderButton("Sign-Up")}
             </form>
           </div>
         </div>

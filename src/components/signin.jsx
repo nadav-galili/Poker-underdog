@@ -3,7 +3,7 @@ import PageHeader from "./common/pageHeader";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import userService from "../services/userService";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 class Signin extends Form {
   state = {
@@ -20,7 +20,13 @@ class Signin extends Form {
     const { email, password } = this.state.data;
     try {
       await userService.login(email, password);
+      //let details = await userService.getCurrentUser();
+
       window.location = "/";
+
+      // setTimeout(() => {
+      //   this.props.history.replace(`/#/my-stats/${details._id}`);
+      // }, 5000);
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         this.setState({ errors: { email: ex.response.data } });
@@ -31,7 +37,7 @@ class Signin extends Form {
   render() {
     if (userService.getCurrentUser()) return <Redirect to="/" />;
     return (
-      <div className="container">
+      <div className="container-fluid">
         <PageHeader titleText="Sign-In to Poker Underdog" />
         <div className="row">
           <div className="col-12">

@@ -6,7 +6,7 @@
 }
 
 .me {
-  background-color: $basecolorPurple;
+  background-color: $headerColorBlue;
 }
 
 h4.ms-4,
@@ -15,7 +15,7 @@ h2.ms-4 {
 }
 
 .totalP {
-  background-color: $backgroundGreen;
+  background-color: $basecolorGreen;
   min-height: 450px;
   padding-bottom: 100px;
 }
@@ -23,13 +23,14 @@ h2.ms-4 {
 .card.mx-auto {
   width: 250px !important;
   height: 250px;
-  border: 3px solid $basecolorPurple;
+  border: 3px solid $headerColorBlue;
   border-radius: 20px;
 }
 
 .card-text.mt-3 {
   text-decoration: underline;
-  color: $basecolorPurple;
+  color: $headerColorBlue;
+  font-size: 1.5em;
 }
 
 .icon-cards div {
@@ -37,5 +38,5 @@ h2.ms-4 {
 }
 
 .personalTeams {
-  background-color: $basecolorPurple;
+  background-color: $headerColorBlue;
 }

@@ -23,6 +23,9 @@ export function createTeam(team) {
 export function getMyTeam() {
   return http.get(`${apiUrl}/teams/my-teams`);
 }
+// export function getTeam() {
+//   return http.get(`${apiUrl}/teams/my-teams`);
+// }
 
 export function deleteTeam(teamId) {
   return http.delete(`${apiUrl}/teams/${teamId}`);

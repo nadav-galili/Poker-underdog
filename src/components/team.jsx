@@ -12,8 +12,8 @@ const Team = ({ team, removeTeam }) => {
   const formated = `${day}/${month}/${year}`;
 
   return (
-    <div className="col-md-6 col-lg-4 mt-3">
-      <div className="card">
+    <div className="col-md-6 col-lg-3 mt-3">
+      <div className="card mb-3">
         <img
           className="p-2"
           src={team.teamImage}
@@ -33,8 +33,10 @@ const Team = ({ team, removeTeam }) => {
           <Link className="btn btn-primary" to={`/main-table/${team._id}`}>
             Team Tables & Statistics
           </Link>
-          <div className="card-text">
-            <strong>Players:</strong>
+          <div className="card-text ">
+            <strong>
+              <u>Players:</u>
+            </strong>
             <ul>
               {team.players.map((player) => (
                 <li key={player._id}>
@@ -45,7 +47,7 @@ const Team = ({ team, removeTeam }) => {
               ))}
             </ul>
           </div>
-          <Link className="btn btn-success mb-2" to={`/new-game/${team._id}`}>
+          <Link className="btn mb-2" to={`/new-game/${team._id}`}>
             Start a new game
           </Link>
           <p className="card-text border-top pt-2">Created At:{formated}</p>

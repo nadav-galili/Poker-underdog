@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
 
 class Navbar extends Component {
   state = {};
   render() {
     const { user } = this.props;
-    console.log(user);
-
+    const { details } = this.props;
+    console.log("r", details);
     return (
       <nav className="navbar navbar-expand-lg navbar-light shadow-sm ">
-        <div className="container">
+        <div className="container-fluid">
           <Link className="navbar-brand" to="/#">
-            <img src={process.env.PUBLIC_URL + `logo-red.png`} alt="logo"></img>
+            <img
+              src={process.env.PUBLIC_URL + `logoNewRed.png`}
+              alt="logo"
+            ></img>
           </Link>
           <button
             className="navbar-toggler"
@@ -78,9 +82,9 @@ class Navbar extends Component {
               {user && (
                 <React.Fragment>
                   <li className="nav-item">
-                    <NavLink className="nav-item nav-link" to="/#">
-                      {/* name {this.props.userDetails} */}
-                    </NavLink>
+                    {user && (
+                      <Avatar src={details.userImage} alt={details.name} />
+                    )}
                   </li>
                   <li className="nav-item">
                     <NavLink className="nav-item nav-link" to="/logout">

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "./common/pageHeader";
-const Home = (props) => {
+const Home = () => {
   return (
     <section>
       <div className="container-fluid  pt-3">
@@ -32,7 +32,7 @@ const Home = (props) => {
               </Link>
             </p>
           </div>
-          <div className="col-6 col-md-4 homeImg">
+          <div className="col-6 col-md-4 col-lg-4 homeImg">
             <img
               src="https://neconnected.co.uk/wp-content/uploads/2021/03/vcs_should_invest_like_poker_player-bf365a82-1280x640.jpg"
               alt=""

@@ -40,7 +40,7 @@ h1 {
 }
 
 .col-6 img:nth-child(1) {
-  border: 3px solid black;
+  border: 3px solid $basecolorRed;
   border-radius: 15px;
   transform: rotate(-30deg);
   margin: 2em;
@@ -63,7 +63,7 @@ h1 {
 }
 
 .col-6 img:nth-child(2) {
-  border: 3px solid black;
+  border: 3px solid $basecolorGreen;
   border-radius: 15px;
   margin: 2em;
   //transform: rotate(-20deg);

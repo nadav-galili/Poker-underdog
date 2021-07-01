@@ -67,7 +67,7 @@ h1 {
 }
 
 .col-6 img:nth-child(1) {
-  border: 3px solid black;
+  border: 3px solid #ff3030;
   border-radius: 15px;
   -webkit-transform: rotate(-30deg);
           transform: rotate(-30deg);
@@ -77,7 +77,7 @@ h1 {
 }
 
 .col-6 img:nth-child(2) {
-  border: 3px solid black;
+  border: 3px solid #02d84d;
   border-radius: 15px;
   margin: 2em;
 }
@@ -138,6 +138,19 @@ p strong {
   color: #ff3030;
 }
 
+.teamText {
+  color: #fcfcfc;
+  font-size: 1.5em;
+}
+
+.card-text {
+  font-size: 1.2em;
+}
+
+.btn.mb-2 {
+  background-color: #02d84d;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -146,8 +159,12 @@ p strong {
   font-family: "Roboto-slab";
 }
 
+.container-fluid {
+  margin-left: 5% !important;
+  margin-right: 12% !important;
+}
+
 .navbar-brand img {
-  border: 4px solid #fcfcfc;
   border-radius: 15px;
   height: 150px;
   width: 200px;
@@ -171,6 +188,11 @@ p strong {
   margin-bottom: 15px;
 }
 
+.row.demoText {
+  color: #fcfcfc;
+  font-size: 1.5em;
+}
+
 .userImage {
   width: 200px !important;
   height: 200px;
@@ -179,7 +201,7 @@ p strong {
 }
 
 .me {
-  background-color: #901eed;
+  background-color: #2752ea;
 }
 
 h4.ms-4,
@@ -188,7 +210,7 @@ h2.ms-4 {
 }
 
 .totalP {
-  background-color: #7aef9b;
+  background-color: #02d84d;
   min-height: 450px;
   padding-bottom: 100px;
 }
@@ -196,13 +218,14 @@ h2.ms-4 {
 .card.mx-auto {
   width: 250px !important;
   height: 250px;
-  border: 3px solid #901eed;
+  border: 3px solid #2752ea;
   border-radius: 20px;
 }
 
 .card-text.mt-3 {
   text-decoration: underline;
-  color: #901eed;
+  color: #2752ea;
+  font-size: 1.5em;
 }
 
 .icon-cards div {
@@ -210,7 +233,7 @@ h2.ms-4 {
 }
 
 .personalTeams {
-  background-color: #901eed;
+  background-color: #2752ea;
 }
 
 .col-12 p {
@@ -219,9 +242,21 @@ h2.ms-4 {
 
 label {
   font-size: 2em;
+  color: #fcfcfc;
 }
 
 h4.mt-4 {
+  font-size: 2em;
+  color: #fcfcfc;
+}
+
+.aboutIcon {
+  width: 200px !important;
+  height: 200px;
+}
+
+.noStats {
+  color: #fcfcfc;
   font-size: 2em;
 }
 

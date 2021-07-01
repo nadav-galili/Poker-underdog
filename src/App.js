@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLocation } from "react";
 import "../src/css/main.css";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
@@ -6,6 +6,7 @@ import Home from "./components/home";
 import Signup from "./components/signup";
 import Signin from "./components/signin";
 import Logout from "./components/logout";
+
 import CreateTeam from "./components/createTeam";
 import { Switch, Route, HashRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -24,6 +25,8 @@ import About from "./components/about";
 import MyStats from "./components/personalStats/myStats";
 
 function App() {
+  const [user, setUser] = useState({});
+  const [details, setDetails] = useState({});
   useEffect(() => {
     const fetchUser = async () => {
       const me = await userService.getCurrentUser();
@@ -32,27 +35,25 @@ function App() {
     fetchUser();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     const me = await userService.getUserDetails();
-  //     setUser(me);
-  //   };
-  //   fetchUser();
-  // }, []);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const me = await userService.getUserDetails();
+      setDetails(me.data);
+    };
+    fetchUser();
+  }, []);
 
-  const [user, setUser] = useState({});
   const style = {
     minHeight: 900,
-    //backgroundImage: `url(${process.env.PUBLIC_URL + "background1.jpg"})`,
   };
   return (
     <React.Fragment>
       <ToastContainer />
       <header>
-        <Navbar user={user} />
+        <Navbar user={user} details={details} />
       </header>
       <main style={style} className="main">
-        <HashRouter>
+        <HashRouter user={user}>
           <Switch>
             <ProtectedRoute
               path="/my-stats/:id"
@@ -63,7 +64,7 @@ function App() {
               path="/my-teams/edit/:teamId"
               component={EditTeam}
             />
-            <ProtectedRoute path="/my-teams" component={MyTeams} />
+            <ProtectedRoute path="/my-teams" component={MyTeams} user={user} />
             <ProtectedRoute
               path="/create-team"
               user={user}
@@ -89,7 +90,7 @@ function App() {
             <Route path="/logout" component={Logout} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} user={user} />
-            <Route exact path="/" component={Home} user={user} />
+            <Route exact path="/" component={Home} user={user} d={details} />
           </Switch>
         </HashRouter>
       </main>

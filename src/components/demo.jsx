@@ -3,9 +3,10 @@ import PageHeader from "./common/pageHeader";
 
 const Demo = () => {
   return (
-    <div className="container">
-      <div className="row">
-        <PageHeader titleText="Demo for the game" />
+    <div className="container-fluid">
+      <PageHeader titleText="Demo for the game" />
+
+      <div className="row demoText">
         <h3>Basic instructions for setting up a game:</h3>
         <ul>
           <li>First sign-up or sign-in to set up a user</li>

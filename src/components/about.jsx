@@ -3,12 +3,18 @@ import PageHeader from "./common/pageHeader";
 
 const About = () => {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
         <PageHeader titleText="About" />
+        <img
+          src={process.env.PUBLIC_URL + "/icons/about.png"}
+          alt="abput icon"
+          className="aboutIcon"
+        />
         <h4 className="mt-4">
           My name is Nadav Galili, I developed Poker-Underground after several
-          years of playing Poker with my friends.
+          years of <br />
+          playing Poker with my friends.
         </h4>
         <h4 className="mt-4">
           One of the pleasures of the game is to keep track of your game
@@ -26,7 +32,10 @@ const About = () => {
         <h3>
           <br />
           Get in touch:
-          <a href="mailto:nadavg1000@gmail.com">nadavg1000@gmail.com</a>
+          <a href="mailto:nadavg1000@gmail.com" className="ms-2">
+            {" "}
+            nadavg1000@gmail.com
+          </a>
         </h3>
       </div>
     </div>

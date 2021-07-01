@@ -18,25 +18,31 @@ const MyStats = (props) => {
   }, [setMe]);
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row ">
         <PageHeader titleText="Player Statistics" />
+        {/* <img
+          src={process.env.PUBLIC_URL + "/icons/statistic.png"}
+          alt="stats icon"
+          className="aboutIcon"
+        /> */}
+
         {me.name && (
           <React.Fragment>
-            <div className="me">
+            <div className="me col-12 col-md-8 col-lg-10">
               <img src={me.userImage} alt="user" className="userImage m-4" />
               <h2 className="ms-4">{me.name.toUpperCase()}</h2>
               <h4 className="ms-4">{me.email}</h4>
             </div>
-            <div className="totalP">
+            <div className="totalP col-12 col-md-8 col-lg-10">
               <TotalPersonal />
             </div>
-            <div className="personalTeams">
+            <div className="personalTeams col-12 col-md-8 col-lg-10">
               <TeamForPersonal />
             </div>
           </React.Fragment>
         )}
-        {!me.name && <p>no stats yet</p>}
+        {!me.name && <p className="noStats">No games played yet </p>}
       </div>
     </div>
   );
