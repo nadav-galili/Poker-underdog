@@ -81,7 +81,7 @@ class Navbar extends Component {
               )}
               {user && (
                 <React.Fragment>
-                  <li className="nav-item">
+                  <li className="nav-item me-2">
                     {user && (
                       <Avatar src={details.userImage} alt={details.name} />
                     )}

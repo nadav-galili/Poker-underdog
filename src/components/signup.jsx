@@ -29,7 +29,7 @@ class Signup extends Form {
       if (!data.userImage) delete data.userImage;
       await http.post(`${apiUrl}/users`, data);
       await userService.login(data.email, data.password);
-      window.location = "/#/create-team";
+      window.location = "/";
       toast("A new acoount is opened");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
