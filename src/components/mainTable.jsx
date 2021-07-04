@@ -29,7 +29,7 @@ const columns = [
   {
     id: "profit",
     label: "Profit",
-    minWidth: 50,
+    minWidth: 51,
     align: "right",
   },
   {
@@ -187,6 +187,14 @@ export default function MainTable(props) {
                           <TableCell
                             key={column.id}
                             align={column.align}
+                            className={
+                              column.id === "avgProfit" && value > 0
+                                ? "bg-success"
+                                : column.id === "avgProfit" && value < 0
+                                ? "bg-danger"
+                                : ""
+                            }
+
                             // style={inputStyles}
                           >
                             {column.format && typeof value === "number"
