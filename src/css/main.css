@@ -260,6 +260,14 @@ h4.mt-4 {
   font-size: 2em;
 }
 
+.myStats {
+  font-size: 3.5em;
+}
+
+.card.mx-auto.mt-5 {
+  margin-bottom: 80px;
+}
+
 main {
   background-repeat: no-repeat;
   background-size: cover;

@@ -9,7 +9,12 @@ export function table(teamId) {
   return http.get(`${apiUrl}/games/table/${teamId}`);
 }
 
+export function personal(uId) {
+  return http.get(`${apiUrl}/games/personal/${uId}`);
+}
+
 export default {
   lastGame,
   table,
+  personal,
 };
