@@ -6,7 +6,6 @@ import Home from "./components/home";
 import Signup from "./components/signup";
 import Signin from "./components/signin";
 import Logout from "./components/logout";
-
 import CreateTeam from "./components/createTeam";
 import { Switch, Route, HashRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -23,6 +22,10 @@ import MainTable from "./components/mainTable";
 import Demo from "./components/demo";
 import About from "./components/about";
 import MyStats from "./components/personalStats/myStats";
+import ReactGA from "react-ga";
+
+ReactGA.initialize("G-MPD41JDBPV");
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 function App() {
   const [user, setUser] = useState({});
