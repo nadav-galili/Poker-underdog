@@ -106,7 +106,7 @@ export default function MainLastGame({ team }) {
   const formated = `${day}/${month}/${year}`;
 
   return (
-    <div className="container mt-3">
+    <div className="container mt-3 pb-5">
       <PageHeader titleText="Last Game" />
       {!lastGame.created_at && (
         <div className="start">

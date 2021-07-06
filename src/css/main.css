@@ -151,6 +151,16 @@ p strong {
   background-color: #02d84d;
 }
 
+.btn-secondary {
+  padding-top: 10px !important;
+  padding-bottom: 11px !important;
+  text-decoration: none;
+}
+
+.start {
+  color: #02d84d !important;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;

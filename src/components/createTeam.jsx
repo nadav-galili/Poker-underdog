@@ -41,7 +41,7 @@ class CreateTeam extends Form {
         <PageHeader titleText="Team Registration Form" />
         <div className="row">
           <div className="col-12">
-            <p>Start a new team</p>
+            <p className="start">Start a new team</p>
           </div>
         </div>
         <div className="row">
@@ -50,7 +50,11 @@ class CreateTeam extends Form {
               {this.renderInput("name", "Team Name")}
               {this.renderInput("teamImage", "Team Image")}
               {this.renderButton("Create Team")}
-              <Link className="btn-lg btn-secondary ms-3" to="/my-teams">
+              <Link
+                className=" btn-lg btn-secondary ms-4 mb-2 "
+                type="button"
+                to="/my-teams"
+              >
                 Do it later
               </Link>
             </form>

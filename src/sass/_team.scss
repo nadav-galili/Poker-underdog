@@ -24,3 +24,13 @@ p strong {
 .btn.mb-2 {
   background-color: $basecolorGreen;
 }
+
+.btn-secondary {
+  padding-top: 10px !important;
+  padding-bottom: 11px !important;
+  text-decoration: none;
+}
+
+.start {
+  color: $basecolorGreen !important;
+}

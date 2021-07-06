@@ -102,7 +102,7 @@ export default function LastGame(props) {
   const formated = `${day}/${month}/${year}`;
 
   return (
-    <div className="container mt-3">
+    <div className="container pt-3">
       <PageHeader titleText="Last Game" />
       <h3 className="mb-4">Played at:{formated}</h3>
       <Paper className={classes.root}>

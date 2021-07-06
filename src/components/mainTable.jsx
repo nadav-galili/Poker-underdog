@@ -141,7 +141,7 @@ export default function MainTable(props) {
     );
   });
   return (
-    <div className="container mt-3">
+    <div className="container">
       <PageHeader titleText="Main Table" />
       {data.length < 1 && (
         <div className="start">
