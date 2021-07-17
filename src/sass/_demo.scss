@@ -10,3 +10,13 @@
   color: $navbarWhite;
   font-size: 1.5em;
 }
+
+.demoVideo {
+  border: 4px solid $headerColorBlue;
+}
+@media screen and (max-width: 600px) {
+  .demoVideo {
+    width: 350px;
+    height: 250px;
+  }
+}

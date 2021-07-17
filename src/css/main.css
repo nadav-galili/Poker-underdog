@@ -96,6 +96,16 @@ h1 {
   }
 }
 
+.MuiPaper-root {
+  width: 90% !important;
+}
+
+@media screen and (max-width: 600px) {
+  .MuiPaper-root {
+    width: 95% !important;
+  }
+}
+
 .MuiAvatar-root {
   border: 2px solid black;
   height: 60px !important;
@@ -161,6 +171,20 @@ p strong {
   color: #02d84d !important;
 }
 
+.teamName {
+  color: #fcfcfc;
+}
+
+.container-fluid ol {
+  color: #fcfcfc;
+  font-size: 1.5em;
+}
+
+.steps {
+  color: #02d84d;
+  font-size: 2em;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -203,6 +227,17 @@ p strong {
   font-size: 1.5em;
 }
 
+.demoVideo {
+  border: 4px solid #2752ea;
+}
+
+@media screen and (max-width: 600px) {
+  .demoVideo {
+    width: 350px;
+    height: 250px;
+  }
+}
+
 .userImage {
   width: 200px !important;
   height: 200px;
@@ -212,6 +247,8 @@ p strong {
 
 .me {
   background-color: #2752ea;
+  background: -webkit-gradient(linear, left top, right top, from(#2752ea), color-stop(35%, #2752ea), to(#00d4ff));
+  background: linear-gradient(90deg, #2752ea 0%, #2752ea 35%, #00d4ff 100%);
 }
 
 h4.ms-4,
@@ -221,6 +258,8 @@ h2.ms-4 {
 
 .totalP {
   background-color: #02d84d;
+  background: -webkit-gradient(linear, left top, right top, from(#02d84d), color-stop(35%, #02d84d), to(#02d84d));
+  background: linear-gradient(90deg, #02d84d 0%, #02d84d 35%, #02d84d 100%);
   min-height: 450px;
   padding-bottom: 100px;
 }
@@ -244,6 +283,11 @@ h2.ms-4 {
 
 .personalTeams {
   background-color: #2752ea;
+}
+
+.editUser {
+  color: black;
+  font-size: 1.5em;
 }
 
 .col-12 p {
@@ -276,6 +320,18 @@ h4.mt-4 {
 
 .card.mx-auto.mt-5 {
   margin-bottom: 80px;
+}
+
+.playerStats {
+  width: 85% !important;
+}
+
+.playerImage {
+  border: 3px solid #02d84d;
+}
+
+.join {
+  color: #02d84d;
 }
 
 main {

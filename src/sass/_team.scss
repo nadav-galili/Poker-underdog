@@ -34,3 +34,17 @@ p strong {
 .start {
   color: $basecolorGreen !important;
 }
+
+.teamName {
+  color: $navbarWhite;
+}
+
+.container-fluid ol {
+  color: $navbarWhite;
+  font-size: 1.5em;
+}
+
+.steps {
+  color: $basecolorGreen;
+  font-size: 2em;
+}

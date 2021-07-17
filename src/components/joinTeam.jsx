@@ -46,9 +46,9 @@ class JoinTeam extends Form {
 
   render() {
     const { user } = this.props;
-    console.log(user);
+
     return (
-      <div className="container">
+      <div className="container-fluid">
         <PageHeader titleText="Join an existing team" />
         <div className="row">
           <div className="col-12">
@@ -59,19 +59,19 @@ class JoinTeam extends Form {
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-6">
+          <div className="col-lg-2 col-8">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="PUT">
               {this.renderInput("teamNumber", "Team Number")}
               {this.renderButton("Join Team")}
               <Link
                 type="button"
-                className="btn btn-secondary mt-3 ms-3"
+                className="btn-lg btn-secondary  ms-3"
                 to="/my-teams"
               >
                 Not right now
               </Link>
             </form>
-            <p className="mt-2">*To join a demo team, enter:235950</p>
+            <p className="mt-2 join">*To join a demo team, enter:235950</p>
           </div>
         </div>
       </div>

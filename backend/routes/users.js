@@ -71,7 +71,8 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", auth, async (req, res) => {
   const { error } = validateUserWithId(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  // if (error) return res.status(400).send(error.details[0].message);
+  if (error) console.log(error.details[0].message);
   let user = await User.findOneAndUpdate({ _id: req.params.id }, req.body);
   if (!user)
     return res.status(404).send("The user with the given ID was not found");

@@ -22,7 +22,7 @@ const Demo = () => {
             className="demo-img"
           /> */}
           {/* <video src={process.env.PUBLIC_URL + "demo/demo1.mp4"}></video> */}
-          <video width="400" height="240" controls>
+          <video width="700" height="400" controls className="demoVideo">
             <source src={process.env.PUBLIC_URL + "demo/demo1.mp4"} />
           </video>
           <li>
@@ -36,18 +36,13 @@ const Demo = () => {
             </ul>
           </li>
           <li>Table & statistics</li>
-          {/* <img
-            src={process.env.PUBLIC_URL + `demo/table.JPG`}
-            alt="team table"
-            className="demo-img"
-          /> */}
-          <video width="400" height="240" controls>
+
+          <video width="700" height="400" controls className="demoVideo">
             <source src={process.env.PUBLIC_URL + "demo/demo2.mp4"} />
           </video>
           <li>Start a new game:</li>
           <ul>
             <li>Select the players that will play in the game</li>
-            <li>*Note that you need to select at least 2 players</li>
             <li>*Note that you need to select at least 2 players</li>
           </ul>
 

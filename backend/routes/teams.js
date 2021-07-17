@@ -60,14 +60,10 @@ router.post("/", auth, async (req, res) => {
 router.put("/:teamId", auth, async (req, res) => {
   const { error } = validateTeamWithId(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-
   let team = await Team.findOneAndUpdate({ _id: req.params.teamId }, req.body);
-  console.log(team);
   if (!team)
     return res.status(404).send("The team with the given Id was not found");
-
   team = await Team.findOne({ _id: req.params.teamId });
-  console.log(team);
   res.send(team);
 });
 

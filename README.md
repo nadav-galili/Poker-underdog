@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# Poker-Underdog
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a web app designed for managing home poker games.  
+Poker Underdog is an interactive platform for poker groups playing together home games.
 
-## Available Scripts
+In this app you can keep scores for your games and display statistics for the whole group or individual stats.
 
-In the project directory, you can run:
+You can open or join as many groups as you like and stay updated on each group individually and all these features are FREE!
 
-### `npm start`
+## Basic instructions for setting up a game:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[https://poker-underdog.com/#/demo](Link for the game demo)
+*First sign-up or sign-in to set up a user
+*Head over to "My-Teams" located at the top navbar
+\*If you want to check out a demo team, select "Join an existing team" and follow instuctions
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![My Teams Page](public\demo\myTeams.JPG)
+*In this page you can:
+*Join an existing team
+*Start a new team
+*Check out your team statistics
+*Start a new game
+*Edit or delete a team
 
-### `npm test`
+\*Table & statistics:
+![Personal statistics](public\demo\stats.JPG)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Start a new game
 
-### `npm run build`
+*Select the players that will play in the game
+*Note that you need to select at least 2 players
+*Start your game, compete with your amigos for the chance to be poker champions
+*Each time a player cashes in, press the $ icon to add another 50$ to his cashing
+*At the end of the match , count each players cash and input the ammount to the "cash in hand" field.
+*To finish the game press "Update Results" & you will be transferd to the leading boards of the latest game
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Have fun & ALL IN!!!!!!!!!!!!

@@ -189,9 +189,9 @@ export default function Game(props) {
     );
   });
   return (
-    <div className="container">
+    <div className="container-fluid">
       <PageHeader titleText="Start a new game" />
-      <p>Steps for starting a new game:</p>
+      <p className="steps">Steps for starting a new game:</p>
       <ol>
         <li>
           Add an initial cashing for each player participating (usually just
@@ -266,7 +266,7 @@ export default function Game(props) {
       <button
         type="button"
         onClick={updateGame}
-        className="btn btn-primary btn-lg mt-3 border"
+        className="btn btn-primary btn-lg mt-3 border mb-3"
       >
         Update results
       </button>

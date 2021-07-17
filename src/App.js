@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLocation } from "react";
+import React, { useEffect, useState } from "react";
 import "../src/css/main.css";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import userService from "./services/userService";
 import ProtectedRoute from "./components/common/protectedRoutes";
 import MyTeams from "./components/myTeams";
+import EditPlayer from "./components/editPlayer";
 import EditTeam from "./components/editTeam";
 import SelectPlayers from "./components/selectPlayers";
 import JoinTeam from "./components/joinTeam";
@@ -59,10 +60,16 @@ function App() {
         <HashRouter user={user}>
           <Switch>
             <ProtectedRoute
+              path="/my-stats/edit/:id"
+              component={EditPlayer}
+              user={user}
+            />
+            <ProtectedRoute
               path="/my-stats/:id"
               component={MyStats}
               user={user}
             />
+
             <ProtectedRoute
               path="/my-teams/edit/:teamId"
               component={EditTeam}

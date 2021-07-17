@@ -7,7 +7,7 @@ class Navbar extends Component {
   render() {
     const { user } = this.props;
     const { details } = this.props;
-    console.log("r", details);
+
     return (
       <nav className="navbar navbar-expand-lg navbar-light shadow-sm ">
         <div className="container-fluid">

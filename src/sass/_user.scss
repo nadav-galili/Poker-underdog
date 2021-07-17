@@ -7,6 +7,12 @@
 
 .me {
   background-color: $headerColorBlue;
+  background: linear-gradient(
+    90deg,
+    $headerColorBlue 0%,
+    $headerColorBlue 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
 
 h4.ms-4,
@@ -16,6 +22,12 @@ h2.ms-4 {
 
 .totalP {
   background-color: $basecolorGreen;
+  background: linear-gradient(
+    90deg,
+    $basecolorGreen 0%,
+    $basecolorGreen 35%,
+    $basecolorGreen 100%
+  );
   min-height: 450px;
   padding-bottom: 100px;
 }
@@ -39,4 +51,9 @@ h2.ms-4 {
 
 .personalTeams {
   background-color: $headerColorBlue;
+}
+
+.editUser {
+  color: black;
+  font-size: 1.5em;
 }

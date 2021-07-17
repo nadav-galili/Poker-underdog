@@ -58,9 +58,9 @@ function validateUserWithId(user) {
   const schema = Joi.object({
     _id: Joi.string().min(24).max(24).required(),
     name: Joi.string().min(2).max(255).required(),
-    email: Joi.string().min(6).max(255).required().email(),
-    password: Joi.string().min(6).max(1024).required(),
-    teams: Joi.array(),
+    // email: Joi.string().min(6).max(255).required().email(),
+    // password: Joi.string().min(6).max(1024).required(),
+    // teams: Joi.array(),
     userImage: Joi.string().min(11).max(1025),
   });
 

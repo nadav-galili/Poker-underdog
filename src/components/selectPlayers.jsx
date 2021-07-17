@@ -14,7 +14,7 @@ const SelectPlayers = (props) => {
       setData(players.data);
     };
     fetchPlayers();
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     localStorage.setItem("playersInGame", JSON.stringify(selected));
@@ -36,11 +36,11 @@ const SelectPlayers = (props) => {
   }
 
   return (
-    <div className="container mt-3">
+    <div className="container-fluid">
       <h1>
         <u>Start A New Game Here</u>
       </h1>
-      <h2>{data.name}</h2>
+      <h2 className="teamName">{data.name}</h2>
       <h3>Team Number:{data.teamNumber}</h3>
       <img src={data.teamImage} alt={data.name} width="200" height="200"></img>
       <PageHeader titleText="Select players for current game" />
