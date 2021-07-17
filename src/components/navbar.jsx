@@ -41,7 +41,7 @@ class Navbar extends Component {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" aria-current="page" to="/demo">
-                  Demo
+                  Game Demo
                 </Link>
               </li>
 

@@ -14,7 +14,7 @@ const TotalPersonal = (stats) => {
           <CardIcon
             image="casino"
             text="Total Profit"
-            profit={stats.stats.totalProfit}
+            profit={Math.round(stats.stats.totalProfit * 100) / 100}
             itemClass={
               stats.stats.totalProfit > 0 ? "text-primary" : "text-danger"
             }
@@ -22,12 +22,12 @@ const TotalPersonal = (stats) => {
           <CardIcon
             image="poker-chips"
             text="Avg Cashing"
-            avgCashing={stats.stats.avgCashing}
+            avgCashing={Math.round(stats.stats.avgCashing * 100) / 100}
           />
           <CardIcon
             image="poker"
             text="Avg Profit"
-            avgProfit={stats.stats.avgProfit}
+            avgProfit={Math.round(stats.stats.avgProfit * 100) / 100}
             itemClass={
               stats.stats.avgProfit > 0 ? "text-primary" : "text-danger"
             }

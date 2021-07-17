@@ -29,7 +29,7 @@ const MyStats = () => {
         <PageHeader titleText="Player Statistics" />
         {me.name && stats && (
           <React.Fragment>
-            <div className="me col-12 col-md-8 col-lg-10">
+            <div className="me col-10 col-md-8 col-lg-10">
               <img src={me.userImage} alt="user" className="userImage m-4 " />
               <h2 className="ms-4">{me.name.toUpperCase()}</h2>
               <h4 className="ms-4">{me.email}</h4>
@@ -38,10 +38,10 @@ const MyStats = () => {
                 Edit User
               </Link>
             </div>
-            <div className="totalP col-12 col-md-8 col-lg-10">
+            <div className="totalP col-10 col-md-8 col-lg-10">
               <TotalPersonal stats={stats ? stats : {}} />
             </div>
-            <div className="personalTeams col-12 col-md-8 col-lg-10 mb-5">
+            <div className="personalTeams col-10 col-md-8 col-lg-10 mb-5">
               {/* <TeamForPersonal /> */}
               <h2 className="ms-4">
                 Last game played at:
@@ -50,7 +50,7 @@ const MyStats = () => {
                     {new Date(stats.lastGame).toLocaleDateString("en-US")}
                   </p>
                 )}
-                {!stats[0] && (
+                {!stats && (
                   <p>No games played yet...start a new game & join the fun</p>
                 )}
               </h2>

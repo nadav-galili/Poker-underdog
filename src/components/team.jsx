@@ -12,7 +12,7 @@ const Team = ({ team, removeTeam }) => {
   const formated = `${day}/${month}/${year}`;
 
   return (
-    <div className="col-md-6 col-lg-3 mt-3">
+    <div className=" col-10 col-md-6 col-lg-3 mt-3">
       <div className="card mb-3">
         <img
           className="p-2"
@@ -37,9 +37,9 @@ const Team = ({ team, removeTeam }) => {
             <strong>
               <u>Players:</u>
             </strong>
-            <ul>
+            <ul className="row">
               {team.players.map((player) => (
-                <li key={player._id}>
+                <li key={player._id} className="col-4">
                   {player.name}
                   <br></br>
                   <img src={player.userImage} width="70" alt="user" />
@@ -52,14 +52,14 @@ const Team = ({ team, removeTeam }) => {
           </Link>
           <p className="card-text border-top pt-2">Created At:{formated}</p>
           <p>
-            <Link className="ml-2" to={`/my-teams/edit/${team._id}`}>
-              <i className="fas fa-edit ms-1"></i>
+            <Link to={`/my-teams/edit/${team._id}`}>
+              <i className="fas fa-edit me-2 "></i>
               Edit
             </Link>
           </p>
           <p>
-            <Link className="ml-2" onClick={removeTeam} to="/my-teams">
-              <i className="fas fa-trash-alt me-1 "></i>
+            <Link onClick={removeTeam} to="/my-teams">
+              <i className="fas fa-trash-alt me-2"></i>
               Delete
             </Link>
           </p>

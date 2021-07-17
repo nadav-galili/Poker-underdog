@@ -1,54 +1,35 @@
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Roboto-slab";
+  font-family: "Playfair Display", serif;
 }
 
 .container-fluid.pt-3 {
-  -webkit-animation-name: cont;
-          animation-name: cont;
-  -webkit-animation-duration: 1500ms;
-          animation-duration: 1500ms;
-  -webkit-transition-timing-function: ease-in;
-          transition-timing-function: ease-in;
-  -webkit-animation-delay: 0.8ms;
-          animation-delay: 0.8ms;
+  animation-name: cont;
+  animation-duration: 1500ms;
+  transition-timing-function: ease-in;
+  animation-delay: 0.8ms;
   opacity: 1;
   margin-left: 5%;
-}
-
-@-webkit-keyframes cont {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0px, 100%, 0px);
-            transform: translate3d(0px, 100%, 0px);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-            transform: none;
-  }
 }
 
 @keyframes cont {
   0% {
     opacity: 0;
-    -webkit-transform: translate3d(0px, 100%, 0px);
-            transform: translate3d(0px, 100%, 0px);
+    transform: translate3d(0px, 100%, 0px);
   }
   100% {
     opacity: 1;
-    -webkit-transform: none;
-            transform: none;
+    transform: none;
   }
 }
 
 h1 {
-  font-size: 3.5em !important;
+  font-size: 2.5em !important;
   color: #ff3030;
   font-weight: bolder !important;
+  font-family: "Rock Salt", cursive;
 }
 
 .col-12 p {
@@ -69,11 +50,9 @@ h1 {
 .col-6 img:nth-child(1) {
   border: 3px solid #ff3030;
   border-radius: 15px;
-  -webkit-transform: rotate(-30deg);
-          transform: rotate(-30deg);
+  transform: rotate(-30deg);
   margin: 2em;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .col-6 img:nth-child(2) {
@@ -82,17 +61,9 @@ h1 {
   margin: 2em;
 }
 
-@-webkit-keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-
 @keyframes spin {
   100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -186,16 +157,27 @@ p strong {
 }
 
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Roboto-slab";
+  font-family: "Playfair Display", serif;
 }
 
 .container-fluid {
   margin-left: 5% !important;
   margin-right: 12% !important;
+}
+
+nav {
+  background-color: #ff3030;
+  background: linear-gradient(to right, rgba(255, 48, 48, 0.9), rgba(255, 48, 48, 0.3)), url("https://cdn.pixabay.com/photo/2016/08/02/16/46/poker-1564042_960_720.jpg") top;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.navbar a {
+  color: black;
+  font-size: x-large;
 }
 
 .navbar-brand img {
@@ -225,6 +207,7 @@ p strong {
 .row.demoText {
   color: #fcfcfc;
   font-size: 1.5em;
+  margin-right: 20px;
 }
 
 .demoVideo {
@@ -247,7 +230,6 @@ p strong {
 
 .me {
   background-color: #2752ea;
-  background: -webkit-gradient(linear, left top, right top, from(#2752ea), color-stop(35%, #2752ea), to(#00d4ff));
   background: linear-gradient(90deg, #2752ea 0%, #2752ea 35%, #00d4ff 100%);
 }
 
@@ -258,7 +240,6 @@ h2.ms-4 {
 
 .totalP {
   background-color: #02d84d;
-  background: -webkit-gradient(linear, left top, right top, from(#02d84d), color-stop(35%, #02d84d), to(#02d84d));
   background: linear-gradient(90deg, #02d84d 0%, #02d84d 35%, #02d84d 100%);
   min-height: 450px;
   padding-bottom: 100px;
@@ -286,8 +267,8 @@ h2.ms-4 {
 }
 
 .editUser {
-  color: black;
-  font-size: 1.5em;
+  color: #fcfcfc;
+  font-size: 1.2em;
 }
 
 .col-12 p {
@@ -345,15 +326,6 @@ footer {
   color: #fcfcfc;
 }
 
-nav {
-  background-color: #ff3030;
-}
-
-.navbar a {
-  color: black;
-  font-size: x-large;
-}
-
 .teams p {
   font-size: larger;
 }
@@ -369,3 +341,4 @@ nav {
 .fa-minus-circle {
   color: #ff3030;
 }
+/*# sourceMappingURL=main.css.map */
