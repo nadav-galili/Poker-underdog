@@ -9,12 +9,15 @@ You can open or join as many groups as you like and stay updated on each group i
 
 ## Basic instructions for setting up a game:
 
-[https://poker-underdog.com/#/demo](Link for the game demo)
-*First sign-up or sign-in to set up a user
-*Head over to "My-Teams" located at the top navbar
+[Link for the game demo](https://poker-underdog.com/#/demo)
+
+\*First sign-up or sign-in to set up a user
+
+\*Head over to "My-Teams" located at the top navbar
+
 \*If you want to check out a demo team, select "Join an existing team" and follow instuctions
 
-![My Teams Page](public\demo\myTeams.JPG)
+![My Teams Page](https://github.com/nadav-galili/Poker-underdog/blob/main/public/demo/myTeams.JPG)
 *In this page you can:
 *Join an existing team
 *Start a new team
@@ -23,7 +26,7 @@ You can open or join as many groups as you like and stay updated on each group i
 *Edit or delete a team
 
 \*Table & statistics:
-![Personal statistics](public\demo\stats.JPG)
+![Personal statistics](https://github.com/nadav-galili/Poker-underdog/blob/main/public/demo/stats.JPG)
 
 ### Start a new game
 
