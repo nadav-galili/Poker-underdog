@@ -39,10 +39,15 @@ const Team = ({ team, removeTeam }) => {
             </strong>
             <ul className="row">
               {team.players.map((player) => (
-                <li key={player._id} className="col-4">
+                <li key={player._id} className="col-4 teams">
                   {player.name}
                   <br></br>
-                  <img src={player.userImage} width="70" alt="user" />
+                  <img
+                    src={player.userImage}
+                    // width="70"
+                    // height="50"
+                    alt="user"
+                  />
                 </li>
               ))}
             </ul>
