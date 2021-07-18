@@ -9,15 +9,12 @@
 @import "about";
 @import "personal";
 @import "game";
+@import "footer";
 
 main {
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #1c1515;
-}
-footer {
-  background-color: $basecolorGreen;
-  color: $navbarWhite;
 }
 
 .teams p {

@@ -28,12 +28,7 @@ nav {
   height: 60px !important;
   background-image: url("https://cdn4.vectorstock.com/i/1000x1000/05/73/menu-button-icon-design-vector-22050573.jpg") !important;
 }
-.navbar {
-  a {
-    color: black;
-    font-size: x-large;
-  }
-}
+
 .navbar-brand img {
   //border: 4px solid $navbarWhite;
   border-radius: 15px;
@@ -45,6 +40,7 @@ nav {
   color: $navbarWhite !important;
   font-size: xx-large !important;
   margin-right: 20px;
+  font-weight: 900;
 }
 .nav-link:hover {
   color: $basecolorGreen !important;

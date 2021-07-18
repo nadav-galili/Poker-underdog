@@ -1,0 +1,34 @@
+footer {
+  background-color: $basecolorGreen;
+  color: black;
+  //   color: $navbarWhite;
+  height: 250px;
+}
+
+.d-flex {
+  //   justify-content: space-between;
+  img {
+    height: 150px;
+    max-width: 200px;
+
+    border-radius: 40px;
+  }
+  p {
+    font-size: 1.3em;
+    font-weight: 800;
+  }
+}
+
+.social-icons {
+  img {
+    height: 30px;
+  }
+
+  ul {
+    list-style: none;
+  }
+  p {
+    font-size: 1em;
+    text-decoration: underline;
+  }
+}

@@ -189,11 +189,6 @@ nav {
   background-image: url("https://cdn4.vectorstock.com/i/1000x1000/05/73/menu-button-icon-design-vector-22050573.jpg") !important;
 }
 
-.navbar a {
-  color: black;
-  font-size: x-large;
-}
-
 .navbar-brand img {
   border-radius: 15px;
   height: 150px;
@@ -204,6 +199,7 @@ nav {
   color: #fcfcfc !important;
   font-size: xx-large !important;
   margin-right: 20px;
+  font-weight: 900;
 }
 
 .nav-link:hover {
@@ -329,15 +325,40 @@ h4.mt-4 {
   color: #02d84d;
 }
 
+footer {
+  background-color: #02d84d;
+  color: black;
+  height: 250px;
+}
+
+.d-flex img {
+  height: 150px;
+  max-width: 200px;
+  border-radius: 40px;
+}
+
+.d-flex p {
+  font-size: 1.3em;
+  font-weight: 800;
+}
+
+.social-icons img {
+  height: 30px;
+}
+
+.social-icons ul {
+  list-style: none;
+}
+
+.social-icons p {
+  font-size: 1em;
+  text-decoration: underline;
+}
+
 main {
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #1c1515;
-}
-
-footer {
-  background-color: #02d84d;
-  color: #fcfcfc;
 }
 
 .teams p {
