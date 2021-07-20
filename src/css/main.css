@@ -326,14 +326,15 @@ h4.mt-4 {
 }
 
 footer {
-  background-color: #02d84d;
   color: black;
+  background-image: linear-gradient(to bottom right, #02d84d, #fcfcfc);
   height: 250px;
 }
 
 .d-flex img {
   height: 150px;
   max-width: 200px;
+  border: 2px #fcfcfc solid;
   border-radius: 40px;
 }
 
@@ -353,6 +354,10 @@ footer {
 .social-icons p {
   font-size: 1em;
   text-decoration: underline;
+}
+
+.social-icons a {
+  color: black;
 }
 
 main {

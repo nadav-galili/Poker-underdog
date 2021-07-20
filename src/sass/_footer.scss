@@ -1,7 +1,11 @@
 footer {
-  background-color: $basecolorGreen;
+  //background-color: $basecolorGreen;
   color: black;
-  //   color: $navbarWhite;
+  background-image: linear-gradient(
+    to bottom right,
+    $basecolorGreen,
+    $navbarWhite
+  );
   height: 250px;
 }
 
@@ -10,6 +14,7 @@ footer {
   img {
     height: 150px;
     max-width: 200px;
+    border: 2px $navbarWhite solid;
 
     border-radius: 40px;
   }
@@ -30,5 +35,8 @@ footer {
   p {
     font-size: 1em;
     text-decoration: underline;
+  }
+  a {
+    color: black;
   }
 }

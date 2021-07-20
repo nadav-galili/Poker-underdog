@@ -17,7 +17,7 @@ const Footer = () => {
           {new Date().getFullYear()}
         </p>
         <div className="col social-icons mt-2 ">
-          <p>Contact me at:</p>
+          <p className="ms-4">Contact me at:</p>
           <ul>
             <li>
               <a href="https://www.facebook.com/nadav.galili">
@@ -25,6 +25,7 @@ const Footer = () => {
                   src="https://img.icons8.com/doodle/50/000000/facebook-new.png"
                   alt="facebook"
                 />
+                facebook
               </a>
             </li>
             <li>
@@ -33,6 +34,7 @@ const Footer = () => {
                   src="https://img.icons8.com/doodle/50/000000/twitter--v1.png"
                   alt="twitter"
                 />
+                twitter
               </a>
             </li>
             <li>
@@ -41,6 +43,7 @@ const Footer = () => {
                   src="https://img.icons8.com/doodle/50/000000/linkedin--v2.png"
                   alt="linkedin"
                 />
+                linkedin
               </a>
             </li>
             <li>
@@ -49,6 +52,7 @@ const Footer = () => {
                   src="https://img.icons8.com/doodle/50/000000/github.png"
                   alt="github"
                 />
+                github
               </a>
             </li>
 
@@ -58,6 +62,7 @@ const Footer = () => {
                   src="https://img.icons8.com/plasticine/50/000000/email.png"
                   alt="email"
                 />
+                email
               </a>
             </li>
           </ul>
