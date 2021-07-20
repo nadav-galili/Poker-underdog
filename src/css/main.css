@@ -331,10 +331,15 @@ footer {
   height: 250px;
 }
 
+@media screen and (max-width: 600px) {
+  footer {
+    height: 400px;
+  }
+}
+
 .d-flex img {
   height: 150px;
   max-width: 200px;
-  border: 2px #fcfcfc solid;
   border-radius: 40px;
 }
 

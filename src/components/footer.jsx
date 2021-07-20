@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div className="container  ">
       <div className="d-flex justify-content-center row ">
-        <div className="logomage col">
+        <div className="logoImage col">
           <img
             src={process.env.PUBLIC_URL + "logoNewRed.png"}
             alt="logo"

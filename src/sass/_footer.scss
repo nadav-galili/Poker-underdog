@@ -1,5 +1,4 @@
 footer {
-  //background-color: $basecolorGreen;
   color: black;
   background-image: linear-gradient(
     to bottom right,
@@ -9,12 +8,16 @@ footer {
   height: 250px;
 }
 
+@media screen and (max-width: 600px) {
+  footer {
+    height: 400px;
+  }
+}
+
 .d-flex {
-  //   justify-content: space-between;
   img {
     height: 150px;
     max-width: 200px;
-    border: 2px $navbarWhite solid;
 
     border-radius: 40px;
   }
