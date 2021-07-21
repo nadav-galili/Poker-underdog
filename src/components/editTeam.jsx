@@ -64,7 +64,7 @@ class EditTeam extends Form {
               {this.renderInput("teamImage", "Team Image")}
               {this.renderButton("Update Team")}
               <button
-                className="btn  btn-secondary ms-3 "
+                className="btn btn-secondary ms-3 "
                 onClick={this.handleCancel}
               >
                 Cancel

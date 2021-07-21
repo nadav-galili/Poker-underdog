@@ -351,6 +351,9 @@ footer {
   footer {
     height: 400px;
   }
+  p.align-self-center {
+    margin-top: 10px;
+  }
 }
 
 .d-flex img {

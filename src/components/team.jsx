@@ -31,9 +31,9 @@ const Team = ({ team, removeTeam }) => {
           </p>
           <p>
             <b>
-              <u>
-                Team Manager: <span>{captain[0].name}</span>
-              </u>
+              <u>Team Manager:</u>
+              <br />
+              <span>{captain[0].name}</span>
             </b>
           </p>
           <Link className="btn btn-primary" to={`/main-table/${team._id}`}>
@@ -45,7 +45,7 @@ const Team = ({ team, removeTeam }) => {
             </strong>
             <ul className="row">
               {team.players.map((player) => (
-                <li key={player._id} className="col-5 teams">
+                <li key={player._id} className="col-12 teams">
                   {player.name}
                   <br></br>
                   <img
