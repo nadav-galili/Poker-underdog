@@ -45,7 +45,7 @@ const SelectPlayers = (props) => {
       <img src={data.teamImage} alt={data.name} width="200" height="200"></img>
       <PageHeader titleText="Select players for current game" />
       <div className="playersInGame"></div>
-      <div className="row">
+      <div className="row container">
         {data.players &&
           data.players.map((player) => (
             <Player
@@ -71,7 +71,9 @@ const SelectPlayers = (props) => {
           Continue to game
         </Link>
       )}
-      {selected.length <= 1 && <p>*Please select at least 2 players</p>}
+      {selected.length <= 1 && (
+        <p className="selectP">*Please select at least 2 players</p>
+      )}
     </div>
   );
 };

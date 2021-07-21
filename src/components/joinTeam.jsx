@@ -65,7 +65,7 @@ class JoinTeam extends Form {
               {this.renderButton("Join Team")}
               <Link
                 type="button"
-                className="btn-lg btn-secondary ms-3"
+                className="btn-lg btn-secondary  ms-2"
                 to="/my-teams"
               >
                 Not right now

@@ -2,7 +2,7 @@ import React from "react";
 
 const Player = ({ player, selectPlayers, selected }) => {
   return (
-    <div className="col-md-6 col-lg-2 col-8 mt-3">
+    <div className="col-md-6 col-lg-3 col-8 mt-3">
       <div className="card">
         <img
           className="m-2 playerImage"

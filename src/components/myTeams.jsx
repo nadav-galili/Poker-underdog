@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PageHeader from "./common/pageHeader";
 import teamService from "../services/teamService";
-//import userService from "../services/userService";
+import userService from "../services/userService";
 import Team from "./team";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -9,40 +9,45 @@ import { toast } from "react-toastify";
 
 const MyTeams = () => {
   const [teams, setTeams] = useState([]);
-  //console.log("teete", teams);
-  // userService.getCurrentUser();
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const fetchTeams = async () => {
-      // await userService.getCurrentUser();
       const { data } = await teamService.getMyTeam();
       setTeams(data);
-      // if (data.length > 0) {
-      //   setTeams(data);
-      // } else {
-      //   setTeams([]);
-      // }
+      const me = await userService.getCurrentUser();
+      setUser(me);
     };
     fetchTeams();
   }, []);
 
   let removeTeam = (teamId) => {
-    Swal.fire({
-      title: "Are you sure you want to delete this team?",
-      text: "you wont be able to cancel",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        let myTeams = teams.filter((team) => team._id !== teamId);
-        teamService.deleteTeam(teamId);
-        setTeams(myTeams);
-        toast("This team was deleted succesfully");
-      }
-    });
+    let chosenTeam = teams.filter((team) => team._id === teamId);
+
+    if (user._id !== chosenTeam[0].user_id) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Only team manager can delete a team",
+      });
+    } else {
+      Swal.fire({
+        title: "Are you sure you want to delete this team?",
+        text: "you wont be able to cancel",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let myTeams = teams.filter((team) => team._id !== teamId);
+          teamService.deleteTeam(teamId);
+          setTeams(myTeams);
+          toast("This team was deleted succesfully");
+        }
+      });
+    }
   };
   return (
     <div className="container-fluid about">
@@ -69,7 +74,7 @@ const MyTeams = () => {
           </p>
         </div>
       </div>
-      <div className="row">
+      <div className="row container">
         {teams.length > 0 &&
           teams.map((team) => (
             <Team

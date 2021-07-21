@@ -58,3 +58,15 @@ p strong {
     border: 2px solid $headerColorBlue;
   }
 }
+
+.selectP {
+  color: $navbarWhite;
+  font-weight: bolder;
+  padding-bottom: 20px;
+  margin: 0;
+  font-size: 1.5em;
+}
+
+span {
+  color: $basecolorGreen;
+}

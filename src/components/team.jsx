@@ -1,15 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-//import MainTable from "./mainTable";
-// import SelectPlayers from "./selectPlayers";
-
 const Team = ({ team, removeTeam }) => {
   const teamDate = new Date(team.created_at);
   const day = teamDate.getDate();
   const month = teamDate.getMonth() + 1;
   const year = teamDate.getFullYear();
   const formated = `${day}/${month}/${year}`;
+
+  let captain = team.players.filter((e) => e._id === team.user_id);
 
   return (
     <div className=" col-10 col-md-6 col-lg-3 mt-3">
@@ -30,6 +29,13 @@ const Team = ({ team, removeTeam }) => {
             <br />
             *Share this number with your friends and let them join your team
           </p>
+          <p>
+            <b>
+              <u>
+                Team Manager: <span>{captain[0].name}</span>
+              </u>
+            </b>
+          </p>
           <Link className="btn btn-primary" to={`/main-table/${team._id}`}>
             Team Tables & Statistics
           </Link>
@@ -39,7 +45,7 @@ const Team = ({ team, removeTeam }) => {
             </strong>
             <ul className="row">
               {team.players.map((player) => (
-                <li key={player._id} className="col-4 teams">
+                <li key={player._id} className="col-5 teams">
                   {player.name}
                   <br></br>
                   <img

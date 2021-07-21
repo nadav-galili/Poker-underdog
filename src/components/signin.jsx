@@ -51,6 +51,13 @@ class Signin extends Form {
               {this.renderInput("password", "Password", "password")}
               {this.renderButton("Sign-In")}
             </form>
+            <p className="selectP mt-5">
+              *you can try a demo account-
+              <br />
+              Email:test@test.com
+              <br />
+              Password:123456
+            </p>
           </div>
         </div>
       </div>

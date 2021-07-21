@@ -72,6 +72,7 @@ router.delete("/:teamId", auth, async (req, res) => {
     _id: req.params.teamId,
     user_id: req.user._id,
   });
+
   if (!team)
     return res.status(404).send("The team with the given ID was not found");
   res.send(team);

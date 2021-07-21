@@ -164,6 +164,18 @@ p strong {
   border: 2px solid #2752ea;
 }
 
+.selectP {
+  color: #fcfcfc;
+  font-weight: bolder;
+  padding-bottom: 20px;
+  margin: 0;
+  font-size: 1.5em;
+}
+
+span {
+  color: #02d84d;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -288,6 +300,10 @@ h2.ms-4 {
 label {
   font-size: 2em;
   color: #fcfcfc;
+}
+
+.selectP.mt-5 {
+  color: #02d84d;
 }
 
 h4.mt-4 {

@@ -74,7 +74,12 @@ function App() {
               path="/my-teams/edit/:teamId"
               component={EditTeam}
             />
-            <ProtectedRoute path="/my-teams" component={MyTeams} user={user} />
+            <ProtectedRoute
+              path="/my-teams"
+              component={MyTeams}
+              user={user}
+              d={details}
+            />
             <ProtectedRoute
               path="/create-team"
               user={user}
