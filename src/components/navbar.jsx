@@ -9,7 +9,7 @@ class Navbar extends Component {
     const { details } = this.props;
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light shadow-sm ">
+      <nav className="navbar navbar-expand-lg navbar-light shadow p-3 ">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/#">
             <img

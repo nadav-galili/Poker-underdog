@@ -26,44 +26,29 @@ h1 {
   font-family: "Rock Salt", cursive;
 }
 
-.col-12 p {
-  font-size: 2.5em;
+#homeText p {
+  font-size: 2em;
   color: $navbarWhite;
 }
 
-.col-12 p:nth-child(4) {
+#homeText p:nth-child(4) {
   color: $basecolorRed;
   font-weight: bolder;
 }
-.col-12 p:nth-child(5) {
+#homeText p:nth-child(5) {
   color: $basecolorGreen;
   font-weight: bolder;
 }
 
-.col-6 img:nth-child(1) {
+#homeImg img:nth-child(1) {
   border: 3px solid $basecolorRed;
   border-radius: 15px;
   transform: rotate(-30deg);
   margin: 2em;
   object-fit: cover;
-  //padding-left: 2em;
-
-  //   @keyframes mymove {
-  //     0% {
-  //       width: 100px;
-  //     }
-  //     50% {
-  //       width: 150px;
-  //       transform: rotate(-10deg);
-  //     }
-  //     100% {
-  //       width: 250px;
-  //       transform: rotate(-30deg);
-  //     }
-  //   }
 }
 
-.col-6 img:nth-child(2) {
+#homeImg img:nth-child(2) {
   border: 3px solid $basecolorGreen;
   border-radius: 15px;
   margin: 2em;

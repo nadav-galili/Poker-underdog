@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {FaArrowRight } from "react-icons/fa";
+import {CgCardHearts } from "react-icons/cg";
 
 const Team = ({ team, removeTeam }) => {
   const teamDate = new Date(team.created_at);
@@ -8,11 +10,11 @@ const Team = ({ team, removeTeam }) => {
   const year = teamDate.getFullYear();
   const formated = `${day}/${month}/${year}`;
 
-  let captain = team.players.filter((e) => e._id === team.user_id);
-
+  var captain = team.players.filter((e) => e._id === team.user_id);
+ 
   return (
-    <div className=" col-10 col-md-6 col-lg-3 mt-3">
-      <div className="card mb-3">
+    <div className=" col-12 col-md-6 col-lg-6 mt-3">
+      <div className="card mb-3" >
         <img
           className="p-2"
           src={team.teamImage}
@@ -24,28 +26,36 @@ const Team = ({ team, removeTeam }) => {
           <h3 className="card-title ">
             <u>{team.name}</u>
           </h3>
-          <p className="card-text">
-            <strong>Team Number:{team.teamNumber}</strong>
+          <p className="card-text info">
+          <strong><u>Team Number:</u><span className="text-primary">{team.teamNumber}</span></strong> 
             <br />
+            <p id="share">
             *Share this number with your friends and let them join your team
+            </p>
           </p>
           <p>
             <b>
-              <u>Team Manager:</u>
-              <br />
-              <span>{captain[0].name}</span>
+              <u className="text-dark">Team Manager:</u>
+              {/* <br /> */}
+              <span className="text-primary captain">{captain[0].name}</span>
+             
             </b>
           </p>
-          <Link className="btn btn-primary" to={`/main-table/${team._id}`}>
+          <Link className="btn btn-primary btn-lg" to={`/main-table/${team._id}`}>
             Team Tables & Statistics
+           <FaArrowRight/>
+
           </Link>
+          <i class="fa-duotone fa-angles-right"></i>
+          
+
           <div className="card-text ">
             <strong>
               <u>Players:</u>
             </strong>
-            <ul className="row">
+            <ul className="row" id="playersList">
               {team.players.map((player) => (
-                <li key={player._id} className="col-12 teams">
+                <li key={player._id} className="col-6 col-lg-4 teams">
                   {player.name}
                   <br></br>
                   <img

@@ -6,34 +6,36 @@
 }
 
 nav {
-  background-color: $basecolorRed;
+  // border-bottom: 2px solid $navbarWhite;
+  // background-color: $basecolorRed;
+   background-color: $backgroundBlack;
 
-  background: linear-gradient(
-      to right,
-      rgba($basecolorRed, 0.9),
-      rgba($basecolorRed, 0.3)
-    ),
-    url("https://cdn.pixabay.com/photo/2016/08/02/16/46/poker-1564042_960_720.jpg")
-      top;
-  background-size: cover;
-  background-repeat: no-repeat;
+  // background: linear-gradient(
+  //     to right,
+  //     rgba($basecolorRed, 0.9),
+  //     rgba($basecolorRed, 0.3)
+  //   ),
+  //   url("https://cdn.pixabay.com/photo/2016/08/02/16/46/poker-1564042_960_720.jpg")
+  //     top;
+  // background-size: cover;
+  // background-repeat: no-repeat;
 }
 
-.navbar-light .navbar-toggler-icon {
-  width: 60px !important;
-  height: 60px !important;
-  background-image: url("https://cdn4.vectorstock.com/i/1000x1000/05/73/menu-button-icon-design-vector-22050573.jpg") !important;
-}
+// .navbar-light .navbar-toggler-icon {
+//   width: 60px !important;
+//   height: 60px !important;
+//   background-image: url("https://cdn4.vectorstock.com/i/1000x1000/05/73/menu-button-icon-design-vector-22050573.jpg") !important;
+// }
 
 .navbar-brand img {
   border-radius: 15px;
-  height: 150px;
-  width: 200px;
+  height: 100px;
+  width: 100px;
 }
 
 .nav-link {
   color: $navbarWhite !important;
-  font-size: xx-large !important;
+  font-size: x-large !important;
   margin-right: 20px;
   font-weight: 900;
 }

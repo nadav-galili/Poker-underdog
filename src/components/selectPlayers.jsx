@@ -63,7 +63,6 @@ const SelectPlayers = (props) => {
         <Link
           to={{
             pathname: "/game",
-
             data: { data },
           }}
           className="btn btn-primary btn-lg m-3"

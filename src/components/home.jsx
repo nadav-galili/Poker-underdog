@@ -7,7 +7,7 @@ const Home = () => {
       <div className="container-fluid  pt-3">
         <PageHeader titleText="Poker-Underdog" />
         <div className="row home">
-          <div className="col-12 col-md-8 homeText">
+          <div className="col-12 col-md-8 homeText" id="homeText">
             <p className="mt-4">
               Poker Underdog is an interactive platform for poker groups playing
               together home games.
@@ -32,7 +32,7 @@ const Home = () => {
               </Link>
             </p>
           </div>
-          <div className="col-6 col-md-4 col-lg-4 homeImg">
+          <div className="col-6 col-md-4 col-lg-4 " id='homeImg'>
             <img
               src="https://neconnected.co.uk/wp-content/uploads/2021/03/vcs_should_invest_like_poker_player-bf365a82-1280x640.jpg"
               alt=""
