@@ -63,16 +63,30 @@ height: 60%;
 }
 
 #statsCardText{
-  color:$navbarWhite;
- text-align: center;
- font-weight: bolder;
- font-size: 1.5em;
+text-align: center;
+
 
  & p{
-   margin-bottom: 0;
- }
- & span{
-   color: $basecolorGreen;
+  margin-bottom: 0;
+
  }
 
+
+ & span:first-child{
+   color: $navbarWhite;
+  align-self: center;
+  font-weight: bolder;
+  font-size: 1.2em;
+ }
+ & span{
+  align-self: center;
+  font-weight: bolder;
+  font-size: 1.5em;
+ }
+
+}
+
+.card-title{
+  color:#02d84d;
+  font-weight: bolder;
 }

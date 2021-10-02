@@ -89,7 +89,7 @@ h1 {
 }
 
 .lastGame-head {
-  background-color: #901eed !important;
+  background-color: #6c14b4 !important;
 }
 
 .MuiTableCell-head {
@@ -106,7 +106,7 @@ h1 {
 }
 
 #mainStats {
-  background-color: #901eed;
+  background-color: #6c14b4;
 }
 
 #statsCardBody {
@@ -129,18 +129,29 @@ h1 {
 }
 
 #statsCardText {
-  color: #fcfcfc;
   text-align: center;
-  font-weight: bolder;
-  font-size: 1.5em;
 }
 
 #statsCardText p {
   margin-bottom: 0;
 }
 
+#statsCardText span:first-child {
+  color: #fcfcfc;
+  align-self: center;
+  font-weight: bolder;
+  font-size: 1.2em;
+}
+
 #statsCardText span {
+  align-self: center;
+  font-weight: bolder;
+  font-size: 1.5em;
+}
+
+.card-title {
   color: #02d84d;
+  font-weight: bolder;
 }
 
 .team-list {

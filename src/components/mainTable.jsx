@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import gameService from "../services/gameService";
+import gameService, { table } from "../services/gameService";
 import { makeStyles } from "@material-ui/core/styles";
 import PageHeader from "./common/pageHeader";
 import Paper from "@material-ui/core/Paper";
@@ -13,8 +13,8 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { Avatar } from "@material-ui/core";
 import MainLastGame from "./mainLastGame";
-import { GiCardAceHearts } from "react-icons/gi";
-import { VscChevronRight } from "react-icons/vsc";
+import PlayerCard  from "./topStats/playerCard";
+
 
 //set headers for the tables
 const columns = [
@@ -95,6 +95,11 @@ const useStyles = makeStyles({
 export default function MainTable(props) {
   //get the data for the table
   const [data, setData] = useState([]);
+  const [profit,setProfit]=useState("");
+
+  const profitName=profit?profit._id.name:"";
+  const profitImage=profit?profit._id.image:"";
+  console.log(profitImage,"s");
 
   //fetch data from DB
   useEffect(() => {
@@ -102,11 +107,16 @@ export default function MainTable(props) {
       let table = await gameService.table(props.match.params.teamId);
       table = table.data;
       console.log(table);
+
+      const profit= await table.reduce((prev,current)=>(+prev.totalProfit>current.totalProfit)? prev:current);
+      setProfit(profit);
       setData(table);
+
     };
 
     getTable();
   }, [setData, props.match.params.teamId]);
+
 
   const classes = useStyles();
   const rows = [];
@@ -143,35 +153,24 @@ export default function MainTable(props) {
       )
     );
   });
+
+  // get current year for header
   const year = new Date();
   const thisYear = year.getFullYear();
+
+
+console.log(profit);
+
   return (
     <div className="container">
       <h1>{thisYear} Top Stats</h1>
       <div className="row ">
-        <div className="col-lg-4 col-6 mt-3">
-          <div class="card" id="mainStats">
-            <img
-              // src="https://scontent.ftlv5-1.fna.fbcdn.net/v/t1.6435-9/41808168_10156559226923903_7069984621298974720_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=7qjX1mGCrWEAX9Wt0Do&_nc_ht=scontent.ftlv5-1.fna&oh=3f3cc82610bac2456dd62b66f29cdc70&oe=617A9E00"
-              src={process.env.PUBLIC_URL + `/n3.png`}
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body" id="statsCardBody">
-              <p class="card-text" id="statsCardText">
-                <p>Average Profit</p>
-                <span>40</span><br />
-                <Link className="btn btn-primary btn-sm" type="button">
-                  See full table
-                  <GiCardAceHearts />
-                  <VscChevronRight />
-                </Link>
-              </p>
-            </div>
-          </div>
-        </div>
-
-       
+       <PlayerCard header="Total Profit" data={profit.totalProfit} name={profitName} image={profitImage}/>
+       <PlayerCard header="Average Profit" data="40" name="Dan"/>
+       <PlayerCard header="Total Games" data="48" name="Zeev"/>
+       <PlayerCard header="Average Cashing" data="2.54" name="Assi"/>
+       <PlayerCard header="Success %" data="35%" name="Rami"/>
+       <PlayerCard header="Total Games" data="48" name="Koko"/>
       </div>
 
       <PageHeader titleText="Main Table" />
