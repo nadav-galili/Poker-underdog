@@ -34,3 +34,45 @@
 .noGames {
   color: $basecolorRed;
 }
+
+#mainStats{
+ background-color:$basecolorPurple;
+}
+
+#statsCardBody{
+   background-color: $darkeerPurple;
+
+   & a{
+     color:$navbarWhite;
+
+     & svg{
+        width: 1.5em;
+        height: 2em;
+  
+     }
+    
+   }
+}
+
+#mainStats img{
+// border-radius: 50%;
+align-self: center;
+width: 80%;
+height: 60%;
+
+}
+
+#statsCardText{
+  color:$navbarWhite;
+ text-align: center;
+ font-weight: bolder;
+ font-size: 1.5em;
+
+ & p{
+   margin-bottom: 0;
+ }
+ & span{
+   color: $basecolorGreen;
+ }
+
+}

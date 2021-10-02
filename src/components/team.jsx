@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {FaArrowRight } from "react-icons/fa";
-import {CgCardHearts } from "react-icons/cg";
+
 
 const Team = ({ team, removeTeam }) => {
   const teamDate = new Date(team.created_at);

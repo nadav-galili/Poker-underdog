@@ -105,6 +105,44 @@ h1 {
   color: #ff3030;
 }
 
+#mainStats {
+  background-color: #901eed;
+}
+
+#statsCardBody {
+  background-color: #520c8c;
+}
+
+#statsCardBody a {
+  color: #fcfcfc;
+}
+
+#statsCardBody a svg {
+  width: 1.5em;
+  height: 2em;
+}
+
+#mainStats img {
+  align-self: center;
+  width: 80%;
+  height: 60%;
+}
+
+#statsCardText {
+  color: #fcfcfc;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 1.5em;
+}
+
+#statsCardText p {
+  margin-bottom: 0;
+}
+
+#statsCardText span {
+  color: #02d84d;
+}
+
 .team-list {
   font-weight: 700;
   font-size: 1.5em;

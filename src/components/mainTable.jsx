@@ -13,6 +13,8 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { Avatar } from "@material-ui/core";
 import MainLastGame from "./mainLastGame";
+import { GiCardAceHearts } from "react-icons/gi";
+import { VscChevronRight } from "react-icons/vsc";
 
 //set headers for the tables
 const columns = [
@@ -99,6 +101,7 @@ export default function MainTable(props) {
     const getTable = async () => {
       let table = await gameService.table(props.match.params.teamId);
       table = table.data;
+      console.log(table);
       setData(table);
     };
 
@@ -140,8 +143,37 @@ export default function MainTable(props) {
       )
     );
   });
+  const year = new Date();
+  const thisYear = year.getFullYear();
   return (
     <div className="container">
+      <h1>{thisYear} Top Stats</h1>
+      <div className="row ">
+        <div className="col-lg-4 col-6 mt-3">
+          <div class="card" id="mainStats">
+            <img
+              // src="https://scontent.ftlv5-1.fna.fbcdn.net/v/t1.6435-9/41808168_10156559226923903_7069984621298974720_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=7qjX1mGCrWEAX9Wt0Do&_nc_ht=scontent.ftlv5-1.fna&oh=3f3cc82610bac2456dd62b66f29cdc70&oe=617A9E00"
+              src={process.env.PUBLIC_URL + `/n3.png`}
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body" id="statsCardBody">
+              <p class="card-text" id="statsCardText">
+                <p>Average Profit</p>
+                <span>40</span><br />
+                <Link className="btn btn-primary btn-sm" type="button">
+                  See full table
+                  <GiCardAceHearts />
+                  <VscChevronRight />
+                </Link>
+              </p>
+            </div>
+          </div>
+        </div>
+
+       
+      </div>
+
       <PageHeader titleText="Main Table" />
       {data.length < 1 && (
         <div className="start">

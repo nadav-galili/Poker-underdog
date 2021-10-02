@@ -16,32 +16,32 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 const columns = [
-  { id: "name", label: "Name", minWidth: 170 },
-  { id: "image", label: "Image", minWidth: 170 },
-  { id: "add_cashing", label: "Add Cashing", minWidth: 170 },
+  { id: "name", label: "Name", minWidth: 70 },
+  { id: "image", label: "Image", minWidth: 70 },
+  { id: "add_cashing", label: "Add Cashing", minWidth: 70 },
   {
     id: "ammount_cashed",
     label: "Ammount Cashed",
-    minWidth: 170,
+    minWidth: 70,
     //   align: 'right',
   },
   {
     id: "cash_in_hand",
     label: "Cash In Hand",
-    minWidth: 170,
+    minWidth: 70,
     // align: "right",
   },
   {
     id: "profit",
     label: "Profit/Loss",
-    minWidth: 170,
+    minWidth: 70,
     //   align: 'right',
     //   format: (value) => value.toFixed(2),
   },
   {
     id: "cancel_cashing",
     label: "Cancel Cashing",
-    minWidth: 170,
+    minWidth: 70,
     //   align: 'right',
   },
 ];
@@ -69,7 +69,7 @@ function createData(
 
 const useStyles = makeStyles({
   root: {
-    width: "100%",
+    width: "80%",
   },
   container: {
     maxHeight: 440,
@@ -191,25 +191,7 @@ export default function Game(props) {
   return (
     <div className="container-fluid">
       <PageHeader titleText="Start a new game" />
-      <p className="steps">Steps for starting a new game:</p>
-      <ol>
-        <li>
-          Add an initial cashing for each player participating (usually just
-          50$).
-        </li>
-        <li>
-          Start playing poker with your friends and each time a player cashes in
-          , press the "add 50" icon.
-        </li>
-        <li>
-          After you finished playing , insert the total ammount of cash each
-          player has in the "Cash in hand" field.
-        </li>
-        <li>
-          Press the update results button and get a summary of your latest game.
-        </li>
-        <li>All In!!!</li>
-      </ol>
+     
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
@@ -270,6 +252,25 @@ export default function Game(props) {
       >
         Update results
       </button>
+      <p className="steps">Steps for starting a new game:</p>
+      <ol>
+        <li>
+          Add an initial cashing for each player participating (usually just
+          50$).
+        </li>
+        <li>
+          Start playing poker with your friends and each time a player cashes in
+          , press the "add 50" icon.
+        </li>
+        <li>
+          After you finished playing , insert the total ammount of cash each
+          player has in the "Cash in hand" field.
+        </li>
+        <li>
+          Press the update results button and get a summary of your latest game.
+        </li>
+        <li>All In!!!</li>
+      </ol>
     </div>
   );
 }
