@@ -13,8 +13,13 @@ export function personal(uId) {
   return http.get(`${apiUrl}/games/personal/${uId}`);
 }
 
+export function monthsData(teamId){
+  return http.get(`${apiUrl}/games/byMonths/${teamId}`);
+}
+
 export default {
   lastGame,
   table,
   personal,
+  monthsData,
 };

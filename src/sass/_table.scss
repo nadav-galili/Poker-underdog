@@ -55,10 +55,11 @@
 }
 
 #mainStats img{
-// border-radius: 50%;
 align-self: center;
 width: 80%;
-height: 60%;
+height: 18vh;
+object-fit: cover;
+
 
 }
 
@@ -89,4 +90,8 @@ text-align: center;
 .card-title{
   color:#02d84d;
   font-weight: bolder;
+}
+
+#month{
+  color:$navbarWhite;
 }

@@ -13,8 +13,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { Avatar } from "@material-ui/core";
 import MainLastGame from "./mainLastGame";
-import PlayerCard  from "./topStats/playerCard";
-
+import PlayerCard from "./topStats/playerCard";
 
 //set headers for the tables
 const columns = [
@@ -95,28 +94,76 @@ const useStyles = makeStyles({
 export default function MainTable(props) {
   //get the data for the table
   const [data, setData] = useState([]);
-  const [profit,setProfit]=useState("");
+  const [profit, setProfit] = useState("");
+  const [avgprofit, setAvgprofit] = useState("");
+  const [totalgames, setTotalgames] = useState("");
+  const [avgcashing, setAvgcashing] = useState("");
+  const [success, setSuccess] = useState("");
+  const [gamesprofit, setGamesprofit] = useState("");
+  const [months, setMonths] = useState([]);
+  const [monthleader, setMonthleader] = useState("");
 
-  const profitName=profit?profit._id.name:"";
-  const profitImage=profit?profit._id.image:"";
-  console.log(profitImage,"s");
+  // get current year for header
+  const year = new Date();
+  const thisYear = year.getFullYear();
+  const thisMonth = year.getMonth();
 
   //fetch data from DB
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.table(props.match.params.teamId);
       table = table.data;
-      console.log(table);
 
-      const profit= await table.reduce((prev,current)=>(+prev.totalProfit>current.totalProfit)? prev:current);
+      const profit = await table.reduce((prev, current) =>
+        +prev.totalProfit > current.totalProfit ? prev : current
+      );
+      const avgProfit = await table.reduce((prev, current) =>
+        +prev.avgProfit > current.avgProfit ? prev : current
+      );
+      const totalGames = await table.reduce((prev, current) =>
+        +prev.numOfGames > current.numOfGames ? prev : current
+      );
+      const avgcashing = await table.reduce((prev, current) =>
+        +prev.avgCashing < current.avgCashing ? prev : current
+      );
+
+      const successP = await table.reduce((prev, current) =>
+        +prev.successPercentage > current.successPercentage ? prev : current
+      );
+
+      const gamesProfit = await table.reduce((prev, current) =>
+        +prev.gamesWithProfit > current.gamesWithProfit ? prev : current
+      );
+
+      setGamesprofit(gamesProfit);
+      setSuccess(successP);
+      setAvgcashing(avgcashing);
+      setTotalgames(totalGames);
+      setAvgprofit(avgProfit);
       setProfit(profit);
       setData(table);
-
     };
 
     getTable();
   }, [setData, props.match.params.teamId]);
 
+  useEffect(() => {
+    const dataByMonths = async () => {
+      let results = await gameService.monthsData(props.match.params.teamId);
+      results = results.data;
+      console.log("results", results);
+
+      const currMonth = results.filter((e) => e._id.monthPlayed !== thisMonth);
+      const currMonthLeader = await currMonth.reduce((prev, current) =>
+        +prev.totalProfit > current.totalProfit ? prev : current
+      );
+
+      setMonths(results);
+      setMonthleader(currMonthLeader);
+      console.log("R", currMonthLeader);
+    };
+    dataByMonths();
+  }, [thisMonth, props.match.params.teamId]);
 
   const classes = useStyles();
   const rows = [];
@@ -154,23 +201,53 @@ export default function MainTable(props) {
     );
   });
 
-  // get current year for header
-  const year = new Date();
-  const thisYear = year.getFullYear();
-
-
-console.log(profit);
-
   return (
     <div className="container">
       <h1>{thisYear} Top Stats</h1>
       <div className="row ">
-       <PlayerCard header="Total Profit" data={profit.totalProfit} name={profitName} image={profitImage}/>
-       <PlayerCard header="Average Profit" data="40" name="Dan"/>
-       <PlayerCard header="Total Games" data="48" name="Zeev"/>
-       <PlayerCard header="Average Cashing" data="2.54" name="Assi"/>
-       <PlayerCard header="Success %" data="35%" name="Rami"/>
-       <PlayerCard header="Total Games" data="48" name="Koko"/>
+        <PlayerCard
+          header="Total Profit"
+          data={profit.totalProfit}
+          name={profit ? profit._id.name : ""}
+          image={profit ? profit._id.image : ""}
+        />
+        <PlayerCard
+          header="Average Profit"
+          data={avgprofit.avgProfit}
+          name={avgprofit ? avgprofit._id.name : ""}
+          image={avgprofit ? avgprofit._id.image : ""}
+        />
+        <PlayerCard
+          header="Total Games"
+          data={totalgames.numOfGames}
+          name={totalgames ? totalgames._id.name : ""}
+          image={totalgames ? totalgames._id.image : ""}
+        />
+        <PlayerCard
+          header="Average Cashing"
+          data={avgcashing.avgCashing}
+          name={avgcashing ? avgcashing._id.name : ""}
+          image={avgcashing ? avgcashing._id.image : ""}
+        />
+        <PlayerCard
+          header="Success %"
+          data={success.successPercentage}
+          name={success ? success._id.name : ""}
+          image={success ? success._id.image : ""}
+        />
+        <PlayerCard
+          header="Games In Profit"
+          data={gamesprofit.gamesWithProfit}
+          name={gamesprofit ? gamesprofit._id.name : ""}
+          image={gamesprofit ? gamesprofit._id.image : ""}
+        />
+        <PlayerCard
+          header="Current Month"
+          data={monthleader.totalProfit}
+          name={monthleader ? monthleader._id.name : ""}
+          image={monthleader ? monthleader._id.image : ""}
+          cMonth={monthleader ? monthleader.lastGame : ""}
+        />
       </div>
 
       <PageHeader titleText="Main Table" />

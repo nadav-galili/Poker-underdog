@@ -125,7 +125,8 @@ h1 {
 #mainStats img {
   align-self: center;
   width: 80%;
-  height: 60%;
+  height: 18vh;
+  object-fit: cover;
 }
 
 #statsCardText {
@@ -152,6 +153,10 @@ h1 {
 .card-title {
   color: #02d84d;
   font-weight: bolder;
+}
+
+#month {
+  color: #fcfcfc;
 }
 
 .team-list {
