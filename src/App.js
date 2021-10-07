@@ -23,6 +23,7 @@ import MainTable from "./components/mainTable";
 import Demo from "./components/demo";
 import About from "./components/about";
 import MyStats from "./components/personalStats/myStats";
+import CardTable from "./components/topStats/cardTable";
 import ReactGA from "react-ga";
 
 ReactGA.initialize("G-MPD41JDBPV");
@@ -99,6 +100,8 @@ function App() {
 
             <ProtectedRoute path="/last-game/:teamId" component={LastGame} />
             <ProtectedRoute path="/main-table/:teamId" component={MainTable} />
+            <ProtectedRoute path="/tables/:cardName/:teamId" component={CardTable} />
+
 
             <Route path="/demo" component={Demo} />
             <Route path="/about" component={About} />

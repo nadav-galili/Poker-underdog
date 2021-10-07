@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import gameService, { table } from "../services/gameService";
+import gameService from "../services/gameService";
 import { makeStyles } from "@material-ui/core/styles";
 import PageHeader from "./common/pageHeader";
 import Paper from "@material-ui/core/Paper";
@@ -100,9 +100,12 @@ export default function MainTable(props) {
   const [avgcashing, setAvgcashing] = useState("");
   const [success, setSuccess] = useState("");
   const [gamesprofit, setGamesprofit] = useState("");
-  const [months, setMonths] = useState([]);
+  // const [months, setMonths] = useState([]);
   const [monthleader, setMonthleader] = useState("");
 
+  const teamId=props.match.params.teamId;
+
+  
   // get current year for header
   const year = new Date();
   const thisYear = year.getFullYear();
@@ -111,56 +114,60 @@ export default function MainTable(props) {
   //fetch data from DB
   useEffect(() => {
     const getTable = async () => {
-      let table = await gameService.table(props.match.params.teamId);
+      let table = await gameService.table(teamId);
       table = table.data;
 
-      const profit = await table.reduce((prev, current) =>
-        +prev.totalProfit > current.totalProfit ? prev : current
-      );
-      const avgProfit = await table.reduce((prev, current) =>
-        +prev.avgProfit > current.avgProfit ? prev : current
-      );
-      const totalGames = await table.reduce((prev, current) =>
-        +prev.numOfGames > current.numOfGames ? prev : current
-      );
-      const avgcashing = await table.reduce((prev, current) =>
-        +prev.avgCashing < current.avgCashing ? prev : current
-      );
+      if (table.length > 0) {
+        const profit = await table.reduce((prev, current) =>
+          +prev.totalProfit > current.totalProfit ? prev : current
+        );
+        const avgProfit = await table.reduce((prev, current) =>
+          +prev.avgProfit > current.avgProfit ? prev : current
+        );
+        const totalGames = await table.reduce((prev, current) =>
+          +prev.numOfGames > current.numOfGames ? prev : current
+        );
+        const avgcashing = await table.reduce((prev, current) =>
+          +prev.avgCashing < current.avgCashing ? prev : current
+        );
 
-      const successP = await table.reduce((prev, current) =>
-        +prev.successPercentage > current.successPercentage ? prev : current
-      );
+        const successP = await table.reduce((prev, current) =>
+          +prev.successPercentage > current.successPercentage ? prev : current
+        );
 
-      const gamesProfit = await table.reduce((prev, current) =>
-        +prev.gamesWithProfit > current.gamesWithProfit ? prev : current
-      );
+        const gamesProfit = await table.reduce((prev, current) =>
+          +prev.gamesWithProfit > current.gamesWithProfit ? prev : current
+        );
 
-      setGamesprofit(gamesProfit);
-      setSuccess(successP);
-      setAvgcashing(avgcashing);
-      setTotalgames(totalGames);
-      setAvgprofit(avgProfit);
-      setProfit(profit);
-      setData(table);
+        setGamesprofit(gamesProfit);
+        setSuccess(successP);
+        setAvgcashing(avgcashing);
+        setTotalgames(totalGames);
+        setAvgprofit(avgProfit);
+        setProfit(profit);
+        setData(table);
+      }
     };
 
     getTable();
-  }, [setData, props.match.params.teamId]);
+  }, [setData, teamId]);
 
   useEffect(() => {
     const dataByMonths = async () => {
       let results = await gameService.monthsData(props.match.params.teamId);
       results = results.data;
-      console.log("results", results);
 
-      const currMonth = results.filter((e) => e._id.monthPlayed !== thisMonth);
-      const currMonthLeader = await currMonth.reduce((prev, current) =>
-        +prev.totalProfit > current.totalProfit ? prev : current
-      );
+      if (results.length > 0) {
+        const currMonth = results.filter(
+          (e) => e._id.monthPlayed !== thisMonth
+        );
+        const currMonthLeader = await currMonth.reduce((prev, current) =>
+          +prev.totalProfit > current.totalProfit ? prev : current
+        );
 
-      setMonths(results);
-      setMonthleader(currMonthLeader);
-      console.log("R", currMonthLeader);
+        // setMonths(results);
+        setMonthleader(currMonthLeader);
+      }
     };
     dataByMonths();
   }, [thisMonth, props.match.params.teamId]);
@@ -210,12 +217,17 @@ export default function MainTable(props) {
           data={profit.totalProfit}
           name={profit ? profit._id.name : ""}
           image={profit ? profit._id.image : ""}
+          cardName="profit"
+          team={teamId}
+          table={data}
         />
         <PlayerCard
           header="Average Profit"
           data={avgprofit.avgProfit}
           name={avgprofit ? avgprofit._id.name : ""}
           image={avgprofit ? avgprofit._id.image : ""}
+          cardName="avgprofit"
+          team={teamId}
         />
         <PlayerCard
           header="Total Games"

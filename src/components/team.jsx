@@ -29,9 +29,9 @@ const Team = ({ team, removeTeam }) => {
           <p className="card-text info">
           <strong><u>Team Number:</u><span className="text-primary">{team.teamNumber}</span></strong> 
             <br />
-            <p id="share">
+            <span id="share">
             *Share this number with your friends and let them join your team
-            </p>
+            </span>
           </p>
           <p>
             <b>
@@ -46,7 +46,7 @@ const Team = ({ team, removeTeam }) => {
            <FaArrowRight/>
 
           </Link>
-          <i class="fa-duotone fa-angles-right"></i>
+          <i className="fa-duotone fa-angles-right"></i>
           
 
           <div className="card-text ">
@@ -60,8 +60,6 @@ const Team = ({ team, removeTeam }) => {
                   <br></br>
                   <img
                     src={player.userImage}
-                    // width="70"
-                    // height="50"
                     alt="user"
                   />
                 </li>
