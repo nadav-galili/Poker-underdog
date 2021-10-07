@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const PlayerCard = ({ header, data, name, image, cMonth, cardName, team, table}) => {
   let currentMonth = new Date(cMonth);
   currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
-    console.log("Pp",table);
+ 
   return (
     <div className="col-lg-2 col-6 mt-3">
       <div className="card " id="mainStats">
