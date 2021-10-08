@@ -1,10 +1,6 @@
-// const Model=require('../models');
-// const {games, teams, user}=Model;
-const express = require("express");
+
 const _ = require("lodash");
 const { Game, validate } = require("../models/games");
-const auth = require("../middleware/auth");
-const router = express.Router();
 
 
 exports.teamStats=async function (req, res){

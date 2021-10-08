@@ -14,6 +14,7 @@ import TableRow from "@material-ui/core/TableRow";
 import { Avatar } from "@material-ui/core";
 import MainLastGame from "./mainLastGame";
 import PlayerCard from "./topStats/playerCard";
+import CardTable from "./topStats/cardTable";
 
 //set headers for the tables
 const columns = [
@@ -110,13 +111,14 @@ export default function MainTable(props) {
   const year = new Date();
   const thisYear = year.getFullYear();
   const thisMonth = year.getMonth();
+  
 
   //fetch data from DB
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.table(teamId);
       table = table.data;
-
+     
       if (table.length > 0) {
         const profit = await table.reduce((prev, current) =>
           +prev.totalProfit > current.totalProfit ? prev : current
@@ -171,7 +173,6 @@ export default function MainTable(props) {
     };
     dataByMonths();
   }, [thisMonth, props.match.params.teamId]);
-
   const classes = useStyles();
   const rows = [];
   const [page, setPage] = React.useState(0);
@@ -208,6 +209,7 @@ export default function MainTable(props) {
     );
   });
 
+  <CardTable teamId={teamId} data={data}/>
   return (
     <div className="container">
       <h1>{thisYear} Top Stats</h1>
@@ -274,7 +276,7 @@ export default function MainTable(props) {
           </Link>
         </div>
       )}
-      <Paper className={classes.root}>
+ <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -339,7 +341,6 @@ export default function MainTable(props) {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-
       {/* Display last game played */}
       <MainLastGame team={props.match.params.teamId} />
     </div>

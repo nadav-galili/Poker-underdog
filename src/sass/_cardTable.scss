@@ -1,31 +1,83 @@
-.statsHero{
-   height: 160px;
-   width:280px;
+.statsHero {
+  height: 180px;
+  width: 280px;
+
 }
-.statsList{
-    padding: 0;
+.statsList {
+  padding: 0;
+  list-style-type: none;
 }
 
-.heroImage img{
-    width: 200px;
-    height: 160px;
-    //  margin-bottom: 40px;
-    //  margin-left: 120px; 
-    object-fit: cover;   
+.heroImage img {
+width: 100%;
+  min-height: 180px;
+  object-fit: cover;
+  margin-left: 7em;
+  margin-top: -1.5em;
 }
-.pos{
+.pos {
   color: $navbarWhite;
   margin-left: 0.7em;
-  font-size: 1.5em;  
+  font-size: 1.5em;
 }
-#profit{
-    color:gold;
-    margin-left: 1em;
+#profit {
+  color: $navbarWhite;
+  margin-left: 0.8em;
+  font-size: 1.4rem;
+  font-family:$fantasyFont;
+}
+#heroName {
+  text-decoration: none;
+  font-size: 2em;
+  margin-left: 0.5em;
+  color: $navbarWhite;
+  font-family: $fantasyFont
 }
 
-#cardTop{
-    border :4px solid lime;
-    height:200px;
-    background-color: $basecolorPurple; 
+#amount {
+   
+  margin-left: 0.5em;
+  font-size: 2em;
+  color: $basecolorGreen;
+}
+#cardTop {
 
+  height: 200px;
+  background-color: $basecolorPurple;
+}
+
+.statsRow{
+    background-color: $navbarWhite;
+}
+
+.rowPos{
+    font-size: 1.4em;
+    font-weight: bold;
+    padding-left: 1em;
+    padding-top: 1em;
+
+}
+
+.rowImage img{
+    height: 60px;
+    min-width: 80px;
+    object-fit: cover;
+    position: relative;
+    bottom: 10px;
+}
+
+.rowName{
+    font-size: 1.3em;
+    font-family: $fantasyFont;
+    // padding-left: 0.5em;
+    padding-top: 0.9em;
+}
+
+.rowProfit{
+    font-size: 1.5em;
+    font-family: $fantasyFont;
+    margin-left: auto; 
+    margin-right:0.5em;
+    padding-top: 0.9em;
+    // background-color: yellow;
 }
