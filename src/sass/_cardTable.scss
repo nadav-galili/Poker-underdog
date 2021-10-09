@@ -9,11 +9,11 @@
 }
 
 .heroImage img {
-width: 100%;
-  min-height: 180px;
+width: 70%;
+height: 70%;
   object-fit: cover;
-  margin-left: 7em;
-  margin-top: -1.5em;
+  margin-left: 4.5em;
+  margin-top: 2em;
 }
 .pos {
   color: $navbarWhite;
@@ -59,17 +59,18 @@ width: 100%;
 }
 
 .rowImage img{
-    height: 60px;
-    min-width: 80px;
+    height: 40px;
+    min-width: 50px;
     object-fit: cover;
     position: relative;
-    bottom: 10px;
+    // bottom: 5px;
+    top:10px;
 }
 
 .rowName{
     font-size: 1.3em;
     font-family: $fantasyFont;
-    // padding-left: 0.5em;
+    padding-left: 2.5em;
     padding-top: 0.9em;
 }
 
