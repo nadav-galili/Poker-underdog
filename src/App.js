@@ -24,6 +24,8 @@ import Demo from "./components/demo";
 import About from "./components/about";
 import MyStats from "./components/personalStats/myStats";
 import CardTable from "./components/topStats/cardTable";
+import SuccessCard from "./components/topStats/successCard";
+import CurrMonthCard from "./components/topStats/currMonthCard";
 import ReactGA from "react-ga";
 
 ReactGA.initialize("G-MPD41JDBPV");
@@ -100,7 +102,10 @@ function App() {
 
             <ProtectedRoute path="/last-game/:teamId" component={LastGame} />
             <ProtectedRoute path="/main-table/:teamId" component={MainTable} />
+            <ProtectedRoute path="/tables/success/:teamId" component={SuccessCard} />
+            <ProtectedRoute path="/tables/byMonths/:currMonth/:teamId" component={CurrMonthCard} />
             <ProtectedRoute path="/tables/:cardName/:teamId" component={CardTable} />
+        
 
 
             <Route path="/demo" component={Demo} />

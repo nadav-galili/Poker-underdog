@@ -2,45 +2,50 @@ import React, {useEffect, useState}from "react";
 import gameService from "../../services/gameService";
 
 
-
-
 const CardTable = ( props) => {
   const [data, setData] = useState([]);
   const [hero,setHero]=useState([]);
-
-  
-  
+  const [headerTitle, setHeaderTitle]=useState("");
   const teamId=props.match.params.teamId;
   const cardName=props.match.params.cardName;
-  console.log(cardName);
 
+
+
+
+  
+   console.log(headerTitle);
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.cardsData(teamId, cardName);
-      //let fetchedData=gameService.table(teamId, cardName)
       table = table.data;
-      console.log("DD", table);
       let myHero=table.shift();
-      // console.log("wwww", h);
+      // if(cardName==="avgProfit"){setHeaderTitle("Average Profit")};
+      switch (cardName){
+        case "avgProfit":
+          setHeaderTitle("Average Profit");
+          break;
+          case "numOfGames":
+            setHeaderTitle("Total Games");
+          break;
+          case "avgCashing":
+            setHeaderTitle("Average  Cashing");
+          break;
+          case "gamesWithProfit":
+            setHeaderTitle("Games With Profit");
+            break;
+        default:
+          setHeaderTitle("Total Profit");
+      }
       setHero(myHero);
       setData(table);
-      // let h=data;
-      // console.log("vv", h);
-      
-      // setHero(h);
-  
     };
   
     getTable();
   }, [setData, teamId, cardName]);
 
-
-  // setHero(h);
- 
-
   return (
     <div className="container-fluid">
-        <h1>{cardName}</h1>
+       <h1>{headerTitle}</h1> 
       <div className="col-lg-3 col-10" id="cardTop">
             <ul className="statsList ">
                 <li className="statsHero d-flex"
@@ -48,7 +53,6 @@ const CardTable = ( props) => {
                     <div className="statsInfo flex-fill">
                       <div className="pos">1.</div>
                       <a href="#/" id="heroName">{data.length>0?hero._id.name:""}</a>
-                    {/* <div id="profit" className="flex-fill">{cardName}</div> */}
                     <div id="amount" className="flex-fill">{data.length>0?hero.cardTitle:""}</div>
                     </div>
                 <div className="heroImage ">
@@ -68,9 +72,7 @@ const CardTable = ( props) => {
               
                   ))}
                 </React.Fragment>
-                
-               
-            
+           
             </ul>
         
         </div>

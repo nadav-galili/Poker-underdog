@@ -1,4 +1,5 @@
 
+const { func } = require("@hapi/joi");
 const _ = require("lodash");
 const { Game, validate } = require("../models/games");
 
@@ -101,7 +102,63 @@ exports.teamStats=async function (req, res){
       res.send(table);
 }
 
-exports.lastGames=async function(req,res){
+exports.successp=async function (req, res){
+  const success=await Game.aggregate(
+    [{$unwind: {
+      path: "$players",
+    
+      preserveNullAndEmptyArrays: true
+    }}, {$match: {
+     team_id:req.params.teamId,
+    
+    }}, {$project: {
+      players:1,
+    created_at:1,
+    team_name:1,
+    team_id:1,
+    gamesWithProfit:{
+      $cond:{
+        if:{$gt:["$players.profit",0]},then:1,else:0
+      }
+    },
+    
+    }}, {$group: {
+    
+        _id: {
+         name: "$players.name",
+              image: "$players.image",
+              player_id: "$players.id",
+              team_id: "$team_id",
+              team_name: "$team_name",
+    
+            },
+            numOfGames: {
+              $sum: 1,
+            },
+    
+                gamesWithProfit:{
+              $sum:"$gamesWithProfit"
+            } 
+    
+    }}, {$project: {
+      successPercentage:{
+        $round:[ {$multiply:[{$divide:["$gamesWithProfit","$numOfGames"]},100]},2]
+      },
+    
+       players:1,
+    team_name:1,
+    team_id:1,
+    
+    
+    }}, {$sort: {
+         successPercentage: -1,
+    }}]
+  )
+
+  res.send(success);
+}
+
+exports.lastGame=async function(req,res){
     const game = await Game.find({ team_id: req.params.teamId })
     .sort({ created_at: -1 })
     .limit(1);
@@ -307,8 +364,7 @@ exports.gamesByCardName=async function(req, res){
       },
     },
   ]);
-console.log(cardTitle);
-//  console.log(table);
+
   res.send(table);
 
 

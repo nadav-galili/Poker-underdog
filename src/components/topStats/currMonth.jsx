@@ -3,8 +3,10 @@ import { GiCardAceHearts } from "react-icons/gi";
 import { VscChevronRight } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 
-const PlayerCard = ({ header, data, name, image, cardName, team, table}) => {
-
+const CurrMonth = ({ header, data, name, image, cMonth, cardName, team, table}) => {
+  let currentMonth = new Date(cMonth);
+  currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
+ 
   return (
     <div className="col-lg-2 col-6 mt-3">
       <div className="card " id="mainStats">
@@ -19,17 +21,20 @@ const PlayerCard = ({ header, data, name, image, cardName, team, table}) => {
           className="card-img-top "
           alt={name}
         />
+
         <div className="card-img-overlay"></div>
         <div className="card-body" id="statsCardBody">
           <p className="card-text" id="statsCardText">
             <span>{header}</span>
             <br />
+                <span id="month">{cMonth ? currentMonth : ""}</span>
+                <br />
             <span>{data ? data : 0}</span>
             <br />
           </p>
         </div>
       </div>
-      <Link className="card-footer ms-3 text-white" to={`/tables/${cardName}/${team}`}  header={header}>
+      <Link className="card-footer ms-3 text-white" to={`/tables/byMonths/${currentMonth}/${team}`}>
         See full table
         <GiCardAceHearts />
         <VscChevronRight />
@@ -38,4 +43,4 @@ const PlayerCard = ({ header, data, name, image, cardName, team, table}) => {
   );
 };
 
-export default PlayerCard;
+export default CurrMonth;

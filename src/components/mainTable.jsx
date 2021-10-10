@@ -16,6 +16,7 @@ import MainLastGame from "./mainLastGame";
 import PlayerCard from "./topStats/playerCard";
 import CardTable from "./topStats/cardTable";
 import SuccessP from "./topStats/successp";
+import CurrMonth from "./topStats/currMonth";
 
 //set headers for the tables
 const columns = [
@@ -102,8 +103,9 @@ export default function MainTable(props) {
   const [avgcashing, setAvgcashing] = useState("");
   const [success, setSuccess] = useState("");
   const [gamesprofit, setGamesprofit] = useState("");
-  // const [months, setMonths] = useState([]);
+ 
   const [monthleader, setMonthleader] = useState("");
+  
 
   const teamId=props.match.params.teamId;
 
@@ -164,6 +166,8 @@ export default function MainTable(props) {
         const currMonth = results.filter(
           (e) => e._id.monthPlayed !== thisMonth
         );
+       
+  
         const currMonthLeader = await currMonth.reduce((prev, current) =>
           +prev.totalProfit > current.totalProfit ? prev : current
         );
@@ -249,28 +253,12 @@ export default function MainTable(props) {
           team={teamId}
        />
         <PlayerCard
-          header="Success %"
-          data={success.successPercentage}
-          name={success ? success._id.name : ""}
-          image={success ? success._id.image : ""}
-          cardName="successPercentage"
-          team={teamId}
-       />
-
-        <PlayerCard
-          header="Games In Profit"
+          header="Games With Profit"
           data={gamesprofit.gamesWithProfit}
           name={gamesprofit ? gamesprofit._id.name : ""}
           image={gamesprofit ? gamesprofit._id.image : ""}
           cardName="gamesWithProfit"
           team={teamId}
-        />
-        <PlayerCard
-          header="Current Month"
-          data={monthleader.totalProfit}
-          name={monthleader ? monthleader._id.name : ""}
-          image={monthleader ? monthleader._id.image : ""}
-          cMonth={monthleader ? monthleader.lastGame : ""}
         />
         <SuccessP
          header="Success %"
@@ -280,6 +268,14 @@ export default function MainTable(props) {
          cardName="successPercentage"
         team={teamId}
        />
+        <CurrMonth
+           header="Current Month"
+           data={monthleader.totalProfit}
+           name={monthleader ? monthleader._id.name : ""}
+           image={monthleader ? monthleader._id.image : ""}
+           cMonth={monthleader ? monthleader.lastGame : ""}
+           team={teamId}/>
+
       </div>
 
       <PageHeader titleText="Main Table" />
@@ -359,7 +355,7 @@ export default function MainTable(props) {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-      {/* Display last game played */}
+  {/* // Display last game played */} 
       <MainLastGame team={props.match.params.teamId} />
     </div>
   );

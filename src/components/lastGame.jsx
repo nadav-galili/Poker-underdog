@@ -67,10 +67,12 @@ export default function LastGame(props) {
 
   useEffect(() => {
     const getLastGame = async () => {
-      let game = await gameService.lastGame(props.match.params.teamId);
-      game = game.data[0];
-      setData(game.players);
-      setLastGame(game);
+
+       let game = await gameService.lastGame(props.match.params.teamId);
+ 
+       game = game.data[0];
+       setData(game.players);
+       setLastGame(game);
     };
 
     getLastGame();
@@ -80,7 +82,7 @@ export default function LastGame(props) {
 
   const rows = [];
 
-  if (data.length > 0) {
+  if ( data.length > 0) {
     let rank = 1;
     data.forEach((e) => {
       rows.push(

@@ -32,7 +32,7 @@ const SuccessP = ({ header, data, name, image,cardName, team, table}) => {
           </p>
         </div>
       </div>
-      <Link  className="card-footer ms-3 text-white" to={`/tables/${cardName}/${team}`}>
+      <Link  className="card-footer ms-3 text-white" to={`/tables/success/${team}`}>
         See full table
         <GiCardAceHearts />
         <VscChevronRight />
