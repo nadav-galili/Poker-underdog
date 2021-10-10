@@ -17,13 +17,14 @@ export function monthsData(teamId){
   return http.get(`${apiUrl}/games/byMonths/${teamId}`);
 }
 
-// export function cardsData(teamId, cardName){
-// return http.get(`${apiUrl}/games/${cardName}/${teamId});
-// }
+export function cardsData(teamId, cardName){
+return http.get(`${apiUrl}/games/${cardName}/${teamId}`);
+}
 
 export default {
   lastGame,
   table,
   personal,
   monthsData,
+  cardsData
 };

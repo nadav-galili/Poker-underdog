@@ -15,6 +15,7 @@ import { Avatar } from "@material-ui/core";
 import MainLastGame from "./mainLastGame";
 import PlayerCard from "./topStats/playerCard";
 import CardTable from "./topStats/cardTable";
+import SuccessP from "./topStats/successp";
 
 //set headers for the tables
 const columns = [
@@ -167,7 +168,7 @@ export default function MainTable(props) {
           +prev.totalProfit > current.totalProfit ? prev : current
         );
 
-        // setMonths(results);
+
         setMonthleader(currMonthLeader);
       }
     };
@@ -219,7 +220,7 @@ export default function MainTable(props) {
           data={profit.totalProfit}
           name={profit ? profit._id.name : ""}
           image={profit ? profit._id.image : ""}
-          cardName="profit"
+          cardName="totalProfit"
           team={teamId}
           table={data}
         />
@@ -228,7 +229,7 @@ export default function MainTable(props) {
           data={avgprofit.avgProfit}
           name={avgprofit ? avgprofit._id.name : ""}
           image={avgprofit ? avgprofit._id.image : ""}
-          cardName="avgprofit"
+          cardName="avgProfit"
           team={teamId}
         />
         <PlayerCard
@@ -236,24 +237,33 @@ export default function MainTable(props) {
           data={totalgames.numOfGames}
           name={totalgames ? totalgames._id.name : ""}
           image={totalgames ? totalgames._id.image : ""}
+          cardName="numOfGames"
+          team={teamId}
         />
         <PlayerCard
           header="Average Cashing"
           data={avgcashing.avgCashing}
           name={avgcashing ? avgcashing._id.name : ""}
           image={avgcashing ? avgcashing._id.image : ""}
-        />
+          cardName="avgCashing"
+          team={teamId}
+       />
         <PlayerCard
           header="Success %"
           data={success.successPercentage}
           name={success ? success._id.name : ""}
           image={success ? success._id.image : ""}
-        />
+          cardName="successPercentage"
+          team={teamId}
+       />
+
         <PlayerCard
           header="Games In Profit"
           data={gamesprofit.gamesWithProfit}
           name={gamesprofit ? gamesprofit._id.name : ""}
           image={gamesprofit ? gamesprofit._id.image : ""}
+          cardName="gamesWithProfit"
+          team={teamId}
         />
         <PlayerCard
           header="Current Month"
@@ -262,6 +272,14 @@ export default function MainTable(props) {
           image={monthleader ? monthleader._id.image : ""}
           cMonth={monthleader ? monthleader.lastGame : ""}
         />
+        <SuccessP
+         header="Success %"
+         data={success.successPercentage}
+         name={success ? success._id.name : ""}
+         image={success ? success._id.image : ""}
+         cardName="successPercentage"
+        team={teamId}
+       />
       </div>
 
       <PageHeader titleText="Main Table" />

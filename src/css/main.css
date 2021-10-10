@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Andada+Pro:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Andada+Pro:wght@400;500;600;700&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
@@ -29,7 +31,7 @@ h1 {
   font-size: 2.5em !important;
   color: #ff3030;
   font-weight: bolder !important;
-  font-family: "Rock Salt", cursive;
+  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
 
 #homeText p {
@@ -454,7 +456,7 @@ footer {
   color: #fcfcfc;
   margin-left: 0.8em;
   font-size: 1.4rem;
-  font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
 
 #heroName {
@@ -462,7 +464,7 @@ footer {
   font-size: 2em;
   margin-left: 0.5em;
   color: #fcfcfc;
-  font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
 
 #amount {
@@ -498,14 +500,14 @@ footer {
 
 .rowName {
   font-size: 1.3em;
-  font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   padding-left: 2.5em;
   padding-top: 0.9em;
 }
 
 .rowProfit {
   font-size: 1.5em;
-  font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   margin-left: auto;
   margin-right: 0.5em;
   padding-top: 0.9em;

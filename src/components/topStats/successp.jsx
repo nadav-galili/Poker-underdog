@@ -3,10 +3,8 @@ import { GiCardAceHearts } from "react-icons/gi";
 import { VscChevronRight } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 
-const PlayerCard = ({ header, data, name, image, cMonth, cardName, team, table}) => {
-  let currentMonth = new Date(cMonth);
-  console.log(cardName);
-  currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
+const SuccessP = ({ header, data, name, image,cardName, team, table}) => {
+
  
   return (
     <div className="col-lg-2 col-6 mt-3">
@@ -28,18 +26,13 @@ const PlayerCard = ({ header, data, name, image, cMonth, cardName, team, table})
           <p className="card-text" id="statsCardText">
             <span>{header}</span>
             <br />
-            {cMonth && (
-              <React.Fragment>
-                <span id="month">{cMonth ? currentMonth : ""}</span>
-                <br />
-              </React.Fragment>
-            )}
+           
             <span>{data ? data : 0}</span>
             <br />
           </p>
         </div>
       </div>
-      <Link header={header} className="card-footer ms-3 text-white" to={`/tables/${cardName}/${team}`}>
+      <Link  className="card-footer ms-3 text-white" to={`/tables/${cardName}/${team}`}>
         See full table
         <GiCardAceHearts />
         <VscChevronRight />
@@ -48,4 +41,4 @@ const PlayerCard = ({ header, data, name, image, cMonth, cardName, team, table})
   );
 };
 
-export default PlayerCard;
+export default SuccessP;

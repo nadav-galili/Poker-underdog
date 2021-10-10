@@ -23,7 +23,9 @@ h1 {
   font-size: 2.5em !important;
   color: $basecolorRed;
   font-weight: bolder !important;
-  font-family: "Rock Salt", cursive;
+  // font-family: "Rock Salt", cursive;
+  // font-family: $headerFont;
+  font-family: $fantasyFont;
 }
 
 #homeText p {

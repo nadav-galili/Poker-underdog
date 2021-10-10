@@ -230,7 +230,7 @@ exports.gamesByCardName=async function(req, res){
           created_at: 1,
           team_name: 1,
           team_id: 1,
-          gamesWithPlus: {
+          gamesWithProfit: {
               $cond: {
                   if: {
                       $gt: ["$players.profit", 0]
@@ -267,7 +267,7 @@ exports.gamesByCardName=async function(req, res){
           $max: "$created_at",
         },
         gamesWithProfit: {
-          $sum: "$gamesWithPlus"
+          $sum: "$gamesWithProfit"
       },
       },
     },
@@ -282,32 +282,33 @@ exports.gamesByCardName=async function(req, res){
           },
   
           players: 1,
-          created_at: 1,
+          // created_at: 1,
           team_name: 1,
           team_id: 1,
-          gamesWithPlus: 1,
-          totalProfit: 1,
-          avgProfit: {
-              $round: ["$avgProfit", 2]
-          },
-          numOfGames: 1,
-          avgCashing: {
-              $round: ["$avgCashing", 2]
-          },
-          lastGame: 1,
-          gamesWithProfit: 1,
-          cardTitle:cardTitle,
+          // gamesWithPlus: 1,
+          // totalProfit: 1,
+          // avgProfit: {
+          //     $round: ["$avgProfit", 2]
+          // },
+          // numOfGames: 1,
+          // avgCashing: {
+          //     $round: ["$avgCashing", 2]
+          // },
+          // lastGame: 1,
+          // gamesWithProfit: 1,
+          cardTitle:{$round:[cardTitle,2]},
   
       }
   },
 
     {
       $sort: {
-        cardTitle: -1,
+        cardTitle:-1,
       },
     },
   ]);
 console.log(cardTitle);
+//  console.log(table);
   res.send(table);
 
 
