@@ -1,7 +1,6 @@
 .statsHero {
   height: 180px;
   width: 280px;
-
 }
 .statsList {
   padding: 0;
@@ -9,10 +8,10 @@
 }
 
 .heroImage img {
-width: 70%;
-height: 70%;
+  width: 70%;
+  height: 70%;
   object-fit: cover;
-  margin-left: 4.5em;
+  margin-left: 6.5em;
   margin-top: 2em;
 }
 .pos {
@@ -24,61 +23,59 @@ height: 70%;
   color: $navbarWhite;
   margin-left: 0.8em;
   font-size: 1.4rem;
-  font-family:$fantasyFont;
+  font-family: $fantasyFont;
 }
 #heroName {
   text-decoration: none;
   font-size: 2em;
   margin-left: 0.5em;
   color: $navbarWhite;
-  font-family: $fantasyFont
+  font-family: $fantasyFont;
 }
 
 #amount {
-   
   margin-left: 0.5em;
   font-size: 2em;
   color: $basecolorGreen;
 }
 #cardTop {
-
   height: 200px;
   background-color: $basecolorPurple;
 }
 
-.statsRow{
-    background-color: $navbarWhite;
+.statsRow {
+  background-color: $navbarWhite;
 }
 
-.rowPos{
-    font-size: 1.4em;
-    font-weight: bold;
-    padding-left: 1em;
-    padding-top: 1em;
-
+.rowPos {
+  font-size: 1.4em;
+  font-weight: bold;
+  padding-left: 1em;
+  padding-top: 1em;
 }
 
-.rowImage img{
-    height: 40px;
-    min-width: 50px;
-    object-fit: cover;
-    position: relative;
-    // bottom: 5px;
-    top:10px;
+.rowImage img {
+  height: 40px;
+  min-width: 50px;
+  object-fit: cover;
+  position: relative;
+  // bottom: 5px;
+  left: 10px;
+  top: 10px;
 }
 
-.rowName{
-    font-size: 1.3em;
-    font-family: $fantasyFont;
-    padding-left: 2.5em;
-    padding-top: 0.9em;
+.rowName {
+  font-size: 1.3em;
+  font-family: $fantasyFont;
+  padding-left: 2.5em;
+  padding-top: 0.9em;
 }
 
-.rowProfit{
-    font-size: 1.5em;
-    font-family: $fantasyFont;
-    margin-left: auto; 
-    margin-right:0.5em;
-    padding-top: 0.9em;
-    // background-color: yellow;
+.rowProfit {
+  font-size: 1.5em;
+  font-family: $fantasyFont;
+  margin-left: auto;
+  margin-right: 0.5em;
+  padding-top: 0.9em;
+  // background-color: yellow;
 }

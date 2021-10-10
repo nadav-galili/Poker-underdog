@@ -13,6 +13,10 @@ router.get("/table/:teamId", auth, gamesController.teamStats);
 // gets  month stats
 router.get("/byMonths/:teamId",auth,gamesController.dataByMonths);
 
+// gets game data by card name
+ router.get("/:cardName/:teamId", gamesController.gamesByCardName);
+
+
 //gets the latest game
 router.get("/last-game/:teamId",auth,gamesController.lastGames);
 

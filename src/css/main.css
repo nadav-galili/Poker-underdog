@@ -440,7 +440,7 @@ footer {
   width: 70%;
   height: 70%;
   object-fit: cover;
-  margin-left: 4.5em;
+  margin-left: 6.5em;
   margin-top: 2em;
 }
 
@@ -492,6 +492,7 @@ footer {
   min-width: 50px;
   object-fit: cover;
   position: relative;
+  left: 10px;
   top: 10px;
 }
 

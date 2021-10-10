@@ -17,11 +17,12 @@ const CardTable = ( props) => {
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.table(teamId);
+      //let fetchedData=gameService.table(teamId, cardName)
       table = table.data;
      
       if (table.length > 0) {
         // const profit = await table.sort((a, b) => (a.color > b.color) ? 1 : -1);
-        const avgProfit = await table.sort((a, b) => (a.avgProfit > b.avgProfit) ? 1 : -1);
+        const avgProfit = await table.sort((a, b) => (a.avgProfit < b.avgProfit) ? 1 : -1);
         console.log("uu",avgProfit);
         const totalGames = await table.reduce((prev, current) =>
           +prev.numOfGames > current.numOfGames ? prev : current
