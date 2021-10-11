@@ -8,7 +8,7 @@ var storage=multer.diskStorage({
     filename:function(req, file, cb){
         let ext=path.extname(file.originalname);
         let fileName=path.basename(file.originalname, ext);
-        cb(null,fileName+ Date.now()+ext);
+        cb(null,fileName+'-'+ Date.now()+ext);
     }
 })
 

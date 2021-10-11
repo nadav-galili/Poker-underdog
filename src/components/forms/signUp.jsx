@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import http from "../../services/httpService";
+import axios from "axios";
 import { apiUrl } from "../../config.json";
 import { toast } from "react-toastify";
 import userService from "../../services/userService";
@@ -31,26 +32,22 @@ const validationSchema = Yup.object({
 });
 
 const SignUp = (props) => {
-    // const [formData, setFormData]=useState({});
-    const onSubmit =async (values, onSubmitProps) => {
-        console.log("form f", values);
-        onSubmitProps.setSubmitting(false);
-        // setFormData(values);
-        // console.log("ffff", formData);
-        let data=new FormData();
-        data.append('image', values.image);
-        console.log("D", data);
-      //   return fetch(url, {method, headers, body})
 
-   
-   
-        try {
-            console.log("test", values);
-            let d=values;
-            d.image=values.image.name;
-            console.log("cccc",d);
-        //   if (!values.image) delete values.image;
-          await http.post(`${apiUrl}/users`, d);
+
+     const onSubmit =async (values, onSubmitProps) => {
+        onSubmitProps.setSubmitting(false);
+
+        let data=new FormData();
+        data.append('firstName', values.firstName);
+        data.append('lastName', values.lastName);
+        data.append('nickName', values.nickName);
+        data.append('email', values.email);
+        data.append('password', values.password);
+        data.append('image', values.image);
+        axios.post("https://httpbin.org/anything", data).then(res=>console.log('res',res)).catch(err=>console.log('e',err));
+         try {
+           if (!values.image) delete values.image;
+          await http.post(`${apiUrl}/users`, data);
         //   await userService.login(values.email, values.password);
         //   window.location = "/";
           toast("A new acoount is opened");
