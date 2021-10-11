@@ -7,6 +7,7 @@ const upload=require("../middleware/upload");
 const { Team } = require("../models/teams");
 const router = express.Router();
 const { Game } = require("../models/games");
+const { NextWeek } = require("@material-ui/icons");
 
 const getTeams = async (teamsArray) => {
   const teams = await Team.find({ teamNumber: { $in: teamsArray } });
@@ -48,10 +49,17 @@ router.get("/me", auth, async (req, res) => {
 
 router.post("/",upload.single('image'),  async (req, res) => {
   const { error } = validate(req.body);
-  // if (error) return res.status(400).send(error.details[0].message);
-  if (error) console.log(error.details[0].message);
+  if (error) return res.status(400).send(error.details[0].message);
+  // if (error) console.log(error.details[0].message);
   var user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User already registered.");
+  const {file}=req;
+  console.log("file",file);
+  // const ext=file.detectFileExtension;
+  // console.log("ext", ext);
+  // if(file.mimetype!=='.image/jpg'||file.mimetype!=='.image/jpeg'||file.mimetype!=='.image/gif' ){
+  //   return res.status(415).send("Invalid File Type");
+  // }
 
   user = new User({
     firstName: req.body.firstName,

@@ -28,9 +28,13 @@ label{
 
 .form-control{
     margin-bottom: 10px;
-    background-color: aqua;
+    // background-color: aqua;
 }
-
+.row.inputFile.mb-4{
+    color:$navbarWhite;
+    // margin-left: 0px;
+    padding-left: 10px;
+}
 .error {
     color:red;
 }

@@ -525,7 +525,11 @@ label {
 
 .form-control {
   margin-bottom: 10px;
-  background-color: aqua;
+}
+
+.row.inputFile.mb-4 {
+  color: #fcfcfc;
+  padding-left: 10px;
 }
 
 .error {
