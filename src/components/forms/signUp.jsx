@@ -23,6 +23,7 @@ const validationSchema = Yup.object({
   firstName: Yup.string().required("Required"),
   lastName: Yup.string().required("Required"),
   nickName: Yup.string().required("Required"),
+  image:Yup.string(),
   email: Yup.string().email("Invaild email format").required("Required"),
   password: Yup.string()
     .min(6, "Password must be min 6 chars")
@@ -30,23 +31,28 @@ const validationSchema = Yup.object({
 });
 
 const SignUp = (props) => {
-    const [formData, setFormData]=useState({});
+    // const [formData, setFormData]=useState({});
     const onSubmit =async (values, onSubmitProps) => {
         console.log("form f", values);
         onSubmitProps.setSubmitting(false);
-        setFormData(values);
-        console.log("ffff", formData);
-      //   let data=new FormData();
-      //   data.append('image', values.image);
-      //   console.log("D", data);
+        // setFormData(values);
+        // console.log("ffff", formData);
+        let data=new FormData();
+        data.append('image', values.image);
+        console.log("D", data);
       //   return fetch(url, {method, headers, body})
+
    
    
         try {
-          if (!values.image) delete values.image;
-          await http.post(`${apiUrl}/users`, values);
-          await userService.login(values.email, values.password);
-          window.location = "/";
+            console.log("test", values);
+            let d=values;
+            d.image=values.image.name;
+            console.log("cccc",d);
+        //   if (!values.image) delete values.image;
+          await http.post(`${apiUrl}/users`, d);
+        //   await userService.login(values.email, values.password);
+        //   window.location = "/";
           toast("A new acoount is opened");
         } catch (ex) {
           if (ex.response && ex.response.status === 400) {

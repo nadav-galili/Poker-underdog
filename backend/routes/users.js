@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const { User, validate, validateUserWithId } = require("../models/user");
 const auth = require("../middleware/auth");
+const upload=require("../middleware/upload");
 const { Team } = require("../models/teams");
 const router = express.Router();
 const { Game } = require("../models/games");
@@ -45,7 +46,7 @@ router.get("/me", auth, async (req, res) => {
   res.send(user);
 });
 
-router.post("/", async (req, res) => {
+router.post("/",upload.single('image'),  async (req, res) => {
   const { error } = validate(req.body);
   // if (error) return res.status(400).send(error.details[0].message);
   if (error) console.log(error.details[0].message);
@@ -57,9 +58,8 @@ router.post("/", async (req, res) => {
     lastName: req.body.lastName,
     nickName: req.body.nickName,
     email: req.body.email,
-    image: req.body.image
-      ? req.body.image
-      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    image: req.file? req.file.path:
+     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     password: req.body.password,
     teams: [],
   });
