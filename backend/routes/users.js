@@ -47,15 +47,18 @@ router.get("/me", auth, async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  // if (error) return res.status(400).send(error.details[0].message);
+  if (error) console.log(error.details[0].message);
   var user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User already registered.");
 
   user = new User({
-    name: req.body.name,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    nickName: req.body.nickName,
     email: req.body.email,
-    userImage: req.body.userImage
-      ? req.body.userImage
+    image: req.body.image
+      ? req.body.image
       : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     password: req.body.password,
     teams: [],
@@ -66,7 +69,7 @@ router.post("/", async (req, res) => {
 
   await user.save();
 
-  res.send(_.pick(user, ["_id", "name", "email", "userImage"]));
+  res.send(_.pick(user, ["_id", "FirstName","lastName","nickName", "email", "image"]));
 });
 
 router.put("/:id", auth, async (req, res) => {

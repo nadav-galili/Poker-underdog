@@ -28,7 +28,11 @@ import SuccessCard from "./components/topStats/successCard";
 import CurrMonthCard from "./components/topStats/currMonthCard";
 import ProfitsCard from "./components/topStats/profitsCard";
 import SignUp from "./components/forms/signUp";
+import { ChakraProvider } from "@chakra-ui/react";
+import {Formik} from "formik";
+// import {Container, Row, Col, Input, Button} from "reactstrap";
 import ReactGA from "react-ga";
+
 
 ReactGA.initialize("G-MPD41JDBPV");
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -56,6 +60,7 @@ function App() {
     minHeight: 900,
   };
   return (
+    <ChakraProvider>
     <React.Fragment>
     
       <ToastContainer />
@@ -132,6 +137,7 @@ function App() {
       </footer>
  
     </React.Fragment>
+    </ChakraProvider>
   );
 }
 
