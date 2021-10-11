@@ -16,7 +16,8 @@ router.get("/byMonths/:teamId",auth,gamesController.dataByMonths);
 
 //gets the latest game
 router.get("/last-game/:teamId",auth,gamesController.lastGame);
-
+// get 10 biggest profits
+router.get("/profits/top-ten/:teamId", auth, gamesController.profits);
 // get success% 
 router.get("/success-p/:teamId",auth, gamesController.successp )
 // gets game data by card name

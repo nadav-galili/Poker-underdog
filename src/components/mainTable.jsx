@@ -17,6 +17,7 @@ import PlayerCard from "./topStats/playerCard";
 import CardTable from "./topStats/cardTable";
 import SuccessP from "./topStats/successp";
 import CurrMonth from "./topStats/currMonth";
+import Profits from "./topStats/profits";
 
 //set headers for the tables
 const columns = [
@@ -105,6 +106,7 @@ export default function MainTable(props) {
   const [gamesprofit, setGamesprofit] = useState("");
  
   const [monthleader, setMonthleader] = useState("");
+  const [profits, setProfits]=useState([]);
   
 
   const teamId=props.match.params.teamId;
@@ -178,6 +180,18 @@ export default function MainTable(props) {
     };
     dataByMonths();
   }, [thisMonth, props.match.params.teamId]);
+
+  useEffect(()=>{
+  const profits=async ()=>{
+    let results=await gameService.profits(props.match.params.teamId);
+    results=results.data;
+    console.log("i", results);
+    setProfits(results);
+  };
+  profits();
+  }, [props.match.params.teamId]);
+
+
   const classes = useStyles();
   const rows = [];
   const [page, setPage] = React.useState(0);
@@ -236,6 +250,14 @@ export default function MainTable(props) {
           cardName="avgProfit"
           team={teamId}
         />
+            <SuccessP
+         header="Success %"
+         data={success.successPercentage}
+         name={success ? success._id.name : ""}
+         image={success ? success._id.image : ""}
+         cardName="successPercentage"
+        team={teamId}
+       />
         <PlayerCard
           header="Total Games"
           data={totalgames.numOfGames}
@@ -260,14 +282,13 @@ export default function MainTable(props) {
           cardName="gamesWithProfit"
           team={teamId}
         />
-        <SuccessP
-         header="Success %"
-         data={success.successPercentage}
-         name={success ? success._id.name : ""}
-         image={success ? success._id.image : ""}
-         cardName="successPercentage"
-        team={teamId}
-       />
+    
+            <Profits
+            header="Top 10 Profits"
+            name={profits.length>0?profits[0].players.name:""}
+            image={profits.length>0?profits[0].players.image:""}
+            data={profits.length>0?profits[0].players.profit:""}
+            team={teamId}/>
         <CurrMonth
            header="Current Month"
            data={monthleader.totalProfit}
@@ -275,6 +296,7 @@ export default function MainTable(props) {
            image={monthleader ? monthleader._id.image : ""}
            cMonth={monthleader ? monthleader.lastGame : ""}
            team={teamId}/>
+      
 
       </div>
 

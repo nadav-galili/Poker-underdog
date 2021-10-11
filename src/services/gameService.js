@@ -25,6 +25,10 @@ export function cardsData(teamId, cardName){
   return http.get(`${apiUrl}/games/${cardName}/${teamId}`);
   }
 
+  export function profits(teamId){
+    return http.get(`${apiUrl}/games/profits/top-ten/${teamId}`);
+  }
+
 
 export default {
   lastGame,
@@ -32,5 +36,6 @@ export default {
   personal,
   monthsData,
   cardsData, 
-  successp
+  successp,
+  profits
 };

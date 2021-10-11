@@ -165,6 +165,21 @@ exports.lastGame=async function(req,res){
   res.send(game)
 }
 
+exports.profits=async function (req, res){
+  const profits=await Game.aggregate(
+    [{$unwind: {
+      path: "$players",
+    
+      preserveNullAndEmptyArrays: true
+    }}, {$match: {
+     team_id:req.params.teamId,
+    }}, {$sort: {
+        "players.profit": -1,
+    }}, {$limit: 10}]
+  )
+  res.send(profits);
+}
+
 exports.allGames=async function (req, res){
     const game = await Game.find({ team_id: req.body.team_id });
     res.send(game);
