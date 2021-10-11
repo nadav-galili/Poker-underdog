@@ -27,6 +27,7 @@ import CardTable from "./components/topStats/cardTable";
 import SuccessCard from "./components/topStats/successCard";
 import CurrMonthCard from "./components/topStats/currMonthCard";
 import ProfitsCard from "./components/topStats/profitsCard";
+import SignUp from "./components/forms/signUp";
 import ReactGA from "react-ga";
 
 ReactGA.initialize("G-MPD41JDBPV");
@@ -56,7 +57,9 @@ function App() {
   };
   return (
     <React.Fragment>
+    
       <ToastContainer />
+  
       <header>
         <Navbar user={user} details={details} />
       </header>
@@ -115,6 +118,10 @@ function App() {
             <Route path="/logout" component={Logout} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} user={user} />
+
+
+            <Route path="/sign-up" component={SignUp} user={user} />
+
             <Route exact path="/" component={Home} user={user} d={details} />
           </Switch>
         </HashRouter>
@@ -123,6 +130,7 @@ function App() {
       <footer>
         <Footer />
       </footer>
+ 
     </React.Fragment>
   );
 }
