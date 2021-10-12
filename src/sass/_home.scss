@@ -19,12 +19,11 @@
   }
 }
 h1 {
-  //text-decoration: underline;
+
   font-size: 2.5em !important;
   color: $basecolorRed;
   font-weight: bolder !important;
-  // font-family: "Rock Salt", cursive;
-  // font-family: $headerFont;
+
   font-family: $fantasyFont;
 }
 
@@ -46,18 +45,24 @@ h1 {
   border: 3px solid $basecolorRed;
   border-radius: 15px;
   transform: rotate(-30deg);
-  margin: 2em;
+  margin: 2em 0 0 4em;
   object-fit: cover;
 }
 
 #homeImg img:nth-child(2) {
   border: 3px solid $basecolorGreen;
   border-radius: 15px;
-  margin: 2em;
+  margin: 4em;
   //transform: rotate(-20deg);
   @keyframes spin {
     100% {
       transform: rotate(360deg);
     }
   }
+}
+
+#create, #join{
+  // font-size: 50px;
+  color:$headerColorBlue;
+  text-decoration: underline;
 }

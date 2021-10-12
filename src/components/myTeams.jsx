@@ -59,10 +59,10 @@ const MyTeams = () => {
       />
       <div className="row">
         <div className="col-12 ">
-          <Link className="btn btn-primary ms-2" to="/create-team">
+          <Link className="btn btn-primary ms-2 mb-3" to="/create-team">
             +Add A New Team
           </Link>
-          <Link className="btn btn-primary ms-2" to="/join-team">
+          <Link className="btn btn-primary ms-2 mb-3" to="/join-team">
             Join An Existing Team
           </Link>
           <div className="teamText">
@@ -74,7 +74,8 @@ const MyTeams = () => {
           </p>
         </div>
       </div>
-      <div className="row container">
+      <div className="row ">
+        <div className="col-lg-5 col-10">
         {teams.length > 0 &&
           teams.map((team) => (
             <Team
@@ -83,6 +84,7 @@ const MyTeams = () => {
               removeTeam={() => removeTeam(team._id)}
             />
           ))}
+        </div>
       </div>
     </div>
   );

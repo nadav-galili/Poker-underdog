@@ -6,26 +6,16 @@
 }
 
 nav {
-  // border-bottom: 2px solid $navbarWhite;
-  // background-color: $basecolorRed;
    background-color: $backgroundBlack;
-
-  // background: linear-gradient(
-  //     to right,
-  //     rgba($basecolorRed, 0.9),
-  //     rgba($basecolorRed, 0.3)
-  //   ),
-  //   url("https://cdn.pixabay.com/photo/2016/08/02/16/46/poker-1564042_960_720.jpg")
-  //     top;
-  // background-size: cover;
-  // background-repeat: no-repeat;
+}
+.navbar-light .navbar-toggler-icon{
+  background-color: white;
+  height: 50px;
+  width: 50px;
+  // border:2px solid red;
 }
 
-// .navbar-light .navbar-toggler-icon {
-//   width: 60px !important;
-//   height: 60px !important;
-//   background-image: url("https://cdn4.vectorstock.com/i/1000x1000/05/73/menu-button-icon-design-vector-22050573.jpg") !important;
-// }
+
 
 .navbar-brand img {
   border-radius: 15px;
@@ -41,4 +31,25 @@ nav {
 }
 .nav-link:hover {
   color: $basecolorGreen !important;
+}
+
+.userDetails{
+  display: flex;
+  & p{
+   padding: 8px 30px 0 12px;
+   font-weight: bold;
+   font-size: 25px;
+  }
+  & img{
+    background-color: $darkeerPurple;
+  }
+}
+
+@media screen and (max-width: 600px) {
+.userDetails{
+  display: block;
+  & p{
+    padding: 0;
+  }
+}
 }

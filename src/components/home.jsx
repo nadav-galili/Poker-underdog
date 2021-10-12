@@ -23,11 +23,11 @@ const Home = () => {
 
             <p>
               Join us now and <br />
-              <Link to="/signup">Create A New Account For Free</Link>
+              <Link to="/signup" id="create">Create A New Account For Free</Link>
             </p>
             <p>Already registerd?</p>
             <p>
-              <Link to="/my-teams">
+              <Link to="/my-teams" id="join">
                 Pick a team and start a new game...ALL IN!
               </Link>
             </p>

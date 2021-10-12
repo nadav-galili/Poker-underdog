@@ -9,7 +9,7 @@ class Navbar extends Component {
     const { details } = this.props;
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light shadow p-3 ">
+      <nav className="navbar navbar-expand-lg navbar-light shadow ">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/#">
             <img
@@ -81,9 +81,16 @@ class Navbar extends Component {
               )}
               {user && (
                 <React.Fragment>
-                  <li className="nav-item me-2">
+                  <li className="nav-item me-2 ">
                     {user && (
-                      <Avatar src={details.userImage} alt={details.name} />
+                      <div className="userDetails flex-row-reverse">
+                         <p className="text-primary">{details.nickName}</p>
+                        <Avatar 
+                        // src={details.image}
+                        src={`http://localhost:3900/${details.image}`}
+                         alt={details.name} />
+                       
+                      </div>
                     )}
                   </li>
                   <li className="nav-item">

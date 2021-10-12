@@ -7,6 +7,7 @@ const cors = require("cors");
 const app = express();
 const http = require("http").Server(app);
 const mongoose = require("mongoose");
+const path = require('path');
 
 // mongoose
 //   .connect(
@@ -42,6 +43,7 @@ app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/games", games);
 app.use("/api/teams", teams);
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Poker-Underground application test." });
 });

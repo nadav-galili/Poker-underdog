@@ -55,11 +55,7 @@ router.post("/",upload.single('image'),  async (req, res) => {
   if (user) return res.status(400).send("User already registered.");
   const {file}=req;
   console.log("file",file);
-  // const ext=file.detectFileExtension;
-  // console.log("ext", ext);
-  // if(file.mimetype!=='.image/jpg'||file.mimetype!=='.image/jpeg'||file.mimetype!=='.image/gif' ){
-  //   return res.status(415).send("Invalid File Type");
-  // }
+
 
   user = new User({
     firstName: req.body.firstName,

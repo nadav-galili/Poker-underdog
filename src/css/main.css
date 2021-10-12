@@ -53,20 +53,25 @@ h1 {
   border: 3px solid #ff3030;
   border-radius: 15px;
   transform: rotate(-30deg);
-  margin: 2em;
+  margin: 2em 0 0 4em;
   object-fit: cover;
 }
 
 #homeImg img:nth-child(2) {
   border: 3px solid #02d84d;
   border-radius: 15px;
-  margin: 2em;
+  margin: 4em;
 }
 
 @keyframes spin {
   100% {
     transform: rotate(360deg);
   }
+}
+
+#create, #join {
+  color: #2752ea;
+  text-decoration: underline;
 }
 
 .MuiPaper-root {
@@ -249,6 +254,12 @@ nav {
   background-color: #1c1515;
 }
 
+.navbar-light .navbar-toggler-icon {
+  background-color: white;
+  height: 50px;
+  width: 50px;
+}
+
 .navbar-brand img {
   border-radius: 15px;
   height: 100px;
@@ -264,6 +275,29 @@ nav {
 
 .nav-link:hover {
   color: #02d84d !important;
+}
+
+.userDetails {
+  display: flex;
+}
+
+.userDetails p {
+  padding: 8px 30px 0 12px;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.userDetails img {
+  background-color: #520c8c;
+}
+
+@media screen and (max-width: 600px) {
+  .userDetails {
+    display: block;
+  }
+  .userDetails p {
+    padding: 0;
+  }
 }
 
 .demo-img {

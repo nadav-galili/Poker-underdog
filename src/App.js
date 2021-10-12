@@ -122,7 +122,7 @@ function App() {
             <Route path="/about" component={About} />
             <Route path="/logout" component={Logout} />
             <Route path="/signin" component={Signin} />
-            <Route path="/signup" component={Signup} user={user} />
+            <Route path="/signup" component={SignUp} user={user} />
 
 
             <Route path="/sign-up" component={SignUp} user={user} />

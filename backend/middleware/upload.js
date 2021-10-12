@@ -15,7 +15,7 @@ var storage=multer.diskStorage({
 var upload=multer({
     storage:storage,
     fileFilter:function(req, file, cb){
-        var filetypes = /jpeg|jpg|gif/;
+        var filetypes = /jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF/;
         var mimetype = filetypes.test(file.mimetype);
         var extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     
