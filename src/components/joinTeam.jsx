@@ -21,13 +21,17 @@ class JoinTeam extends Form {
 
     try {
       const team = await teamService.getTeamByNumber(data.teamNumber);
+      console.log(team);
       //get user details from token
       let user = await userService.getCurrentUser();
       //get full user details
       user = await userService.getUserDetails();
+  
       //add the team id to the user in db
+      console.log("i", team.data._id);
       user.data.teams.push(team.data._id);
 
+      console.log("b",user.data);
       await userService.editUserDetails(user.data);
 
       delete user.data.password;
@@ -65,7 +69,7 @@ class JoinTeam extends Form {
               {this.renderButton("Join Team")}
               <Link
                 type="button"
-                className="btn-lg btn-secondary  ms-2"
+                className="btn btn-secondary"
                 to="/my-teams"
               >
                 Not right now
