@@ -6,7 +6,7 @@
 h3 {
   color: $basecolorGreen;
   font-weight: bolder;
-  
+
 
 }
 
@@ -77,3 +77,21 @@ h3 {
 span {
   color: $basecolorGreen;
 }
+
+#joinText{
+  & p{
+    color:$headerColorBlue;
+  }
+}
+
+.btn-secondary{
+  margin-left: 10px;
+  margin-bottom:0.35em;
+}
+
+@media screen and (max-width: 600px) {
+  .btn-secondary{
+  margin-top: 1em;
+  margin-left: 0;
+  }
+  }

@@ -54,7 +54,7 @@ const SelectPlayers = (props) => {
               player={player}
               key={player._id}
               selectPlayers={() => {
-                selectPlayers(player._id, player.name, player.userImage);
+                selectPlayers(player._id, player.nickName, player.image);
               }}
             />
           ))}

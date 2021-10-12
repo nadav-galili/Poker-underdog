@@ -1,4 +1,5 @@
 import React from "react";
+import {apiImage} from "../config.json"
 
 const Player = ({ player, selectPlayers, selected }) => {
   return (
@@ -8,7 +9,7 @@ const Player = ({ player, selectPlayers, selected }) => {
           className="m-2 playerImage"
           width="100"
           height="100"
-          src={player.userImage}
+          src={`${apiImage}${player.image}`}
           alt=""
         />
         <div
@@ -18,7 +19,7 @@ const Player = ({ player, selectPlayers, selected }) => {
               : "card-body"
           }
         >
-          <h5 className="card-title">{player.name}</h5>
+          <h5 className="card-title">{player.nickName}</h5>
           <button
             type="button"
             className="btn btn-primary align-self-center"

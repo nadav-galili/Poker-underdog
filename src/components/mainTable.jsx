@@ -236,7 +236,7 @@ export default function MainTable(props) {
         <PlayerCard
           header="Total Profit"
           data={profit.totalProfit}
-          name={profit ? profit._id.name : ""}
+          name={profit ? profit._id.nickName : ""}
           image={profit ? profit._id.image : ""}
           cardName="totalProfit"
           team={teamId}

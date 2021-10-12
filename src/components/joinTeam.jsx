@@ -28,10 +28,10 @@ class JoinTeam extends Form {
       user = await userService.getUserDetails();
   
       //add the team id to the user in db
-      console.log("i", team.data._id);
+   
       user.data.teams.push(team.data._id);
 
-      console.log("b",user.data);
+   
       await userService.editUserDetails(user.data);
 
       delete user.data.password;
@@ -55,7 +55,7 @@ class JoinTeam extends Form {
       <div className="container-fluid">
         <PageHeader titleText="Join an existing team" />
         <div className="row">
-          <div className="col-12">
+          <div className="col-12" id="joinText">
             <p>
               <strong>Please enter team number</strong> <br />
               *Ask team members for the number
@@ -69,7 +69,7 @@ class JoinTeam extends Form {
               {this.renderButton("Join Team")}
               <Link
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-secondary "
                 to="/my-teams"
               >
                 Not right now
