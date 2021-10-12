@@ -39,20 +39,19 @@ const SignUp = (props) => {
     data.append("email", values.email);
     data.append("password", values.password);
     data.append("image", values.image);
-    // axios.post("https://httpbin.org/anything", data).then(res=>console.log('res',res)).catch(err=>console.log('e',err));
+ 
     try {
       if (!values.image) delete values.image;
       await http.post(`${apiUrl}/users`, data);
-      //   await userService.login(values.email, values.password);
-      //   window.location = "/";
+        await userService.login(values.email, values.password);
+        window.location = "/";
       toast("A new acoount is opened");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         setErrors({ email: "This email is taken" });
         console.error(ex);
-      } else if (ex.response && ex.response.status === 415) {
-        setErrors({ image: "Invalid file type. only images allwoed" });
-        console.error(ex);
+
+  
       }
     }
   };

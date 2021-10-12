@@ -3,7 +3,7 @@ const multer=require('multer');
 
 var storage=multer.diskStorage({
     destination:function(req, file, cb){
-        cb(null, '../public/uploads');
+        cb(null, 'uploads/');
     }, 
     filename:function(req, file, cb){
         let ext=path.extname(file.originalname);
@@ -14,17 +14,15 @@ var storage=multer.diskStorage({
 
 var upload=multer({
     storage:storage,
-    fileFilter:function(req, file, callback){
-        if(
-            file.mimetype==="image/png" ||
-            file.mimetype==="image/jpg" ||
-            file.mimetype==="image/jpeg"
-        ){
-            callback(null, true)
-        }else{
-            console.log('only jpg & jpeg & png file supported');
-            callback(null, false)
-        }
+    fileFilter:function(req, file, cb){
+        var filetypes = /jpeg|jpg|gif/;
+        var mimetype = filetypes.test(file.mimetype);
+        var extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    
+        if (mimetype && extname) {
+            return cb(null, true);
+          }
+          cb("Error: File upload only supports the following filetypes - " + filetypes);       
     },
     limits:{
         fileSize:1024*1024*6
