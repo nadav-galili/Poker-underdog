@@ -1,11 +1,51 @@
 .playerImage {
-  border: 3px solid $basecolorGreen;
+  border: 3px solid $headerColorBlue;
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  background-color: $backgroundBlack;
+  border-radius: 50%;
 }
 
 .join {
   color: $basecolorGreen;
 }
+#selectTitle{
+  color:$headerColorBlue;
+}
+.card-head {
+  width: 100px;
+  height: 100px;
+}
 
-// .selectP {
-//   color: $navbarWhite;
-// }
+.card-body {
+  & button {
+    font-size: 12px;
+  }
+}
+
+.MuiTableCell-root.MuiTableCell-body {
+  & input {
+    border: 2px solid black;
+    max-width: 50%;
+  }
+}
+
+tfoot {
+  & td {
+    font-weight: bolder;
+    text-decoration: underline;
+    font-size: 20px;
+    padding-left: 18px;
+    color: $headerColorBlue;
+
+  }
+}
+
+.MuiTableRow-root.last-head.MuiTableRow-head{
+  & th{
+    font-size: 17px!important;
+    // color:gold!important;
+    padding: 0 7px 0 0;
+  }
+}

@@ -3,8 +3,9 @@ import {apiImage} from "../config.json"
 
 const Player = ({ player, selectPlayers, selected }) => {
   return (
-    <div className="col-md-6 col-lg-3 col-6 mt-3">
-      <div className="card">
+    <div className="col-md-6 col-lg-2 col-6 mt-3">
+      <div className="card align-items-center">
+        <div className="card-head ">
         <img
           className="m-2 playerImage"
           width="100"
@@ -12,20 +13,22 @@ const Player = ({ player, selectPlayers, selected }) => {
           src={`${apiImage}${player.image}`}
           alt=""
         />
+        </div>
+        
         <div
           className={
             selected.find((e) => player._id === e.id)
-              ? "card-body selected"
-              : "card-body"
+              ? "card-body selected d-flex flex-column"
+              : "card-body d-flex flex-column "
           }
         >
-          <h5 className="card-title">{player.nickName}</h5>
+          <h5 className="card-title d-flex" id="selectTitle">{player.nickName}</h5>
           <button
             type="button"
-            className="btn btn-primary align-self-center"
+            className="btn btn-primary "
             onClick={selectPlayers}
           >
-            +Add/Remove player to game
+            +Add/Remove player
           </button>
         </div>
       </div>

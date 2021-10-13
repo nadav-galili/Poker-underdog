@@ -35,6 +35,11 @@ const SelectPlayers = (props) => {
       : setSelected([...selected, player]);
   }
 
+  function shuffle(){
+    const shuffle=new Audio(process.env.PUBLIC_URL+'sounds/Shuffle.mp3');
+    shuffle.play();
+  }
+
   return (
     <div className="container-fluid">
       <h1>
@@ -66,6 +71,7 @@ const SelectPlayers = (props) => {
             data: { data },
           }}
           className="btn btn-primary btn-lg m-3"
+          onClick={shuffle()}
         >
           Continue to game
         </Link>

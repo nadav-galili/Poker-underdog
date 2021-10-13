@@ -1,10 +1,13 @@
-.MuiPaper-root {
-  width: 90% !important;
-}
-@media screen and (max-width: 600px) {
-  .MuiPaper-root {
-    width: 95% !important;
-  }
+// .MuiPaper-root {
+//   // width: 90% !important;
+// }
+// @media screen and (max-width: 600px) {
+//   .MuiPaper-root {
+//     // width: 95% !important;
+//   }
+// }
+#dashboard{
+  margin-left: 5%;
 }
 
 .MuiAvatar-root {
@@ -35,63 +38,81 @@
   color: $basecolorRed;
 }
 
-#mainStats{
- background-color:$basecolorPurple;
+#mainStats {
+  background-color: $basecolorPurple;
 }
 
-#statsCardBody{
-   background-color: $darkeerPurple;
+#statsCardBody {
+  background-color: $darkeerPurple;
 
-   & a{
-     color:$navbarWhite;
+  & a {
+    color: $navbarWhite;
 
-     & svg{
-        width: 1.5em;
-        height: 2em;
-  
-     }
-    
-   }
+    & svg {
+      width: 1.5em;
+      height: 2em;
+    }
+  }
 }
 
-#mainStats img{
-align-self: center;
-width: 80%;
-height: 18vh;
-object-fit: cover;
+.img-card {
+  height: 10rem;
+  width: 12rem;
+  margin: auto;
+}
+#mainStats img {
 
-
+  height: 100%;
+  object-fit: contain;
 }
 
-#statsCardText{
-text-align: center;
+#statsCardText {
+  text-align: center;
+  & p {
+    margin-bottom: 0;
+  }
 
+  & span:first-child {
+    color: $navbarWhite;
+    align-self: center;
+    font-weight: bolder;
+    font-size: 1.5em;
+  }
+  & span {
+    align-self: center;
+    font-weight: bolder;
+    font-size: 1.5em;
+  }
+}
 
- & p{
-  margin-bottom: 0;
-
- }
-
-
- & span:first-child{
-   color: $navbarWhite;
-  align-self: center;
-  font-weight: bolder;
-  font-size: 1.1em;
- }
- & span{
-  align-self: center;
-  font-weight: bolder;
+.card-title {
+  color: $navbarWhite;
   font-size: 1.5em;
- }
+  font-weight: 900;
+  display: flex;
+
+  text-transform: capitalize;
+}
+
+#cardFooter{
+  width: 100%;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  font-size: 1.3em;
+  & svg{
+    // margin:20px
+    margin: 5px 0 0 5px;
+    // height: 100%;
+  }
 
 }
 
-.card-title{
-  color:$headerColorBlue;
-  font-weight: bolder;
+#month {
+  color: $navbarWhite;
 }
 
-#month{
-  color:$navbarWhite;
-}
+
+

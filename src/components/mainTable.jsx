@@ -18,6 +18,7 @@ import CardTable from "./topStats/cardTable";
 import SuccessP from "./topStats/successp";
 import CurrMonth from "./topStats/currMonth";
 import Profits from "./topStats/profits";
+import { apiImage } from "../config.json";
 
 //set headers for the tables
 const columns = [
@@ -104,26 +105,24 @@ export default function MainTable(props) {
   const [avgcashing, setAvgcashing] = useState("");
   const [success, setSuccess] = useState("");
   const [gamesprofit, setGamesprofit] = useState("");
- 
+
   const [monthleader, setMonthleader] = useState("");
-  const [profits, setProfits]=useState([]);
-  
+  const [profits, setProfits] = useState([]);
 
-  const teamId=props.match.params.teamId;
+  const teamId = props.match.params.teamId;
 
-  
   // get current year for header
   const year = new Date();
   const thisYear = year.getFullYear();
   const thisMonth = year.getMonth();
-  
 
+  console.log(profit, "p");
   //fetch data from DB
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.table(teamId);
       table = table.data;
-     
+
       if (table.length > 0) {
         const profit = await table.reduce((prev, current) =>
           +prev.totalProfit > current.totalProfit ? prev : current
@@ -168,12 +167,10 @@ export default function MainTable(props) {
         const currMonth = results.filter(
           (e) => e._id.monthPlayed !== thisMonth
         );
-       
-  
+
         const currMonthLeader = await currMonth.reduce((prev, current) =>
           +prev.totalProfit > current.totalProfit ? prev : current
         );
-
 
         setMonthleader(currMonthLeader);
       }
@@ -181,16 +178,15 @@ export default function MainTable(props) {
     dataByMonths();
   }, [thisMonth, props.match.params.teamId]);
 
-  useEffect(()=>{
-  const profits=async ()=>{
-    let results=await gameService.profits(props.match.params.teamId);
-    results=results.data;
-    console.log("i", results);
-    setProfits(results);
-  };
-  profits();
-  }, [props.match.params.teamId]);
+  useEffect(() => {
+    const profits = async () => {
+      let results = await gameService.profits(props.match.params.teamId);
+      results = results.data;
 
+      setProfits(results);
+    };
+    profits();
+  }, [props.match.params.teamId]);
 
   const classes = useStyles();
   const rows = [];
@@ -228,15 +224,17 @@ export default function MainTable(props) {
     );
   });
 
-  <CardTable teamId={teamId} data={data}/>
+  <CardTable teamId={teamId} data={data} key={data.lastGame} />;
+
   return (
-    <div className="container">
+    <div className="container" id="dashboard">
       <h1>{thisYear} Top Stats</h1>
       <div className="row ">
+        {/* <div className="col-lg-8 col-10"></div> */}
         <PlayerCard
           header="Total Profit"
           data={profit.totalProfit}
-          name={profit ? profit._id.nickName : ""}
+          name={profit ? profit._id.name : ""}
           image={profit ? profit._id.image : ""}
           cardName="totalProfit"
           team={teamId}
@@ -250,14 +248,14 @@ export default function MainTable(props) {
           cardName="avgProfit"
           team={teamId}
         />
-            <SuccessP
-         header="Success %"
-         data={success.successPercentage}
-         name={success ? success._id.name : ""}
-         image={success ? success._id.image : ""}
-         cardName="successPercentage"
-        team={teamId}
-       />
+        <SuccessP
+          header="Success %"
+          data={success.successPercentage}
+          name={success ? success._id.name : ""}
+          image={success ? success._id.image : ""}
+          cardName="successPercentage"
+          team={teamId}
+        />
         <PlayerCard
           header="Total Games"
           data={totalgames.numOfGames}
@@ -273,7 +271,7 @@ export default function MainTable(props) {
           image={avgcashing ? avgcashing._id.image : ""}
           cardName="avgCashing"
           team={teamId}
-       />
+        />
         <PlayerCard
           header="Games With Profit"
           data={gamesprofit.gamesWithProfit}
@@ -282,22 +280,22 @@ export default function MainTable(props) {
           cardName="gamesWithProfit"
           team={teamId}
         />
-    
-            <Profits
-            header="Top 10 Profits"
-            name={profits.length>0?profits[0].players.name:""}
-            image={profits.length>0?profits[0].players.image:""}
-            data={profits.length>0?profits[0].players.profit:""}
-            team={teamId}/>
-        <CurrMonth
-           header="Current Month"
-           data={monthleader.totalProfit}
-           name={monthleader ? monthleader._id.name : ""}
-           image={monthleader ? monthleader._id.image : ""}
-           cMonth={monthleader ? monthleader.lastGame : ""}
-           team={teamId}/>
-      
 
+        <Profits
+          header="Top 10 Profits"
+          name={profits.length > 0 ? profits[0].players.name : ""}
+          image={profits.length > 0 ? profits[0].players.image : ""}
+          data={profits.length > 0 ? profits[0].players.profit : ""}
+          team={teamId}
+        />
+        <CurrMonth
+          header="Current Month"
+          data={monthleader.totalProfit}
+          name={monthleader ? monthleader._id.name : ""}
+          image={monthleader ? monthleader._id.image : ""}
+          cMonth={monthleader ? monthleader.lastGame : ""}
+          team={teamId}
+        />
       </div>
 
       <PageHeader titleText="Main Table" />
@@ -312,7 +310,7 @@ export default function MainTable(props) {
           </Link>
         </div>
       )}
- <Paper className={classes.root}>
+      <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -377,7 +375,7 @@ export default function MainTable(props) {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-  {/* // Display last game played */} 
+      {/* // Display last game played */}
       <MainLastGame team={props.match.params.teamId} />
     </div>
   );

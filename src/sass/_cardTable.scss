@@ -1,78 +1,92 @@
 .statsHero {
-  height: 180px;
+  height: 100px;
   width: 280px;
 }
 .statsList {
   padding: 0;
-  list-style-type: none;
 }
 
-.heroImage img {
-  width: 70%;
-  height: 70%;
-  object-fit: cover;
-  margin-left: 6.5em;
-  margin-top: 2em;
+.heroImage {
+  & img {
+    object-fit: cover;
+    height: 100%;
+    margin-left: 2em;
+  }
 }
+
 .pos {
   color: $navbarWhite;
   margin-left: 0.7em;
-  font-size: 1.5em;
+  font-size: 0.7em;
 }
 #profit {
   color: $navbarWhite;
   margin-left: 0.8em;
-  font-size: 1.4rem;
+  font-size: 2.7em;
   font-family: $fantasyFont;
 }
 #heroName {
   text-decoration: none;
-  font-size: 2em;
-  margin-left: 0.5em;
+  font-size: 0.8em;
+  margin-left: 0.6em;
   color: $navbarWhite;
   font-family: $fantasyFont;
+  text-transform: capitalize;
 }
 
 #amount {
   margin-left: 0.5em;
-  font-size: 2em;
+  font-size: 0.8em;
   color: $basecolorGreen;
 }
 #cardTop {
-  height: 200px;
   background-color: $basecolorPurple;
 }
 
 .statsRow {
   background-color: $navbarWhite;
+  display: flex;
+  align-content: end;
+  height: 50px;
+  border-bottom: 0.7px solid  ;
 }
 
 .rowPos {
-  font-size: 1.4em;
+  font-size: 0.5em;
   font-weight: bold;
-  padding-left: 1em;
-  padding-top: 1em;
+  padding-left: 5px;
+  // padding-top: 1em;
+  align-self: center;
 }
 
-.rowImage img {
-  height: 40px;
-  min-width: 50px;
-  object-fit: cover;
-  position: relative;
-  // bottom: 5px;
-  left: 10px;
-  top: 10px;
+.rowImage {
+  align-self: center;
+  width:20%;
+  margin-left: 0.8em;
+  img {
+    border-radius: 50%;
+    border: 1px solid black;
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+  
+    // position: relative;
+    // left: 10px;
+    // top: 10px;
+    background-image: linear-gradient($basecolorPurple, #4e4949);
+  }
 }
 
 .rowName {
-  font-size: 1.3em;
+  font-size: 0.7em;
   font-family: $fantasyFont;
   padding-left: 2.5em;
   padding-top: 0.9em;
+  text-transform: capitalize;
 }
 
 .rowProfit {
-  font-size: 1.5em;
+  font-size: 0.7em;
   font-family: $fantasyFont;
   margin-left: auto;
   margin-right: 0.5em;

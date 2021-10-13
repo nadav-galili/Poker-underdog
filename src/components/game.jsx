@@ -14,9 +14,10 @@ import http from "../services/httpService";
 import { apiUrl } from "../config.json";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { apiImage } from "../config.json";
 
 const columns = [
-  { id: "name", label: "Name", minWidth: 70 },
+  // { id: "name", label: "Name", minWidth: 70 },
   { id: "image", label: "Image", minWidth: 70 },
   { id: "add_cashing", label: "Add Cashing", minWidth: 70 },
   {
@@ -35,8 +36,6 @@ const columns = [
     id: "profit",
     label: "Profit/Loss",
     minWidth: 70,
-    //   align: 'right',
-    //   format: (value) => value.toFixed(2),
   },
   {
     id: "cancel_cashing",
@@ -47,7 +46,7 @@ const columns = [
 ];
 
 function createData(
-  name,
+  // name,
   image,
   add_cashing,
   ammount_cashed,
@@ -57,7 +56,7 @@ function createData(
 ) {
   //const profit = cash_in_hand - ammount_cashed;
   return {
-    name,
+    // name,
     image,
     add_cashing,
     ammount_cashed,
@@ -108,7 +107,8 @@ export default function Game(props) {
 
   function addCashing(playerId) {
     let player = livePlayers.find((e) => playerId === e.id);
-
+    const chips = new Audio(process.env.PUBLIC_URL + "sounds/chips.mp3");
+    chips.play();
     setCashing((player.cashing += 50));
   }
 
@@ -117,6 +117,8 @@ export default function Game(props) {
     if (player.cashing > 0) {
       setCashing((player.cashing -= 50));
     }
+    const cancel = new Audio(process.env.PUBLIC_URL + "sounds/cancel.mp3");
+    cancel.play();
   }
 
   function handleChange(cash, playerId) {
@@ -168,8 +170,8 @@ export default function Game(props) {
   livePlayers.forEach((e) => {
     rows.push(
       createData(
-        e.name,
-        <Avatar src={e.image} alt={e.name} />,
+        // e.name,
+        <Avatar src={`${apiImage}${e.image}`} alt={e.name} />,
         <i
           className="fas fa-money-bill-wave  "
           onClick={() => addCashing(e.id)}
@@ -191,60 +193,82 @@ export default function Game(props) {
   return (
     <div className="container-fluid">
       <PageHeader titleText="Start a new game" />
-     
-      <Paper className={classes.root}>
-        <TableContainer className={classes.container}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.name}
-                    >
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </Paper>
+      <div className="row">
+        <div className="col-12 col-lg-6">
+          <Paper className={classes.root}>
+            <TableContainer className={classes.container}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {columns.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.name}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === "number"
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+                <tfoot>
+                  <tr>
+                    <td>Total</td>
+                    <td></td>
+                    <td>
+                      {livePlayers.reduce((a, b) => {
+                        return a + b.cashing;
+                      }, 0)}
+                    </td>
+                    <td>    {livePlayers.reduce((a, b) => {
+                        return a + b.cashInHand;
+                      }, 0)}</td>
+                    <td>
+                  
+                    </td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </div>
+      </div>
+
       <button
         type="button"
         onClick={updateGame}

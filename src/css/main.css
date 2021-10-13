@@ -74,14 +74,8 @@ h1 {
   text-decoration: underline;
 }
 
-.MuiPaper-root {
-  width: 90% !important;
-}
-
-@media screen and (max-width: 600px) {
-  .MuiPaper-root {
-    width: 95% !important;
-  }
+#dashboard {
+  margin-left: 5%;
 }
 
 .MuiAvatar-root {
@@ -129,11 +123,15 @@ h1 {
   height: 2em;
 }
 
+.img-card {
+  height: 10rem;
+  width: 12rem;
+  margin: auto;
+}
+
 #mainStats img {
-  align-self: center;
-  width: 80%;
-  height: 18vh;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
 }
 
 #statsCardText {
@@ -148,7 +146,7 @@ h1 {
   color: #fcfcfc;
   align-self: center;
   font-weight: bolder;
-  font-size: 1.1em;
+  font-size: 1.5em;
 }
 
 #statsCardText span {
@@ -158,8 +156,25 @@ h1 {
 }
 
 .card-title {
-  color: #2752ea;
-  font-weight: bolder;
+  color: #fcfcfc;
+  font-size: 1.5em;
+  font-weight: 900;
+  display: flex;
+  text-transform: capitalize;
+}
+
+#cardFooter {
+  width: 100%;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  font-size: 1.3em;
+}
+
+#cardFooter svg {
+  margin: 5px 0 0 5px;
 }
 
 #month {
@@ -209,7 +224,6 @@ h3 {
 }
 
 .container-fluid ol {
-  color: #fcfcfc;
   font-size: 1.5em;
 }
 
@@ -428,11 +442,47 @@ h4.mt-4 {
 }
 
 .playerImage {
-  border: 3px solid #02d84d;
+  border: 3px solid #2752ea;
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  background-color: #1c1515;
+  border-radius: 50%;
 }
 
 .join {
   color: #02d84d;
+}
+
+#selectTitle {
+  color: #2752ea;
+}
+
+.card-head {
+  width: 100px;
+  height: 100px;
+}
+
+.card-body button {
+  font-size: 12px;
+}
+
+.MuiTableCell-root.MuiTableCell-body input {
+  border: 2px solid black;
+  max-width: 50%;
+}
+
+tfoot td {
+  font-weight: bolder;
+  text-decoration: underline;
+  font-size: 20px;
+  padding-left: 18px;
+  color: #2752ea;
+}
+
+.MuiTableRow-root.last-head.MuiTableRow-head th {
+  font-size: 17px !important;
+  padding: 0 7px 0 0;
 }
 
 footer {
@@ -448,12 +498,6 @@ footer {
   p.align-self-center {
     margin-top: 10px;
   }
-}
-
-.d-flex img {
-  height: 150px;
-  max-width: 200px;
-  border-radius: 40px;
 }
 
 .d-flex p {
@@ -479,84 +523,92 @@ footer {
 }
 
 .statsHero {
-  height: 180px;
+  height: 100px;
   width: 280px;
 }
 
 .statsList {
   padding: 0;
-  list-style-type: none;
 }
 
 .heroImage img {
-  width: 70%;
-  height: 70%;
   object-fit: cover;
-  margin-left: 6.5em;
-  margin-top: 2em;
+  height: 100%;
+  margin-left: 2em;
 }
 
 .pos {
   color: #fcfcfc;
   margin-left: 0.7em;
-  font-size: 1.5em;
+  font-size: 0.7em;
 }
 
 #profit {
   color: #fcfcfc;
   margin-left: 0.8em;
-  font-size: 1.4rem;
+  font-size: 2.7em;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
 
 #heroName {
   text-decoration: none;
-  font-size: 2em;
-  margin-left: 0.5em;
+  font-size: 0.8em;
+  margin-left: 0.6em;
   color: #fcfcfc;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
+  text-transform: capitalize;
 }
 
 #amount {
   margin-left: 0.5em;
-  font-size: 2em;
+  font-size: 0.8em;
   color: #02d84d;
 }
 
 #cardTop {
-  height: 200px;
   background-color: #6c14b4;
 }
 
 .statsRow {
   background-color: #fcfcfc;
+  display: flex;
+  align-content: end;
+  height: 50px;
+  border-bottom: 0.7px solid;
 }
 
 .rowPos {
-  font-size: 1.4em;
+  font-size: 0.5em;
   font-weight: bold;
-  padding-left: 1em;
-  padding-top: 1em;
+  padding-left: 5px;
+  align-self: center;
+}
+
+.rowImage {
+  align-self: center;
+  width: 20%;
+  margin-left: 0.8em;
 }
 
 .rowImage img {
+  border-radius: 50%;
+  border: 1px solid black;
   height: 40px;
-  min-width: 50px;
+  width: 40px;
   object-fit: cover;
-  position: relative;
-  left: 10px;
-  top: 10px;
+  background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
 .rowName {
-  font-size: 1.3em;
+  font-size: 0.7em;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   padding-left: 2.5em;
   padding-top: 0.9em;
+  text-transform: capitalize;
 }
 
 .rowProfit {
-  font-size: 1.5em;
+  font-size: 0.7em;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   margin-left: auto;
   margin-right: 0.5em;

@@ -24,27 +24,28 @@ import { Link } from "react-router-dom";
 import gameService from "../services/gameService";
 import { Avatar } from "@material-ui/core";
 import PageHeader from "../components/common/pageHeader";
+import {apiImage} from "../config.json";
 
 const columns = [
-  { id: "rank", label: "Rank", minWidth: 50 },
-  { id: "player", label: "Player", minWidth: 100 },
+  { id: "rank", label: "Rank", align: "center",  },
+  { id: "player", label: "Player", align: "center", },
   {
     id: "image",
     label: "Image",
-    maxWidth: 50,
-    align: "left",
+    // maxWidth: 10,
+    align: "center",
   },
   {
     id: "profit",
     label: "Profit",
-    minWidth: 50,
-    align: "right",
+    // minWidth: 20,
+    align: "center",
   },
   {
     id: "num_of_cashing",
     label: "Num of cashing",
-    minWidth: 50,
-    align: "right",
+    // minWidth: 20,
+    align: "center",
   },
 ];
 
@@ -89,7 +90,7 @@ export default function LastGame(props) {
         createData(
           rank++,
           e.name,
-          <Avatar src={e.image} />,
+          <Avatar src={`${apiImage}${e.image}`} />,
           e.profit,
           e.numOfcashing
         )
@@ -104,8 +105,10 @@ export default function LastGame(props) {
   const formated = `${day}/${month}/${year}`;
 
   return (
-    <div className="container pt-3">
-      <PageHeader titleText="Last Game" />
+    <div className="container-fluid pt-3">
+      <div className="row">
+        <div className="col-12 col-lg-6">
+        <PageHeader titleText="Last Game" />
       <h3 className="mb-4">Played at:{formated}</h3>
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
@@ -150,16 +153,11 @@ export default function LastGame(props) {
             </TableBody>
           </Table>
         </TableContainer>
-        {/* <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        /> */}
+   
       </Paper>
+        </div>
+      </div>
+    
 
       <Link
         to={`/main-table/${props.match.params.teamId}`}
