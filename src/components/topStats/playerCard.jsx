@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { apiImage } from "./../../config.json";
 
 const PlayerCard = ({ header, data, name, image, cardName, team, table }) => {
-  console.log("i", name);
   return (
     <div className="col-lg-3 col-6 mt-3">
       <div className="card " id="mainStats">

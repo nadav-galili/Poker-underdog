@@ -18,7 +18,7 @@ import CardTable from "./topStats/cardTable";
 import SuccessP from "./topStats/successp";
 import CurrMonth from "./topStats/currMonth";
 import Profits from "./topStats/profits";
-import { apiImage } from "../config.json";
+import { SpinnerDiamond } from "spinners-react";
 
 //set headers for the tables
 const columns = [
@@ -116,7 +116,6 @@ export default function MainTable(props) {
   const thisYear = year.getFullYear();
   const thisMonth = year.getMonth();
 
-  console.log(profit, "p");
   //fetch data from DB
   useEffect(() => {
     const getTable = async () => {
@@ -229,87 +228,104 @@ export default function MainTable(props) {
   return (
     <div className="container" id="dashboard">
       <h1>{thisYear} Top Stats</h1>
-      <div className="row ">
-        {/* <div className="col-lg-8 col-10"></div> */}
-        <PlayerCard
-          header="Total Profit"
-          data={profit.totalProfit}
-          name={profit ? profit._id.name : ""}
-          image={profit ? profit._id.image : ""}
-          cardName="totalProfit"
-          team={teamId}
-          table={data}
-        />
-        <PlayerCard
-          header="Average Profit"
-          data={avgprofit.avgProfit}
-          name={avgprofit ? avgprofit._id.name : ""}
-          image={avgprofit ? avgprofit._id.image : ""}
-          cardName="avgProfit"
-          team={teamId}
-        />
-        <SuccessP
-          header="Success %"
-          data={success.successPercentage}
-          name={success ? success._id.name : ""}
-          image={success ? success._id.image : ""}
-          cardName="successPercentage"
-          team={teamId}
-        />
-        <PlayerCard
-          header="Total Games"
-          data={totalgames.numOfGames}
-          name={totalgames ? totalgames._id.name : ""}
-          image={totalgames ? totalgames._id.image : ""}
-          cardName="numOfGames"
-          team={teamId}
-        />
-        <PlayerCard
-          header="Average Cashing"
-          data={avgcashing.avgCashing}
-          name={avgcashing ? avgcashing._id.name : ""}
-          image={avgcashing ? avgcashing._id.image : ""}
-          cardName="avgCashing"
-          team={teamId}
-        />
-        <PlayerCard
-          header="Games With Profit"
-          data={gamesprofit.gamesWithProfit}
-          name={gamesprofit ? gamesprofit._id.name : ""}
-          image={gamesprofit ? gamesprofit._id.image : ""}
-          cardName="gamesWithProfit"
-          team={teamId}
-        />
 
-        <Profits
-          header="Top 10 Profits"
-          name={profits.length > 0 ? profits[0].players.name : ""}
-          image={profits.length > 0 ? profits[0].players.image : ""}
-          data={profits.length > 0 ? profits[0].players.profit : ""}
-          team={teamId}
-        />
-        <CurrMonth
-          header="Current Month"
-          data={monthleader.totalProfit}
-          name={monthleader ? monthleader._id.name : ""}
-          image={monthleader ? monthleader._id.image : ""}
-          cMonth={monthleader ? monthleader.lastGame : ""}
-          team={teamId}
-        />
-      </div>
-
-      <PageHeader titleText="Main Table" />
-      {data.length < 1 && (
-        <div className="start">
-          <h2 className="noGames">No Games Played Yet!</h2>
-          <Link
-            className="btn btn-success mb-2"
-            to={`/new-game/${props.match.params.teamId}`}
-          >
-            Start a new game
-          </Link>
+      {!profit && (
+        <div className="spinner">
+          <SpinnerDiamond
+            size={200}
+            thickness={151}
+            speed={81}
+            color="rgba(108, 20, 180, 1)"
+            secondaryColor="rgba(252, 252, 252, 1)"
+            enabled={!profit ? true : false}
+          />
         </div>
       )}
+      {profit && (
+        <React.Fragment>
+          <div className="row ">
+            <PlayerCard
+              header="Total Profit"
+              data={profit.totalProfit}
+              name={profit ? profit._id.name : ""}
+              image={profit ? profit._id.image : ""}
+              cardName="totalProfit"
+              team={teamId}
+              table={data}
+            />
+            <PlayerCard
+              header="Average Profit"
+              data={avgprofit.avgProfit}
+              name={avgprofit ? avgprofit._id.name : ""}
+              image={avgprofit ? avgprofit._id.image : ""}
+              cardName="avgProfit"
+              team={teamId}
+            />
+            <SuccessP
+              header="Success %"
+              data={success.successPercentage}
+              name={success ? success._id.name : ""}
+              image={success ? success._id.image : ""}
+              cardName="successPercentage"
+              team={teamId}
+            />
+            <PlayerCard
+              header="Total Games"
+              data={totalgames.numOfGames}
+              name={totalgames ? totalgames._id.name : ""}
+              image={totalgames ? totalgames._id.image : ""}
+              cardName="numOfGames"
+              team={teamId}
+            />
+            <PlayerCard
+              header="Average Cashing"
+              data={avgcashing.avgCashing}
+              name={avgcashing ? avgcashing._id.name : ""}
+              image={avgcashing ? avgcashing._id.image : ""}
+              cardName="avgCashing"
+              team={teamId}
+            />
+            <PlayerCard
+              header="Games With Profit"
+              data={gamesprofit.gamesWithProfit}
+              name={gamesprofit ? gamesprofit._id.name : ""}
+              image={gamesprofit ? gamesprofit._id.image : ""}
+              cardName="gamesWithProfit"
+              team={teamId}
+            />
+
+            <Profits
+              header="Top 10 Profits"
+              name={profits.length > 0 ? profits[0].players.name : ""}
+              image={profits.length > 0 ? profits[0].players.image : ""}
+              data={profits.length > 0 ? profits[0].players.profit : ""}
+              team={teamId}
+            />
+            <CurrMonth
+              header="Current Month"
+              data={monthleader.totalProfit}
+              name={monthleader ? monthleader._id.name : ""}
+              image={monthleader ? monthleader._id.image : ""}
+              cMonth={monthleader ? monthleader.lastGame : ""}
+              team={teamId}
+            />
+          </div>
+
+          <PageHeader titleText="Main Table" />
+          {data.length < 1 && (
+            <div className="start">
+              <h2 className="noGames">No Games Played Yet!</h2>
+              <Link
+                className="btn btn-success mb-2"
+                to={`/new-game/${props.match.params.teamId}`}
+              >
+                Start a new game
+              </Link>
+            </div>
+          )}
+        </React.Fragment>
+      )}
+
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
