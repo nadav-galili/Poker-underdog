@@ -20,7 +20,7 @@ const SuccessCard = (props) => {
     getTable();
   }, [setData, teamId]);
 
-  console.log(apiImage);
+ let rank=2;
 
   return (
     <div className="container-fluid">
@@ -55,10 +55,10 @@ const SuccessCard = (props) => {
           <React.Fragment>
             {data.map((player) => (
               <li className="statsRow d-flex" key={player._id.name}>
-                <div className="rowPos">1.</div>
+                <div className="rowPos">{rank++}</div>
                 <div className="rowImage">
                   <img
-                    src={data.length > 0 ? player._id.image : ""}
+                    src={data.length > 0 ?`${apiImage}${player._id.image}` : ""}
                     alt="playr list row"
                   />
                 </div>

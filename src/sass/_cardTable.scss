@@ -33,6 +33,12 @@
   font-family: $fantasyFont;
   text-transform: capitalize;
 }
+.heroDate{
+  font-size: 0.8em;
+  margin-left: 0.4em;
+  color: $navbarWhite;
+
+}
 
 #amount {
   margin-left: 0.5em;
@@ -49,6 +55,7 @@
   align-content: end;
   height: 50px;
   border-bottom: 0.7px solid  ;
+
 }
 
 .rowPos {
@@ -70,9 +77,7 @@
     width: 40px;
     object-fit: cover;
   
-    // position: relative;
-    // left: 10px;
-    // top: 10px;
+  
     background-image: linear-gradient($basecolorPurple, #4e4949);
   }
 }
@@ -83,6 +88,19 @@
   padding-left: 2.5em;
   padding-top: 0.9em;
   text-transform: capitalize;
+  flex-grow: 2;
+}
+.rowDate{
+  font-size: 0.7em;
+  font-family: $fantasyFont;
+  // flex-grow: 2;
+  padding-right: 5em;
+  // padding-left: 5em;
+  padding-top: 0.9em;
+  // width: 50%;
+  // margin-left: auto;
+ 
+
 }
 
 .rowProfit {

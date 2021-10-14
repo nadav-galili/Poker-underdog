@@ -559,6 +559,12 @@ footer {
   text-transform: capitalize;
 }
 
+.heroDate {
+  font-size: 0.8em;
+  margin-left: 0.4em;
+  color: #fcfcfc;
+}
+
 #amount {
   margin-left: 0.5em;
   font-size: 0.8em;
@@ -605,6 +611,14 @@ footer {
   padding-left: 2.5em;
   padding-top: 0.9em;
   text-transform: capitalize;
+  flex-grow: 2;
+}
+
+.rowDate {
+  font-size: 0.7em;
+  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
+  padding-right: 5em;
+  padding-top: 0.9em;
 }
 
 .rowProfit {
