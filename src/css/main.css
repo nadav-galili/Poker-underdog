@@ -535,16 +535,23 @@ tfoot td {
 
 @media screen and (max-width: 600px) {
   #footer {
-    height: 300px;
+    height: 22em;
+  }
+  .logoImage {
+    margin-top: 1.5em;
   }
   .copyrights p {
-    font-size: 1.1em;
-    width: 100%;
+    font-size: 1.5em;
+    width: 80%;
     font-weight: bolder;
     margin: auto;
+    text-align: center;
+  }
+  .social-icons {
+    margin-bottom: 2em;
   }
   .social-icons p {
-    font-size: 1.1em;
+    font-size: 1.5em;
   }
 }
 
@@ -655,9 +662,10 @@ tfoot td {
   padding-top: 0.9em;
 }
 
-.form-control.row {
+.form-control {
   background-color: transparent !important;
-  border: none;
+  border: none !important;
+  padding: 0 !important;
 }
 
 label {

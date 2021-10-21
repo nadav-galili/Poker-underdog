@@ -4,44 +4,41 @@
     to bottom right,
     $basecolorGreen,
     rgb(200, 211, 200)
- 
   );
   height: 10em;
- 
 }
 
+.logoImage {
+  height: 8em;
 
-.logoImage{
-  height:8em;
-
-  & img{
-    height:100%;
-    border:1px solid black;
+  & img {
+    height: 100%;
+    border: 1px solid black;
     border-radius: 20px;
   }
 }
 
-.copyrights{
-  & p{
+.copyrights {
+  & p {
     font-size: 1.3em;
     font-weight: bolder;
   }
 }
 
-.social-icons{
-  height:5em;
+.social-icons {
+  height: 5em;
   width: 25em;
-  & p{
+  & p {
     font-size: 1.2em;
     font-weight: bolder;
     text-decoration: underline;
     text-align: center;
   }
-  & ul{
+  & ul {
     list-style: none;
-    height:2.2em;
+    height: 2.2em;
 
-    & li a img{
+    & li a img {
       height: 100%;
     }
   }
@@ -49,20 +46,24 @@
 
 @media screen and (max-width: 600px) {
   #footer {
-    height: 300px;
+    height: 22em;
   }
-  .copyrights{
-    & p{
-      font-size: 1.1em;
-      width: 100%;
+  .logoImage {
+    margin-top: 1.5em;
+  }
+  .copyrights {
+    & p {
+      font-size: 1.5em;
+      width: 80%;
       font-weight: bolder;
-   margin: auto;
+      margin: auto;
+      text-align: center;
     }
   }
   .social-icons {
-    & p{
-      font-size: 1.1em;
+    margin-bottom: 2em;
+    & p {
+      font-size: 1.5em;
     }
   }
-
 }

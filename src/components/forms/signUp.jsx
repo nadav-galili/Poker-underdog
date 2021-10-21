@@ -58,7 +58,7 @@ const SignUp = (props) => {
 
   const [errors, setErrors] = useState({ email: "", image: "" });
   return (
-    <div className="container-fluid">
+    <div className="container">
       <h1>Sign Up Form</h1>
       <Formik
         initialValues={initialValues}
@@ -71,7 +71,7 @@ const SignUp = (props) => {
             <div className="row">
               <div className="col-10 col-lg-4">
                 <Form>
-                  <div className="form-control row">
+                  <div className="form-control d-flex flex-column">
                     <label htmlFor="First Name">First Name</label>
                     <Field type="text" id="firstName" name="firstName" />
                     <ErrorMessage
@@ -81,7 +81,7 @@ const SignUp = (props) => {
                     />
                   </div>
 
-                  <div className="form-control row">
+                  <div className="form-control d-flex flex-column">
                     <label htmlFor="Last Name">Last Name</label>
                     <Field type="text" id="lastName" name="lastName" />
                     <ErrorMessage
@@ -91,7 +91,7 @@ const SignUp = (props) => {
                     />
                   </div>
 
-                  <div className="form-control row">
+                  <div className="form-control d-flex flex-column">
                     <label htmlFor="Nick Name">Nick Name</label>
                     <Field type="text" id="nickName" name="nickName" />
                     <ErrorMessage
@@ -101,7 +101,7 @@ const SignUp = (props) => {
                     />
                   </div>
 
-                  <div className="form-control row">
+                  <div className="form-control d-flex flex-column">
                     <label htmlFor="email">E-mail</label>
                     <Field type="email" id="email" name="email" />
                     <span className="error">{errors.email}</span>
@@ -112,7 +112,7 @@ const SignUp = (props) => {
                     />
                   </div>
 
-                  <div className="form-control row mb-4">
+                  <div className="form-control d-flex flex-column  mb-3">
                     <label htmlFor="password">Password</label>
                     <Field type="password" id="password" name="password" />
                     <ErrorMessage
