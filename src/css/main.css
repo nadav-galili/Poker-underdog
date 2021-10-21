@@ -293,6 +293,7 @@ nav {
   background-color: white;
   height: 50px;
   width: 50px;
+  border-radius: 12px;
 }
 
 .navbar-brand img {
@@ -490,41 +491,61 @@ tfoot td {
   padding: 0 7px 0 0;
 }
 
-footer {
+#footer {
   color: black;
-  background-image: linear-gradient(to bottom right, #02d84d, #fcfcfc);
-  height: 250px;
+  background-image: linear-gradient(to bottom right, #02d84d, #c8d3c8);
+  height: 10em;
 }
 
-@media screen and (max-width: 600px) {
-  footer {
-    height: 400px;
-  }
-  p.align-self-center {
-    margin-top: 10px;
-  }
+.logoImage {
+  height: 8em;
 }
 
-.d-flex p {
+.logoImage img {
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.copyrights p {
   font-size: 1.3em;
-  font-weight: 800;
+  font-weight: bolder;
 }
 
-.social-icons img {
-  height: 30px;
+.social-icons {
+  height: 5em;
+  width: 25em;
+}
+
+.social-icons p {
+  font-size: 1.2em;
+  font-weight: bolder;
+  text-decoration: underline;
+  text-align: center;
 }
 
 .social-icons ul {
   list-style: none;
+  height: 2.2em;
 }
 
-.social-icons p {
-  font-size: 1em;
-  text-decoration: underline;
+.social-icons ul li a img {
+  height: 100%;
 }
 
-.social-icons a {
-  color: black;
+@media screen and (max-width: 600px) {
+  #footer {
+    height: 300px;
+  }
+  .copyrights p {
+    font-size: 1.1em;
+    width: 100%;
+    font-weight: bolder;
+    margin: auto;
+  }
+  .social-icons p {
+    font-size: 1.1em;
+  }
 }
 
 .statsHero {

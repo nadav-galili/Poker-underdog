@@ -10,7 +10,7 @@ class Navbar extends Component {
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light shadow ">
-        <div className="container-fluid">
+        <div className="container">
           <Link className="navbar-brand" to="/#">
             <img
               src={process.env.PUBLIC_URL + `logoNewRed.png`}
