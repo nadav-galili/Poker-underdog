@@ -1,11 +1,11 @@
-.container-fluid.pt-3 {
+.container.pt-3 {
   animation-name: cont;
   animation-duration: 1500ms;
   transition-timing-function: ease-in;
   animation-delay: 0.8ms;
   opacity: 1;
-  margin-left: 5%;
-  //animation-fill-mode: both;
+ 
+
 }
 
 @keyframes cont {
@@ -19,17 +19,21 @@
   }
 }
 h1 {
-
   font-size: 2.5em !important;
   color: $basecolorRed;
   font-weight: bolder !important;
-
   font-family: $fantasyFont;
 }
 
+.row.home{
+  display: flex;
+  justify-content: space-between;
+}
+
 #homeText p {
-  font-size: 2em;
+  font-size: 1.7em;
   color: $navbarWhite;
+  // width: 80%;
 }
 
 #homeText p:nth-child(4) {
@@ -41,28 +45,63 @@ h1 {
   font-weight: bolder;
 }
 
-#homeImg img:nth-child(1) {
+#homeImg{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.homeImg1{
+  display: flex;
+  justify-content: center;
+
+  height: 12em;
+
+& img{
+  display: flex;
+  justify-content: center;
   border: 3px solid $basecolorRed;
   border-radius: 15px;
   transform: rotate(-30deg);
-  margin: 2em 0 0 4em;
   object-fit: cover;
+  width: 80%;
+}
+}
+.homeImg2{
+  display: flex;
+  justify-content: center;
+  object-fit: cover;
+
+  height: 12em;
+  & img{
+    border: 3px solid $basecolorGreen;
+    border-radius: 15px;
+  width: 80%;
+
+  }
+
 }
 
-#homeImg img:nth-child(2) {
-  border: 3px solid $basecolorGreen;
-  border-radius: 15px;
-  margin: 4em;
-  //transform: rotate(-20deg);
-  @keyframes spin {
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-}
 
 #create, #join{
-  // font-size: 50px;
+
   color:$headerColorBlue;
   text-decoration: underline;
+}
+
+@media screen and (max-width: 600px) {
+#homeImg{
+ margin: 3em 0 3em 0;
+}
+
+.homeImg1{
+  margin-bottom: 3em;
+}
+
+  .homeImg1 img{
+  width: 50%;
+}
+ .homeImg2 img{
+  width: 50%;
+}
 }

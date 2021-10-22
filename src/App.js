@@ -29,7 +29,7 @@ import CurrMonthCard from "./components/topStats/currMonthCard";
 import ProfitsCard from "./components/topStats/profitsCard";
 import SignUp from "./components/forms/signUp";
 import { ChakraProvider } from "@chakra-ui/react";
-import {Formik} from "formik";
+
 // import {Container, Row, Col, Input, Button} from "reactstrap";
 import ReactGA from "react-ga";
 

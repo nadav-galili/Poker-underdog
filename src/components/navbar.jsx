@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
+import {apiUrl} from "../config.json"
 
 class Navbar extends Component {
   state = {};
@@ -86,8 +87,8 @@ class Navbar extends Component {
                       <div className="userDetails flex-row-reverse">
                          <p className="text-primary">{details.nickName}</p>
                         <Avatar 
-                        // src={details.image}
-                        src={`http://localhost:3900/${details.image}`}
+                   
+                        src={`${apiUrl}/${details.image}`}
                          alt={details.name} />
                        
                       </div>
