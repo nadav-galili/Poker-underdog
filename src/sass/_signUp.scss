@@ -1,26 +1,22 @@
-.form-control{
-    background-color: transparent!important ;
-    border:none !important;
-    padding: 0!important;
+.form-control {
+
+  border: none !important;
+  padding: 0 !important;
 }
 
-label{
-    font-weight: bold;
-
-    margin-bottom: 5px;
+label {
+  font-size: 1em;
+  margin-bottom: 5px;
 }
 
-
-
-.form-control{
-    margin-bottom: 10px;
-
+.form-control {
+  margin-bottom: 10px;
 }
-.row.inputFile.mb-4{
-    color:$navbarWhite;
+.row.inputFile.mb-4 {
+  color: $navbarWhite;
 
-    padding-left: 10px;
+  padding-left: 10px;
 }
 .error {
-    color:red;
+  color: red;
 }

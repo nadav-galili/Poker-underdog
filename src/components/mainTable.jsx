@@ -227,23 +227,23 @@ export default function MainTable(props) {
 
   return (
     <div className="container" id="dashboard">
-      <h1>{thisYear} Top Stats</h1>
-
+      <h1 className="mb-2 pt-3">{thisYear} Top Stats</h1>
       {!profit && (
-        <div className="spinner">
+        <div className="spinner mt-5">
           <SpinnerDiamond
-            size={200}
+            size={130}
             thickness={151}
             speed={81}
             color="rgba(108, 20, 180, 1)"
             secondaryColor="rgba(252, 252, 252, 1)"
+            // enabled={true}
             enabled={!profit ? true : false}
           />
         </div>
       )}
       {profit && (
         <React.Fragment>
-          <div className="row ">
+          <div  id="dashboardDisplay">
             <PlayerCard
               header="Total Profit"
               data={profit.totalProfit}
@@ -253,14 +253,14 @@ export default function MainTable(props) {
               team={teamId}
               table={data}
             />
-            <PlayerCard
+           <PlayerCard
               header="Average Profit"
               data={avgprofit.avgProfit}
               name={avgprofit ? avgprofit._id.name : ""}
               image={avgprofit ? avgprofit._id.image : ""}
               cardName="avgProfit"
               team={teamId}
-            />
+            /> 
             <SuccessP
               header="Success %"
               data={success.successPercentage}
@@ -294,22 +294,22 @@ export default function MainTable(props) {
               team={teamId}
             />
 
-            <Profits
+           <Profits
               header="Top 10 Profits"
               name={profits.length > 0 ? profits[0].players.name : ""}
               image={profits.length > 0 ? profits[0].players.image : ""}
               data={profits.length > 0 ? profits[0].players.profit : ""}
               team={teamId}
-            />
-            <CurrMonth
+            /> 
+         <CurrMonth
               header="Current Month"
               data={monthleader.totalProfit}
               name={monthleader ? monthleader._id.name : ""}
               image={monthleader ? monthleader._id.image : ""}
               cMonth={monthleader ? monthleader.lastGame : ""}
               team={teamId}
-            />
-          </div>
+            />  
+          </div> 
 
           <PageHeader titleText="Main Table" />
           {data.length < 1 && (
@@ -323,76 +323,79 @@ export default function MainTable(props) {
               </Link>
             </div>
           )}
-        </React.Fragment>
+     
+      <Paper className={classes.root}>
+      <TableContainer className={classes.container}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => {
+                return (
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={row.player}
+                  >
+                    {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          className={
+                            column.id === "avgProfit" && value > 0
+                              ? "bg-success"
+                              : column.id === "avgProfit" && value < 0
+                              ? "bg-danger"
+                              : ""
+                          }
+
+                          // style={inputStyles}
+                        >
+                          {column.format && typeof value === "number"
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+    </Paper>
+    {/* // Display last game played */}
+    <MainLastGame team={props.match.params.teamId} />
+    </React.Fragment>
+      
       )}
 
-      <Paper className={classes.root}>
-        <TableContainer className={classes.container}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.player}
-                    >
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell
-                            key={column.id}
-                            align={column.align}
-                            className={
-                              column.id === "avgProfit" && value > 0
-                                ? "bg-success"
-                                : column.id === "avgProfit" && value < 0
-                                ? "bg-danger"
-                                : ""
-                            }
-
-                            // style={inputStyles}
-                          >
-                            {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </Paper>
-      {/* // Display last game played */}
-      <MainLastGame team={props.match.params.teamId} />
+      
     </div>
   );
 }

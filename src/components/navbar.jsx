@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
-import {apiUrl} from "../config.json"
+import { apiImage } from "../config.json";
 
 class Navbar extends Component {
   state = {};
@@ -85,12 +85,11 @@ class Navbar extends Component {
                   <li className="nav-item me-2 ">
                     {user && (
                       <div className="userDetails flex-row-reverse">
-                         <p className="text-primary">{details.nickName}</p>
-                        <Avatar 
-                   
-                        src={`${apiUrl}/${details.image}`}
-                         alt={details.name} />
-                       
+                        <p className="text-primary">{details.nickName}</p>
+                        <Avatar
+                          src={`${apiImage}${details.image}`}
+                          alt={details.name}
+                        />
                       </div>
                     )}
                   </li>

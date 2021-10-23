@@ -108,10 +108,6 @@ h1 {
   }
 }
 
-#dashboard {
-  margin-left: 5%;
-}
-
 .MuiAvatar-root {
   border: 2px solid black;
   height: 60px !important;
@@ -140,8 +136,29 @@ h1 {
   color: #ff3030;
 }
 
+#dashboardDisplay {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.cardDiv {
+  width: 26%;
+  margin-bottom: 30px;
+}
+
 #mainStats {
   background-color: #6c14b4;
+}
+
+.card-title {
+  color: #02d84d;
+  font-size: 1.5em;
+  font-weight: 900;
+  display: flex;
+  margin: auto;
+  margin-top: 10px;
+  text-transform: capitalize;
 }
 
 #statsCardBody {
@@ -158,9 +175,7 @@ h1 {
 }
 
 .img-card {
-  height: 10rem;
-  width: 12rem;
-  margin: auto;
+  height: 6rem;
 }
 
 #mainStats img {
@@ -178,7 +193,6 @@ h1 {
 
 #statsCardText span:first-child {
   color: #fcfcfc;
-  align-self: center;
   font-weight: bolder;
   font-size: 1.5em;
 }
@@ -189,26 +203,17 @@ h1 {
   font-size: 1.5em;
 }
 
-.card-title {
-  color: #fcfcfc;
-  font-size: 1.5em;
-  font-weight: 900;
-  display: flex;
-  text-transform: capitalize;
-}
-
 #cardFooter {
   width: 100%;
   display: flex;
-  height: 50px;
+  height: 2.5em;
   justify-content: center;
-  align-content: center;
   align-self: center;
-  font-size: 1.3em;
+  font-size: 1.1em;
 }
 
 #cardFooter svg {
-  margin: 5px 0 0 5px;
+  margin: 5px 0 0 3px;
 }
 
 #month {
@@ -218,6 +223,36 @@ h1 {
 .spinner {
   display: flex;
   justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+  .cardDiv {
+    width: 45%;
+  }
+  #statsCardText span:first-child {
+    font-weight: bolder;
+    font-size: 1em;
+  }
+  #statsCardText span {
+    font-size: 1.3em;
+  }
+  #cardFooter {
+    width: 100%;
+    display: flex;
+    height: 2.6em;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+    font-size: 0.8em;
+  }
+  #cardFooter svg {
+    margin: 5px 0 0 5px;
+  }
+}
+
+#myTeams a {
+  margin-right: 20px;
+  font-size: 0.7em;
 }
 
 .team-list {
@@ -260,10 +295,6 @@ h3 {
 
 .teamName {
   color: #fcfcfc;
-}
-
-.container-fluid ol {
-  font-size: 1.5em;
 }
 
 .steps {
@@ -447,7 +478,11 @@ h2.ms-4 {
 
 label {
   font-size: 2em;
-  color: #fcfcfc;
+  color: #fcfcfc !important;
+}
+
+.input {
+  background-color: #fcfcfc !important;
 }
 
 .selectP.mt-5 {
@@ -606,8 +641,8 @@ tfoot td {
 
 .pos {
   color: #fcfcfc;
-  margin-left: 0.7em;
-  font-size: 0.7em;
+  margin-left: 0.5em;
+  font-size: 1em;
 }
 
 #profit {
@@ -619,7 +654,7 @@ tfoot td {
 
 #heroName {
   text-decoration: none;
-  font-size: 0.8em;
+  font-size: 1em;
   margin-left: 0.6em;
   color: #fcfcfc;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
@@ -633,8 +668,8 @@ tfoot td {
 }
 
 #amount {
-  margin-left: 0.5em;
-  font-size: 0.8em;
+  margin-left: 0.7em;
+  font-size: 1em;
   color: #02d84d;
 }
 
@@ -651,9 +686,10 @@ tfoot td {
 }
 
 .rowPos {
-  font-size: 0.5em;
   font-weight: bold;
   padding-left: 5px;
+  font-size: 0.8em;
+  font-weight: bold;
   align-self: center;
 }
 
@@ -673,7 +709,8 @@ tfoot td {
 }
 
 .rowName {
-  font-size: 0.7em;
+  font-size: 0.8em;
+  font-weight: bold;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   padding-left: 2.5em;
   padding-top: 0.9em;
@@ -696,14 +733,18 @@ tfoot td {
   padding-top: 0.9em;
 }
 
+.rowProfit {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
 .form-control {
-  background-color: transparent !important;
   border: none !important;
   padding: 0 !important;
 }
 
 label {
-  font-weight: bold;
+  font-size: 1em;
   margin-bottom: 5px;
 }
 

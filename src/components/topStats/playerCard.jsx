@@ -6,9 +6,9 @@ import { apiImage } from "./../../config.json";
 
 const PlayerCard = ({ header, data, name, image, cardName, team, table }) => {
   return (
-    <div className="col-lg-3 col-6 mt-3">
-      <div className="card " id="mainStats">
-        <h5 className="card-title pt-1 ps-2">{name}</h5>
+    <div className="cardDiv">
+      <div className="card" id="mainStats">
+        <h5 className="card-title ">{name}</h5>
         <div className="img-card">
           <img
             src={

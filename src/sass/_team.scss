@@ -1,3 +1,12 @@
+#myTeams{
+  & a{
+    margin-right: 20px;
+    font-size: 0.7em;
+  }
+}
+
+
+
 .team-list {
   font-weight: 700;
   font-size: 1.5em;
@@ -46,10 +55,10 @@ h3 {
   color: $navbarWhite;
 }
 
-.container-fluid ol {
-  // color: $navbarWhite;
-  font-size: 1.5em;
-}
+// .container-fluid ol {
+//   // color: $navbarWhite;
+//   font-size: 1.5em;
+// }
 
 .steps {
   color: $basecolorGreen;

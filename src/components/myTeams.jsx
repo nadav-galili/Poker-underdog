@@ -58,11 +58,11 @@ const MyTeams = () => {
         className="aboutIcon"
       />
       <div className="row">
-        <div className="col-12 ">
-          <Link className="btn btn-primary ms-2 mb-3" to="/create-team">
+        <div className="col-12" id="myTeams">
+          <Link className="btn btn-primary  mb-3" to="/create-team">
             +Add A New Team
           </Link>
-          <Link className="btn btn-primary ms-2 mb-3" to="/join-team">
+          <Link className="btn btn-primary  mb-3" to="/join-team">
             Join An Existing Team
           </Link>
           <div className="teamText">

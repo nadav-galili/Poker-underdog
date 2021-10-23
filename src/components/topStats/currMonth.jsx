@@ -18,7 +18,7 @@ const CurrMonth = ({
   currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
 
   return (
-    <div className="col-lg-3 col-6 mt-3">
+    <div className="cardDiv">
       <div className="card " id="mainStats">
         <h5 className="card-title pt-1 ps-2">{name}</h5>
         <div className="img-card">

@@ -16,8 +16,8 @@
 
 .pos {
   color: $navbarWhite;
-  margin-left: 0.7em;
-  font-size: 0.7em;
+  margin-left: 0.5em;
+  font-size:1em;
 }
 #profit {
   color: $navbarWhite;
@@ -27,7 +27,7 @@
 }
 #heroName {
   text-decoration: none;
-  font-size: 0.8em;
+  font-size: 1em;
   margin-left: 0.6em;
   color: $navbarWhite;
   font-family: $fantasyFont;
@@ -41,8 +41,8 @@
 }
 
 #amount {
-  margin-left: 0.5em;
-  font-size: 0.8em;
+  margin-left: 0.7em;
+  font-size: 1em;
   color: $basecolorGreen;
 }
 #cardTop {
@@ -59,10 +59,10 @@
 }
 
 .rowPos {
-  font-size: 0.5em;
   font-weight: bold;
   padding-left: 5px;
-  // padding-top: 1em;
+  font-size: 0.8em;
+  font-weight: bold;
   align-self: center;
 }
 
@@ -83,7 +83,8 @@
 }
 
 .rowName {
-  font-size: 0.7em;
+  font-size: 0.8em;
+  font-weight: bold;
   font-family: $fantasyFont;
   padding-left: 2.5em;
   padding-top: 0.9em;
@@ -110,4 +111,9 @@
   margin-right: 0.5em;
   padding-top: 0.9em;
   // background-color: yellow;
+}
+
+.rowProfit {
+  font-size: 0.9em;
+  font-weight: bold;
 }

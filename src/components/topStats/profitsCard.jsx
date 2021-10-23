@@ -21,8 +21,6 @@ const SuccessCard = (props) => {
         });
       };
       table = handleDates(table, "created_at");
-
-      console.log("DD", table);
       let myHero = table.shift();
       setHero(myHero);
       setData(table);
@@ -31,7 +29,7 @@ const SuccessCard = (props) => {
     getTable();
   }, [setData, teamId]);
 
-  let rank=2;
+  let rank = 2;
   return (
     <div className="container-fluid">
       <h1>Top 10 Profits </h1>
@@ -73,7 +71,11 @@ const SuccessCard = (props) => {
                 <div className="rowPos">{rank++}.</div>
                 <div className="rowImage">
                   <img
-                    src={data.length > 0 ? `${apiImage}${player.players.image}` : ""}
+                    src={
+                      data.length > 0
+                        ? `${apiImage}${player.players.image}`
+                        : ""
+                    }
                     alt="player list row"
                   />
                 </div>

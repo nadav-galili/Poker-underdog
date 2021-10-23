@@ -37,15 +37,15 @@ class Signin extends Form {
   render() {
     if (userService.getCurrentUser()) return <Redirect to="/" />;
     return (
-      <div className="container-fluid">
-        <PageHeader titleText="Sign-In to Poker Underdog" />
+      <div className="container">
+        <PageHeader titleText="Sign-In" />
         <div className="row">
           <div className="col-12">
-            <p>You can sign-in here with your account!</p>
+            <p className="text-primary">You can sign-in here with your account!</p>
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-6">
+          <div className="col-lg-3">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">
               {this.renderInput("email", "Email", "email")}
               {this.renderInput("password", "Password", "password")}
