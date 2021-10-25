@@ -56,7 +56,7 @@ const SuccessCard = (props) => {
                </a>
  
                <div id="amount" className="flex-fill">
-                 {data.length > 0 ? hero.successPercentage : ""}
+                 {data.length > 0 ?` ${hero.successPercentage} %` : ""}
                </div>
              </div>
              <div className="heroImage ">
@@ -81,8 +81,8 @@ const SuccessCard = (props) => {
                  <div className="rowName">
                    {data.length > 0 ? player._id.name : ""}
                  </div>
-                 <div className="rowProfit">
-                   {data.length > 0 ? player.successPercentage : ""}
+                 <div className="sucProfit">
+                   {data.length > 0 ?` ${player.successPercentage} %`: ""}
                  </div>
                </li>
              ))}

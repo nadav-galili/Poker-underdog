@@ -7,7 +7,6 @@ const upload=require("../middleware/upload");
 const { Team } = require("../models/teams");
 const router = express.Router();
 const { Game } = require("../models/games");
-const { NextWeek } = require("@material-ui/icons");
 
 const getTeams = async (teamsArray) => {
   const teams = await Team.find({ teamNumber: { $in: teamsArray } });

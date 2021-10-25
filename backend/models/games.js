@@ -1,5 +1,6 @@
 const Joi = require("@hapi/joi");
 const mongoose = require("mongoose");
+const Schema=mongoose.Schema;
 
 const gameSchema = new mongoose.Schema({
   team_name: {
@@ -15,14 +16,11 @@ const gameSchema = new mongoose.Schema({
     maxlength: 24,
   },
   players: {
-    type: Array,
-    required: true,
-  },
-  created_at: {
-    type: Date,
-    default: Date.now(),
-  },
-});
+    type:Array,
+    minlength:2
+  }
+},
+{ timestamps: true });
 
 const Game = mongoose.model("Game", gameSchema);
 

@@ -35,15 +35,15 @@
 }
 .heroDate{
   font-size: 0.8em;
-  margin-left: 0.4em;
+  margin-left: 0.7em;
   color: $navbarWhite;
-
 }
 
 #amount {
   margin-left: 0.7em;
   font-size: 1em;
   color: $basecolorGreen;
+  font-weight: bold;
 }
 #cardTop {
   background-color: $basecolorPurple;
@@ -61,6 +61,7 @@
 .rowPos {
   font-weight: bold;
   padding-left: 5px;
+ width: 8%;
   font-size: 0.8em;
   font-weight: bold;
   align-self: center;
@@ -68,7 +69,7 @@
 
 .rowImage {
   align-self: center;
-  width:20%;
+  width:15%;
   margin-left: 0.8em;
   img {
     border-radius: 50%;
@@ -86,34 +87,43 @@
   font-size: 0.8em;
   font-weight: bold;
   font-family: $fantasyFont;
-  padding-left: 2.5em;
-  padding-top: 0.9em;
+  padding-left: 1.5em;
+  padding-top: 1em;
   text-transform: capitalize;
   flex-grow: 2;
 }
 .rowDate{
   font-size: 0.7em;
   font-family: $fantasyFont;
-  // flex-grow: 2;
-  padding-right: 5em;
-  // padding-left: 5em;
-  padding-top: 0.9em;
-  // width: 50%;
-  // margin-left: auto;
- 
+// width: 20%;
+   padding-right: 1.2em;
+  padding-top: 1.2em;
 
-}
-
-.rowProfit {
-  font-size: 0.7em;
-  font-family: $fantasyFont;
-  margin-left: auto;
-  margin-right: 0.5em;
-  padding-top: 0.9em;
-  // background-color: yellow;
 }
 
 .rowProfit {
   font-size: 0.9em;
   font-weight: bold;
+  font-family: $fantasyFont;
+  margin-left: auto;
+  margin-right: 0.5em;
+  padding-top: 0.75em;
+  width: 15%;
+  text-align: center;
+
 }
+
+.sucProfit{
+  font-size: 0.8em;
+  font-family: $fantasyFont;
+  margin-left: auto;
+  margin-right: 0.5em;
+  padding-top: 0.75em;
+  width: 15%;
+  text-align: start;
+  font-weight: bold;
+}
+// .rowProfit {
+//   font-size: 0.9em;
+//   font-weight: bold;
+// }

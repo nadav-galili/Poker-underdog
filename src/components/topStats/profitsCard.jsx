@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import gameService from "../../services/gameService";
 import { apiImage } from "../../config.json";
+import { SpinnerInfinity} from "spinners-react";
+
 
 const SuccessCard = (props) => {
   const [data, setData] = useState([]);
@@ -33,7 +35,17 @@ const SuccessCard = (props) => {
   return (
     <div className="container-fluid">
       <h1>Top 10 Profits </h1>
-      <div className="col-lg-3 col-10" id="cardTop">
+      {data.length===0 && (
+        <div className="spinner pt-2">
+     <SpinnerInfinity size={130} thickness={151}
+     speed={70} color="rgba(252, 252, 252, 1)"
+      secondaryColor="rgba(108, 20, 180, 1)"
+       enabled={data.length===0? true : false}
+      />
+        </div>
+      )}
+      {data.length>0 &&(
+        <div className="col-lg-3 col-10" id="cardTop">
         <ul className="statsList ">
           <li
             className="statsHero d-flex"
@@ -93,6 +105,7 @@ const SuccessCard = (props) => {
           </React.Fragment>
         </ul>
       </div>
+      )}
     </div>
   );
 };
