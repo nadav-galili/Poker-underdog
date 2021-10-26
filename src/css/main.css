@@ -808,6 +808,40 @@ label {
   font-size: 0.5em;
 }
 
+#gameLi {
+  width: 100%;
+  height: 50px;
+}
+
+.gameHeaders {
+  align-self: flex-end;
+  font-size: 0.8em;
+  width: 100%;
+  justify-content: center;
+  color: #fcfcfc;
+}
+
+.gameHeaders .Cashing {
+  padding-right: 20px;
+}
+
+.gameHeaders .Hand {
+  padding-right: 20px;
+}
+
+#lastGameHero {
+  background-color: #6c14b4;
+  width: 100%;
+  height: 3em;
+  justify-content: center;
+  color: #fcfcfc;
+  align-items: center;
+}
+
+#lastGameHero p {
+  margin-bottom: 0;
+}
+
 main {
   background-repeat: no-repeat;
   background-size: cover;

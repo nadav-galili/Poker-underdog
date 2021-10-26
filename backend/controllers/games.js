@@ -159,10 +159,19 @@ exports.successp=async function (req, res){
 }
 
 exports.lastGame=async function(req,res){
-    const game = await Game.find({ team_id: req.params.teamId })
-    .sort({ created_at: -1 })
+  console.log( req.params.teamId);
+    const game = await Game.find(
+      { team_id: req.params.teamId }
+      ).sort({
+        updatedAt:-1
+      })
     .limit(1);
   res.send(game)
+
+  
+ 
+  
+  
 }
 
 exports.profits=async function (req, res){
@@ -283,7 +292,7 @@ exports.updateGame=async function(req,res){
   const { error } = validate(req.body);
   if (error) console.log(error.details[0].message);
   // res.status(400).send(error.details[0].message);
-console.log(req.body,"qq");
+
   let game= await Game.findByIdAndUpdate(req.body.gameId,{"players":req.body.players},  { new: true });
  await res.send(game);
 }

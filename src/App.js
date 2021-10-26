@@ -17,7 +17,7 @@ import EditPlayer from "./components/editPlayer";
 import EditTeam from "./components/editTeam";
 import SelectPlayers from "./components/selectPlayers";
 import JoinTeam from "./components/joinTeam";
-import Game from "./components/game";
+// import Game from "./components/game";
 import LastGame from "./components/lastGame";
 import MainTable from "./components/mainTable";
 import Demo from "./components/demo";
@@ -29,7 +29,7 @@ import CurrMonthCard from "./components/topStats/currMonthCard";
 import ProfitsCard from "./components/topStats/profitsCard";
 import SignUp from "./components/forms/signUp";
 import NewGame from "./components/games/newGame";
-
+import GameEnd from "./components/gameEnd";
 // import {Container, Row, Col, Input, Button} from "reactstrap";
 import ReactGA from "react-ga";
 
@@ -109,13 +109,13 @@ function App() {
 
             <ProtectedRoute path="/games/:gameId" component={NewGame} />
 
-            <ProtectedRoute path="/last-game/:teamId" component={LastGame} />
+            <ProtectedRoute path="/last-game/:teamId" component={GameEnd} />
             <ProtectedRoute path="/main-table/:teamId" component={MainTable} />
             <ProtectedRoute path="/tables/success/:teamId" component={SuccessCard} />
             <ProtectedRoute path="/tables/byMonths/:currMonth/:teamId" component={CurrMonthCard} />
             <ProtectedRoute path="/tables/profits/top-ten/:teamId" component={ProfitsCard} />    
             <ProtectedRoute path="/tables/:cardName/:teamId" component={CardTable} />
-        
+         
 
 
             <Route path="/demo" component={Demo} />

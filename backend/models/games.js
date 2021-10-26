@@ -2,6 +2,11 @@ const Joi = require("@hapi/joi");
 const mongoose = require("mongoose");
 
 const gameSchema = new mongoose.Schema({
+  isOpen:{
+    type:Boolean,
+    required:true,
+    default:false,
+  },
   gameId:{
     type:String
   },
@@ -20,8 +25,7 @@ const gameSchema = new mongoose.Schema({
   players: {
     type: Array,
     required: true,
-  },
-  createdAt:{type:String}
+  }
 },
 {timestamps:true});
 

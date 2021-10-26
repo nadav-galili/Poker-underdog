@@ -50,11 +50,20 @@ const NewGame = (props) => {
     gameService.updateGame(data.gameId, data).then((res) => {
       setData(res.data);
     });
+    props.history.push(`/last-game/${data.team_id}`);
   };
   return (
     <div className="container-fluid">
-      <h1>sssdsd</h1>
-      {/* <PageHeader titletext="New Game" /> */}
+      <PageHeader titleText="Game No." />
+      <p className="text-danger">{data._id}</p>
+      <p className="text-primary">Started At:</p>
+      <p className="text-primary">
+        {new Date(data.createdAt).toLocaleDateString("en-GB") +
+          " " +
+          new Date(data.createdAt).getHours() +
+          " : " +
+          new Date(data.createdAt).getMinutes()}
+      </p>
       {data.length < 1 && (
         <div className="spinner pt-2">
           <SpinnerInfinity
@@ -72,13 +81,22 @@ const NewGame = (props) => {
         <div className="col-lg-3 col-10" id="cardTop">
           <ol className="statsList">
             <li
+            id="gameLi"
               className="statsHero d-flex"
               style={{
                 backgroundImage: `url(${
                   process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
                 })`,
               }}
-            ></li>
+            >
+              <div className="gameHeaders d-flex">
+              <div className="Cashing">Cashing</div>
+              <div className="Hand">Cash In Hand</div>
+              <div className="Profit">Profit</div>
+              </div>
+              
+           
+            </li>
             <React.Fragment>
               {data.players.map((player) => (
                 <li className="statsRow" key={player.id}>
