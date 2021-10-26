@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PageHeader from "./common/pageHeader";
 import teamService from "../services/teamService";
+import gameService from "../services/gameService";
 import Player from "./player";
 import { Link } from "react-router-dom";
 
@@ -28,6 +29,7 @@ const SelectPlayers = (props) => {
       image: image,
       cashing: 0,
       cashInHand: 0,
+      numOfCashing:0,
       profit: 0,
     };
     selected.find((e) => player.id === e.id)
@@ -38,6 +40,16 @@ const SelectPlayers = (props) => {
   function shuffle(){
     const shuffle=new Audio(process.env.PUBLIC_URL+'sounds/Shuffle.mp3');
     shuffle.play();
+
+    let game={
+      players:selected,
+      team_name:data.name,
+     team_id:data._id
+    };
+    gameService.newGame(game).then(res=>{
+      props.history.push(`/games/${res.data._id}`)
+    })
+
   }
 
   return (
@@ -65,16 +77,7 @@ const SelectPlayers = (props) => {
           ))}
       </div>
       {selected.length > 1 && (
-        <Link
-          to={{
-            pathname: "/game",
-            data: { data },
-          }}
-          className="btn btn-primary btn-lg m-3"
-          onClick={shuffle()}
-        >
-          Continue to game
-        </Link>
+        <button className="btn btn-primary btn-lg m-3" onClick={shuffle}>Continue to game</button>
       )}
       {selected.length <= 1 && (
         <p className="selectP">*Please select at least 2 players</p>

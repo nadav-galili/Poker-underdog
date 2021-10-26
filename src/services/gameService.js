@@ -29,6 +29,17 @@ export function cardsData(teamId, cardName){
     return http.get(`${apiUrl}/games/profits/top-ten/${teamId}`);
   }
 
+export function newGame(game){
+  return http.post(`${apiUrl}/games`, game);
+}
+
+export function gameById(gameId){
+  return http.get(`${apiUrl}/games/${gameId}`)
+}
+
+export function updateGame(gameId, game){
+  return http.put(`${apiUrl}/games/${gameId}`, game)
+}
 
 export default {
   lastGame,
@@ -37,5 +48,8 @@ export default {
   monthsData,
   cardsData, 
   successp,
-  profits
+  profits,
+  newGame,
+  gameById,
+  updateGame
 };

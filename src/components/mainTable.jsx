@@ -215,9 +215,9 @@ export default function MainTable(props) {
         player._id.name,
         <Avatar src={player._id.image} className={classes.large} />,
         player.totalProfit,
-        player.avgProfit.toFixed(2),
-        player.numOfGames,
-        player.avgCashing.toFixed(2),
+        // player.avgProfit.toFixed(2),
+        // player.numOfGames,
+        // player.avgCashing.toFixed(2),
         formated
       )
     );

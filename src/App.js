@@ -28,7 +28,7 @@ import SuccessCard from "./components/topStats/successCard";
 import CurrMonthCard from "./components/topStats/currMonthCard";
 import ProfitsCard from "./components/topStats/profitsCard";
 import SignUp from "./components/forms/signUp";
-import { ChakraProvider } from "@chakra-ui/react";
+import NewGame from "./components/games/newGame";
 
 // import {Container, Row, Col, Input, Button} from "reactstrap";
 import ReactGA from "react-ga";
@@ -60,7 +60,7 @@ function App() {
     minHeight: 900,
   };
   return (
-    <ChakraProvider>
+  
     <React.Fragment>
     
       <ToastContainer />
@@ -107,7 +107,7 @@ function App() {
               user={user}
             />
 
-            <ProtectedRoute path="/game" component={Game} />
+            <ProtectedRoute path="/games/:gameId" component={NewGame} />
 
             <ProtectedRoute path="/last-game/:teamId" component={LastGame} />
             <ProtectedRoute path="/main-table/:teamId" component={MainTable} />
@@ -137,7 +137,7 @@ function App() {
       </footer>
  
     </React.Fragment>
-    </ChakraProvider>
+
   );
 }
 

@@ -761,6 +761,53 @@ label {
   color: red;
 }
 
+.rowPlayer {
+  align-self: center;
+  width: 15%;
+  margin-left: 0.2em;
+}
+
+.rowPlayer img {
+  border-radius: 50%;
+  border: 1px solid black;
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  background-image: linear-gradient(#6c14b4, #4e4949);
+}
+
+.rowCash {
+  align-self: center;
+  margin-left: 0.2em;
+}
+
+.rowCashInHand {
+  margin-left: 0.2em;
+  align-self: center;
+  width: 20%;
+}
+
+.rowCashInHand input {
+  max-width: 100%;
+}
+
+.playerProfit {
+  margin-left: 0.2em;
+  align-self: center;
+}
+
+.fas.fa-minus-circle {
+  margin-left: 0.4em;
+  align-self: center;
+  font-size: 0.5em;
+  padding-right: 0.5em;
+}
+
+.fas.fa-money-bill-wave {
+  align-self: center;
+  font-size: 0.5em;
+}
+
 main {
   background-repeat: no-repeat;
   background-size: cover;

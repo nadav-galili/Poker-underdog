@@ -56,6 +56,7 @@ const SignUp = (props) => {
   };
 
   const [errors, setErrors] = useState({ email: "", image: "" });
+  if (userService.getCurrentUser()) return <Redirect to="/" />;
   return (
     <div className="container">
       <PageHeader titleText="Sign Up" />

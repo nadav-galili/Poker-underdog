@@ -49,7 +49,7 @@ const CardTable = (props) => {
      speed={70} color="rgba(252, 252, 252, 1)"
       secondaryColor="rgba(108, 20, 180, 1)"
        enabled={data.length===0? true : false}
-      // enabled={true}
+
 
        />
         </div>

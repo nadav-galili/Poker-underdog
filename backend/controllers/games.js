@@ -1,5 +1,5 @@
 
-const { func } = require("@hapi/joi");
+// const Joi = require("@hapi/joi");
 const _ = require("lodash");
 const { Game, validate } = require("../models/games");
 
@@ -279,6 +279,14 @@ exports.newGame=async function (req, res){
     res.send(_.pick(game, ["_id", "team_name", "players"]));
 }
 
+exports.updateGame=async function(req,res){
+  const { error } = validate(req.body);
+  if (error) console.log(error.details[0].message);
+  // res.status(400).send(error.details[0].message);
+console.log(req.body,"qq");
+  let game= await Game.findByIdAndUpdate(req.body.gameId,{"players":req.body.players},  { new: true });
+ await res.send(game);
+}
 exports.gamesByCardName=async function(req, res){
 
   let cardTitle=req.params.cardName;
