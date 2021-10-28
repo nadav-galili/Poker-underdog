@@ -1,18 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import gameService from "../services/gameService";
-import { makeStyles } from "@material-ui/core/styles";
 import PageHeader from "./common/pageHeader";
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import { Avatar } from "@material-ui/core";
-import MainLastGame from "./mainLastGame";
+import GameEnd from "./gameEnd";
 import PlayerCard from "./topStats/playerCard";
 import CardTable from "./topStats/cardTable";
 import SuccessP from "./topStats/successp";
@@ -20,101 +10,20 @@ import CurrMonth from "./topStats/currMonth";
 import Profits from "./topStats/profits";
 import { SpinnerDiamond } from "spinners-react";
 
-//set headers for the tables
-const columns = [
-  { id: "rank", label: "Rank", minWidth: 50 },
-
-  { id: "player", label: "Player", minWidth: 100 },
-
-  {
-    id: "image",
-    label: "Image",
-    maxWidth: 50,
-    align: "left",
-  },
-  {
-    id: "profit",
-    label: "Profit",
-    minWidth: 51,
-    align: "right",
-  },
-  {
-    id: "avgProfit",
-    label: "Average Profit",
-    minWidth: 50,
-    align: "center",
-  },
-  {
-    id: "numOfGames",
-    label: "Number Of Games",
-    minWidth: 50,
-    align: "center",
-  },
-  {
-    id: "avgCashing",
-    label: "Average Cashing",
-    minWidth: 50,
-    align: "center",
-  },
-  {
-    id: "lastGame",
-    label: "Last Game Played",
-    minWidth: 50,
-    align: "center",
-  },
-];
-
-///func to get the data 4 the table
-function createData(
-  rank,
-  player,
-  image,
-  profit,
-  avgProfit,
-  numOfGames,
-  avgCashing,
-  lastGame
-) {
-  return {
-    rank,
-    player,
-    image,
-    profit,
-    avgProfit,
-    numOfGames,
-    avgCashing,
-    lastGame,
-  };
-}
-
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-  },
-  container: {
-    maxHeight: 440,
-  },
-});
-
 export default function MainTable(props) {
   //get the data for the table
   const [data, setData] = useState([]);
-  const [profit, setProfit] = useState("");
-  const [avgprofit, setAvgprofit] = useState("");
-  const [totalgames, setTotalgames] = useState("");
-  const [avgcashing, setAvgcashing] = useState("");
-  const [success, setSuccess] = useState("");
-  const [gamesprofit, setGamesprofit] = useState("");
+  // const [profit, setProfit] = useState([]);
+  const [avgprofit, setAvgprofit] = useState([]);
+  const [totalgames, setTotalgames] = useState([]);
+  const [avgcashing, setAvgcashing] = useState([]);
+  const [success, setSuccess] = useState([]);
+  const [gamesprofit, setGamesprofit] = useState([]);
 
-  const [monthleader, setMonthleader] = useState("");
+  // const [monthleader, setMonthleader] = useState("");
   const [profits, setProfits] = useState([]);
 
   const teamId = props.match.params.teamId;
-
-  // get current year for header
-  const year = new Date();
-  const thisYear = year.getFullYear();
-  const thisMonth = year.getMonth();
 
   //fetch data from DB
   useEffect(() => {
@@ -122,60 +31,55 @@ export default function MainTable(props) {
       let table = await gameService.table(teamId);
       table = table.data;
 
-      if (table.length > 0) {
-        const profit = await table.reduce((prev, current) =>
-          +prev.totalProfit > current.totalProfit ? prev : current
-        );
-        const avgProfit = await table.reduce((prev, current) =>
-          +prev.avgProfit > current.avgProfit ? prev : current
-        );
-        const totalGames = await table.reduce((prev, current) =>
-          +prev.numOfGames > current.numOfGames ? prev : current
-        );
-        const avgcashing = await table.reduce((prev, current) =>
-          +prev.avgCashing < current.avgCashing ? prev : current
-        );
+      await table.sort((a, b) => b.totalProfit - a.totalProfit);
+      setData(table);
 
-        const successP = await table.reduce((prev, current) =>
-          +prev.successPercentage > current.successPercentage ? prev : current
-        );
+      let totoalg = [...table];
+      const totalG = await totoalg.sort((a, b) => b.numOfGames - a.numOfGames);
+      setTotalgames(totalG);
 
-        const gamesProfit = await table.reduce((prev, current) =>
-          +prev.gamesWithProfit > current.gamesWithProfit ? prev : current
-        );
+      let avgp = [...table];
+      const avgP = await avgp.sort((a, b) => b.avgProfit - a.avgProfit);
+      setAvgprofit(avgP);
 
-        setGamesprofit(gamesProfit);
-        setSuccess(successP);
-        setAvgcashing(avgcashing);
-        setTotalgames(totalGames);
-        setAvgprofit(avgProfit);
-        setProfit(profit);
-        setData(table);
-      }
+      let gamep = [...table];
+      const gameP = await gamep.sort(
+        (a, b) => b.gamesWithProfit - a.gamesWithProfit
+      );
+      setGamesprofit(gameP);
+
+      let successPc = [...table];
+      const successP = await successPc.sort(
+        (a, b) => b.successPercentage - a.successPercentage
+      );
+      setSuccess(successP);
+      let avgc = [...table];
+      const avgC = await avgc.sort((a, b) => a.avgCashing - b.avgCashing);
+      setAvgcashing(avgC);
     };
 
     getTable();
   }, [setData, teamId]);
 
-  useEffect(() => {
-    const dataByMonths = async () => {
-      let results = await gameService.monthsData(props.match.params.teamId);
-      results = results.data;
+  // useEffect(() => {
+  //   const dataByMonths = async () => {
+  //     let results = await gameService.monthsData(props.match.params.teamId);
+  //     results = results.data;
 
-      if (results.length > 0) {
-        const currMonth = results.filter(
-          (e) => e._id.monthPlayed !== thisMonth
-        );
+  //     if (results.length > 0) {
+  //       const currMonth = results.filter(
+  //         (e) => e._id.monthPlayed !== thisMonth
+  //       );
 
-        const currMonthLeader = await currMonth.reduce((prev, current) =>
-          +prev.totalProfit > current.totalProfit ? prev : current
-        );
+  //       const currMonthLeader = await currMonth.reduce((prev, current) =>
+  //         +prev.totalProfit > current.totalProfit ? prev : current
+  //       );
 
-        setMonthleader(currMonthLeader);
-      }
-    };
-    dataByMonths();
-  }, [thisMonth, props.match.params.teamId]);
+  //       setMonthleader(currMonthLeader);
+  //     }
+  //   };
+  //   dataByMonths();
+  // }, [thisMonth, props.match.params.teamId]);
 
   useEffect(() => {
     const profits = async () => {
@@ -187,48 +91,15 @@ export default function MainTable(props) {
     profits();
   }, [props.match.params.teamId]);
 
-  const classes = useStyles();
-  const rows = [];
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
-  let rank = 1;
-  data.forEach((player) => {
-    const playerDate = new Date(player.lastGame);
-    const day = playerDate.getDate();
-    const month = playerDate.getMonth() + 1;
-    const year = playerDate.getFullYear();
-    const formated = `${day}/${month}/${year}`;
-
-    rows.push(
-      createData(
-        rank++,
-        player._id.name,
-        <Avatar src={player._id.image} className={classes.large} />,
-        player.totalProfit,
-        // player.avgProfit.toFixed(2),
-        // player.numOfGames,
-        // player.avgCashing.toFixed(2),
-        formated
-      )
-    );
-  });
+  // let rank = 1;
 
   <CardTable teamId={teamId} data={data} key={data.lastGame} />;
 
   return (
     <div className="container" id="dashboard">
-      <h1 className="mb-2 pt-3">{thisYear} Top Stats</h1>
-      {!profit && (
+      <PageHeader className="mb-0" titleText={new Date().getFullYear() + " Top Stats"} />
+      <span>{new Date().toLocaleDateString("en-GB")}</span>
+      {data.length < 1 && (
         <div className="spinner mt-5">
           <SpinnerDiamond
             size={130}
@@ -237,62 +108,78 @@ export default function MainTable(props) {
             color="rgba(108, 20, 180, 1)"
             secondaryColor="rgba(252, 252, 252, 1)"
             // enabled={true}
-            enabled={!profit ? true : false}
+            enabled={data.length < 1 ? true : false}
           />
         </div>
       )}
-      {profit && (
+      {data.length > 1 && (
         <React.Fragment>
-          <div  id="dashboardDisplay">
+          <div id="dashboardDisplay">
             <PlayerCard
               header="Total Profit"
-              data={profit.totalProfit}
-              name={profit ? profit._id.name : ""}
-              image={profit ? profit._id.image : ""}
+              data={data[0].totalProfit}
+              name={data[0]._id.name}
+              image={data[0]._id.image}
               cardName="totalProfit"
               team={teamId}
               table={data}
             />
-           <PlayerCard
-              header="Average Profit"
-              data={avgprofit.avgProfit}
-              name={avgprofit ? avgprofit._id.name : ""}
-              image={avgprofit ? avgprofit._id.image : ""}
-              cardName="avgProfit"
-              team={teamId}
-            /> 
-            <SuccessP
-              header="Success %"
-              data={success.successPercentage}
-              name={success ? success._id.name : ""}
-              image={success ? success._id.image : ""}
-              cardName="successPercentage"
-              team={teamId}
-            />
-            <PlayerCard
-              header="Total Games"
-              data={totalgames.numOfGames}
-              name={totalgames ? totalgames._id.name : ""}
-              image={totalgames ? totalgames._id.image : ""}
-              cardName="numOfGames"
-              team={teamId}
-            />
-            <PlayerCard
-              header="Average Cashing"
-              data={avgcashing.avgCashing}
-              name={avgcashing ? avgcashing._id.name : ""}
-              image={avgcashing ? avgcashing._id.image : ""}
-              cardName="avgCashing"
-              team={teamId}
-            />
-            <PlayerCard
-              header="Games With Profit"
-              data={gamesprofit.gamesWithProfit}
-              name={gamesprofit ? gamesprofit._id.name : ""}
-              image={gamesprofit ? gamesprofit._id.image : ""}
-              cardName="gamesWithProfit"
-              team={teamId}
-            />
+            {avgprofit.length > 1 && (
+              <PlayerCard
+                header="Average Profit"
+                data={avgprofit[0].avgProfit}
+                name={avgprofit[0]._id.name}
+                image={avgprofit[0]._id.image}
+                cardName="avgProfit"
+                team={teamId}
+              />
+            )}
+
+            {totalgames.length > 1 && (
+              <PlayerCard
+                header="Total Games"
+                data={totalgames[0].numOfGames}
+                name={totalgames[0]._id.name}
+                image={totalgames[0]._id.image}
+                cardName="numOfGames"
+                team={teamId}
+              />
+            )}
+
+            {gamesprofit.length > 1 && (
+              <PlayerCard
+                header="Games With Profit"
+                data={gamesprofit[0].gamesWithProfit}
+                name={gamesprofit[0]._id.name}
+                image={gamesprofit[0]._id.image}
+                cardName="gamesWithProfit"
+                team={teamId}
+              />
+            )}
+
+            {success.length > 1 && (
+              <SuccessP
+                header="Success %"
+                data={success[0].successPercentage}
+                name={success[0]._id.name}
+                image={success[0]._id.image}
+                cardName="successPercentage"
+                team={teamId}
+              />
+            )}
+         
+            {avgcashing.length > 1 && (
+              <PlayerCard
+                header="Average Cashing"
+                data={avgcashing[0].avgCashing}
+                name={avgcashing[0]._id.name}
+                image={avgcashing[0]._id.image}
+                cardName="avgCashing"
+                team={teamId}
+              />
+            )}
+
+   
 
            <Profits
               header="Top 10 Profits"
@@ -301,6 +188,7 @@ export default function MainTable(props) {
               data={profits.length > 0 ? profits[0].players.profit : ""}
               team={teamId}
             /> 
+                     {/*
          <CurrMonth
               header="Current Month"
               data={monthleader.totalProfit}
@@ -308,9 +196,9 @@ export default function MainTable(props) {
               image={monthleader ? monthleader._id.image : ""}
               cMonth={monthleader ? monthleader.lastGame : ""}
               team={teamId}
-            />  
-          </div> 
-
+            />   */}
+          </div>
+          {/* 
           <PageHeader titleText="Main Table" />
           {data.length < 1 && (
             <div className="start">
@@ -322,9 +210,9 @@ export default function MainTable(props) {
                 Start a new game
               </Link>
             </div>
-          )}
-     
-      <Paper className={classes.root}>
+          )} */}
+
+          {/* <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -364,7 +252,6 @@ export default function MainTable(props) {
                               ? "bg-danger"
                               : ""
                           }
-
                           // style={inputStyles}
                         >
                           {column.format && typeof value === "number"
@@ -388,14 +275,10 @@ export default function MainTable(props) {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
-    {/* // Display last game played */}
-    <MainLastGame team={props.match.params.teamId} />
-    </React.Fragment>
-      
+    </Paper> */}
+          {/* // Display last game played */}
+        </React.Fragment>
       )}
-
-      
     </div>
   );
 }

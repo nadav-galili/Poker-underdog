@@ -26,6 +26,7 @@ const SuccessCard = (props) => {
   return (
     <div className="container-fluid">
       <h1>Success %</h1>
+      <span>{new Date().toLocaleDateString("en-GB")}</span>
       {data.length === 0 && (
         <div className="spinner pt-2">
           <SpinnerInfinity
@@ -56,7 +57,7 @@ const SuccessCard = (props) => {
                </a>
  
                <div id="amount" className="flex-fill">
-                 {data.length > 0 ? hero.successPercentage : ""}
+                 {data.length > 0 ? hero.successPercentage+' %' : ""}
                </div>
              </div>
              <div className="heroImage ">
@@ -82,7 +83,7 @@ const SuccessCard = (props) => {
                    {data.length > 0 ? player._id.name : ""}
                  </div>
                  <div className="rowProfit">
-                   {data.length > 0 ? player.successPercentage : ""}
+                   {data.length > 0 ? player.successPercentage+' %' : ""}
                  </div>
                </li>
              ))}

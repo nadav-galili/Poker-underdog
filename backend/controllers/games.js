@@ -20,7 +20,7 @@ exports.teamStats=async function (req, res){
         {
           $project: {
               players: 1,
-              created_at: 1,
+              createdAt: 1,
               team_name: 1,
               team_id: 1,
               gamesWithPlus: {
@@ -54,10 +54,10 @@ exports.teamStats=async function (req, res){
               $sum: 1,
             },
             avgCashing: {
-              $avg: "$players.numOfcashing",
+              $avg: "$players.numOfCashing",
             },
             lastGame: {
-              $max: "$created_at",
+              $max: "$createdAt",
             },
             gamesWithProfit: {
               $sum: "$gamesWithPlus"
@@ -267,10 +267,10 @@ exports.personalStats=async function(req,res){
               $sum: 1,
             },
             avgCashing: {
-              $avg: "$players.numOfcashing",
+              $avg: "$players.numOfCashing",
             },
             lastGame: {
-              $max: "$created_at",
+              $max: "$createdAt",
             },
           },
         },
@@ -316,7 +316,7 @@ exports.gamesByCardName=async function(req, res){
     {
       $project: {
           players: 1,
-          created_at: 1,
+          createdAt: 1,
           team_name: 1,
           team_id: 1,
           gamesWithProfit: {
@@ -350,10 +350,10 @@ exports.gamesByCardName=async function(req, res){
           $sum: 1,
         },
         avgCashing: {
-          $avg: "$players.numOfcashing",
+          $avg: "$players.numOfCashing",
         },
         lastGame: {
-          $max: "$created_at",
+          $max: "$createdAt",
         },
         gamesWithProfit: {
           $sum: "$gamesWithProfit"

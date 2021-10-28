@@ -43,6 +43,7 @@ const CardTable = (props) => {
   return (
     <div className="container-fluid">
       <h1>{headerTitle}</h1>
+      <span>{new Date().toLocaleDateString("en-GB") }</span>
       {data.length === 0 && (
         <div className="spinner pt-2">
           <SpinnerInfinity

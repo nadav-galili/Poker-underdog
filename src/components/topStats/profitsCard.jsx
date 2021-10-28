@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import gameService from "../../services/gameService";
 import { apiImage } from "../../config.json";
 
-const SuccessCard = (props) => {
+const ProfitsCard = (props) => {
   const [data, setData] = useState([]);
   const [hero, setHero] = useState([]);
 
   const teamId = props.match.params.teamId;
-  console.log("F", data);
-  console.log("hhhh", hero);
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.profits(teamId);
@@ -20,7 +18,7 @@ const SuccessCard = (props) => {
           return obj;
         });
       };
-      table = handleDates(table, "created_at");
+      table = handleDates(table, "createdAt");
       let myHero = table.shift();
       setHero(myHero);
       setData(table);
@@ -33,6 +31,7 @@ const SuccessCard = (props) => {
   return (
     <div className="container-fluid">
       <h1>Top 10 Profits </h1>
+      <span>{new Date().toLocaleDateString("en-GB")}</span>
       <div className="col-lg-3 col-10" id="cardTop">
         <ul className="statsList ">
           <li
@@ -48,8 +47,8 @@ const SuccessCard = (props) => {
               <a href="#/" id="heroName">
                 {data.length > 0 ? hero.players.name : ""}
               </a>
-              <div className="heroDate">
-                {data.length > 0 ? hero.created_at : ""}
+              <div className="heroDate ps-1">
+                {data.length > 0 ? hero.createdAt : ""}
               </div>
               <div id="amount" className="flex-fill">
                 {data.length > 0 ? hero.players.profit : ""}
@@ -66,7 +65,7 @@ const SuccessCard = (props) => {
             {data.map((player) => (
               <li
                 className="statsRow d-flex"
-                key={player.created_at + player.players.profit}
+                key={player.createdAt + player.players.profit}
               >
                 <div className="rowPos">{rank++}.</div>
                 <div className="rowImage">
@@ -83,7 +82,7 @@ const SuccessCard = (props) => {
                   {data.length > 0 ? player.players.name : ""}
                 </div>
                 <div className="rowDate">
-                  {data.length > 0 ? player.created_at : ""}
+                  {data.length > 0 ? player.createdAt : ""}
                 </div>
                 <div className="rowProfit">
                   {data.length > 0 ? player.players.profit : ""}
@@ -97,4 +96,4 @@ const SuccessCard = (props) => {
   );
 };
 
-export default SuccessCard;
+export default ProfitsCard;
