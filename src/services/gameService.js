@@ -40,6 +40,9 @@ export function gameById(gameId){
 export function updateGame(gameId, game){
   return http.put(`${apiUrl}/games/${gameId}`, game)
 }
+export function inProgress(teamId){
+  return http.get(`${apiUrl}/games/true/${teamId}`);
+}
 
 export default {
   lastGame,
@@ -51,5 +54,6 @@ export default {
   profits,
   newGame,
   gameById,
-  updateGame
+  updateGame,
+  inProgress
 };

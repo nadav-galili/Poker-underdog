@@ -167,11 +167,6 @@ exports.lastGame=async function(req,res){
       })
     .limit(1);
   res.send(game)
-
-  
- 
-  
-  
 }
 
 exports.profits=async function (req, res){
@@ -206,7 +201,7 @@ exports.dataByMonths=async function(req,res){
         }}, {  $match: {
           team_id: req.params.teamId,
         },}, {$group: {
-          _id:{   monthPlayed:{$month:"$created_at"},
+          _id:{   monthPlayed:{$month:"$createdAt"},
                   name: "$players.name",
                   image: "$players.image",
                   player_id: "$players.id",
@@ -222,10 +217,10 @@ exports.dataByMonths=async function(req,res){
                   $sum: 1,
                 },
                 avgCashing: {
-                  $avg: "$players.numOfcashing",
+                  $avg: "$players.numOfCashing",
                 },
                 lastGame: {
-                  $max: "$created_at",
+                  $max: "$createdAt",
                 },
         
         }}, {$sort: {
@@ -283,17 +278,17 @@ exports.newGame=async function (req, res){
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
   
-    let game = new Game(_.pick(req.body, ["team_name", "team_id", "players"]));
+    let game = new Game(_.pick(req.body, ["team_name", "team_id", "players", "isOpen"]));
     await game.save();
-    res.send(_.pick(game, ["_id", "team_name", "players"]));
+    res.send(_.pick(game, ["_id", "team_name", "players", "isOpen"]));
 }
 
 exports.updateGame=async function(req,res){
   const { error } = validate(req.body);
-  if (error) console.log(error.details[0].message);
-  // res.status(400).send(error.details[0].message);
+  // if (error) console.log(error.details[0].message);
+ if (error) res.status(400).send(error.details[0].message);
 
-  let game= await Game.findByIdAndUpdate(req.body.gameId,{"players":req.body.players},  { new: true });
+  let game= await Game.findByIdAndUpdate(req.body.gameId,{"players":req.body.players ,"isOpen":req.body.isOpen},  { new: true });
  await res.send(game);
 }
 exports.gamesByCardName=async function(req, res){
@@ -400,4 +395,8 @@ exports.gamesByCardName=async function(req, res){
   res.send(table);
 
 
+}
+exports.gameInProgress=async function (req,res){
+  let progress=await Game.find({team_id:req.params.teamId, isOpen:true});
+  res.send(progress);
 }

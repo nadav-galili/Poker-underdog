@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+
 import gameService from "../services/gameService";
 import PageHeader from "./common/pageHeader";
-import GameEnd from "./gameEnd";
 import PlayerCard from "./topStats/playerCard";
-import CardTable from "./topStats/cardTable";
 import SuccessP from "./topStats/successp";
 import CurrMonth from "./topStats/currMonth";
 import Profits from "./topStats/profits";
 import { SpinnerDiamond } from "spinners-react";
+import MainLastgame from "./mainLastGame";
 
 export default function MainTable(props) {
   //get the data for the table
@@ -20,7 +19,7 @@ export default function MainTable(props) {
   const [success, setSuccess] = useState([]);
   const [gamesprofit, setGamesprofit] = useState([]);
 
-  // const [monthleader, setMonthleader] = useState("");
+  const [monthleader, setMonthleader] = useState([]);
   const [profits, setProfits] = useState([]);
 
   const teamId = props.match.params.teamId;
@@ -61,25 +60,24 @@ export default function MainTable(props) {
     getTable();
   }, [setData, teamId]);
 
-  // useEffect(() => {
-  //   const dataByMonths = async () => {
-  //     let results = await gameService.monthsData(props.match.params.teamId);
-  //     results = results.data;
+  useEffect(() => {
+    const dataByMonths = async () => {
+      let results = await gameService.monthsData(props.match.params.teamId);
+      results = results.data;
+      let thisMonth = new Date().getMonth();
+      if (results.length > 0) {
+        const currMonth = results.filter(
+          (e) => e._id.monthPlayed !== thisMonth
+        );
+        const currMonthLeader = await currMonth.sort(
+          (a, b) => b.totalProfit - a.totalProfit
+        );
 
-  //     if (results.length > 0) {
-  //       const currMonth = results.filter(
-  //         (e) => e._id.monthPlayed !== thisMonth
-  //       );
-
-  //       const currMonthLeader = await currMonth.reduce((prev, current) =>
-  //         +prev.totalProfit > current.totalProfit ? prev : current
-  //       );
-
-  //       setMonthleader(currMonthLeader);
-  //     }
-  //   };
-  //   dataByMonths();
-  // }, [thisMonth, props.match.params.teamId]);
+        setMonthleader(currMonthLeader);
+      }
+    };
+    dataByMonths();
+  }, [props.match.params.teamId]);
 
   useEffect(() => {
     const profits = async () => {
@@ -91,13 +89,14 @@ export default function MainTable(props) {
     profits();
   }, [props.match.params.teamId]);
 
-  // let rank = 1;
-
-  <CardTable teamId={teamId} data={data} key={data.lastGame} />;
+  // <CardTable teamId={teamId} data={data} key={data.lastGame} />;
 
   return (
     <div className="container" id="dashboard">
-      <PageHeader className="mb-0" titleText={new Date().getFullYear() + " Top Stats"} />
+      <PageHeader
+        className="mb-0"
+        titleText={new Date().getFullYear() + " Top Stats"}
+      />
       <span>{new Date().toLocaleDateString("en-GB")}</span>
       {data.length < 1 && (
         <div className="spinner mt-5">
@@ -145,7 +144,6 @@ export default function MainTable(props) {
                 team={teamId}
               />
             )}
-
             {gamesprofit.length > 1 && (
               <PlayerCard
                 header="Games With Profit"
@@ -156,7 +154,6 @@ export default function MainTable(props) {
                 team={teamId}
               />
             )}
-
             {success.length > 1 && (
               <SuccessP
                 header="Success %"
@@ -167,7 +164,6 @@ export default function MainTable(props) {
                 team={teamId}
               />
             )}
-         
             {avgcashing.length > 1 && (
               <PlayerCard
                 header="Average Cashing"
@@ -178,105 +174,25 @@ export default function MainTable(props) {
                 team={teamId}
               />
             )}
-
-   
-
-           <Profits
+            <Profits
               header="Top 10 Profits"
               name={profits.length > 0 ? profits[0].players.name : ""}
               image={profits.length > 0 ? profits[0].players.image : ""}
               data={profits.length > 0 ? profits[0].players.profit : ""}
               team={teamId}
-            /> 
-                     {/*
-         <CurrMonth
-              header="Current Month"
-              data={monthleader.totalProfit}
-              name={monthleader ? monthleader._id.name : ""}
-              image={monthleader ? monthleader._id.image : ""}
-              cMonth={monthleader ? monthleader.lastGame : ""}
-              team={teamId}
-            />   */}
+            />
+            {monthleader.length > 0 && (
+              <CurrMonth
+                header="Current Month"
+                data={monthleader[0].totalProfit}
+                name={monthleader[0]._id.name}
+                image={monthleader[0]._id.image}
+                cMonth={monthleader[0].lastGame}
+                team={teamId}
+              />
+            )}
           </div>
-          {/* 
-          <PageHeader titleText="Main Table" />
-          {data.length < 1 && (
-            <div className="start">
-              <h2 className="noGames">No Games Played Yet!</h2>
-              <Link
-                className="btn btn-success mb-2"
-                to={`/new-game/${props.match.params.teamId}`}
-              >
-                Start a new game
-              </Link>
-            </div>
-          )} */}
-
-          {/* <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow
-                    hover
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={row.player}
-                  >
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          className={
-                            column.id === "avgProfit" && value > 0
-                              ? "bg-success"
-                              : column.id === "avgProfit" && value < 0
-                              ? "bg-danger"
-                              : ""
-                          }
-                          // style={inputStyles}
-                        >
-                          {column.format && typeof value === "number"
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
-    </Paper> */}
-          {/* // Display last game played */}
+          <MainLastgame teamId={teamId}  />
         </React.Fragment>
       )}
     </div>

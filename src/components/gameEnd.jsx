@@ -1,44 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import gameService from "../services/gameService";
 import PageHeader from "../components/common/pageHeader";
 import { apiImage } from "../config.json";
 import { SpinnerInfinity } from "spinners-react";
+import {Link} from "react-router-dom"
 
 const GameEnd = (props) => {
-  const [hero, setHero] = useState([]);
-  const [headerTitle, setHeaderTitle] = useState("");
   const teamId = props.match.params.teamId;
-  const cardName = props.match.params.cardName;
-
   const [data, setData] = useState([]);
   const [lastGame, setLastGame] = useState([]);
   useEffect(() => {
     const getLastGame = async () => {
       let game = await gameService.lastGame(props.match.params.teamId);
-      console.log(game, "gg");
       game = game.data[0];
+      game.players.sort((a,b)=>b.profit-a.profit)
       setData(game.players);
       setLastGame(game);
     };
 
     getLastGame();
   }, [setData, props.match.params.teamId]);
+  let Rank=1;
 
   return (
     <div className="container-fluid">
       <PageHeader titleText="Last Game" />
-      {/* <p className="text-primary">
-        {new Date(lastGame.createdAt).toLocaleDateString("en-GB") +
-          "  " +
-          new Date(lastGame.createdAt).getHours() +
-          ":" +
-          new Date(lastGame.createdAt).getMinutes() +
-          "-" +
-          new Date(lastGame.updatedAt).getHours() +
-          ":" +
-          new Date(lastGame.updatedAt).getMinutes()}
-      </p> */}
+
       {data.length === 0 && (
         <div className="spinner pt-2">
           <SpinnerInfinity
@@ -56,7 +43,7 @@ const GameEnd = (props) => {
           <ol className="statsList">
             <li
             id="lastGameHero"
-              className="statsHero d-flex"
+              className="statsHero d-flex flex-column"
               style={{
                 backgroundImage: `url(${
                   process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
@@ -66,29 +53,34 @@ const GameEnd = (props) => {
               <p>
                 {new Date(lastGame.createdAt).toLocaleDateString("en-GB") +
                   "  " +
-                  new Date(lastGame.createdAt).getHours() +
-                  ":" +
-                  new Date(lastGame.createdAt).getMinutes() +
-                  "-" +
-                  new Date(lastGame.updatedAt).getHours() +
-                  ":" +
-                  new Date(lastGame.updatedAt).getMinutes()}
+                  new Date(lastGame.createdAt).toLocaleString("en-US", {hour: "2-digit", minute: "2-digit", hour12: false})
+                  +" - "+
+                  new Date(lastGame.updatedAt).toLocaleString("en-US", {hour: "2-digit", minute: "2-digit", hour12: false}) 
+                  }
               </p>
-
+                <div className="stats d-flex w-100 justify-content-between" id="lGame">
+                  <p>Player</p>
+                  <p>Name</p>
+                  <p>Cashing</p>
+                  <p>Profit</p>
+                </div>
             
             </li>
             <React.Fragment>
               {data.map((player) => (
                 <li className="statsRow" key={player.id}>
-                  <div className="rowPos">2</div>
+                  <div className="rowPos">{Rank++}</div>
                   <div className="rowImage">
                     <img
                       src={data.length > 0 ? `${apiImage}${player.image}` : ""}
                       alt="player list row"
                     />
                   </div>
-                  <div className="rowName">
+                  <div className="rowName" id="lGameName">
                     {data.length > 1 ? player.name : ""}
+                  </div>
+                  <div className="rowCashing">
+                    {data.length > 1 ? player.cashing : ""}
                   </div>
                   <div
                     className={
@@ -103,6 +95,10 @@ const GameEnd = (props) => {
               ))}
             </React.Fragment>
           </ol>
+          <Link className="btn btn-primary " to={`/main-table/${teamId}`}>
+            Team Tables & Statistics
+            <i className="ps-2 fas fa-angle-double-right"></i>
+          </Link>
         </div>
       )}
     </div>

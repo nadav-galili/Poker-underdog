@@ -44,8 +44,6 @@ const Team = ({ team, removeTeam }) => {
           <Link className="btn btn-primary " to={`/main-table/${team._id}`}>
             Team Tables & Statistics
             <i className="ps-2 fas fa-angle-double-right"></i>
-
-
           </Link>
          
           

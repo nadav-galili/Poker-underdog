@@ -34,7 +34,7 @@ const CurrMonth = ({
         </div>
         <div className="card-img-overlay"></div>
         <div className="card-body" id="statsCardBody">
-          <p className="card-text" id="statsCardText">
+          <div className="card-text" id="statsCardText">
             <span>{header}</span>
             <br />
             <div className="d-flex justify-content-around">
@@ -43,7 +43,7 @@ const CurrMonth = ({
             </div>
     
           
-          </p>
+          </div>
         </div>
       </div>
       <Link

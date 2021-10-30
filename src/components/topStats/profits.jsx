@@ -1,6 +1,5 @@
 import React from "react";
 import { GiCardAceHearts } from "react-icons/gi";
-
 import { Link } from "react-router-dom";
 import { apiImage } from "../../config.json";
 import { AiOutlineDoubleRight } from "react-icons/ai";

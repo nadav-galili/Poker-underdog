@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import gameService from "../../services/gameService";
 import PageHeader from "../common/pageHeader";
 import { SpinnerInfinity } from "spinners-react";
-import { apiImage, apiUrl } from "../../config.json";
+import { apiImage } from "../../config.json";
 
 const NewGame = (props) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   useEffect(() => {
     const players = async () => {
       let playersInGame = await gameService.gameById(props.match.params.gameId);
@@ -19,35 +19,50 @@ const NewGame = (props) => {
     let player = data.players.find((e) => playerId === e.id);
     player.cashing += 50;
     player.numOfCashing += 1;
-    data.gameId = props.match.params.gameId;
-    gameService.updateGame(data._id, data).then((res) => {
-      setData(res.data);
+    let game={...data}
+    game.gameId = props.match.params.gameId;
+    delete game._id;
+    delete game.__v;
+    setData(game)
+    gameService.updateGame(game.gameId, game).then((res) => {
+      // setData(res.data);
     });
   };
 
   const undoCashing = (playerId) => {
     let player = data.players.find((e) => playerId === e.id);
-    if (player.cashing > 0) player.cashing -= 50;
-    if (player.numOfCashing > 0) player.numOfCashing -= 1;
-    data.gameId = props.match.params.gameId;
-
-    gameService.updateGame(data._id, data).then((res) => {
-      setData(res.data);
-    });
+    player.cashing -= 50;
+    player.numOfCashing -= 1;
+    let game={...data}
+    game.gameId = props.match.params.gameId;
+    delete game._id;
+    delete game.__v;
+    setData(game)
+    gameService.updateGame(game.gameId, game);
   };
 
   const handleChange = (playerId, e) => {
-    let player = data.players.find((e) => playerId === e.id);
+    let play={...data}
+    let player = play.players.find((e) => playerId === e.id);
     player.cashInHand = e.target.value;
     player.profit = player.cashInHand - player.cashing;
-    let game = data;
+    let game = play;
     setData(game);
   };
 
   const updateGame = () => {
-    data.gameId = props.match.params.gameId;
-    delete data._id;
-    gameService.updateGame(data.gameId, data).then((res) => {
+    let game={...data}
+    game.gameId = props.match.params.gameId;
+    delete game._id;
+    game.isOpen=false
+    game.players.sort((a,b)=>b.profit-a.profit)
+    console.log(game);
+    let gameRank=1;
+    game.players.map(p=>(
+      p.gameRank=gameRank++
+    ));
+    setData(game)
+    gameService.updateGame(game.gameId, game).then((res) => {
       setData(res.data);
     });
     props.history.push(`/last-game/${data.team_id}`);
@@ -56,14 +71,11 @@ const NewGame = (props) => {
     <div className="container-fluid">
       <PageHeader titleText="Game No." />
       <p className="text-danger">{data._id}</p>
-      <p className="text-primary">Started At:</p>
-      <p className="text-primary">
-        {new Date(data.createdAt).toLocaleDateString("en-GB") +
+      <p className="text-primary">Started At: {new Date(data.createdAt).toLocaleDateString("en-GB") +
           " " +
-          new Date(data.createdAt).getHours() +
-          " : " +
-          new Date(data.createdAt).getMinutes()}
-      </p>
+          new Date(data.createdAt).toLocaleString("en-US", {hour: "2-digit", minute: "2-digit", hour12: false})
+        }</p>
+    
       {data.length < 1 && (
         <div className="spinner pt-2">
           <SpinnerInfinity
@@ -127,6 +139,16 @@ const NewGame = (props) => {
                 </li>
               ))}
             </React.Fragment>
+            <li className="statsRow w-100">
+              <p className="ms-5 text-primary">Total</p>
+            <div className="ms-3 me-5">{data.players.reduce((a,b)=>{
+              return a+b.cashing
+            },0)}</div>
+           
+            <div className="totalPlayersProfit ms-5">{data.players.reduce((a,b)=>{
+              return a+b.profit
+            },0)}</div>
+            </li>
           </ol>
         </div>
       )}

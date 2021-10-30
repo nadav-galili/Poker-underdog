@@ -842,6 +842,20 @@ label {
   margin-bottom: 0;
 }
 
+#lGameName {
+  max-width: 30%;
+  padding-left: 0.7em;
+}
+
+.rowCashing {
+  font-size: 0.8em;
+  font-weight: bold;
+  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
+  padding-top: 1.1em;
+  text-transform: capitalize;
+  flex-grow: 2;
+}
+
 main {
   background-repeat: no-repeat;
   background-size: cover;

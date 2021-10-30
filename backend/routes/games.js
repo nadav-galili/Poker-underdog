@@ -16,8 +16,8 @@ router.get("/table/:teamId", auth, gamesController.teamStats);
 
 // gets  month stats
 router.get("/byMonths/:teamId",auth,gamesController.dataByMonths);
-
-
+//gameinprogrerss
+router.get('/true/:teamId', auth,gamesController.gameInProgress);
 //gets the latest game
 router.get("/last-game/:teamId",auth,gamesController.lastGame);
 // get 10 biggest profits
