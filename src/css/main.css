@@ -842,6 +842,11 @@ label {
   margin-bottom: 0;
 }
 
+.gameH2h {
+  align-items: center;
+  color: #fcfcfc;
+}
+
 #lGameName {
   max-width: 30%;
   padding-left: 0.7em;

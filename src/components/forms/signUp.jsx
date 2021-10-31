@@ -3,7 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import PageHeader from "../common/pageHeader";
 import * as Yup from "yup";
 import http from "../../services/httpService";
-import axios from "axios";
 import { apiUrl } from "../../config.json";
 import { toast } from "react-toastify";
 import userService from "../../services/userService";

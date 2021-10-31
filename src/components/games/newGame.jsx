@@ -3,9 +3,11 @@ import gameService from "../../services/gameService";
 import PageHeader from "../common/pageHeader";
 import { SpinnerInfinity } from "spinners-react";
 import { apiImage } from "../../config.json";
+import H2hGame from "../h2h/h2hGame";
 
 const NewGame = (props) => {
   const [data, setData] = useState({});
+
   useEffect(() => {
     const players = async () => {
       let playersInGame = await gameService.gameById(props.match.params.gameId);
@@ -14,16 +16,18 @@ const NewGame = (props) => {
 
     players();
   }, [props.match.params.gameId]);
+  let  playerstoh2h={...data};
+
 
   const addCashing = (playerId) => {
     let player = data.players.find((e) => playerId === e.id);
     player.cashing += 50;
     player.numOfCashing += 1;
-    let game={...data}
+    let game = { ...data };
     game.gameId = props.match.params.gameId;
     delete game._id;
     delete game.__v;
-    setData(game)
+    setData(game);
     gameService.updateGame(game.gameId, game).then((res) => {
       // setData(res.data);
     });
@@ -33,16 +37,16 @@ const NewGame = (props) => {
     let player = data.players.find((e) => playerId === e.id);
     player.cashing -= 50;
     player.numOfCashing -= 1;
-    let game={...data}
+    let game = { ...data };
     game.gameId = props.match.params.gameId;
     delete game._id;
     delete game.__v;
-    setData(game)
+    setData(game);
     gameService.updateGame(game.gameId, game);
   };
 
   const handleChange = (playerId, e) => {
-    let play={...data}
+    let play = { ...data };
     let player = play.players.find((e) => playerId === e.id);
     player.cashInHand = e.target.value;
     player.profit = player.cashInHand - player.cashing;
@@ -51,17 +55,15 @@ const NewGame = (props) => {
   };
 
   const updateGame = () => {
-    let game={...data}
+    let game = { ...data };
     game.gameId = props.match.params.gameId;
     delete game._id;
-    game.isOpen=false
-    game.players.sort((a,b)=>b.profit-a.profit)
+    game.isOpen = false;
+    game.players.sort((a, b) => b.profit - a.profit);
     console.log(game);
-    let gameRank=1;
-    game.players.map(p=>(
-      p.gameRank=gameRank++
-    ));
-    setData(game)
+    let gameRank = 1;
+    game.players.map((p) => (p.gameRank = gameRank++));
+    setData(game);
     gameService.updateGame(game.gameId, game).then((res) => {
       setData(res.data);
     });
@@ -71,11 +73,21 @@ const NewGame = (props) => {
     <div className="container-fluid">
       <PageHeader titleText="Game No." />
       <p className="text-danger">{data._id}</p>
-      <p className="text-primary">Started At: {new Date(data.createdAt).toLocaleDateString("en-GB") +
+      <p className="text-primary">
+        Started At:{" "}
+        {new Date(data.createdAt).toLocaleDateString("en-GB") +
           " " +
-          new Date(data.createdAt).toLocaleString("en-US", {hour: "2-digit", minute: "2-digit", hour12: false})
-        }</p>
-    
+          new Date(data.createdAt).toLocaleString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+          })}
+      </p>
+      {/* <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        player x cashed in
+      </div> */}
+  
+
       {data.length < 1 && (
         <div className="spinner pt-2">
           <SpinnerInfinity
@@ -90,10 +102,10 @@ const NewGame = (props) => {
       )}
 
       {data.players && (
-        <div className="col-lg-3 col-10" id="cardTop">
+        <div className="col-lg-8 col-10" id="cardTop">
           <ol className="statsList">
             <li
-            id="gameLi"
+              id="gameLi"
               className="statsHero d-flex"
               style={{
                 backgroundImage: `url(${
@@ -102,12 +114,10 @@ const NewGame = (props) => {
               }}
             >
               <div className="gameHeaders d-flex">
-              <div className="Cashing">Cashing</div>
-              <div className="Hand">Cash In Hand</div>
-              <div className="Profit">Profit</div>
+                <div className="Cashing">Cashing</div>
+                <div className="Hand">Cash In Hand</div>
+                <div className="Profit">Profit</div>
               </div>
-              
-           
             </li>
             <React.Fragment>
               {data.players.map((player) => (
@@ -121,6 +131,7 @@ const NewGame = (props) => {
                   >
                     Add 50$
                   </i>
+
                   <div className="rowCash flex-fill">{player.cashing}</div>
                   <div className="rowCashInHand">
                     <input
@@ -141,13 +152,17 @@ const NewGame = (props) => {
             </React.Fragment>
             <li className="statsRow w-100">
               <p className="ms-5 text-primary">Total</p>
-            <div className="ms-3 me-5">{data.players.reduce((a,b)=>{
-              return a+b.cashing
-            },0)}</div>
-           
-            <div className="totalPlayersProfit ms-5">{data.players.reduce((a,b)=>{
-              return a+b.profit
-            },0)}</div>
+              <div className="ms-3 me-5">
+                {data.players.reduce((a, b) => {
+                  return a + b.cashing;
+                }, 0)}
+              </div>
+
+              <div className="totalPlayersProfit ms-5">
+                {data.players.reduce((a, b) => {
+                  return a + b.profit;
+                }, 0)}
+              </div>
             </li>
           </ol>
         </div>
@@ -161,6 +176,7 @@ const NewGame = (props) => {
         <div className="btn btn-primary update">Update Game</div>
         <div className="btn btn-danger update">Reset Game</div>
       </div>
+      <H2hGame  players={playerstoh2h}/>
     </div>
   );
 };

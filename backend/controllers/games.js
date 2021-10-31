@@ -285,7 +285,6 @@ exports.newGame=async function (req, res){
 
 exports.updateGame=async function(req,res){
   const { error } = validate(req.body);
-  // if (error) console.log(error.details[0].message);
  if (error) res.status(400).send(error.details[0].message);
 
   let game= await Game.findByIdAndUpdate(req.body.gameId,{"players":req.body.players ,"isOpen":req.body.isOpen},  { new: true });

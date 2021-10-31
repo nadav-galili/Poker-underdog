@@ -14,7 +14,7 @@ const SelectPlayers = (props) => {
       if (data.length > 0) {
         const players = await teamService.getTeam(data);
         const game = await gameService.inProgress(props.match.params.teamId);
-    
+
         if (game.data.length > 0) {
           setSelected(game.data[0].players);
           setStarted(game.data[0]);
@@ -24,11 +24,6 @@ const SelectPlayers = (props) => {
     };
     fetchPlayers();
   }, [props.match.params.teamId, data]);
-
-  useEffect(() => {
-    localStorage.setItem("playersInGame", JSON.stringify(selected));
-    localStorage.setItem("data", JSON.stringify(data));
-  });
 
   function selectPlayers(playerId, name, image) {
     const player = {
@@ -50,7 +45,6 @@ const SelectPlayers = (props) => {
     shuffle.play();
     if (!started) {
       let game = {
-    
         isOpen: true,
         players: selected,
         team_name: data.name,
@@ -60,20 +54,16 @@ const SelectPlayers = (props) => {
         console.log(res);
         props.history.push(`/games/${res.data._id}`);
       });
-    }
-
-
-    else{
-      let game={
-     players:selected,
-      team_name:started.team_name,
-      team_id:started.team_id,
-      gameId:started._id
-      }
-      gameService.updateGame(started._id, game).then((res)=>{
-
+    } else {
+      let game = {
+        players: selected,
+        team_name: started.team_name,
+        team_id: started.team_id,
+        gameId: started._id,
+      };
+      gameService.updateGame(started._id, game).then((res) => {
         props.history.push(`/games/${res.data._id}`);
-      })
+      });
     }
   }
 
