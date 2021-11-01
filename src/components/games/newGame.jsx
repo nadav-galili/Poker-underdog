@@ -60,7 +60,7 @@ const NewGame = (props) => {
     delete game._id;
     game.isOpen = false;
     game.players.sort((a, b) => b.profit - a.profit);
-    console.log(game);
+   
     let gameRank = 1;
     game.players.map((p) => (p.gameRank = gameRank++));
     setData(game);
@@ -176,7 +176,7 @@ const NewGame = (props) => {
         <div className="btn btn-primary update">Update Game</div>
         <div className="btn btn-danger update">Reset Game</div>
       </div>
-      <H2hGame  players={playerstoh2h}/>
+      <H2hGame  gameId={data._id}/>
     </div>
   );
 };

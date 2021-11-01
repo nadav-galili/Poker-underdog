@@ -581,6 +581,14 @@ tfoot td {
   font-weight: bolder;
 }
 
+.copyrights a {
+  font-size: 1.1em;
+  display: block;
+  font-weight: bolder;
+  margin: auto;
+  text-align: center;
+}
+
 .social-icons {
   height: 5em;
   width: 25em;

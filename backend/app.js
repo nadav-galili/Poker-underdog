@@ -2,6 +2,7 @@ const users = require("./routes/users");
 const auth = require("./routes/auth");
 const games = require("./routes/games");
 const teams = require("./routes/teams");
+const h2h=require("./routes/h2h");
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -39,11 +40,12 @@ app.use(cors());
 // app.use(cors(corsOptions));
 
 app.use(express.json());
-
+app.use("/api/h2h",h2h);
 app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/games", games);
 app.use("/api/teams", teams);
+
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Poker-Underground application test." });

@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 
 const Footer = () => {
   return (
@@ -15,6 +16,7 @@ const Footer = () => {
           Poker-Underdog was created by  Nadav Galili &copy;{" "}
           {new Date().getFullYear()}
         </p>
+        <a href="https://www.nadav-galili.com">www.nadav-galili.com</a>
         </div>
       
         <div className="social-icons ">

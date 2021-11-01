@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageHeader from "./common/pageHeader";
 import teamService from "../services/teamService";
 import gameService from "../services/gameService";
+import h2hService from "../services/h2hService";
 import Player from "./player";
 
 const SelectPlayers = (props) => {
@@ -51,7 +52,10 @@ const SelectPlayers = (props) => {
         team_id: data._id,
       };
       gameService.newGame(game).then((res) => {
-        console.log(res);
+        let newGame = { ...res.data };
+        newGame.gameId = newGame._id;
+        delete newGame._id;
+        h2hService.newH2h(newGame);
         props.history.push(`/games/${res.data._id}`);
       });
     } else {
@@ -62,7 +66,10 @@ const SelectPlayers = (props) => {
         gameId: started._id,
       };
       gameService.updateGame(started._id, game).then((res) => {
-        props.history.push(`/games/${res.data._id}`);
+        console.log(res.data);
+        //  res.data.gameId=res.data._id
+        // h2hService.newH2h(res.data)
+        // props.history.push(`/games/${res.data._id}`);
       });
     }
   }

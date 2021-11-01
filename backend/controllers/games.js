@@ -159,7 +159,6 @@ exports.successp=async function (req, res){
 }
 
 exports.lastGame=async function(req,res){
-  console.log( req.params.teamId);
     const game = await Game.find(
       { team_id: req.params.teamId }
       ).sort({
@@ -280,7 +279,7 @@ exports.newGame=async function (req, res){
   
     let game = new Game(_.pick(req.body, ["team_name", "team_id", "players", "isOpen"]));
     await game.save();
-    res.send(_.pick(game, ["_id", "team_name", "players", "isOpen"]));
+    res.send(_.pick(game, ["_id", "team_name", "players", "isOpen", "team_id"]));
 }
 
 exports.updateGame=async function(req,res){
