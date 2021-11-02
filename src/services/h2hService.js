@@ -9,7 +9,12 @@ export function getByGameId(gameId){
     return http.get(`${apiUrl}/h2h/${gameId}`)
 }
 
+export function updateH2h(gameId){
+    return http.put(`${apiUrl}/h2h/updateh2h/${gameId}`)
+}
+
 export default{
     newH2h,
-    getByGameId
+    getByGameId,
+    updateH2h
 }

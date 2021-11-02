@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import gameService from "../../services/gameService";
+import h2hService from "../../services/h2hService";
 import PageHeader from "../common/pageHeader";
 import { SpinnerInfinity } from "spinners-react";
 import { apiImage } from "../../config.json";
@@ -16,7 +17,7 @@ const NewGame = (props) => {
 
     players();
   }, [props.match.params.gameId]);
-  let  playerstoh2h={...data};
+ 
 
 
   const addCashing = (playerId) => {
@@ -29,7 +30,7 @@ const NewGame = (props) => {
     delete game.__v;
     setData(game);
     gameService.updateGame(game.gameId, game).then((res) => {
-      // setData(res.data);
+   
     });
   };
 
@@ -65,6 +66,7 @@ const NewGame = (props) => {
     game.players.map((p) => (p.gameRank = gameRank++));
     setData(game);
     gameService.updateGame(game.gameId, game).then((res) => {
+      h2hService.updateH2h(game.gameId)
       setData(res.data);
     });
     props.history.push(`/last-game/${data.team_id}`);

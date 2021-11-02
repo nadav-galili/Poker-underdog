@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import gameService from "../services/gameService";
 import PageHeader from "../components/common/pageHeader";
+import H2hGameEnd from "./h2h/h2hGameEnd";
 import { apiImage } from "../config.json";
 import { SpinnerInfinity } from "spinners-react";
 import {Link} from "react-router-dom"
@@ -95,6 +96,7 @@ const GameEnd = (props) => {
               ))}
             </React.Fragment>
           </ol>
+          <H2hGameEnd gameId={lastGame._id}/>
           <Link className="btn btn-primary " to={`/main-table/${teamId}`}>
             Team Tables & Statistics
             <i className="ps-2 fas fa-angle-double-right"></i>

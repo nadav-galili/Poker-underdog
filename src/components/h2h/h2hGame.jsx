@@ -1,21 +1,40 @@
 import React, { useState, useEffect } from "react";
 import PageHeader from "../common/pageHeader";
 import h2hService from "../../services/h2hService";
-import {apiImage} from "../../config.json"
+import gameService from "../../services/gameService";
+import { apiImage } from "../../config.json";
+
 
 const H2hGame = ({ gameId }) => {
-  const [players, setPlayers] = useState({});
-
+  const [players, setPlayers] = useState([]);
+  const [game, setGame]=useState({})
 
   useEffect(() => {
     const h2h = async () => {
-      let playersInGame = await h2hService.getByGameId(gameId);
-      setPlayers(playersInGame.data[0].players);
-  
+      try {
+        let playersInGame = await h2hService.getByGameId(gameId);
+        playersInGame = await playersInGame.data[0].players;
+        setPlayers(playersInGame);
+      } catch (error) {
+        console.log("error");
+      }
     };
     h2h();
   }, [gameId]);
-  console.log(players);
+
+  useEffect(()=>{
+      const game=async()=>{
+          try{
+              let gameForH2h=await gameService.gameById(gameId);
+              setGame(gameForH2h.data)
+          }
+          catch(error){
+              console.log("Error");
+          }
+      };
+      game()
+  }, [gameId])
+  
   return (
     <React.Fragment>
       <PageHeader titleText="Head 2 Head" />
@@ -36,21 +55,20 @@ const H2hGame = ({ gameId }) => {
               <div className="player2">Player 2</div>
             </div>
           </li>
-            {players.length>0 &&(
- players.map((p) => (
-          <div className="statsRow w-100 justify-content-evenly">
-      <div className="rowPlayer">
-        <img src={`${apiImage}${p[0].image}`} alt="" />
-      </div>
-      <p className="d-flex align-items-center"><strong>Vs</strong></p>
-      <div className="rowPlayer">
-        <img src={`${apiImage}${p[1].image}`} alt="" />
-      </div>
-      </div>
-  ))
-            )
-             }
-     
+          {players.length > 0 &&
+            players.map((p) => (
+              <div className="statsRow w-100 justify-content-evenly" key={p[0].id}>
+                <div className="rowPlayer">
+                  <img src={`${apiImage}${p[0].image}`} alt="" />
+                </div>
+                <p className="d-flex align-items-center">
+                  <strong>Vs</strong>
+                </p>
+                <div className="rowPlayer">
+                  <img src={`${apiImage}${p[1].image}`} alt="" />
+                </div>
+              </div>
+            ))}
         </ol>
       </div>
     </React.Fragment>
