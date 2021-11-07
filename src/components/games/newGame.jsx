@@ -17,8 +17,6 @@ const NewGame = (props) => {
 
     players();
   }, [props.match.params.gameId]);
- 
-
 
   const addCashing = (playerId) => {
     let player = data.players.find((e) => playerId === e.id);
@@ -29,13 +27,12 @@ const NewGame = (props) => {
     delete game._id;
     delete game.__v;
     setData(game);
-    gameService.updateGame(game.gameId, game).then((res) => {
-   
-    });
+    gameService.updateGame(game.gameId, game).then((res) => {});
   };
 
   const undoCashing = (playerId) => {
     let player = data.players.find((e) => playerId === e.id);
+  if(player.cashing>0){
     player.cashing -= 50;
     player.numOfCashing -= 1;
     let game = { ...data };
@@ -44,6 +41,7 @@ const NewGame = (props) => {
     delete game.__v;
     setData(game);
     gameService.updateGame(game.gameId, game);
+  }
   };
 
   const handleChange = (playerId, e) => {
@@ -61,18 +59,18 @@ const NewGame = (props) => {
     delete game._id;
     game.isOpen = false;
     game.players.sort((a, b) => b.profit - a.profit);
-   
+
     let gameRank = 1;
     game.players.map((p) => (p.gameRank = gameRank++));
     setData(game);
     gameService.updateGame(game.gameId, game).then((res) => {
-      h2hService.updateH2h(game.gameId)
+      h2hService.updateH2h(game.gameId);
       setData(res.data);
     });
-    props.history.push(`/last-game/${data.team_id}`);
+    props.history.replace(`/last-game/${data.team_id}`);
   };
   return (
-    <div className="container-fluid">
+    <div className="container ">
       <PageHeader titleText="Game No." />
       <p className="text-danger">{data._id}</p>
       <p className="text-primary">
@@ -88,7 +86,6 @@ const NewGame = (props) => {
       {/* <div class="alert alert-primary alert-dismissible fade show" role="alert">
         player x cashed in
       </div> */}
-  
 
       {data.length < 1 && (
         <div className="spinner pt-2">
@@ -104,7 +101,7 @@ const NewGame = (props) => {
       )}
 
       {data.players && (
-        <div className="col-lg-8 col-10" id="cardTop">
+        <div className="col-lg-8 col-12" id="newGameTop">
           <ol className="statsList">
             <li
               id="gameLi"
@@ -115,17 +112,23 @@ const NewGame = (props) => {
                 })`,
               }}
             >
-              <div className="gameHeaders d-flex">
-                <div className="Cashing">Cashing</div>
-                <div className="Hand">Cash In Hand</div>
-                <div className="Profit">Profit</div>
+              <div className="gameHeaders d-flex justify-content-evenly">
+                <div className="P1">Player</div>
+                <div className="add1">Add 50</div>
+                <div className="Cashing1">Cashing</div>
+                <div className="Hand1">Cash In Hand</div>
+                <div className="Profit1">Profit</div>
+                <div className="">Cancel </div>
               </div>
             </li>
             <React.Fragment>
               {data.players.map((player) => (
-                <li className="statsRow" key={player.id}>
+                <li
+                  className="statsRows w-100 d-flex justify-content-evenly"
+                  key={player.id}
+                >
                   <div className="rowPlayer">
-                    <img src={`${apiImage}${player.image}`} alt="" />
+                    <img src={`${apiImage}${player.image}`} alt="player" />
                   </div>
                   <i
                     className="fas fa-money-bill-wave"
@@ -134,7 +137,7 @@ const NewGame = (props) => {
                     Add 50$
                   </i>
 
-                  <div className="rowCash flex-fill">{player.cashing}</div>
+                  <div className="rowCash">{player.cashing}</div>
                   <div className="rowCashInHand">
                     <input
                       type="number"
@@ -142,7 +145,7 @@ const NewGame = (props) => {
                       onChange={(e) => handleChange(player.id, e)}
                     />
                   </div>
-                  <div className="playerProfit flex-fill">{player.profit}</div>
+                  <div className="playerProfit ">{player.profit}</div>
                   <i
                     className="fas fa-minus-circle"
                     onClick={() => undoCashing(player.id)}
@@ -152,33 +155,37 @@ const NewGame = (props) => {
                 </li>
               ))}
             </React.Fragment>
-            <li className="statsRow w-100">
-              <p className="ms-5 text-primary">Total</p>
-              <div className="ms-3 me-5">
+            <li className="statsRows w-100 d-flex justify-content-evenly">
+              <div className="rowPlayer text-primary"></div>
+              <div className="fas fa-money-bill-wave text-primary">Total</div>
+              <div className="rowCash text-primary">
                 {data.players.reduce((a, b) => {
                   return a + b.cashing;
                 }, 0)}
               </div>
-
-              <div className="totalPlayersProfit ms-5">
+            <div className="rowCashInHand"></div>
+              <div className="playerProfit text-primary">
                 {data.players.reduce((a, b) => {
                   return a + b.profit;
                 }, 0)}
               </div>
+              <div className="fas fa-minus-circle text-primary">Cancel</div>
             </li>
-          </ol>
-        </div>
-      )}
-      <div
+            <div
         onClick={() => {
           updateGame();
         }}
-        className="buttonsGame d-flex justify-content-between col-lg-3 col-10"
+        className="buttonsGame d-flex justify-content-between"
       >
-        <div className="btn btn-primary update">Update Game</div>
-        <div className="btn btn-danger update">Reset Game</div>
+        <div className="btn btn-primary update m-2">Update Game</div>
+        <div className="btn btn-danger update m-2">Reset Game</div>
       </div>
-      <H2hGame  gameId={data._id}/>
+          </ol>
+         
+        </div>
+      )}
+    
+      <H2hGame gameId={data._id} />
     </div>
   );
 };

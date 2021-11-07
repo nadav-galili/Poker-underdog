@@ -50,7 +50,7 @@ const MyTeams = () => {
     }
   };
   return (
-    <div className="container-fluid about">
+    <div className="container about">
       <PageHeader titleText="My Teams Page" />
       <img
         src={process.env.PUBLIC_URL + "/icons/teams.png"}

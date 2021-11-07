@@ -426,6 +426,20 @@ nav {
   }
 }
 
+.carousel-inner {
+  height: 30em;
+}
+
+.carousel-inner img {
+  height: 100%;
+  object-fit: contain;
+}
+
+.carousel-item {
+  border: 2px solid #02d84d;
+  height: 95%;
+}
+
 .userImage {
   width: 200px !important;
   height: 200px;
@@ -499,21 +513,57 @@ h4.mt-4 {
   height: 200px;
 }
 
-.noStats {
+.playerBg {
+  border-radius: 10px;
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 5px #888888;
+  width: 96%;
+  margin: auto;
+  height: 12em;
+}
+
+.pImage {
+  align-self: end;
+}
+
+.pImage img {
+  height: 9em;
+}
+
+.pDetails {
+  align-self: center;
   color: #fcfcfc;
-  font-size: 2em;
 }
 
-.myStats {
-  font-size: 3.5em;
+.pDetails p {
+  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
+  font-size: 1.5em;
+  text-transform: capitalize;
 }
 
-.card.mx-auto.mt-5 {
-  margin-bottom: 80px;
+.detailedStats {
+  width: 90%;
+  margin: auto;
+  font-size: 0.9em;
 }
 
-.playerStats {
-  width: 85% !important;
+.personalStat :first-child {
+  border-right: 1px solid grey;
+  font-weight: 900;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.personalStat :nth-child(2) {
+  text-align: center;
+  color: blue;
+}
+
+.detailedStatsRow2 {
+  width: 90%;
+  margin: auto;
+  font-size: 0.9em;
 }
 
 .playerImage {
@@ -587,6 +637,7 @@ tfoot td {
   font-weight: bolder;
   margin: auto;
   text-align: center;
+  text-decoration: none;
 }
 
 .social-icons {
@@ -693,7 +744,7 @@ tfoot td {
   border-bottom: 0.7px solid;
 }
 
-.rowPos {
+.rowPos, .rowPosTop {
   font-weight: bold;
   padding-left: 5px;
   font-size: 0.8em;
@@ -701,13 +752,17 @@ tfoot td {
   align-self: center;
 }
 
-.rowImage {
+.rowPosTop {
+  width: 10%;
+}
+
+.rowImage, .rowImageTop {
   align-self: center;
   width: 20%;
   margin-left: 0.8em;
 }
 
-.rowImage img {
+.rowImage img, .rowImageTop img {
   border-radius: 50%;
   border: 1px solid black;
   height: 40px;
@@ -716,32 +771,33 @@ tfoot td {
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
-.rowName {
+.rowImageTop {
+  width: 10%;
+}
+
+.rowName, .rowNameTop {
   font-size: 0.8em;
   font-weight: bold;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   padding-left: 2.5em;
-  padding-top: 0.9em;
+  align-self: center;
   text-transform: capitalize;
   flex-grow: 2;
 }
 
 .rowDate {
+  width: 30%;
+  align-self: center;
   font-size: 0.7em;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
-  padding-right: 5em;
-  padding-top: 0.9em;
 }
 
-.rowProfit {
+.rowProfit, .rowProfitTop {
   font-size: 0.7em;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   margin-left: auto;
+  align-self: center;
   margin-right: 0.5em;
-  padding-top: 0.9em;
-}
-
-.rowProfit {
   font-size: 0.9em;
   font-weight: bold;
 }
@@ -769,28 +825,40 @@ label {
   color: red;
 }
 
+.joinB {
+  padding: 0;
+  margin: 0;
+}
+
+.statsRows {
+  background-color: #fcfcfc;
+  align-content: end;
+  height: 3.5em;
+  border-bottom: 0.7px solid;
+}
+
 .rowPlayer {
   align-self: center;
-  width: 15%;
-  margin-left: 0.2em;
+  min-width: 15%;
 }
 
 .rowPlayer img {
   border-radius: 50%;
   border: 1px solid black;
-  height: 40px;
-  width: 40px;
+  height: 2.7em;
+  width: 80%;
+  display: block;
+  margin: auto;
   object-fit: cover;
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
 .rowCash {
   align-self: center;
-  margin-left: 0.2em;
+  min-width: 10%;
 }
 
 .rowCashInHand {
-  margin-left: 0.2em;
   align-self: center;
   width: 20%;
 }
@@ -800,15 +868,13 @@ label {
 }
 
 .playerProfit {
-  margin-left: 0.2em;
   align-self: center;
+  min-width: 10%;
 }
 
 .fas.fa-minus-circle {
-  margin-left: 0.4em;
   align-self: center;
   font-size: 0.5em;
-  padding-right: 0.5em;
 }
 
 .fas.fa-money-bill-wave {
@@ -819,6 +885,7 @@ label {
 #gameLi {
   width: 100%;
   height: 50px;
+  background-color: #6c14b4;
 }
 
 .gameHeaders {
@@ -827,14 +894,6 @@ label {
   width: 100%;
   justify-content: center;
   color: #fcfcfc;
-}
-
-.gameHeaders .Cashing {
-  padding-right: 20px;
-}
-
-.gameHeaders .Hand {
-  padding-right: 20px;
 }
 
 #lastGameHero {
@@ -853,6 +912,19 @@ label {
 .gameH2h {
   align-items: center;
   color: #fcfcfc;
+}
+
+.buttonsGame {
+  background-color: white;
+}
+
+@media screen and (min-width: 600px) {
+  .rowPlayer {
+    min-width: 10%;
+  }
+  .rowPlayer img {
+    width: 50%;
+  }
 }
 
 #lGameName {

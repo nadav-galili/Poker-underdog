@@ -1,11 +1,67 @@
 import React from "react";
 import PageHeader from "./common/pageHeader";
+import Carousel from "react-bootstrap/Carousel";
 
 const Demo = () => {
   return (
-    <div className="container-fluid">
+    <div className="container">
       <PageHeader titleText="Demo for the game" />
+      <div className="screenShots col-lg-6 col-12">
+        <h3 className="text-primary">Screen Shots</h3>
+        <Carousel>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src={process.env.PUBLIC_URL + "demo/dashboard.JPG"}
+              alt="First slide"
+            />
+            <Carousel.Caption>
+              {/* <h3>First slide label</h3>
+              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src={process.env.PUBLIC_URL + "demo/dash2.JPG"}
+              alt="Second slide"
+            />
 
+            <Carousel.Caption>
+              {/* <h3>Second slide label</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src={process.env.PUBLIC_URL + "demo/dash3.JPG"}
+              alt="Third slide"
+            />
+
+            <Carousel.Caption>
+              {/* <h3>Third slide label</h3>
+              <p>
+                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+              </p> */}
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src={process.env.PUBLIC_URL + "demo/dash4.JPG"}
+              alt="Third slide"
+            />
+
+            <Carousel.Caption>
+              {/* <h3>Third slide label</h3>
+              <p>
+                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+              </p> */}
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
+      </div>
       <div className="row demoText">
         <h3>Basic instructions for setting up a game:</h3>
         <ul>
@@ -22,9 +78,12 @@ const Demo = () => {
             className="demo-img"
           /> */}
           {/* <video src={process.env.PUBLIC_URL + "demo/demo1.mp4"}></video> */}
-          <video width="700" height="400" controls className="demoVideo">
+         <div className="video col-lg-6 col-12">
+         <video width="100%" controls className="demoVideo ">
             <source src={process.env.PUBLIC_URL + "demo/demo1.mp4"} />
           </video>
+         </div>
+        
           <li>
             In this page you can:
             <ul>
@@ -36,10 +95,11 @@ const Demo = () => {
             </ul>
           </li>
           <li>Table & statistics</li>
-
-          <video width="700" height="400" controls className="demoVideo">
+          <div className="video col-lg-6 col-12">
+          <video width="100%" controls className="demoVideo">
             <source src={process.env.PUBLIC_URL + "demo/demo2.mp4"} />
           </video>
+          </div>
           <li>Start a new game:</li>
           <ul>
             <li>Select the players that will play in the game</li>

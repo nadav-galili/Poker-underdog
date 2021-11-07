@@ -9,10 +9,10 @@ import Profits from "./topStats/profits";
 import { SpinnerDiamond } from "spinners-react";
 import MainLastgame from "./mainLastGame";
 
+
 export default function MainTable(props) {
   //get the data for the table
   const [data, setData] = useState([]);
-  // const [profit, setProfit] = useState([]);
   const [avgprofit, setAvgprofit] = useState([]);
   const [totalgames, setTotalgames] = useState([]);
   const [avgcashing, setAvgcashing] = useState([]);
@@ -89,7 +89,6 @@ export default function MainTable(props) {
     profits();
   }, [props.match.params.teamId]);
 
-  // <CardTable teamId={teamId} data={data} key={data.lastGame} />;
 
   return (
     <div className="container" id="dashboard">
@@ -193,6 +192,7 @@ export default function MainTable(props) {
             )}
           </div>
           <MainLastgame teamId={teamId}  />
+         
         </React.Fragment>
       )}
     </div>

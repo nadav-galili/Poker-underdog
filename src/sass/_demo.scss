@@ -21,3 +21,18 @@
     height: 250px;
   }
 }
+
+
+.carousel-inner{
+   height:30em;
+   & img{
+     height:100%;
+    object-fit: contain;
+  }
+}
+
+.carousel-item{
+  border: 2px solid $basecolorGreen;
+  height: 95%;
+ 
+}

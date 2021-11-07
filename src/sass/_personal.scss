@@ -1,16 +1,52 @@
-.noStats {
-  color: $navbarWhite;
-  font-size: 2em;
+.playerBg{
+  border-radius: 10px;
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 5px #888888;
+  width: 96%;
+  margin: auto;
+  height: 12em;
+}
+.pImage{
+  align-self: end;
+ & img{
+   height: 9em;
+  //  align-self: center;
+ }
 }
 
-.myStats {
-  font-size: 3.5em;
+.pDetails{
+   align-self: center;
+   color:$navbarWhite;
+& p{
+  font-family:$fantasyFont;
+  font-size: 1.5em;
+  text-transform: capitalize;
+}
 }
 
-.card.mx-auto.mt-5 {
-  margin-bottom: 80px;
+@mixin detailedStats{
+  width: 90%;
+  margin: auto;
+ font-size: 0.9em;
+
+}
+.detailedStats{ width: 90%;
+  margin: auto;
+ font-size: 0.9em;}
+.personalStat{
+  & :first-child{
+    border-right: 1px solid grey;
+    font-weight: 900;
+    text-decoration: underline;
+    text-align: center;
+  }
+  & :nth-child(2){
+    text-align: center;
+    color:blue;
+  }
 }
 
-.playerStats {
-  width: 85% !important;
+ .detailedStatsRow2 {
+@include detailedStats
 }

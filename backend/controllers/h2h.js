@@ -8,7 +8,7 @@ exports.newH2h = async function (req, res) {
   let players = req.body.players;
 
   if (players.length % 2 !== 0) {
-    players.push({ id: "1234", name: "monkey", image: "monkey", profit: 0 });
+    players.push({ id: "1234", name: "monkey", image: "uploads/monkey.jpg", profit: 0 });
   }
   var splitAt = function (i, xs) {
     var a = xs.slice(0, i);
@@ -85,3 +85,34 @@ exports.updateh2h = async function (req, res) {
   );
   await res.send(newH2h);
 };
+
+exports.getplayerStats=async function(req, res){
+  const agg =await H2h.aggregate(
+    [
+      {
+        $unwind: {
+          path: '$players'
+        }
+      }, {
+        $unwind: {
+          path: '$players'
+        }
+      }, {
+        $match: {
+         "players.id": req.params.pId
+        }
+      }, {
+        $group: {
+          _id: {
+          name: '$players.name', 
+            player_id: '$players.id'
+          }, 
+          totalPoints: {
+            $sum: '$players.points'
+          }
+        }
+      }
+    ]
+  );
+  res.send(agg)
+}

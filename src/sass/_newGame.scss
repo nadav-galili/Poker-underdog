@@ -1,12 +1,21 @@
+.statsRows {
+  background-color: $navbarWhite;
+  align-content: end;
+   height: 3.5em;
+  border-bottom: 0.7px solid;
+}
+
 .rowPlayer {
   align-self: center;
-  width: 15%;
-  margin-left: 0.2em;
+  min-width: 15%;
+
   img {
     border-radius: 50%;
     border: 1px solid black;
-    height: 40px;
-    width: 40px;
+    height:2.7em;
+    width: 80%;
+    display: block;
+    margin: auto;
     object-fit: cover;
     background-image: linear-gradient($basecolorPurple, #4e4949);
   }
@@ -14,10 +23,9 @@
 
 .rowCash {
   align-self: center;
-  margin-left: 0.2em;
+  min-width: 10%;
 }
 .rowCashInHand {
-  margin-left: 0.2em;
   align-self: center;
   width: 20%;
   & input {
@@ -25,24 +33,27 @@
   }
 }
 .playerProfit {
-  margin-left: 0.2em;
+  // margin-left: 0.2em;
   align-self: center;
+  min-width: 10%;
 }
 .fas.fa-minus-circle {
-  // width: 10%;
-  margin-left: 0.4em;
+  //  width: 10%;
+  // margin-left: 0.4em;
   align-self: center;
   font-size: 0.5em;
-  padding-right: 0.5em;
+  // padding-right: 0.5em;
 }
 .fas.fa-money-bill-wave {
   align-self: center;
   font-size: 0.5em;
+  // width: 10%;
 }
 
 #gameLi {
   width: 100%;
   height: 50px;
+  background-color: $basecolorPurple;
 }
 .gameHeaders {
   align-self: flex-end;
@@ -50,12 +61,12 @@
   width: 100%;
   justify-content: center;
   color: $navbarWhite;
-  & .Cashing {
-    padding-right: 20px;
-  }
-  & .Hand {
-    padding-right: 20px;
-  }
+  // & .Cashing {
+  //   padding-right: 20px;
+  // }
+  // & .Hand {
+  //   padding-right: 20px;
+  // }
 }
 
 #lastGameHero {
@@ -71,12 +82,19 @@
   }
 }
 
-.gameH2h{
+.gameH2h {
   align-items: center;
-  color:$navbarWhite;
+  color: $navbarWhite;
 }
 
-// .alert{
-//  width: 80%;
- 
-// }
+.buttonsGame{
+  background-color: white;
+}
+@media screen and (min-width: 600px) {
+  .rowPlayer {
+    min-width:10%;
+    & img{
+      width: 50%;
+    }
+  }
+}

@@ -66,10 +66,10 @@ const SelectPlayers = (props) => {
         gameId: started._id,
       };
       gameService.updateGame(started._id, game).then((res) => {
-        console.log(res.data);
-        //  res.data.gameId=res.data._id
-        // h2hService.newH2h(res.data)
-        // props.history.push(`/games/${res.data._id}`);
+        
+          res.data.gameId=res.data._id
+         h2hService.newH2h(res.data)
+         props.history.push(`/games/${res.data._id}`);
       });
     }
   }

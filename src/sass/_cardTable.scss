@@ -65,6 +65,11 @@
   font-weight: bold;
   align-self: center;
 }
+.rowPosTop{
+ @extend .rowPos;
+ width: 10%;
+
+}
 
 .rowImage {
   align-self: center;
@@ -76,10 +81,13 @@
     height: 40px;
     width: 40px;
     object-fit: cover;
-  
-  
     background-image: linear-gradient($basecolorPurple, #4e4949);
   }
+}
+.rowImageTop{
+  @extend .rowImage;
+ width: 10%;
+
 }
 
 .rowName {
@@ -87,33 +95,35 @@
   font-weight: bold;
   font-family: $fantasyFont;
   padding-left: 2.5em;
-  padding-top: 0.9em;
+ align-self: center;
+  // padding-top: 0.9em;
   text-transform: capitalize;
   flex-grow: 2;
 }
+.rowNameTop{
+  @extend .rowName;
+}
 .rowDate{
+ width: 30%;
+ align-self: center;
   font-size: 0.7em;
   font-family: $fantasyFont;
-  // flex-grow: 2;
-  padding-right: 5em;
-  // padding-left: 5em;
-  padding-top: 0.9em;
-  // width: 50%;
-  // margin-left: auto;
- 
-
+  // padding-right: 5em;
+  // padding-top: 0.9em;
 }
 
 .rowProfit {
   font-size: 0.7em;
   font-family: $fantasyFont;
   margin-left: auto;
+  align-self: center;
   margin-right: 0.5em;
-  padding-top: 0.9em;
-  // background-color: yellow;
-}
-
-.rowProfit {
+  // padding-top: 0.9em;
   font-size: 0.9em;
   font-weight: bold;
+
+}
+
+.rowProfitTop{
+@extend .rowProfit;
 }

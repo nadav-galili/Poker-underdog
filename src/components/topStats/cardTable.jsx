@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import gameService from "../../services/gameService";
 import { apiImage } from "../../config.json";
 import { SpinnerInfinity } from "spinners-react";
+import PageHeader from "../common/pageHeader";
 
 const CardTable = (props) => {
   const [data, setData] = useState([]);
@@ -40,11 +41,13 @@ const CardTable = (props) => {
   }, [setData, teamId, cardName]);
   let rank = 2;
 
+
   return (
-    <div className="container-fluid">
-      <h1>{headerTitle}</h1>
+    <div className="container">
+      <PageHeader titleText={headerTitle}/>
+
       <span>{new Date().toLocaleDateString("en-GB") }</span>
-      {data.length === 0 && (
+      {data.length===0 && (
         <div className="spinner pt-2">
           <SpinnerInfinity
             size={130}
@@ -52,12 +55,13 @@ const CardTable = (props) => {
             speed={70}
             color="rgba(252, 252, 252, 1)"
             secondaryColor="rgba(108, 20, 180, 1)"
-            enabled={data.length === 0 ? true : false}
+            enabled={data.length===0 ? true : false}
+            // enabled={true}
           />
         </div>
       )}
 
-      {data.length > 0 && (
+      {data.length>0 && (
         <div className="col-lg-3 col-10" id="cardTop">
           <ol className="statsList">
             <li

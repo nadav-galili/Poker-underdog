@@ -3,7 +3,7 @@ import PageHeader from "./common/pageHeader";
 
 const About = () => {
   return (
-    <div className="container-fluid">
+    <div className="container">
       <div className="row">
         <PageHeader titleText="About" />
         <img

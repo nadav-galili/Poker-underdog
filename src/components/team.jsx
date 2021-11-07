@@ -13,7 +13,7 @@ const Team = ({ team, removeTeam }) => {
   var captain = team.players.filter((e) => e._id === team.user_id);
  
   return (
-    <div className=" col-12 col-md-6 col-lg-6 mt-3">
+    <div className=" col-12 col-md-6 col-lg-8 mt-3">
       <div className="card mb-3" >
         <img
           className="p-2"

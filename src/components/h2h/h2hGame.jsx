@@ -39,7 +39,7 @@ const H2hGame = ({ gameId }) => {
     <React.Fragment>
       <PageHeader titleText="Head 2 Head" />
 
-      <div className="col-lg-8 col-10" id="cardTop">
+      <div className="col-lg-8 col-12" id="cardTop">
         <ol className="statsList">
           <li
             id="gameLi"

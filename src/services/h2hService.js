@@ -13,8 +13,13 @@ export function updateH2h(gameId){
     return http.put(`${apiUrl}/h2h/updateh2h/${gameId}`)
 }
 
+export function getPointsByPlayer(pId){
+    return http.get(`${apiUrl}/h2h/byPlayer/${pId}`)
+}
+
 export default{
     newH2h,
     getByGameId,
-    updateH2h
+    updateH2h,
+    getPointsByPlayer
 }

@@ -20,7 +20,7 @@ const CurrMonth = ({
   return (
     <div className="cardDiv">
       <div className="card " id="mainStats">
-        <h5 className="card-title pt-1 ps-2">{name}</h5>
+        <h5 className="card-title ">{name}</h5>
         <div className="img-card">
           <img
             src={

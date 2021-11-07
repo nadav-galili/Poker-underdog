@@ -24,7 +24,7 @@ const SuccessCard = (props) => {
   let rank = 2;
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       <h1>Success %</h1>
       <span>{new Date().toLocaleDateString("en-GB")}</span>
       {data.length === 0 && (

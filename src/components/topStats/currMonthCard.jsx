@@ -18,9 +18,7 @@ const CurrMonthCard = (props) => {
       table = table.filter(
         (month) => month._id.monthPlayed === currentMonthNumber
       );
-
       let myHero = table.shift();
-
       setHero(myHero);
       setData(table);
     };
@@ -31,7 +29,7 @@ const CurrMonthCard = (props) => {
   let rank=2;
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       <h1>{currentMonth} {new Date().getFullYear()}</h1>
       <div className="col-lg-3 col-10" id="cardTop">
         <ul className="statsList ">

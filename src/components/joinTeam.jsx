@@ -21,7 +21,6 @@ class JoinTeam extends Form {
 
     try {
       const team = await teamService.getTeamByNumber(data.teamNumber);
-      console.log(team);
       //get user details from token
       let user = await userService.getCurrentUser();
       //get full user details
@@ -52,7 +51,7 @@ class JoinTeam extends Form {
     const { user } = this.props;
 
     return (
-      <div className="container-fluid">
+      <div className="container">
         <PageHeader titleText="Join an existing team" />
         <div className="row">
           <div className="col-12" id="joinText">
@@ -63,19 +62,22 @@ class JoinTeam extends Form {
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-2 col-8">
-            <form onSubmit={this.handleSubmit} autoComplete="off" method="PUT">
+          <div className="col-lg-4 col-8">
+            <form onSubmit={this.handleSubmit} autoComplete="off" method="PUT" >
               {this.renderInput("teamNumber", "Team Number")}
+              <div className="d-flex justify-content-between">
               {this.renderButton("Join Team")}
               <Link
                 type="button"
-                className="btn btn-secondary "
+                className="btn btn-secondary joinB"
                 to="/my-teams"
               >
                 Not right now
               </Link>
+               </div>
+            
             </form>
-            <p className="mt-2 join">*To join a demo team, enter:235950</p>
+            <p className="mt-2 join">*To join a demo team, enter:976991</p>
           </div>
         </div>
       </div>

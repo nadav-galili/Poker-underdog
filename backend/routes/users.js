@@ -7,7 +7,7 @@ const upload=require("../middleware/upload");
 const { Team } = require("../models/teams");
 const router = express.Router();
 const { Game } = require("../models/games");
-const { NextWeek } = require("@material-ui/icons");
+
 
 const getTeams = async (teamsArray) => {
   const teams = await Team.find({ teamNumber: { $in: teamsArray } });
@@ -17,7 +17,6 @@ const getTeams = async (teamsArray) => {
 //get teams info
 router.get("/teams", auth, async (req, res) => {
   if (!req.query.numbers) res.status(400).send("Missing numbers data");
-
   let data = {};
   data.teams = req.query.numbers.split(",");
   const teams = await getTeams(data.teams);

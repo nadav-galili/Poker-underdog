@@ -3,6 +3,7 @@ import gameService from "../services/gameService";
 import PageHeader from "../components/common/pageHeader";
 import { apiImage } from "../config.json";
 import { SpinnerInfinity } from "spinners-react";
+import H2hGameEnd from "./h2h/h2hGameEnd";
 
 const MainLastgame = ({ teamId }) => {
   const [data, setData] = useState([]);
@@ -21,7 +22,7 @@ const MainLastgame = ({ teamId }) => {
 
   let Rank = 1;
   return (
-    <div className="container-fluid">
+    <div className="container">
       <PageHeader titleText="Last Game" />
 
       {!data && (
@@ -37,7 +38,7 @@ const MainLastgame = ({ teamId }) => {
         </div>
       )}
       {data && (
-        <div className="col-lg-3 col-10 pb-3" id="card-top">
+        <div className="col-lg-4 col-10 pb-3" id="card-top">
           <ol className="statsList">
             <li
               id="lastGameHero"
@@ -98,10 +99,13 @@ const MainLastgame = ({ teamId }) => {
                 </li>
               ))}
             </React.Fragment>
+            <H2hGameEnd gameId={lastGame._id} header="Last H2H"/>
           </ol>
         </div>
       )}
     </div>
+
+     
   );
 };
 

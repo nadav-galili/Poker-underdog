@@ -24,7 +24,7 @@ const GameEnd = (props) => {
   let Rank=1;
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       <PageHeader titleText="Last Game" />
 
       {data.length === 0 && (
@@ -40,7 +40,7 @@ const GameEnd = (props) => {
         </div>
       )}
       {data.length > 0 && (
-        <div className="col-lg-3 col-10" id="card-top">
+        <div className="col-lg-4 col-10" id="card-top">
           <ol className="statsList">
             <li
             id="lastGameHero"
@@ -96,7 +96,7 @@ const GameEnd = (props) => {
               ))}
             </React.Fragment>
           </ol>
-          <H2hGameEnd gameId={lastGame._id}/>
+          <H2hGameEnd gameId={lastGame._id} header="Head 2 Head"/>
           <Link className="btn btn-primary " to={`/main-table/${teamId}`}>
             Team Tables & Statistics
             <i className="ps-2 fas fa-angle-double-right"></i>

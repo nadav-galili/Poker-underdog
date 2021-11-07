@@ -29,7 +29,7 @@ const ProfitsCard = (props) => {
 
   let rank = 2;
   return (
-    <div className="container-fluid">
+    <div className="container">
       <h1>Top 10 Profits </h1>
       <span>{new Date().toLocaleDateString("en-GB")}</span>
       <div className="col-lg-3 col-10" id="cardTop">
@@ -67,8 +67,8 @@ const ProfitsCard = (props) => {
                 className="statsRow d-flex"
                 key={player.createdAt + player.players.profit}
               >
-                <div className="rowPos">{rank++}.</div>
-                <div className="rowImage">
+                <div className="rowPosTop">{rank++}.</div>
+                <div className="rowImageTop">
                   <img
                     src={
                       data.length > 0
@@ -78,13 +78,13 @@ const ProfitsCard = (props) => {
                     alt="player list row"
                   />
                 </div>
-                <div className="rowName">
+                <div className="rowNameTop">
                   {data.length > 0 ? player.players.name : ""}
                 </div>
                 <div className="rowDate">
                   {data.length > 0 ? player.createdAt : ""}
                 </div>
-                <div className="rowProfit">
+                <div className="rowProfitTop">
                   {data.length > 0 ? player.players.profit : ""}
                 </div>
               </li>
