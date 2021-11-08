@@ -14,15 +14,15 @@ const H2hGameEnd = ({ gameId, header }) => {
         last.sort((a, b) => b.points - a.points);
         setPlayers(last);
       } catch (error) {
-        console.log("error1");
+        // console.log("error1");
       }
     };
     lastH2h();
   }, [gameId]);
   let Rank=1;
   return (<div className="">
-{players.length>1&&(
-     <div className="containr-fluid">
+{players.length>1 && (
+     <div className="container">
      <PageHeader titleText={header} />
      <div className="col-12"  id="card-top">
          <ol className="statsList">

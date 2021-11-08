@@ -1,8 +1,11 @@
 // const Joi = require("@hapi/joi");
+const { response } = require("express");
 const _ = require("lodash");
 const { Game, validate } = require("../models/games");
+const {Team}= require('../models/teams');
 
 exports.teamStats = async function (req, res) {
+   const team=await Team.find({_id:req.params.teamId});
   const table = await Game.aggregate([
     {
       $unwind: {
@@ -102,6 +105,7 @@ exports.teamStats = async function (req, res) {
   ]);
 
   res.send(table);
+
 };
 
 exports.successp = async function (req, res) {

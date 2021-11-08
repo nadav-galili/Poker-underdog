@@ -4,7 +4,7 @@ import PageHeader from "../components/common/pageHeader";
 import H2hGameEnd from "./h2h/h2hGameEnd";
 import { apiImage } from "../config.json";
 import { SpinnerInfinity } from "spinners-react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const GameEnd = (props) => {
   const teamId = props.match.params.teamId;
@@ -14,20 +14,20 @@ const GameEnd = (props) => {
     const getLastGame = async () => {
       let game = await gameService.lastGame(props.match.params.teamId);
       game = game.data[0];
-      game.players.sort((a,b)=>b.profit-a.profit)
+      game.players.sort((a, b) => b.profit - a.profit);
       setData(game.players);
       setLastGame(game);
-    };
+    }; 
 
     getLastGame();
   }, [setData, props.match.params.teamId]);
-  let Rank=1;
+  let Rank = 1;
 
   return (
     <div className="container">
       <PageHeader titleText="Last Game" />
 
-      {data.length === 0 && (
+      {data.length === 0 && lastGame._id &&(
         <div className="spinner pt-2">
           <SpinnerInfinity
             size={130}
@@ -43,7 +43,7 @@ const GameEnd = (props) => {
         <div className="col-lg-4 col-10" id="card-top">
           <ol className="statsList">
             <li
-            id="lastGameHero"
+              id="lastGameHero"
               className="statsHero d-flex flex-column"
               style={{
                 backgroundImage: `url(${
@@ -54,18 +54,27 @@ const GameEnd = (props) => {
               <p>
                 {new Date(lastGame.createdAt).toLocaleDateString("en-GB") +
                   "  " +
-                  new Date(lastGame.createdAt).toLocaleString("en-US", {hour: "2-digit", minute: "2-digit", hour12: false})
-                  +" - "+
-                  new Date(lastGame.updatedAt).toLocaleString("en-US", {hour: "2-digit", minute: "2-digit", hour12: false}) 
-                  }
+                  new Date(lastGame.createdAt).toLocaleString("en-US", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                  }) +
+                  " - " +
+                  new Date(lastGame.updatedAt).toLocaleString("en-US", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                  })}
               </p>
-                <div className="stats d-flex w-100 justify-content-between" id="lGame">
-                  <p>Player</p>
-                  <p>Name</p>
-                  <p>Cashing</p>
-                  <p>Profit</p>
-                </div>
-            
+              <div
+                className="stats d-flex w-100 justify-content-between"
+                id="lGame"
+              >
+                <p>Player</p>
+                <p>Name</p>
+                <p>Cashing</p>
+                <p>Profit</p>
+              </div>
             </li>
             <React.Fragment>
               {data.map((player) => (
@@ -96,7 +105,7 @@ const GameEnd = (props) => {
               ))}
             </React.Fragment>
           </ol>
-          <H2hGameEnd gameId={lastGame._id} header="Head 2 Head"/>
+          <H2hGameEnd gameId={lastGame._id} header="Head 2 Head" />
           <Link className="btn btn-primary " to={`/main-table/${teamId}`}>
             Team Tables & Statistics
             <i className="ps-2 fas fa-angle-double-right"></i>

@@ -53,7 +53,7 @@ router.post("/",upload.single('image'),  async (req, res) => {
   var user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User already registered.");
   const {file}=req;
-  console.log("file",file);
+ 
 
 
   user = new User({

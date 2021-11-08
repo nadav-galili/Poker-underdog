@@ -52,7 +52,6 @@ const MyStats = () => {
     const points=async()=>{
       if(me._id){
         let myPoints=await h2hService.getPointsByPlayer(me._id);
-        console.log(myPoints);
         setPoints(myPoints.data[0]);
       }
       

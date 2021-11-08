@@ -1,4 +1,7 @@
 const express = require("express");
+const upload = require("../middleware/upload");
+const { User } = require("../models/user");
+const mongoose = require("mongoose");
 // const _ = require("lodash");
 const {
   Team,
@@ -11,7 +14,7 @@ const router = express.Router();
 
 //get all the teams of a specific user
 router.get("/my-teams", auth, async (req, res) => {
-  const teams = await Team.find({ "players._id": req.user._id });
+  const teams = await Team.find({"players._id": req.user._id});
   res.send(teams);
 });
 
@@ -39,14 +42,25 @@ router.get("/", auth, async (req, res) => {
 });
 
 // submits a new team
-router.post("/", auth, async (req, res) => {
+router.post("/", upload.single("image"), auth, async (req, res) => {
   const { error } = validateTeam(req.body);
   if (error) return res.status(400).send(error.details[0].message);
+  // if (error) console.log(error.details[0].message);
+  console.log(req.user._id,"zxzxz");
+  // const {file}=req;
+  const player = await User.find({ _id:req.user._id })
+    .select("-createdAt")
+    .select("-__v")
+    .select("-password")
+    // .select("-_id");
+
+  // let d = new mongoose.Types.ObjectId(player[0]._id.toString());
+  // console.log(req.user._id.str, "oo");
   let team = new Team({
     name: req.body.name,
-    players: req.body.players,
-    teamImage: req.body.teamImage
-      ? req.body.teamImage
+    players: player,
+    teamImage: req.file
+      ? req.file.path
       : "https://cdn.pixabay.com/photo/2013/07/13/10/42/casino-157595_960_720.png",
     teamNumber: await generateTeamNumber(Team),
     user_id: req.user._id,
@@ -59,7 +73,7 @@ router.post("/", auth, async (req, res) => {
 //edit a specific team by id
 router.put("/:teamId", auth, async (req, res) => {
   const { error } = validateTeamWithId(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  // if (error) return res.status(400).send(error.details[0].message);
   let team = await Team.findOneAndUpdate({ _id: req.params.teamId }, req.body);
   if (!team)
     return res.status(404).send("The team with the given Id was not found");

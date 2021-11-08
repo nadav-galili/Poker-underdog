@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import gameService from "../services/gameService";
 import PageHeader from "./common/pageHeader";
 import PlayerCard from "./topStats/playerCard";

@@ -120,7 +120,7 @@ const SignUp = (props) => {
                       className="error"
                     />
                   </div>
-                  <div className="form-control d-flex flex-column    bg-primary mb-3">
+                  <div className="form-control d-flex flex-column bg-primary mb-3">
                   <label htmlFor="image">Image</label>
                   <input
                     className="row mb-4 inputFile"

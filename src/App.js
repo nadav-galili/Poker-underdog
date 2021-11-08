@@ -28,6 +28,7 @@ import ProfitsCard from "./components/topStats/profitsCard";
 import SignUp from "./components/forms/signUp";
 import NewGame from "./components/games/newGame";
 import GameEnd from "./components/gameEnd";
+import TeamSignUp from "./components/forms/teamSignUp"
 import ReactGA from "react-ga";
 
 
@@ -89,7 +90,7 @@ function App() {
             <ProtectedRoute
               path="/create-team"
               user={user}
-              component={CreateTeam}
+              component={TeamSignUp}
             />
             <ProtectedRoute
               path="/new-game/:teamId"

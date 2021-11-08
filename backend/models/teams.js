@@ -11,12 +11,11 @@ const teamSchema = new mongoose.Schema({
   },
   players: {
     type: Array,
-    required: true,
   },
   teamImage: {
     type: String,
     required: true,
-    minlength: 11,
+    minlength: 3,
     maxlength: 1024,
   },
   teamNumber: {
@@ -26,19 +25,16 @@ const teamSchema = new mongoose.Schema({
     maxlength: 99999999999,
     unique: true,
   },
-  created_at: {
-    type: Date,
-    default: Date.now(),
-  },
   user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-});
+},
+{ timestamps: true });
 
 const Team = mongoose.model("Team", teamSchema);
 
 function validateTeam(team) {
   const schema = Joi.object({
     name: Joi.string().min(2).max(255).required(),
-    players: Joi.array().required(),
+    players: Joi.array(),
     teamImage: Joi.string().min(11).max(1025),
   });
   return schema.validate(team);
@@ -47,7 +43,7 @@ function validateTeam(team) {
 function validateTeamWithId(team) {
   const schema = Joi.object({
     name: Joi.string().min(2).max(255).required(),
-    players: Joi.array().required(),
+    players: Joi.array(),
     teamImage: Joi.string().min(11).max(1025),
     user_id: Joi.string(),
   });
