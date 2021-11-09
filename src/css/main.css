@@ -108,28 +108,21 @@ h1 {
   }
 }
 
-.MuiAvatar-root {
-  border: 2px solid black;
-  height: 60px !important;
-  width: 60px !important;
+.teamImg {
+  height: 4.5em;
+  width: 5em;
 }
 
-.MuiTableCell-stickyHeader {
-  background-color: #2752ea !important;
-  color: white !important;
+.teamImg img {
+  width: 100%;
+}
+
+.teamImg span {
+  align-self: center;
 }
 
 .lastGame-head {
   background-color: #6c14b4 !important;
-}
-
-.MuiTableCell-head {
-  font-size: 20px !important;
-  text-decoration: underline;
-}
-
-.MuiTableCell-body {
-  font-weight: 900 !important;
 }
 
 .noGames {

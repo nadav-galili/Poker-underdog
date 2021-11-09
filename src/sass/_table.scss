@@ -1,26 +1,18 @@
-.MuiAvatar-root {
-  border: 2px solid black;
-  height: 60px !important;
-  width: 60px !important;
-}
 
-.MuiTableCell-stickyHeader {
-  background-color: $headerColorBlue !important;
-  color: white !important;
+.teamImg{
+  height: 4.5em;
+  width: 5em;
+  & img{
+    width: 100%;
+  }
+  & span{
+    align-self: center;
+  }
 }
-
 .lastGame-head {
   background-color: $basecolorPurple !important;
 }
 
-.MuiTableCell-head {
-  font-size: 20px !important;
-  text-decoration: underline;
-}
-
-.MuiTableCell-body {
-  font-weight: 900 !important;
-}
 
 .noGames {
   color: $basecolorRed;

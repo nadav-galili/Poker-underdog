@@ -47,6 +47,7 @@ const CardTable = (props) => {
       <PageHeader titleText={headerTitle}/>
 
       <span>{new Date().toLocaleDateString("en-GB") }</span>
+      <span></span>
       {data.length===0 && (
         <div className="spinner pt-2">
           <SpinnerInfinity

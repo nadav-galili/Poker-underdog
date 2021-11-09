@@ -59,7 +59,6 @@ const NewGame = (props) => {
     delete game._id;
     game.isOpen = false;
     game.players.sort((a, b) => b.profit - a.profit);
-
     let gameRank = 1;
     game.players.map((p) => (p.gameRank = gameRank++));
     setData(game);

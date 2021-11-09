@@ -62,7 +62,7 @@ router.post("/",upload.single('image'),  async (req, res) => {
     nickName: req.body.nickName,
     email: req.body.email,
     image: req.file? req.file.path:
-     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+     "uploads/user.png",
     password: req.body.password,
     teams: [],
   });

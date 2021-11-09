@@ -21,8 +21,8 @@ const H2hGameEnd = ({ gameId, header }) => {
   }, [gameId]);
   let Rank=1;
   return (<div className="">
-{players.length>1 && (
-     <div className="container">
+{players.length>0 && (
+     <div className="contain">
      <PageHeader titleText={header} />
      <div className="col-12"  id="card-top">
          <ol className="statsList">

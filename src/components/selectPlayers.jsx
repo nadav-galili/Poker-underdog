@@ -4,6 +4,7 @@ import teamService from "../services/teamService";
 import gameService from "../services/gameService";
 import h2hService from "../services/h2hService";
 import Player from "./player";
+import {apiImage} from "../config.json"
 
 const SelectPlayers = (props) => {
   const [data, setData] = useState([props.match.params.teamId]);
@@ -50,6 +51,7 @@ const SelectPlayers = (props) => {
         players: selected,
         team_name: data.name,
         team_id: data._id,
+      
       };
       gameService.newGame(game).then((res) => {
         let newGame = { ...res.data };
@@ -63,6 +65,7 @@ const SelectPlayers = (props) => {
         players: selected,
         team_name: started.team_name,
         team_id: started.team_id,
+        
         gameId: started._id,
       };
       gameService.updateGame(started._id, game).then((res) => {
@@ -81,7 +84,7 @@ const SelectPlayers = (props) => {
       </h1>
       <h2 className="teamName">{data.name}</h2>
       <h3>Team Number:{data.teamNumber}</h3>
-      <img src={data.teamImage} alt={data.name} width="200" height="200"></img>
+      <img src={`${apiImage}${data.teamImage}`} alt={data.name} width="200" height="200"></img>
       <PageHeader titleText="Select players for current game" />
       <div className="playersInGame"></div>
       <div className="row container">

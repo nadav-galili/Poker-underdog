@@ -4,20 +4,15 @@ import { apiImage } from "../config.json";
 
 
 const Team = ({ team, removeTeam }) => {
-  const teamDate = new Date(team.created_at);
-  const day = teamDate.getDate();
-  const month = teamDate.getMonth() + 1;
-  const year = teamDate.getFullYear();
-  const formated = `${day}/${month}/${year}`;
-
   var captain = team.players.filter((e) => e._id === team.user_id);
  
   return (
-    <div className=" col-12 col-md-6 col-lg-8 mt-3">
+   
+    <div className=" col-12 col-md-6 col-lg-4 mt-3">
       <div className="card mb-3" >
         <img
           className="p-2"
-          src={team.teamImage}
+          src={`${apiImage}${team.teamImage}`}
           alt={team.name}
           width="100"
           height="100"
@@ -66,13 +61,13 @@ const Team = ({ team, removeTeam }) => {
           <Link className="btn mb-2" to={`/new-game/${team._id}`}>
             Start a new game
           </Link>
-          <p className="card-text border-top pt-2">Created At:{formated}</p>
-          <p className="text-primary">
+          <p className="card-text border-top pt-2">Created At:{new Date(team.createdAt).toLocaleDateString("en-GB")}</p>
+          {/* <p className="text-primary">
             <Link to={`/my-teams/edit/${team._id}`}>
               <i className="fas fa-edit me-2 "></i>
               Edit
             </Link>
-          </p>
+          </p> */}
           <p className="text-primary">
             <Link onClick={removeTeam} to="/my-teams">
               <i className="fas fa-trash-alt me-2"></i>
@@ -82,6 +77,7 @@ const Team = ({ team, removeTeam }) => {
         </div>
       </div>
     </div>
+    
   );
 };
 

@@ -46,27 +46,39 @@ router.post("/", upload.single("image"), auth, async (req, res) => {
   const { error } = validateTeam(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   // if (error) console.log(error.details[0].message);
-  console.log(req.user._id,"zxzxz");
-  // const {file}=req;
+  
   const player = await User.find({ _id:req.user._id })
     .select("-createdAt")
     .select("-__v")
     .select("-password")
     // .select("-_id");
+ 
+    let teamPlayer={};
+    teamPlayer._id=player[0]._id.valueOf().toString();
+    teamPlayer.nickName=player[0].nickName;
+    teamPlayer.image=player[0].image;
+    teamPlayer.teams=player[0].teams;
+ 
 
   // let d = new mongoose.Types.ObjectId(player[0]._id.toString());
   // console.log(req.user._id.str, "oo");
   let team = new Team({
     name: req.body.name,
-    players: player,
+    players: teamPlayer,
     teamImage: req.file
       ? req.file.path
-      : "https://cdn.pixabay.com/photo/2013/07/13/10/42/casino-157595_960_720.png",
+      : "uploads/poker.png",
     teamNumber: await generateTeamNumber(Team),
     user_id: req.user._id,
   });
-
   let post = await team.save();
+  
+  // const tt = await User.find({ _id:req.user._id })
+  // tt[0].teams.push(post._id);
+  // let o=User.findByIdAndUpdate({ _id:req.user._id},tt[0])
+  // console.log(o, "jjj,lkh");
+
+
   res.send(post);
 });
 

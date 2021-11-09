@@ -7,7 +7,8 @@ import CurrMonth from "./topStats/currMonth";
 import Profits from "./topStats/profits";
 import { SpinnerDiamond } from "spinners-react";
 import MainLastgame from "./mainLastGame";
-
+import teamService from "../services/teamService";
+import { apiImage } from "../config.json";
 
 export default function MainTable(props) {
   //get the data for the table
@@ -20,6 +21,7 @@ export default function MainTable(props) {
 
   const [monthleader, setMonthleader] = useState([]);
   const [profits, setProfits] = useState([]);
+  const [teamImage, setTeamImage] = useState("");
 
   const teamId = props.match.params.teamId;
 
@@ -28,9 +30,11 @@ export default function MainTable(props) {
     const getTable = async () => {
       let table = await gameService.table(teamId);
       table = table.data;
-
       await table.sort((a, b) => b.totalProfit - a.totalProfit);
       setData(table);
+
+      let teamPic = await teamService.getTeam(teamId);
+      setTeamImage(teamPic.data);
 
       let totoalg = [...table];
       const totalG = await totoalg.sort((a, b) => b.numOfGames - a.numOfGames);
@@ -88,14 +92,16 @@ export default function MainTable(props) {
     profits();
   }, [props.match.params.teamId]);
 
-
   return (
     <div className="container" id="dashboard">
       <PageHeader
         className="mb-0"
         titleText={new Date().getFullYear() + " Top Stats"}
       />
-      <span>{new Date().toLocaleDateString("en-GB")}</span>
+      <div className="teamImg d-flex flex-row">
+        <img src={`${apiImage}${teamImage.teamImage}`} alt="" />
+        <span>{new Date().toLocaleDateString("en-GB")}</span>
+      </div>
       {data.length < 1 && (
         <div className="spinner mt-5">
           <SpinnerDiamond
@@ -190,8 +196,7 @@ export default function MainTable(props) {
               />
             )}
           </div>
-          <MainLastgame teamId={teamId}  />
-         
+          <MainLastgame teamId={teamId} />
         </React.Fragment>
       )}
     </div>
