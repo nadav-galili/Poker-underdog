@@ -5,6 +5,7 @@ import PageHeader from "../common/pageHeader";
 import { SpinnerInfinity } from "spinners-react";
 import { apiImage } from "../../config.json";
 import H2hGame from "../h2h/h2hGame";
+import Swal from "sweetalert2";
 
 const NewGame = (props) => {
   const [data, setData] = useState({});
@@ -19,29 +20,46 @@ const NewGame = (props) => {
   }, [props.match.params.gameId]);
 
   const addCashing = (playerId) => {
-    let player = data.players.find((e) => playerId === e.id);
-    player.cashing += 50;
-    player.numOfCashing += 1;
-    let game = { ...data };
-    game.gameId = props.match.params.gameId;
-    delete game._id;
-    delete game.__v;
-    setData(game);
-    gameService.updateGame(game.gameId, game).then((res) => {});
+    Swal.fire({
+      title: "sure you want to cash in?",
+      text: "",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let player = data.players.find((e) => playerId === e.id);
+       console.log(player);
+        player.cashing += 50;
+        player.numOfCashing += 1;
+        let game = { ...data };
+        game.gameId = props.match.params.gameId;
+        delete game._id;
+        delete game.__v;
+        setData(game);
+        gameService.updateGame(game.gameId, game).then((res) => {});
+        const chips = new Audio(process.env.PUBLIC_URL + `sounds/chips.mp3`);
+        chips.play();
+        Swal.fire(`Added cashing to ${player.name}`);
+
+      }
+    });
   };
 
   const undoCashing = (playerId) => {
     let player = data.players.find((e) => playerId === e.id);
-  if(player.cashing>0){
-    player.cashing -= 50;
-    player.numOfCashing -= 1;
-    let game = { ...data };
-    game.gameId = props.match.params.gameId;
-    delete game._id;
-    delete game.__v;
-    setData(game);
-    gameService.updateGame(game.gameId, game);
-  }
+    if (player.cashing > 0) {
+      player.cashing -= 50;
+      player.numOfCashing -= 1;
+      let game = { ...data };
+      game.gameId = props.match.params.gameId;
+      delete game._id;
+      delete game.__v;
+      setData(game);
+      gameService.updateGame(game.gameId, game);
+    }
   };
 
   const handleChange = (playerId, e) => {
@@ -162,7 +180,7 @@ const NewGame = (props) => {
                   return a + b.cashing;
                 }, 0)}
               </div>
-            <div className="rowCashInHand"></div>
+              <div className="rowCashInHand"></div>
               <div className="playerProfit text-primary">
                 {data.players.reduce((a, b) => {
                   return a + b.profit;
@@ -171,19 +189,18 @@ const NewGame = (props) => {
               <div className="fas fa-minus-circle text-primary">Cancel</div>
             </li>
             <div
-        onClick={() => {
-          updateGame();
-        }}
-        className="buttonsGame d-flex justify-content-between"
-      >
-        <div className="btn btn-primary update m-2">Update Game</div>
-        <div className="btn btn-danger update m-2">Reset Game</div>
-      </div>
+              onClick={() => {
+                updateGame();
+              }}
+              className="buttonsGame d-flex justify-content-between"
+            >
+              <div className="btn btn-primary update m-2">Update Game</div>
+              <div className="btn btn-danger update m-2">Reset Game</div>
+            </div>
           </ol>
-         
         </div>
       )}
-    
+
       <H2hGame gameId={data._id} />
     </div>
   );

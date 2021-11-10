@@ -765,7 +765,7 @@ tfoot td {
 }
 
 .rowImageTop {
-  width: 10%;
+  width: 25%;
 }
 
 .rowName, .rowNameTop {
@@ -778,21 +778,30 @@ tfoot td {
   flex-grow: 2;
 }
 
+.rowNameTop {
+  padding-left: 0;
+  text-align: start;
+}
+
 .rowDate {
-  width: 30%;
+  width: 20%;
   align-self: center;
   font-size: 0.7em;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
 
 .rowProfit, .rowProfitTop {
+  width: 12%;
   font-size: 0.7em;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   margin-left: auto;
   align-self: center;
-  margin-right: 0.5em;
   font-size: 0.9em;
   font-weight: bold;
+}
+
+.rowProfitTop {
+  text-align: start;
 }
 
 .form-control {
@@ -832,7 +841,7 @@ label {
 
 .rowPlayer {
   align-self: center;
-  min-width: 15%;
+  width: 15%;
 }
 
 .rowPlayer img {
@@ -913,7 +922,7 @@ label {
 
 @media screen and (min-width: 600px) {
   .rowPlayer {
-    min-width: 10%;
+    width: 10%;
   }
   .rowPlayer img {
     width: 50%;

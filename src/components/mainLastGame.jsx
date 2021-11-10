@@ -38,7 +38,7 @@ const MainLastgame = ({ teamId }) => {
         </div>
       )}
       {data && (
-        <div className="col-lg-4 col-10 pb-3" id="card-top">
+        <div className="col-lg-4 col-12 pb-3" id="card-top">
           <ol className="statsList">
             <li
               id="lastGameHero"

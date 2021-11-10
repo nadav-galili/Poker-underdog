@@ -7,7 +7,7 @@
 
 .rowPlayer {
   align-self: center;
-  min-width: 15%;
+ width: 15%;
 
   img {
     border-radius: 50%;
@@ -92,7 +92,7 @@
 }
 @media screen and (min-width: 600px) {
   .rowPlayer {
-    min-width:10%;
+    width:10%;
     & img{
       width: 50%;
     }

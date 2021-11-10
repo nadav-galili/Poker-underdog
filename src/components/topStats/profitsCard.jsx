@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
 import gameService from "../../services/gameService";
+import teamService from "../../services/teamService";
+import PageHeader from "../common/pageHeader";
 import { apiImage } from "../../config.json";
 
 const ProfitsCard = (props) => {
   const [data, setData] = useState([]);
   const [hero, setHero] = useState([]);
+  const [teamImg, setTeamImg] = useState("");
 
   const teamId = props.match.params.teamId;
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.profits(teamId);
       table = table.data;
+
+      let teamPic = await teamService.getTeam(teamId);
+      setTeamImg(teamPic.data);
+
       const handleDates = (list, prop) => {
         return list.map((item) => {
           const obj = Object.assign({}, item);
@@ -30,9 +37,12 @@ const ProfitsCard = (props) => {
   let rank = 2;
   return (
     <div className="container">
-      <h1>Top 10 Profits </h1>
+      <PageHeader titleText="Top 10 Profits"/>
+      <div className="teamImg d-flex flex-row mb-2">
+      <img src={`${apiImage}${teamImg.teamImage}`} alt="" />
       <span>{new Date().toLocaleDateString("en-GB")}</span>
-      <div className="col-lg-3 col-10" id="cardTop">
+      </div>
+      <div className="col-lg-3 col-12" id="cardTop">
         <ul className="statsList ">
           <li
             className="statsHero d-flex"

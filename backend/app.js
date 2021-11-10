@@ -10,27 +10,27 @@ const http = require("http").Server(app);
 const mongoose = require("mongoose");
 const path = require("path");
 
-mongoose
-  .connect(
-    "mongodb+srv://nadavG:Barbar88@cluster0.kfjyo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    }
-  )
-  .then(() => console.log("Connected to MongoDB remote..."))
-  .catch((err) => console.error("Could not connect to MongoDB..."));
 // mongoose
-//   .connect("mongodb://localhost/backend", {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//   })
-//   .then(() => console.log("Connected to MongoDB..."))
+//   .connect(
+//     "mongodb+srv://nadavG:Barbar88@cluster0.kfjyo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+//     {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//       useCreateIndex: true,
+//       useFindAndModify: false,
+//     }
+//   )
+//   .then(() => console.log("Connected to MongoDB remote..."))
 //   .catch((err) => console.error("Could not connect to MongoDB..."));
+mongoose
+  .connect("mongodb://localhost/backend", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log("Connected to MongoDB..."))
+  .catch((err) => console.error("Could not connect to MongoDB..."));
 
 let corsOptions = {
   origin: "https://poker-underdog.com",

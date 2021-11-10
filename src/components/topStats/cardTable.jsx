@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import gameService from "../../services/gameService";
+import teamService from "../../services/teamService";
 import { apiImage } from "../../config.json";
 import { SpinnerInfinity } from "spinners-react";
 import PageHeader from "../common/pageHeader";
@@ -8,6 +9,7 @@ const CardTable = (props) => {
   const [data, setData] = useState([]);
   const [hero, setHero] = useState([]);
   const [headerTitle, setHeaderTitle] = useState("");
+  const [teamImg, setTeamImg] = useState("");
   const teamId = props.match.params.teamId;
   const cardName = props.match.params.cardName;
 
@@ -16,6 +18,9 @@ const CardTable = (props) => {
       let table = await gameService.cardsData(teamId, cardName);
       table = table.data;
       let myHero = table.shift();
+
+      let teamPic = await teamService.getTeam(teamId);
+      setTeamImg(teamPic.data);
 
       switch (cardName) {
         case "avgProfit":
@@ -41,14 +46,14 @@ const CardTable = (props) => {
   }, [setData, teamId, cardName]);
   let rank = 2;
 
-
   return (
     <div className="container">
-      <PageHeader titleText={headerTitle}/>
-
-      <span>{new Date().toLocaleDateString("en-GB") }</span>
-      <span></span>
-      {data.length===0 && (
+      <PageHeader titleText={headerTitle} />
+      <div className="teamImg d-flex flex-row mb-2">
+        <img src={`${apiImage}${teamImg.teamImage}`} alt="" />
+        <span>{new Date().toLocaleDateString("en-GB")}</span>
+      </div>
+      {data.length === 0 && (
         <div className="spinner pt-2">
           <SpinnerInfinity
             size={130}
@@ -56,14 +61,14 @@ const CardTable = (props) => {
             speed={70}
             color="rgba(252, 252, 252, 1)"
             secondaryColor="rgba(108, 20, 180, 1)"
-            enabled={data.length===0 ? true : false}
+            enabled={data.length === 0 ? true : false}
             // enabled={true}
           />
         </div>
       )}
 
-      {data.length>0 && (
-        <div className="col-lg-3 col-10" id="cardTop">
+      {data.length > 0 && (
+        <div className="col-lg-3 col-12" id="cardTop">
           <ol className="statsList">
             <li
               className="statsHero d-flex"

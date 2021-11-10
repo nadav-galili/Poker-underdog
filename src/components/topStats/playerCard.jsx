@@ -4,7 +4,7 @@ import { AiOutlineDoubleRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { apiImage } from "./../../config.json";
 
-const PlayerCard = ({ header, data, name, image, cardName, team, table }) => {
+const PlayerCard = ({ header, data, name, image, cardName, team, teamimage }) => {
   return (
     <div className="cardDiv">
       <div className="card" id="mainStats">

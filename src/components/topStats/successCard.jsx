@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import gameService from "../../services/gameService";
+import teamService from "../../services/teamService";
 import { apiImage } from "../../config.json";
 import { SpinnerInfinity } from "spinners-react";
+import PageHeader from "../common/pageHeader";
 
 const SuccessCard = (props) => {
   const [data, setData] = useState([]);
   const [hero, setHero] = useState([]);
+  const [teamImg, setTeamImg] = useState("");
   const teamId = props.match.params.teamId;
 
   useEffect(() => {
@@ -13,6 +16,9 @@ const SuccessCard = (props) => {
       let table = await gameService.successp(teamId);
       table = table.data;
       let myHero = table.shift();
+
+      let teamPic = await teamService.getTeam(teamId);
+      setTeamImg(teamPic.data);
 
       setHero(myHero);
       setData(table);
@@ -25,8 +31,11 @@ const SuccessCard = (props) => {
 
   return (
     <div className="container">
-      <h1>Success %</h1>
+      <PageHeader titleText="Success %" />
+      <div className="teamImg d-flex flex-row mb-2">
+      <img src={`${apiImage}${teamImg.teamImage}`} alt="" />
       <span>{new Date().toLocaleDateString("en-GB")}</span>
+      </div>
       {data.length === 0 && (
         <div className="spinner pt-2">
           <SpinnerInfinity
@@ -40,7 +49,7 @@ const SuccessCard = (props) => {
         </div>
       )}
       {data.length>0 && (
-         <div className="col-lg-3 col-10" id="cardTop">
+         <div className="col-lg-3 col-12" id="cardTop">
          <ul className="statsList ">
            <li
              className="statsHero d-flex"

@@ -98,7 +98,7 @@ export default function MainTable(props) {
         className="mb-0"
         titleText={new Date().getFullYear() + " Top Stats"}
       />
-      <div className="teamImg d-flex flex-row">
+      <div className="teamImg d-flex flex-row mb-2">
         <img src={`${apiImage}${teamImage.teamImage}`} alt="" />
         <span>{new Date().toLocaleDateString("en-GB")}</span>
       </div>
@@ -126,6 +126,7 @@ export default function MainTable(props) {
               cardName="totalProfit"
               team={teamId}
               table={data}
+          
             />
             {avgprofit.length > 1 && (
               <PlayerCard

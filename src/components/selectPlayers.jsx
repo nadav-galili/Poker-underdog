@@ -28,6 +28,8 @@ const SelectPlayers = (props) => {
   }, [props.match.params.teamId, data]);
 
   function selectPlayers(playerId, name, image) {
+    const push = new Audio(process.env.PUBLIC_URL + `sounds/push.mp3`);
+    push.play();
     const player = {
       id: playerId,
       name: name,

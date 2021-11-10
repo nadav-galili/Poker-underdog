@@ -3,6 +3,8 @@ import h2hService from "../../services/h2hService";
 import _ from "lodash";
 import PageHeader from "../common/pageHeader";
 import { apiImage } from "../../config.json"
+import { SpinnerInfinity } from "spinners-react";
+import Swal from "sweetalert2";
 
 const H2hGameEnd = ({ gameId, header }) => {
   const [players, setPlayers] = useState([]);
@@ -20,7 +22,17 @@ const H2hGameEnd = ({ gameId, header }) => {
     lastH2h();
   }, [gameId]);
   let Rank=1;
-  return (<div className="">
+  return (
+  
+  <div>
+     <SpinnerInfinity
+            size={130}
+            thickness={151}
+            speed={70}
+            color="rgba(252, 252, 252, 1)"
+            secondaryColor="rgba(108, 20, 180, 1)"
+            enabled={players.length === 0 ? true : false}
+          />
 {players.length>0 && (
      <div className="contain">
      <PageHeader titleText={header} />

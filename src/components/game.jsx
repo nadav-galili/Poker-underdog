@@ -106,6 +106,7 @@ export default function Game(props) {
   };
 
   function addCashing(playerId) {
+    
     let player = livePlayers.find((e) => playerId === e.id);
     const chips = new Audio(process.env.PUBLIC_URL + "sounds/chips.mp3");
     chips.play();

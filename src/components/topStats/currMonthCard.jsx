@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import gameService from "../../services/gameService";
 import { apiImage } from "../../config.json";
+import teamService from "../../services/teamService";
+import PageHeader from "../common/pageHeader";
 
 const CurrMonthCard = (props) => {
   const [data, setData] = useState([]);
   const [hero, setHero] = useState([]);
+  const [teamImg, setTeamImg] = useState("");
+
   let currentMonth = new Date();
   let currentMonthNumber = currentMonth.getMonth() + 1;
   currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
@@ -15,6 +19,10 @@ const CurrMonthCard = (props) => {
     const getTable = async () => {
       let table = await gameService.monthsData(teamId);
       table = table.data;
+
+      let teamPic = await teamService.getTeam(teamId);
+      setTeamImg(teamPic.data);
+
       table = table.filter(
         (month) => month._id.monthPlayed === currentMonthNumber
       );
@@ -26,12 +34,16 @@ const CurrMonthCard = (props) => {
     getTable();
   }, [setData, teamId, currentMonthNumber]);
 
-  let rank=2;
+  let rank = 2;
 
   return (
     <div className="container">
-      <h1>{currentMonth} {new Date().getFullYear()}</h1>
-      <div className="col-lg-3 col-10" id="cardTop">
+      <PageHeader titleText={`${currentMonth} ${new Date().getFullYear()}`} />
+      <div className="teamImg d-flex flex-row mb-2">
+        <img src={`${apiImage}${teamImg.teamImage}`} alt="" />
+        <span>{new Date().toLocaleDateString("en-GB")}</span>
+      </div>
+      <div className="col-lg-3 col-12" id="cardTop">
         <ul className="statsList ">
           <li
             className="statsHero d-flex"
@@ -52,7 +64,10 @@ const CurrMonthCard = (props) => {
               </div>
             </div>
             <div className="heroImage ">
-              <img src={data.length > 0 ? `${apiImage}${hero._id.image}` : ""} alt="hero" />
+              <img
+                src={data.length > 0 ? `${apiImage}${hero._id.image}` : ""}
+                alt="hero"
+              />
             </div>
           </li>
           <React.Fragment>
@@ -61,7 +76,9 @@ const CurrMonthCard = (props) => {
                 <div className="rowPos">{rank++}.</div>
                 <div className="rowImage">
                   <img
-                    src={data.length > 0 ? `${apiImage}${player._id.image}` : ""}
+                    src={
+                      data.length > 0 ? `${apiImage}${player._id.image}` : ""
+                    }
                     alt="player list row"
                   />
                 </div>

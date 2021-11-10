@@ -86,7 +86,7 @@
 }
 .rowImageTop{
   @extend .rowImage;
- width: 10%;
+ width: 25%;
 
 }
 
@@ -102,9 +102,11 @@
 }
 .rowNameTop{
   @extend .rowName;
+  padding-left: 0;
+  text-align: start;
 }
 .rowDate{
- width: 30%;
+ width: 20%;
  align-self: center;
   font-size: 0.7em;
   font-family: $fantasyFont;
@@ -113,11 +115,12 @@
 }
 
 .rowProfit {
+  width: 12%;
   font-size: 0.7em;
   font-family: $fantasyFont;
   margin-left: auto;
   align-self: center;
-  margin-right: 0.5em;
+  //  margin-right: 0.5em;
   // padding-top: 0.9em;
   font-size: 0.9em;
   font-weight: bold;
@@ -126,4 +129,5 @@
 
 .rowProfitTop{
 @extend .rowProfit;
+text-align: start;
 }
