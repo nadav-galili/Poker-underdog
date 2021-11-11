@@ -1,6 +1,7 @@
 .statsHero {
   height: 100px;
-  width: 280px;
+  // width: 280px;
+  background-size: 100%;
 }
 .statsList {
   padding: 0;
@@ -10,7 +11,7 @@
   & img {
     object-fit: cover;
     height: 100%;
-    margin-left: 2em;
+    margin-right: 2em;
   }
 }
 
@@ -106,7 +107,7 @@
   text-align: start;
 }
 .rowDate{
- width: 20%;
+ width: 25%;
  align-self: center;
   font-size: 0.7em;
   font-family: $fantasyFont;
@@ -115,7 +116,7 @@
 }
 
 .rowProfit {
-  width: 12%;
+  width: 15%;
   font-size: 0.7em;
   font-family: $fantasyFont;
   margin-left: auto;

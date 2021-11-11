@@ -6,7 +6,7 @@ const auth = require("../middleware/auth");
 const upload=require("../middleware/upload");
 const { Team } = require("../models/teams");
 const router = express.Router();
-const { Game } = require("../models/games");
+// const { Game } = require("../models/games");
 
 
 const getTeams = async (teamsArray) => {

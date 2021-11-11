@@ -506,3 +506,46 @@ exports.gameInProgress = async function (req, res) {
   let progress = await Game.find({ team_id: req.params.teamId, isOpen: true });
   res.send(progress);
 };
+
+exports.totalCash = async function (req, res) {
+  const total = await Game.aggregate([
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $match: {
+        team_id: req.params.teamId,
+      },
+    },
+    {
+      $project: {
+        totalHours: {
+          $divide: [
+            {
+              $subtract: ["$updatedAt", "$createdAt"],
+            },
+            3600000,
+          ]
+        },
+        totalCashing:{
+          $sum:'$players.cashing'
+        }
+      },
+    },
+
+    {
+      $group: {
+        _id: null,
+        totalHours: {
+          $sum: '$totalHours'
+        }, 
+        totalCashing: {
+          $sum: '$totalCashing'
+        }
+      },
+    },
+  ]);
+  res.send(total);
+};

@@ -3,6 +3,7 @@ import "../src/css/main.css";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import Home from "./components/home";
+import SideNavbar from "./components/sideNavbar";
 import Signup from "./components/signup";
 import Signin from "./components/signin";
 import Logout from "./components/logout";
@@ -55,13 +56,14 @@ function App() {
   }, []);
 
   const style = {
-    minHeight: 900,
+    minHeight: 780,
   };
   return (
     <React.Fragment> 
       <ToastContainer />
       <header>
-        <Navbar user={user} details={details} />
+        {/* <Navbar user={user} details={details} /> */}
+        <SideNavbar user={user} details={details} pageWrapId={"page-wrap"} outerContainerId={"App"} />
       </header>
       <main style={style} className="main">
         <HashRouter user={user}>

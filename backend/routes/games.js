@@ -27,6 +27,8 @@ router.get("/success-p/:teamId",auth, gamesController.successp )
 // gets game data by card name
  router.get("/:cardName/:teamId",auth,  gamesController.gamesByCardName);
 
+// gets agg cashing of all the games for a team
+router.get("/total/cash/:teamId", auth, gamesController.totalCash)
 // specific game
 router.get("/:gameId",auth,gamesController.gameById);
 

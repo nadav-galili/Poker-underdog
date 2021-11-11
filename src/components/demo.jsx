@@ -5,7 +5,7 @@ import Carousel from "react-bootstrap/Carousel";
 const Demo = () => {
   return (
     <div className="container">
-      <PageHeader titleText="Demo for the game" />
+      <PageHeader titleText="Game Demo" />
       <div className="screenShots col-lg-6 col-12">
         <h3 className="text-primary">Screen Shots</h3>
         <Carousel>

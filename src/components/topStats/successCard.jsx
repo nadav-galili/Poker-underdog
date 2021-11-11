@@ -52,7 +52,7 @@ const SuccessCard = (props) => {
          <div className="col-lg-3 col-12" id="cardTop">
          <ul className="statsList ">
            <li
-             className="statsHero d-flex"
+             className="statsHero d-flex w-100"
              style={{
                backgroundImage: `url(${
                  process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"

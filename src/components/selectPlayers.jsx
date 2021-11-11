@@ -82,7 +82,7 @@ const SelectPlayers = (props) => {
   return (
     <div className="container">
       <h1>
-        <u>Start A New Game Here</u>
+       Start A New Game 
       </h1>
       <h2 className="teamName">{data.name}</h2>
       <h3>Team Number:{data.teamNumber}</h3>

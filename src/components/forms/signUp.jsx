@@ -31,21 +31,26 @@ const validationSchema = Yup.object({
 const SignUp = (props) => {
   const onSubmit = async (values, onSubmitProps) => {
     onSubmitProps.setSubmitting(false);
-
     let data = new FormData();
     data.append("firstName", values.firstName);
     data.append("lastName", values.lastName);
     data.append("nickName", values.nickName);
     data.append("email", values.email);
     data.append("password", values.password);
-    data.append("image", values.image);
+    if(values.image){
+      data.append("image", values.image);
+    }
+ 
+
+    console.log(data);
 
     try {
       if (!values.image) delete values.image;
       await http.post(`${apiUrl}/users`, data);
       await userService.login(values.email, values.password);
-      window.location = "/";
+      window.location = "/my-teams";
       toast("A new acoount is opened");
+      console.log("try");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         setErrors({ email: "This email is taken" });
@@ -121,16 +126,16 @@ const SignUp = (props) => {
                     />
                   </div>
                   <div className="form-control d-flex flex-column bg-primary mb-3">
-                  <label htmlFor="image">Image</label>
-                  <input
-                    className="row mb-4 inputFile"
-                    type="file"
-                    name="image"
-                    onChange={(event) => {
-                      formik.setFieldValue("image", event.target.files[0]);
-                    }}
-                  ></input>
-                  <span className="error">{errors.image}</span>
+                    <label htmlFor="image">Image</label>
+                    <input
+                      className="row mb-4 inputFile"
+                      type="file"
+                      name="image"
+                      onChange={(event) => {
+                        formik.setFieldValue("image", event.target.files[0]);
+                      }}
+                    ></input>
+                    <span className="error">{errors.image}</span>
                   </div>
                   <button
                     type="submit"

@@ -33,7 +33,7 @@ const CardTable = (props) => {
           setHeaderTitle("Average  Cashing");
           break;
         case "gamesWithProfit":
-          setHeaderTitle("Games With Profit");
+          setHeaderTitle("Games W/ Profit");
           break;
         default:
           setHeaderTitle("Total Profit");
@@ -71,7 +71,7 @@ const CardTable = (props) => {
         <div className="col-lg-3 col-12" id="cardTop">
           <ol className="statsList">
             <li
-              className="statsHero d-flex"
+              className="statsHero d-flex w-100"
               style={{
                 backgroundImage: `url(${
                   process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"

@@ -22,6 +22,7 @@ export default function MainTable(props) {
   const [monthleader, setMonthleader] = useState([]);
   const [profits, setProfits] = useState([]);
   const [teamImage, setTeamImage] = useState("");
+  const [totalCash, setTotalCash] = useState({});
 
   const teamId = props.match.params.teamId;
 
@@ -35,6 +36,10 @@ export default function MainTable(props) {
 
       let teamPic = await teamService.getTeam(teamId);
       setTeamImage(teamPic.data);
+
+      let totalCash=await gameService.totalCash(teamId);
+      setTotalCash(totalCash.data)
+
 
       let totoalg = [...table];
       const totalG = await totoalg.sort((a, b) => b.numOfGames - a.numOfGames);
@@ -92,17 +97,14 @@ export default function MainTable(props) {
     profits();
   }, [props.match.params.teamId]);
 
+
   return (
     <div className="container" id="dashboard">
       <PageHeader
         className="mb-0"
         titleText={new Date().getFullYear() + " Top Stats"}
       />
-      <div className="teamImg d-flex flex-row mb-2">
-        <img src={`${apiImage}${teamImage.teamImage}`} alt="" />
-        <span>{new Date().toLocaleDateString("en-GB")}</span>
-      </div>
-      {data.length < 1 && (
+       {data.length < 1 && (
         <div className="spinner mt-5">
           <SpinnerDiamond
             size={130}
@@ -115,6 +117,16 @@ export default function MainTable(props) {
           />
         </div>
       )}
+      <div className="teamImg w-100 d-flex flex-row mb-2 justify-content-start">
+        <img src={`${apiImage}${teamImage.teamImage}`} alt="" />
+       <p className="ms-2">{teamImage.name}</p>
+   
+      </div>
+      <div className="totalCash d-flex flex-column">
+        <p className="mb-0">Total Cash Played: <strong><u>{totalCash[0]?totalCash[0].totalCashing:null} <i class="fas fa-money-bill-alt"></i></u></strong></p>
+        <p className="mb-0">Total Hours Playes: <strong><u>{totalCash[0]?totalCash[0].totalHours.toFixed(2):null} <i class="fas fa-hourglass-half"></i></u></strong></p>
+      </div>
+     
       {data.length > 1 && (
         <React.Fragment>
           <div id="dashboardDisplay">

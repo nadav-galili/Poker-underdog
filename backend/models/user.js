@@ -38,9 +38,9 @@ const userSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: true,
-    minlength: 3,
-    maxlength: 1024,
+     required: true,
+    // minlength: 3,
+     maxlength: 1024,
   },
   teams: {
     type: Array,
@@ -63,7 +63,7 @@ function validateUser(user) {
     email: Joi.string().min(6).max(255).required().email(),
     password: Joi.string().min(6).max(1024).required(),
     teams: Joi.array(),
-    image: Joi.string().min(3).max(1025),
+    image: Joi.string().max(1024),
   });
 
   return schema.validate(user);

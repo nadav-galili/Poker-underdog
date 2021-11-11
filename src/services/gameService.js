@@ -44,6 +44,10 @@ export function inProgress(teamId){
   return http.get(`${apiUrl}/games/true/${teamId}`);
 }
 
+export function totalCash(teamId){
+  return http.get(`${apiUrl}/games/total/cash/${teamId}`)
+}
+
 export default {
   lastGame,
   table,
@@ -55,5 +59,6 @@ export default {
   newGame,
   gameById,
   updateGame,
-  inProgress
+  inProgress,
+  totalCash
 };
