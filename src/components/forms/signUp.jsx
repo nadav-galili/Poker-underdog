@@ -37,20 +37,18 @@ const SignUp = (props) => {
     data.append("nickName", values.nickName);
     data.append("email", values.email);
     data.append("password", values.password);
-    if(values.image){
+    if (values.image) {
       data.append("image", values.image);
     }
- 
 
-    console.log(data);
+
 
     try {
       if (!values.image) delete values.image;
       await http.post(`${apiUrl}/users`, data);
       await userService.login(values.email, values.password);
-      window.location = "/my-teams";
+      window.location = "/";
       toast("A new acoount is opened");
-      console.log("try");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         setErrors({ email: "This email is taken" });

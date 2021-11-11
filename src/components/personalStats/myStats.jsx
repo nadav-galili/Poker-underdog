@@ -135,7 +135,7 @@ const MyStats = () => {
             </div>
             <div className="personalStat">
               <p>Month-{currentMonth}</p>
-              {/* <p>{month.totalProfit}</p> */}
+              <p>{month.totalProfit}</p>
             </div>
             <div className="personalStat">
               <p>H2H Points</p>

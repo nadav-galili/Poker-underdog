@@ -59,9 +59,6 @@ router.post("/", upload.single("image"), auth, async (req, res) => {
     teamPlayer.image=player[0].image;
     teamPlayer.teams=player[0].teams;
  
-
-  // let d = new mongoose.Types.ObjectId(player[0]._id.toString());
-  // console.log(req.user._id.str, "oo");
   let team = new Team({
     name: req.body.name,
     players: teamPlayer,
@@ -73,11 +70,9 @@ router.post("/", upload.single("image"), auth, async (req, res) => {
   });
   let post = await team.save();
   
-  // const tt = await User.find({ _id:req.user._id })
-  // tt[0].teams.push(post._id);
-  // let o=User.findByIdAndUpdate({ _id:req.user._id},tt[0])
-  // console.log(o, "jjj,lkh");
-
+  player[0].teams.push(post._id.valueOf().toString());
+  const p=await User.findOneAndUpdate({ _id:req.user._id },player[0] )
+  console.log(p);
 
   res.send(post);
 });
