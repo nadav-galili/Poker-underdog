@@ -7,12 +7,14 @@ import PageHeader from "../common/pageHeader";
 import { SpinnerCircular } from "spinners-react";
 import { apiImage } from "../../config.json";
 import _ from "lodash";
+import TotalPersonal from "./totalPersonal";
 
 const MyStats = () => {
   const [me, setMe] = useState({});
   const [stats, setStats] = useState({});
   const [month, setMonth] = useState([]);
   const [points, setPoints] = useState([]);
+  const [details,setDetails]=useState([])
   let currentMonth = new Date();
   let currentMonthNumber = currentMonth.getMonth() + 1;
   currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
@@ -23,7 +25,7 @@ const MyStats = () => {
       if (me.teams) {
         
         let table = await gameService.monthsData(me.teams[0]);
-        console.log(table,"sd");
+        
         table = table.data;
        
         table = table.filter(
@@ -32,6 +34,9 @@ const MyStats = () => {
         
         table = table.find((e) => e._id.player_id === me._id);
         setMonth(table);
+
+        let detailed=await gameService.personalGames(me._id);
+        setDetails(detailed.data)
       }
     };
 
@@ -59,10 +64,9 @@ const MyStats = () => {
     points();
   }, [me._id]);
 
-  console.log(month);
 
   return (
-    <div className="container playerStats">
+    <div className="container playerStats pb-4">
       <PageHeader titleText="Player Statistics" />
       <div className="spinner">
         <SpinnerCircular
@@ -154,6 +158,7 @@ const MyStats = () => {
           </div>
         </div>
       )}
+      <TotalPersonal details={details}/>
     </div>
   );
 };

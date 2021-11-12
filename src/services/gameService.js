@@ -10,8 +10,14 @@ export function table(teamId) {
   return http.get(`${apiUrl}/games/table/${teamId}`);
 }
 
+
+
 export function personal(uId) {
   return http.get(`${apiUrl}/games/personal/${uId}`);
+}
+
+export function personalGames(uId){
+  return http.get(`${apiUrl}/games/personalGames/${uId}`);
 }
 
 export function monthsData(teamId){
@@ -60,5 +66,6 @@ export default {
   gameById,
   updateGame,
   inProgress,
-  totalCash
+  totalCash,
+  personalGames
 };

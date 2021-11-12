@@ -643,6 +643,39 @@ h4.mt-4 {
   font-size: 0.9em;
 }
 
+#personalheader {
+  font-size: 4em;
+}
+
+#personalDetails, #personalheader {
+  font-size: 0.7em;
+  align-items: center;
+}
+
+#personalDetails :nth-child(1), #personalheader :nth-child(1) {
+  width: 15%;
+}
+
+#personalDetails :nth-child(2), #personalheader :nth-child(2) {
+  width: 20%;
+}
+
+#personalDetails :nth-child(3), #personalheader :nth-child(3) {
+  width: 12%;
+}
+
+#personalDetails :nth-child(4), #personalheader :nth-child(4) {
+  width: 12%;
+}
+
+#personalDetails :nth-child(5), #personalheader :nth-child(5) {
+  width: 12%;
+}
+
+#personalDetails :nth-child(6), #personalheader :nth-child(6) {
+  width: 10%;
+}
+
 .playerImage {
   border: 3px solid #2752ea;
   width: 80%;
@@ -878,8 +911,8 @@ tfoot td {
   width: 15%;
   font-size: 0.7em;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
-  margin-left: auto;
   align-self: center;
+  text-align: center;
   font-size: 0.9em;
   font-weight: bold;
 }

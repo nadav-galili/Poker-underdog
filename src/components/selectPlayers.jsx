@@ -44,7 +44,7 @@ const SelectPlayers = (props) => {
       : setSelected([...selected, player]);
   }
 
-  function shuffle() {
+  async function shuffle() {
     const shuffle = new Audio(process.env.PUBLIC_URL + "sounds/Shuffle.mp3");
     shuffle.play();
     if (!started) {
@@ -55,7 +55,7 @@ const SelectPlayers = (props) => {
         team_id: data._id,
       
       };
-      gameService.newGame(game).then((res) => {
+      await gameService.newGame(game).then((res) => {
         let newGame = { ...res.data };
         newGame.gameId = newGame._id;
         delete newGame._id;
@@ -67,11 +67,9 @@ const SelectPlayers = (props) => {
         players: selected,
         team_name: started.team_name,
         team_id: started.team_id,
-        
         gameId: started._id,
       };
-      gameService.updateGame(started._id, game).then((res) => {
-        
+     await  gameService.updateGame(started._id, game).then((res) => {
           res.data.gameId=res.data._id
          h2hService.newH2h(res.data)
          props.history.push(`/games/${res.data._id}`);

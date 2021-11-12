@@ -11,6 +11,8 @@ router.put('/:gameId',auth,gamesController.updateGame);
 ///gets aggregate results of personal stats
 router.get("/personal/:uId", auth,gamesController.personalStats);
 
+// gets game details for user
+router.get("/personalGames/:uId", auth, gamesController.personalGames)
 //gets aggregated results of the team
 router.get("/table/:teamId", auth, gamesController.teamStats);
 

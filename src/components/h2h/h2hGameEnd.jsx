@@ -49,13 +49,13 @@ const H2hGameEnd = ({ gameId, header }) => {
                 className="stats d-flex w-100 justify-content-between"
                 id="lGame"
               >
-                <p className="ms-3">Player</p>
+                <p className="ms-5">Player</p>
                 <p className="me-3">Points</p>
               </div>
             </li>
             <React.Fragment>
               {players.map((player) => (
-                <li className="statsRow" key={player.id}>
+                <li className="statsRow w-100 justify-content-between" key={player.id}>
                   <div className="rowPos">{Rank++}</div>
                   <div className="rowImage">
                     <img
@@ -66,7 +66,7 @@ const H2hGameEnd = ({ gameId, header }) => {
                   <div className="rowName" id="lGameName">
                     {player.name}
                   </div>
-                  <div className="rowProfit me-3">{player.points}</div>
+                  <div className="rowProfit">{player.points}</div>
                 </li>
               ))}
             </React.Fragment>

@@ -549,3 +549,21 @@ exports.totalCash = async function (req, res) {
   ]);
   res.send(total);
 };
+
+exports.personalGames=async function(req, res){
+  const details=await Game.aggregate(
+    [
+      {
+        $unwind: {
+          path: "$players",
+        },
+      },
+      {
+        $match: {
+          "players.id": req.params.uId,
+        },
+      },
+    ]
+  );
+  res.send(details)
+}

@@ -52,3 +52,32 @@
  .detailedStatsRow2 {
 @include detailedStats
 }
+
+#personalheader{
+  font-size: 4em;
+  @extend #personalDetails;
+ 
+}
+#personalDetails{
+  font-size: 0.7em;
+  align-items: center;
+& :nth-child(1){
+  width: 15%;
+}
+& :nth-child(2){
+  width: 20%;
+}
+& :nth-child(3){
+  width: 12%;
+}
+& :nth-child(4){
+  width: 12%;
+}
+& :nth-child(5){
+  width: 12%;
+}
+& :nth-child(6){
+  width: 10%;
+}
+
+}

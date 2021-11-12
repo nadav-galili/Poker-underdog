@@ -72,7 +72,7 @@ router.post("/", upload.single("image"), auth, async (req, res) => {
   
   player[0].teams.push(post._id.valueOf().toString());
   const p=await User.findOneAndUpdate({ _id:req.user._id },player[0] )
-  console.log(p);
+
 
   res.send(post);
 });
