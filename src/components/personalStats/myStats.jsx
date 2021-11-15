@@ -8,35 +8,60 @@ import { SpinnerCircular } from "spinners-react";
 import { apiImage } from "../../config.json";
 import _ from "lodash";
 import TotalPersonal from "./totalPersonal";
+import { Line } from "react-chartjs-2";
+
+
 
 const MyStats = () => {
   const [me, setMe] = useState({});
   const [stats, setStats] = useState({});
   const [month, setMonth] = useState([]);
   const [points, setPoints] = useState([]);
-  const [details,setDetails]=useState([])
+  const [details, setDetails] = useState([]);
+  const [chartData, setChartData]=useState([])
+  const [chartDates, setChartDates]=useState([])
   let currentMonth = new Date();
   let currentMonthNumber = currentMonth.getMonth() + 1;
   currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
+  
+ 
 
   useEffect(() => {
     const getTable = async () => {
-     
       if (me.teams) {
-        
         let table = await gameService.monthsData(me.teams[0]);
-        
+
         table = table.data;
-       
+
         table = table.filter(
           (month) => month._id.monthPlayed === currentMonthNumber
         );
-        
+
         table = table.find((e) => e._id.player_id === me._id);
         setMonth(table);
 
-        let detailed=await gameService.personalGames(me._id);
-        setDetails(detailed.data)
+        let detailed = await gameService.personalGames(me._id);
+        setDetails(detailed.data);
+
+        let myDetailed = await gameService.personalGames(me._id);
+        // setChartData(myDetailed.data)
+        
+       console.log(myDetailed, "popo");
+       let chartDetails=[]
+       let chartDates=[]
+       try{
+        await  myDetailed.data.forEach(
+          e=>chartDetails.push(e.players.profit)
+        )
+        setChartData(chartDetails)
+
+        await myDetailed.data.forEach(
+          e=>chartDates.push(new Date(e.createdAt).toLocaleDateString("en-GB"))
+        )
+        setChartDates(chartDates)
+       }catch{
+         console.log("errr");
+       }
       }
     };
 
@@ -63,6 +88,26 @@ const MyStats = () => {
     };
     points();
   }, [me._id]);
+  console.log(chartData, "ljljlj");
+  const data = {
+    labels: chartDates,
+    datasets: [
+      {
+        label: "Profits By Date",
+        data: chartData,
+        fill: false,
+        backgroundColor: "#6c14b4",
+        borderColor: "#6c14b4",
+      },
+    ],
+  };
+  const options = {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
 
 
   return (
@@ -158,7 +203,14 @@ const MyStats = () => {
           </div>
         </div>
       )}
-      <TotalPersonal details={details}/>
+      <div className="header">
+        <h1 className="title">Personal Chart</h1>
+      </div>
+      <div className="col-lg-4 col-11">
+      <Line data={data} options={options} />
+
+      </div>
+      <TotalPersonal details={details} />
     </div>
   );
 };

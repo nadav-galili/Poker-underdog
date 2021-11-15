@@ -563,6 +563,13 @@ exports.personalGames=async function(req, res){
           "players.id": req.params.uId,
         },
       },
+      {
+        
+          $sort: {
+            'createdAt': 1
+          }
+     
+      },
     ]
   );
   res.send(details)

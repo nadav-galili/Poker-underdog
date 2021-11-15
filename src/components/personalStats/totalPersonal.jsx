@@ -1,5 +1,8 @@
 import React from "react";
 
+
+
+
 const TotalPersonal = ({ details }) => {
   return (
     <div className="col-lg-4 col-11 mt-4 ">
@@ -29,18 +32,29 @@ const TotalPersonal = ({ details }) => {
           {details.map((d) => (
             <li
               className="statsRow w-100 d-flex justify-content-between"
-              id="personalDetails"
+              id="personalDetails" key={new Date(d.createdAt).toLocaleDateString("en-GB")}
             >
-              <div className="rowPlayerDetails ms-1">{new Date(d.createdAt).toLocaleDateString("en-GB")}</div>
+              <div className="rowPlayerDetails ms-1">
+                {new Date(d.createdAt).toLocaleDateString("en-GB")}
+              </div>
               <div className="rowPlayerDetails">{d.team_name}</div>
               <div className="rowPlayerDetails">{d.players.cashing}</div>
               <div className="rowPlayerDetails">{d.players.numOfCashing}</div>
               <div className="rowPlayerDetails">{d.players.gameRank}</div>
-              <div className="rowPlayerDetails">{d.players.profit}</div>
+              <div
+                className={
+                  d.players.profit > 0
+                    ? "rowPlayersDetails text-success"
+                    : "rowPlayersDetails text-danger"
+                }
+              >
+                {d.players.profit}
+              </div>
             </li>
           ))}
         </ol>
       </div>
+    
     </div>
   );
 };
