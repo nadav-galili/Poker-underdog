@@ -29,6 +29,7 @@ import ProfitsCard from "./components/topStats/profitsCard";
 import SignUp from "./components/forms/signUp";
 import NewGame from "./components/games/newGame";
 import GameEnd from "./components/gameEnd";
+import H2hTable from "./components/h2h/h2hTable"
 import TeamSignUp from "./components/forms/teamSignUp"
 import ReactGA from "react-ga";
 
@@ -106,6 +107,7 @@ function App() {
 
             <ProtectedRoute path="/games/:gameId" component={NewGame} />
             <ProtectedRoute path="/last-game/:teamId" component={GameEnd} />
+            <ProtectedRoute path="/tables/h2h/:teamId" component={H2hTable} /> 
             <ProtectedRoute path="/main-table/:teamId" component={MainTable} />
             <ProtectedRoute path="/tables/success/:teamId" component={SuccessCard} />
             <ProtectedRoute path="/tables/byMonths/:currMonth/:teamId" component={CurrMonthCard} />

@@ -32,7 +32,7 @@ const TotalPersonal = ({ details }) => {
           {details.map((d) => (
             <li
               className="statsRow w-100 d-flex justify-content-between"
-              id="personalDetails" key={new Date(d.createdAt).toLocaleDateString("en-GB")}
+              id="personalDetails" key={new Date(d.createdAt)}
             >
               <div className="rowPlayerDetails ms-1">
                 {new Date(d.createdAt).toLocaleDateString("en-GB")}

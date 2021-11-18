@@ -271,7 +271,7 @@ h3 {
 }
 
 #share {
-  font-size: 0.8em;
+  font-size: 0.6em;
   color: #ff3030;
 }
 
@@ -870,13 +870,13 @@ tfoot td {
   width: 10%;
 }
 
-.rowImage, .rowImageTop {
+.rowImage, .rowImageTop, .rowImageH2h {
   align-self: center;
   width: 20%;
   margin-left: 0.8em;
 }
 
-.rowImage img, .rowImageTop img {
+.rowImage img, .rowImageTop img, .rowImageH2h img {
   border-radius: 50%;
   border: 1px solid black;
   height: 40px;
@@ -885,11 +885,11 @@ tfoot td {
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
-.rowImageTop {
+.rowImageTop, .rowImageH2h {
   width: 25%;
 }
 
-.rowName, .rowNameTop {
+.rowName, .rowNameTop, .rowNameH2h {
   font-size: 0.8em;
   font-weight: bold;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
@@ -899,12 +899,12 @@ tfoot td {
   flex-grow: 2;
 }
 
-.rowNameTop {
+.rowNameTop, .rowNameH2h {
   padding-left: 0;
   text-align: start;
 }
 
-.rowDate {
+.rowDate, .rowH2hAvg, .rowH2hG {
   width: 25%;
   align-self: center;
   font-size: 0.7em;
@@ -923,6 +923,47 @@ tfoot td {
 
 .rowProfitTop {
   text-align: start;
+}
+
+.avgP {
+  color: #fcfcfc;
+}
+
+#h2hLi {
+  list-style: none;
+}
+
+.h2hDetailsRow {
+  height: 3.5em;
+  color: #fcfcfc;
+  font-size: 0.7em;
+  align-self: center;
+}
+
+.h2hDetailsRow p {
+  margin: 0;
+  width: 15%;
+}
+
+.h2hDetailsRow :nth-child(3) {
+  padding-left: 1.9em;
+}
+
+.rowImageH2h {
+  width: 12%;
+}
+
+.rowH2hAvg {
+  text-align: center;
+}
+
+.rowH2hG {
+  padding-left: 1em;
+}
+
+.rowNameH2h {
+  width: 20%;
+  padding-left: 0.5em;
 }
 
 .form-control {
@@ -1055,13 +1096,17 @@ label {
   padding-left: 0.7em;
 }
 
-.rowCashing {
+.rowCashing, .rowCashingAll {
   font-size: 0.8em;
   font-weight: bold;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   padding-top: 1.1em;
   text-transform: capitalize;
   flex-grow: 2;
+}
+
+.rowCashingAll {
+  width: 5%;
 }
 
 main {

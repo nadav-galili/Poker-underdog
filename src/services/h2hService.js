@@ -14,12 +14,22 @@ export function updateH2h(gameId){
 }
 
 export function getPointsByPlayer(pId){
-    return http.get(`${apiUrl}/h2h/byPlayer/${pId}`)
+    return http.get(`${apiUrl}/h2h/byPlayer/${pId}`);
+}
+
+export function getPointsByTeam(teamId){
+    return http.get(`${apiUrl}/h2h/byTeam/${teamId}`);
+}
+
+export function teamAllGames(teamId){
+    return http.get(`${apiUrl}/h2h/teamAllGames/${teamId}`);
 }
 
 export default{
     newH2h,
     getByGameId,
     updateH2h,
-    getPointsByPlayer
+    getPointsByPlayer,
+    getPointsByTeam,
+    teamAllGames
 }

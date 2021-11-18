@@ -54,6 +54,10 @@ export function totalCash(teamId){
   return http.get(`${apiUrl}/games/total/cash/${teamId}`)
 }
 
+export function allGamesByTeam(teamId){
+  return http.get(`${apiUrl}/games/teams/byTeamId/${teamId}`);
+}
+
 export default {
   lastGame,
   table,
@@ -67,5 +71,6 @@ export default {
   updateGame,
   inProgress,
   totalCash,
-  personalGames
+  personalGames, 
+  allGamesByTeam
 };

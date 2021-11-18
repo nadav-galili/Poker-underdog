@@ -17,3 +17,9 @@
     text-transform: capitalize;
     flex-grow: 2;
 }
+.rowCashingAll{
+    @extend .rowCashing;
+    width: 5%;
+    // text-align: start;
+
+}

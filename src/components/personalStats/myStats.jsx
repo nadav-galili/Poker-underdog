@@ -44,9 +44,7 @@ const MyStats = () => {
         setDetails(detailed.data);
 
         let myDetailed = await gameService.personalGames(me._id);
-        // setChartData(myDetailed.data)
-        
-       console.log(myDetailed, "popo");
+     
        let chartDetails=[]
        let chartDates=[]
        try{
@@ -56,7 +54,7 @@ const MyStats = () => {
         setChartData(chartDetails)
 
         await myDetailed.data.forEach(
-          e=>chartDates.push(new Date(e.createdAt).toLocaleDateString("en-GB"))
+          e=>chartDates.push(new Date(e.createdAt).toLocaleDateString("en-GB").substr(0,5))
         )
         setChartDates(chartDates)
        }catch{
@@ -88,7 +86,7 @@ const MyStats = () => {
     };
     points();
   }, [me._id]);
-  console.log(chartData, "ljljlj");
+
   const data = {
     labels: chartDates,
     datasets: [
@@ -204,7 +202,7 @@ const MyStats = () => {
         </div>
       )}
       <div className="header">
-        <h1 className="title">Personal Chart</h1>
+        <h1 className="title  mt-2">Personal Chart</h1>
       </div>
       <div className="col-lg-4 col-11">
       <Line data={data} options={options} />

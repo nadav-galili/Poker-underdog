@@ -116,3 +116,50 @@ exports.getplayerStats=async function(req, res){
   );
   res.send(agg)
 }
+
+exports.h2hGamesByTeam=async function(req, res){
+  const agg=await H2h.aggregate(
+    [
+      {
+        $match: {
+          team_id:req.params.teamId
+        }
+      }, {
+        $unwind: {
+          path: '$players'
+        }
+      }, {
+        $unwind: {
+          path: '$players'
+        }
+      }, {
+        $group: {
+          _id: {
+            name: '$players.name', 
+            image: '$players.image', 
+            player_id: '$players.id'
+          }, 
+          totalPoints: {
+            $sum: '$players.points'
+          }, 
+          numOfGames: {
+            $sum: 1
+          }, 
+          avgPoints: {
+            $avg: '$players.points'
+          }
+        }
+      },
+      {
+        $sort: {
+            totalPoints: -1
+        }}
+    ]
+  )
+  await res.send(agg)
+}
+
+exports.teamAllGames=async function(req, res){
+  let game=await H2h.find({team_id:req.params.teamId});
+  res.send(game);
+}

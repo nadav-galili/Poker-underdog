@@ -18,7 +18,7 @@ router.get("/table/:teamId", auth, gamesController.teamStats);
 
 // gets  month stats
 router.get("/byMonths/:teamId",auth,gamesController.dataByMonths);
-//gameinprogrerss
+//game in progrerss
 router.get('/true/:teamId', auth,gamesController.gameInProgress);
 //gets the latest game
 router.get("/last-game/:teamId",auth,gamesController.lastGame);
@@ -34,6 +34,8 @@ router.get("/total/cash/:teamId", auth, gamesController.totalCash)
 // specific game
 router.get("/:gameId",auth,gamesController.gameById);
 
+//games by team
+router.get('/teams/byTeamId/:teamId', auth, gamesController.byTeamId)
 // gets back all the games
 router.get("/",auth, gamesController.allGames);
 

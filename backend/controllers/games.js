@@ -4,6 +4,13 @@ const _ = require("lodash");
 const { Game, validate } = require("../models/games");
 const { Team } = require("../models/teams");
 
+
+exports.byTeamId=async function(req, res){
+  let games=await Game.find({team_id:req.params.teamId}).sort({createdAt:-1});
+  res.send(games)
+
+}
+
 exports.teamStats = async function (req, res) {
   const team = await Team.find({ _id: req.params.teamId });
   const table = await Game.aggregate([
@@ -574,3 +581,4 @@ exports.personalGames=async function(req, res){
   );
   res.send(details)
 }
+

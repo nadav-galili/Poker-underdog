@@ -130,3 +130,46 @@
 @extend .rowProfit;
 text-align: start;
 }
+
+.avgP{
+  color:$navbarWhite
+}
+#h2hLi{
+  list-style: none;
+}
+
+.h2hDetailsRow{
+  height: 3.5em;
+  color:$navbarWhite;
+  font-size: 0.7em;
+  align-self: center;
+  & p{
+margin:0;
+    width: 15%;
+  }
+  & :nth-child(3){
+    padding-left:1.9em;
+  }
+}
+
+.rowImageH2h{
+  @extend .rowImageTop;
+  width: 12%;
+
+}
+
+.rowH2hAvg{
+  @extend .rowDate;
+  text-align: center;
+}
+
+.rowH2hG{
+  @extend .rowDate;
+ padding-left: 1em;
+}
+
+.rowNameH2h{
+  @extend .rowNameTop;
+  width: 20%;
+  padding-left: 0.5em;
+}

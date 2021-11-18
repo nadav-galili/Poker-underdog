@@ -9,6 +9,9 @@ import { SpinnerDiamond } from "spinners-react";
 import MainLastgame from "./mainLastGame";
 import teamService from "../services/teamService";
 import { apiImage } from "../config.json";
+import h2hService from "../services/h2hService";
+import H2hCard from "./h2h/h2hCard";
+import AllGames from "./games/allGames";
 
 export default function MainTable(props) {
   //get the data for the table
@@ -18,6 +21,7 @@ export default function MainTable(props) {
   const [avgcashing, setAvgcashing] = useState([]);
   const [success, setSuccess] = useState([]);
   const [gamesprofit, setGamesprofit] = useState([]);
+  const [h2h, setH2h] = useState([]);
 
   const [monthleader, setMonthleader] = useState([]);
   const [profits, setProfits] = useState([]);
@@ -37,9 +41,11 @@ export default function MainTable(props) {
       let teamPic = await teamService.getTeam(teamId);
       setTeamImage(teamPic.data);
 
-      let totalCash=await gameService.totalCash(teamId);
-      setTotalCash(totalCash.data)
+      let totalCash = await gameService.totalCash(teamId);
+      setTotalCash(totalCash.data);
 
+      let h2h = await h2hService.getPointsByTeam(teamId);
+      setH2h(h2h.data);
 
       let totoalg = [...table];
       const totalG = await totoalg.sort((a, b) => b.numOfGames - a.numOfGames);
@@ -97,14 +103,13 @@ export default function MainTable(props) {
     profits();
   }, [props.match.params.teamId]);
 
-
   return (
     <div className="container" id="dashboard">
       <PageHeader
         className="mb-0"
         titleText={new Date().getFullYear() + " Top Stats"}
       />
-       {data.length < 1 && (
+      {data.length < 1 && (
         <div className="spinner mt-5">
           <SpinnerDiamond
             size={130}
@@ -119,14 +124,29 @@ export default function MainTable(props) {
       )}
       <div className="teamImg w-100 d-flex flex-row mb-2 justify-content-start">
         <img src={`${apiImage}${teamImage.teamImage}`} alt="" />
-       <p className="ms-2">{teamImage.name}</p>
-   
+        <p className="ms-2">{teamImage.name}</p>
       </div>
-      <div className="totalCash d-flex flex-column">
-        <p className="mb-0">Total Cash Played: <strong><u>{totalCash[0]?totalCash[0].totalCashing:null} <i class="fas fa-money-bill-alt"></i></u></strong></p>
-        <p className="mb-0">Total Hours Playes: <strong><u>{totalCash[0]?totalCash[0].totalHours.toFixed(2):null} <i class="fas fa-hourglass-half"></i></u></strong></p>
+      <div className="totalCash d-flex flex-column mb-2">
+        <p className="mb-0">
+          Total Cash Played:
+          <strong>
+            <span className="ps-1">
+              {totalCash[0] ? totalCash[0].totalCashing.toLocaleString() : null}
+              <i className="fas fa-money-bill-alt ps-1"></i>
+            </span>
+          </strong>
+        </p>
+        <p className="mb-0">
+          Total Hours Playes:
+          <strong>
+            <span className="ps-1">
+              {totalCash[0] ? totalCash[0].totalHours.toFixed(2) : null}
+              <i className="fas fa-hourglass-half ps-1 "></i>
+            </span>
+          </strong>
+        </p>
       </div>
-     
+
       {data.length > 1 && (
         <React.Fragment>
           <div id="dashboardDisplay">
@@ -138,7 +158,6 @@ export default function MainTable(props) {
               cardName="totalProfit"
               team={teamId}
               table={data}
-          
             />
             {avgprofit.length > 1 && (
               <PlayerCard
@@ -208,8 +227,18 @@ export default function MainTable(props) {
                 team={teamId}
               />
             )}
+            {h2h.length > 0 && (
+              <H2hCard
+                header="H2H Games"
+                data={h2h[0].totalPoints}
+                name={h2h[0]._id.name}
+                image={h2h[0]._id.image}
+                team={teamId}
+              />
+            )}
           </div>
           <MainLastgame teamId={teamId} />
+          <AllGames teamId={teamId} />
         </React.Fragment>
       )}
     </div>
