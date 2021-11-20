@@ -37,6 +37,7 @@ const H2hGameCard = ({ team }) => {
       <div className="contain">
         <PageHeader titleText="All Games" />
 
+        <div className="row">
         {games &&
           games.map((g) => (
             <div className="col-12 col-lg-3 pb-4" id="card-top" key={games.createdAt}>
@@ -83,6 +84,8 @@ const H2hGameCard = ({ team }) => {
               </ol>
             </div>
           ))}
+        </div>
+      
       </div>
     </div>
   );

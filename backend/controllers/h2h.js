@@ -160,6 +160,6 @@ exports.h2hGamesByTeam=async function(req, res){
 }
 
 exports.teamAllGames=async function(req, res){
-  let game=await H2h.find({team_id:req.params.teamId});
+  let game=await H2h.find({team_id:req.params.teamId}).sort({createdAt:-1});
   res.send(game);
 }
