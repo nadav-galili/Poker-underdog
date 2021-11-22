@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker-Underdog</title>
+    <link rel="stylesheet" href="css/style.css">
+        <style>
+.logoImage {
+    height:8em;
+  }
+.logoImage img{
+  height: 100%;
+ border: 1px solid black;
+ border-radius: 20px;
+  }
+
+.statsHero {
+    height: 100px;
+    background-size: 100%;
+}
+.statsList{
+    width:380px;
+    padding:0;
+    display:flex;
+    list-style-type:none
+}
+#lastGameHero{
+display: flex ;
+flex-direction:column;
+background-color: #6c14b4;
+ width: 100%;
+ height: 5em;
+ justify-content: center;
+ color: #fcfcfc;
+ align-items: center;
+  }
+.stats{
+display:flex;
+flex-direction:row;
+justify-content: end;
+}
+    </style>
+</head>
+<body>
+<div class="logoImage">
+    <img src='https://poker-underdog.com/logoNewRed.png'>
+</div>
+<h1>Poker-Underdog</h1>
+<h2>Game no {{_id}} Has Ended</h2>
+<ol class="statsList">
+    <li id="lastGameHero">
+        <p >{{createdAt}}</p>
+        <div class="stats">
+            <p>Player</p>
+            <p>Cashing</p>
+            <p>Profit</p>
+        </div>
+    </li>
+    <li id="statsRow">
+        <div class="rowPos">{{player.gameRank}}</div>
+        <div class="rowName">{{player.name}}</div>
+        <div class="rowCashing">{{player.cashing}}</div>
+        <div class="rowProfit">{{player.profit}}</div>
+       
+    </li>
+</ol>
+</body>
+</html>
