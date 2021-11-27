@@ -84,7 +84,7 @@ class Navbar extends Component {
                 <React.Fragment>
                   <li className="nav-item me-2 ">
                     {user && (
-                      <div className="userDetails flex-row-reverse">
+                      <div className="userDetails d-flex flex-row">
                         <p className="text-primary">{details.nickName}</p>
                         <Avatar
                           src={`${apiImage}${details.image}`}

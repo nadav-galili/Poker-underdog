@@ -38,19 +38,27 @@ const Home = () => {
             <div className="homeImg1">
               <img
                 src="https://neconnected.co.uk/wp-content/uploads/2021/03/vcs_should_invest_like_poker_player-bf365a82-1280x640.jpg"
-                alt=""
-             
+                alt="poker"
               />
             </div>
             <div className="homeImg2">
               <img
                 src="https://www.telegraph.co.uk/content/dam/betting/Better-Collective/8-Classic-xlarge.jpg"
-                alt=""
+                alt="poker-cards"
          
               />
             </div>
           </div>
         </div>
+        {/* <div className="col-md-3 col-12 text-primary ">
+        <div className="vh-25 wh-25">
+              <img
+                src={ process.env.PUBLIC_URL + "/demo/dash3.JPG"}
+                alt="poker-cards"
+              />
+            </div>
+            </div> */}
+
       </div>
     </section>
   );
