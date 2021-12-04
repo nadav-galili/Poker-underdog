@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 
 const NewGame = (props) => {
   const [data, setData] = useState({});
+  const [alert, setAlert] = useState("visually-hidden");
+  const [playerName, setPlayerName] = useState("");
 
   useEffect(() => {
     const players = async () => {
@@ -31,7 +33,6 @@ const NewGame = (props) => {
     }).then((result) => {
       if (result.isConfirmed) {
         let player = data.players.find((e) => playerId === e.id);
-       console.log(player);
         player.cashing += 50;
         player.numOfCashing += 1;
         let game = { ...data };
@@ -42,8 +43,9 @@ const NewGame = (props) => {
         gameService.updateGame(game.gameId, game).then((res) => {});
         const chips = new Audio(process.env.PUBLIC_URL + `sounds/chips.mp3`);
         chips.play();
+        setAlert("");
+        setPlayerName(player.name);
         Swal.fire(`Added cashing to ${player.name}`);
-
       }
     });
   };
@@ -58,6 +60,8 @@ const NewGame = (props) => {
       delete game._id;
       delete game.__v;
       setData(game);
+      const cancel = new Audio(process.env.PUBLIC_URL + `sounds/cancel.mp3`);
+      cancel.play();
       gameService.updateGame(game.gameId, game);
     }
   };
@@ -72,38 +76,57 @@ const NewGame = (props) => {
   };
 
   const updateGame = () => {
-    let game = { ...data };
-    game.gameId = props.match.params.gameId;
-    delete game._id;
-    game.isOpen = false;
-    game.players.sort((a, b) => b.profit - a.profit);
-    let gameRank = 1;
-    game.players.map((p) => (p.gameRank = gameRank++));
-    setData(game);
-    gameService.updateGame(game.gameId, game).then((res) => {
-      h2hService.updateH2h(game.gameId);
-      setData(res.data);
+    Swal.fire({
+      title: "sure you want to end game?",
+      text: "you won't be able to cancel",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let game = { ...data };
+        game.gameId = props.match.params.gameId;
+        delete game._id;
+        game.isOpen = false;
+        game.players.sort((a, b) => b.profit - a.profit);
+        let gameRank = 1;
+        game.players.map((p) => (p.gameRank = gameRank++));
+        setData(game);
+        gameService.updateGame(game.gameId, game).then((res) => {
+          h2hService.updateH2h(game.gameId);
+          setData(res.data);
+        });
+        props.history.replace(`/last-game/${data.team_id}`);
+      }
     });
-    props.history.replace(`/last-game/${data.team_id}`);
   };
+  console.log(data,"44");
   return (
     <div className="container ">
       <PageHeader titleText="Game No." />
       <p className="text-danger">{data._id}</p>
       <p className="text-primary">
         Started At:{" "}
-        {new Date(data.createdAt).toLocaleDateString("en-GB") +
-          " " +
-          new Date(data.createdAt).toLocaleString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-          })}
+        {`${new Date(data.createdAt).toLocaleDateString("en-GB")}
+        ${new Date(data.createdAt).toLocaleString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        })}`}
       </p>
-      {/* <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        player x cashed in
-      </div> */}
-
+      <div
+        className={`alert alert-success ${alert} fade show w-75 py-1`}
+        role="alert"
+      >
+        {playerName} cashed in{" "}
+        {`${new Date().toLocaleString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        })}`}
+      </div>
       {data.length < 1 && (
         <div className="spinner pt-2">
           <SpinnerInfinity

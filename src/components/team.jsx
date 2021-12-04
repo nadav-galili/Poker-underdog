@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { apiImage } from "../config.json";
+import {GiCardKingClubs} from "react-icons/gi"
+import {IoMdStats} from "react-icons/io"
+
+
 
 
 const Team = ({ team, removeTeam }) => {
@@ -17,7 +21,7 @@ const Team = ({ team, removeTeam }) => {
           width="100"
           height="100"
         />
-        <div className="card-body">
+        <div className="card-body pt-0">
           <h3 className="card-title ">
             <u className="text-primary">{team.name}</u>
           </h3>
@@ -31,25 +35,22 @@ const Team = ({ team, removeTeam }) => {
           <p className="mb-2">
             <b>
               <u className="text-dark ">Team Manager:</u>
-          
               <span className="text-primary captain ">{captain[0].nickName}</span>
              
             </b>
           </p>
           <Link className="btn btn-primary " to={`/main-table/${team._id}`}>
-            Team Tables & Statistics
+            Team Tables & Stats
+            <IoMdStats className="ms-2"/>
             <i className="ps-2 fas fa-angle-double-right"></i>
           </Link>
-         
-          
-
           <div className="card-text ">
             <strong>
               <u>Players:</u>
             </strong>
-            <ul className="row" id="playersList">
+            <ul className="row ps-0" id="playersList">
               {team.players.map((player) => (
-                <li key={player._id} className="col-6 col-lg-4 teams">
+                <li key={player._id} className="col-4 col-lg-4 teams">
                   {player.nickName}
                   <br></br>
                   <img src={`${apiImage}${player.image}`} alt="user" className='mb-2'
@@ -60,6 +61,8 @@ const Team = ({ team, removeTeam }) => {
           </div>
           <Link className="btn mb-2" to={`/new-game/${team._id}`}>
             Start a new game
+            <GiCardKingClubs className="ms-2" />
+            <i className="ps-2 fas fa-angle-double-right"></i>
           </Link>
           <p className="card-text border-top pt-2">Created At:{new Date(team.createdAt).toLocaleDateString("en-GB")}</p>
           {/* <p className="text-primary">

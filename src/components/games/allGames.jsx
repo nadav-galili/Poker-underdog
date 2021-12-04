@@ -4,10 +4,16 @@ import PageHeader from "../common/pageHeader";
 import { apiImage } from "../../config.json";
 import { SpinnerInfinity } from "spinners-react";
 import _ from "lodash";
+import ReactPaginate from "react-paginate";
 
 const AllGames = ({ teamId }) => {
-  const [games, setGames] = useState();
-  const [gamesData, setGamesData] = useState();
+  const [games, setGames] = useState(null);
+  const [gamesData, setGamesData] = useState([]);
+  const [perPage, setPerPage] = useState(3);
+  const [page, setPage] = useState(0);
+  const [pages, setPages] = useState(0);
+  const [loading,setLoading]=useState(false)
+
 
   useEffect(() => {
     const getGames = async () => {
@@ -15,18 +21,32 @@ const AllGames = ({ teamId }) => {
       setGamesData(all.data);
       const allGames = all.data.map((d) => _.flattenDeep(d.players));
       setGames(allGames);
+      setLoading(true)
+      try {
+        setPages(Math.floor(games.length / perPage));
+      } catch {
+        console.log("not yet logged");
+      }
     };
 
     getGames();
-  }, [teamId]);
-
-
+  }, [teamId, perPage, games]);
   let created = 0;
+  let items = [];
+  items = games ? games.slice(page * perPage, (page + 1) * perPage) : "";
+  let itemsDates = gamesData
+    ? gamesData.slice(page * perPage, (page + 1) * perPage)
+    : "";
+
+  const handlePageClick = (event) => {
+    let pageC = event.selected;
+    setPage(pageC);
+  };
+
 
   return (
     <div className="container">
       <PageHeader titleText="All Games" />
-     
       {!games && (
         <div className="spinner pt-2">
           <SpinnerInfinity
@@ -39,85 +59,106 @@ const AllGames = ({ teamId }) => {
           />
         </div>
       )}
-       <div className="row">
-       {games &&
-        games.map((g) => (
-          <div className="col-lg-4 col-12 pb-3" id="card-top">
-            <ol className="statsList">
-              <li
-                id="lastGameHero"
-                className="statsHero d-flex flex-column"
-                style={{
-                  backgroundImage: `url(${
-                    process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
-                  })`,
-                }}
-              >
-                <p>
-                  {new Date(gamesData[created++].createdAt).toLocaleDateString(
-                    "en-GB"
-                  ) +
-                    " " +
-                    new Date(gamesData[created - 1].createdAt).toLocaleString(
-                      "en-US",
-                      {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        hour12: false,
-                      }
-                    ) +
-                    " - " +
-                    new Date(gamesData[created - 1].updatedAt).toLocaleString(
-                      "en-US",
-                      {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        hour12: false,
-                      }
-                    )}
-                </p>
-                <div
-                  className="stats d-flex w-100 justify-content-between"
-                  id="lGame"
+      <div className="row">
+        {loading &&(
+          <ReactPaginate
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          pageCount={pages+1}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination text-white justify-content-center"}
+          activeClassName={"active"}
+          pageClassName={"page-item"}
+          pageLinkClassName={"page-link"}
+          previousClassName={"page-item"}
+          previousLinkClassName={"page-link"}
+          nextClassName={"page-item"}
+          nextLinkClassName={"page-link"}
+        />
+        )}
+      
+        {games &&
+          items.map((g) => (
+            <div
+              className="col-lg-4 col-12 pb-3"
+              id="card-top"
+              key={g.createdAt}
+            >
+              <ol className="statsList">
+                <li
+                  id="lastGameHero"
+                  className="statsHero d-flex flex-column"
+                  style={{
+                    backgroundImage: `url(${
+                      process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
+                    })`,
+                  }}
                 >
-                  <p>Player</p>
-                  <p>Name</p>
-                  <p>Cashing</p>
-                  <p>Profit</p>
-                </div>
-              </li>
-              {g
-                .sort((a, b) => b.profit - a.profit)
-                .map((player) => (
-                  <li className="statsRow" key={player.id}>
-                    <div className="rowPos">{player.gameRank}</div>
-                    <div className="rowImage">
-                      <img
-                        src={`${apiImage}${player.image}`}
-                        alt="player list row"
-                      />
-                    </div>
-                    <div className="rowName" id="lGameName">
-                      {player.name}
-                    </div>
-                    <div className="rowCashingAll">{player.cashing}</div>
-                    <div
-                      className={
-                        player.profit > 0
-                          ? "rowProfit text-success"
-                          : "rowProfit text-danger"
-                      }
-                    >
-                      {player.profit}
-                    </div>
-                  </li>
-                ))}
-            </ol>
-          </div>
-        ))}
-          </div>
+                  <p>
+                    {new Date(
+                      itemsDates[created++].createdAt
+                    ).toLocaleDateString("en-GB") +
+                      " " +
+                      new Date(
+                        itemsDates[created - 1].createdAt
+                      ).toLocaleString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false,
+                      }) +
+                      " - " +
+                      new Date(
+                        itemsDates[created - 1].updatedAt
+                      ).toLocaleString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false,
+                      })}
+                  </p>
+                  <div
+                    className="stats d-flex w-100 justify-content-between"
+                    id="lGame"
+                  >
+                    <p>Player</p>
+                    <p>Name</p>
+                    <p>Cashing</p>
+                    <p>Profit</p>
+                  </div>
+                </li>
 
-     
+                {g
+                  .sort((a, b) => b.profit - a.profit)
+                  .map((player) => (
+                    <li className="statsRow" key={player.id}>
+                      <div className="rowPos">{player.gameRank}</div>
+                      <div className="rowImage">
+                        <img
+                          src={`${apiImage}${player.image}`}
+                          alt="player list row"
+                        />
+                      </div>
+                      <div className="rowName" id="lGameName">
+                        {player.name}
+                      </div>
+                      <div className="rowCashingAll">{player.cashing}</div>
+                      <div
+                        className={
+                          player.profit > 0
+                            ? "rowProfit text-success"
+                            : "rowProfit text-danger"
+                        }
+                      >
+                        {player.profit}
+                      </div>
+                    </li>
+                  ))}
+              </ol>
+            </div>
+          ))}
+      </div>
+    
+  
+      
     </div>
   );
 };

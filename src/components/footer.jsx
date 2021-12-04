@@ -12,7 +12,7 @@ const Footer = () => {
           />
         </div>
         <div className="copyrights ">
-        <p >
+        <p className="w-100" >
           Poker-Underdog was created by  Nadav Galili &copy;{" "}
           {new Date().getFullYear()}
         </p>
@@ -20,8 +20,8 @@ const Footer = () => {
         </div>
       
         <div className="social-icons ">
-          <p className="mb-2">Contact me at:</p>
-          <ul className="d-flex justify-content-around ">
+          {/* <p className="mb-2">Contact me at:</p> */}
+          <ul className="d-flex justify-content-around mt-4 p-0 ">
             <li>
               <a href="https://www.facebook.com/nadav.galili">
                 <img

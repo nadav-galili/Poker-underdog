@@ -22,7 +22,9 @@
     width:380px;
     padding:0;
     display:flex;
-    list-style-type:none
+    list-style-type:none;
+    flex-direction:column;
+    min-height: 700px;
 }
 #lastGameHero{
 display: flex ;
@@ -35,9 +37,15 @@ background-color: #6c14b4;
  align-items: center;
   }
 .stats{
+width: 100%;
 display:flex;
 flex-direction:row;
-npm justify-content: end;
+justify-content: space-around;
+}
+#statsRow{
+ display:flex;
+ flex-direction: row;
+ justify-content: space-around;
 }
     </style>
 </head>
@@ -51,18 +59,21 @@ npm justify-content: end;
     <li id="lastGameHero">
         <p >{{createdAt}}</p>
         <div class="stats">
+            <p>Rank</p>
             <p>Player</p>
             <p>Cashing</p>
             <p>Profit</p>
         </div>
     </li>
+{{#each players}}
     <li id="statsRow">
-        <div class="rowPos">{{player.gameRank}}</div>
-        <div class="rowName">{{player.name}}</div>
-        <div class="rowCashing">{{player.cashing}}</div>
-        <div class="rowProfit">{{player.profit}}</div>
-       
+        <div class="rowPos">{{this.gameRank}}</div>
+        <div class="rowPos">{{this.name}}</div>
+        <div class="rowPos">{{this.cashing}}</div>
+        <div class="rowPos">{{this.profit}}</div>
     </li>
+{{/each}}
+
 </ol>
 </body>
 </html>

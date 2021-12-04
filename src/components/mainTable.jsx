@@ -12,6 +12,7 @@ import { apiImage } from "../config.json";
 import h2hService from "../services/h2hService";
 import H2hCard from "./h2h/h2hCard";
 import AllGames from "./games/allGames";
+import {IoIosTrophy} from "react-icons/io"
 
 export default function MainTable(props) {
   //get the data for the table
@@ -27,6 +28,7 @@ export default function MainTable(props) {
   const [profits, setProfits] = useState([]);
   const [teamImage, setTeamImage] = useState("");
   const [totalCash, setTotalCash] = useState({});
+  const [totalGames, setTotalGames]=useState("");
 
   const teamId = props.match.params.teamId;
 
@@ -43,6 +45,9 @@ export default function MainTable(props) {
 
       let totalCash = await gameService.totalCash(teamId);
       setTotalCash(totalCash.data);
+
+      let totalGames=await gameService.totalGames(teamId);
+      setTotalGames(totalGames.data);
 
       let h2h = await h2hService.getPointsByTeam(teamId);
       setH2h(h2h.data);
@@ -97,7 +102,6 @@ export default function MainTable(props) {
     const profits = async () => {
       let results = await gameService.profits(props.match.params.teamId);
       results = results.data;
-
       setProfits(results);
     };
     profits();
@@ -137,11 +141,20 @@ export default function MainTable(props) {
           </strong>
         </p>
         <p className="mb-0">
-          Total Hours Playes:
+          Total Hours Played:
           <strong>
             <span className="ps-1">
               {totalCash[0] ? totalCash[0].totalHours.toFixed(2) : null}
               <i className="fas fa-hourglass-half ps-1 "></i>
+            </span>
+          </strong>
+        </p>
+        <p className="mb-0">
+          Total Games Played:
+          <strong>
+            <span className="ps-1">
+              {totalGames ? totalGames[0].TotalGames : null}
+              <IoIosTrophy className="ms-1 mb-1"/>
             </span>
           </strong>
         </p>
@@ -227,6 +240,7 @@ export default function MainTable(props) {
                 team={teamId}
               />
             )}
+            {monthleader.length===0 &&(<p className="text-danger display-10">{new Date().toLocaleString('en-us',{month:'long'})} Stats-No games this month yet</p>)}
             {h2h.length > 0 && (
               <H2hCard
                 header="H2H Games"
@@ -238,7 +252,7 @@ export default function MainTable(props) {
             )}
           </div>
           <MainLastgame teamId={teamId} />
-          <AllGames teamId={teamId} />
+          <AllGames teamId={teamId}  />
         </React.Fragment>
       )}
     </div>

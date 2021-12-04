@@ -4,10 +4,15 @@ import _ from "lodash";
 import PageHeader from "../common/pageHeader";
 import { apiImage } from "../../config.json";
 import { SpinnerInfinity } from "spinners-react";
+import ReactPaginate from "react-paginate";
 
 const H2hGameCard = ({ team }) => {
   const [games, setGames] = useState();
-  const [gamesData, setGamesData]=useState()
+  const [gamesData, setGamesData]=useState();
+  const [perPage, setPerPage] = useState(3);
+  const [page, setPage] = useState(0);
+  const [pages, setPages] = useState(0);
+  const [loading,setLoading]=useState(false)
   useEffect(() => {
     const lastH2h = async () => {
       try {
@@ -15,14 +20,26 @@ const H2hGameCard = ({ team }) => {
         setGamesData(aGames.data)
         let allGames = aGames.data.map((d) => _.flattenDeep(d.players));
         setGames(allGames);
+        setLoading(true)
+        setPages(Math.floor(games.length / perPage));
       } catch (error) {
         // console.log("error1");
       }
     };
     lastH2h();
-  }, [team]);
-  // let Rank = 1;
+  }, [team, perPage, games]);
+
   let created=0
+  let items = [];
+  items = games ? games.slice(page * perPage, (page + 1) * perPage) : "";
+  let itemsDates = gamesData
+    ? gamesData.slice(page * perPage, (page + 1) * perPage)
+    : "";
+
+  const handlePageClick = (event) => {
+    let pageC = event.selected;
+    setPage(pageC);
+  };
   return (
     <div>
       {!games &&(
@@ -38,8 +55,26 @@ const H2hGameCard = ({ team }) => {
         <PageHeader titleText="All Games" />
 
         <div className="row">
+        {loading &&(
+          <ReactPaginate
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          pageCount={pages+1}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination text-white justify-content-center"}
+          activeClassName={"active"}
+          pageClassName={"page-item"}
+          pageLinkClassName={"page-link"}
+          previousClassName={"page-item"}
+          previousLinkClassName={"page-link"}
+          nextClassName={"page-item"}
+          nextLinkClassName={"page-link"}
+          marginPagesDisplayed={"4"}
+          // renderOnZeroPageCount={null}
+        />
+        )}
         {games &&
-          games.map((g) => (
+          items.map((g) => (
             <div className="col-12 col-lg-3 pb-4" id="card-top" key={games.createdAt}>
               <ol className="statsList">
                 <li

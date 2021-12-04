@@ -685,7 +685,7 @@ canvas {
   width: 80%;
   height: 80%;
   object-fit: cover;
-  background-color: #1c1515;
+  background-color: #6c14b4;
   border-radius: 50%;
 }
 
@@ -1076,6 +1076,10 @@ label {
 .gameH2h {
   align-items: center;
   color: #fcfcfc;
+}
+
+.alert-success {
+  background-color: #02d84d !important;
 }
 
 .buttonsGame {

@@ -7,6 +7,7 @@ import { SpinnerInfinity } from "spinners-react";
 
 const H2hGameEnd = ({ gameId, header }) => {
   const [players, setPlayers] = useState([]);
+  const [ended, setEnded]=useState(false)
   useEffect(() => {
     const lastH2h = async () => {
       try {
@@ -15,6 +16,7 @@ const H2hGameEnd = ({ gameId, header }) => {
         last.sort((a, b) => b.points - a.points);
         console.log(last);
         setPlayers(last);
+        setEnded(true)
       } catch (error) {
         // console.log("error1");
       }
@@ -30,9 +32,11 @@ const H2hGameEnd = ({ gameId, header }) => {
         speed={70}
         color="rgba(252, 252, 252, 1)"
         secondaryColor="rgba(108, 20, 180, 1)"
-        enabled={players.length === 0 ? true : false}
+        enabled={!ended}
       />
-      <div className="contain">
+      {ended &&
+      (
+        <div className="contain">
         <PageHeader titleText={header} />
         <div className="col-12" id="card-top">
           <ol className="statsList">
@@ -73,6 +77,8 @@ const H2hGameEnd = ({ gameId, header }) => {
           </ol>
         </div>
       </div>
+      )}
+     
     </div>
   );
 };

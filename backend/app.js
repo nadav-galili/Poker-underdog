@@ -35,11 +35,11 @@ mongoose
     useFindAndModify: false,
   })
   .then(() => console.log("Connected to MongoDB..."))
-  .catch((err) => console.error("Could not connect to MongoDB..."));
+  .catch((err) => console.error(err,"Could not connect to MongoDB..."));
 
-// let corsOptions = {
-//   origin: "https://poker-underdog.com",
-// };
+let corsOptions = {
+  origin: "https://poker-underdog.com",
+};
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
@@ -54,8 +54,9 @@ app.set('view engine', 'hbs');
 app.set("views", "./views/");
 
 app.get('/test', (req, res) => {
-    res.render('gameEnd', {createdAt:req.body.updatedAt,
-    _id:req.body._id});
+  const date=new Date(req.body.updatedAt).toLocaleDateString("en-GB");
+    res.render('email', {createdAt:date,
+    _id:req.body._id,players:req.body.players });
 });
 
 const options = {
@@ -83,7 +84,7 @@ app.get("/info", async (req, res) => {
   try {
    transporter.use("compile", hbs(options));
     const mailInfo = {
-      from: "info-poker-underdog@poker-underdog.com",
+      from: "info@poker-underdog.com",
       to: "nadavg1000@gmail.com",
       subject: `Game number ${req.body._id} has ended`,
       template: "gameEnd",
@@ -92,7 +93,6 @@ app.get("/info", async (req, res) => {
     await transporter.sendMail(mailInfo);
      res.send("email sent");
   
-    
   } catch (e) {
     console.log(e);
     res.status(500).send("Something broke!");

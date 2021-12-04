@@ -8,6 +8,8 @@ import {GiPokerHand} from "react-icons/gi";
 import { HiOutlineUserGroup} from "react-icons/hi";
 import {ImStatsBars} from "react-icons/im";
 import {FiLogOut} from "react-icons/fi";
+import {VscSignIn} from "react-icons/vsc"
+import {FiUserPlus} from "react-icons/fi"
 
 class SideNavBar extends React.Component {
   constructor(props) {
@@ -92,18 +94,20 @@ class SideNavBar extends React.Component {
           {!this.props.user && (
             <React.Fragment>
               <NavLink
-                className="nav-item nav-link"
+                className="nav-item nav-link d-flex"
                 to="/signin"
                 onClick={() => this.closeMenu()}
               >
-                Sign-In
+                <VscSignIn class="mt-2 me-2"/>
+                <p class="m-0">Sign-In</p>
               </NavLink>
               <NavLink
-                className="nav-item nav-link"
+                className="nav-item nav-link d-flex"
                 to="/signup"
                 onClick={() => this.closeMenu()}
               >
-                Sign-Up
+                <FiUserPlus class="mt-2 me-2"/>
+                <p class="m-0">Sign-Up</p>
               </NavLink>
             </React.Fragment>
           )}

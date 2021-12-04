@@ -10,56 +10,59 @@ import _ from "lodash";
 import TotalPersonal from "./totalPersonal";
 import { Line } from "react-chartjs-2";
 
-
-
 const MyStats = () => {
   const [me, setMe] = useState({});
   const [stats, setStats] = useState({});
   const [month, setMonth] = useState([]);
   const [points, setPoints] = useState([]);
   const [details, setDetails] = useState([]);
-  const [chartData, setChartData]=useState([])
-  const [chartDates, setChartDates]=useState([])
+  const [chartData, setChartData] = useState([]);
+  const [chartDates, setChartDates] = useState([]);
+  const [chartCashing, setChartCashing]=useState([]);
   let currentMonth = new Date();
   let currentMonthNumber = currentMonth.getMonth() + 1;
   currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
-  
- 
 
   useEffect(() => {
     const getTable = async () => {
       if (me.teams) {
         let table = await gameService.monthsData(me.teams[0]);
-
         table = table.data;
-
-        table = table.filter(
+        let currentMonth = [...table];
+        currentMonth = currentMonth.filter(
           (month) => month._id.monthPlayed === currentMonthNumber
         );
-
-        table = table.find((e) => e._id.player_id === me._id);
-        setMonth(table);
+        currentMonth = currentMonth.find((e) => e._id.player_id === me._id);
+        setMonth(currentMonth);
 
         let detailed = await gameService.personalGames(me._id);
         setDetails(detailed.data);
 
         let myDetailed = await gameService.personalGames(me._id);
-     
-       let chartDetails=[]
-       let chartDates=[]
-       try{
-        await  myDetailed.data.forEach(
-          e=>chartDetails.push(e.players.profit)
-        )
-        setChartData(chartDetails)
 
-        await myDetailed.data.forEach(
-          e=>chartDates.push(new Date(e.createdAt).toLocaleDateString("en-GB").substr(0,5))
-        )
-        setChartDates(chartDates)
-       }catch{
-         console.log("errr");
-       }
+        let chartDetails = [];
+        let chartDates = [];
+        let chartCash=[];
+        try {
+          await myDetailed.data.forEach((e) =>
+            chartDetails.push(e.players.profit)
+          );
+          setChartData(chartDetails);
+
+          await myDetailed.data.forEach((e) =>
+             chartCash.push(e.players.cashing)
+          );
+          setChartCashing(chartCash);
+
+          await myDetailed.data.forEach((e) =>
+            chartDates.push(
+              new Date(e.createdAt).toLocaleDateString("en-GB").substr(0, 5)
+            )
+          );
+          setChartDates(chartDates);
+        } catch {
+          console.log("errr");
+        }
       }
     };
 
@@ -72,6 +75,7 @@ const MyStats = () => {
       delete myData.data.password;
       setMe(myData.data);
       let myStats = await gameService.personal(me._id);
+
       setStats(myStats.data[0]);
     };
     getMydata();
@@ -88,25 +92,49 @@ const MyStats = () => {
   }, [me._id]);
 
   const data = {
+  
     labels: chartDates,
     datasets: [
       {
-        label: "Profits By Date",
+        label: "Profit",
         data: chartData,
         fill: false,
         backgroundColor: "#6c14b4",
         borderColor: "#6c14b4",
       },
+      {
+        label: "Cashing",
+        data: chartCashing,
+        fill: false,
+        backgroundColor: "#2752ea",
+        borderColor: "#2752ea",
+      },
     ],
   };
+  let delayed;
   const options = {
+    options: {
+      animation: {
+        onComplete: () => {
+          delayed = true;
+        },
+        delay: (context) => {
+          let delay = 0;
+          if (context.type === 'data' && context.mode === 'default' && !delayed) {
+            delay = context.dataIndex * 400 + context.datasetIndex * 200;
+          }
+          return delay;
+        },
+      },
     scales: {
+      x: {
+        type: 'linear'
+      },
       y: {
         beginAtZero: true,
       },
     },
-  };
-
+  }}
 
   return (
     <div className="container playerStats pb-4">
@@ -181,8 +209,8 @@ const MyStats = () => {
               <p>{stats.minProfit}</p>
             </div>
             <div className="personalStat">
-              <p>Month-{currentMonth}</p>
-              <p>{month.totalProfit}</p>
+              <p>{currentMonth}-Total Profit</p>
+              <p>{month ? month.totalProfit : "No games this month"}</p>
             </div>
             <div className="personalStat">
               <p>H2H Points</p>
@@ -205,8 +233,7 @@ const MyStats = () => {
         <h1 className="title  mt-2">Personal Chart</h1>
       </div>
       <div className="col-lg-4 col-11">
-      <Line data={data} options={options} />
-
+        <Line data={data} options={options} />
       </div>
       <TotalPersonal details={details} />
     </div>

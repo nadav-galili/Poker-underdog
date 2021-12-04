@@ -4,7 +4,8 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 const gamesController=require('../controllers/games.js');
 
-
+// count all games by teamId
+router.get('/totalGames/:teamId', auth, gamesController.totalGames)
 //update game by id
 router.put('/:gameId',auth,gamesController.updateGame);
 
@@ -38,6 +39,7 @@ router.get("/:gameId",auth,gamesController.gameById);
 router.get('/teams/byTeamId/:teamId', auth, gamesController.byTeamId)
 // gets back all the games
 router.get("/",auth, gamesController.allGames);
+
 
 // submits a new game
 router.post("/", auth, gamesController.newGame);

@@ -86,7 +86,9 @@
   align-items: center;
   color: $navbarWhite;
 }
-
+.alert-success{
+  background-color: $basecolorGreen!important;
+}
 .buttonsGame{
   background-color: white;
 }

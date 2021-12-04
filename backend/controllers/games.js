@@ -5,6 +5,18 @@ const { Game, validate } = require("../models/games");
 const { Team } = require("../models/teams");
 
 
+exports.totalGames=async function(req, res){
+  let tGames= await Game.aggregate([
+    {
+      $match: {
+        team_id: req.params.teamId
+      }
+    }, {
+      $count: 'TotalGames'
+    }
+  ])
+  res.send(tGames)
+}
 exports.byTeamId=async function(req, res){
   let games=await Game.find({team_id:req.params.teamId}).sort({createdAt:-1});
   res.send(games)
