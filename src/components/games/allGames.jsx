@@ -64,7 +64,7 @@ const AllGames = ({ teamId }) => {
           <ReactPaginate
           previousLabel={"prev"}
           nextLabel={"next"}
-          pageCount={pages+1}
+          pageCount={items.length%3===0?pages+1:pages}
           onPageChange={handlePageClick}
           containerClassName={"pagination text-white justify-content-center"}
           activeClassName={"active"}

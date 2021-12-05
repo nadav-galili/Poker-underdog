@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-
+import PageHeader from "../common/pageHeader";
 const TotalPersonal = ({ details }) => {
   const [perPage, setPerPage] = useState(10);
   const [page, setPage] = useState(0);
@@ -22,10 +22,11 @@ const TotalPersonal = ({ details }) => {
 
   return (
     <div className="allPersonal mt-2">
+      <PageHeader titleText="All Games"/>
       <ReactPaginate
         previousLabel={"prev"}
         nextLabel={"next"}
-        pageCount={pages + 1}
+        pageCount={items.length%10===0?pages+1:pages}
         onPageChange={handlePageClick}
         containerClassName={"pagination text-white justify-content-center"}
         activeClassName={"active"}
