@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 
 const NewGame = (props) => {
   const [data, setData] = useState({});
+  const [id, setId] = useState("");
   const [alert, setAlert] = useState("visually-hidden");
   const [playerName, setPlayerName] = useState("");
 
@@ -16,6 +17,7 @@ const NewGame = (props) => {
     const players = async () => {
       let playersInGame = await gameService.gameById(props.match.params.gameId);
       setData(playersInGame.data);
+      setId(playersInGame.data._id);
     };
 
     players();
@@ -102,11 +104,11 @@ const NewGame = (props) => {
       }
     });
   };
-  console.log(data,"44");
+
   return (
-    <div className="container ">
+    <div className="container">
       <PageHeader titleText="Game No." />
-      <p className="text-danger">{data._id}</p>
+      <p className="text-danger">{id}</p>
       <p className="text-primary">
         Started At:{" "}
         {`${new Date(data.createdAt).toLocaleDateString("en-GB")}
@@ -211,20 +213,22 @@ const NewGame = (props) => {
               </div>
               <div className="fas fa-minus-circle text-primary">Cancel</div>
             </li>
-            <div
-              onClick={() => {
-                updateGame();
-              }}
-              className="buttonsGame d-flex justify-content-between"
-            >
-              <div className="btn btn-primary update m-2">Update Game</div>
+            <div className="buttonsGame d-flex justify-content-between">
+              <div
+                className="btn btn-primary update m-2"
+                onClick={() => {
+                  updateGame();
+                }}
+              >
+                Update Game
+              </div>
               <div className="btn btn-danger update m-2">Reset Game</div>
             </div>
           </ol>
         </div>
       )}
 
-      <H2hGame gameId={data._id} />
+      <H2hGame gameId={data._id} className="mb-2" />
     </div>
   );
 };

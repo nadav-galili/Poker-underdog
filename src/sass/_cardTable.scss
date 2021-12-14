@@ -57,6 +57,7 @@
   height: 50px;
   border-bottom: 0.7px solid  ;
 
+
 }
 
 .rowPos {
@@ -172,4 +173,17 @@ margin:0;
   @extend .rowNameTop;
   width: 20%;
   padding-left: 0.5em;
+}
+
+#lGame{
+  font-size: 0.7em;
+  justify-content: start;
+}
+#h2hGdata{
+  & :nth-child(2){
+    text-align: start;
+  }
+  & :nth-child(6){
+    text-align: end;
+  }
 }

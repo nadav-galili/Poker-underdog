@@ -18,7 +18,7 @@ const MyStats = () => {
   const [details, setDetails] = useState([]);
   const [chartData, setChartData] = useState([]);
   const [chartDates, setChartDates] = useState([]);
-  const [chartCashing, setChartCashing]=useState([]);
+  const [chartCashing, setChartCashing] = useState([]);
   let currentMonth = new Date();
   let currentMonthNumber = currentMonth.getMonth() + 1;
   currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
@@ -42,7 +42,7 @@ const MyStats = () => {
 
         let chartDetails = [];
         let chartDates = [];
-        let chartCash=[];
+        let chartCash = [];
         try {
           await myDetailed.data.forEach((e) =>
             chartDetails.push(e.players.profit)
@@ -50,7 +50,7 @@ const MyStats = () => {
           setChartData(chartDetails);
 
           await myDetailed.data.forEach((e) =>
-             chartCash.push(e.players.cashing)
+            chartCash.push(e.players.cashing)
           );
           setChartCashing(chartCash);
 
@@ -92,7 +92,6 @@ const MyStats = () => {
   }, [me._id]);
 
   const data = {
-  
     labels: chartDates,
     datasets: [
       {
@@ -120,37 +119,45 @@ const MyStats = () => {
         },
         delay: (context) => {
           let delay = 0;
-          if (context.type === 'data' && context.mode === 'default' && !delayed) {
+          if (
+            context.type === "data" &&
+            context.mode === "default" &&
+            !delayed
+          ) {
             delay = context.dataIndex * 400 + context.datasetIndex * 200;
           }
           return delay;
         },
       },
-    scales: {
-      x: {
-        type: 'linear'
-      },
-      y: {
-        beginAtZero: true,
+      scales: {
+        x: {
+          type: "linear",
+        },
+        y: {
+          beginAtZero: true,
+        },
       },
     },
-  }}
+  };
 
   return (
     <div className="container playerStats pb-4">
       <PageHeader titleText="Player Statistics" />
-      <div className="spinner">
-        <SpinnerCircular
-          size={130}
-          thickness={151}
-          speed={81}
-          color="rgba(108, 20, 180, 1)"
-          secondaryColor="rgba(252, 252, 252, 1)"
-          // enabled={true}
-          enabled={_.isEmpty(stats) ? true : false}
-        />
-      </div>
+      {_.isEmpty(stats) && (
+        <div className="spinner">
+          <SpinnerCircular
+            size={130}
+            thickness={151}
+            speed={81}
+            color="rgba(108, 20, 180, 1)"
+            secondaryColor="rgba(252, 252, 252, 1)"
+            // enabled={true}
+            enabled={_.isEmpty(stats) ? true : false}
+          />
+        </div>
+      )}
       {!_.isEmpty(stats) && (
+        <div className="">
         <div className="playerInfo bg-white col-11 col-lg-4">
           <span className="text-primary ms-3">
             {new Date().toLocaleDateString("en-GB")}
@@ -227,15 +234,16 @@ const MyStats = () => {
               <p>{new Date(stats.lastGame).toLocaleDateString("en-GB")}</p>
             </div>
           </div>
-        </div>
-      )}
-      <div className="header">
+          </div>
+          <div className="header">
         <h1 className="title  mt-2">Personal Chart</h1>
       </div>
       <div className="col-lg-4 col-11">
-        <Line data={data} options={options} />
+      <Line data={data} options={options} />
       </div>
       <TotalPersonal details={details} />
+          </div>
+      )}
     </div>
   );
 };

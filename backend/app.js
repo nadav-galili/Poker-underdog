@@ -10,10 +10,11 @@ const http = require("http").Server(app);
 const mongoose = require("mongoose");
 const path = require("path");
 const nodemailer = require("nodemailer");
-const exphbs=require('express-handlebars');
+const exphbs = require("express-handlebars");
 const hbs = require("nodemailer-express-handlebars");
-  //  const hbs = require("hbs")
-const { engine } = require('express-handlebars');
+//  const hbs = require("hbs")
+const { engine } = require("express-handlebars");
+const { spawn } = require("child_process");
 
 // mongoose
 //   .connect(
@@ -45,73 +46,99 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 //static folder
-app.use( express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 // app.engine('.hbs', exphbs({extname: '.hbs'}));
 // app.set('view engine', '.hbs');
 // app.engine('handlebars', exphbs());
-app.engine('handlebars', engine());
-app.set('view engine', 'hbs');
+app.engine("handlebars", engine());
+app.set("view engine", "hbs");
 app.set("views", "./views/");
 
-app.get('/test', (req, res) => {
-  const date=new Date(req.body.updatedAt).toLocaleDateString("en-GB");
-    res.render('email', {createdAt:date,
-    _id:req.body._id,players:req.body.players });
+app.get("/test", (req, res) => {
+  const date = new Date(req.body.updatedAt).toLocaleDateString("en-GB");
+  res.render("email", {
+    createdAt: date,
+    _id: req.body._id,
+    players: req.body.players,
+  });
 });
 
 const options = {
   viewEngine: {
     partialsDir: __dirname + "/views/partials",
     layoutsDir: __dirname + "/views/layouts",
-    extname: ".hbs"
+    extname: ".hbs",
   },
   extName: ".hbs",
-  viewPath: "views"
+  viewPath: "views",
 };
 
 // app.use(cors(corsOptions));
- let transporter = nodemailer.createTransport({
-      host: "mail.poker-underdog.com",
-      port: 465,
-      secure: true,
-      auth: {
-        user: "info@poker-underdog.com",
-        pass: "Emmush2016",
-      },
-    });
-    
+let transporter = nodemailer.createTransport({
+  host: "mail.poker-underdog.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "info@poker-underdog.com",
+    pass: "Emmush2016",
+  },
+});
+
 app.get("/info", async (req, res) => {
   try {
-   transporter.use("compile", hbs(options));
+    transporter.use("compile", hbs(options));
     const mailInfo = {
       from: "info@poker-underdog.com",
       to: "nadavg1000@gmail.com",
       subject: `Game number ${req.body._id} has ended`,
       template: "gameEnd",
-      context: req.body
+      context: req.body,
     };
     await transporter.sendMail(mailInfo);
-     res.send("email sent");
-  
+    res.send("email sent");
   } catch (e) {
     console.log(e);
     res.status(500).send("Something broke!");
   }
 });
 
+// const DB_NAME = "backend";
+// const ARCHIVE_PATH = path.join(__dirname, "public", `${DB_NAME}.gzip`);
 
+// backupMongoDB();
 
+// function backupMongoDB() {
+//   const child = spawn("mongodump", [
+//     `--db=${DB_NAME}`,
+//     `--archive=${ARCHIVE_PATH}`,
+//     "--gzip",
+//   ]);
+//   console.log(child);
+//   child.stdout.on("data", (data) => {
+//     console.log("stdout:\n", data);
+//   });
+//   child.stderr.on("data", (data) => {
+//     console.log("stderr:\n", data);
+//   });
+//   child.on("error", (error) => {
+//     console.log("error:\n", error);
+//   });
+//   child.on("exit", (code, signal) => {
+//     if (code) console.log("process exit with code:", code);
+//     else if (signal) console.log("process killed with signal", signal);
+//     else console.log("backup is succesfull ");
+//   });
 
-app.use("/api/h2h", h2h);
-app.use("/api/users", users);
-app.use("/api/auth", auth);
-app.use("/api/games", games);
-app.use("/api/teams", teams);
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+  app.use("/api/h2h", h2h);
+  app.use("/api/users", users);
+  app.use("/api/auth", auth);
+  app.use("/api/games", games);
+  app.use("/api/teams", teams);
+  app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
+  app.get("/", (req, res) => {
+    res.json({ message: "Welcome to Poker-Underground application test." });
+  });
+  const PORT = process.env.PORT || 3900;
+  http.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
 
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Poker-Underground application test." });
-});
-const PORT = process.env.PORT || 3900;
-http.listen(PORT, () => console.log(`Listening on port ${PORT}...`));

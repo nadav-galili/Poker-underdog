@@ -50,7 +50,7 @@ const Team = ({ team, removeTeam }) => {
             </strong>
             <ul className="row ps-0" id="playersList">
               {team.players.map((player) => (
-                <li key={player._id} className="col-4 col-lg-4 teams">
+                <li key={player._id} className="col-4 col-lg-4 teams" id="playerAvatar">
                   {player.nickName}
                   <br></br>
                   <img src={`${apiImage}${player.image}`} alt="user" className='mb-2'

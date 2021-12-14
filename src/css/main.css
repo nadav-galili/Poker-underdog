@@ -308,6 +308,7 @@ h3 {
   object-fit: cover;
   border-radius: 15px;
   border: 2px solid #2752ea;
+  background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
 .selectP {
@@ -964,6 +965,19 @@ tfoot td {
 .rowNameH2h {
   width: 20%;
   padding-left: 0.5em;
+}
+
+#lGame {
+  font-size: 0.7em;
+  justify-content: start;
+}
+
+#h2hGdata :nth-child(2) {
+  text-align: start;
+}
+
+#h2hGdata :nth-child(6) {
+  text-align: end;
 }
 
 .form-control {

@@ -1,11 +1,9 @@
-#myTeams{
-  & a{
+#myTeams {
+  & a {
     margin-right: 20px;
     font-size: 0.7em;
   }
 }
-
-
 
 .team-list {
   font-weight: 700;
@@ -15,27 +13,21 @@
 h3 {
   color: $basecolorGreen;
   font-weight: bolder;
-
-
 }
-
-
 
 .teamText {
   color: $navbarWhite;
   font-size: 1em;
 }
 
-#share{
+#share {
   font-size: 0.6em;
   color: $basecolorRed;
 }
 
-#playersList{
+#playersList {
   list-style: none;
 }
-
-
 
 .btn.mb-2 {
   background-color: $basecolorGreen;
@@ -72,6 +64,7 @@ h3 {
     object-fit: cover;
     border-radius: 15px;
     border: 2px solid $headerColorBlue;
+    background-image: linear-gradient($basecolorPurple, #4e4949);
   }
 }
 
@@ -87,20 +80,20 @@ span {
   color: $basecolorGreen;
 }
 
-#joinText{
-  & p{
-    color:$headerColorBlue;
+#joinText {
+  & p {
+    color: $headerColorBlue;
   }
 }
 
-.btn-secondary{
+.btn-secondary {
   margin-left: 10px;
-  margin-bottom:0.35em;
+  margin-bottom: 0.35em;
 }
 
 @media screen and (max-width: 600px) {
-  .btn-secondary{
-  margin-top: 1em;
-  margin-left: 0;
+  .btn-secondary {
+    margin-top: 1em;
+    margin-left: 0;
   }
-  }
+}

@@ -21,7 +21,7 @@ const TotalPersonal = ({ details }) => {
   };
 
   return (
-    <div className="allPersonal mt-2">
+    <div className="allPersonal mt-2 col-lg-4 col-11">
       <PageHeader titleText="All Games"/>
       <ReactPaginate
         previousLabel={"prev"}
@@ -37,7 +37,7 @@ const TotalPersonal = ({ details }) => {
         nextClassName={"page-item"}
         nextLinkClassName={"page-link"}
       />
-      <div className="col-lg-4 col-11 mt-4 ">
+      <div className="col-12 mt-2">
         <div id="card-top">
           <ol className="statsList mb-0">
             <li

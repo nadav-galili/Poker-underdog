@@ -115,7 +115,7 @@ export default function MainTable(props) {
       />
       {data.length < 1 && (
         <div className="spinner mt-5">
-          <SpinnerDiamond
+             <SpinnerDiamond
             size={130}
             thickness={151}
             speed={81}
@@ -123,10 +123,14 @@ export default function MainTable(props) {
             secondaryColor="rgba(252, 252, 252, 1)"
             // enabled={true}
             enabled={data.length < 1 ? true : false}
-          />
+          /> 
         </div>
       )}
-      <div className="teamImg w-100 d-flex flex-row mb-2 justify-content-start">
+  
+
+      {data.length > 1 && (
+        <React.Fragment>
+           <div className="teamImg w-100 d-flex flex-row mb-2 justify-content-start">
         <img src={`${apiImage}${teamImage.teamImage}`} alt="" />
         <p className="ms-2">{teamImage.name}</p>
       </div>
@@ -153,15 +157,12 @@ export default function MainTable(props) {
           Total Games Played:
           <strong>
             <span className="ps-1">
-              {totalGames ? totalGames[0].TotalGames : null}
+              {totalGames[0] ? totalGames[0].TotalGames : null}
               <IoIosTrophy className="ms-1 mb-1"/>
             </span>
           </strong>
         </p>
       </div>
-
-      {data.length > 1 && (
-        <React.Fragment>
           <div id="dashboardDisplay">
             <PlayerCard
               header="Total Profit"
