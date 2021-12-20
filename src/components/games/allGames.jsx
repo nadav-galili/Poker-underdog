@@ -12,8 +12,7 @@ const AllGames = ({ teamId }) => {
   const [perPage, setPerPage] = useState(3);
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState(0);
-  const [loading,setLoading]=useState(false)
-
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getGames = async () => {
@@ -21,7 +20,7 @@ const AllGames = ({ teamId }) => {
       setGamesData(all.data);
       const allGames = all.data.map((d) => _.flattenDeep(d.players));
       setGames(allGames);
-      setLoading(true)
+      setLoading(true);
       try {
         setPages(Math.floor(games.length / perPage));
       } catch {
@@ -30,7 +29,7 @@ const AllGames = ({ teamId }) => {
     };
 
     getGames();
-  }, [teamId, perPage, games]);
+  }, [perPage, games ? games.length : "", teamId]);
   let created = 0;
   let items = [];
   items = games ? games.slice(page * perPage, (page + 1) * perPage) : "";
@@ -42,7 +41,6 @@ const AllGames = ({ teamId }) => {
     let pageC = event.selected;
     setPage(pageC);
   };
-
 
   return (
     <div className="container">
@@ -60,23 +58,23 @@ const AllGames = ({ teamId }) => {
         </div>
       )}
       <div className="row">
-        {loading &&(
+        {loading && (
           <ReactPaginate
-          previousLabel={"prev"}
-          nextLabel={"next"}
-          pageCount={items.length%3===0?pages+1:pages}
-          onPageChange={handlePageClick}
-          containerClassName={"pagination text-white justify-content-center"}
-          activeClassName={"active"}
-          pageClassName={"page-item"}
-          pageLinkClassName={"page-link"}
-          previousClassName={"page-item"}
-          previousLinkClassName={"page-link"}
-          nextClassName={"page-item"}
-          nextLinkClassName={"page-link"}
-        />
+            previousLabel={"prev"}
+            nextLabel={"next"}
+            pageCount={items.length % 3 === 0 ? pages + 1 : pages}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination text-white justify-content-center"}
+            activeClassName={"active"}
+            pageClassName={"page-item"}
+            pageLinkClassName={"page-link"}
+            previousClassName={"page-item"}
+            previousLinkClassName={"page-link"}
+            nextClassName={"page-item"}
+            nextLinkClassName={"page-link"}
+          />
         )}
-      
+
         {games &&
           items.map((g) => (
             <div
@@ -156,9 +154,6 @@ const AllGames = ({ teamId }) => {
             </div>
           ))}
       </div>
-    
-  
-      
     </div>
   );
 };

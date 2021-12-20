@@ -14,7 +14,9 @@ const exphbs = require("express-handlebars");
 const hbs = require("nodemailer-express-handlebars");
 //  const hbs = require("hbs")
 const { engine } = require("express-handlebars");
-const { spawn } = require("child_process");
+;
+
+
 
 // mongoose
 //   .connect(
@@ -36,7 +38,7 @@ mongoose
     useFindAndModify: false,
   })
   .then(() => console.log("Connected to MongoDB..."))
-  .catch((err) => console.error(err,"Could not connect to MongoDB..."));
+  .catch((err) => console.error(err, "Could not connect to MongoDB..."));
 
 let corsOptions = {
   origin: "https://poker-underdog.com",
@@ -102,43 +104,17 @@ app.get("/info", async (req, res) => {
   }
 });
 
-// const DB_NAME = "backend";
-// const ARCHIVE_PATH = path.join(__dirname, "public", `${DB_NAME}.gzip`);
 
-// backupMongoDB();
 
-// function backupMongoDB() {
-//   const child = spawn("mongodump", [
-//     `--db=${DB_NAME}`,
-//     `--archive=${ARCHIVE_PATH}`,
-//     "--gzip",
-//   ]);
-//   console.log(child);
-//   child.stdout.on("data", (data) => {
-//     console.log("stdout:\n", data);
-//   });
-//   child.stderr.on("data", (data) => {
-//     console.log("stderr:\n", data);
-//   });
-//   child.on("error", (error) => {
-//     console.log("error:\n", error);
-//   });
-//   child.on("exit", (code, signal) => {
-//     if (code) console.log("process exit with code:", code);
-//     else if (signal) console.log("process killed with signal", signal);
-//     else console.log("backup is succesfull ");
-//   });
+app.use("/api/h2h", h2h);
+app.use("/api/users", users);
+app.use("/api/auth", auth);
+app.use("/api/games", games);
+app.use("/api/teams", teams);
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
-  app.use("/api/h2h", h2h);
-  app.use("/api/users", users);
-  app.use("/api/auth", auth);
-  app.use("/api/games", games);
-  app.use("/api/teams", teams);
-  app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
-
-  app.get("/", (req, res) => {
-    res.json({ message: "Welcome to Poker-Underground application test." });
-  });
-  const PORT = process.env.PORT || 3900;
-  http.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
-
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to Poker-Underground application test." });
+});
+const PORT = process.env.PORT || 3900;
+http.listen(PORT, () => console.log(`Listening on port ${PORT}...`));

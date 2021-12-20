@@ -74,18 +74,17 @@ const MyTeams = () => {
           </p>
         </div>
       </div>
-<div className="row">
-{teams.length > 0 &&
+      <div className="row">
+        {teams.length > 0 &&
           teams.map((team) => (
             <Team
               key={team._id}
               team={team}
+              teamId={team._id}
               removeTeam={() => removeTeam(team._id)}
             />
           ))}
-</div>
-    
-    
+      </div>
     </div>
   );
 };
