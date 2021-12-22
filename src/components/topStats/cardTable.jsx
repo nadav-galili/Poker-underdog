@@ -4,12 +4,15 @@ import teamService from "../../services/teamService";
 import { apiImage } from "../../config.json";
 import { SpinnerInfinity } from "spinners-react";
 import PageHeader from "../common/pageHeader";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
 
 const CardTable = (props) => {
   const [data, setData] = useState([]);
   const [hero, setHero] = useState([]);
   const [headerTitle, setHeaderTitle] = useState("");
   const [teamImg, setTeamImg] = useState("");
+  const [dataChartDetails, setdataChartDetails] = useState({});
   const teamId = props.match.params.teamId;
   const cardName = props.match.params.cardName;
 
@@ -17,6 +20,61 @@ const CardTable = (props) => {
     const getTable = async () => {
       let table = await gameService.cardsData(teamId, cardName);
       table = table.data;
+
+      let accu = [];
+      const dataChart = {
+        labels: [], 
+        datasets: [
+          {
+            label: "# of Votes",
+            title: {
+              display: true,
+              text: "Chart.js Doughnut Chart",
+            },
+            data: [],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+              "rgba(255, 159, 64, 0.2)",
+              "rgba(39, 186, 46, 0.2)",
+              "rgba(8, 20, 107, 0.2)",
+              "rgba(8, 20, 107, 0.2)",
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(39, 186, 46,1)",
+              "rgba(8, 20, 107, 1)",
+              "rgba(8, 20, 107, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      };
+      try {
+        await table.forEach((player) => {
+          dataChart.labels.push(player._id.name);
+          accu.push(player.cardTitle);
+        });
+        let sum = accu.reduce((partial_sum, a) => partial_sum + a, 0);
+        let percentageSum = [];
+        accu.forEach((percent) => {
+          percentageSum.push(`${((percent / sum) * 100).toFixed(2)}`);
+        });
+        dataChart.datasets[0].data = percentageSum;
+
+        setdataChartDetails(dataChart);
+      } catch {
+        console.log("err1");
+      }
+
       let myHero = table.shift();
 
       let teamPic = await teamService.getTeam(teamId);
@@ -45,9 +103,10 @@ const CardTable = (props) => {
     getTable();
   }, [setData, teamId, cardName]);
   let rank = 2;
+  ChartJS.register(ArcElement, Tooltip, Legend);
 
   return (
-    <div className="container">
+    <div className="container pb-4">
       <PageHeader titleText={headerTitle} />
       <div className="teamImg d-flex flex-row mb-2">
         <img src={`${apiImage}${teamImg.teamImage}`} alt="" />
@@ -122,7 +181,14 @@ const CardTable = (props) => {
               ))}
             </React.Fragment>
           </ol>
+          <h4 className="text-white justify-content-center d-flex">{headerTitle} in %</h4>
+          {headerTitle !== "Average Profit" && headerTitle
+           !=='Total Profit' &&(
+       <Doughnut data={dataChartDetails} 
+          className="mb-3"/>
+          )} 
         </div>
+      
       )}
     </div>
   );
