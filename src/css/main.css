@@ -929,7 +929,7 @@ tfoot td {
 }
 
 .rowProfit, .rowProfitTop {
-  width: 15%;
+  width: 20%;
   font-size: 0.7em;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   align-self: center;
@@ -984,6 +984,7 @@ tfoot td {
 }
 
 #lGame {
+  width: 90%;
   font-size: 0.7em;
   justify-content: start;
 }

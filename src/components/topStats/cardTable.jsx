@@ -5,7 +5,7 @@ import { apiImage } from "../../config.json";
 import { SpinnerInfinity } from "spinners-react";
 import PageHeader from "../common/pageHeader";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import { Doughnut, Bar } from "react-chartjs-2";
 
 const CardTable = (props) => {
   const [data, setData] = useState([]);
@@ -13,6 +13,7 @@ const CardTable = (props) => {
   const [headerTitle, setHeaderTitle] = useState("");
   const [teamImg, setTeamImg] = useState("");
   const [dataChartDetails, setdataChartDetails] = useState({});
+  const [barChartDetails, setbarChartDetails] = useState({});
   const teamId = props.match.params.teamId;
   const cardName = props.match.params.cardName;
 
@@ -22,15 +23,52 @@ const CardTable = (props) => {
       table = table.data;
 
       let accu = [];
-      const dataChart = {
-        labels: [], 
+      const barChart = {
+        labels: [],
         datasets: [
           {
-            label: "# of Votes",
-            title: {
-              display: true,
-              text: "Chart.js Doughnut Chart",
-            },
+            label: `${headerTitle} By Player`,
+            data: [],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.5)",
+              "rgba(54, 162, 235, 0.5)",
+              "rgba(255, 206, 86, 0.5)",
+              "rgba(75, 192, 192, 0.5)",
+              "rgba(153, 102, 255, 0.5)",
+              "rgba(255, 159, 64, 0.5)",
+              "rgba(39, 186, 46, 0.5)",
+              "rgba(8, 20, 107, 0.5)",
+              "rgba(8, 20, 107, 0.5)",
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(39, 186, 46,1)",
+              "rgba(8, 20, 107, 1)",
+              "rgba(8, 20, 107, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      };
+      try {
+        await table.forEach((player) => {
+          barChart.labels.push(player._id.name);
+          barChart.datasets[0].data.push(player.cardTitle);
+        });
+        setbarChartDetails(barChart);
+      } catch {
+        console.log("err1");
+      }
+
+      const dataChart = {
+        labels: [],
+        datasets: [
+          {
             data: [],
             backgroundColor: [
               "rgba(255, 99, 132, 0.5)",
@@ -101,7 +139,7 @@ const CardTable = (props) => {
     };
 
     getTable();
-  }, [setData, teamId, cardName]);
+  }, [setData, teamId, cardName, headerTitle]);
   let rank = 2;
   ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -181,14 +219,16 @@ const CardTable = (props) => {
               ))}
             </React.Fragment>
           </ol>
-          <h4 className="text-white justify-content-center d-flex">{headerTitle} in %</h4>
-          {headerTitle !== "Average Profit" && headerTitle
-           !=='Total Profit' &&(
-       <Doughnut data={dataChartDetails} 
-          className="mb-3"/>
-          )} 
+          {headerTitle !== "Average Profit" && headerTitle !== "Total Profit" && (
+            <React.Fragment>
+              <h4 className="text-white justify-content-center d-flex">
+                {headerTitle} In %
+              </h4>
+              <Doughnut data={dataChartDetails} className="mb-3" />
+            </React.Fragment>
+          )}
+          <Bar data={barChartDetails} className="mb-3" />
         </div>
-      
       )}
     </div>
   );
