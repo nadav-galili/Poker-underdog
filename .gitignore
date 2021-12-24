@@ -4,6 +4,7 @@
 /node_modules
 # /config
 /backend/node_modules
+/backend/config.js
 # /.pnp
 # .pnp.js
 # config.json

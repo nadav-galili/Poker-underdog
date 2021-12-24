@@ -14,31 +14,30 @@ const exphbs = require("express-handlebars");
 const hbs = require("nodemailer-express-handlebars");
 //  const hbs = require("hbs")
 const { engine } = require("express-handlebars");
-;
-
-
-
-// mongoose
-//   .connect(
-//     "mongodb+srv://nadavG:Barbar88@cluster0.kfjyo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-//     {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//       useCreateIndex: true,
-//       useFindAndModify: false,
-//     }
-//   )
-//   .then(() => console.log("Connected to MongoDB remote..."))
-//   .catch((err) => console.error("Could not connect to MongoDB..."));
+// const env = '';
+const config = require("./config");
 mongoose
-  .connect("mongodb://localhost/backend", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  })
-  .then(() => console.log("Connected to MongoDB..."))
+  .connect(
+    `mongodb+srv://${config.production.database.user_name}:` +
+      `${config.production.database.pass}@${config.production.server.cluster}/${config.production.database.db}?retryWrites=true&w=majority`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+    }
+  )
+  .then(() => console.log("Connected to MongoDB remote..."))
   .catch((err) => console.error(err, "Could not connect to MongoDB..."));
+// mongoose
+//   .connect("mongodb://localhost/backend", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false,
+//   })
+//   .then(() => console.log("Connected to MongoDB..."))
+//   .catch((err) => console.error(err, "Could not connect to MongoDB..."));
 
 let corsOptions = {
   origin: "https://poker-underdog.com",
@@ -103,8 +102,6 @@ app.get("/info", async (req, res) => {
     res.status(500).send("Something broke!");
   }
 });
-
-
 
 app.use("/api/h2h", h2h);
 app.use("/api/users", users);
