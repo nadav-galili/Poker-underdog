@@ -3,11 +3,14 @@ import gameService from "../../services/gameService";
 import { apiImage } from "../../config.json";
 import teamService from "../../services/teamService";
 import PageHeader from "../common/pageHeader";
+import { Bar } from "react-chartjs-2";
 
 const CurrMonthCard = (props) => {
   const [data, setData] = useState([]);
   const [hero, setHero] = useState([]);
   const [teamImg, setTeamImg] = useState("");
+  const [barChartDetails, setbarChartDetails] = useState({});
+
 
   let currentMonth = new Date();
   let currentMonthNumber = currentMonth.getMonth() + 1;
@@ -19,6 +22,50 @@ const CurrMonthCard = (props) => {
     const getTable = async () => {
       let table = await gameService.monthsData(teamId);
       table = table.data;
+      console.log(table,"Sds");
+
+      const barChart = {
+        labels: [],
+        datasets: [
+          {
+            label: `Profit By Player`,
+            data: [],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.5)",
+              "rgba(54, 162, 235, 0.5)",
+              "rgba(255, 206, 86, 0.5)",
+              "rgba(75, 192, 192, 0.5)",
+              "rgba(153, 102, 255, 0.5)",
+              "rgba(255, 159, 64, 0.5)",
+              "rgba(39, 186, 46, 0.5)",
+              "rgba(8, 20, 107, 0.5)",
+              "rgba(8, 20, 107, 0.5)",
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(39, 186, 46,1)",
+              "rgba(8, 20, 107, 1)",
+              "rgba(8, 20, 107, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      };
+      try {
+        await table.forEach((player) => {
+          barChart.labels.push(player._id.name);
+          barChart.datasets[0].data.push(player.totalProfit);
+        });
+       
+        setbarChartDetails(barChart);
+      } catch {
+        console.log("err1");
+      }
 
       let teamPic = await teamService.getTeam(teamId);
       setTeamImg(teamPic.data);
@@ -58,7 +105,6 @@ const CurrMonthCard = (props) => {
               <a href="#/" id="heroName">
                 {data.length > 0 ? hero._id.name : ""}
               </a>
-              {/* <div id="profit" className="flex-fill">{cardName}</div> */}
               <div id="amount" className="flex-fill">
                 {data.length > 0 ? hero.totalProfit : ""}
               </div>
@@ -92,6 +138,9 @@ const CurrMonthCard = (props) => {
             ))}
           </React.Fragment>
         </ul>
+        {barChartDetails.datasets&& (
+        <Bar data={barChartDetails} className="mb-3" />
+        )}
       </div>
     </div>
   );
