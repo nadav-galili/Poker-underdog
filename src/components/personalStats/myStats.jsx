@@ -75,7 +75,6 @@ const MyStats = () => {
       delete myData.data.password;
       setMe(myData.data);
       let myStats = await gameService.personal(me._id);
-
       setStats(myStats.data[0]);
     };
     getMydata();

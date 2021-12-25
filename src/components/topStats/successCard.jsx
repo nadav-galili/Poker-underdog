@@ -4,24 +4,71 @@ import teamService from "../../services/teamService";
 import { apiImage } from "../../config.json";
 import { SpinnerInfinity } from "spinners-react";
 import PageHeader from "../common/pageHeader";
+import { Bar } from "react-chartjs-2";
 
 const SuccessCard = (props) => {
   const [data, setData] = useState([]);
   const [hero, setHero] = useState([]);
   const [teamImg, setTeamImg] = useState("");
+  const [barChartDetails, setbarChartDetails] = useState({});
   const teamId = props.match.params.teamId;
 
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.successp(teamId);
       table = table.data;
-      let myHero = table.shift();
 
       let teamPic = await teamService.getTeam(teamId);
       setTeamImg(teamPic.data);
 
+      const barChart = {
+        labels: [],
+        datasets: [
+          {
+            label: `Success %  By Player`,
+            data: [],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.5)",
+              "rgba(54, 162, 235, 0.5)",
+              "rgba(255, 206, 86, 0.5)",
+              "rgba(75, 192, 192, 0.5)",
+              "rgba(153, 102, 255, 0.5)",
+              "rgba(255, 159, 64, 0.5)",
+              "rgba(39, 186, 46, 0.5)",
+              "rgba(8, 20, 107, 0.5)",
+              "rgba(8, 20, 107, 0.5)",
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(39, 186, 46,1)",
+              "rgba(8, 20, 107, 1)",
+              "rgba(8, 20, 107, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      };
+      try {
+        await table.forEach((player) => {
+          barChart.labels.push(player._id.name);
+          barChart.datasets[0].data.push(player.successPercentage);
+        });
+        setbarChartDetails(barChart);
+       
+      } catch {
+        console.log("err1");
+      }
+
+      let myHero = table.shift();
+      
       setHero(myHero);
       setData(table);
+
     };
 
     getTable();
@@ -98,6 +145,7 @@ const SuccessCard = (props) => {
              ))}
            </React.Fragment>
          </ul>
+         <Bar data={barChartDetails} className="mb-3" />
        </div>
       )}
      

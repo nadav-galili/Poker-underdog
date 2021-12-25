@@ -64,12 +64,12 @@ const MainLastgame = ({ teamId }) => {
                     hour12: false,
                   })}
               </p>
-              <div className="stats d-flex w-100 justify-content-between" id="lGame">
-                  <p>Player</p>
-                  <p>Name</p>
-                  <p>Cashing</p>
-                  <p>Profit</p>
-                </div>
+              <div className="stats d-flex justify-content-between" id="lGame">
+                <p>Player</p>
+                <p>Name</p>
+                <p>Cashing</p>
+                <p>Profit</p>
+              </div>
             </li>
             <React.Fragment>
               {data.map((player) => (
@@ -99,13 +99,11 @@ const MainLastgame = ({ teamId }) => {
                 </li>
               ))}
             </React.Fragment>
-            <H2hGameEnd gameId={lastGame._id} header="Last H2H"/>
+            <H2hGameEnd gameId={lastGame._id} header="Last H2H" />
           </ol>
         </div>
       )}
     </div>
-
-     
   );
 };
 

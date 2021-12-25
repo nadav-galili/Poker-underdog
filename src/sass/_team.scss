@@ -97,3 +97,13 @@ span {
     margin-left: 0;
   }
 }
+
+.liveGames span{
+  animation: blinker 0.8s step-start infinite;
+}
+
+@keyframes blinker {
+  from { opacity: 1.0; }
+  50% { opacity: 0.5; }
+  to { opacity: 1.0; }
+}

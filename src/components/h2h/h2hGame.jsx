@@ -36,11 +36,10 @@ const H2hGame = ({ gameId }) => {
   }, [gameId])
   
   return (
-    <React.Fragment>
+      <div className="pb-5">
       <PageHeader titleText="Head 2 Head" />
-
       <div className="col-lg-8 col-12" id="cardTop">
-        <ol className="statsList">
+        <ol className="statsList ">
           <li
             id="gameLi"
             className="statsHero d-flex"
@@ -71,8 +70,7 @@ const H2hGame = ({ gameId }) => {
             ))}
         </ol>
       </div>
-    </React.Fragment>
-  );
+      </div>);
 };
 
 export default H2hGame;

@@ -59,6 +59,7 @@ export function totalGames(teamId) {
   return http.get(`${apiUrl}/games/totalGames/${teamId}`);
 }
 
+
 export default {
   lastGame,
   table,
