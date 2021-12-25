@@ -4,6 +4,7 @@ import Joi from "joi-browser";
 import Form from "./common/form";
 import userService from "../services/userService";
 import { Redirect } from "react-router-dom";
+import { GoogleLogin } from "react-google-login";
 
 class Signin extends Form {
   state = {
@@ -15,6 +16,19 @@ class Signin extends Form {
     email: Joi.string().required().email().label("Email"),
     password: Joi.string().required().min(6).label("Password"),
   };
+
+  handleLogin = async (googleData) => {
+    try {
+      await userService.loginGoogle(googleData.profileObj.email, googleData.tokenId);
+
+      window.location = "/";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        this.setState({ errors: { email: ex.response.data } });
+      }
+    }
+  }
+
 
   doSubmit = async () => {
     const { email, password } = this.state.data;
@@ -36,6 +50,7 @@ class Signin extends Form {
 
   render() {
     if (userService.getCurrentUser()) return <Redirect to="/" />;
+
     return (
       <div className="container">
         <PageHeader titleText="Sign-In" />
@@ -44,6 +59,10 @@ class Signin extends Form {
             <p className="text-primary">You can sign-in here with your account!</p>
           </div>
         </div>
+        <GoogleLogin
+          clientId='310842465793-hdu8fm8luvho3qds0ce4chg9c3696d4d.apps.googleusercontent.com'
+          onSuccess={this.handleLogin}
+        />
         <div className="row">
           <div className="col-lg-3">
             <form onSubmit={this.handleSubmit} autoComplete="off" method="POST">

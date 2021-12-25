@@ -36,8 +36,14 @@ export async function login(email, password) {
   localStorage.setItem(tokenKey, data.token);
 }
 
+export async function loginGoogle(email, token) {
+  const { data } = await http.post(`${apiUrl}/auth/google`, { email, token });
+  localStorage.setItem(tokenKey, data.token);
+}
+
 export default {
   login,
+  loginGoogle,
   getCurrentUser,
   logout,
   getJwt,
