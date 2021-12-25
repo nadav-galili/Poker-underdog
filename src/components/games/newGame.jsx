@@ -227,8 +227,9 @@ const NewGame = (props) => {
           </ol>
         </div>
       )}
-
-      <H2hGame gameId={data._id} className="mb-2" />
+      {(data._id) ? 
+        <H2hGame gameId={data._id} className="mb-2" /> : null
+      }
     </div>
   );
 };
