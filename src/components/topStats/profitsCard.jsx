@@ -52,20 +52,21 @@ const ProfitsCard = (props) => {
         ],
       };
       try {
-        await table.forEach((player) => {
-          dataChart.labels.push(player.players.name);
-          accu.push(player.players.profit);
-        });
-        let sum = accu.reduce((partial_sum, a) => partial_sum + a, 0);
-        let percentageSum = [];
-        accu.forEach((percent) => {
-          percentageSum.push(`${((percent / sum) * 100).toFixed(2)}`);
-        });
-        dataChart.datasets[0].data = percentageSum;
 
+        // await table.forEach((player) => {
+        //   dataChart.labels.push(player.players.name);
+        //   accu.push(player.players.profit);
+        // });
+        // let sum = accu.reduce((partial_sum, a) => partial_sum + a, 0);
+        // let percentageSum = [];
+        // accu.forEach((percent) => {
+        //   percentageSum.push(`${((percent / sum) * 100).toFixed(2)}`);
+        // });
+        // dataChart.datasets[0].data = percentageSum;
+        console.log(dataChart,"llj");
         setdataChartDetails(dataChart);
-      } catch {
-        console.log("err1");
+      } catch(error) {
+        console.log(error,"err1");
       }
 
       let teamPic = await teamService.getTeam(teamId);
