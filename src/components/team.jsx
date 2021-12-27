@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { apiImage } from "../config.json";
 import { GiCardKingClubs } from "react-icons/gi";
 import { IoMdStats } from "react-icons/io";
+import {AiFillEdit} from "react-icons/ai";
 import gameService from "../services/gameService";
 const Team = ({ team, removeTeam, teamId }) => {
   const [livePlayers, setLivePlayers] = useState([]);
@@ -109,12 +110,19 @@ const Team = ({ team, removeTeam, teamId }) => {
               </div>
             </div>
           )}
-
-          <Link className="btn btn-primary " to={`/main-table/${team._id}`}>
+          <div className="teamBtns d-flex flex-column w-75 pb-3">
+          <Link className="btn btn-primary mb-3 " to={`/main-table/${team._id}`}>
             Team Tables & Stats
             <IoMdStats className="ms-2" />
             <i className="ps-2 fas fa-angle-double-right"></i>
           </Link>
+          <Link className="btn btn-secondary py-1 m-0 w-75 " to={`/edit-games/${team._id}`}>
+            Edit Games
+            <AiFillEdit color="white" className="ms-1"/>
+            <i className="ps-2 fas fa-angle-double-right"></i>
+          </Link>
+          </div>
+       
           <div className="card-text ">
             <strong>
               <u>Players:</u>
@@ -145,12 +153,12 @@ const Team = ({ team, removeTeam, teamId }) => {
           <p className="card-text border-top pt-2">
             Created At:{new Date(team.createdAt).toLocaleDateString("en-GB")}
           </p>
-          {/* <p className="text-primary">
+          <p className="text-primary">
             <Link to={`/my-teams/edit/${team._id}`}>
               <i className="fas fa-edit me-2 "></i>
               Edit
             </Link>
-          </p> */}
+          </p>
           <p className="text-primary">
             <Link onClick={removeTeam} to="/my-teams">
               <i className="fas fa-trash-alt me-2"></i>

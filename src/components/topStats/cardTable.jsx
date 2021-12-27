@@ -107,7 +107,6 @@ const CardTable = (props) => {
           percentageSum.push(`${((percent / sum) * 100).toFixed(2)}`);
         });
         dataChart.datasets[0].data = percentageSum;
-
         setdataChartDetails(dataChart);
       } catch {
         console.log("err1");
@@ -159,7 +158,6 @@ const CardTable = (props) => {
             color="rgba(252, 252, 252, 1)"
             secondaryColor="rgba(108, 20, 180, 1)"
             enabled={data.length === 0 ? true : false}
-            // enabled={true}
           />
         </div>
       )}
@@ -224,7 +222,7 @@ const CardTable = (props) => {
               <h4 className="text-white justify-content-center d-flex">
                 {headerTitle} In %
               </h4>
-              <Doughnut data={dataChartDetails} className="mb-3" />
+              <Doughnut data={dataChartDetails} className="mb-3 pb-3" />
             </React.Fragment>
           )}
           <Bar data={barChartDetails} className="mb-3" />

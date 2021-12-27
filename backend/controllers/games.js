@@ -293,6 +293,36 @@ exports.dataByMonths = async function (req, res) {
   res.send(byMonths);
 };
 
+exports.agg_profits=async function(req,res){
+  const agg=await Game.aggregate([
+    {
+      $unwind: {
+        path: "$players"
+      }
+    }, {
+      $match: {
+        team_id: req.params.teamId,
+      }
+    }, {
+      $sort: {
+        "players.profit": -1
+      }
+    }, {
+      $limit: 10
+    }, {
+      $group: {
+        _id: {
+          name: "$players.name"
+        }, 
+        totalProfit: {
+          $sum: "$players.profit"
+        }
+      }
+    }
+  ])
+  res.send(agg)
+}
+
 exports.personalStats = async function (req, res) {
   const agg = await Game.aggregate([
     {

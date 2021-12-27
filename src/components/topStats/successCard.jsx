@@ -145,7 +145,7 @@ const SuccessCard = (props) => {
              ))}
            </React.Fragment>
          </ul>
-         <Bar data={barChartDetails} className="mb-3" />
+         <Bar data={barChartDetails} className="mb-3 pb-3" />
        </div>
       )}
      

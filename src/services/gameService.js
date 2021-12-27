@@ -32,6 +32,10 @@ export function profits(teamId) {
   return http.get(`${apiUrl}/games/profits/top-ten/${teamId}`);
 }
 
+export function agg_profits(teamId) {
+  return http.get(`${apiUrl}/games/agg_profits/top-ten/${teamId}`);
+}
+
 export function newGame(game) {
   return http.post(`${apiUrl}/games`, game);
 }
@@ -59,7 +63,6 @@ export function totalGames(teamId) {
   return http.get(`${apiUrl}/games/totalGames/${teamId}`);
 }
 
-
 export default {
   lastGame,
   table,
@@ -76,4 +79,5 @@ export default {
   personalGames,
   allGamesByTeam,
   totalGames,
+  agg_profits,
 };

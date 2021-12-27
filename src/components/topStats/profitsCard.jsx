@@ -17,7 +17,9 @@ const ProfitsCard = (props) => {
     const getTable = async () => {
       let table = await gameService.profits(teamId);
       table = table.data;
-      console.log(table, "sd");
+
+      let aggregatedProfits = await gameService.agg_profits(teamId);
+      aggregatedProfits = aggregatedProfits.data;
 
       let accu = [];
       const dataChart = {
@@ -52,21 +54,19 @@ const ProfitsCard = (props) => {
         ],
       };
       try {
-
-        // await table.forEach((player) => {
-        //   dataChart.labels.push(player.players.name);
-        //   accu.push(player.players.profit);
-        // });
-        // let sum = accu.reduce((partial_sum, a) => partial_sum + a, 0);
-        // let percentageSum = [];
-        // accu.forEach((percent) => {
-        //   percentageSum.push(`${((percent / sum) * 100).toFixed(2)}`);
-        // });
-        // dataChart.datasets[0].data = percentageSum;
-        console.log(dataChart,"llj");
+        await aggregatedProfits.forEach((player) => {
+          dataChart.labels.push(player._id.name);
+          accu.push(player.totalProfit);
+        });
+        let sum = accu.reduce((partial_sum, a) => partial_sum + a, 0);
+        let percentageSum = [];
+        accu.forEach((percent) => {
+          percentageSum.push(`${((percent / sum) * 100).toFixed(2)}`);
+        });
+        dataChart.datasets[0].data = percentageSum;
         setdataChartDetails(dataChart);
-      } catch(error) {
-        console.log(error,"err1");
+      } catch (error) {
+        console.log(error, "err1");
       }
 
       let teamPic = await teamService.getTeam(teamId);
@@ -86,7 +86,7 @@ const ProfitsCard = (props) => {
     };
 
     getTable();
-  }, [setData, teamId]);
+  }, [teamId]);
 
   let rank = 2;
   ChartJS.register(ArcElement, Tooltip, Legend);
@@ -157,7 +157,10 @@ const ProfitsCard = (props) => {
             ))}
           </React.Fragment>
         </ul>
-        {/* <Doughnut data={dataChartDetails} className="mb-3" /> */}
+        <h7 className="text-white justify-content-center d-flex">
+          Players Profit In % From Top 10 Profits
+        </h7>
+        {dataChartDetails.hasOwnProperty('labels')?<Doughnut data={dataChartDetails} className="mb-3 pb-3"/>:""}
       </div>
     </div>
   );

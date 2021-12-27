@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../src/css/main.css";
-import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import Home from "./components/home";
 import SideNavbar from "./components/sideNavbar";
@@ -30,8 +29,10 @@ import SignUp from "./components/forms/signUp";
 import NewGame from "./components/games/newGame";
 import GameEnd from "./components/gameEnd";
 import H2hTable from "./components/h2h/h2hTable"
-import TeamSignUp from "./components/forms/teamSignUp"
+import TeamSignUp from "./components/forms/teamSignUp";
+import EditGames from "./components/games/editGames";
 import ReactGA from "react-ga";
+import { editTeam } from "./services/teamService";
 
 
 ReactGA.initialize("G-MPD41JDBPV");
@@ -104,6 +105,7 @@ function App() {
               component={JoinTeam}
               user={user}
             />
+            <ProtectedRoute path="/edit-games/:teamId" component={EditGames} /> 
 
             <ProtectedRoute path="/games/:gameId" component={NewGame} />
             <ProtectedRoute path="/last-game/:teamId" component={GameEnd} />
@@ -113,6 +115,7 @@ function App() {
             <ProtectedRoute path="/tables/byMonths/:currMonth/:teamId" component={CurrMonthCard} />
             <ProtectedRoute path="/tables/profits/top-ten/:teamId" component={ProfitsCard} />    
             <ProtectedRoute path="/tables/:cardName/:teamId" component={CardTable} /> 
+            
 
 
             <Route path="/demo" component={Demo} />
