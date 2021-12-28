@@ -116,7 +116,7 @@ const Team = ({ team, removeTeam, teamId }) => {
             <IoMdStats className="ms-2" />
             <i className="ps-2 fas fa-angle-double-right"></i>
           </Link>
-          <Link className="btn btn-secondary py-1 m-0 w-75 " to={`/edit-games/${team._id}`}>
+          <Link className="btn btn-secondary py-1 m-0 w-75 " to={`/edit-games/${team._id}`} teamId={team._id}>
             Edit Games
             <AiFillEdit color="white" className="ms-1"/>
             <i className="ps-2 fas fa-angle-double-right"></i>
