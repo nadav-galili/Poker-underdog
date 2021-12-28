@@ -6,6 +6,7 @@ import SideNavbar from "./components/sideNavbar";
 import Signup from "./components/signup";
 import Signin from "./components/signin";
 import Logout from "./components/logout";
+import EditUser from "./components/forms/editUser";
 import CreateTeam from "./components/createTeam";
 import { Switch, Route, HashRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -32,7 +33,7 @@ import H2hTable from "./components/h2h/h2hTable"
 import TeamSignUp from "./components/forms/teamSignUp";
 import EditGames from "./components/games/editGames";
 import ReactGA from "react-ga";
-import { editTeam } from "./services/teamService";
+
 
 
 ReactGA.initialize("G-MPD41JDBPV");
@@ -64,7 +65,6 @@ function App() {
     <React.Fragment> 
       <ToastContainer />
       <header>
-        {/* <Navbar user={user} details={details} /> */}
         <SideNavbar user={user} details={details} pageWrapId={"page-wrap"} outerContainerId={"App"} />
       </header>
       <main style={style} className="main">
@@ -73,6 +73,11 @@ function App() {
             <ProtectedRoute
               path="/my-stats/edit/:id"
               component={EditPlayer}
+     
+            />
+            <ProtectedRoute
+              path="/my-stats/edit_player/:id"
+              component={EditUser}
               user={user}
             />
             <ProtectedRoute

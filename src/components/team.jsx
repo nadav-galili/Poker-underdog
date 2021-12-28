@@ -5,6 +5,7 @@ import { GiCardKingClubs } from "react-icons/gi";
 import { IoMdStats } from "react-icons/io";
 import {AiFillEdit} from "react-icons/ai";
 import gameService from "../services/gameService";
+
 const Team = ({ team, removeTeam, teamId }) => {
   const [livePlayers, setLivePlayers] = useState([]);
   const [liveGame, setliveGame] = useState({});

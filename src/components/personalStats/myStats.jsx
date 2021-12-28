@@ -9,6 +9,8 @@ import { apiImage } from "../../config.json";
 import _ from "lodash";
 import TotalPersonal from "./totalPersonal";
 import { Line } from "react-chartjs-2";
+import { Link } from "react-router-dom";
+import { AiFillEdit } from "react-icons/ai";
 
 const MyStats = () => {
   const [me, setMe] = useState({});
@@ -34,7 +36,6 @@ const MyStats = () => {
         );
         currentMonth = currentMonth.find((e) => e._id.player_id === me._id);
         setMonth(currentMonth);
-
         let detailed = await gameService.personalGames(me._id);
         setDetails(detailed.data);
 
@@ -75,6 +76,7 @@ const MyStats = () => {
       delete myData.data.password;
       setMe(myData.data);
       let myStats = await gameService.personal(me._id);
+
       setStats(myStats.data[0]);
     };
     getMydata();
@@ -157,91 +159,95 @@ const MyStats = () => {
       )}
       {!_.isEmpty(stats) && (
         <div className="">
-        <div className="playerInfo bg-white col-11 col-lg-4">
-          <span className="text-primary ms-3">
-            {new Date().toLocaleDateString("en-GB")}
-          </span>
-          <div
-            className="playerBg d-flex justify-content-around bg-primary"
-            style={{
-              backgroundImage: `url(${
-                process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
-              })`,
-            }}
-          >
-            <div className="pDetails">
-              <p>
-                {me.firstName} {me.lastName}
-              </p>
-              <p>{me.nickName}</p>
+          <div className="playerInfo bg-white col-11 col-lg-4">
+            <span className="text-primary ms-3">
+              {new Date().toLocaleDateString("en-GB")}
+            </span>
+            <div
+              className="playerBg d-flex justify-content-around bg-primary"
+              style={{
+                backgroundImage: `url(${
+                  process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
+                })`,
+              }}
+            >
+              <div className="pDetails">
+                <p>
+                  {me.firstName} {me.lastName}
+                </p>
+                <p>{me.nickName}</p>
+                <Link className="text-white text-decoration-none" to={`/my-stats/edit_player/${me._id}`}>
+                  <AiFillEdit color="white" className="ms-1" />
+                  Edit Player
+                </Link>
+              </div>
+              <div className="pImage">
+                <img src={`${apiImage}${me.image}`} alt="" />
+              </div>
             </div>
-            <div className="pImage">
-              <img src={`${apiImage}${me.image}`} alt="" />
+            <div className="detailedStats d-flex justify-content-between mt-3">
+              <div className="personalStat">
+                <p>Total Profit</p>
+                <p>{stats.totalProfit}</p>
+              </div>
+              <div className="personalStat">
+                <p>Avg Profit</p>
+                <p>{stats.avgProfit ? stats.avgProfit.toFixed(2) : 0}</p>
+              </div>
+              <div className="personalStat">
+                <p>Total Games</p>
+                <p>{stats.numOfGames}</p>
+              </div>
+              <div className="personalStat">
+                <p>Games W/ Profit</p>
+                <p>{stats.gamesWithProfit}</p>
+              </div>
+              <div className="personalStat">
+                <p>Success %</p>
+                <p>{stats.successPercentage}%</p>
+              </div>
             </div>
-          </div>
-          <div className="detailedStats d-flex justify-content-between mt-3">
-            <div className="personalStat">
-              <p>Total Profit</p>
-              <p>{stats.totalProfit}</p>
+            <div className="detailedStatsRow2 d-flex justify-content-between">
+              <div className="personalStat">
+                <p>Avg Cashing</p>
+                <p>{stats.avgCashing.toFixed(2)}</p>
+              </div>
+              <div className="personalStat">
+                <p>Max Profit</p>
+                <p>{stats.maxProfit}</p>
+              </div>
+              <div className="personalStat">
+                <p>Max Loss</p>
+                <p>{stats.minProfit}</p>
+              </div>
+              <div className="personalStat">
+                <p>{currentMonth}-Total Profit</p>
+                <p>{month ? month.totalProfit : "No games this month"}</p>
+              </div>
+              <div className="personalStat">
+                <p>H2H Points</p>
+                <p>{points.totalPoints}</p>
+              </div>
             </div>
-            <div className="personalStat">
-              <p>Avg Profit</p>
-              <p>{stats.avgProfit.toFixed(2)}</p>
+            <div className="detailedStats d-flex justify-content-between">
+              <div className="personalStat">
+                <p>Avg Game Rank</p>
+                <p>{stats.avgGameRank.toFixed(2)}</p>
+              </div>
+              <div className="personalStat">
+                <p>Last Game</p>
+                <p>{new Date(stats.lastGame).toLocaleDateString("en-GB")}</p>
+              </div>
             </div>
-            <div className="personalStat">
-              <p>Total Games</p>
-              <p>{stats.numOfGames}</p>
-            </div>
-            <div className="personalStat">
-              <p>Games W/ Profit</p>
-              <p>{stats.gamesWithProfit}</p>
-            </div>
-            <div className="personalStat">
-              <p>Success %</p>
-              <p>{stats.successPercentage}%</p>
-            </div>
-          </div>
-          <div className="detailedStatsRow2 d-flex justify-content-between">
-            <div className="personalStat">
-              <p>Avg Cashing</p>
-              <p>{stats.avgCashing.toFixed(2)}</p>
-            </div>
-            <div className="personalStat">
-              <p>Max Profit</p>
-              <p>{stats.maxProfit}</p>
-            </div>
-            <div className="personalStat">
-              <p>Max Loss</p>
-              <p>{stats.minProfit}</p>
-            </div>
-            <div className="personalStat">
-              <p>{currentMonth}-Total Profit</p>
-              <p>{month ? month.totalProfit : "No games this month"}</p>
-            </div>
-            <div className="personalStat">
-              <p>H2H Points</p>
-              <p>{points.totalPoints}</p>
-            </div>
-          </div>
-          <div className="detailedStats d-flex justify-content-between">
-            <div className="personalStat">
-              <p>Avg Game Rank</p>
-              <p>{stats.avgGameRank.toFixed(2)}</p>
-            </div>
-            <div className="personalStat">
-              <p>Last Game</p>
-              <p>{new Date(stats.lastGame).toLocaleDateString("en-GB")}</p>
-            </div>
-          </div>
           </div>
           <div className="header">
-        <h1 className="title  mt-2">Personal Chart</h1>
-      </div>
-      <div className="col-lg-4 col-11">
-      <Line data={data} options={options} />
-      </div>
-      <TotalPersonal details={details} />
+            <h1 className="title  mt-2">Personal Chart</h1>
           </div>
+          <div className="col-lg-4 col-11">
+            <Line data={data} options={options} />
+          </div>
+          <TotalPersonal details={details} />
+        </div>
       )}
     </div>
   );

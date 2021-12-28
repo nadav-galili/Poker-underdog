@@ -3,11 +3,10 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const { User, validate, validateUserWithId } = require("../models/user");
 const auth = require("../middleware/auth");
-const upload=require("../middleware/upload");
+const upload = require("../middleware/upload");
 const { Team } = require("../models/teams");
 const router = express.Router();
 // const { Game } = require("../models/games");
-
 
 const getTeams = async (teamsArray) => {
   const teams = await Team.find({ teamNumber: { $in: teamsArray } });
@@ -42,27 +41,23 @@ router.get("/me", auth, async (req, res) => {
   let user = await User.findById(req.user._id)
     .select("-createdAt")
     .select("-__v");
-
   res.send(user);
 });
 
-router.post("/",upload.single('image'),  async (req, res) => {
+router.post("/", upload.single("image"), async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   // if (error) console.log(error.details[0].message);
   var user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User already registered.");
-  const {file}=req;
- 
-
+  const { file } = req;
 
   user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     nickName: req.body.nickName,
     email: req.body.email,
-    image: req.file? req.file.path:
-     "uploads/user.png",
+    image: req.file ? req.file.path : "uploads/user.png",
     password: req.body.password,
     teams: [],
   });
@@ -72,17 +67,21 @@ router.post("/",upload.single('image'),  async (req, res) => {
 
   await user.save();
 
-  res.send(_.pick(user, ["_id", "FirstName","lastName","nickName", "email", "image"]));
+  res.send(
+    _.pick(user, ["_id", "FirstName", "lastName", "nickName", "email", "image"])
+  );
 });
 
 router.put("/:id", auth, async (req, res) => {
   const { error } = validateUserWithId(req.body);
-   if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send(error.details[0].message);
   // if (error) console.log(error.details[0].message);
-  let user = await User.findOneAndUpdate({ _id: req.params.id }, req.body);
+  let user = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+    new: true,
+  });
   if (!user)
     return res.status(404).send("The user with the given ID was not found");
-  user = await User.findOne({ _id: req.params.id, user_id: req.user.id });
+  // user = await User.findOne({ _id: req.params.id, user_id: req.user.id });
   res.send(user);
 });
 
