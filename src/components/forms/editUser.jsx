@@ -6,13 +6,9 @@ import http from "../../services/httpService";
 import { apiUrl } from "../../config.json";
 import { toast } from "react-toastify";
 import userService from "../../services/userService";
-import { Redirect } from "react-router-dom";
-// import { GoogleLogin } from "react-google-login";
 
-const initialValues = {
-  nickName: "",
-  image: "",
-};
+
+
 
 const validationSchema = Yup.object({
   nickName: Yup.string().required("Required"),
@@ -21,6 +17,19 @@ const validationSchema = Yup.object({
 });
 
 const EditUser = () => {
+
+  const [me, setMe]=useState({})
+  useEffect(()=>{
+    const meData=async ()=>{
+      let getUser=await userService.getUserDetails();
+      console.log(getUser,"sdsd");
+      getUser=getUser.data;
+      setMe(getUser);
+      console.log(me,"pp");
+
+    }
+    meData()
+  },[])
 
   const onSubmit = async (values, onSubmitProps) => {
     onSubmitProps.setSubmitting(false);
@@ -35,9 +44,9 @@ const EditUser = () => {
     //   ecter new query
     //   await http.post(`${apiUrl}/users`, data);
 
-         await userService.login(values.email, values.password);
-      window.location = "/";
-      toast("A new acoount is opened");
+        //  await userService.login(values.email, values.password);
+      // window.location = "/";
+      // toast("A new acoount is opened");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         setErrors({ email: "Something went wrong" });
@@ -46,6 +55,10 @@ const EditUser = () => {
     }
   };
 
+  const initialValues = {
+    nickName: me.nickName,
+    image: "",
+  };
   const [errors, setErrors] = useState({ email: "", image: "" });
   const [fields, setFields] = useState(initialValues);
 
