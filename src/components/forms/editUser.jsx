@@ -53,18 +53,25 @@ const EditUser = () => {
   };
 
   const initialValues = {
+    nickName: '',
+    image: '',
+  };
+  const savedValues = {
     nickName: me.nickName,
     image: me.image,
   };
-  const [errors, setErrors] = useState({ email: "", image: "" });
+
+  
+  const [errors, setErrors] = useState({ nickName: "", image: "" });
   const [fields, setFields] = useState(initialValues);
+  const [formValues, setFormValues]=useState(savedValues)
 
   return (
     <div className="container">
       <PageHeader titleText="Edit User"/>
       <Formik
         enableReinitialize
-        initialValues={fields}
+        initialValues={savedValues ||fields}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
         validateOnMount
@@ -76,7 +83,7 @@ const EditUser = () => {
                 <Form>
                   <div className="form-control d-flex flex-column  bg-primary">
                     <label htmlFor="Nick Name">Nick Name</label>
-                    <Field type="text" id="nickName" name="nickName"  value={me.nickName}/>
+                    <Field type="text" id="nickName" name="nickName"  />
                     <ErrorMessage
                       name="nickName"
                       component="div"
@@ -84,7 +91,7 @@ const EditUser = () => {
                     />
                   </div>
                   <div className="oldImage w-25 mb-2 ">
-                  <img src={`${apiImage}${me.image}`} alt="user" className="w-100 h-100" />
+                  <img src={`${apiImage}${savedValues.image}`} alt="user" className="w-100 h-100" />
                   </div>
                   <div className="form-control d-flex flex-column bg-primary mb-3">
                     <label htmlFor="image">Change Image</label>
@@ -104,7 +111,7 @@ const EditUser = () => {
                     className="btn btn-primary"
                     disabled={!formik.isValid || formik.isSubmitting}
                   >
-                    Submit
+                    Update Details
                   </button>
                   <Link
                 type="button"

@@ -232,7 +232,7 @@ const MyStats = () => {
             <div className="detailedStats d-flex justify-content-between">
               <div className="personalStat">
                 <p>Avg Game Rank</p>
-                <p>{stats.avgGameRank.toFixed(2)}</p>
+                <p>{stats.avgGameRank?stats.avgGameRank.toFixed(2):0}</p>
               </div>
               <div className="personalStat">
                 <p>Last Game</p>
