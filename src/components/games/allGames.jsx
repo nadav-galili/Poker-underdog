@@ -114,9 +114,10 @@ const AllGames = ({ teamId }) => {
                       })}
                   </p>
                   <div
-                    className="stats d-flex w-100 justify-content-between"
+                    className="stats d-flex w-90 justify-content-between"
                     id="lGame"
                   >
+                    {/* <p>Rank</p> */}
                     <p>Player</p>
                     <p>Name</p>
                     <p>Cashing</p>
@@ -127,7 +128,7 @@ const AllGames = ({ teamId }) => {
                 {g
                   .sort((a, b) => b.profit - a.profit)
                   .map((player) => (
-                    <li className="statsRow" key={player.id}>
+                    <li className="statsRow " key={player.id}>
                       <div className="rowPos">{player.gameRank}</div>
                       <div className="rowImage">
                         <img

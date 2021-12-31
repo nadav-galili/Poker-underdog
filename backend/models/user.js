@@ -38,9 +38,9 @@ const userSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-     required: true,
+    required: true,
     // minlength: 3,
-     maxlength: 1024,
+    maxlength: 1024,
   },
   teams: {
     type: Array,
@@ -74,7 +74,7 @@ function validateUserWithId(user) {
     _id: Joi.string().min(24).max(24).required(),
     firstName: Joi.string().min(2).max(255).required(),
     lastName: Joi.string().min(2).max(255).required(),
-    nickName:Joi.string().min(2).max(255).required(),
+    nickName: Joi.string().min(2).max(255).required(),
     email: Joi.string().min(6).max(255).required().email(),
     password: Joi.string().min(6).max(1024).required(),
     teams: Joi.array(),
@@ -84,6 +84,16 @@ function validateUserWithId(user) {
   return schema.validate(user);
 }
 
+const validateForUpdate = (user) => {
+  const schema = Joi.object({
+    _id: Joi.string().min(24).max(24).required(),
+    nickName: Joi.string().min(2).max(255).required(),
+    image: Joi.string().min(11).max(1025),
+  });
+  return schema.validate(user);
+};
+
 exports.User = User;
 exports.validate = validateUser;
 exports.validateUserWithId = validateUserWithId;
+exports.validateForUpdate = validateForUpdate;

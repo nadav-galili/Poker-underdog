@@ -5,7 +5,7 @@ const EditGames = (props) => {
    let  iframeUrl=`https://nadav.retool.com/embedded/public/b9a1f778-e9c9-44f9-9309-37862ad3a349#teamId=${props.match.params.teamId}`;
    
     return ( 
-        <div className="container pb-3 mt-2">
+        <div className="container pb-3">
             <PageHeader titleText="Edit Games"/>
             <p className='text-white'>In this section you can edit, update and delete games and games details.</p>
             <ul className='text-white'>

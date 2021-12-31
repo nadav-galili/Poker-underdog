@@ -3,6 +3,7 @@ const { response } = require("express");
 const _ = require("lodash");
 const { Game, validate } = require("../models/games");
 const { Team } = require("../models/teams");
+const mongoose = require("mongoose");
 
 
 exports.totalGames=async function(req, res){
@@ -439,7 +440,7 @@ exports.updateGame = async function (req, res) {
   if (error) res.status(400).send(error.details[0].message);
 
   let game = await Game.findByIdAndUpdate(
-    req.body.gameId,
+    mongoose.Types.ObjectId(req.body.gameId),
     { players: req.body.players, isOpen: req.body.isOpen },
     { new: true }
   );

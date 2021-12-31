@@ -105,6 +105,10 @@ const NewGame = (props) => {
     });
   };
 
+  if(!id){
+    return (
+    <div className="text-primary">No Games</div>
+  )}else{
   return (
     <div className="container">
       <PageHeader titleText="Game No." />
@@ -230,7 +234,7 @@ const NewGame = (props) => {
 
       <H2hGame gameId={data._id} className="mb-2" />
     </div>
-  );
+  )}
 };
 
 export default NewGame;

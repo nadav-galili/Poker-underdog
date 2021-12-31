@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const _ = require("lodash");
-const { User, validate, validateUserWithId } = require("../models/user");
+const { User, validate, validateUserWithId, validateUserforUpdate } = require("../models/user");
 const auth = require("../middleware/auth");
 const upload = require("../middleware/upload");
 const { Team } = require("../models/teams");
@@ -72,9 +72,9 @@ router.post("/", upload.single("image"), async (req, res) => {
   );
 });
 
-router.put("/:id", auth, async (req, res) => {
-  const { error } = validateUserWithId(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.put("/:id",  upload.single("image"),auth, async (req, res) => {
+  // const { error } = validateUserforUpdate(req.body);
+  // if (error) return res.status(400).send(error.details[0].message);
   // if (error) console.log(error.details[0].message);
   let user = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
     new: true,

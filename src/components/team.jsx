@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import { apiImage } from "../config.json";
 import { GiCardKingClubs } from "react-icons/gi";
 import { IoMdStats } from "react-icons/io";
-import {AiFillEdit} from "react-icons/ai";
+import { AiFillEdit } from "react-icons/ai";
 import gameService from "../services/gameService";
 
-const Team = ({ team, removeTeam, teamId }) => {
+const Team = ({ team, removeTeam, teamId, user }) => {
+  console.log(user);
   const [livePlayers, setLivePlayers] = useState([]);
   const [liveGame, setliveGame] = useState({});
   let captain = team.players.filter((e) => e._id === team.user_id);
@@ -57,7 +58,9 @@ const Team = ({ team, removeTeam, teamId }) => {
           </p>
           {liveGame && (
             <div className="liveGames ">
-              <span className="display-6 "><u>Live Game</u></span>
+              <span className="display-6 ">
+                <u>Live Game</u>
+              </span>
               <div className="col-12 border border-primary my-2" id="card-top">
                 <ol className="statsList m-0">
                   <li
@@ -112,18 +115,30 @@ const Team = ({ team, removeTeam, teamId }) => {
             </div>
           )}
           <div className="teamBtns d-flex flex-column w-75 pb-3">
-          <Link className="btn btn-primary mb-3 " to={`/main-table/${team._id}`}>
-            Team Tables & Stats
-            <IoMdStats className="ms-2" />
-            <i className="ps-2 fas fa-angle-double-right"></i>
-          </Link>
-          <Link className="btn btn-secondary py-1 m-0 w-75 " to={`/edit-games/${team._id}`} teamId={team._id}>
-            Edit Games
-            <AiFillEdit color="white" className="ms-1"/>
-            <i className="ps-2 fas fa-angle-double-right"></i>
-          </Link>
+            <Link
+              className="btn btn-primary mb-3 "
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Only Team Manger can edit games details"
+              to={`/main-table/${team._id}`}
+            >
+              Team Tables & Stats
+              <IoMdStats className="ms-2" />
+              <i className="ps-2 fas fa-angle-double-right"></i>
+            </Link>
+            {captain[0]._id === user._id && (
+              <Link
+                className="btn btn-secondary py-1 m-0 w-75 "
+                to={`/edit-games/${team._id}`}
+                teamId={team._id}
+              >
+                Edit Games
+                <AiFillEdit color="white" className="ms-1" />
+                <i className="ps-2 fas fa-angle-double-right"></i>
+              </Link>
+            )}
           </div>
-       
+
           <div className="card-text ">
             <strong>
               <u>Players:</u>

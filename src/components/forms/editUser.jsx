@@ -7,41 +7,39 @@ import { apiUrl } from "../../config.json";
 import { toast } from "react-toastify";
 import userService from "../../services/userService";
 import { apiImage } from "../../config.json";
-import {Link} from "react-router-dom"
-
-
+import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object({
   nickName: Yup.string().required("Required"),
   image: Yup.string(),
-
 });
 
 const EditUser = () => {
-  const [me, setMe]=useState({})
-  useEffect(()=>{
-    const meData=async ()=>{
-      let getUser=await userService.getUserDetails();
-      getUser=getUser.data;
+  const [me, setMe] = useState({});
+  useEffect(() => {
+    const meData = async () => {
+      let getUser = await userService.getUserDetails();
+      getUser = getUser.data;
       setMe(getUser);
-    }
-    meData()
-  },[])
+    };
+    meData();
+  }, []);
 
   const onSubmit = async (values, onSubmitProps) => {
     onSubmitProps.setSubmitting(false);
     let data = new FormData();
+    data.append("_id", values._id);
     data.append("nickName", values.nickName);
+    // data.append("email", values.email);
     if (values.image) {
       data.append("image", values.image);
     }
 
     try {
       if (!values.image) delete values.image;
-    //   ecter new query
-    //   await http.post(`${apiUrl}/users`, data);
-
-        //  await userService.login(values.email, values.password);
+      console.log(data._id);
+      await userService.editUserDetails(values);
+      //  await userService.login(values.email, values.password);
       // window.location = "/";
       // toast("A new acoount is opened");
     } catch (ex) {
@@ -53,25 +51,32 @@ const EditUser = () => {
   };
 
   const initialValues = {
-    nickName: '',
-    image: '',
+    nickName: "",
+    image: "",
+    _id: "",
   };
   const savedValues = {
     nickName: me.nickName,
     image: me.image,
+    _id: me._id,
+    // firstName: me.firstName,
+    // lastName: me.lastName,
+    // email: me.email,
+    // password: me.password,
+    // createdAt: me.createdAt,
+    // teams: me.teams,
   };
 
-  
   const [errors, setErrors] = useState({ nickName: "", image: "" });
   const [fields, setFields] = useState(initialValues);
-  const [formValues, setFormValues]=useState(savedValues)
+  const [formValues, setFormValues] = useState(savedValues);
 
   return (
     <div className="container">
-      <PageHeader titleText="Edit User"/>
+      <PageHeader titleText="Edit User" />
       <Formik
         enableReinitialize
-        initialValues={savedValues ||fields}
+        initialValues={savedValues || fields}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
         validateOnMount
@@ -83,7 +88,7 @@ const EditUser = () => {
                 <Form>
                   <div className="form-control d-flex flex-column  bg-primary">
                     <label htmlFor="Nick Name">Nick Name</label>
-                    <Field type="text" id="nickName" name="nickName"  />
+                    <Field type="text" id="nickName" name="nickName" />
                     <ErrorMessage
                       name="nickName"
                       component="div"
@@ -91,7 +96,11 @@ const EditUser = () => {
                     />
                   </div>
                   <div className="oldImage w-25 mb-2 ">
-                  <img src={`${apiImage}${savedValues.image}`} alt="user" className="w-100 h-100" />
+                    <img
+                      src={`${apiImage}${savedValues.image}`}
+                      alt="user"
+                      className="w-100 h-100"
+                    />
                   </div>
                   <div className="form-control d-flex flex-column bg-primary mb-3">
                     <label htmlFor="image">Change Image</label>
@@ -106,22 +115,21 @@ const EditUser = () => {
                     <span className="error">{errors.image}</span>
                   </div>
                   <div className="buttons d-flex justify-content-between">
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={!formik.isValid || formik.isSubmitting}
-                  >
-                    Update Details
-                  </button>
-                  <Link
-                type="button"
-                className="btn btn-secondary  m-0"
-                to={`/my-stats/${me._id}`}
-              >
-                Not right now
-              </Link> 
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={!formik.isValid || formik.isSubmitting}
+                    >
+                      Update Details
+                    </button>
+                    <Link
+                      type="button"
+                      className="btn btn-secondary  m-0"
+                      to={`/my-stats/${me._id}`}
+                    >
+                      Not right now
+                    </Link>
                   </div>
-          
                 </Form>
               </div>
             </div>

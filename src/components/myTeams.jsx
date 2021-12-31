@@ -81,6 +81,7 @@ const MyTeams = () => {
               key={team._id}
               team={team}
               teamId={team._id}
+              user={user}
               removeTeam={() => removeTeam(team._id)}
             />
           ))}
