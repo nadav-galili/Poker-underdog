@@ -10,7 +10,7 @@
 # config.json
 # testing
 # /coverage
-
+build.zip
 # production
 /build
 
