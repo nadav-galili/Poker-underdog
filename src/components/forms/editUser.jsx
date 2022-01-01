@@ -41,7 +41,7 @@ const EditUser = () => {
       await userService.editUserDetails(values);
       //  await userService.login(values.email, values.password);
       // window.location = "/";
-      // toast("A new acoount is opened");
+      toast("The user has been updated!");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         setErrors({ email: "Something went wrong" });
