@@ -13,12 +13,14 @@ const { Team } = require("../models/teams");
 const router = express.Router();
 const { Game } = require("../models/games");
 const { H2h } = require("../models/h2h");
+const userController=require ('../controllers/user');
 
 const getTeams = async (teamsArray) => {
   const teams = await Team.find({ teamNumber: { $in: teamsArray } });
   return teams;
 };
-
+// edit user nickname and image
+router.put('/edit-user/:id',auth,userController.editUser);
 //get teams info
 router.get("/teams", auth, async (req, res) => {
   if (!req.query.numbers) res.status(400).send("Missing numbers data");
@@ -78,46 +80,19 @@ router.post("/", upload.single("image"), async (req, res) => {
   );
 });
 
-router.put("/:id", upload.single("image"), auth, async (req, res) => {
-  // const { error } = validateUserforUpdate(req.body);
-  // if (error) return res.status(400).send(error.details[0].message);
+router.put("/:id", auth, async (req, res) => {
+  const { error } = validateUserWithId(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
   // if (error) console.log(error.details[0].message);
 
   let user = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
     new: true,
   });
-
-  let team = await Team.updateMany(
-    { _id: user.teams, "players._id": req.params.id },
-    { $set: { "players.$.nickName": user.nickName } },
-    {
-      new: true,
-    }
-  );
-  // let teamId = await Team.find({ "players._id": req.params.id });
-
-  // let games = await Game.updateMany(
-  //   { players: [req.params.id] },
-  //   { $set: { "players.$.name": user.nickName } },
-  //   { new: true }
-  // );
-  let h2h = await H2h.aggregate([
-    { $unwind: { path: "$players" } },
-    { $unwind: { path: "$players" } },
-    { $match: { "players.id": req.params.id } },
-  ]);
-
-
-  let h2hUpdated = await H2h.updateMany(
-    { team_id: h2h[0].team_id }, {"players":"monkey"},
-    {$set:{players:"monkey2"}},
-    
-  );
-  console.log("sdds",h2hUpdated);
-
   if (!user)
     return res.status(404).send("The user with the given ID was not found");
-  res.send({ user: user, team: team, h2hUpdated:h2hUpdated});
+  res.send(user);
 });
+
+
 
 module.exports = router;

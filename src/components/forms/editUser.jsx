@@ -37,8 +37,8 @@ const EditUser = () => {
 
     try {
       if (!values.image) delete values.image;
-      console.log(data._id);
-      await userService.editUserDetails(values);
+     
+      await userService.editUserForUpdate(values)
       //  await userService.login(values.email, values.password);
       // window.location = "/";
       toast("The user has been updated!");
@@ -59,12 +59,6 @@ const EditUser = () => {
     nickName: me.nickName,
     image: me.image,
     _id: me._id,
-    // firstName: me.firstName,
-    // lastName: me.lastName,
-    // email: me.email,
-    // password: me.password,
-    // createdAt: me.createdAt,
-    // teams: me.teams,
   };
 
   const [errors, setErrors] = useState({ nickName: "", image: "" });

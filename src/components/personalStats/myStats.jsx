@@ -176,10 +176,10 @@ const MyStats = () => {
                   {me.firstName} {me.lastName}
                 </p>
                 <p>{me.nickName}</p>
-                {/* <Link className="text-white text-decoration-none" to={`/my-stats/edit_player/${me._id}`}>
+                <Link className="text-white text-decoration-none" to={`/my-stats/edit_player/${me._id}`}>
                   <AiFillEdit color="white" className="ms-1" />
                   Edit Player
-                </Link> */}
+                </Link>
               </div>
               <div className="pImage">
                 <img src={`${apiImage}${me.image}`} alt="" />

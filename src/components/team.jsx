@@ -169,12 +169,12 @@ const Team = ({ team, removeTeam, teamId, user }) => {
           <p className="card-text border-top pt-2">
             Created At:{new Date(team.createdAt).toLocaleDateString("en-GB")}
           </p>
-          <p className="text-primary">
+          {/* <p className="text-primary">
             <Link to={`/my-teams/edit/${team._id}`}>
               <i className="fas fa-edit me-2 "></i>
               Edit
             </Link>
-          </p>
+          </p> */}
           <p className="text-primary">
             <Link onClick={removeTeam} to="/my-teams">
               <i className="fas fa-trash-alt me-2"></i>

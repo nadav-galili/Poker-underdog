@@ -79,7 +79,7 @@ export default function MainTable(props) {
     getTable();
     return () => {
       isCancelled = true;
-      console.log(isCancelled,"rr");
+  
     };
   }, [teamId]);
 
@@ -153,7 +153,7 @@ export default function MainTable(props) {
               Total Hours Played:
               <strong>
                 <span className="ps-1">
-                  {totalCash[0] ? totalCash[0].totalHours.toFixed(2) : null}
+                  {totalCash[0] ? (totalCash[0].totalHours/6).toFixed(2): null}
                   <i className="fas fa-hourglass-half ps-1 "></i>
                 </span>
               </strong>
