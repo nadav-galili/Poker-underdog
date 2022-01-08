@@ -32,7 +32,7 @@ exports.newH2h = async function (req, res) {
 
   var result = zip(splitAt(players.length / 2, shuffle(players)));
   let h2h = _.pick(req.body, ["team_id", "gameId"]);
-  h2h.players = result;
+  h2h.players= result;
   let newH2h = new H2h(h2h);
   await newH2h.save();
   res.send(newH2h);
@@ -80,7 +80,7 @@ exports.updateh2h = async function (req, res) {
 
   let newH2h = await H2h.findOneAndUpdate(
     { gameId: req.params.gameId },
-    { players: h2h[0].players },
+    {$set:{ players: h2h[0].players }},
     { new: true }
   );
   await res.send(newH2h);

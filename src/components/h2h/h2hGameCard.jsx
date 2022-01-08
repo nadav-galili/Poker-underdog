@@ -18,9 +18,7 @@ const H2hGameCard = ({ team }) => {
       try {
         let aGames = await h2hService.teamAllGames(team);
         setGamesData(aGames.data);
-        console.log(gamesData);
-        let allGames = aGames.data.map((d) => _.flatten(d.players));
-        // console.log(allGames);
+        let allGames = aGames.data.map((d) => _.flatten(d.players));  
         setGames(allGames);
         setLoading(true);
         setPages(Math.floor(games.length / perPage));
@@ -36,10 +34,8 @@ const H2hGameCard = ({ team }) => {
   items = gamesData
     ? gamesData.slice(page * perPage, (page + 1) * perPage)
     : "";
-  console.log(items, "jj");
-  // let itemsDates = gamesData
-  //   ? gamesData.slice(page * perPage, (page + 1) * perPage)
-  //   : "";
+
+
 
   const handlePageClick = (event) => {
     let pageC = event.selected;

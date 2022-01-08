@@ -22,7 +22,6 @@ const CurrMonthCard = (props) => {
     const getTable = async () => {
       let table = await gameService.monthsData(teamId);
       table = table.data;
-      console.log(table,"Sds");
 
       const barChart = {
         labels: [],

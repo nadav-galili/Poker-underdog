@@ -15,9 +15,16 @@ const NewGame = (props) => {
 
   useEffect(() => {
     const players = async () => {
-      let playersInGame = await gameService.gameById(props.match.params.gameId);
-      setData(playersInGame.data);
-      setId(playersInGame.data._id);
+      try{
+        let playersInGame = await gameService.gameById(props.match.params.gameId);
+        setData(playersInGame.data);
+        setId(playersInGame.data._id);
+      }catch(e){
+        console.log("tt")
+
+        console.log(e,"EE");
+      }
+  
     };
 
     players();

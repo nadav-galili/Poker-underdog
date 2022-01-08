@@ -439,12 +439,13 @@ exports.updateGame = async function (req, res) {
   const { error } = validate(req.body);
   if (error) res.status(400).send(error.details[0].message);
 
-  let game = await Game.findByIdAndUpdate(
-    mongoose.Types.ObjectId(req.body.gameId),
+  let game = await Game.findOneAndUpdate(
+    {_id:req.body.gameId},
     { players: req.body.players, isOpen: req.body.isOpen },
     { new: true }
   );
-  await res.send(game);
+
+   res.send(game);
 };
 exports.gamesByCardName = async function (req, res) {
   let cardTitle = req.params.cardName;
@@ -576,7 +577,7 @@ exports.totalCash = async function (req, res) {
             {
               $subtract: ["$updatedAt", "$createdAt"],
             },
-            3600000,
+            3600000*6,
           ]
         },
         totalCashing:{

@@ -50,7 +50,7 @@ class SideNavBar extends React.Component {
             onClick={() => this.closeMenu()}
           >
             <img
-              src={process.env.PUBLIC_URL + `logoNewRed.png`}
+              src={process.env.PUBLIC_URL + `newIcon.jpeg`}
               alt="logo"
             ></img>
           </Link>

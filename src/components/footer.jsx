@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="d-flex flex-wrap justify-content-around align-items-center" id="footer">
         <div className="logoImage ">
           <img
-            src={process.env.PUBLIC_URL + "logoNewRed.png"}
+            src={process.env.PUBLIC_URL + "newIcon.jpeg"}
             alt="logo"
           />
         </div>

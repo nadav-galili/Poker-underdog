@@ -7,7 +7,7 @@ import { AiFillEdit } from "react-icons/ai";
 import gameService from "../services/gameService";
 
 const Team = ({ team, removeTeam, teamId, user }) => {
-  console.log(user);
+
   const [livePlayers, setLivePlayers] = useState([]);
   const [liveGame, setliveGame] = useState({});
   let captain = team.players.filter((e) => e._id === team.user_id);
