@@ -26,23 +26,13 @@ exports.editUser=async function(req,res){
        { new: true , timestamps:false}
     );
 
-   let h2h=await H2h.aggregate([
-       {$unwind:{
-           path:'$players'
-       }},
-       {$unwind:{
-           path:'$players'
-       }},
-       {
-        $match:{
-            'players.id':req.params.id
-        }
-       }
-   ])
-       await  h2h.forEach(p=>{
-            p.players.name=user.nickName
-        })
+   let h2h=await H2h.updateMany(
+    {"players":{$elemMatch:{$elemMatch:{id:req.params.id}}}},
+    { $set: { "players.$[].$[elem].name": user.nickName } },
+    {arrayFilters:[{'elem.id':req.params.id}]},
  
+   )
+    
     
     res.send({h2h:h2h,games:games,team:team})
 }
