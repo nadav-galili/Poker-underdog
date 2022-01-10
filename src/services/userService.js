@@ -31,8 +31,9 @@ export function editUserDetails(user) {
   return http.put(`${apiUrl}/users/${uId}`, user);
 }
 
-export function editUserForUpdate(user){
-  return http.put(`${apiUrl}/users/edit-user/${user._id}`,user);
+export function editUserForUpdate(user, data){
+  console.log(`sds`,user._id);
+  return http.put(`${apiUrl}/users/edit-user/${user._id}`,data);
 }
 
 export async function login(email, password) {

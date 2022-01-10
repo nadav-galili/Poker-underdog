@@ -222,7 +222,7 @@ const NewGame = (props) => {
                   return a + b.profit;
                 }, 0)}
               </div>
-              <div className="fas fa-minus-circle text-primary">Cancel</div>
+              <div className="fas fa-minus-circle text-white">Cancel</div>
             </li>
             <div className="buttonsGame d-flex justify-content-between">
               <div

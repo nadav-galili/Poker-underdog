@@ -7,7 +7,13 @@ const mongoose = require("mongoose");
 const { H2h } = require("../models/h2h");
 
 exports.editUser=async function(req,res){
-    let user = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+  const {file}=req;
+  console.log("t",req.body);
+  console.log("R", res);
+    //  const { error } = validateUserforUpdate(req.body);
+    // if (error) return res.status(400).send(error.details[0].message);
+    //  if (error) console.log(error.details[0].message);
+    let user = await User.findOneAndUpdate({ _id: req.params.id }, {nickName:req.body.nickName}, {
         new: true,
       });
      
@@ -30,17 +36,13 @@ exports.editUser=async function(req,res){
     {"players":{$elemMatch:{$elemMatch:{id:req.params.id}}}},
     { $set: { "players.$[].$[elem].name": user.nickName } },
     {arrayFilters:[{'elem.id':req.params.id}]},
- 
-   )
-    
+   );
+
     
     res.send({h2h:h2h,games:games,team:team})
 }
 
 
-    // const { error } = validateUserforUpdate(req.body);
-    // if (error) return res.status(400).send(error.details[0].message);
-    // if (error) console.log(error.details[0].message);
   
 
  

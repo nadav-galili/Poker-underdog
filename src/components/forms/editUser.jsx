@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import PageHeader from "../common/pageHeader";
 import * as Yup from "yup";
-import http from "../../services/httpService";
+// import http from "../../services/httpService";
 import { apiUrl } from "../../config.json";
 import { toast } from "react-toastify";
 import userService from "../../services/userService";
@@ -26,21 +26,20 @@ const EditUser = () => {
   }, []);
 
   const onSubmit = async (values, onSubmitProps) => {
+  
     onSubmitProps.setSubmitting(false);
     let data = new FormData();
     data.append("_id", values._id);
     data.append("nickName", values.nickName);
-    // data.append("email", values.email);
+    
     if (values.image) {
       data.append("image", values.image);
     }
-
+    
     try {
-      if (!values.image) delete values.image;
-     
-      await userService.editUserForUpdate(values)
-      //  await userService.login(values.email, values.password);
-      // window.location = "/";
+      // if (!values.image) delete values.image;
+      await userService.editUserForUpdate(values, data)
+       window.location = `#/my-stats/${values._id}`;
       toast("The user has been updated!");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -70,7 +69,7 @@ const EditUser = () => {
       <PageHeader titleText="Edit User" />
       <Formik
         enableReinitialize
-        initialValues={savedValues || fields}
+        initialValues={savedValues||fields}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
         validateOnMount
@@ -104,6 +103,9 @@ const EditUser = () => {
                       name="image"
                       onChange={(event) => {
                         formik.setFieldValue("image", event.target.files[0]);
+                        console.log('rr',event.target.files[0])
+                        console.log("Pp",fields)
+                        console.log("aaap",formik)
                       }}
                     ></input>
                     <span className="error">{errors.image}</span>
