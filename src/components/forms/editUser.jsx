@@ -103,9 +103,6 @@ const EditUser = () => {
                       name="image"
                       onChange={(event) => {
                         formik.setFieldValue("image", event.target.files[0]);
-                        console.log('rr',event.target.files[0])
-                        console.log("Pp",fields)
-                        console.log("aaap",formik)
                       }}
                     ></input>
                     <span className="error">{errors.image}</span>
