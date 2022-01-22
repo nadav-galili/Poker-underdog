@@ -24,3 +24,8 @@ build.zip
 # npm-debug.log*
 # yarn-debug.log*
 # yarn-error.log*
+backend/backup/backup.zip
+backend/backup/games.json
+backend/backup/h2h.json
+backend/backup/teams.json
+backend/backup/users.json

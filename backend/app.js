@@ -14,8 +14,6 @@ const exphbs = require("express-handlebars");
 const hbs = require("nodemailer-express-handlebars");
 //  const hbs = require("hbs")
 const { engine } = require("express-handlebars");
-// const backup=require("./backup");
-
 
 // const config = require("./config");
 // mongoose
@@ -77,7 +75,7 @@ const options = {
   viewPath: "views",
 };
 
-// app.use(cors(corsOptions));
+
 let transporter = nodemailer.createTransport({
   host: "mail.poker-underdog.com",
   port: 465,
