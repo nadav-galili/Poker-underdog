@@ -7,6 +7,9 @@ const fs = require("fs");
 const AdmZip = require("adm-zip");
 const nodemailer = require("nodemailer");
 const config = require("./config");
+const cron = require('node-cron');
+
+
 
 // mongoose
 //   .connect("mongodb://localhost/backend", {
@@ -17,6 +20,11 @@ const config = require("./config");
 //   })
 //   .then(() => console.log("Connected to MongoDB..."))
 //   .catch((err) => console.error(err, "Could not connect to MongoDB..."));
+
+// ...
+
+// Schedule tasks to be run on the server.
+cron.schedule('* * * * *', function() {
 
 mongoose
   .connect(
@@ -124,3 +132,5 @@ async function main() {
 }
 
 main().catch(console.error);
+
+});
