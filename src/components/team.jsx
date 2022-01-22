@@ -5,6 +5,7 @@ import { GiCardKingClubs } from "react-icons/gi";
 import { IoMdStats } from "react-icons/io";
 import { AiFillEdit } from "react-icons/ai";
 import gameService from "../services/gameService";
+import Avatar from "@material-ui/core/Avatar";
 
 const Team = ({ team, removeTeam, teamId, user }) => {
 
@@ -114,9 +115,9 @@ const Team = ({ team, removeTeam, teamId, user }) => {
               </div>
             </div>
           )}
-          <div className="teamBtns d-flex flex-column w-75 pb-3">
+          <div className="teamBtns d-flex flex-column w-75 ">
             <Link
-              className="btn btn-primary mb-3 "
+              className="button-72 p-2"
               data-toggle="tooltip"
               data-placement="top"
               title="Only Team Manger can edit games details"
@@ -147,21 +148,18 @@ const Team = ({ team, removeTeam, teamId, user }) => {
               {team.players.map((player) => (
                 <li
                   key={player._id}
-                  className="col-4 col-lg-4 teams"
+                  className="col-2 col-lg-3 teams"
                   id="playerAvatar"
                 >
-                  {player.nickName}
-                  <br></br>
-                  <img
-                    src={`${apiImage}${player.image}`}
-                    alt="user"
-                    className="mb-2"
-                  />
+                  <p id="playerPersonalInfo">{player.nickName}</p>
+                  {/* <Link  to={`my-stats/${player._id}`}> */}
+                    <Avatar src={`${apiImage}${player.image}`} alt={player.name} />
+                    {/* </Link> */}
                 </li>
               ))}
             </ul>
           </div>
-          <Link className="btn mb-2" to={`/new-game/${team._id}`}>
+          <Link className="mb-2 button-71" to={`/new-game/${team._id}`}>
             Start a new game
             <GiCardKingClubs className="ms-2" />
             <i className="ps-2 fas fa-angle-double-right"></i>
@@ -176,9 +174,9 @@ const Team = ({ team, removeTeam, teamId, user }) => {
             </Link>
           </p> */}
           <p className="text-primary">
-            <Link onClick={removeTeam} to="/my-teams">
+            <Link onClick={removeTeam} to="/my-teams" className="text-danger">
               <i className="fas fa-trash-alt me-2"></i>
-              Delete
+              Delete Team
             </Link>
           </p>
         </div>

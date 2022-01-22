@@ -77,7 +77,7 @@ const SuccessCard = (props) => {
   let rank = 2;
 
   return (
-    <div className="container">
+    <div className="container pb-4">
       <PageHeader titleText="Success %" />
       <div className="teamImg d-flex flex-row mb-2">
       <img src={`${apiImage}${teamImg.teamImage}`} alt="" />

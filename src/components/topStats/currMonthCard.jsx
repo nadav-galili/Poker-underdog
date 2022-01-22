@@ -83,7 +83,7 @@ const CurrMonthCard = (props) => {
   let rank = 2;
 
   return (
-    <div className="container">
+    <div className="container pb-3">
       <PageHeader titleText={`${currentMonth} ${new Date().getFullYear()}`} />
       <div className="teamImg d-flex flex-row mb-2">
         <img src={`${apiImage}${teamImg.teamImage}`} alt="" />

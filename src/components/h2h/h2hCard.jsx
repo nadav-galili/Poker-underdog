@@ -7,7 +7,12 @@ import { apiImage } from "./../../config.json";
 const H2hCard = ({ header, data, name, image, cardName, team, teamimage }) => {
   return (
     <div className="cardDiv">
-      <div className="card" id="mainStats">
+      <div className="card" id="mainStats"
+           style={{
+            backgroundImage: `url(${
+              process.env.PUBLIC_URL + "/icons/diamond.svg"
+            })`,
+          }}>
         <h5 className="card-title ">{name}</h5>
         <div className="img-card">
           <img

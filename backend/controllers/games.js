@@ -448,9 +448,11 @@ exports.updateGame = async function (req, res) {
    res.send(game);
 };
 exports.gamesByCardName = async function (req, res) {
+
   let cardTitle = req.params.cardName;
   cardTitle = "$" + cardTitle;
-
+  let sortOrder;
+  cardTitle === '$avgCashing' ? sortOrder = 1 : sortOrder = -1;
   const table = await Game.aggregate([
     {
       $unwind: {
@@ -526,27 +528,16 @@ exports.gamesByCardName = async function (req, res) {
         },
 
         players: 1,
-        // created_at: 1,
         team_name: 1,
         team_id: 1,
-        // gamesWithPlus: 1,
-        // totalProfit: 1,
-        // avgProfit: {
-        //     $round: ["$avgProfit", 2]
-        // },
-        // numOfGames: 1,
-        // avgCashing: {
-        //     $round: ["$avgCashing", 2]
-        // },
-        // lastGame: 1,
-        // gamesWithProfit: 1,
+
         cardTitle: { $round: [cardTitle, 2] },
       },
     },
 
     {
       $sort: {
-        cardTitle: -1,
+        cardTitle:sortOrder,
       },
     },
   ]);
