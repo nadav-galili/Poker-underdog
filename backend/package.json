@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "binarnadav": "npm i react-dom",
-    "icons": "npm install react react - dom"
+    "backup": "concurrently \"node app.js\" \"node backup.js\" ",
+    "dev": "concurrently --kill-others \"node app\" \"node backup\""
   },
   "keywords": [],
   "author": "",
