@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "backup": "concurrently \"node app.js\" \"node backup.js\" ",
-    "dev": "concurrently --kill-others \"node app\" \"node backup\""
+    "dev": "concurrently  \"node app\" \"node backup\""
   },
   "keywords": [],
   "author": "",
