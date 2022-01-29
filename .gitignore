@@ -5,6 +5,11 @@
 # /config
 /backend/node_modules
 /backend/config.js
+/backup/node_modules
+/backup/config.js
+/backup/config
+/backup/backup
+
 # /.pnp
 # .pnp.js
 # config.json
