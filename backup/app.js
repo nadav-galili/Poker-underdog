@@ -9,15 +9,7 @@ const nodemailer = require("nodemailer");
 const config = require("./config");
 const cron = require("node-cron");
 
-// mongoose
-//   .connect("mongodb://localhost/backend", {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//   })
-//   .then(() => console.log("Connected to MongoDB..."))
-//   .catch((err) => console.error(err, "Could not connect to MongoDB..."));
+
 
 // ...
 
@@ -27,18 +19,16 @@ mongoose
   `mongodb+srv://${config.production.database.user_name}:` +
     `${config.production.database.pass}@${config.production.server.cluster}/${config.production.database.db}?retryWrites=true&w=majority`,
   {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
+    // useCreateIndex: true,
+    // useFindAndModify: false,
   }
 )
 .then(() => console.log("Connected to MongoDB remote..."))
-  .catch((err) => console.error(err, "Could not connect to MongoDB..."));
-
+.catch((err) => console.error(err, "Could not connect to MongoDB..."));
 cron.schedule("* * * * *", function () {
-
-
+// 
   const getData = async () => {
     let user = await User.find({});
     user = JSON.stringify(user);
@@ -125,7 +115,7 @@ cron.schedule("* * * * *", function () {
         },
       ],
     });
-
+console.log('3');
     console.log("Message sent: %s", info.messageId);
 
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
