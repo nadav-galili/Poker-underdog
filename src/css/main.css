@@ -970,7 +970,7 @@ tfoot td {
 }
 
 .statsHero {
-  height: 100px;
+  height: 150px;
   background-size: 100%;
 }
 
@@ -980,14 +980,16 @@ tfoot td {
 
 .heroImage img {
   object-fit: cover;
-  height: 100%;
+  height: 90%;
   margin-right: 2em;
+  margin-top: 10px;
 }
 
 .pos {
   color: #fcfcfc;
   margin-left: 0.5em;
-  font-size: 1em;
+  font-size: 1.5em;
+  font-weight: bolder;
 }
 
 #profit {
@@ -999,8 +1001,8 @@ tfoot td {
 
 #heroName {
   text-decoration: none;
-  font-size: 1em;
-  margin-left: 0.6em;
+  font-size: 1.8em;
+  margin-left: 0.5em;
   color: #fcfcfc;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   text-transform: capitalize;
@@ -1013,8 +1015,9 @@ tfoot td {
 }
 
 #amount {
-  margin-left: 0.7em;
-  font-size: 1em;
+  margin-left: 0.5em;
+  font-size: 1.7em;
+  font-weight: 900;
   color: #02d84d;
 }
 
@@ -1026,16 +1029,17 @@ tfoot td {
   background-color: #fcfcfc;
   display: flex;
   align-content: end;
-  height: 50px;
+  height: 70px;
   border-bottom: 0.7px solid;
 }
 
 .rowPos, .rowPosTop {
   font-weight: bold;
   padding-left: 5px;
-  font-size: 0.8em;
+  font-size: 1em;
   font-weight: bold;
   align-self: center;
+  width: 15%;
 }
 
 .rowPosTop {
@@ -1053,8 +1057,8 @@ tfoot td {
 .rowImage img, .rowImageTop img, .rowImageH2h img {
   border-radius: 50%;
   border: 1px solid black;
-  height: 40px;
-  width: 40px;
+  height: 60px;
+  width: 60px;
   object-fit: cover;
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
@@ -1064,7 +1068,7 @@ tfoot td {
 }
 
 .rowName, .rowNameTop, .rowNameH2h {
-  font-size: 0.8em;
+  font-size: 1.2em;
   font-weight: bold;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   padding-left: 2.5em;
@@ -1088,11 +1092,10 @@ tfoot td {
 
 .rowProfit, .rowProfitTop {
   width: 20%;
-  font-size: 0.7em;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   align-self: center;
   text-align: center;
-  font-size: 0.9em;
+  font-size: 1.2em;
   font-weight: bold;
 }
 
@@ -1153,6 +1156,10 @@ tfoot td {
 
 #h2hGdata :nth-child(6) {
   text-align: end;
+}
+
+* {
+  outline: 1px solid red;
 }
 
 .form-control {

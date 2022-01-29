@@ -6,6 +6,8 @@ import { SpinnerInfinity } from "spinners-react";
 import PageHeader from "../common/pageHeader";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut, Bar } from "react-chartjs-2";
+// import { Link } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const CardTable = (props) => {
   const [data, setData] = useState([]);
@@ -175,32 +177,36 @@ const CardTable = (props) => {
             >
               <div className="statsInfo flex-fill">
                 <div className="pos">1.</div>
-                <a href="#/" id="heroName">
+                <Link to={`/players-stats/${hero._id.player_id}`} id="heroName">
                   {data.length > 0 ? hero._id.name : ""}
-                </a>
+                </Link>
                 <div id="amount" className="flex-fill">
                   {data.length > 0 ? hero.cardTitle : ""}
                 </div>
               </div>
               <div className="heroImage">
-                <img
-                  src={data.length > 0 ? `${apiImage}${hero._id.image}` : ""}
-                  alt=""
-                />
+                <Link to={`/players-stats/${hero._id.player_id}`} id="heroName">
+                  <img
+                    src={data.length > 0 ? `${apiImage}${hero._id.image}` : ""}
+                    alt=""
+                  />
+                </Link>
               </div>
             </li>
             <React.Fragment>
               {data.map((player) => (
                 <li className="statsRow" key={player._id.name}>
                   <div className="rowPos">{rank++}.</div>
-                  <div className="rowImage">
-                    <img
-                      src={
-                        data.length > 0 ? `${apiImage}${player._id.image}` : ""
-                      }
-                      alt="player list row"
-                    />
-                  </div>
+                  <Link className="rowImage" to={`/players-stats/${player._id.player_id}`}>
+                      <img
+                        src={
+                          data.length > 0
+                            ? `${apiImage}${player._id.image}`
+                            : ""
+                        }
+                        alt="player list row"
+                      />
+                  </Link>
                   <div className="rowName">
                     {data.length > 0 ? player._id.name : ""}
                   </div>
