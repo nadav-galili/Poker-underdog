@@ -5,9 +5,10 @@
 # /config
 /backend/node_modules
 /backend/config.js
+
 /backup/node_modules
-/backup/config.js
 /backup/config
+/backup/config.js
 /backup/backup
 
 # /.pnp
