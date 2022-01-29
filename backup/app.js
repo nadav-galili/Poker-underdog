@@ -27,7 +27,7 @@ mongoose
 )
 .then(() => console.log("Connected to MongoDB remote..."))
 .catch((err) => console.error(err, "Could not connect to MongoDB..."));
-cron.schedule("* * * * *", function () {
+cron.schedule("00 08 * * *", function () {
 // 
   const getData = async () => {
     let user = await User.find({});
