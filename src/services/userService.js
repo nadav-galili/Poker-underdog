@@ -25,6 +25,11 @@ export function getUserDetails() {
   return http.get(`${apiUrl}/users/me`);
 }
 
+//get other player stats for players-stats component
+export function getPlayerDetails(uId) {
+  return http.get(`${apiUrl}/users/player-stats/${uId}`);
+}
+
 export function editUserDetails(user) {
   const uId = user._id;
   // delete user._id;
@@ -54,5 +59,6 @@ export default {
   getJwt,
   getUserDetails,
   editUserDetails,
-  editUserForUpdate
+  editUserForUpdate,
+  getPlayerDetails
 };

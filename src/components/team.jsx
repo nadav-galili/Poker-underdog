@@ -129,7 +129,7 @@ const Team = ({ team, removeTeam, teamId, user }) => {
             </Link>
             {captain[0]._id === user._id && (
               <Link
-                className="btn btn-secondary py-1 m-0 w-75 "
+                className="button-75 mt-2 "
                 to={`/edit-games/${team._id}`}
                 teamId={team._id}
               >
@@ -152,9 +152,9 @@ const Team = ({ team, removeTeam, teamId, user }) => {
                   id="playerAvatar"
                 >
                   <p id="playerPersonalInfo">{player.nickName}</p>
-                  {/* <Link  to={`my-stats/${player._id}`}> */}
+                  <Link  to={`players-stats/${player._id}`}>
                     <Avatar src={`${apiImage}${player.image}`} alt={player.name} />
-                    {/* </Link> */}
+                    </Link>
                 </li>
               ))}
             </ul>

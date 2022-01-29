@@ -32,6 +32,7 @@ import GameEnd from "./components/gameEnd";
 import H2hTable from "./components/h2h/h2hTable"
 import TeamSignUp from "./components/forms/teamSignUp";
 import EditGames from "./components/games/editGames";
+import PlayerStats from "./components/personalStats/playerStats";
 import ReactGA from "react-ga";
 
 
@@ -120,6 +121,7 @@ function App() {
             <ProtectedRoute path="/tables/byMonths/:currMonth/:teamId" component={CurrMonthCard} />
             <ProtectedRoute path="/tables/profits/top-ten/:teamId" component={ProfitsCard} />    
             <ProtectedRoute path="/tables/:cardName/:teamId" component={CardTable} /> 
+            <ProtectedRoute path="/players-stats/:id" component={PlayerStats}/>
             
 
 

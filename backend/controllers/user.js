@@ -6,6 +6,16 @@ const {Team}= require('../models/teams');
 const mongoose = require("mongoose");
 const { H2h } = require("../models/h2h");
 
+
+//get player details for player -stats
+exports.getPlayerDetails = async function (req, res) {
+  let user = await User.findById(req.params.uId)
+  .select("-createdAt")
+  .select("-__v");
+res.send(user);
+}
+
+
 exports.editUser=async function(req,res){
   const {file}=req;
 
