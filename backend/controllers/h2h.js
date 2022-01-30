@@ -152,7 +152,8 @@ exports.h2hGamesByTeam=async function(req, res){
       },
       {
         $sort: {
-            totalPoints: -1
+            // totalPoints: -1
+          avgPoints:-1
         }}
     ]
   )

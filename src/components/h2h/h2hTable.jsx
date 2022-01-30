@@ -46,7 +46,7 @@ const H2hTable = (props) => {
         />
       )}
       {data && (
-        <div className="col-lg-3 col-12" id="cardTop">
+        <div className="col-lg-4 col-12" id="cardTop">
           <ul className="statsList ">
             <li
               className="statsHero  d-flex w-100"
@@ -56,34 +56,43 @@ const H2hTable = (props) => {
                 })`,
               }}
             >
-                <div className="h2hInfo d-flex w-100 justify-content-between">
+              <div className="h2hInfo d-flex w-100 justify-content-between">
                 <div className="statsInfo ">
-                <div className="pos">1.</div>
-                <a href="#/" id="heroName">
-                  {hero ? hero._id.name : ""}
-                </a>
-                <div className="heroDate ps-1">
-                  Average Points:
-                 <span className="ms-2 avgP">{hero ? hero.avgPoints.toFixed(2) : ""}</span> 
+                  <div className="pos">1.</div>
+                  <a href="#/" id="heroName">
+                    {hero ? hero._id.name : ""}
+                  </a>
+                  <div className="heroDate ps-1">
+                    Average Points:
+                    <span className="ms-2 avgP">
+                      {hero ? hero.avgPoints.toFixed(2) : ""}
+                    </span>
+                  </div>
+                  <div id="amount" className="">
+                    Total Points:
+                    <span className="ms-2">
+                      {" "}
+                      {hero ? hero.totalPoints : ""}
+                    </span>
+                  </div>
                 </div>
-                <div id="amount" className="">
-                  Total Points:
-                  <span className="ms-2"> {hero ? hero.totalPoints : ""}</span>
+                <div className="heroImage ">
+                  <img
+                    src={hero ? `${apiImage}${hero._id.image}` : ""}
+                    alt="hero"
+                  />
                 </div>
               </div>
-              <div className="heroImage ">
-                <img src={hero ? `${apiImage}${hero._id.image}` : ""} alt="hero" />
-              </div>
-                </div>
             </li>
             <li id="h2hLi">
-                <div className="h2hDetailsRow  d-flex justify-content-between">
-                    <p>Rank</p>
-                    <p>Player</p>
-                    <p>Avg Points</p>
-                    <p>Games played</p>
-                    <p>Points</p>
-                </div>
+              <div className="h2hDetailsRow  d-flex ">
+                <p>Rank</p>
+                <p>Image</p>
+                <p>Player</p>
+                <p>Avg Points</p>
+                <p>Games played</p>
+                <p>Points</p>
+              </div>
             </li>
             <React.Fragment>
               {data.map((player) => (
@@ -95,25 +104,17 @@ const H2hTable = (props) => {
                       alt="player list row"
                     />
                   </div>
-                  <div className="rowNameH2h">
-                    { player._id.name }
-                  </div>
-                  <div className="rowH2hAvg">
-                    { player.avgPoints.toFixed(2)}
-                  </div>
-                  <div className="rowH2hG">
-                    { player.numOfGames}
-                  </div>
-                  <div className="rowProfitTop">
-                    { player.totalPoints}
-                  </div>
+                  <div className="rowNameH2h">{player._id.name}</div>
+                  <div className="rowH2hAvg">{player.avgPoints.toFixed(2)}</div>
+                  <div className="rowH2hG">{player.numOfGames}</div>
+                  <div className="rowProfitTop">{player.totalPoints}</div>
                 </li>
               ))}
             </React.Fragment>
           </ul>
         </div>
       )}
-      <H2hGameCard team={teamId}/>
+      <H2hGameCard team={teamId} />
     </div>
   );
 };

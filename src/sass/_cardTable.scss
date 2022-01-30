@@ -1,6 +1,5 @@
 .statsHero {
   height: 150px;
-  // width: 280px;
   background-size: 100%;
 }
 .statsList {
@@ -38,8 +37,8 @@
   text-transform: capitalize;
 }
 .heroDate {
-  font-size: 0.8em;
-  margin-left: 0.4em;
+  font-size: 1.2em;
+  margin-left: 0.5em;
   color: $navbarWhite;
 }
 
@@ -71,7 +70,9 @@
 }
 .rowPosTop {
   @extend .rowPos;
-  width: 10%;
+  width: 12%;
+  text-align: center;
+  padding-left: 0px;
 }
 
 .rowImage {
@@ -80,7 +81,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  // margin-left: 0.8em;
   img {
     border-radius: 50%;
     border: 1px solid black;
@@ -101,7 +101,6 @@
   font-family: $fantasyFont;
   padding-left: 2.5em;
   align-self: center;
-  // padding-top: 0.9em;
   text-transform: capitalize;
   flex-grow: 2;
 }
@@ -116,12 +115,11 @@
   align-self: center;
   font-size: 0.7em;
   font-family: $fantasyFont;
-  // padding-right: 5em;
-  // padding-top: 0.9em;
+
 }
 
 .rowProfit {
-  width: 20%;
+  width: 15%;
   font-family: $fantasyFont;
   align-self: center;
   text-align: center;
@@ -131,7 +129,6 @@
 
 .rowProfitTop {
   @extend .rowProfit;
-  // text-align: start;
   text-align: center;
 }
 
@@ -145,36 +142,52 @@
 .h2hDetailsRow {
   height: 3.5em;
   color: $navbarWhite;
-  font-size: 0.7em;
-  align-self: center;
+  font-size: 0.6em;
+  text-align: center;
+  align-items: center;
   & p {
     margin: 0;
-    width: 15%;
+    width: 10%;
+  }
+  & :nth-child(2) {
+    width: 17%;
   }
   & :nth-child(3) {
-    padding-left: 1.9em;
+    width: 30%;
+  }
+  & :nth-child(4) {
+    width: 20%;
+  }
+  & :nth-child(5) {
+    width: 20%;
+  }
+  & :nth-child(6) {
+    width: 10%;
   }
 }
 
 .rowImageH2h {
   @extend .rowImageTop;
-  width: 12%;
+  width: 17%;
 }
 
 .rowH2hAvg {
   @extend .rowDate;
+  font-size: 1.2em;
   text-align: center;
 }
 
 .rowH2hG {
   @extend .rowDate;
+  width:17%;
+  font-size: 1em;
   padding-left: 1em;
 }
 
 .rowNameH2h {
   @extend .rowNameTop;
-  width: 20%;
-  padding-left: 0.5em;
+  width: 33%;
+  padding-left: 0.3em;
 }
 
 #lGame {
@@ -191,6 +204,6 @@
   }
 }
 
-*{
-  outline: 1px solid red;
-}
+// *{
+//   outline: 1px solid red;
+// }
