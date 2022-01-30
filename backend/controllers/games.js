@@ -617,3 +617,100 @@ exports.personalGames=async function(req, res){
   res.send(details)
 }
 
+exports.statsPerHour= async function(req,res) {
+  const data = await Game.aggregate([
+    {$unwind: {
+      path: '$players',
+      preserveNullAndEmptyArrays: true
+     }}, {$match: {
+      team_id: req.params.teamId,
+     }}, {$project: {
+      players: 1,
+      createdAt: 1,
+      updatedAt: 1,
+      team_id: 1,
+      team_name: 1,
+      hoursPlayed: {
+       $round: [
+        {
+         $divide: [
+          {
+           $subtract: [
+            '$updatedAt',
+            '$createdAt'
+           ]
+          },
+          3600000
+         ]
+        },
+        2
+       ]
+      }
+     }}, {$group: {
+      _id: {
+       name: '$players.name',
+       image: '$players.image',
+       player_id: '$players.id',
+       team_id: '$team_id',
+       team_name: '$team_name'
+      },
+      totalProfit: {
+       $sum: '$players.profit'
+      },
+      totalCashing: {
+       $sum: '$players.cashing'
+      },
+      totalNumOfCashing: {
+       $sum: '$players.numOfCashing'
+      },
+      hoursPlayed: {
+       $sum: '$hoursPlayed'
+      }
+     }}, {$project: {
+      _id: 1,
+      totalProfit: 1,
+      totalCashing: 1,
+      totalNumOfCashing: 1,
+      hoursPlayed: {
+       $round: [
+        '$hoursPlayed',
+        2
+       ]
+      },
+      profitPerHour: {
+       $round: [
+        {
+         $divide: [
+          '$hoursPlayed',
+          '$totalProfit'
+         ]
+        },
+        2
+       ]
+      },
+      cashingPerHour: {
+       $round: [
+        {
+         $divide: [
+          '$hoursPlayed',
+          '$totalCashing'
+         ]
+        },
+        2
+       ]
+      },
+      nuOfCashingPerHour: {
+       $round: [
+        {
+         $divide: [
+          '$hoursPlayed',
+          '$totalNumOfCashing'
+         ]
+        },
+        2
+       ]
+      }
+     }}]
+  )
+  res.send(data)
+}

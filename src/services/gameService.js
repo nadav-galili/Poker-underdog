@@ -21,6 +21,9 @@ export function monthsData(teamId) {
   return http.get(`${apiUrl}/games/byMonths/${teamId}`);
 }
 
+export function statsPerHour(teamId) {
+  return http.get(`${apiUrl}/games/statsPerHour/${teamId}`);
+}
 export function successp(teamId) {
   return http.get(`${apiUrl}/games/success-p/${teamId}`);
 }
@@ -63,6 +66,8 @@ export function totalGames(teamId) {
   return http.get(`${apiUrl}/games/totalGames/${teamId}`);
 }
 
+
+
 export default {
   lastGame,
   table,
@@ -80,4 +85,5 @@ export default {
   allGamesByTeam,
   totalGames,
   agg_profits,
+  statsPerHour,
 };

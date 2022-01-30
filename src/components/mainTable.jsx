@@ -28,7 +28,7 @@ export default function MainTable(props) {
   const [teamImage, setTeamImage] = useState("");
   const [totalCash, setTotalCash] = useState({});
   const [totalGames, setTotalGames] = useState("");
-
+  const [statsPerHour, setstatsPerHour] = useState([]);
   const teamId = props.match.params.teamId;
 
   //fetch data from DB
@@ -39,7 +39,7 @@ export default function MainTable(props) {
       table = table.data;
 
       table.sort((a, b) => b.totalProfit - a.totalProfit);
-       setData(table)
+      setData(table);
 
       let teamPic = await teamService.getTeam(teamId);
       setTeamImage(teamPic.data);
@@ -79,7 +79,6 @@ export default function MainTable(props) {
     getTable();
     return () => {
       isCancelled = true;
-  
     };
   }, [teamId]);
 
@@ -110,6 +109,14 @@ export default function MainTable(props) {
     };
     profits();
   }, [props.match.params.teamId]);
+
+  useEffect(() => {
+    const statsPerHour = async () => {
+      const dataPerHour = await gameService.statsPerHour(props.match.params.teamId);
+      setstatsPerHour(dataPerHour.data)
+    };
+    statsPerHour();
+  },[props.match.params.teamId])
 
   return (
     <div className="container" id="dashboard">
@@ -153,7 +160,7 @@ export default function MainTable(props) {
               Total Hours Played:
               <strong>
                 <span className="ps-1">
-                  {totalCash[0] ? totalCash[0].totalHours.toFixed(2): null}
+                  {totalCash[0] ? totalCash[0].totalHours.toFixed(2) : null}
                   <i className="fas fa-hourglass-half ps-1 "></i>
                 </span>
               </strong>

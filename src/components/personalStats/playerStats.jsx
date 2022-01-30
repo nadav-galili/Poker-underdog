@@ -164,7 +164,7 @@ const PlayerStats = (props) => {
               {new Date().toLocaleDateString("en-GB")}
             </span>
             <div
-              className="playerBg d-flex justify-content-around bg-white"
+              className="playerBg d-flex justify-content-around"
               style={{
                 backgroundImage: `url(${
                   process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
@@ -175,7 +175,7 @@ const PlayerStats = (props) => {
                 <p >
                   {me.firstName} {me.lastName}
                 </p>
-                <p className="text-primary">{me.nickName}</p>
+                <p className="text-white">{me.nickName}</p>
               </div>
               <div className="pImage">
                 <img src={`${apiImage}${me.image}`} alt="" />
