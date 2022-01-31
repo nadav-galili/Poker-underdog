@@ -5,24 +5,25 @@ const { Game, validate } = require("../models/games");
 const { Team } = require("../models/teams");
 const mongoose = require("mongoose");
 
-
-exports.totalGames=async function(req, res){
-  let tGames= await Game.aggregate([
+exports.totalGames = async function (req, res) {
+  let tGames = await Game.aggregate([
     {
       $match: {
-        team_id: req.params.teamId
-      }
-    }, {
-      $count: 'TotalGames'
-    }
-  ])
-  res.send(tGames)
-}
-exports.byTeamId=async function(req, res){
-  let games=await Game.find({team_id:req.params.teamId}).sort({createdAt:-1});
-  res.send(games)
-
-}
+        team_id: req.params.teamId,
+      },
+    },
+    {
+      $count: "TotalGames",
+    },
+  ]);
+  res.send(tGames);
+};
+exports.byTeamId = async function (req, res) {
+  let games = await Game.find({ team_id: req.params.teamId }).sort({
+    createdAt: -1,
+  });
+  res.send(games);
+};
 
 exports.teamStats = async function (req, res) {
   const team = await Team.find({ _id: req.params.teamId });
@@ -294,35 +295,39 @@ exports.dataByMonths = async function (req, res) {
   res.send(byMonths);
 };
 
-exports.agg_profits=async function(req,res){
-  const agg=await Game.aggregate([
+exports.agg_profits = async function (req, res) {
+  const agg = await Game.aggregate([
     {
       $unwind: {
-        path: "$players"
-      }
-    }, {
+        path: "$players",
+      },
+    },
+    {
       $match: {
         team_id: req.params.teamId,
-      }
-    }, {
+      },
+    },
+    {
       $sort: {
-        "players.profit": -1
-      }
-    }, {
-      $limit: 10
-    }, {
+        "players.profit": -1,
+      },
+    },
+    {
+      $limit: 10,
+    },
+    {
       $group: {
         _id: {
-          name: "$players.name"
-        }, 
+          name: "$players.name",
+        },
         totalProfit: {
-          $sum: "$players.profit"
-        }
-      }
-    }
-  ])
-  res.send(agg)
-}
+          $sum: "$players.profit",
+        },
+      },
+    },
+  ]);
+  res.send(agg);
+};
 
 exports.personalStats = async function (req, res) {
   const agg = await Game.aggregate([
@@ -440,19 +445,18 @@ exports.updateGame = async function (req, res) {
   if (error) res.status(400).send(error.details[0].message);
 
   let game = await Game.findOneAndUpdate(
-    {_id:req.body.gameId},
+    { _id: req.body.gameId },
     { players: req.body.players, isOpen: req.body.isOpen },
     { new: true }
   );
 
-   res.send(game);
+  res.send(game);
 };
 exports.gamesByCardName = async function (req, res) {
-
   let cardTitle = req.params.cardName;
   cardTitle = "$" + cardTitle;
   let sortOrder;
-  cardTitle === '$avgCashing' ? sortOrder = 1 : sortOrder = -1;
+  cardTitle === "$avgCashing" ? (sortOrder = 1) : (sortOrder = -1);
   const table = await Game.aggregate([
     {
       $unwind: {
@@ -537,7 +541,7 @@ exports.gamesByCardName = async function (req, res) {
 
     {
       $sort: {
-        cardTitle:sortOrder,
+        cardTitle: sortOrder,
       },
     },
   ]);
@@ -568,12 +572,12 @@ exports.totalCash = async function (req, res) {
             {
               $subtract: ["$updatedAt", "$createdAt"],
             },
-            3600000*6,
-          ]
+            3600000 * 6,
+          ],
         },
-        totalCashing:{
-          $sum:'$players.cashing'
-        }
+        totalCashing: {
+          $sum: "$players.cashing",
+        },
       },
     },
 
@@ -581,49 +585,45 @@ exports.totalCash = async function (req, res) {
       $group: {
         _id: null,
         totalHours: {
-          $sum: '$totalHours'
-        }, 
+          $sum: "$totalHours",
+        },
         totalCashing: {
-          $sum: '$totalCashing'
-        }
+          $sum: "$totalCashing",
+        },
       },
     },
   ]);
   res.send(total);
 };
 
-exports.personalGames=async function(req, res){
-  const details=await Game.aggregate(
-    [
-      {
-        $unwind: {
-          path: "$players",
-        },
+exports.personalGames = async function (req, res) {
+  const details = await Game.aggregate([
+    {
+      $unwind: {
+        path: "$players",
       },
-      {
-        $match: {
-          "players.id": req.params.uId,
-        },
+    },
+    {
+      $match: {
+        "players.id": req.params.uId,
       },
-      {
-        
-          $sort: {
-            'createdAt': 1
-          }
-     
+    },
+    {
+      $sort: {
+        createdAt: 1,
       },
-    ]
-  );
-  res.send(details)
-}
+    },
+  ]);
+  res.send(details);
+};
 
-exports.statsPerHour= async function(req,res) {
-  const data = await Game.aggregate([
-    {$unwind: {
+exports.statsPerHour = async function (req, res) {
+  const data = await Game.aggregate(
+    [{$unwind: {
       path: '$players',
       preserveNullAndEmptyArrays: true
      }}, {$match: {
-      team_id: req.params.teamId,
+      team_id: '61ebec6f9e2f424aec28ec3a'
      }}, {$project: {
       players: 1,
       createdAt: 1,
@@ -681,8 +681,8 @@ exports.statsPerHour= async function(req,res) {
        $round: [
         {
          $divide: [
-          '$hoursPlayed',
-          '$totalProfit'
+          '$totalProfit',
+          '$hoursPlayed'
          ]
         },
         2
@@ -692,8 +692,8 @@ exports.statsPerHour= async function(req,res) {
        $round: [
         {
          $divide: [
-          '$hoursPlayed',
-          '$totalCashing'
+          '$totalCashing',
+          '$hoursPlayed'
          ]
         },
         2
@@ -703,14 +703,17 @@ exports.statsPerHour= async function(req,res) {
        $round: [
         {
          $divide: [
-          '$hoursPlayed',
-          '$totalNumOfCashing'
+          '$totalNumOfCashing',
+          '$hoursPlayed'
          ]
         },
         2
        ]
       }
+     }}, {$sort: {
+      profitPerHour: -1
      }}]
-  )
-  res.send(data)
-}
+  );
+
+  res.send(data);
+};

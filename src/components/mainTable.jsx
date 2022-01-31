@@ -236,6 +236,16 @@ export default function MainTable(props) {
                 team={teamId}
               />
             )}
+            {statsPerHour.length > 1 && (
+              <PlayerCard
+                header="Profit Per Hour"
+                data={statsPerHour[0].profitPerHour}
+                name={statsPerHour[0]._id.name}
+                image={statsPerHour[0]._id.image}
+                cardName="profitsPerHour"
+                team={teamId}
+              />
+            )}
             <Profits
               header="Top 10 Profits"
               name={profits.length > 0 ? profits[0].players.name : ""}
