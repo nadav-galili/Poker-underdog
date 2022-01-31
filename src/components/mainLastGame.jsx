@@ -64,7 +64,8 @@ const MainLastgame = ({ teamId }) => {
                     hour12: false,
                   })}
               </p>
-              <div className="stats d-flex justify-content-between" id="lGame">
+              <div className="stats d-flex  w-100" id="lGameMain">
+                <p>Rank</p>
                 <p>Player</p>
                 <p>Name</p>
                 <p>Cashing</p>
@@ -75,13 +76,13 @@ const MainLastgame = ({ teamId }) => {
               {data.map((player) => (
                 <li className="statsRow" key={player.id}>
                   <div className="rowPos">{Rank++}</div>
-                  <div className="rowImage">
+                  <div className="rowImagePerHour">
                     <img
                       src={data.length > 0 ? `${apiImage}${player.image}` : ""}
                       alt="player list row"
                     />
                   </div>
-                  <div className="rowName" id="lGameName">
+                  <div id="lGamePlayer">
                     {data.length > 1 ? player.name : ""}
                   </div>
                   <div className="rowCashing">

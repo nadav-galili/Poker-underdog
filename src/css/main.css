@@ -983,7 +983,7 @@ tfoot td {
   padding: 0;
 }
 
-.heroImage img {
+.heroImage img, .heroImagePerHour img {
   object-fit: cover;
   height: 90%;
   margin-right: 2em;
@@ -1177,6 +1177,31 @@ tfoot td {
   justify-content: start;
 }
 
+#lGameMain p {
+  font-size: 0.9em;
+  text-align: center;
+}
+
+#lGameMain :nth-child(1) {
+  width: 15%;
+}
+
+#lGameMain :nth-child(2) {
+  width: 18%;
+}
+
+#lGameMain :nth-child(3) {
+  width: 30%;
+}
+
+#lGameMain :nth-child(4) {
+  width: 22%;
+}
+
+#lGameMain :nth-child(5) {
+  width: 17%;
+}
+
 #h2hGdata :nth-child(2) {
   text-align: start;
 }
@@ -1240,6 +1265,10 @@ tfoot td {
 .heroPerHour {
   color: gold;
   font-size: 0.5em;
+}
+
+.heroImagePerHour {
+  height: 80%;
 }
 
 .form-control {
@@ -1369,6 +1398,18 @@ label {
   .rowPlayer img {
     width: 50%;
   }
+}
+
+#lGamePlayer {
+  text-align: center;
+  align-self: center;
+  font-size: 1em;
+  font-weight: bolder;
+  width: 30%;
+}
+
+* {
+  outline: 1px solid red;
 }
 
 #lGameName {

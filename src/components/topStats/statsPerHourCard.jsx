@@ -186,7 +186,7 @@ const StatsPerHourCard = (props) => {
                  <p className="heroPerHour m-0"> {statsHour.length > 0 ? hero.cashingPerHour : ""}</p>
                 </div>
               </div>
-              <div className="heroImage">
+              <div className="heroImagePerHour">
                 <Link to={`/players-stats/${hero._id.player_id}`} id="heroName">
                   <img
                     src={
@@ -234,12 +234,7 @@ const StatsPerHourCard = (props) => {
                   {statsHour.length > 0 ? player.profitPerHour : ""}
                 </div>
                 <div
-                  className={
-                    player.profitPerHour > 0
-                      ? "rowProfitPerHour text-success"
-                      : "rowProfitPerHour text-danger"
-                  }
-                >
+                  className="rowProfitPerHour">
                   {statsHour.length > 0 ? player.cashingPerHour : ""}
                 </div>
               </li>
