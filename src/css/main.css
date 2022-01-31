@@ -1181,6 +1181,10 @@ tfoot td {
   text-align: end;
 }
 
+* {
+  outline: 1px solid red;
+}
+
 .form-control {
   border: none !important;
   padding: 0 !important;

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { apiImage } from "../../config.json";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 
-const Profits = ({ header, data, name, image, team, table }) => {
+const Profits = ({ header, data, name, image, team, table,path }) => {
   return (
     <div className="cardDiv">
       <div className="card" id="mainStats"
@@ -39,7 +39,7 @@ const Profits = ({ header, data, name, image, team, table }) => {
       <Link
      className="text-white btn btn-primary"
      id="cardFooter"
-        to={`/tables/profits/top-ten/${team}`}
+        to={path}
       >
         See full table
         <GiCardAceHearts />

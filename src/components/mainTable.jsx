@@ -242,7 +242,7 @@ export default function MainTable(props) {
             )}
             {statsPerHour.length > 1 && (
               <StatsPerHour
-                header="Stats Per Hour"
+                header="Profit Per Hour"
                 name={statsPerHour.length > 0 ? statsPerHour[0]._id.name : ""}
                 image={statsPerHour.length > 0 ? statsPerHour[0]._id.image : ""}
                 data={
@@ -251,6 +251,7 @@ export default function MainTable(props) {
                     : ""
                 }
                 team={teamId}
+                path={ `/stats-per-hour/${props.match.params.teamId}`}
               />
             )}
             <Profits
