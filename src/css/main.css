@@ -1034,7 +1034,7 @@ tfoot td {
   border-bottom: 0.7px solid;
 }
 
-.rowPos, .rowPosTop {
+.rowPos, .rowPosTop, .rowPosPerHour {
   font-weight: bold;
   padding-left: 5px;
   font-size: 1em;
@@ -1049,7 +1049,7 @@ tfoot td {
   padding-left: 0px;
 }
 
-.rowImage, .rowImageTop, .rowImageH2h {
+.rowImage, .rowImageTop, .rowImageH2h, .rowImagePerHour {
   align-self: center;
   width: 20%;
   display: flex;
@@ -1057,7 +1057,7 @@ tfoot td {
   align-items: center;
 }
 
-.rowImage img, .rowImageTop img, .rowImageH2h img {
+.rowImage img, .rowImageTop img, .rowImageH2h img, .rowImagePerHour img {
   border-radius: 50%;
   border: 1px solid black;
   height: 60px;
@@ -1070,7 +1070,7 @@ tfoot td {
   width: 20%;
 }
 
-.rowName, .rowNameTop, .rowNameH2h {
+.rowName, .rowNameTop, .rowNameH2h, .rowNamePerHour {
   font-size: 1.2em;
   font-weight: bold;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
@@ -1093,7 +1093,7 @@ tfoot td {
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
 
-.rowProfit, .rowProfitTop {
+.rowProfit, .rowProfitTop, .rowProfitPerHour {
   width: 15%;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   align-self: center;
@@ -1181,8 +1181,56 @@ tfoot td {
   text-align: end;
 }
 
-* {
-  outline: 1px solid red;
+.rowPosPerHour {
+  width: 10%;
+}
+
+.rowImagePerHour {
+  width: 17%;
+}
+
+.rowNamePerHour {
+  padding-left: 0.2em;
+  width: 12%;
+  font-size: 1.1em;
+}
+
+.statsHeaderPerHour {
+  background-color: #0fe4a4;
+  list-style: none;
+  height: 3.5em;
+}
+
+.statsHeaderPerHour div {
+  text-align: center;
+  font-size: 0.8em;
+  align-self: center;
+  font-weight: bolder;
+  border-right: 1px solid black;
+}
+
+.statsHeaderPerHour :nth-child(1) {
+  width: 10%;
+}
+
+.statsHeaderPerHour :nth-child(2) {
+  width: 17%;
+}
+
+.statsHeaderPerHour :nth-child(3) {
+  width: 29%;
+}
+
+.statsHeaderPerHour :nth-child(4) {
+  width: 22%;
+}
+
+.statsHeaderPerHour :nth-child(5) {
+  width: 22%;
+}
+
+.rowProfitPerHour {
+  width: 22%;
 }
 
 .form-control {

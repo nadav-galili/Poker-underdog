@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import gameService from "../../services/gameService";
+import gameService, { statsPerHour } from "../../services/gameService";
 import teamService from "../../services/teamService";
 import { apiImage } from "../../config.json";
 import { SpinnerInfinity } from "spinners-react";
@@ -26,7 +26,7 @@ const StatsPerHourCard = (props) => {
       setStatsHour(table);
       let myHero = table.shift();
       setHero(myHero);
-      console.log('s',hero);
+      console.log("s", hero);
 
       let teamPic = await teamService.getTeam(teamId);
       setTeamImg(teamPic.data);
@@ -143,7 +143,7 @@ const StatsPerHourCard = (props) => {
   // ChartJS.register(ArcElement, Tooltip, Legend);
 
   return (
-    <div className="container pb-4">
+    <div className="container pb-2">
       <PageHeader titleText="Stats Per Hour" />
       <div className="teamImg d-flex flex-row mb-2">
         <img src={`${apiImage}${teamImg.teamImage}`} alt="team" />
@@ -161,7 +161,7 @@ const StatsPerHourCard = (props) => {
           />
         </div>
       )}
-      {statsHour.length > 0 && (
+      {statsHour.length > 0 && hero._id && (
         <div className="col-lg-4 col-12" id="cardTop">
           <ol className="statsList">
             <li
@@ -178,72 +178,71 @@ const StatsPerHourCard = (props) => {
                   {statsHour.length > 0 ? hero._id.name : ""}
                 </Link>
                 <div id="amount" className="flex-fill">
-                 {statsHour.length > 0 ? hero.profitPerHour : ""}
-             </div>
+                  {statsHour.length > 0 ? hero.profitPerHour : ""}
+                </div>
               </div>
               <div className="heroImage">
                 <Link to={`/players-stats/${hero._id.player_id}`} id="heroName">
                   <img
-                    src={statsHour.length > 0 ? `${apiImage}${hero._id.image}` : ""}
-                   alt=""
-                 />
-              </Link>
-           </div>
+                    src={
+                      statsHour.length > 0 ? `${apiImage}${hero._id.image}` : ""
+                    }
+                    alt=""
+                  />
+                </Link>
+              </div>
             </li>
+
+            <li className="statsHeaderPerHour d-flex w-100 justify-content-between">
+              <div>Rank</div>
+              <div>Image</div>
+              <div>Player</div>
+              <div>Profit Per Hour</div>
+              <div>Cashing Per Hour</div>
+            </li>
+            {statsHour.map((player) => (
+              <li className="statsRow">
+                <div className="rowPosPerHour">{rank++}.</div>
+                <Link
+                  className="rowImagePerHour"
+                  to={`/players-stats/${player._id.player_id}`}
+                >
+                  <img
+                    src={
+                      statsHour.length > 0
+                        ? `${apiImage}${player._id.image}`
+                        : ""
+                    }
+                    alt=""
+                  />
+                </Link>
+                <div className="rowNamePerHour">
+                  {statsHour.length > 0 ? player._id.name : ""}
+                </div>
+                <div
+                  className={
+                    player.profitPerHour > 0
+                      ? "rowProfitPerHour text-success"
+                      : "rowProfitPerHour text-danger"
+                  }
+                >
+                  {statsHour.length > 0 ? player.profitPerHour : ""}
+                </div>
+                <div
+                  className={
+                    player.profitPerHour > 0
+                      ? "rowProfitPerHour text-success"
+                      : "rowProfitPerHour text-danger"
+                  }
+                >
+                  {statsHour.length > 0 ? player.cashingPerHour : ""}
+                </div>
+              </li>
+            ))}
           </ol>
         </div>
       )}
     </div>
-
-    //         <React.Fragment>
-    //           {statsHour.map((player) => (
-    //             <li className="statsRow" >
-    //               <div className="rowPos"></div>
-    //               <Link className="rowImage" to={`/players-stats/${player._id.player_id}`}>
-    //                 <img src={statsHour.length>0?`${apiImage}${player._id.image}`:''} alt="" />
-    //               </Link>
-    //             </li>
-    //             // <li className="statsRow" key={player._id.name}>
-    //             //   <div className="rowPos">{rank++}.</div>
-    //             //   <Link className="rowImage" to={`/players-stats/${player._id.player_id}`}>
-    //             //       <img
-    //             //         src={
-    //             //           data.length > 0
-    //             //             ? `${apiImage}${player._id.image}`
-    //             //             : ""
-    //             //         }
-    //             //         alt="player list row"
-    //             //       />
-    //             //   </Link>
-    //             //   <div className="rowName">
-    //             //     {data.length > 0 ? player._id.name : ""}
-    //             //   </div>
-    //             //   <div
-    //             //     className={
-    //             //       player.cardTitle > 0
-    //             //         ? "rowProfit text-success"
-    //             //         : "rowProfit text-danger"
-    //             //     }
-    //             //   >
-    //             //     {data.length > 0 ? player.cardTitle : ""}
-    //             //   </div>
-    //             // </li>
-    //           ))}
-    //         </React.Fragment>
-    //       </ol>
-    //        {/* {headerTitle !== "Average Profit" && headerTitle !== "Total Profit" && (
-    //         <React.Fragment>
-    //           <h4 className="text-white justify-content-center d-flex">
-    //             {headerTitle} In %
-    //           </h4>
-    //           {/* <Doughnut data={dataChartDetails} className="mb-3 pb-3" /> */}
-    //         </React.Fragment>
-    //   )}  */}
-
-    //       {/* <Bar data={barChartDetails} className="mb-3" /> */}
-    //     </div>
-    //   )}
-    // </div>
   );
 };
 
