@@ -13,6 +13,7 @@ import h2hService from "../services/h2hService";
 import H2hCard from "./h2h/h2hCard";
 import AllGames from "./games/allGames";
 import { IoIosTrophy } from "react-icons/io";
+import StatsPerHour from "./topStats/statsPerHour";
 
 export default function MainTable(props) {
   //get the data for the table
@@ -112,11 +113,14 @@ export default function MainTable(props) {
 
   useEffect(() => {
     const statsPerHour = async () => {
-      const dataPerHour = await gameService.statsPerHour(props.match.params.teamId);
-      setstatsPerHour(dataPerHour.data)
+      const dataPerHour = await gameService.statsPerHour(
+        props.match.params.teamId
+      );
+      setstatsPerHour(dataPerHour.data);
+      console.log("sdsd", dataPerHour.data);
     };
     statsPerHour();
-  },[props.match.params.teamId])
+  }, [props.match.params.teamId]);
 
   return (
     <div className="container" id="dashboard">
@@ -237,12 +241,15 @@ export default function MainTable(props) {
               />
             )}
             {statsPerHour.length > 1 && (
-              <PlayerCard
-                header="Profit Per Hour"
-                data={statsPerHour[0].profitPerHour}
-                name={statsPerHour[0]._id.name}
-                image={statsPerHour[0]._id.image}
-                cardName="profitsPerHour"
+              <StatsPerHour
+                header="Stats Per Hour"
+                name={statsPerHour.length > 0 ? statsPerHour[0]._id.name : ""}
+                image={statsPerHour.length > 0 ? statsPerHour[0]._id.image : ""}
+                data={
+                  statsPerHour.length > 0
+                    ? statsPerHour[0].profitPerHour
+                    : ""
+                }
                 team={teamId}
               />
             )}

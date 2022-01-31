@@ -33,6 +33,7 @@ import H2hTable from "./components/h2h/h2hTable"
 import TeamSignUp from "./components/forms/teamSignUp";
 import EditGames from "./components/games/editGames";
 import PlayerStats from "./components/personalStats/playerStats";
+import StatsPerHour from "./components/topStats/statsPerHour";
 import ReactGA from "react-ga";
 
 
@@ -122,7 +123,7 @@ function App() {
             <ProtectedRoute path="/tables/profits/top-ten/:teamId" component={ProfitsCard} />    
             <ProtectedRoute path="/tables/:cardName/:teamId" component={CardTable} /> 
             <ProtectedRoute path="/players-stats/:id" component={PlayerStats}/>
-            
+            <ProtectedRoute path = "/tables/statsperhour/:teamName/:teamId" component={StatsPerHour}/>
 
 
             <Route path="/demo" component={Demo} />
