@@ -165,7 +165,7 @@ const StatsPerHourCard = (props) => {
         <div className="col-lg-4 col-12" id="cardTop">
           <ol className="statsList">
             <li
-              className="statsHero d-flex w-100"
+              className="statsHeroPerHour d-flex w-100"
               style={{
                 backgroundImage: `url(${
                   process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
@@ -178,7 +178,12 @@ const StatsPerHourCard = (props) => {
                   {statsHour.length > 0 ? hero._id.name : ""}
                 </Link>
                 <div id="amount" className="flex-fill">
-                  {statsHour.length > 0 ? hero.profitPerHour : ""}
+                  <p className="heroPerHour m-0">Profit Per Hour:</p>
+                 <p className="heroPerHour m-0"> {statsHour.length > 0 ? hero.profitPerHour : ""}</p>
+                </div>
+                <div id="amount" className="flex-fill">
+                  <p className="heroPerHour m-0">Cashing Per Hour:</p>
+                 <p className="heroPerHour m-0"> {statsHour.length > 0 ? hero.cashingPerHour : ""}</p>
                 </div>
               </div>
               <div className="heroImage">

@@ -970,9 +970,13 @@ tfoot td {
   }
 }
 
-.statsHero {
+.statsHero, .statsHeroPerHour {
   height: 150px;
   background-size: 100%;
+}
+
+.statsHeroPerHour {
+  height: 180px;
 }
 
 .statsList {
@@ -1231,6 +1235,11 @@ tfoot td {
 
 .rowProfitPerHour {
   width: 22%;
+}
+
+.heroPerHour {
+  color: gold;
+  font-size: 0.5em;
 }
 
 .form-control {
