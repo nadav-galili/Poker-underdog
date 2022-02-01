@@ -627,7 +627,7 @@ exports.statsPerHour = async function (req, res) {
     },
     {
       $match: {
-        team_id: "61ebec6f9e2f424aec28ec3a",
+        team_id: req.params.id,
       },
     },
     {
