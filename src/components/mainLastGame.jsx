@@ -85,7 +85,7 @@ const MainLastgame = ({ teamId }) => {
                   <div id="lGamePlayer">
                     {data.length > 1 ? player.name : ""}
                   </div>
-                  <div className="rowCashing">
+                  <div className="rowCashingLastGame">
                     {data.length > 1 ? player.cashing : ""}
                   </div>
                   <div

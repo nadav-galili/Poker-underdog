@@ -1030,12 +1030,41 @@ tfoot td {
   background-color: #6c14b4;
 }
 
-.statsRow {
+.statsRow, .statsRowAllGames {
   background-color: #fcfcfc;
   display: flex;
   align-content: end;
   height: 70px;
   border-bottom: 0.7px solid;
+}
+
+.statsRowAllGames :nth-child(1) {
+  width: 14%;
+}
+
+.statsRowAllGames :nth-child(2) {
+  width: 20%;
+}
+
+.statsRowAllGames :nth-child(2) img {
+  width: 90%;
+}
+
+.statsRowAllGames :nth-child(3) {
+  width: 20%;
+  font-size: 1em;
+}
+
+.statsRowAllGames :nth-child(4) {
+  width: 10%;
+  text-align: center;
+  align-self: center;
+  font-size: 1em;
+  padding-top: 0;
+}
+
+.statsRowAllGames :nth-child(5) {
+  width: 19%;
 }
 
 .rowPos, .rowPosTop, .rowPosPerHour {
@@ -1378,6 +1407,32 @@ label {
   margin-bottom: 0;
 }
 
+#lGameAllGames {
+  font-size: 0.8em;
+  text-align: center;
+  text-decoration: underline;
+}
+
+#lGameAllGames :nth-child(1) {
+  width: 14%;
+}
+
+#lGameAllGames :nth-child(2) {
+  width: 20%;
+}
+
+#lGameAllGames :nth-child(3) {
+  width: 29%;
+}
+
+#lGameAllGames :nth-child(4) {
+  width: 19%;
+}
+
+#lGameAllGames :nth-child(5) {
+  width: 19%;
+}
+
 .gameH2h {
   align-items: center;
   color: #fcfcfc;
@@ -1401,11 +1456,18 @@ label {
 }
 
 #lGamePlayer {
-  text-align: center;
+  padding-left: 0.5em;
   align-self: center;
   font-size: 1em;
   font-weight: bolder;
   width: 30%;
+}
+
+.rowCashingLastGame {
+  width: 21%;
+  align-self: center;
+  text-align: center;
+  font-size: 1.1em;
 }
 
 * {

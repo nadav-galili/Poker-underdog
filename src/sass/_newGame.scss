@@ -74,6 +74,28 @@
   & p {
     margin-bottom: 0;
   }
+  
+}
+
+#lGameAllGames{
+  font-size: 0.8em;
+  text-align: center;
+  text-decoration: underline;
+  & :nth-child(1){
+    width: 14%;
+  }
+  & :nth-child(2){
+    width: 20%;
+  }
+  & :nth-child(3){
+    width: 29%;
+  }
+  & :nth-child(4){
+    width: 19%;
+  }
+  & :nth-child(5){
+    width: 19%;
+  }
 }
 
 .gameH2h {
@@ -96,13 +118,20 @@
 }
 
 #lGamePlayer{
-  // padding: 0!important;
-  // margin: 0;
-  text-align: center;
+  padding-left: 0.5em;
   align-self: center;
   font-size: 1em;
   font-weight: bolder;
   width:30% ;
+}
+.rowCashingLastGame{
+  width: 21%;
+  align-self: center;
+  text-align: center;
+  font-size: 1.1em;
+  // padding-left: 0.5em;
+
+
 }
 *{
   outline: 1px solid red;
