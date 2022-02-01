@@ -13,6 +13,7 @@ import h2hService from "../services/h2hService";
 import H2hCard from "./h2h/h2hCard";
 import AllGames from "./games/allGames";
 import { IoIosTrophy } from "react-icons/io";
+import StatsPerHour from "./topStats/statsPerHour";
 
 export default function MainTable(props) {
   //get the data for the table
@@ -28,7 +29,7 @@ export default function MainTable(props) {
   const [teamImage, setTeamImage] = useState("");
   const [totalCash, setTotalCash] = useState({});
   const [totalGames, setTotalGames] = useState("");
-
+  const [statsPerHour, setstatsPerHour] = useState([]);
   const teamId = props.match.params.teamId;
 
   //fetch data from DB
@@ -39,7 +40,7 @@ export default function MainTable(props) {
       table = table.data;
 
       table.sort((a, b) => b.totalProfit - a.totalProfit);
-       setData(table)
+      setData(table);
 
       let teamPic = await teamService.getTeam(teamId);
       setTeamImage(teamPic.data);
@@ -79,7 +80,6 @@ export default function MainTable(props) {
     getTable();
     return () => {
       isCancelled = true;
-  
     };
   }, [teamId]);
 
@@ -109,6 +109,17 @@ export default function MainTable(props) {
       setProfits(results);
     };
     profits();
+  }, [props.match.params.teamId]);
+
+  useEffect(() => {
+    const statsPerHour = async () => {
+      const dataPerHour = await gameService.statsPerHour(
+        props.match.params.teamId
+      );
+      setstatsPerHour(dataPerHour.data);
+      console.log("sdsd", dataPerHour.data);
+    };
+    statsPerHour();
   }, [props.match.params.teamId]);
 
   return (
@@ -153,7 +164,7 @@ export default function MainTable(props) {
               Total Hours Played:
               <strong>
                 <span className="ps-1">
-                  {totalCash[0] ? totalCash[0].totalHours.toFixed(2): null}
+                  {totalCash[0] ? totalCash[0].totalHours.toFixed(2) : null}
                   <i className="fas fa-hourglass-half ps-1 "></i>
                 </span>
               </strong>
@@ -227,6 +238,20 @@ export default function MainTable(props) {
                 image={avgcashing[0]._id.image}
                 cardName="avgCashing"
                 team={teamId}
+              />
+            )}
+            {statsPerHour.length > 1 && (
+              <StatsPerHour
+                header="Profit Per Hour"
+                name={statsPerHour.length > 0 ? statsPerHour[0]._id.name : ""}
+                image={statsPerHour.length > 0 ? statsPerHour[0]._id.image : ""}
+                data={
+                  statsPerHour.length > 0
+                    ? statsPerHour[0].profitPerHour
+                    : ""
+                }
+                team={teamId}
+                path={ `/stats-per-hour/${props.match.params.teamId}`}
               />
             )}
             <Profits

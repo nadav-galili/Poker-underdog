@@ -463,6 +463,47 @@ span {
   transform: scale(1.05);
 }
 
+/* CSS */
+.button-75 {
+  background-color: #6d7a8d;
+  border: 0;
+  border-radius: 56px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  outline: 0;
+  padding: 5px 5px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-75:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50%;
+  left: 4%;
+  opacity: .5;
+  position: absolute;
+  top: 0;
+  transition: all .3s;
+  width: 92%;
+}
+
+.button-75:hover {
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset, rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
+  transform: scale(1.05);
+}
+
 @media (min-width: 768px) {
   .button-72 {
     padding: 5px 12px;
@@ -721,8 +762,9 @@ h4.mt-4 {
 }
 
 .playerBg {
+  background-color: gold;
   border-radius: 10px;
-  background-size: 100%;
+  background-size: 170%;
   border: 1px solid;
   padding: 10px;
   box-shadow: 5px 5px #888888;
@@ -928,25 +970,31 @@ tfoot td {
   }
 }
 
-.statsHero {
-  height: 100px;
+.statsHero, .statsHeroPerHour {
+  height: 150px;
   background-size: 100%;
+}
+
+.statsHeroPerHour {
+  height: 215px;
 }
 
 .statsList {
   padding: 0;
 }
 
-.heroImage img {
+.heroImage img, .heroImagePerHour img {
   object-fit: cover;
-  height: 100%;
+  height: 90%;
   margin-right: 2em;
+  margin-top: 10px;
 }
 
 .pos {
   color: #fcfcfc;
   margin-left: 0.5em;
-  font-size: 1em;
+  font-size: 1.5em;
+  font-weight: bolder;
 }
 
 #profit {
@@ -958,22 +1006,23 @@ tfoot td {
 
 #heroName {
   text-decoration: none;
-  font-size: 1em;
-  margin-left: 0.6em;
+  font-size: 1.8em;
+  margin-left: 0.5em;
   color: #fcfcfc;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   text-transform: capitalize;
 }
 
 .heroDate {
-  font-size: 0.8em;
-  margin-left: 0.4em;
+  font-size: 1.2em;
+  margin-left: 0.5em;
   color: #fcfcfc;
 }
 
 #amount {
-  margin-left: 0.7em;
-  font-size: 1em;
+  margin-left: 0.5em;
+  font-size: 1.7em;
+  font-weight: 900;
   color: #02d84d;
 }
 
@@ -981,27 +1030,59 @@ tfoot td {
   background-color: #6c14b4;
 }
 
-.statsRow {
+.statsRow, .statsRowAllGames {
   background-color: #fcfcfc;
   display: flex;
   align-content: end;
-  height: 50px;
+  height: 70px;
   border-bottom: 0.7px solid;
 }
 
-.rowPos, .rowPosTop {
+.statsRowAllGames :nth-child(1) {
+  width: 14%;
+}
+
+.statsRowAllGames :nth-child(2) {
+  width: 20%;
+}
+
+.statsRowAllGames :nth-child(2) img {
+  width: 90%;
+}
+
+.statsRowAllGames :nth-child(3) {
+  width: 20%;
+  font-size: 1em;
+}
+
+.statsRowAllGames :nth-child(4) {
+  width: 10%;
+  text-align: center;
+  align-self: center;
+  font-size: 1em;
+  padding-top: 0;
+}
+
+.statsRowAllGames :nth-child(5) {
+  width: 19%;
+}
+
+.rowPos, .rowPosTop, .rowPosPerHour {
   font-weight: bold;
   padding-left: 5px;
-  font-size: 0.8em;
+  font-size: 1em;
   font-weight: bold;
   align-self: center;
+  width: 15%;
 }
 
 .rowPosTop {
-  width: 10%;
+  width: 12%;
+  text-align: center;
+  padding-left: 0px;
 }
 
-.rowImage, .rowImageTop, .rowImageH2h {
+.rowImage, .rowImageTop, .rowImageH2h, .rowImagePerHour {
   align-self: center;
   width: 20%;
   display: flex;
@@ -1009,11 +1090,11 @@ tfoot td {
   align-items: center;
 }
 
-.rowImage img, .rowImageTop img, .rowImageH2h img {
+.rowImage img, .rowImageTop img, .rowImageH2h img, .rowImagePerHour img {
   border-radius: 50%;
   border: 1px solid black;
-  height: 40px;
-  width: 40px;
+  height: 60px;
+  width: 60px;
   object-fit: cover;
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
@@ -1022,8 +1103,8 @@ tfoot td {
   width: 20%;
 }
 
-.rowName, .rowNameTop, .rowNameH2h {
-  font-size: 0.8em;
+.rowName, .rowNameTop, .rowNameH2h, .rowNamePerHour {
+  font-size: 1.2em;
   font-weight: bold;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   padding-left: 2.5em;
@@ -1035,6 +1116,7 @@ tfoot td {
 .rowNameTop, .rowNameH2h {
   padding-left: 0;
   text-align: start;
+  width: 40%;
 }
 
 .rowDate, .rowH2hAvg, .rowH2hG {
@@ -1045,18 +1127,18 @@ tfoot td {
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
 
-.rowProfit, .rowProfitTop {
-  width: 20%;
-  font-size: 0.7em;
+.rowProfit, .rowProfitTop, .rowProfitPerHour {
+  width: 15%;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   align-self: center;
   text-align: center;
-  font-size: 0.9em;
+  font-size: 1.2em;
   font-weight: bold;
 }
 
 .rowProfitTop {
   text-align: center;
+  width: 25%;
 }
 
 .avgP {
@@ -1070,34 +1152,54 @@ tfoot td {
 .h2hDetailsRow {
   height: 3.5em;
   color: #fcfcfc;
-  font-size: 0.7em;
-  align-self: center;
+  font-size: 0.6em;
+  text-align: center;
+  align-items: center;
 }
 
 .h2hDetailsRow p {
   margin: 0;
-  width: 15%;
+  width: 10%;
+}
+
+.h2hDetailsRow :nth-child(2) {
+  width: 17%;
 }
 
 .h2hDetailsRow :nth-child(3) {
-  padding-left: 1.9em;
+  width: 30%;
+}
+
+.h2hDetailsRow :nth-child(4) {
+  width: 20%;
+}
+
+.h2hDetailsRow :nth-child(5) {
+  width: 20%;
+}
+
+.h2hDetailsRow :nth-child(6) {
+  width: 10%;
 }
 
 .rowImageH2h {
-  width: 12%;
+  width: 17%;
 }
 
 .rowH2hAvg {
+  font-size: 1.2em;
   text-align: center;
 }
 
 .rowH2hG {
+  width: 17%;
+  font-size: 1em;
   padding-left: 1em;
 }
 
 .rowNameH2h {
-  width: 20%;
-  padding-left: 0.5em;
+  width: 33%;
+  padding-left: 0.3em;
 }
 
 #lGame {
@@ -1106,12 +1208,133 @@ tfoot td {
   justify-content: start;
 }
 
-#h2hGdata :nth-child(2) {
-  text-align: start;
+#lGameMain p {
+  font-size: 0.9em;
+  text-align: center;
 }
 
-#h2hGdata :nth-child(6) {
-  text-align: end;
+#lGameMain :nth-child(1) {
+  width: 15%;
+}
+
+#lGameMain :nth-child(2) {
+  width: 18%;
+}
+
+#lGameMain :nth-child(3) {
+  width: 30%;
+}
+
+#lGameMain :nth-child(4) {
+  width: 22%;
+}
+
+#lGameMain :nth-child(5) {
+  width: 17%;
+}
+
+.rowPosPerHour {
+  width: 8%;
+}
+
+.rowImagePerHour {
+  width: 18%;
+}
+
+.rowNamePerHour {
+  padding-left: 0.2em;
+  width: 15%;
+  font-size: 0.9em;
+}
+
+.rowHours {
+  width: 15%;
+  text-align: center;
+  align-self: center;
+  font-size: 1.1em;
+  font-weight: bolder;
+  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
+}
+
+.statsHeaderPerHour {
+  background-color: #0fe4a4;
+  list-style: none;
+  height: 3.5em;
+}
+
+.statsHeaderPerHour div {
+  text-align: center;
+  font-size: 0.8em;
+  align-self: center;
+  font-weight: bolder;
+  border-right: 1px solid black;
+}
+
+.statsHeaderPerHour :nth-child(1) {
+  width: 10%;
+}
+
+.statsHeaderPerHour :nth-child(2) {
+  width: 25%;
+}
+
+.statsHeaderPerHour :nth-child(3) {
+  width: 29%;
+}
+
+.statsHeaderPerHour :nth-child(4) {
+  width: 22%;
+}
+
+.statsHeaderPerHour :nth-child(5) {
+  width: 22%;
+}
+
+.rowProfitPerHour {
+  width: 18%;
+}
+
+.heroPerHour {
+  color: gold;
+  font-size: 0.5em;
+}
+
+.heroImagePerHour {
+  height: 80%;
+}
+
+#lGameP2P {
+  font-size: 0.8em;
+}
+
+#lGameP2P p {
+  text-align: center;
+  align-self: center;
+}
+
+#lGameP2P :nth-child(1) {
+  width: 19%;
+}
+
+#lGameP2P :nth-child(2) {
+  width: 14%;
+}
+
+#lGameP2P :nth-child(3) {
+  width: 15%;
+}
+
+#lGameP2P :nth-child(4) {
+  width: 19%;
+  padding-left: 0.7em;
+}
+
+#lGameP2P :nth-child(5) {
+  width: 14%;
+}
+
+#lGameP2P :nth-child(6) {
+  width: 19%;
 }
 
 .form-control {
@@ -1221,6 +1444,32 @@ label {
   margin-bottom: 0;
 }
 
+#lGameAllGames {
+  font-size: 0.8em;
+  text-align: center;
+  text-decoration: underline;
+}
+
+#lGameAllGames :nth-child(1) {
+  width: 14%;
+}
+
+#lGameAllGames :nth-child(2) {
+  width: 20%;
+}
+
+#lGameAllGames :nth-child(3) {
+  width: 29%;
+}
+
+#lGameAllGames :nth-child(4) {
+  width: 19%;
+}
+
+#lGameAllGames :nth-child(5) {
+  width: 19%;
+}
+
 .gameH2h {
   align-items: center;
   color: #fcfcfc;
@@ -1241,6 +1490,21 @@ label {
   .rowPlayer img {
     width: 50%;
   }
+}
+
+#lGamePlayer {
+  padding-left: 0.5em;
+  align-self: center;
+  font-size: 1em;
+  font-weight: bolder;
+  width: 30%;
+}
+
+.rowCashingLastGame {
+  width: 21%;
+  align-self: center;
+  text-align: center;
+  font-size: 1.1em;
 }
 
 #lGameName {

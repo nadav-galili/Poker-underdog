@@ -4,6 +4,9 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 const gamesController=require('../controllers/games.js');
 
+
+//get stats per hour
+router.get('/statsPerHour/:teamId',gamesController.statsPerHour);
 // count all games by teamId
 router.get('/totalGames/:teamId', auth, gamesController.totalGames)
 //update game by id

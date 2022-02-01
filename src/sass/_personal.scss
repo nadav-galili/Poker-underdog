@@ -1,6 +1,7 @@
-.playerBg{
+.playerBg {
+  background-color: gold;
   border-radius: 10px;
-  background-size: 100%;
+  background-size: 170%;
   border: 1px solid;
   padding: 10px;
   box-shadow: 5px 5px #888888;
@@ -8,79 +9,78 @@
   margin: auto;
   height: 12em;
 }
-.pImage{
+.pImage {
   align-self: end;
- & img{
-   height: 9em;
-  //  align-self: center;
- }
+  & img {
+    height: 9em;
+    //  align-self: center;
+  }
 }
 
-.pDetails{
-   align-self: center;
-   color:$navbarWhite;
-& p{
-  font-family:$fantasyFont;
-  font-size: 1.5em;
-  text-transform: capitalize;
-}
+.pDetails {
+  align-self: center;
+  color: $navbarWhite;
+  & p {
+    font-family: $fantasyFont;
+    font-size: 1.5em;
+    text-transform: capitalize;
+  }
 }
 
-@mixin detailedStats{
+@mixin detailedStats {
   width: 90%;
   margin: auto;
- font-size: 0.9em;
-
+  font-size: 0.9em;
 }
-.detailedStats{ width: 90%;
+.detailedStats {
+  width: 90%;
   margin: auto;
- font-size: 0.9em;}
-.personalStat{
-  & :first-child{
+  font-size: 0.9em;
+}
+.personalStat {
+  & :first-child {
     border-right: 1px solid grey;
     font-weight: 900;
     text-decoration: underline;
     text-align: center;
   }
-  & :nth-child(2){
+  & :nth-child(2) {
     text-align: center;
-    color:blue;
+    color: blue;
   }
 }
 
- .detailedStatsRow2 {
-@include detailedStats
+.detailedStatsRow2 {
+  @include detailedStats;
 }
 
-#personalheader{
+#personalheader {
   font-size: 4em;
   @extend #personalDetails;
- 
 }
-#personalDetails{
+#personalDetails {
   font-size: 0.7em;
   align-items: center;
-& :nth-child(1){
-  width: 15%;
-}
-& :nth-child(2){
-  width: 20%;
-}
-& :nth-child(3){
-  width: 12%;
-}
-& :nth-child(4){
-  width: 12%;
-}
-& :nth-child(5){
-  width: 12%;
-}
-& :nth-child(6){
-  width: 10%;
+  & :nth-child(1) {
+    width: 15%;
+  }
+  & :nth-child(2) {
+    width: 20%;
+  }
+  & :nth-child(3) {
+    width: 12%;
+  }
+  & :nth-child(4) {
+    width: 12%;
+  }
+  & :nth-child(5) {
+    width: 12%;
+  }
+  & :nth-child(6) {
+    width: 10%;
+  }
 }
 
-}
-
-canvas{
-  background-color: $navbarWhite
+canvas {
+  background-color: $navbarWhite;
 }

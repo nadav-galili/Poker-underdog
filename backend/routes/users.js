@@ -15,6 +15,11 @@ const { Game } = require("../models/games");
 const { H2h } = require("../models/h2h");
 const userController=require ('../controllers/user');
 
+
+
+//get players stats for players-stats
+router.get('/player-stats/:uId', userController.getPlayerDetails);
+
 const getTeams = async (teamsArray) => {
   const teams = await Team.find({ teamNumber: { $in: teamsArray } });
   return teams;

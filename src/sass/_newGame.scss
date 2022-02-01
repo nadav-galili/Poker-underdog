@@ -1,18 +1,18 @@
 .statsRows {
   background-color: $navbarWhite;
   align-content: end;
-   height: 3.5em;
+  height: 3.5em;
   border-bottom: 0.7px solid;
 }
 
 .rowPlayer {
   align-self: center;
- width: 15%;
+  width: 15%;
 
   img {
     border-radius: 50%;
     border: 1px solid black;
-    height:2.7em;
+    height: 2.7em;
     width: 80%;
     display: block;
     margin: auto;
@@ -61,12 +61,6 @@
   width: 100%;
   justify-content: center;
   color: $navbarWhite;
-  // & .Cashing {
-  //   padding-right: 20px;
-  // }
-  // & .Hand {
-  //   padding-right: 20px;
-  // }
 }
 
 #lastGameHero {
@@ -82,21 +76,60 @@
   }
 }
 
+#lGameAllGames {
+  font-size: 0.8em;
+  text-align: center;
+  text-decoration: underline;
+  & :nth-child(1) {
+    width: 14%;
+  }
+  & :nth-child(2) {
+    width: 20%;
+  }
+  & :nth-child(3) {
+    width: 29%;
+  }
+  & :nth-child(4) {
+    width: 19%;
+  }
+  & :nth-child(5) {
+    width: 19%;
+  }
+}
+
 .gameH2h {
   align-items: center;
   color: $navbarWhite;
 }
-.alert-success{
-  background-color: $basecolorGreen!important;
+.alert-success {
+  background-color: $basecolorGreen !important;
 }
-.buttonsGame{
+.buttonsGame {
   background-color: white;
 }
 @media screen and (min-width: 600px) {
   .rowPlayer {
-    width:10%;
-    & img{
+    width: 10%;
+    & img {
       width: 50%;
     }
   }
 }
+
+#lGamePlayer {
+  padding-left: 0.5em;
+  align-self: center;
+  font-size: 1em;
+  font-weight: bolder;
+  width: 30%;
+}
+.rowCashingLastGame {
+  width: 21%;
+  align-self: center;
+  text-align: center;
+  font-size: 1.1em;
+  // padding-left: 0.5em;
+}
+// *{
+//   outline: 1px solid red;
+// }
