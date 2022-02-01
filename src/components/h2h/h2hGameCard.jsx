@@ -18,7 +18,7 @@ const H2hGameCard = ({ team }) => {
       try {
         let aGames = await h2hService.teamAllGames(team);
         setGamesData(aGames.data);
-        let allGames = aGames.data.map((d) => _.flatten(d.players));  
+        let allGames = aGames.data.map((d) => _.flatten(d.players));
         setGames(allGames);
         setLoading(true);
         setPages(Math.floor(games.length / perPage));
@@ -34,8 +34,6 @@ const H2hGameCard = ({ team }) => {
   items = gamesData
     ? gamesData.slice(page * perPage, (page + 1) * perPage)
     : "";
-
-
 
   const handlePageClick = (event) => {
     let pageC = event.selected;
@@ -78,7 +76,7 @@ const H2hGameCard = ({ team }) => {
           )}
           {gamesData &&
             items.map((g) => (
-              <div className="col-12 col-lg-3 pb-4" id="card-top">
+              <div className="col-12 col-lg-4 pb-4" id="card-top">
                 <ol className="statsList">
                   <li
                     id="lastGameHero"
@@ -94,25 +92,22 @@ const H2hGameCard = ({ team }) => {
                         "en-GB"
                       )}
                     </span>
-                    <div
-                      className="stats d-flex w-100 justify-content-between"
-                      id="lGame"
-                    >
-                      <p className="ms-2">Player 1</p>
+                    <div className="stats d-flex w-100 " id="lGameP2P">
+                      <p>Player 1</p>
                       <p>profit</p>
                       <p>points</p>
                       <p>points</p>
                       <p>profit</p>
-                      <p className="me-2">Player 2</p>
+                      <p>Player 2</p>
                     </div>
                   </li>
                   {g.players.map((game) => {
                     return (
                       <li
-                        className="statsRow w-100" id="h2hGdata"
+                        className="statsRow w-100"
                         key={game.name + Date.now()}
                       >
-                        <div className="rowImage" >
+                        <div className="rowImage">
                           <img
                             src={`${apiImage}${game[0].image}`}
                             alt="player list row"

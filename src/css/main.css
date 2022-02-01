@@ -1231,14 +1231,6 @@ tfoot td {
   width: 17%;
 }
 
-#h2hGdata :nth-child(2) {
-  text-align: start;
-}
-
-#h2hGdata :nth-child(6) {
-  text-align: end;
-}
-
 .rowPosPerHour {
   width: 10%;
 }
@@ -1298,6 +1290,39 @@ tfoot td {
 
 .heroImagePerHour {
   height: 80%;
+}
+
+#lGameP2P {
+  font-size: 0.8em;
+}
+
+#lGameP2P p {
+  text-align: center;
+  align-self: center;
+}
+
+#lGameP2P :nth-child(1) {
+  width: 19%;
+}
+
+#lGameP2P :nth-child(2) {
+  width: 14%;
+}
+
+#lGameP2P :nth-child(3) {
+  width: 15%;
+}
+
+#lGameP2P :nth-child(4) {
+  width: 19%;
+}
+
+#lGameP2P :nth-child(5) {
+  width: 14%;
+}
+
+#lGameP2P :nth-child(6) {
+  width: 19%;
 }
 
 .form-control {

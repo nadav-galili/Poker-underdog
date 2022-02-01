@@ -247,14 +247,6 @@
     width: 17%;
   }
 }
-#h2hGdata {
-  & :nth-child(2) {
-    text-align: start;
-  }
-  & :nth-child(6) {
-    text-align: end;
-  }
-}
 
 .rowPosPerHour {
   @extend .rowPos;
@@ -311,6 +303,33 @@
 .heroImagePerHour {
   @extend .heroImage;
   height: 80%;
+}
+
+#lGameP2P {
+  font-size: 0.8em;
+  p {
+    text-align: center;
+    align-self: center;
+  }
+
+  :nth-child(1) {
+    width: 19%;
+  }
+  :nth-child(2) {
+    width: 14%;
+  }
+  :nth-child(3) {
+    width: 15%;
+  }
+  :nth-child(4) {
+    width: 19%;
+  }
+  :nth-child(5) {
+    width: 14%;
+  }
+  :nth-child(6) {
+    width: 19%;
+  }
 }
 
 // *{
