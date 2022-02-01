@@ -5,7 +5,7 @@
 
 .statsHeroPerHour {
   @extend .statsHero;
-  height: 180px;
+  height: 215px;
 }
 .statsList {
   padding: 0;
@@ -139,6 +139,7 @@
   @extend .rowName;
   padding-left: 0;
   text-align: start;
+  width: 40%;
 }
 .rowDate {
   width: 25%;
@@ -160,6 +161,7 @@
 .rowProfitTop {
   @extend .rowProfit;
   text-align: center;
+  width: 25%;
 }
 
 .avgP {
@@ -250,18 +252,27 @@
 
 .rowPosPerHour {
   @extend .rowPos;
-  width: 10%;
+  width: 8%;
 }
 
 .rowImagePerHour {
   @extend .rowImage;
-  width: 17%;
+  width: 18%;
 }
 .rowNamePerHour {
   @extend .rowName;
   padding-left: 0.2em;
-  width: 12%;
+  width: 15%;
+  font-size: 0.9em;
+}
+
+.rowHours {
+  width: 15%;
+  text-align: center;
+  align-self: center;
   font-size: 1.1em;
+  font-weight: bolder;
+  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
 .statsHeaderPerHour {
   background-color: $perHourGreen;
@@ -278,7 +289,7 @@
     width: 10%;
   }
   & :nth-child(2) {
-    width: 17%;
+    width: 25%;
   }
   & :nth-child(3) {
     width: 29%;
@@ -292,7 +303,7 @@
 }
 .rowProfitPerHour {
   @extend .rowProfit;
-  width: 22%;
+  width: 18%;
 }
 
 .heroPerHour {
@@ -323,6 +334,7 @@
   }
   :nth-child(4) {
     width: 19%;
+    padding-left: 0.7em;
   }
   :nth-child(5) {
     width: 14%;

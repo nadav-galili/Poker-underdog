@@ -178,12 +178,22 @@ const StatsPerHourCard = (props) => {
                   {statsHour.length > 0 ? hero._id.name : ""}
                 </Link>
                 <div id="amount" className="flex-fill">
+                  <div className="heroPerHour">Hours Played:</div>
+                  <div className="heroPerHour ">{hero.hoursPlayed}</div>
+                </div>
+                <div id="amount" className="flex-fill">
                   <p className="heroPerHour m-0">Profit Per Hour:</p>
-                 <p className="heroPerHour m-0"> {statsHour.length > 0 ? hero.profitPerHour : ""}</p>
+                  <p className="heroPerHour m-0">
+                    {" "}
+                    {statsHour.length > 0 ? hero.profitPerHour : ""}
+                  </p>
                 </div>
                 <div id="amount" className="flex-fill">
                   <p className="heroPerHour m-0">Cashing Per Hour:</p>
-                 <p className="heroPerHour m-0"> {statsHour.length > 0 ? hero.cashingPerHour : ""}</p>
+                  <p className="heroPerHour m-0">
+                    {" "}
+                    {statsHour.length > 0 ? hero.cashingPerHour : ""}
+                  </p>
                 </div>
               </div>
               <div className="heroImagePerHour">
@@ -202,6 +212,7 @@ const StatsPerHourCard = (props) => {
               <div>Rank</div>
               <div>Image</div>
               <div>Player</div>
+              <div>Hours Played</div>
               <div>Profit Per Hour</div>
               <div>Cashing Per Hour</div>
             </li>
@@ -224,6 +235,9 @@ const StatsPerHourCard = (props) => {
                 <div className="rowNamePerHour">
                   {statsHour.length > 0 ? player._id.name : ""}
                 </div>
+                <div className="rowHours">
+                  {statsHour.length > 0 ? player.hoursPlayed : ""}
+                </div>
                 <div
                   className={
                     player.profitPerHour > 0
@@ -233,8 +247,7 @@ const StatsPerHourCard = (props) => {
                 >
                   {statsHour.length > 0 ? player.profitPerHour : ""}
                 </div>
-                <div
-                  className="rowProfitPerHour">
+                <div className="rowProfitPerHour">
                   {statsHour.length > 0 ? player.cashingPerHour : ""}
                 </div>
               </li>

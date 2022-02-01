@@ -11,6 +11,7 @@
 /backup/config.js
 /backup/backup
 
+node-prod.json
 # /.pnp
 # .pnp.js
 # config.json
