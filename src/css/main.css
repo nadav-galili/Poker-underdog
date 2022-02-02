@@ -798,16 +798,24 @@ h4.mt-4 {
   font-size: 0.9em;
 }
 
-.personalStat :first-child {
+.personalStat :first-child, .personalStatP :first-child {
   border-right: 1px solid grey;
   font-weight: 900;
   text-decoration: underline;
   text-align: center;
 }
 
-.personalStat :nth-child(2) {
+.personalStat :nth-child(2), .personalStatP :nth-child(2) {
   text-align: center;
   color: blue;
+}
+
+.personalStatP :first-child {
+  font-size: 0.9em;
+}
+
+.personalStatP :nth-child(2) {
+  font-size: 0.8em;
 }
 
 .detailedStatsRow2 {
@@ -1077,7 +1085,7 @@ tfoot td {
 }
 
 .rowPosTop {
-  width: 12%;
+  width: 11%;
   text-align: center;
   padding-left: 0px;
 }
@@ -1107,7 +1115,7 @@ tfoot td {
   font-size: 1.2em;
   font-weight: bold;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
-  padding-left: 2.5em;
+  padding-left: 0.8em;
   align-self: center;
   text-transform: capitalize;
   flex-grow: 2;
@@ -1127,8 +1135,8 @@ tfoot td {
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
 
-.rowProfit, .rowProfitTop, .rowProfitPerHour {
-  width: 15%;
+.rowProfit, .rowProfitSuccess, .rowProfitTop, .rowProfitPerHour {
+  width: 20%;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   align-self: center;
   text-align: center;
@@ -1136,9 +1144,13 @@ tfoot td {
   font-weight: bold;
 }
 
+.rowProfitSuccess {
+  font-size: 0.9em;
+}
+
 .rowProfitTop {
   text-align: center;
-  width: 25%;
+  width: 14%;
 }
 
 .avgP {
@@ -1189,16 +1201,17 @@ tfoot td {
 .rowH2hAvg {
   font-size: 1.2em;
   text-align: center;
+  width: 26%;
 }
 
 .rowH2hG {
-  width: 17%;
+  width: 24%;
   font-size: 1em;
   padding-left: 1em;
 }
 
 .rowNameH2h {
-  width: 33%;
+  width: 40%;
   padding-left: 0.3em;
 }
 
@@ -1242,7 +1255,7 @@ tfoot td {
 }
 
 .rowNamePerHour {
-  padding-left: 0.2em;
+  padding-left: 0.4em;
   width: 15%;
   font-size: 0.9em;
 }
@@ -1251,7 +1264,7 @@ tfoot td {
   width: 15%;
   text-align: center;
   align-self: center;
-  font-size: 1.1em;
+  font-size: 1.2em;
   font-weight: bolder;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }

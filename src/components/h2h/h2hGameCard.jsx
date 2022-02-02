@@ -115,7 +115,7 @@ const H2hGameCard = ({ team }) => {
                         </div>
                         <div className="rowProfit ">{game[0].profit}</div>
                         <div className="rowProfit">{game[0].points}</div>
-                        <span className="mt-2 pt-1">VS</span>
+                        <span className="mt-3 pt-1">VS</span>
                         <div className="rowProfit">{game[1].points}</div>
                         <div className="rowProfit ">{game[1].profit}</div>
                         <div className="rowImage d-flex justify-content-center">
