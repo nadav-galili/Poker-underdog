@@ -165,7 +165,7 @@ const CardTable = (props) => {
       )}
 
       {data.length > 0 && (
-        <div className="col-lg-3 col-12" id="cardTop">
+        <div className="col-lg-5 col-12" id="cardTop">
           <ol className="statsList">
             <li
               className="statsHero d-flex w-100"
@@ -197,15 +197,16 @@ const CardTable = (props) => {
               {data.map((player) => (
                 <li className="statsRow" key={player._id.name}>
                   <div className="rowPos">{rank++}.</div>
-                  <Link className="rowImage" to={`/players-stats/${player._id.player_id}`}>
-                      <img
-                        src={
-                          data.length > 0
-                            ? `${apiImage}${player._id.image}`
-                            : ""
-                        }
-                        alt="player list row"
-                      />
+                  <Link
+                    className="rowImage"
+                    to={`/players-stats/${player._id.player_id}`}
+                  >
+                    <img
+                      src={
+                        data.length > 0 ? `${apiImage}${player._id.image}` : ""
+                      }
+                      alt="player list row"
+                    />
                   </Link>
                   <div className="rowName">
                     {data.length > 0 ? player._id.name : ""}

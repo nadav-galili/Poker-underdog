@@ -9,8 +9,6 @@ import { apiImage } from "../../config.json";
 import _ from "lodash";
 import TotalPersonal from "./totalPersonal";
 import { Line } from "react-chartjs-2";
-import { Link } from "react-router-dom";
-import { AiFillEdit } from "react-icons/ai";
 
 const PlayerStats = (props) => {
   const [me, setMe] = useState({});
@@ -73,7 +71,7 @@ const PlayerStats = (props) => {
   useEffect(() => {
     const getMydata = async () => {
       let myData = await userService.getPlayerDetails(props.match.params.id);
-       delete myData.data.password;
+      delete myData.data.password;
       setMe(myData.data);
       let myStats = await gameService.personal(myData.data._id);
       setStats(myStats.data[0]);
@@ -140,7 +138,6 @@ const PlayerStats = (props) => {
     },
   };
 
-
   return (
     <div className="container playerStats pb-4">
       <PageHeader titleText="Player Statistics" />
@@ -172,7 +169,7 @@ const PlayerStats = (props) => {
               }}
             >
               <div className="pDetails">
-                <p >
+                <p>
                   {me.firstName} {me.lastName}
                 </p>
                 <p className="text-white">{me.nickName}</p>
@@ -182,55 +179,55 @@ const PlayerStats = (props) => {
               </div>
             </div>
             <div className="detailedStats d-flex justify-content-between mt-3">
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Total Profit</p>
                 <p>{stats.totalProfit}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Avg Profit</p>
                 <p>{stats.avgProfit ? stats.avgProfit.toFixed(2) : 0}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Total Games</p>
                 <p>{stats.numOfGames}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Games W/ Profit</p>
                 <p>{stats.gamesWithProfit}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Success %</p>
                 <p>{stats.successPercentage}%</p>
               </div>
             </div>
             <div className="detailedStatsRow2 d-flex justify-content-between">
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Avg Cashing</p>
                 <p>{stats.avgCashing.toFixed(2)}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Max Profit</p>
                 <p>{stats.maxProfit}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Max Loss</p>
                 <p>{stats.minProfit}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>{currentMonth}-Total Profit</p>
                 <p>{month ? month.totalProfit : "No games this month"}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>H2H Points</p>
                 <p>{points.totalPoints}</p>
               </div>
             </div>
             <div className="detailedStats d-flex justify-content-between">
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Avg Game Rank</p>
-                <p>{stats.avgGameRank?stats.avgGameRank.toFixed(2):0}</p>
+                <p>{stats.avgGameRank ? stats.avgGameRank.toFixed(2) : 0}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Last Game</p>
                 <p>{new Date(stats.lastGame).toLocaleDateString("en-GB")}</p>
               </div>

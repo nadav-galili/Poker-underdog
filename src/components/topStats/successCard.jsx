@@ -59,16 +59,14 @@ const SuccessCard = (props) => {
           barChart.datasets[0].data.push(player.successPercentage);
         });
         setbarChartDetails(barChart);
-       
       } catch {
         console.log("err1");
       }
 
       let myHero = table.shift();
-      
+
       setHero(myHero);
       setData(table);
-
     };
 
     getTable();
@@ -80,8 +78,8 @@ const SuccessCard = (props) => {
     <div className="container pb-4">
       <PageHeader titleText="Success %" />
       <div className="teamImg d-flex flex-row mb-2">
-      <img src={`${apiImage}${teamImg.teamImage}`} alt="" />
-      <span>{new Date().toLocaleDateString("en-GB")}</span>
+        <img src={`${apiImage}${teamImg.teamImage}`} alt="" />
+        <span>{new Date().toLocaleDateString("en-GB")}</span>
       </div>
       {data.length === 0 && (
         <div className="spinner pt-2">
@@ -95,60 +93,59 @@ const SuccessCard = (props) => {
           />
         </div>
       )}
-      {data.length>0 && (
-         <div className="col-lg-3 col-12" id="cardTop">
-         <ul className="statsList ">
-           <li
-             className="statsHero d-flex w-100"
-             style={{
-               backgroundImage: `url(${
-                 process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
-               })`,
-             }}
-           >
-             <div className="statsInfo flex-fill">
-               <div className="pos">1.</div>
-               <a href="#/" id="heroName">
-                 {data.length > 0 ? hero._id.name : ""}
-               </a>
- 
-               <div id="amount" className="flex-fill">
-                 {data.length > 0 ? hero.successPercentage+' %' : ""}
-               </div>
-             </div>
-             <div className="heroImage ">
-               <img
-                 src={data.length > 0 ? `${apiImage}${hero._id.image}` : ""}
-                 alt=""
-               />
-             </div>
-           </li>
-           <React.Fragment>
-             {data.map((player) => (
-               <li className="statsRow d-flex" key={player._id.name}>
-                 <div className="rowPos">{rank++}</div>
-                 <div className="rowImage">
-                   <img
-                     src={
-                       data.length > 0 ? `${apiImage}${player._id.image}` : ""
-                     }
-                     alt="playr list row"
-                   />
-                 </div>
-                 <div className="rowName">
-                   {data.length > 0 ? player._id.name : ""}
-                 </div>
-                 <div className="rowProfit">
-                   {data.length > 0 ? player.successPercentage+' %' : ""}
-                 </div>
-               </li>
-             ))}
-           </React.Fragment>
-         </ul>
-         <Bar data={barChartDetails} className="mb-3 pb-3" />
-       </div>
+      {data.length > 0 && (
+        <div className="col-lg-3 col-12" id="cardTop">
+          <ul className="statsList ">
+            <li
+              className="statsHero d-flex w-100"
+              style={{
+                backgroundImage: `url(${
+                  process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
+                })`,
+              }}
+            >
+              <div className="statsInfo flex-fill">
+                <div className="pos">1.</div>
+                <a href="#/" id="heroName">
+                  {data.length > 0 ? hero._id.name : ""}
+                </a>
+
+                <div id="amount" className="flex-fill">
+                  {data.length > 0 ? hero.successPercentage + " %" : ""}
+                </div>
+              </div>
+              <div className="heroImage ">
+                <img
+                  src={data.length > 0 ? `${apiImage}${hero._id.image}` : ""}
+                  alt=""
+                />
+              </div>
+            </li>
+            <React.Fragment>
+              {data.map((player) => (
+                <li className="statsRow d-flex" key={player._id.name}>
+                  <div className="rowPos">{rank++}.</div>
+                  <div className="rowImage">
+                    <img
+                      src={
+                        data.length > 0 ? `${apiImage}${player._id.image}` : ""
+                      }
+                      alt="playr list row"
+                    />
+                  </div>
+                  <div className="rowName">
+                    {data.length > 0 ? player._id.name : ""}
+                  </div>
+                  <div className="rowProfitSuccess">
+                    {data.length > 0 ? player.successPercentage + " %" : ""}
+                  </div>
+                </li>
+              ))}
+            </React.Fragment>
+          </ul>
+          <Bar data={barChartDetails} className="mb-3 pb-3" />
+        </div>
       )}
-     
     </div>
   );
 };

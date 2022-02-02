@@ -50,6 +50,15 @@
   }
 }
 
+.personalStatP {
+  @extend .personalStat;
+  :first-child {
+    font-size: 0.9em;
+  }
+  :nth-child(2) {
+    font-size: 0.8em;
+  }
+}
 .detailedStatsRow2 {
   @include detailedStats;
 }
