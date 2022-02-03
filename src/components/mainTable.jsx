@@ -164,7 +164,17 @@ export default function MainTable(props) {
             />
             <p className="ms-2 text-white display-6">{teamImage.name}</p>
           </div>
-          <div className="totalCash d-flex flex-column mb-2">
+          <motion.div
+            initial={{ x: "-100vw" }}
+            animate={{ x: 0 }}
+            transition={{
+              delay: 2,
+              type: "spring",
+              duration: 2,
+              bounce: 0.6,
+            }}
+            className="totalCash d-flex flex-column mb-2"
+          >
             <p className="mb-0">
               Total Cash Played:
               <strong>
@@ -194,7 +204,7 @@ export default function MainTable(props) {
                 </span>
               </strong>
             </p>
-          </div>
+          </motion.div>
           <div id="dashboardDisplay">
             <PlayerCard
               header="Total Profit"
