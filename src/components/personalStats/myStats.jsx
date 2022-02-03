@@ -176,7 +176,10 @@ const MyStats = () => {
                   {me.firstName} {me.lastName}
                 </p>
                 <p>{me.nickName}</p>
-                <Link className="text-white text-decoration-none" to={`/my-stats/edit_player/${me._id}`}>
+                <Link
+                  className="text-white text-decoration-none"
+                  to={`/my-stats/edit_player/${me._id}`}
+                >
                   <AiFillEdit color="white" className="ms-1" />
                   Edit Player
                 </Link>
@@ -186,55 +189,55 @@ const MyStats = () => {
               </div>
             </div>
             <div className="detailedStats d-flex justify-content-between mt-3">
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Total Profit</p>
                 <p>{stats.totalProfit}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Avg Profit</p>
                 <p>{stats.avgProfit ? stats.avgProfit.toFixed(2) : 0}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Total Games</p>
                 <p>{stats.numOfGames}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Games W/ Profit</p>
                 <p>{stats.gamesWithProfit}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Success %</p>
                 <p>{stats.successPercentage}%</p>
               </div>
             </div>
             <div className="detailedStatsRow2 d-flex justify-content-between">
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Avg Cashing</p>
                 <p>{stats.avgCashing.toFixed(2)}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Max Profit</p>
                 <p>{stats.maxProfit}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Max Loss</p>
                 <p>{stats.minProfit}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>{currentMonth}-Total Profit</p>
                 <p>{month ? month.totalProfit : "No games this month"}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>H2H Points</p>
                 <p>{points.totalPoints}</p>
               </div>
             </div>
             <div className="detailedStats d-flex justify-content-between">
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Avg Game Rank</p>
-                <p>{stats.avgGameRank?stats.avgGameRank.toFixed(2):0}</p>
+                <p>{stats.avgGameRank ? stats.avgGameRank.toFixed(2) : 0}</p>
               </div>
-              <div className="personalStat">
+              <div className="personalStatP">
                 <p>Last Game</p>
                 <p>{new Date(stats.lastGame).toLocaleDateString("en-GB")}</p>
               </div>

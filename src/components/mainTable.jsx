@@ -14,6 +14,7 @@ import H2hCard from "./h2h/h2hCard";
 import AllGames from "./games/allGames";
 import { IoIosTrophy } from "react-icons/io";
 import StatsPerHour from "./topStats/statsPerHour";
+import { motion } from "framer-motion";
 
 export default function MainTable(props) {
   //get the data for the table
@@ -144,11 +145,36 @@ export default function MainTable(props) {
 
       {data.length > 1 && (
         <React.Fragment>
-          <div className="teamImg w-100 d-flex flex-row mb-2 justify-content-start">
-            <img src={`${apiImage}${teamImage.teamImage}`} alt="" />
-            <p className="ms-2">{teamImage.name}</p>
+          <div>
+            <motion.img
+              style={{
+                width: 150,
+                height: 150,
+                borderRadius: 30,
+                backgroundColor: "#fff",
+              }}
+              animate={{ rotate: 360 }}
+              transition={{
+                type: "spring",
+                duration: 5,
+                bounce: 0.6,
+              }}
+              src={`${apiImage}${teamImage.teamImage}`}
+              alt="team"
+            />
+            <p className="ms-2 text-white display-6">{teamImage.name}</p>
           </div>
-          <div className="totalCash d-flex flex-column mb-2">
+          <motion.div
+            initial={{ x: "-100vw" }}
+            animate={{ x: 0 }}
+            transition={{
+              delay: 2,
+              type: "spring",
+              duration: 2,
+              bounce: 0.6,
+            }}
+            className="totalCash d-flex flex-column mb-2"
+          >
             <p className="mb-0">
               Total Cash Played:
               <strong>
@@ -178,7 +204,7 @@ export default function MainTable(props) {
                 </span>
               </strong>
             </p>
-          </div>
+          </motion.div>
           <div id="dashboardDisplay">
             <PlayerCard
               header="Total Profit"
@@ -246,12 +272,10 @@ export default function MainTable(props) {
                 name={statsPerHour.length > 0 ? statsPerHour[0]._id.name : ""}
                 image={statsPerHour.length > 0 ? statsPerHour[0]._id.image : ""}
                 data={
-                  statsPerHour.length > 0
-                    ? statsPerHour[0].profitPerHour
-                    : ""
+                  statsPerHour.length > 0 ? statsPerHour[0].profitPerHour : ""
                 }
                 team={teamId}
-                path={ `/stats-per-hour/${props.match.params.teamId}`}
+                path={`/stats-per-hour/${props.match.params.teamId}`}
               />
             )}
             <Profits
