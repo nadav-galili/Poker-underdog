@@ -45,11 +45,6 @@ const EditUser = () => {
     }
   };
 
-  const initialValues = {
-    nickName: "",
-    image: "",
-    _id: "",
-  };
   const savedValues = {
     nickName: me.nickName,
     image: me.image,

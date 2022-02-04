@@ -120,7 +120,6 @@ export default function MainTable(props) {
         props.match.params.teamId
       );
       setstatsPerHour(dataPerHour.data);
-      console.log("sdsd", dataPerHour.data);
     };
     statsPerHour();
   }, [props.match.params.teamId]);

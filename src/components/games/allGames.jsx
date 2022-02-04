@@ -9,11 +9,11 @@ import ReactPaginate from "react-paginate";
 const AllGames = ({ teamId }) => {
   const [games, setGames] = useState(null);
   const [gamesData, setGamesData] = useState([]);
-  const [perPage, setPerPage] = useState(3);
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  const perPage = 3;
   useEffect(() => {
     const getGames = async () => {
       const all = await gameService.allGamesByTeam(teamId);
@@ -29,7 +29,7 @@ const AllGames = ({ teamId }) => {
     };
 
     getGames();
-  }, [perPage, games ? games.length : "", teamId]);
+  }, []);
   let created = 0;
   let items = [];
   items = games ? games.slice(page * perPage, (page + 1) * perPage) : "";

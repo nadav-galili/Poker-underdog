@@ -1369,6 +1369,7 @@ tfoot td {
   margin-right: 0;
   margin-left: -0.5rem;
   object-fit: cover;
+  background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
 .form-control {
