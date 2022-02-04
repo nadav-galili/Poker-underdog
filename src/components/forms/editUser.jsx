@@ -34,7 +34,6 @@ const EditUser = () => {
     }
 
     try {
-      // if (!values.image) delete values.image;
       await userService.editUserForUpdate(values, data);
       window.location = `#/my-stats/${values._id}`;
       toast("The user has been updated!");
@@ -58,15 +57,13 @@ const EditUser = () => {
   };
 
   const [errors, setErrors] = useState({ nickName: "", image: "" });
-  const [fields, setFields] = useState(initialValues);
-  const [formValues, setFormValues] = useState(savedValues);
 
   return (
     <div className="container">
       <PageHeader titleText="Edit User" />
       <Formik
         enableReinitialize
-        initialValues={savedValues || fields}
+        initialValues={savedValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
         validateOnMount

@@ -48,11 +48,6 @@ h3 {
   color: $navbarWhite;
 }
 
-// .container-fluid ol {
-//   // color: $navbarWhite;
-//   font-size: 1.5em;
-// }
-
 .steps {
   color: $basecolorGreen;
   font-size: 2em;
@@ -60,8 +55,8 @@ h3 {
 
 .teams {
   img {
-    height: 70px;
-    width: 70px;
+    height: 80px;
+    width: 80px;
     object-fit: cover;
     border-radius: 15px;
     border: 2px solid $headerColorBlue;
@@ -115,24 +110,22 @@ span {
   }
 }
 
-#playerAvatar{
+#playerAvatar {
   font-size: 0.4em;
   padding: 0;
   & p {
-    margin:0;
+    margin: 0;
     text-align: center;
     text-decoration: underline;
     margin-bottom: 0.5em;
     // font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
   }
-  & div{
+  & div {
     border: 1px solid $basecolorPurple;
     margin: auto;
     margin-bottom: 0.2em;
-
   }
 }
-
 
 /* CSS */
 .button-71 {
@@ -142,7 +135,8 @@ span {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif;
   font-size: 1em;
   font-weight: 400;
   outline: 0;
@@ -150,7 +144,7 @@ span {
   position: relative;
   text-align: center;
   text-decoration: none;
-  transition: all .3s;
+  transition: all 0.3s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -163,15 +157,16 @@ span {
   content: "";
   height: 50%;
   left: 4%;
-  opacity: .5;
+  opacity: 0.5;
   position: absolute;
   top: 0;
-  transition: all .3s;
+  transition: all 0.3s;
   width: 92%;
 }
 
 .button-71:hover {
-  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
+    rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
   transform: scale(1.05);
 }
 
@@ -181,9 +176,6 @@ span {
   }
 }
 
-
-
-
 /* CSS */
 .button-72 {
   background-color: #0d6efd;
@@ -192,7 +184,8 @@ span {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif;
   font-size: 1em;
   font-weight: 400;
   outline: 0;
@@ -200,7 +193,7 @@ span {
   position: relative;
   text-align: center;
   text-decoration: none;
-  transition: all .3s;
+  transition: all 0.3s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -213,15 +206,16 @@ span {
   content: "";
   height: 50%;
   left: 4%;
-  opacity: .5;
+  opacity: 0.5;
   position: absolute;
   top: 0;
-  transition: all .3s;
+  transition: all 0.3s;
   width: 92%;
 }
 
 .button-72:hover {
-  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
+    rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
   transform: scale(1.05);
 }
 /* CSS */
@@ -232,7 +226,8 @@ span {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif;
   font-size: 1em;
   font-weight: 400;
   outline: 0;
@@ -240,7 +235,7 @@ span {
   position: relative;
   text-align: center;
   text-decoration: none;
-  transition: all .3s;
+  transition: all 0.3s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -253,15 +248,16 @@ span {
   content: "";
   height: 50%;
   left: 4%;
-  opacity: .5;
+  opacity: 0.5;
   position: absolute;
   top: 0;
-  transition: all .3s;
+  transition: all 0.3s;
   width: 92%;
 }
 
 .button-75:hover {
-  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
+    rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
   transform: scale(1.05);
 }
 
