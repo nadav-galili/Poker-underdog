@@ -124,8 +124,8 @@ class SideNavBar extends React.Component {
                 to="/logout"
                 onClick={() => this.closeMenu()}
               >
-                <FiLogOut class="mt-2 me-2" />
-                <p class="m-0">Log out</p>
+                <FiLogOut className="mt-2 me-2" />
+                <p className="m-0">Log out</p>
               </NavLink>
             </React.Fragment>
           )}

@@ -350,6 +350,22 @@
   }
 }
 
+.container .playersList {
+  display: flex;
+  overflow: hidden;
+  padding-left: 0.5rem;
+  flex-wrap: wrap;
+  img {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    border: 2px solid #666;
+    margin-right: 0;
+    margin-left: -0.5rem;
+  }
+}
+
 // * {
 //   outline: 1px solid red;
 // }

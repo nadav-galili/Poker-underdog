@@ -775,10 +775,12 @@ h4.mt-4 {
 
 .pImage {
   align-self: end;
+  max-width: 40%;
 }
 
 .pImage img {
   height: 9em;
+  width: 100%;
 }
 
 .pDetails {
@@ -1349,6 +1351,23 @@ tfoot td {
 
 #lGameP2P :nth-child(6) {
   width: 19%;
+}
+
+.container .playersList {
+  display: flex;
+  overflow: hidden;
+  padding-left: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.container .playersList img {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: 2px solid #666;
+  margin-right: 0;
+  margin-left: -0.5rem;
 }
 
 .form-control {

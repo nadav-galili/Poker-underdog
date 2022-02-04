@@ -11,9 +11,10 @@
 }
 .pImage {
   align-self: end;
+  max-width: 40%;
   & img {
     height: 9em;
-    //  align-self: center;
+    width: 100%;
   }
 }
 

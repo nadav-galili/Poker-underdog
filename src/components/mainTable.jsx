@@ -15,6 +15,7 @@ import AllGames from "./games/allGames";
 import { IoIosTrophy } from "react-icons/io";
 import StatsPerHour from "./topStats/statsPerHour";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function MainTable(props) {
   //get the data for the table
@@ -32,6 +33,7 @@ export default function MainTable(props) {
   const [totalGames, setTotalGames] = useState("");
   const [statsPerHour, setstatsPerHour] = useState([]);
   const teamId = props.match.params.teamId;
+  const [teams, setTeams] = useState([]);
 
   //fetch data from DB
   useEffect(() => {
@@ -123,6 +125,16 @@ export default function MainTable(props) {
     statsPerHour();
   }, [props.match.params.teamId]);
 
+  //get team players for avatars
+  useEffect(() => {
+    const fetchTeams = async () => {
+      const { data } = await teamService.getMyTeam();
+
+      setTeams(data[0].players);
+    };
+    fetchTeams();
+  }, []);
+
   return (
     <div className="container" id="dashboard">
       <PageHeader
@@ -159,10 +171,25 @@ export default function MainTable(props) {
                 duration: 5,
                 bounce: 0.6,
               }}
+              //`${apiImage}${player.image}`
               src={`${apiImage}${teamImage.teamImage}`}
               alt="team"
             />
-            <p className="ms-2 text-white display-6">{teamImage.name}</p>
+            <p className="ms-2 text-white mb-0 display-6">{teamImage.name}</p>
+            <div className="container playersList ">
+              {teams.map((player) => (
+                <motion.div
+                  className=""
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.5, duration: 5 }}
+                >
+                  <Link to={`/players-stats/${player._id}`}>
+                    <img src={`${apiImage}${player.image}`} alt="player" />
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
           </div>
           <motion.div
             initial={{ x: "-100vw" }}
