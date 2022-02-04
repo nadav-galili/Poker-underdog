@@ -8,9 +8,9 @@ import gameService from "../services/gameService";
 import Avatar from "@material-ui/core/Avatar";
 
 const Team = ({ team, removeTeam, teamId, user }) => {
-
   const [livePlayers, setLivePlayers] = useState([]);
   const [liveGame, setliveGame] = useState({});
+  const [buttons, setButtons] = useState(false);
   let captain = team.players.filter((e) => e._id === team.user_id);
 
   useEffect(() => {
@@ -25,6 +25,12 @@ const Team = ({ team, removeTeam, teamId, user }) => {
 
     getLiveGame();
   }, [teamId]);
+
+  const displayRemoveButtons = () => {
+    setButtons(!buttons);
+  };
+
+  const removePlayerFromTeam = () => {};
   return (
     <div className=" col-12 col-md-6 col-lg-4 mt-3">
       <div className="card mb-3">
@@ -128,15 +134,25 @@ const Team = ({ team, removeTeam, teamId, user }) => {
               <i className="ps-2 fas fa-angle-double-right"></i>
             </Link>
             {captain[0]._id === user._id && (
-              <Link
-                className="button-75 mt-2 "
-                to={`/edit-games/${team._id}`}
-                teamId={team._id}
-              >
-                Edit Games
-                <AiFillEdit color="white" className="ms-1" />
-                <i className="ps-2 fas fa-angle-double-right"></i>
-              </Link>
+              <div className="d-flex flex-column">
+                <Link
+                  className="button-75 mt-2 "
+                  to={`/edit-games/${team._id}`}
+                  teamId={team._id}
+                >
+                  Edit Games
+                  <AiFillEdit color="white" className="ms-1" />
+                  <i className="ps-2 fas fa-angle-double-right"></i>
+                </Link>
+                <button
+                  type="button"
+                  className="btn btn-outline-danger mt-2 w-75"
+                  onClick={() => displayRemoveButtons()}
+                >
+                  <AiFillEdit color="red" className="ms-1" />
+                  Remove Players From Team
+                </button>
+              </div>
             )}
           </div>
 
@@ -144,17 +160,29 @@ const Team = ({ team, removeTeam, teamId, user }) => {
             <strong>
               <u>Players:</u>
             </strong>
-            <ul className="row ps-0" id="playersList">
+            <ul className="row  ps-0" id="playersList">
               {team.players.map((player) => (
                 <li
                   key={player._id}
-                  className="col-2 col-lg-3 teams"
+                  className="col-4 col-lg-3 teams "
                   id="playerAvatar"
                 >
                   <p id="playerPersonalInfo">{player.nickName}</p>
-                  <Link  to={`players-stats/${player._id}`}>
-                    <Avatar src={`${apiImage}${player.image}`} alt={player.name} />
-                    </Link>
+
+                  <Avatar
+                    src={`${apiImage}${player.image}`}
+                    alt={player.name}
+                  />
+
+                  {captain[0]._id === user._id && buttons && (
+                    <p
+                      className="text-danger  text-wrap mb-2"
+                      onClick={() => removePlayerFromTeam()}
+                    >
+                      <i className="fas fa-trash-alt "></i>
+                      remove player from team
+                    </p>
+                  )}
                 </li>
               ))}
             </ul>
@@ -167,12 +195,6 @@ const Team = ({ team, removeTeam, teamId, user }) => {
           <p className="card-text border-top pt-2">
             Created At:{new Date(team.createdAt).toLocaleDateString("en-GB")}
           </p>
-          {/* <p className="text-primary">
-            <Link to={`/my-teams/edit/${team._id}`}>
-              <i className="fas fa-edit me-2 "></i>
-              Edit
-            </Link>
-          </p> */}
           <p className="text-primary">
             <Link onClick={removeTeam} to="/my-teams" className="text-danger">
               <i className="fas fa-trash-alt me-2"></i>

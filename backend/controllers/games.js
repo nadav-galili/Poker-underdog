@@ -618,7 +618,6 @@ exports.personalGames = async function (req, res) {
 };
 
 exports.statsPerHour = async function (req, res) {
-  console.log(req.params);
   const data = await Game.aggregate([
     {
       $unwind: {
