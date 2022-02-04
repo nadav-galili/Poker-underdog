@@ -3,11 +3,9 @@ import "../src/css/main.css";
 import Footer from "./components/footer";
 import Home from "./components/home";
 import SideNavbar from "./components/sideNavbar";
-import Signup from "./components/signup";
 import Signin from "./components/signin";
 import Logout from "./components/logout";
 import EditUser from "./components/forms/editUser";
-import CreateTeam from "./components/createTeam";
 import { Switch, Route, HashRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,14 +27,12 @@ import ProfitsCard from "./components/topStats/profitsCard";
 import SignUp from "./components/forms/signUp";
 import NewGame from "./components/games/newGame";
 import GameEnd from "./components/gameEnd";
-import H2hTable from "./components/h2h/h2hTable"
+import H2hTable from "./components/h2h/h2hTable";
 import TeamSignUp from "./components/forms/teamSignUp";
 import EditGames from "./components/games/editGames";
 import PlayerStats from "./components/personalStats/playerStats";
 import StatsPerHourCard from "./components/topStats/statsPerHourCard";
 import ReactGA from "react-ga";
-
-
 
 ReactGA.initialize("G-MPD41JDBPV");
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -64,19 +60,20 @@ function App() {
     minHeight: 780,
   };
   return (
-    <React.Fragment> 
+    <React.Fragment>
       <ToastContainer />
       <header>
-        <SideNavbar user={user} details={details} pageWrapId={"page-wrap"} outerContainerId={"App"} />
+        <SideNavbar
+          user={user}
+          details={details}
+          pageWrapId={"page-wrap"}
+          outerContainerId={"App"}
+        />
       </header>
       <main style={style} className="main">
         <HashRouter user={user}>
           <Switch>
-            <ProtectedRoute
-              path="/my-stats/edit/:id"
-              component={EditPlayer}
-     
-            />
+            <ProtectedRoute path="/my-stats/edit/:id" component={EditPlayer} />
             <ProtectedRoute
               path="/my-stats/edit_player/:id"
               component={EditUser}
@@ -112,19 +109,33 @@ function App() {
               component={JoinTeam}
               user={user}
             />
-            <ProtectedRoute path="/edit-games/:teamId" component={EditGames} /> 
+            <ProtectedRoute path="/edit-games/:teamId" component={EditGames} />
 
             <ProtectedRoute path="/games/:gameId" component={NewGame} />
             <ProtectedRoute path="/last-game/:teamId" component={GameEnd} />
-            <ProtectedRoute path="/tables/h2h/:teamId" component={H2hTable} /> 
+            <ProtectedRoute path="/tables/h2h/:teamId" component={H2hTable} />
             <ProtectedRoute path="/main-table/:teamId" component={MainTable} />
-            <ProtectedRoute path="/tables/success/:teamId" component={SuccessCard} />
-            <ProtectedRoute path="/tables/byMonths/:currMonth/:teamId" component={CurrMonthCard} />
-            <ProtectedRoute path="/tables/profits/top-ten/:teamId" component={ProfitsCard} />    
-            <ProtectedRoute path="/tables/:cardName/:teamId" component={CardTable} /> 
-            <ProtectedRoute path="/players-stats/:id" component={PlayerStats}/>
-            <ProtectedRoute path = "/stats-per-hour/:teamId" component={StatsPerHourCard}/>
-
+            <ProtectedRoute
+              path="/tables/success/:teamId"
+              component={SuccessCard}
+            />
+            <ProtectedRoute
+              path="/tables/byMonths/:currMonth/:teamId"
+              component={CurrMonthCard}
+            />
+            <ProtectedRoute
+              path="/tables/profits/top-ten/:teamId"
+              component={ProfitsCard}
+            />
+            <ProtectedRoute
+              path="/tables/:cardName/:teamId"
+              component={CardTable}
+            />
+            <ProtectedRoute path="/players-stats/:id" component={PlayerStats} />
+            <ProtectedRoute
+              path="/stats-per-hour/:teamId"
+              component={StatsPerHourCard}
+            />
 
             <Route path="/demo" component={Demo} />
             <Route path="/about" component={About} />
@@ -141,9 +152,7 @@ function App() {
       <footer>
         <Footer />
       </footer>
- 
     </React.Fragment>
-
   );
 }
 
