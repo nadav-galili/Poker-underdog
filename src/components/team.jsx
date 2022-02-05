@@ -201,17 +201,19 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
                     alt={player.name}
                   />
 
-                  {captain[0]._id === user._id && buttons && (
-                    <p
-                      className="text-danger  text-wrap mb-2"
-                      onClick={() =>
-                        removePlayerFromTeam(teamNumber, player._id, teamid)
-                      }
-                    >
-                      <i className="fas fa-trash-alt "></i>
-                      remove player from team
-                    </p>
-                  )}
+                  {captain[0]._id === user._id &&
+                    buttons &&
+                    player._id !== captain[0]._id && (
+                      <p
+                        className="text-danger  text-wrap mb-2"
+                        onClick={() =>
+                          removePlayerFromTeam(teamNumber, player._id, teamid)
+                        }
+                      >
+                        <i className="fas fa-trash-alt "></i>
+                        remove player from team
+                      </p>
+                    )}
                 </li>
               ))}
             </ul>
