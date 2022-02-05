@@ -78,7 +78,7 @@ const AllGames = ({ teamId }) => {
         {games &&
           items.map((g) => (
             <div
-              className="col-lg-4 col-12 pb-3"
+              className="col-lg-4 col-12 p-0 "
               id="card-top"
               key={g.createdAt}
             >

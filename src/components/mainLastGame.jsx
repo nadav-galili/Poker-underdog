@@ -100,8 +100,8 @@ const MainLastgame = ({ teamId }) => {
                 </li>
               ))}
             </React.Fragment>
-            <H2hGameEnd gameId={lastGame._id} header="Last H2H" />
           </ol>
+          <H2hGameEnd gameId={lastGame._id} header="Last H2H" />
         </div>
       )}
     </div>
