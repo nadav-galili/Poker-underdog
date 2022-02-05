@@ -16,6 +16,8 @@ import { IoIosTrophy } from "react-icons/io";
 import StatsPerHour from "./topStats/statsPerHour";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { MdDateRange } from "react-icons/md";
+import * as dayjs from "dayjs";
 
 export default function MainTable(props) {
   //get the data for the table
@@ -34,6 +36,18 @@ export default function MainTable(props) {
   const [statsPerHour, setstatsPerHour] = useState([]);
   const teamId = props.match.params.teamId;
   const [teams, setTeams] = useState([]);
+  const [lastGame, setLastGame] = useState([]);
+  var relativeTime = require("dayjs/plugin/relativeTime");
+
+  useEffect(() => {
+    const getLastGame = async () => {
+      let game = await gameService.lastGame(teamId);
+      game = game.data[0];
+      setLastGame(game);
+    };
+
+    getLastGame();
+  }, [teamId]);
 
   //fetch data from DB
   useEffect(() => {
@@ -134,6 +148,9 @@ export default function MainTable(props) {
     fetchTeams();
   }, []);
 
+  dayjs.extend(relativeTime);
+  let daysFromGame = dayjs(lastGame.createdAt).fromNow();
+
   return (
     <div className="container" id="dashboard">
       <PageHeader
@@ -227,6 +244,15 @@ export default function MainTable(props) {
                 <span className="ps-1">
                   {totalGames[0] ? totalGames[0].TotalGames : null}
                   <IoIosTrophy className="ms-1 mb-1" />
+                </span>
+              </strong>
+            </p>
+            <p className="mb-0">
+              Last Game Was Played:
+              <strong>
+                <span className="ps-1">
+                  {totalGames[0] ? daysFromGame : ""}
+                  <MdDateRange className="ms-1 " />
                 </span>
               </strong>
             </p>

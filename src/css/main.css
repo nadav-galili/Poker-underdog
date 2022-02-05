@@ -148,7 +148,9 @@ h1 {
 }
 
 #mainStats {
-  background-color: #6c14b4;
+  height: 13.5em;
+  border-radius: 30px;
+  background-color: white;
   border-style: none;
 }
 
@@ -164,6 +166,7 @@ h1 {
 
 #statsCardBody {
   background-color: #520c8c;
+  height: 4.7em;
 }
 
 #statsCardBody a {
@@ -209,6 +212,8 @@ h1 {
   display: flex;
   height: 2.5em;
   justify-content: center;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
   align-self: center;
   font-size: 1.1em;
 }
