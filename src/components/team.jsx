@@ -7,6 +7,8 @@ import { AiFillEdit } from "react-icons/ai";
 import gameService from "../services/gameService";
 import teamService from "../services/teamService";
 import Avatar from "@material-ui/core/Avatar";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
   const [livePlayers, setLivePlayers] = useState([]);
@@ -31,9 +33,30 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
     setButtons(!buttons);
   };
 
-  const removePlayerFromTeam = async (teamNumber, playerId) => {
-    const player = await teamService.removePlayerFromTeam(teamNumber, playerId);
-    console.log("pp", player);
+  const removePlayerFromTeam = async (teamNumber, playerId, teamId) => {
+    Swal.fire({
+      title: "Are you sure you want to remove this player from team?",
+      text: "you wont be able to cancel",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await teamService.removePlayerFromTeam(teamNumber, playerId, teamid);
+        window.location.reload();
+        toast.success("Player removed from team:)", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    });
   };
   return (
     <div className=" col-12 col-md-6 col-lg-4 mt-3">
@@ -182,7 +205,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
                     <p
                       className="text-danger  text-wrap mb-2"
                       onClick={() =>
-                        removePlayerFromTeam(teamNumber, player._id)
+                        removePlayerFromTeam(teamNumber, player._id, teamid)
                       }
                     >
                       <i className="fas fa-trash-alt "></i>

@@ -31,9 +31,10 @@ export function deleteTeam(teamId) {
   return http.delete(`${apiUrl}/teams/${teamId}`);
 }
 
-export function removePlayerFromTeam(teamNumber, playerId) {
+export function removePlayerFromTeam(teamNumber, playerId, teamId) {
   return http.delete(
-    `${apiUrl}/teams/removePlayerFromTeam/${teamNumber}/${playerId}`
+    `${apiUrl}/teams/removePlayerFromTeam/${teamNumber}/${playerId}`,
+    { data: { teamId: teamId } }
   );
 }
 
