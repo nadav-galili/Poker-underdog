@@ -31,18 +31,18 @@ const config = require("./config");
 //   .catch((err) => console.error(err, "Could not connect to MongoDB..."));
 
 mongoose
-  .connect("mongodb://localhost/backend", {
+  .connect("mongodb://localhost/test", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false,
   })
-  .then(() => console.log("Connected to MongoDB..."))
-  .catch((err) => console.error(err, "Could not connect to MongoDB..."));
+  .then(() => console.log("Connected to MongoDB1..."))
+  .catch((err) => console.error(err, "Could not connect to MongoDB1..."));
 
-let corsOptions = {
-  origin: "https://poker-underdog.com",
-};
+// let corsOptions = {
+//   origin: "https://poker-underdog.com",
+// };
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));

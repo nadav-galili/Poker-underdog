@@ -5,9 +5,10 @@ import { GiCardKingClubs } from "react-icons/gi";
 import { IoMdStats } from "react-icons/io";
 import { AiFillEdit } from "react-icons/ai";
 import gameService from "../services/gameService";
+import teamService from "../services/teamService";
 import Avatar from "@material-ui/core/Avatar";
 
-const Team = ({ team, removeTeam, teamId, user }) => {
+const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
   const [livePlayers, setLivePlayers] = useState([]);
   const [liveGame, setliveGame] = useState({});
   const [buttons, setButtons] = useState(false);
@@ -15,7 +16,7 @@ const Team = ({ team, removeTeam, teamId, user }) => {
 
   useEffect(() => {
     const getLiveGame = async () => {
-      let game = await gameService.inProgress(teamId);
+      let game = await gameService.inProgress(teamid);
       game = await game.data[0];
       setliveGame(game);
       game ? setLivePlayers(game.players) : setLivePlayers([]);
@@ -24,13 +25,16 @@ const Team = ({ team, removeTeam, teamId, user }) => {
     };
 
     getLiveGame();
-  }, [teamId]);
+  }, [teamid]);
 
   const displayRemoveButtons = () => {
     setButtons(!buttons);
   };
 
-  const removePlayerFromTeam = () => {};
+  const removePlayerFromTeam = async (teamNumber, playerId) => {
+    const player = await teamService.removePlayerFromTeam(teamNumber, playerId);
+    console.log("pp", player);
+  };
   return (
     <div className=" col-12 col-md-6 col-lg-4 mt-3">
       <div className="card mb-3">
@@ -164,7 +168,7 @@ const Team = ({ team, removeTeam, teamId, user }) => {
               {team.players.map((player) => (
                 <li
                   key={player._id}
-                  className="col-4 col-lg-3 teams "
+                  className="col-3 col-lg-3 teams "
                   id="playerAvatar"
                 >
                   <p id="playerPersonalInfo">{player.nickName}</p>
@@ -177,7 +181,9 @@ const Team = ({ team, removeTeam, teamId, user }) => {
                   {captain[0]._id === user._id && buttons && (
                     <p
                       className="text-danger  text-wrap mb-2"
-                      onClick={() => removePlayerFromTeam()}
+                      onClick={() =>
+                        removePlayerFromTeam(teamNumber, player._id)
+                      }
                     >
                       <i className="fas fa-trash-alt "></i>
                       remove player from team

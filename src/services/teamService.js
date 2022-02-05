@@ -31,6 +31,12 @@ export function deleteTeam(teamId) {
   return http.delete(`${apiUrl}/teams/${teamId}`);
 }
 
+export function removePlayerFromTeam(teamNumber, playerId) {
+  return http.delete(
+    `${apiUrl}/teams/removePlayerFromTeam/${teamNumber}/${playerId}`
+  );
+}
+
 export default {
   createTeam,
   getMyTeam,
@@ -38,4 +44,5 @@ export default {
   editTeam,
   deleteTeam,
   getTeamByNumber,
+  removePlayerFromTeam,
 };
