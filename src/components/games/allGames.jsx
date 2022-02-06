@@ -12,8 +12,7 @@ const AllGames = ({ teamId }) => {
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState(0);
   const [loading, setLoading] = useState(false);
-
-  const perPage = 3;
+  const [perPage, setPerPage] = useState(3);
   useEffect(() => {
     const getGames = async () => {
       const all = await gameService.allGamesByTeam(teamId);
@@ -29,7 +28,7 @@ const AllGames = ({ teamId }) => {
     };
 
     getGames();
-  }, []);
+  }, [perPage, games ? games.length : "", teamId]);
   let created = 0;
   let items = [];
   items = games ? games.slice(page * perPage, (page + 1) * perPage) : "";

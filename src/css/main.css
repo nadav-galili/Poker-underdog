@@ -1026,6 +1026,7 @@ tfoot td {
   height: 150px;
   background-size: 100%;
   border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 }
 
 .statsHeroPerHour {
@@ -1107,7 +1108,7 @@ tfoot td {
 }
 
 .statsRowAllGames :nth-child(2) img {
-  width: 90%;
+  width: 80%;
 }
 
 .statsRowAllGames :nth-child(3) {
@@ -1484,6 +1485,8 @@ label {
 
 .rowCashInHand input {
   max-width: 100%;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
 }
 
 .playerProfit {
@@ -1591,6 +1594,11 @@ label {
   align-self: center;
   text-align: center;
   font-size: 1.1em;
+}
+
+.btn-danger.update {
+  border-bottom-left-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
 }
 
 #lGameName {
