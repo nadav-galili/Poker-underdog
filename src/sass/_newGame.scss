@@ -28,8 +28,11 @@
 .rowCashInHand {
   align-self: center;
   width: 20%;
+
   & input {
     max-width: 100%;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
   }
 }
 .playerProfit {
@@ -130,7 +133,11 @@
   align-self: center;
   text-align: center;
   font-size: 1.1em;
-  // padding-left: 0.5em;
+}
+
+.btn-danger.update {
+  border-bottom-left-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
 }
 // *{
 //   outline: 1px solid red;

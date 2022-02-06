@@ -23,22 +23,20 @@ const cron = require("node-cron");
 
 // Schedule tasks to be run on the server.
 mongoose
-.connect(
-  `mongodb+srv://${config.production.database.user_name}:` +
-    `${config.production.database.pass}@${config.production.server.cluster}/${config.production.database.db}?retryWrites=true&w=majority`,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  }
-)
-.then(() => console.log("Connected to MongoDB remote..."))
+  .connect(
+    `mongodb+srv://${config.production.database.user_name}:` +
+      `${config.production.database.pass}@${config.production.server.cluster}/${config.production.database.db}?retryWrites=true&w=majority`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+    }
+  )
+  .then(() => console.log("Connected to MongoDB remote..."))
   .catch((err) => console.error(err, "Could not connect to MongoDB..."));
 
 cron.schedule("* * * * *", function () {
-
-
   const getData = async () => {
     let user = await User.find({});
     user = JSON.stringify(user);
@@ -101,7 +99,7 @@ cron.schedule("* * * * *", function () {
 
   async function main() {
     // create reusable transporter object using the default SMTP transport
-    console.log('1');
+
     let transporter = nodemailer.createTransport({
       host: "mail.poker-underdog.com",
       port: 465,
@@ -111,7 +109,7 @@ cron.schedule("* * * * *", function () {
         pass: config.production.emailPass.pass,
       },
     });
-    console.log('2');
+
     // send mail with defined transport object
     let info = await transporter.sendMail({
       from: "info@poker-underdog.com",
