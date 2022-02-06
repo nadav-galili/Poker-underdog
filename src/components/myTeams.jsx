@@ -80,8 +80,9 @@ const MyTeams = () => {
             <Team
               key={team._id}
               team={team}
-              teamId={team._id}
+              teamid={team._id}
               user={user}
+              teamNumber={team.teamNumber}
               removeTeam={() => removeTeam(team._id)}
             />
           ))}

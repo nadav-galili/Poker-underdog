@@ -148,7 +148,9 @@ h1 {
 }
 
 #mainStats {
-  background-color: #6c14b4;
+  height: 13.5em;
+  border-radius: 30px;
+  background-color: white;
   border-style: none;
 }
 
@@ -164,6 +166,7 @@ h1 {
 
 #statsCardBody {
   background-color: #520c8c;
+  height: 4.7em;
 }
 
 #statsCardBody a {
@@ -205,16 +208,55 @@ h1 {
 }
 
 #cardFooter {
+  background-color: #0d6efd;
+  border: 0;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  outline: 0;
+  padding: 5px 5px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
   width: 100%;
   display: flex;
   height: 2.5em;
   justify-content: center;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
   align-self: center;
   font-size: 1.1em;
 }
 
 #cardFooter svg {
   margin: 5px 0 0 3px;
+}
+
+#cardFooter:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s;
+  width: 93%;
+}
+
+#cardFooter:hover {
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset, rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
+  transform: scale(1.05);
 }
 
 #month {
@@ -238,7 +280,6 @@ h1 {
     font-size: 1.3em;
   }
   #cardFooter {
-    width: 100%;
     display: flex;
     height: 2.6em;
     justify-content: center;
@@ -305,8 +346,8 @@ h3 {
 }
 
 .teams img {
-  height: 70px;
-  width: 70px;
+  height: 80px;
+  width: 80px;
   object-fit: cover;
   border-radius: 15px;
   border: 2px solid #2752ea;
@@ -383,7 +424,7 @@ span {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
   font-size: 1em;
   font-weight: 400;
   outline: 0;
@@ -391,7 +432,7 @@ span {
   position: relative;
   text-align: center;
   text-decoration: none;
-  transition: all .3s;
+  transition: all 0.3s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -404,10 +445,10 @@ span {
   content: "";
   height: 50%;
   left: 4%;
-  opacity: .5;
+  opacity: 0.5;
   position: absolute;
   top: 0;
-  transition: all .3s;
+  transition: all 0.3s;
   width: 92%;
 }
 
@@ -430,7 +471,7 @@ span {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
   font-size: 1em;
   font-weight: 400;
   outline: 0;
@@ -438,7 +479,7 @@ span {
   position: relative;
   text-align: center;
   text-decoration: none;
-  transition: all .3s;
+  transition: all 0.3s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -451,10 +492,10 @@ span {
   content: "";
   height: 50%;
   left: 4%;
-  opacity: .5;
+  opacity: 0.5;
   position: absolute;
   top: 0;
-  transition: all .3s;
+  transition: all 0.3s;
   width: 92%;
 }
 
@@ -471,7 +512,7 @@ span {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
   font-size: 1em;
   font-weight: 400;
   outline: 0;
@@ -479,7 +520,7 @@ span {
   position: relative;
   text-align: center;
   text-decoration: none;
-  transition: all .3s;
+  transition: all 0.3s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -492,10 +533,10 @@ span {
   content: "";
   height: 50%;
   left: 4%;
-  opacity: .5;
+  opacity: 0.5;
   position: absolute;
   top: 0;
-  transition: all .3s;
+  transition: all 0.3s;
   width: 92%;
 }
 
@@ -775,10 +816,12 @@ h4.mt-4 {
 
 .pImage {
   align-self: end;
+  max-width: 40%;
 }
 
 .pImage img {
   height: 9em;
+  width: 100%;
 }
 
 .pDetails {
@@ -982,6 +1025,7 @@ tfoot td {
 .statsHero, .statsHeroPerHour {
   height: 150px;
   background-size: 100%;
+  border-top-left-radius: 30px;
 }
 
 .statsHeroPerHour {
@@ -990,6 +1034,11 @@ tfoot td {
 
 .statsList {
   padding: 0;
+}
+
+.statsList :last-child {
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
 
 .heroImage img, .heroImagePerHour img {
@@ -1037,6 +1086,8 @@ tfoot td {
 
 #cardTop {
   background-color: #6c14b4;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
 }
 
 .statsRow, .statsRowAllGames {
@@ -1351,6 +1402,25 @@ tfoot td {
   width: 19%;
 }
 
+.container .playersList {
+  display: flex;
+  overflow: hidden;
+  padding-left: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.container .playersList img {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: 2px solid #666;
+  margin-right: 0;
+  margin-left: -0.5rem;
+  object-fit: cover;
+  background-image: linear-gradient(#6c14b4, #4e4949);
+}
+
 .form-control {
   border: none !important;
   padding: 0 !important;
@@ -1448,10 +1518,12 @@ label {
 #lastGameHero {
   background-color: #6c14b4;
   width: 100%;
-  height: 3em;
+  height: 3.5em;
   justify-content: center;
   color: #fcfcfc;
   align-items: center;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 }
 
 #lastGameHero p {

@@ -1,9 +1,8 @@
 // const Joi = require("@hapi/joi");
-const { response } = require("express");
+
 const _ = require("lodash");
 const { Game, validate } = require("../models/games");
 const { Team } = require("../models/teams");
-const mongoose = require("mongoose");
 
 exports.totalGames = async function (req, res) {
   let tGames = await Game.aggregate([
@@ -627,7 +626,7 @@ exports.statsPerHour = async function (req, res) {
     },
     {
       $match: {
-        team_id: req.params.id,
+        team_id: req.params.teamId,
       },
     },
     {

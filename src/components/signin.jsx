@@ -19,7 +19,10 @@ class Signin extends Form {
 
   handleLogin = async (googleData) => {
     try {
-      await userService.loginGoogle(googleData.profileObj.email, googleData.tokenId);
+      await userService.loginGoogle(
+        googleData.profileObj.email,
+        googleData.tokenId
+      );
 
       window.location = "/";
     } catch (ex) {
@@ -27,8 +30,7 @@ class Signin extends Form {
         this.setState({ errors: { email: ex.response.data } });
       }
     }
-  }
-
+  };
 
   doSubmit = async () => {
     const { email, password } = this.state.data;
@@ -56,11 +58,13 @@ class Signin extends Form {
         <PageHeader titleText="Sign-In" />
         <div className="row">
           <div className="col-12">
-            <p className="text-primary">You can sign-in here with your account!</p>
+            <p className="text-primary">
+              You can sign-in here with your account!
+            </p>
           </div>
         </div>
         <GoogleLogin
-          clientId='310842465793-hdu8fm8luvho3qds0ce4chg9c3696d4d.apps.googleusercontent.com'
+          clientId="310842465793-hdu8fm8luvho3qds0ce4chg9c3696d4d.apps.googleusercontent.com"
           onSuccess={this.handleLogin}
         />
         <div className="row">

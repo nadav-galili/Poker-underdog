@@ -75,7 +75,7 @@ const MainLastgame = ({ teamId }) => {
             <React.Fragment>
               {data.map((player) => (
                 <li className="statsRow" key={player.id}>
-                  <div className="rowPos">{Rank++}</div>
+                  <div className="rowPos">{Rank++}.</div>
                   <div className="rowImagePerHour">
                     <img
                       src={data.length > 0 ? `${apiImage}${player.image}` : ""}
@@ -100,8 +100,8 @@ const MainLastgame = ({ teamId }) => {
                 </li>
               ))}
             </React.Fragment>
-            <H2hGameEnd gameId={lastGame._id} header="Last H2H" />
           </ol>
+          <H2hGameEnd gameId={lastGame._id} header="Last H2H" />
         </div>
       )}
     </div>

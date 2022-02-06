@@ -5,17 +5,20 @@ import { GiCardKingClubs } from "react-icons/gi";
 import { IoMdStats } from "react-icons/io";
 import { AiFillEdit } from "react-icons/ai";
 import gameService from "../services/gameService";
+import teamService from "../services/teamService";
 import Avatar from "@material-ui/core/Avatar";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
-const Team = ({ team, removeTeam, teamId, user }) => {
-
+const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
   const [livePlayers, setLivePlayers] = useState([]);
   const [liveGame, setliveGame] = useState({});
+  const [buttons, setButtons] = useState(false);
   let captain = team.players.filter((e) => e._id === team.user_id);
 
   useEffect(() => {
     const getLiveGame = async () => {
-      let game = await gameService.inProgress(teamId);
+      let game = await gameService.inProgress(teamid);
       game = await game.data[0];
       setliveGame(game);
       game ? setLivePlayers(game.players) : setLivePlayers([]);
@@ -24,7 +27,37 @@ const Team = ({ team, removeTeam, teamId, user }) => {
     };
 
     getLiveGame();
-  }, [teamId]);
+  }, [teamid]);
+
+  const displayRemoveButtons = () => {
+    setButtons(!buttons);
+  };
+
+  const removePlayerFromTeam = async (teamNumber, playerId, teamId) => {
+    Swal.fire({
+      title: "Are you sure you want to remove this player from team?",
+      text: "you wont be able to cancel",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await teamService.removePlayerFromTeam(teamNumber, playerId, teamid);
+        window.location.reload();
+        toast.success("Player removed from team:)", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    });
+  };
   return (
     <div className=" col-12 col-md-6 col-lg-4 mt-3">
       <div className="card mb-3">
@@ -128,15 +161,25 @@ const Team = ({ team, removeTeam, teamId, user }) => {
               <i className="ps-2 fas fa-angle-double-right"></i>
             </Link>
             {captain[0]._id === user._id && (
-              <Link
-                className="button-75 mt-2 "
-                to={`/edit-games/${team._id}`}
-                teamId={team._id}
-              >
-                Edit Games
-                <AiFillEdit color="white" className="ms-1" />
-                <i className="ps-2 fas fa-angle-double-right"></i>
-              </Link>
+              <div className="d-flex flex-column">
+                <Link
+                  className="button-75 mt-2 "
+                  to={`/edit-games/${team._id}`}
+                  teamId={team._id}
+                >
+                  Edit Games
+                  <AiFillEdit color="white" className="ms-1" />
+                  <i className="ps-2 fas fa-angle-double-right"></i>
+                </Link>
+                <button
+                  type="button"
+                  className="btn btn-outline-danger mt-2 w-75"
+                  onClick={() => displayRemoveButtons()}
+                >
+                  <AiFillEdit color="red" className="ms-1" />
+                  Remove Players From Team
+                </button>
+              </div>
             )}
           </div>
 
@@ -144,17 +187,33 @@ const Team = ({ team, removeTeam, teamId, user }) => {
             <strong>
               <u>Players:</u>
             </strong>
-            <ul className="row ps-0" id="playersList">
+            <ul className="row  ps-0" id="playersList">
               {team.players.map((player) => (
                 <li
                   key={player._id}
-                  className="col-2 col-lg-3 teams"
+                  className="col-3 col-lg-3 teams "
                   id="playerAvatar"
                 >
                   <p id="playerPersonalInfo">{player.nickName}</p>
-                  <Link  to={`players-stats/${player._id}`}>
-                    <Avatar src={`${apiImage}${player.image}`} alt={player.name} />
-                    </Link>
+
+                  <Avatar
+                    src={`${apiImage}${player.image}`}
+                    alt={player.name}
+                  />
+
+                  {captain[0]._id === user._id &&
+                    buttons &&
+                    player._id !== captain[0]._id && (
+                      <p
+                        className="text-danger  text-wrap mb-2"
+                        onClick={() =>
+                          removePlayerFromTeam(teamNumber, player._id, teamid)
+                        }
+                      >
+                        <i className="fas fa-trash-alt "></i>
+                        remove player from team
+                      </p>
+                    )}
                 </li>
               ))}
             </ul>
@@ -167,12 +226,6 @@ const Team = ({ team, removeTeam, teamId, user }) => {
           <p className="card-text border-top pt-2">
             Created At:{new Date(team.createdAt).toLocaleDateString("en-GB")}
           </p>
-          {/* <p className="text-primary">
-            <Link to={`/my-teams/edit/${team._id}`}>
-              <i className="fas fa-edit me-2 "></i>
-              Edit
-            </Link>
-          </p> */}
           <p className="text-primary">
             <Link onClick={removeTeam} to="/my-teams" className="text-danger">
               <i className="fas fa-trash-alt me-2"></i>

@@ -1,6 +1,7 @@
 .statsHero {
   height: 150px;
   background-size: 100%;
+  border-top-left-radius: 30px;
 }
 
 .statsHeroPerHour {
@@ -9,6 +10,10 @@
 }
 .statsList {
   padding: 0;
+  :last-child {
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
 }
 
 .heroImage {
@@ -54,6 +59,8 @@
 }
 #cardTop {
   background-color: $basecolorPurple;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
 }
 
 .statsRow {
@@ -62,6 +69,9 @@
   align-content: end;
   height: 70px;
   border-bottom: 0.7px solid;
+  // :last-child {
+  //   border-radius: 30px;
+  // }
 }
 
 .statsRowAllGames {
@@ -347,6 +357,24 @@
   }
   :nth-child(6) {
     width: 19%;
+  }
+}
+
+.container .playersList {
+  display: flex;
+  overflow: hidden;
+  padding-left: 0.5rem;
+  flex-wrap: wrap;
+  img {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    border: 2px solid #666;
+    margin-right: 0;
+    margin-left: -0.5rem;
+    object-fit: cover;
+    background-image: linear-gradient(#6c14b4, #4e4949);
   }
 }
 

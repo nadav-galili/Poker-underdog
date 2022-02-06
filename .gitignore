@@ -5,6 +5,7 @@
 # /config
 /backend/node_modules
 /backend/config.js
+/backend/uploads
 
 /backup/node_modules
 /backup/config

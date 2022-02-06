@@ -9,11 +9,11 @@ import ReactPaginate from "react-paginate";
 const AllGames = ({ teamId }) => {
   const [games, setGames] = useState(null);
   const [gamesData, setGamesData] = useState([]);
-  const [perPage, setPerPage] = useState(3);
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  const perPage = 3;
   useEffect(() => {
     const getGames = async () => {
       const all = await gameService.allGamesByTeam(teamId);
@@ -29,7 +29,7 @@ const AllGames = ({ teamId }) => {
     };
 
     getGames();
-  }, [perPage, games ? games.length : "", teamId]);
+  }, []);
   let created = 0;
   let items = [];
   items = games ? games.slice(page * perPage, (page + 1) * perPage) : "";
@@ -78,7 +78,7 @@ const AllGames = ({ teamId }) => {
         {games &&
           items.map((g) => (
             <div
-              className="col-lg-4 col-12 pb-3"
+              className="col-lg-4 col-12 p-0 "
               id="card-top"
               key={g.createdAt}
             >
@@ -126,7 +126,7 @@ const AllGames = ({ teamId }) => {
                   .sort((a, b) => b.profit - a.profit)
                   .map((player) => (
                     <li className="statsRowAllGames" key={player.id}>
-                      <div className="rowPos">{player.gameRank}</div>
+                      <div className="rowPos">{player.gameRank}.</div>
                       <div className="rowImage">
                         <img
                           src={`${apiImage}${player.image}`}
