@@ -17,7 +17,7 @@ const GameEnd = (props) => {
       game.players.sort((a, b) => b.profit - a.profit);
       setData(game.players);
       setLastGame(game);
-    }; 
+    };
 
     getLastGame();
   }, [setData, props.match.params.teamId]);
@@ -27,7 +27,7 @@ const GameEnd = (props) => {
     <div className="container">
       <PageHeader titleText="Last Game" />
 
-      {data.length === 0 && lastGame._id &&(
+      {data.length === 0 && lastGame._id && (
         <div className="spinner pt-2">
           <SpinnerInfinity
             size={130}
@@ -79,7 +79,7 @@ const GameEnd = (props) => {
             <React.Fragment>
               {data.map((player) => (
                 <li className="statsRow" key={player.id}>
-                  <div className="rowPos">{Rank++}</div>
+                  <div className="rowPos">{Rank++}.</div>
                   <div className="rowImage">
                     <img
                       src={data.length > 0 ? `${apiImage}${player.image}` : ""}

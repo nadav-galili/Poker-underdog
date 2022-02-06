@@ -126,7 +126,7 @@ const AllGames = ({ teamId }) => {
                   .sort((a, b) => b.profit - a.profit)
                   .map((player) => (
                     <li className="statsRowAllGames" key={player.id}>
-                      <div className="rowPos">{player.gameRank}</div>
+                      <div className="rowPos">{player.gameRank}.</div>
                       <div className="rowImage">
                         <img
                           src={`${apiImage}${player.image}`}
