@@ -906,6 +906,7 @@ h4.mt-4 {
 
 canvas {
   background-color: #fcfcfc;
+  border-radius: 30px;
 }
 
 .playerImage {
@@ -1046,6 +1047,8 @@ tfoot td {
 }
 
 .heroImage img, .heroImagePerHour img {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
   object-fit: cover;
   height: 90%;
   margin-right: 2em;
@@ -1123,7 +1126,7 @@ tfoot td {
   width: 10%;
   text-align: center;
   align-self: center;
-  font-size: 1em;
+  font-size: 1.2em;
   padding-top: 0;
 }
 
@@ -1359,6 +1362,10 @@ tfoot td {
   width: 22%;
 }
 
+.statsHeaderPerHour :nth-child(6) {
+  border-right: none;
+}
+
 .rowProfitPerHour {
   width: 18%;
 }
@@ -1552,6 +1559,8 @@ label {
 
 #lGameAllGames :nth-child(3) {
   width: 29%;
+  text-align: start;
+  padding-left: 0.8em;
 }
 
 #lGameAllGames :nth-child(4) {

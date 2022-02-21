@@ -31,7 +31,7 @@ const config = require("./config");
 //   .catch((err) => console.error(err, "Could not connect to MongoDB..."));
 
 mongoose
-  .connect("mongodb://localhost/backend", {
+  .connect("mongodb://localhost:27017/myFirstDatabase", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

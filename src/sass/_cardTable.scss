@@ -19,6 +19,8 @@
 
 .heroImage {
   & img {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
     object-fit: cover;
     height: 90%;
     margin-right: 2em;
@@ -70,9 +72,6 @@
   align-content: end;
   height: 70px;
   border-bottom: 0.7px solid;
-  // :last-child {
-  //   border-radius: 30px;
-  // }
 }
 
 .statsRowAllGames {
@@ -94,7 +93,7 @@
     width: 10%;
     text-align: center;
     align-self: center;
-    font-size: 1em;
+    font-size: 1.2em;
     padding-top: 0;
   }
   & :nth-child(5) {
@@ -316,6 +315,9 @@
   }
   & :nth-child(5) {
     width: 22%;
+  }
+  & :nth-child(6) {
+    border-right: none;
   }
 }
 .rowProfitPerHour {

@@ -11,7 +11,6 @@ const CurrMonthCard = (props) => {
   const [teamImg, setTeamImg] = useState("");
   const [barChartDetails, setbarChartDetails] = useState({});
 
-
   let currentMonth = new Date();
   let currentMonthNumber = currentMonth.getMonth() + 1;
   currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
@@ -60,7 +59,7 @@ const CurrMonthCard = (props) => {
           barChart.labels.push(player._id.name);
           barChart.datasets[0].data.push(player.totalProfit);
         });
-       
+
         setbarChartDetails(barChart);
       } catch {
         console.log("err1");
@@ -89,7 +88,7 @@ const CurrMonthCard = (props) => {
         <img src={`${apiImage}${teamImg.teamImage}`} alt="" />
         <span>{new Date().toLocaleDateString("en-GB")}</span>
       </div>
-      <div className="col-lg-3 col-12" id="cardTop">
+      <div className="col-lg-4 col-12" id="cardTop">
         <ul className="statsList ">
           <li
             className="statsHero d-flex"
@@ -137,8 +136,8 @@ const CurrMonthCard = (props) => {
             ))}
           </React.Fragment>
         </ul>
-        {barChartDetails.datasets&& (
-        <Bar data={barChartDetails} className="mb-3" />
+        {barChartDetails.datasets && (
+          <Bar data={barChartDetails} className="mb-3" />
         )}
       </div>
     </div>

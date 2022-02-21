@@ -248,7 +248,7 @@ export default function MainTable(props) {
               </strong>
             </p>
             <p className="mb-0">
-              Last Game Was Played:
+              Last Game Played:
               <strong>
                 <span className="ps-1">
                   {totalGames[0] ? daysFromGame : ""}
