@@ -4,10 +4,9 @@ import h2hService from "../../services/h2hService";
 import gameService from "../../services/gameService";
 import { apiImage } from "../../config.json";
 
-
 const H2hGame = ({ gameId }) => {
   const [players, setPlayers] = useState([]);
-  const [game, setGame]=useState({})
+  const [game, setGame] = useState({});
 
   useEffect(() => {
     const h2h = async () => {
@@ -22,21 +21,20 @@ const H2hGame = ({ gameId }) => {
     h2h();
   }, [gameId]);
 
-  useEffect(()=>{
-      const game=async()=>{
-          try{
-              let gameForH2h=await gameService.gameById(gameId);
-              setGame(gameForH2h.data)
-          }
-          catch(error){
-              console.log("Error");
-          }
-      };
-      game()
-  }, [gameId])
-  
+  useEffect(() => {
+    const game = async () => {
+      try {
+        let gameForH2h = await gameService.gameById(gameId);
+        setGame(gameForH2h.data);
+      } catch (error) {
+        console.log("Error");
+      }
+    };
+    game();
+  }, [gameId]);
+
   return (
-      <div className="pb-5">
+    <div className="pb-5">
       <PageHeader titleText="Head 2 Head" />
       <div className="col-lg-8 col-12" id="cardTop">
         <ol className="statsList ">
@@ -56,21 +54,25 @@ const H2hGame = ({ gameId }) => {
           </li>
           {players.length > 0 &&
             players.map((p) => (
-              <div className="statsRow w-100 justify-content-evenly" key={p[0].id}>
-                <div className="rowPlayer">
+              <div
+                className="statsRow w-100 justify-content-evenly"
+                key={p[0].id}
+              >
+                <div className="rowPlayer newGame">
                   <img src={`${apiImage}${p[0].image}`} alt="" />
                 </div>
                 <p className="d-flex align-items-center">
                   <strong>Vs</strong>
                 </p>
-                <div className="rowPlayer">
+                <div className="rowPlayer newGame">
                   <img src={`${apiImage}${p[1].image}`} alt="" />
                 </div>
               </div>
             ))}
         </ol>
       </div>
-      </div>);
+    </div>
+  );
 };
 
 export default H2hGame;

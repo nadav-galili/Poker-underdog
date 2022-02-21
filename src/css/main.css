@@ -1105,6 +1105,10 @@ tfoot td {
   border-bottom: 0.7px solid;
 }
 
+.statsRow div, .statsRowAllGames div {
+  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
+}
+
 .statsRowAllGames :nth-child(1) {
   width: 14%;
 }
@@ -1136,7 +1140,7 @@ tfoot td {
 
 .rowPos, .rowPosTop, .rowPosPerHour {
   font-weight: bold;
-  padding-left: 5px;
+  text-align: center;
   font-size: 1em;
   font-weight: bold;
   align-self: center;
@@ -1190,7 +1194,7 @@ tfoot td {
   width: 25%;
   text-align: center;
   align-self: center;
-  font-size: 0.7em;
+  font-size: 0.9em;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
 
@@ -1201,6 +1205,8 @@ tfoot td {
   text-align: center;
   font-size: 1.2em;
   font-weight: bold;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 
 .rowProfitSuccess {
@@ -1280,6 +1286,11 @@ tfoot td {
   justify-content: start;
 }
 
+#lGameMain {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
 #lGameMain p {
   font-size: 0.9em;
   text-align: center;
@@ -1303,6 +1314,8 @@ tfoot td {
 
 #lGameMain :nth-child(5) {
   width: 17%;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 
 .rowPosPerHour {
@@ -1483,6 +1496,10 @@ label {
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
+.rowPlayer.newGame img {
+  border-radius: 50%;
+}
+
 .rowCash {
   align-self: center;
   min-width: 10%;
@@ -1544,6 +1561,7 @@ label {
 }
 
 #lGameAllGames {
+  border-radius: 0;
   font-size: 0.8em;
   text-align: center;
   text-decoration: underline;
@@ -1569,6 +1587,7 @@ label {
 
 #lGameAllGames :nth-child(5) {
   width: 19%;
+  border-radius: 0;
 }
 
 .gameH2h {
@@ -1605,7 +1624,7 @@ label {
   width: 21%;
   align-self: center;
   text-align: center;
-  font-size: 1.1em;
+  font-size: 1.2em;
 }
 
 .btn-danger.update {
