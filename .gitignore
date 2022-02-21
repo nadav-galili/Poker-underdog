@@ -20,7 +20,7 @@ node-prod.json
 # /coverage
 build.zip
 # production
-/build
+# build
 /uploads
 # misc
 # .DS_Store
