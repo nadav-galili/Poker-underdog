@@ -2,13 +2,14 @@
 
 const _ = require("lodash");
 const { Game, validate } = require("../models/games");
-const { Team } = require("../models/teams");
+// const { Team } = require("../models/teams");
 
 exports.totalGames = async function (req, res) {
   let tGames = await Game.aggregate([
     {
       $match: {
         team_id: req.params.teamId,
+        "players.name": { $not: /Nispach/ },
       },
     },
     {
@@ -18,14 +19,17 @@ exports.totalGames = async function (req, res) {
   res.send(tGames);
 };
 exports.byTeamId = async function (req, res) {
-  let games = await Game.find({ team_id: req.params.teamId }).sort({
+  let games = await Game.find({
+    team_id: req.params.teamId,
+    "players.name": { $not: /Nispach/ },
+  }).sort({
     createdAt: -1,
   });
   res.send(games);
 };
 
 exports.teamStats = async function (req, res) {
-  const team = await Team.find({ _id: req.params.teamId });
+  // const team = await Team.find({ _id: req.params.teamId });
   const table = await Game.aggregate([
     {
       $unwind: {
@@ -36,6 +40,7 @@ exports.teamStats = async function (req, res) {
     {
       $match: {
         team_id: req.params.teamId,
+        "players.name": { $not: /Nispach/ },
       },
     },
     {
@@ -139,6 +144,7 @@ exports.successp = async function (req, res) {
     {
       $match: {
         team_id: req.params.teamId,
+        "players.name": { $not: /Nispach/ },
       },
     },
     {
@@ -204,7 +210,10 @@ exports.successp = async function (req, res) {
 };
 
 exports.lastGame = async function (req, res) {
-  const game = await Game.find({ team_id: req.params.teamId })
+  const game = await Game.find({
+    team_id: req.params.teamId,
+    "players.name": { $not: /Nispach/ },
+  })
     .sort({
       updatedAt: -1,
     })
@@ -223,6 +232,7 @@ exports.profits = async function (req, res) {
     {
       $match: {
         team_id: req.params.teamId,
+        "players.name": { $not: /Nispach/ },
       },
     },
     {
@@ -236,7 +246,10 @@ exports.profits = async function (req, res) {
 };
 
 exports.allGames = async function (req, res) {
-  const game = await Game.find({ team_id: req.body.team_id });
+  const game = await Game.find({
+    team_id: req.body.team_id,
+    "players.name": { $not: /Nispach/ },
+  });
   res.send(game);
 };
 exports.gameById = async function (req, res) {
@@ -255,6 +268,7 @@ exports.dataByMonths = async function (req, res) {
     {
       $match: {
         team_id: req.params.teamId,
+        "players.name": { $not: /Nispach/ },
       },
     },
     {
@@ -304,6 +318,7 @@ exports.agg_profits = async function (req, res) {
     {
       $match: {
         team_id: req.params.teamId,
+        "players.name": { $not: /Nispach/ },
       },
     },
     {
@@ -339,6 +354,7 @@ exports.personalStats = async function (req, res) {
     {
       $match: {
         "players.id": req.params.uId,
+        // "players.name":{$not:/Nispach/}
       },
     },
     {
@@ -466,6 +482,7 @@ exports.gamesByCardName = async function (req, res) {
     {
       $match: {
         team_id: req.params.teamId,
+        "players.name": { $not: /Nispach/ },
       },
     },
     {
@@ -627,6 +644,7 @@ exports.statsPerHour = async function (req, res) {
     {
       $match: {
         team_id: req.params.teamId,
+        "players.name": { $not: /Nispach/ },
       },
     },
     {

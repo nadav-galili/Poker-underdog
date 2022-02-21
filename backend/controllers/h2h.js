@@ -8,7 +8,12 @@ exports.newH2h = async function (req, res) {
   let players = req.body.players;
 
   if (players.length % 2 !== 0) {
-    players.push({ id: "1234", name: "monkey", image: "uploads/monkey.jpg", profit: 0 });
+    players.push({
+      id: "1234",
+      name: "monkey",
+      image: "uploads/monkey.jpg",
+      profit: 0,
+    });
   }
   var splitAt = function (i, xs) {
     var a = xs.slice(0, i);
@@ -32,7 +37,7 @@ exports.newH2h = async function (req, res) {
 
   var result = zip(splitAt(players.length / 2, shuffle(players)));
   let h2h = _.pick(req.body, ["team_id", "gameId"]);
-  h2h.players= result;
+  h2h.players = result;
   let newH2h = new H2h(h2h);
   await newH2h.save();
   res.send(newH2h);
@@ -80,87 +85,92 @@ exports.updateh2h = async function (req, res) {
 
   let newH2h = await H2h.findOneAndUpdate(
     { gameId: req.params.gameId },
-    {$set:{ players: h2h[0].players }},
+    { $set: { players: h2h[0].players } },
     { new: true }
   );
   await res.send(newH2h);
 };
 
-exports.getplayerStats=async function(req, res){
-  const agg =await H2h.aggregate(
-    [
-      {
-        $unwind: {
-          path: '$players'
-        }
-      }, {
-        $unwind: {
-          path: '$players'
-        }
-      }, {
-        $match: {
-         "players.id": req.params.pId
-        }
-      }, {
-        $group: {
-          _id: {
-          name: '$players.name', 
-            player_id: '$players.id'
-          }, 
-          totalPoints: {
-            $sum: '$players.points'
-          }
-        }
-      }
-    ]
-  );
-  res.send(agg)
-}
-
-exports.h2hGamesByTeam=async function(req, res){
-  const agg=await H2h.aggregate(
-    [
-      {
-        $match: {
-          team_id:req.params.teamId
-        }
-      }, {
-        $unwind: {
-          path: '$players'
-        }
-      }, {
-        $unwind: {
-          path: '$players'
-        }
-      }, {
-        $group: {
-          _id: {
-            name: '$players.name', 
-            image: '$players.image', 
-            player_id: '$players.id'
-          }, 
-          totalPoints: {
-            $sum: '$players.points'
-          }, 
-          numOfGames: {
-            $sum: 1
-          }, 
-          avgPoints: {
-            $avg: '$players.points'
-          }
-        }
+exports.getplayerStats = async function (req, res) {
+  const agg = await H2h.aggregate([
+    {
+      $unwind: {
+        path: "$players",
       },
-      {
-        $sort: {
-            // totalPoints: -1
-          avgPoints:-1
-        }}
-    ]
-  )
-  await res.send(agg)
-}
+    },
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $match: {
+        "players.id": req.params.pId,
+      },
+    },
+    {
+      $group: {
+        _id: {
+          name: "$players.name",
+          player_id: "$players.id",
+        },
+        totalPoints: {
+          $sum: "$players.points",
+        },
+      },
+    },
+  ]);
+  res.send(agg);
+};
 
-exports.teamAllGames=async function(req, res){
-  let game=await H2h.find({team_id:req.params.teamId}).sort({createdAt:-1});
+exports.h2hGamesByTeam = async function (req, res) {
+  const agg = await H2h.aggregate([
+    {
+      $match: {
+        team_id: req.params.teamId,
+      },
+    },
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $group: {
+        _id: {
+          name: "$players.name",
+          image: "$players.image",
+          player_id: "$players.id",
+        },
+        totalPoints: {
+          $sum: "$players.points",
+        },
+        numOfGames: {
+          $sum: 1,
+        },
+        avgPoints: {
+          $avg: "$players.points",
+        },
+      },
+    },
+    {
+      $sort: {
+        // totalPoints: -1
+        avgPoints: -1,
+      },
+    },
+  ]);
+  await res.send(agg);
+};
+
+exports.teamAllGames = async function (req, res) {
+  let game = await H2h.find({ team_id: req.params.teamId }).sort({
+    createdAt: -1,
+  });
   res.send(game);
-}
+};
