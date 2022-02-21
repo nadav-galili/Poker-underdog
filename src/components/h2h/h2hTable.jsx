@@ -15,7 +15,8 @@ const H2hTable = (props) => {
   useEffect(() => {
     const getTable = async () => {
       let table = await h2hService.getPointsByTeam(teamId);
-      table = table.data;
+      table = table.data.filter((player) => player._id.name !== "Nispach");
+
       setData(table);
       let myHero = table.shift();
       setHero(myHero);
