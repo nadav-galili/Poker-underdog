@@ -34,7 +34,7 @@
 }
 
 #mainStats {
-  height: 13.5em;
+  height: 14.7em;
   border-radius: 30px;
   background-color: rgb(255, 255, 255);
   border-style: none;
@@ -179,6 +179,9 @@
     & svg {
       margin: 5px 0 0 5px;
     }
+  }
+  #mainStats {
+    height: 13.5em;
   }
 }
 

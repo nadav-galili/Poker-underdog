@@ -148,7 +148,7 @@ h1 {
 }
 
 #mainStats {
-  height: 13.5em;
+  height: 14.7em;
   border-radius: 30px;
   background-color: white;
   border-style: none;
@@ -289,6 +289,9 @@ h1 {
   }
   #cardFooter svg {
     margin: 5px 0 0 5px;
+  }
+  #mainStats {
+    height: 13.5em;
   }
 }
 
