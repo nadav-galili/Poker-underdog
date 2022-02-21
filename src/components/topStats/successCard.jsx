@@ -94,7 +94,7 @@ const SuccessCard = (props) => {
         </div>
       )}
       {data.length > 0 && (
-        <div className="col-lg-3 col-12" id="cardTop">
+        <div className="col-lg-4 col-12" id="cardTop">
           <ul className="statsList ">
             <li
               className="statsHero d-flex w-100"
@@ -130,7 +130,7 @@ const SuccessCard = (props) => {
                       src={
                         data.length > 0 ? `${apiImage}${player._id.image}` : ""
                       }
-                      alt="playr list row"
+                      alt="player list row"
                     />
                   </div>
                   <div className="rowName">

@@ -76,11 +76,7 @@ const AllGames = ({ teamId }) => {
 
         {games &&
           items.map((g) => (
-            <div
-              className="col-lg-4 col-12 p-0 "
-              id="card-top"
-              key={g.createdAt}
-            >
+            <div className="col-lg-4 col-12 " id="card-top" key={g.createdAt}>
               <ol className="statsList">
                 <li
                   id="lastGameHero"

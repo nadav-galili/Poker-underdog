@@ -15,16 +15,17 @@ const NewGame = (props) => {
 
   useEffect(() => {
     const players = async () => {
-      try{
-        let playersInGame = await gameService.gameById(props.match.params.gameId);
+      try {
+        let playersInGame = await gameService.gameById(
+          props.match.params.gameId
+        );
         setData(playersInGame.data);
         setId(playersInGame.data._id);
-      }catch(e){
-        console.log("tt")
+      } catch (e) {
+        console.log("tt");
 
-        console.log(e,"EE");
+        console.log(e, "EE");
       }
-  
     };
 
     players();
@@ -112,136 +113,136 @@ const NewGame = (props) => {
     });
   };
 
-  if(!id){
+  if (!id) {
+    return <div className="text-primary">No Games</div>;
+  } else {
     return (
-    <div className="text-primary">No Games</div>
-  )}else{
-  return (
-    <div className="container">
-      <PageHeader titleText="Game No." />
-      <p className="text-danger">{id}</p>
-      <p className="text-primary">
-        Started At:{" "}
-        {`${new Date(data.createdAt).toLocaleDateString("en-GB")}
+      <div className="container">
+        <PageHeader titleText="Game No." />
+        <p className="text-danger">{id}</p>
+        <p className="text-primary">
+          Started At:{" "}
+          {`${new Date(data.createdAt).toLocaleDateString("en-GB")}
         ${new Date(data.createdAt).toLocaleString("en-US", {
           hour: "2-digit",
           minute: "2-digit",
           hour12: false,
         })}`}
-      </p>
-      <div
-        className={`alert alert-success ${alert} fade show w-75 py-1`}
-        role="alert"
-      >
-        {playerName} cashed in{" "}
-        {`${new Date().toLocaleString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false,
-        })}`}
-      </div>
-      {data.length < 1 && (
-        <div className="spinner pt-2">
-          <SpinnerInfinity
-            size={130}
-            thickness={151}
-            speed={70}
-            color="rgba(252, 252, 252, 1)"
-            secondaryColor="rgba(108, 20, 180, 1)"
-            enabled={data.length === 0 ? true : false}
-          />
+        </p>
+        <div
+          className={`alert alert-success ${alert} fade show w-75 py-1`}
+          role="alert"
+        >
+          {playerName} cashed in{" "}
+          {`${new Date().toLocaleString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+          })}`}
         </div>
-      )}
+        {data.length < 1 && (
+          <div className="spinner pt-2">
+            <SpinnerInfinity
+              size={130}
+              thickness={151}
+              speed={70}
+              color="rgba(252, 252, 252, 1)"
+              secondaryColor="rgba(108, 20, 180, 1)"
+              enabled={data.length === 0 ? true : false}
+            />
+          </div>
+        )}
 
-      {data.players && (
-        <div className="col-lg-8 col-12" id="newGameTop">
-          <ol className="statsList">
-            <li
-              id="gameLi"
-              className="statsHero d-flex"
-              style={{
-                backgroundImage: `url(${
-                  process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
-                })`,
-              }}
-            >
-              <div className="gameHeaders d-flex justify-content-evenly">
-                <div className="P1">Player</div>
-                <div className="add1">Add 50</div>
-                <div className="Cashing1">Cashing</div>
-                <div className="Hand1">Cash In Hand</div>
-                <div className="Profit1">Profit</div>
-                <div className="">Cancel </div>
-              </div>
-            </li>
-            <React.Fragment>
-              {data.players.map((player) => (
-                <li
-                  className="statsRows w-100 d-flex justify-content-evenly"
-                  key={player.id}
-                >
-                  <div className="rowPlayer">
-                    <img src={`${apiImage}${player.image}`} alt="player" />
-                  </div>
-                  <i
-                    className="fas fa-money-bill-wave"
-                    onClick={() => addCashing(player.id)}
-                  >
-                    Add 50$
-                  </i>
-
-                  <div className="rowCash">{player.cashing}</div>
-                  <div className="rowCashInHand">
-                    <input
-                      type="number"
-                      className="cashInHand"
-                      onChange={(e) => handleChange(player.id, e)}
-                    />
-                  </div>
-                  <div className="playerProfit ">{player.profit}</div>
-                  <i
-                    className="fas fa-minus-circle"
-                    onClick={() => undoCashing(player.id)}
-                  >
-                    Cancel
-                  </i>
-                </li>
-              ))}
-            </React.Fragment>
-            <li className="statsRows w-100 d-flex justify-content-evenly">
-              <div className="rowPlayer text-primary"></div>
-              <div className="fas fa-money-bill-wave text-primary">Total</div>
-              <div className="rowCash text-primary">
-                {data.players.reduce((a, b) => {
-                  return a + b.cashing;
-                }, 0)}
-              </div>
-              <div className="rowCashInHand"></div>
-              <div className="playerProfit text-primary">
-                {data.players.reduce((a, b) => {
-                  return a + b.profit;
-                }, 0)}
-              </div>
-              <div className="fas fa-minus-circle text-white">Cancel</div>
-            </li>
-            <div className="buttonsGame d-flex justify-content-between">
-              <div
-                className="btn btn-primary update m-2"
-                onClick={() => {
-                  updateGame();
+        {data.players && (
+          <div className="col-lg-8 col-12" id="newGameTop">
+            <ol className="statsList">
+              <li
+                id="gameLi"
+                className="statsHero d-flex"
+                style={{
+                  backgroundImage: `url(${
+                    process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
+                  })`,
                 }}
               >
-                Update Game
-              </div>
-              <div className="btn btn-danger update m-2">Reset Game</div>
-            </div>
-          </ol>
-        </div>
-      )}
+                <div className="gameHeaders d-flex justify-content-evenly">
+                  <div className="P1">Player</div>
+                  <div className="add1">Add 50</div>
+                  <div className="Cashing1">Cashing</div>
+                  <div className="Hand1">Cash In Hand</div>
+                  <div className="Profit1">Profit</div>
+                  <div className="">Cancel </div>
+                </div>
+              </li>
+              <React.Fragment>
+                {data.players.map((player) => (
+                  <li
+                    className="statsRows w-100 d-flex justify-content-evenly"
+                    key={player.id}
+                  >
+                    <div className="rowPlayer newGame">
+                      <img src={`${apiImage}${player.image}`} alt="player" />
+                    </div>
+                    <i
+                      className="fas fa-money-bill-wave"
+                      onClick={() => addCashing(player.id)}
+                    >
+                      Add 50$
+                    </i>
 
-      <H2hGame gameId={data._id} className="mb-2" />
-    </div>
-  )}
+                    <div className="rowCash">{player.cashing}</div>
+                    <div className="rowCashInHand">
+                      <input
+                        type="number"
+                        className="cashInHand"
+                        onChange={(e) => handleChange(player.id, e)}
+                      />
+                    </div>
+                    <div className="playerProfit ">{player.profit}</div>
+                    <i
+                      className="fas fa-minus-circle"
+                      onClick={() => undoCashing(player.id)}
+                    >
+                      Cancel
+                    </i>
+                  </li>
+                ))}
+              </React.Fragment>
+              <li className="statsRows w-100 d-flex justify-content-evenly">
+                <div className="rowPlayer text-primary"></div>
+                <div className="fas fa-money-bill-wave text-primary">Total</div>
+                <div className="rowCash text-primary">
+                  {data.players.reduce((a, b) => {
+                    return a + b.cashing;
+                  }, 0)}
+                </div>
+                <div className="rowCashInHand"></div>
+                <div className="playerProfit text-primary">
+                  {data.players.reduce((a, b) => {
+                    return a + b.profit;
+                  }, 0)}
+                </div>
+                <div className="fas fa-minus-circle text-white">Cancel</div>
+              </li>
+              <div className="buttonsGame d-flex justify-content-between">
+                <div
+                  className="btn btn-primary update m-2"
+                  onClick={() => {
+                    updateGame();
+                  }}
+                >
+                  Update Game
+                </div>
+                <div className="btn btn-danger update m-2">Reset Game</div>
+              </div>
+            </ol>
+          </div>
+        )}
+
+        <H2hGame gameId={data._id} className="mb-2" />
+      </div>
+    );
+  }
 };
 
 export default NewGame;

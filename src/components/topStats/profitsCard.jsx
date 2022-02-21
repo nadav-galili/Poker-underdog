@@ -98,7 +98,7 @@ const ProfitsCard = (props) => {
         <img src={`${apiImage}${teamImg.teamImage}`} alt="" />
         <span>{new Date().toLocaleDateString("en-GB")}</span>
       </div>
-      <div className="col-lg-3 col-12" id="cardTop">
+      <div className="col-lg-4 col-12" id="cardTop">
         <ul className="statsList ">
           <li
             className="statsHero d-flex w-100"
@@ -160,7 +160,11 @@ const ProfitsCard = (props) => {
         <h7 className="text-white justify-content-center d-flex">
           Players Profit In % From Top 10 Profits
         </h7>
-        {dataChartDetails.hasOwnProperty('labels')?<Doughnut data={dataChartDetails} className="mb-3 pb-3"/>:""}
+        {dataChartDetails.hasOwnProperty("labels") ? (
+          <Doughnut data={dataChartDetails} className="mb-3 pb-3" />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
