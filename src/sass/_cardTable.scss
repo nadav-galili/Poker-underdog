@@ -343,6 +343,11 @@
 .heroImagePerHour {
   @extend .heroImage;
   height: 80%;
+  & img {
+    padding-right: 1.2em;
+    margin-right: 0;
+    margin-top: 1em;
+  }
 }
 
 #lGameP2P {
