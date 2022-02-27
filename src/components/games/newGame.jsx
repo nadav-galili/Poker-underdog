@@ -42,20 +42,23 @@ const NewGame = (props) => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        let player = data.players.find((e) => playerId === e.id);
-        player.cashing += 50;
-        player.numOfCashing += 1;
         let game = { ...data };
         game.gameId = props.match.params.gameId;
-        delete game._id;
-        delete game.__v;
-        setData(game);
-        gameService.updateGame(game.gameId, game).then((res) => {});
-        const chips = new Audio(process.env.PUBLIC_URL + `sounds/chips.mp3`);
-        chips.play();
-        setAlert("");
-        setPlayerName(player.name);
-        Swal.fire(`Added cashing to ${player.name}`);
+        if (game.gameId) {
+          let player = data.players.find((e) => playerId === e.id);
+          player.cashing += 50;
+          player.numOfCashing += 1;
+          delete game._id;
+          delete game.__v;
+          setData(game);
+
+          gameService.updateGame(game.gameId, game);
+          const chips = new Audio(process.env.PUBLIC_URL + `sounds/chips.mp3`);
+          chips.play();
+          setAlert("");
+          setPlayerName(player.name);
+          Swal.fire(`Added cashing to ${player.name}`);
+        }
       }
     });
   };

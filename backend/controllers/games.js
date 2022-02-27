@@ -1,7 +1,9 @@
 // const Joi = require("@hapi/joi");
 
 const _ = require("lodash");
+const { isValidElement } = require("react");
 const { Game, validate } = require("../models/games");
+const mongoose = require("mongoose");
 // const { Team } = require("../models/teams");
 
 exports.totalGames = async function (req, res) {
@@ -456,11 +458,12 @@ exports.newGame = async function (req, res) {
 };
 
 exports.updateGame = async function (req, res) {
+  let id = mongoose.Types.ObjectId(req.params.gameId);
   const { error } = validate(req.body);
-  if (error) res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send(error.details[0].message);
 
   let game = await Game.findOneAndUpdate(
-    { _id: req.body.gameId },
+    { _id: id },
     { players: req.body.players, isOpen: req.body.isOpen },
     { new: true }
   );

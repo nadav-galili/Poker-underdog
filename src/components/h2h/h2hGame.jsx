@@ -19,7 +19,7 @@ const H2hGame = ({ gameId }) => {
       }
     };
     h2h();
-  }, [gameId]);
+  }, []);
 
   useEffect(() => {
     const game = async () => {
@@ -31,7 +31,7 @@ const H2hGame = ({ gameId }) => {
       }
     };
     game();
-  }, [gameId]);
+  }, []);
 
   return (
     <div className="pb-5">
