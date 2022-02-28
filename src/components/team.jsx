@@ -92,6 +92,17 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
           </p>
           {liveGame && (
             <div className="liveGames ">
+              <Link
+                className=""
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Only Team Manger can edit games details"
+                to={`/games/${liveGame._id}`}
+              >
+                Take Control Of Game
+                <i className="ps-2 fas fa-angle-double-right"></i>
+              </Link>
+              <br></br>
               <span className="display-6 ">
                 <u>Live Game</u>
               </span>
@@ -218,11 +229,14 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
               ))}
             </ul>
           </div>
-          <Link className="mb-2 button-71" to={`/new-game/${team._id}`}>
-            Start a new game
-            <GiCardKingClubs className="ms-2" />
-            <i className="ps-2 fas fa-angle-double-right"></i>
-          </Link>
+          {!liveGame && (
+            <Link className="mb-2 button-71" to={`/new-game/${team._id}`}>
+              Start a new game
+              <GiCardKingClubs className="ms-2" />
+              <i className="ps-2 fas fa-angle-double-right"></i>
+            </Link>
+          )}
+
           <p className="card-text border-top pt-2">
             Created At:{new Date(team.createdAt).toLocaleDateString("en-GB")}
           </p>
