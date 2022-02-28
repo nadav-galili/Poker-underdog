@@ -1451,6 +1451,10 @@ tfoot td {
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
+#perHourHeroSide {
+  min-width: 40%;
+}
+
 .form-control {
   border: none !important;
   padding: 0 !important;

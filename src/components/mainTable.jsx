@@ -69,6 +69,9 @@ export default function MainTable(props) {
       setTotalGames(totalGames.data);
 
       let h2h = await h2hService.getPointsByTeam(teamId);
+      if (h2h.data[0]._id.name === "Nispach") {
+        h2h.data.shift();
+      }
       setH2h(h2h.data);
 
       let totoalg = [...table];
