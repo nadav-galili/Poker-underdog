@@ -1118,7 +1118,7 @@ tfoot td {
 }
 
 .statsRowAllGames :nth-child(2) img {
-  width: 80%;
+  width: 60px;
 }
 
 .statsRowAllGames :nth-child(3) {
@@ -1449,6 +1449,10 @@ tfoot td {
   margin-left: -0.5rem;
   object-fit: cover;
   background-image: linear-gradient(#6c14b4, #4e4949);
+}
+
+#perHourHeroSide {
+  min-width: 40%;
 }
 
 .form-control {

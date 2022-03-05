@@ -172,7 +172,7 @@ const StatsPerHourCard = (props) => {
                 })`,
               }}
             >
-              <div className="statsInfo flex-fill">
+              <div className="statsInfo flex-fill" id="perHourHeroSide">
                 <div className="pos">1.</div>
                 <Link to={`/players-stats/${hero._id.player_id}`} id="heroName">
                   {statsHour.length > 0 ? hero._id.name : ""}

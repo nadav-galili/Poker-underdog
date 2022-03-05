@@ -85,7 +85,7 @@
   & :nth-child(2) {
     width: 20%;
     & img {
-      width: 80%;
+      width: 60px;
     }
   }
   & :nth-child(3) {
@@ -394,6 +394,9 @@
     object-fit: cover;
     background-image: linear-gradient(#6c14b4, #4e4949);
   }
+}
+#perHourHeroSide {
+  min-width: 40%;
 }
 
 // * {
