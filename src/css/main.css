@@ -1118,7 +1118,7 @@ tfoot td {
 }
 
 .statsRowAllGames :nth-child(2) img {
-  width: 80%;
+  width: 60px;
 }
 
 .statsRowAllGames :nth-child(3) {

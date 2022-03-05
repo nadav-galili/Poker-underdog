@@ -262,14 +262,15 @@ exports.dataByMonths = async function (req, res) {
     {
       $unwind: {
         path: "$players",
-
         preserveNullAndEmptyArrays: true,
       },
     },
     {
       $match: {
         team_id: req.params.teamId,
-        // "players.name": { $not: /Nispach/ },
+        $expr: {
+          $gte: [{ $month: "$createdAt" }, { $month: new Date() }],
+        },
       },
     },
     {
