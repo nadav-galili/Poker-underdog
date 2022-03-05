@@ -2,25 +2,31 @@ import React, { useState, useEffect } from "react";
 import PageHeader from "./common/pageHeader";
 import teamService from "../services/teamService";
 import gameService from "../services/gameService";
+import userService from "../services/userService";
 import h2hService from "../services/h2hService";
 import Player from "./player";
-import {apiImage} from "../config.json"
+import { apiImage } from "../config.json";
 
 const SelectPlayers = (props) => {
   const [data, setData] = useState([props.match.params.teamId]);
   const [selected, setSelected] = useState([]);
   const [started, setStarted] = useState("");
+  const [me, setMe] = useState({});
 
   useEffect(() => {
     const fetchPlayers = async () => {
       if (data.length > 0) {
         const players = await teamService.getTeam(data);
         const game = await gameService.inProgress(props.match.params.teamId);
-
+        const getGameManager = await userService.getUserDetails();
+        me.id = getGameManager.data._id;
+        me.name = getGameManager.data.nickName;
+        setMe(me);
         if (game.data.length > 0) {
           setSelected(game.data[0].players);
           setStarted(game.data[0]);
         }
+
         setData(players.data);
       }
     };
@@ -53,7 +59,7 @@ const SelectPlayers = (props) => {
         players: selected,
         team_name: data.name,
         team_id: data._id,
-      
+        game_manager: me,
       };
       await gameService.newGame(game).then((res) => {
         let newGame = { ...res.data };
@@ -69,22 +75,25 @@ const SelectPlayers = (props) => {
         team_id: started.team_id,
         gameId: started._id,
       };
-     await  gameService.updateGame(started._id, game).then((res) => {
-          res.data.gameId=res.data._id
-         h2hService.newH2h(res.data)
-         props.history.push(`/games/${res.data._id}`);
+      await gameService.updateGame(started._id, game).then((res) => {
+        res.data.gameId = res.data._id;
+        h2hService.newH2h(res.data);
+        props.history.push(`/games/${res.data._id}`);
       });
     }
   }
 
   return (
     <div className="container">
-      <h1>
-       Start A New Game 
-      </h1>
+      <h1>Start A New Game</h1>
       <h2 className="teamName">{data.name}</h2>
       <h3>Team Number:{data.teamNumber}</h3>
-      <img src={`${apiImage}${data.teamImage}`} alt={data.name} width="200" height="200"></img>
+      <img
+        src={`${apiImage}${data.teamImage}`}
+        alt={data.name}
+        width="200"
+        height="200"
+      ></img>
       <PageHeader titleText="Select players for current game" />
       <div className="playersInGame"></div>
       <div className="row container">

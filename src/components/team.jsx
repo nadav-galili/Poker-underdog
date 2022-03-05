@@ -98,6 +98,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
                 data-placement="top"
                 title="Only Team Manger can edit games details"
                 to={`/games/${liveGame._id}`}
+                takeControl="yes"
               >
                 Take Control Of Game
                 <i className="ps-2 fas fa-angle-double-right"></i>

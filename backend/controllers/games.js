@@ -1,7 +1,6 @@
 // const Joi = require("@hapi/joi");
 
 const _ = require("lodash");
-const { isValidElement } = require("react");
 const { Game, validate } = require("../models/games");
 const mongoose = require("mongoose");
 // const { Team } = require("../models/teams");
@@ -446,12 +445,32 @@ exports.personalStats = async function (req, res) {
   res.send(agg);
 };
 
+//update game manager if a player takes control of game
+exports.updateManager = async function (req, res) {
+  // const { error } = validate(req.body);
+  // if (error) return res.status(400).send(error.details[0].message);
+  let id = mongoose.Types.ObjectId(req.params.gameId);
+
+  let game = await Game.findOneAndUpdate(
+    { _id: id },
+    { $set: { game_manager: req.body } },
+    { returnNewDocument: true }
+  );
+  res.send(game);
+};
+
 exports.newGame = async function (req, res) {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   let game = new Game(
-    _.pick(req.body, ["team_name", "team_id", "players", "isOpen"])
+    _.pick(req.body, [
+      "team_name",
+      "team_id",
+      "players",
+      "isOpen",
+      "game_manager",
+    ])
   );
   await game.save();
   res.send(_.pick(game, ["_id", "team_name", "players", "isOpen", "team_id"]));

@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from "react";
 import gameService from "../../services/gameService";
 import h2hService from "../../services/h2hService";
+import userService from "../../services/userService";
 import PageHeader from "../common/pageHeader";
 import { SpinnerInfinity } from "spinners-react";
 import { apiImage } from "../../config.json";
 import H2hGame from "../h2h/h2hGame";
 import Swal from "sweetalert2";
-
+import { toast } from "react-toastify";
 const NewGame = (props) => {
   const [data, setData] = useState({});
   const [id, setId] = useState("");
   const [alert, setAlert] = useState("visually-hidden");
   const [playerName, setPlayerName] = useState("");
+  const [me, setMe] = useState({});
+  const [manager, setManager] = useState("");
 
   useEffect(() => {
     const players = async () => {
+      const getGameManager = await userService.getUserDetails();
+      me.id = getGameManager.data._id;
+      me.name = getGameManager.data.nickName;
+      setMe(me);
+
       try {
         let playersInGame = await gameService.gameById(
           props.match.params.gameId
@@ -22,14 +30,17 @@ const NewGame = (props) => {
         setData(playersInGame.data);
         setId(playersInGame.data._id);
       } catch (e) {
-        console.log("tt");
-
         console.log(e, "EE");
       }
     };
 
     players();
   }, [props.match.params.gameId]);
+
+  useEffect(() => {
+    const manager = data.game_manager;
+    setManager(manager);
+  }, [data.game_manager]);
 
   const addCashing = (playerId) => {
     Swal.fire({
@@ -116,6 +127,34 @@ const NewGame = (props) => {
     });
   };
 
+  const takeControl = async () => {
+    Swal.fire({
+      title: "Take control of game?",
+      text: "",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setManager(me);
+        if (manager)
+          toast.success(`🤟 ${me.name} is now manager`, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+      }
+    });
+    await gameService.updateManager(id, me);
+    // window.location = `/#/games/${id}`;
+  };
+
   if (!id) {
     return <div className="text-primary">No Games</div>;
   } else {
@@ -131,6 +170,10 @@ const NewGame = (props) => {
           minute: "2-digit",
           hour12: false,
         })}`}
+        </p>
+        <p className="m-0 mb-1 p-0 text-primary">
+          {/* Game Manager:<span>{data.game_manager.name}</span> */}
+          Game Manager:<span>{manager ? manager.name : ""}</span>
         </p>
         <div
           className={`alert alert-success ${alert} fade show w-75 py-1`}
@@ -156,7 +199,7 @@ const NewGame = (props) => {
           </div>
         )}
 
-        {data.players && (
+        {data.players && manager.id === me.id && (
           <div className="col-lg-8 col-12" id="newGameTop">
             <ol className="statsList">
               <li
@@ -240,6 +283,16 @@ const NewGame = (props) => {
               </div>
             </ol>
           </div>
+        )}
+        {data.players && manager.id !== me.id && (
+          <button
+            className="button-72"
+            onClick={() => {
+              takeControl();
+            }}
+          >
+            Take control of game
+          </button>
         )}
 
         <H2hGame gameId={data._id} className="mb-2" />

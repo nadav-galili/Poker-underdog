@@ -56,6 +56,7 @@ function App() {
     fetchUser();
   }, []);
 
+  // console.log(details);
   const style = {
     minHeight: 780,
   };

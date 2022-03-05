@@ -66,7 +66,9 @@ export function totalGames(teamId) {
   return http.get(`${apiUrl}/games/totalGames/${teamId}`);
 }
 
-
+export function updateManager(id, manager) {
+  return http.put(`${apiUrl}/games/updateManager/${id}`, manager);
+}
 
 export default {
   lastGame,
@@ -86,4 +88,5 @@ export default {
   totalGames,
   agg_profits,
   statsPerHour,
+  updateManager,
 };
