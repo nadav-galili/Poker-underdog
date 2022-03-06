@@ -78,12 +78,12 @@ const Demo = () => {
             className="demo-img"
           /> */}
           {/* <video src={process.env.PUBLIC_URL + "demo/demo1.mp4"}></video> */}
-         <div className="video col-lg-6 col-12">
+          {/* <div className="video col-lg-6 col-12">
          <video width="100%" controls className="demoVideo ">
             <source src={process.env.PUBLIC_URL + "demo/demo1.mp4"} />
           </video>
-         </div>
-        
+         </div> */}
+
           <li>
             In this page you can:
             <ul>
@@ -95,11 +95,11 @@ const Demo = () => {
             </ul>
           </li>
           <li>Table & statistics</li>
-          <div className="video col-lg-6 col-12">
+          {/* <div className="video col-lg-6 col-12">
           <video width="100%" controls className="demoVideo">
             <source src={process.env.PUBLIC_URL + "demo/demo2.mp4"} />
           </video>
-          </div>
+          </div> */}
           <li>Start a new game:</li>
           <ul>
             <li>Select the players that will play in the game</li>
