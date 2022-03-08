@@ -471,6 +471,7 @@ exports.newGame = async function (req, res) {
       "players",
       "isOpen",
       "game_manager",
+      "cashing_details",
     ])
   );
   await game.save();
@@ -484,7 +485,11 @@ exports.updateGame = async function (req, res) {
 
   let game = await Game.findOneAndUpdate(
     { _id: id },
-    { players: req.body.players, isOpen: req.body.isOpen },
+    {
+      players: req.body.players,
+      isOpen: req.body.isOpen,
+      cashing_details: req.body.cashing_details,
+    },
     { new: true }
   );
 
@@ -757,5 +762,11 @@ exports.statsPerHour = async function (req, res) {
     },
   ]);
 
+  res.send(data);
+};
+
+exports.fetchCashingDetails = async function (req, res) {
+  let data = await Game.findById(req.params.gameId);
+  data = data.cashing_details;
   res.send(data);
 };

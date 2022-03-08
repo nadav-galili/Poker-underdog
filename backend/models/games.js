@@ -30,6 +30,10 @@ const gameSchema = new mongoose.Schema(
       type: Object,
       required: true,
     },
+    cashing_details: {
+      type: Array,
+      required: true,
+    },
   },
   { timestamps: true }
 );
@@ -46,6 +50,7 @@ function validateGame(game) {
     updatedAt: Joi.date(),
     gameId: Joi.string(),
     game_manager: Joi.object(),
+    cashing_details: Joi.array(),
   });
   return schema.validate(game);
 }

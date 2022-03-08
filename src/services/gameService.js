@@ -70,6 +70,10 @@ export function updateManager(id, manager) {
   return http.put(`${apiUrl}/games/updateManager/${id}`, manager);
 }
 
+export function fetchCashingDetails(gameId) {
+  return http.get(`${apiUrl}/games/cashingDetails/${gameId}`);
+}
+
 export default {
   lastGame,
   table,
@@ -89,4 +93,5 @@ export default {
   agg_profits,
   statsPerHour,
   updateManager,
+  fetchCashingDetails,
 };

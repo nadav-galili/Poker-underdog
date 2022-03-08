@@ -60,6 +60,7 @@ const SelectPlayers = (props) => {
         team_name: data.name,
         team_id: data._id,
         game_manager: me,
+        cashing_details: [],
       };
       await gameService.newGame(game).then((res) => {
         let newGame = { ...res.data };

@@ -8,6 +8,8 @@ import { apiImage } from "../../config.json";
 import H2hGame from "../h2h/h2hGame";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import CashingDetails from "./cashingDetails";
+
 const NewGame = (props) => {
   const [data, setData] = useState({});
   const [id, setId] = useState("");
@@ -54,6 +56,7 @@ const NewGame = (props) => {
     }).then((result) => {
       if (result.isConfirmed) {
         let game = { ...data };
+        console.log("g", game);
         game.gameId = props.match.params.gameId;
         if (game.gameId) {
           let player = data.players.find((e) => playerId === e.id);
@@ -61,6 +64,13 @@ const NewGame = (props) => {
           player.numOfCashing += 1;
           delete game._id;
           delete game.__v;
+          let cashingDetails = {
+            playerId: player.id,
+            playerName: player.name,
+            playerCashing: 50,
+            time: new Date(),
+          };
+          game.cashing_details.push(cashingDetails);
           setData(game);
 
           gameService.updateGame(game.gameId, game);
@@ -296,6 +306,7 @@ const NewGame = (props) => {
         )}
 
         <H2hGame gameId={data._id} className="mb-2" />
+        <CashingDetails gameId={id} updated={data} />
       </div>
     );
   }
