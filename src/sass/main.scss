@@ -14,11 +14,12 @@
 @import "signUp";
 @import "newGame";
 @import "lastGame";
+@import "cashingDetails";
 
 main {
   background-repeat: no-repeat;
   background-size: cover;
-  background-color:$backgroundBlack;
+  background-color: $backgroundBlack;
 }
 
 .teams p {

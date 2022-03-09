@@ -8,16 +8,29 @@ const CashingDetails = ({ gameId, updated }) => {
   useEffect(() => {
     const getCashingDetails = async () => {
       const fetchDetails = await gameService.fetchCashingDetails(gameId);
-      console.log(fetchDetails.data);
       setCashing(fetchDetails.data);
     };
     getCashingDetails();
   }, [updated]);
 
   return (
-    <div className="row">
+    <div className="col-10 col-lg-6 p-2">
       <PageHeader titleText="Cashing Details" />
-      <div className="col-12 mt-0 mb-0 text-white">gggg</div>
+      <ul className=" cashingDetails bg-white p-0">
+        {cashing.map((cash) => (
+          <li className="d-flex " id="cashingList">
+            <p id="cashingName">{cash.playerName}</p>
+            <p id="cashingAmmount">{cash.playerCashing}</p>
+            <p id="cashingTime">
+              {new Date(cash.time).toLocaleString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+              })}
+            </p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

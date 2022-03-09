@@ -1660,6 +1660,24 @@ label {
   width: 5%;
 }
 
+#cashingList {
+  border-bottom: 1px solid black;
+}
+
+#cashingList:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#cashingName {
+  width: 40%;
+  text-align: start;
+  justify-self: end;
+}
+
+#cashingAmmount {
+  width: 30%;
+}
+
 main {
   background-repeat: no-repeat;
   background-size: cover;

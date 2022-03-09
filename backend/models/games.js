@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 
 const gameSchema = new mongoose.Schema(
   {
+    __v: {
+      type: String,
+    },
     isOpen: {
       type: Boolean,
       default: false,
@@ -42,6 +45,7 @@ const Game = mongoose.model("Game", gameSchema);
 
 function validateGame(game) {
   const schema = Joi.object({
+    __v: Joi.string(),
     team_name: Joi.string().min(2).max(255).required(),
     team_id: Joi.string().min(24).max(24).required(),
     players: Joi.array().required(),

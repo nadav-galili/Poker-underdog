@@ -34,7 +34,7 @@ const H2hGame = ({ gameId }) => {
   }, []);
 
   return (
-    <div className="pb-5">
+    <div className="pb-1">
       <PageHeader titleText="Head 2 Head" />
       <div className="col-lg-8 col-12" id="cardTop">
         <ol className="statsList ">

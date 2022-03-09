@@ -768,5 +768,6 @@ exports.statsPerHour = async function (req, res) {
 exports.fetchCashingDetails = async function (req, res) {
   let data = await Game.findById(req.params.gameId);
   data = data.cashing_details;
+  data = data.reverse();
   res.send(data);
 };
