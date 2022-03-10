@@ -147,6 +147,15 @@
   border-bottom-left-radius: 5px !important;
   border-bottom-right-radius: 5px !important;
 }
+
+#liveGameRow {
+  div {
+    width: 20%;
+    align-self: center;
+    font-size: 1.4em;
+    padding-top: 0;
+  }
+}
 // *{
 //   outline: 1px solid red;
 // }

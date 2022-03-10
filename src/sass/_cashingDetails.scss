@@ -3,9 +3,16 @@
   &:nth-child(even) {
     background-color: #f2f2f2;
   }
+  p {
+    margin: 0;
+  }
+  :first-child {
+    padding-left: 0.5em;
+  }
 }
 
 .cashingDetails {
+  border: 1px solid black;
 }
 
 #cashingName {

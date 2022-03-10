@@ -1642,6 +1642,13 @@ label {
   border-bottom-right-radius: 5px !important;
 }
 
+#liveGameRow div {
+  width: 20%;
+  align-self: center;
+  font-size: 1.4em;
+  padding-top: 0;
+}
+
 #lGameName {
   max-width: 30%;
   padding-left: 0.7em;
@@ -1666,6 +1673,18 @@ label {
 
 #cashingList:nth-child(even) {
   background-color: #f2f2f2;
+}
+
+#cashingList p {
+  margin: 0;
+}
+
+#cashingList :first-child {
+  padding-left: 0.5em;
+}
+
+.cashingDetails {
+  border: 1px solid black;
 }
 
 #cashingName {
