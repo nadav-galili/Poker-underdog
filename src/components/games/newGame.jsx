@@ -101,6 +101,12 @@ const NewGame = (props) => {
       game.gameId = props.match.params.gameId;
       delete game._id;
       delete game.__v;
+      //remove the player's cashing from cashing details
+      const indexOfLastPlayerCashing = game.cashing_details
+        .map((el) => el.playerId)
+        .lastIndexOf(playerId);
+      game.cashing_details.splice(indexOfLastPlayerCashing, 1);
+
       setData(game);
       const cancel = new Audio(process.env.PUBLIC_URL + `sounds/cancel.mp3`);
       cancel.play();

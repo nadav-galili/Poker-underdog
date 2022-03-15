@@ -7,6 +7,7 @@ const CashingDetails = ({ gameId, updated }) => {
   useEffect(() => {
     const getCashingDetails = async () => {
       const fetchDetails = await gameService.fetchCashingDetails(gameId);
+
       setCashing(fetchDetails.data);
     };
     getCashingDetails();

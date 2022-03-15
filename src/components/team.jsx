@@ -27,7 +27,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
     };
 
     getLiveGame();
-  }, [teamid]);
+  }, []);
 
   const displayRemoveButtons = () => {
     setButtons(!buttons);
@@ -137,7 +137,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
                   {livePlayers &&
                     livePlayers.length > 1 &&
                     livePlayers.map((player) => (
-                      <li className="statsRow" key={player.id}>
+                      <li className="statsRow" key={player.id} id="liveGameRow">
                         <div className="rowImage ms-5">
                           <img
                             src={
