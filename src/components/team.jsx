@@ -9,6 +9,7 @@ import teamService from "../services/teamService";
 import Avatar from "@material-ui/core/Avatar";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import CashingDetails from "./games/cashingDetails";
 
 const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
   const [livePlayers, setLivePlayers] = useState([]);
@@ -157,6 +158,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
                       </li>
                     ))}
                 </ol>
+                {/* <CashingDetails gameId={liveGame._id} updated={liveGame} /> */}
               </div>
             </div>
           )}
