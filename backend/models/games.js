@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 
 const gameSchema = new mongoose.Schema(
   {
+    __v: {
+      type: String,
+    },
     isOpen: {
       type: Boolean,
       default: false,
@@ -30,6 +33,10 @@ const gameSchema = new mongoose.Schema(
       type: Object,
       required: true,
     },
+    cashing_details: {
+      type: Array,
+      required: true,
+    },
   },
   { timestamps: true }
 );
@@ -38,6 +45,7 @@ const Game = mongoose.model("Game", gameSchema);
 
 function validateGame(game) {
   const schema = Joi.object({
+    __v: Joi.string(),
     team_name: Joi.string().min(2).max(255).required(),
     team_id: Joi.string().min(24).max(24).required(),
     players: Joi.array().required(),
@@ -46,6 +54,7 @@ function validateGame(game) {
     updatedAt: Joi.date(),
     gameId: Joi.string(),
     game_manager: Joi.object(),
+    cashing_details: Joi.array(),
   });
   return schema.validate(game);
 }

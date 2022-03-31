@@ -260,7 +260,16 @@ export default function MainTable(props) {
               </strong>
             </p>
           </motion.div>
-          <div id="dashboardDisplay">
+          <motion.div
+            id="dashboardDisplay"
+            initial={{ opacity: 0 }}
+            animate={{
+              y: ["300px", "0px"],
+              delay: 2.2,
+              opacity: 1,
+            }}
+            transition={{ duration: 2 }}
+          >
             <PlayerCard
               header="Total Profit"
               data={data[0].totalProfit}
@@ -365,7 +374,7 @@ export default function MainTable(props) {
                 team={teamId}
               />
             )}
-          </div>
+          </motion.div>
           <MainLastgame teamId={teamId} />
           <AllGames teamId={teamId} />
         </React.Fragment>

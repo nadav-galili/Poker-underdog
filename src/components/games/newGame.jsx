@@ -8,10 +8,12 @@ import { apiImage } from "../../config.json";
 import H2hGame from "../h2h/h2hGame";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import CashingDetails from "./cashingDetails";
+
 const NewGame = (props) => {
   const [data, setData] = useState({});
   const [id, setId] = useState("");
-  const [alert, setAlert] = useState("visually-hidden");
+  // const [alert, setAlert] = useState("visually-hidden");
   const [playerName, setPlayerName] = useState("");
   const [me, setMe] = useState({});
   const [manager, setManager] = useState("");
@@ -61,14 +63,30 @@ const NewGame = (props) => {
           player.numOfCashing += 1;
           delete game._id;
           delete game.__v;
+          let cashingDetails = {
+            playerId: player.id,
+            playerName: player.name,
+            playerCashing: 50,
+            time: new Date(),
+          };
+          game.cashing_details.push(cashingDetails);
           setData(game);
 
           gameService.updateGame(game.gameId, game);
           const chips = new Audio(process.env.PUBLIC_URL + `sounds/chips.mp3`);
           chips.play();
-          setAlert("");
+          // setAlert("");
           setPlayerName(player.name);
-          Swal.fire(`Added cashing to ${player.name}`);
+          // Swal.fire(`Added cashing to ${player.name}`);
+          toast.success(`💸 💸Added 50 to ${player.name}`, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         }
       }
     });
@@ -83,6 +101,12 @@ const NewGame = (props) => {
       game.gameId = props.match.params.gameId;
       delete game._id;
       delete game.__v;
+      //remove the player's cashing from cashing details
+      const indexOfLastPlayerCashing = game.cashing_details
+        .map((el) => el.playerId)
+        .lastIndexOf(playerId);
+      game.cashing_details.splice(indexOfLastPlayerCashing, 1);
+
       setData(game);
       const cancel = new Audio(process.env.PUBLIC_URL + `sounds/cancel.mp3`);
       cancel.play();
@@ -175,7 +199,7 @@ const NewGame = (props) => {
           {/* Game Manager:<span>{data.game_manager.name}</span> */}
           Game Manager:<span>{manager ? manager.name : ""}</span>
         </p>
-        <div
+        {/* <div
           className={`alert alert-success ${alert} fade show w-75 py-1`}
           role="alert"
         >
@@ -185,7 +209,7 @@ const NewGame = (props) => {
             minute: "2-digit",
             hour12: false,
           })}`}
-        </div>
+        </div> */}
         {data.length < 1 && (
           <div className="spinner pt-2">
             <SpinnerInfinity
@@ -296,6 +320,7 @@ const NewGame = (props) => {
         )}
 
         <H2hGame gameId={data._id} className="mb-2" />
+        <CashingDetails gameId={id} updated={data} />
       </div>
     );
   }

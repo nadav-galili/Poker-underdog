@@ -5,20 +5,19 @@
   // font-family: "Roboto-slab";
   // font-family: "Playfair Display", serif;
   font-family: "Noto Sans JP", sans-serif;
+  // outline: 1px solid red;
 }
-
-
 
 $basecolorRed: #ff3030;
 $basecolorGreen: #02d84d;
 $headerColorBlue: #2752ea;
 $navbarWhite: #fcfcfc;
 $basecolorPurple: #6c14b4;
-$darkeerPurple:#520c8c;
+$darkeerPurple: #520c8c;
 $backgroundGreen: #7aef9b;
 $perHourGreen: #0fe4a4;
-$backgroundBlack:#1c1515;
+$backgroundBlack: #1c1515;
 
-@import url('https://fonts.googleapis.com/css2?family=Andada+Pro:wght@400;500;600;700&display=swap');
-$headerFont: 'Andada Pro', serif;
-$fantasyFont: 'PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif';
+@import url("https://fonts.googleapis.com/css2?family=Andada+Pro:wght@400;500;600;700&display=swap");
+$headerFont: "Andada Pro", serif;
+$fantasyFont: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";

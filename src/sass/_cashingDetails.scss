@@ -1,0 +1,27 @@
+#cashingList {
+  border-bottom: 1px solid black;
+  &:nth-child(even) {
+    background-color: #e0d9d9;
+  }
+  p {
+    margin: 0;
+  }
+  :first-child {
+    padding-left: 0.5em;
+  }
+}
+
+.cashingDetails {
+  border: 1px solid black;
+}
+
+#cashingName {
+  width: 40%;
+  text-align: start;
+  justify-self: end;
+  //   align-self: baseline;
+}
+
+#cashingAmmount {
+  width: 30%;
+}

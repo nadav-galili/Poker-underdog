@@ -9,6 +9,7 @@ import teamService from "../services/teamService";
 import Avatar from "@material-ui/core/Avatar";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import CashingDetails from "./games/cashingDetails";
 
 const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
   const [livePlayers, setLivePlayers] = useState([]);
@@ -27,7 +28,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
     };
 
     getLiveGame();
-  }, [teamid]);
+  }, []);
 
   const displayRemoveButtons = () => {
     setButtons(!buttons);
@@ -137,7 +138,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
                   {livePlayers &&
                     livePlayers.length > 1 &&
                     livePlayers.map((player) => (
-                      <li className="statsRow" key={player.id}>
+                      <li className="statsRow" key={player.id} id="liveGameRow">
                         <div className="rowImage ms-5">
                           <img
                             src={
@@ -157,6 +158,9 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
                       </li>
                     ))}
                 </ol>
+                {liveGame._id && (
+                  <CashingDetails gameId={liveGame._id} updated={liveGame} />
+                )}
               </div>
             </div>
           )}
@@ -165,7 +169,6 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
               className="button-72 p-2"
               data-toggle="tooltip"
               data-placement="top"
-              title="Only Team Manger can edit games details"
               to={`/main-table/${team._id}`}
             >
               Team Tables & Stats
@@ -178,6 +181,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
                   className="button-75 mt-2 "
                   to={`/edit-games/${team._id}`}
                   teamId={team._id}
+                  title="Only Team Manger can edit games details"
                 >
                   Edit Games
                   <AiFillEdit color="white" className="ms-1" />
