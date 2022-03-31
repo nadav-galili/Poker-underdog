@@ -158,7 +158,9 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
                       </li>
                     ))}
                 </ol>
-                {/* <CashingDetails gameId={liveGame._id} updated={liveGame} /> */}
+                {liveGame._id && (
+                  <CashingDetails gameId={liveGame._id} updated={liveGame} />
+                )}
               </div>
             </div>
           )}
@@ -167,7 +169,6 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
               className="button-72 p-2"
               data-toggle="tooltip"
               data-placement="top"
-              title="Only Team Manger can edit games details"
               to={`/main-table/${team._id}`}
             >
               Team Tables & Stats
@@ -180,6 +181,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
                   className="button-75 mt-2 "
                   to={`/edit-games/${team._id}`}
                   teamId={team._id}
+                  title="Only Team Manger can edit games details"
                 >
                   Edit Games
                   <AiFillEdit color="white" className="ms-1" />
