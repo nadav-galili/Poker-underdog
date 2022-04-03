@@ -13,8 +13,6 @@ import CashingDetails from "./cashingDetails";
 const NewGame = (props) => {
   const [data, setData] = useState({});
   const [id, setId] = useState("");
-  // const [alert, setAlert] = useState("visually-hidden");
-  const [playerName, setPlayerName] = useState("");
   const [me, setMe] = useState({});
   const [manager, setManager] = useState("");
 
@@ -78,9 +76,6 @@ const NewGame = (props) => {
           gameService.updateGame(game.gameId, game);
           const chips = new Audio(process.env.PUBLIC_URL + `sounds/chips.mp3`);
           chips.play();
-          // setAlert("");
-          setPlayerName(player.name);
-          // Swal.fire(`Added cashing to ${player.name}`);
           toast.success(`💸 💸Added 50 to ${player.name}`, {
             position: "top-center",
             autoClose: 2000,
