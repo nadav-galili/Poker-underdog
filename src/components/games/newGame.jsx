@@ -70,6 +70,9 @@ const NewGame = (props) => {
             time: new Date(),
           };
           game.cashing_details.push(cashingDetails);
+          if (game.isOpen == null) {
+            game.isOpen = true;
+          }
           setData(game);
 
           gameService.updateGame(game.gameId, game);

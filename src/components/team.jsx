@@ -23,7 +23,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
       game = await game.data[0];
       setliveGame(game);
       game ? setLivePlayers(game.players) : setLivePlayers([]);
-      if (game && game.isOpen)
+      if (game && (game.isOpen || game.isOpen == null))
         game = game.players.sort((a, b) => b.cashing - a.cashing);
     };
 

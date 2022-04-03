@@ -593,7 +593,10 @@ exports.gamesByCardName = async function (req, res) {
   res.send(table);
 };
 exports.gameInProgress = async function (req, res) {
-  let progress = await Game.find({ team_id: req.params.teamId, isOpen: true });
+  let progress = await Game.find({
+    team_id: req.params.teamId,
+    $or: [{ isOpen: true }, { isOpen: null }],
+  });
   res.send(progress);
 };
 
