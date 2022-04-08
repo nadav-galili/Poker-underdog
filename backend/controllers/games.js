@@ -10,7 +10,6 @@ exports.totalGames = async function (req, res) {
     {
       $match: {
         team_id: req.params.teamId,
-        // "players.name": { $not: /Nispach/ },
       },
     },
     {
