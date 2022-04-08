@@ -18,8 +18,10 @@ const H2hTable = (props) => {
       table = table.data.filter((player) => player._id.name !== "Nispach");
 
       setData(table);
+      console.log(table);
       let myHero = table.shift();
       setHero(myHero);
+
       let teamPic = await teamService.getTeam(teamId);
       setTeamImg(teamPic.data);
     };
@@ -48,9 +50,9 @@ const H2hTable = (props) => {
       )}
       {data && (
         <div className="col-lg-4 col-12" id="cardTop">
-          <ul className="statsList ">
+          <ul className="statsList">
             <li
-              className="statsHero  d-flex w-100"
+              className="statsHeroPerHour d-flex w-100 "
               style={{
                 backgroundImage: `url(${
                   process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
@@ -58,7 +60,7 @@ const H2hTable = (props) => {
               }}
             >
               <div className="h2hInfo d-flex w-100 justify-content-between">
-                <div className="statsInfo ">
+                <div className="statsInfo">
                   <div className="pos">1.</div>
                   <a href="#/" id="heroName">
                     {hero ? hero._id.name : ""}
@@ -69,12 +71,21 @@ const H2hTable = (props) => {
                       {hero ? hero.avgPoints.toFixed(2) : ""}
                     </span>
                   </div>
+                  <div className="heroDate ps-1">
+                    Games Played:
+                    <span className="ms-2 avgP">
+                      {hero ? hero.numOfGames : ""}
+                    </span>
+                  </div>
+                  <div className="heroDate ps-1">
+                    Winning:
+                    <span className="ms-2 avgP">
+                      {hero ? hero.successPercentage : ""}%
+                    </span>
+                  </div>
                   <div id="amount" className="">
                     Total Points:
-                    <span className="ms-2">
-                      {" "}
-                      {hero ? hero.totalPoints : ""}
-                    </span>
+                    <span className="ms-2">{hero ? hero.totalPoints : ""}</span>
                   </div>
                 </div>
                 <div className="heroImage ">
@@ -92,12 +103,13 @@ const H2hTable = (props) => {
                 <p>Player</p>
                 <p>Avg Points</p>
                 <p>Games played</p>
+                <p>Winning</p>
                 <p>Points</p>
               </div>
             </li>
             <React.Fragment>
               {data.map((player) => (
-                <li className="statsRow d-flex" key={player._id.player_id}>
+                <li className="statsRow d-flex" key={player._id.name}>
                   <div className="rowPosTop">{rank++}.</div>
                   <div className="rowImageH2h">
                     <img
@@ -108,7 +120,10 @@ const H2hTable = (props) => {
                   <div className="rowNameH2h">{player._id.name}</div>
                   <div className="rowH2hAvg">{player.avgPoints.toFixed(2)}</div>
                   <div className="rowH2hG">{player.numOfGames}</div>
-                  <div className="rowProfitTop">{player.totalPoints}</div>
+                  <div className="rowSuccessTop">
+                    {player.successPercentage}%
+                  </div>
+                  <div className="rowPointsTop">{player.totalPoints}</div>
                 </li>
               ))}
             </React.Fragment>

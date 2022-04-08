@@ -160,8 +160,27 @@ exports.h2hGamesByTeam = async function (req, res) {
       },
     },
     {
+      $project: {
+        totalPoints: 1,
+        numOfGames: 1,
+        avgPoints: 1,
+        successPercentage: {
+          $round: [
+            {
+              $multiply: [
+                {
+                  $divide: ["$totalPoints", { $multiply: ["$numOfGames", 3] }],
+                },
+                100,
+              ],
+            },
+            2,
+          ],
+        },
+      },
+    },
+    {
       $sort: {
-        // totalPoints: -1
         avgPoints: -1,
       },
     },
