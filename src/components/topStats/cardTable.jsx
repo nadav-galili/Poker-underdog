@@ -6,7 +6,6 @@ import { SpinnerInfinity } from "spinners-react";
 import PageHeader from "../common/pageHeader";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut, Bar } from "react-chartjs-2";
-// import { Link } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const CardTable = (props) => {
@@ -18,7 +17,8 @@ const CardTable = (props) => {
   const [barChartDetails, setbarChartDetails] = useState({});
   const teamId = props.match.params.teamId;
   const cardName = props.match.params.cardName;
-
+  // const rank = props.match.params.rank;
+  console.log("hjhhhajj", props.rank);
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.cardsData(teamId, cardName);
@@ -136,6 +136,7 @@ const CardTable = (props) => {
           setHeaderTitle("Total Profit");
       }
       setHero(myHero);
+
       setData(table);
     };
 
@@ -176,7 +177,9 @@ const CardTable = (props) => {
               }}
             >
               <div className="statsInfo flex-fill">
-                <div className="pos">1.</div>
+                <div className="pos">
+                  {headerTitle === "Total Profit" ? hero.currentTableRank : 1}.
+                </div>
                 <Link to={`/players-stats/${hero._id.player_id}`} id="heroName">
                   {data.length > 0 ? hero._id.name : ""}
                 </Link>
@@ -196,7 +199,12 @@ const CardTable = (props) => {
             <React.Fragment>
               {data.map((player) => (
                 <li className="statsRow" key={player._id.name}>
-                  <div className="rowPos">{rank++}.</div>
+                  <div className="rowPos">
+                    {headerTitle === "Total Profit"
+                      ? player.currentTableRank
+                      : rank++}
+                    .
+                  </div>
                   <Link
                     className="rowImage"
                     to={`/players-stats/${player._id.player_id}`}

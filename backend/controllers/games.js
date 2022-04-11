@@ -91,6 +91,19 @@ exports.teamStats = async function (req, res) {
       },
     },
     {
+      $setWindowFields: {
+        partitionBy: "$players.name",
+        sortBy: {
+          totalProfit: -1,
+        },
+        output: {
+          currentTableRank: {
+            $rank: {},
+          },
+        },
+      },
+    },
+    {
       $project: {
         successPercentage: {
           $round: [
@@ -121,6 +134,7 @@ exports.teamStats = async function (req, res) {
         },
         lastGame: 1,
         gamesWithProfit: 1,
+        currentTableRank: 1,
       },
     },
     {
@@ -559,6 +573,19 @@ exports.gamesByCardName = async function (req, res) {
       },
     },
     {
+      $setWindowFields: {
+        partitionBy: "$players.name",
+        sortBy: {
+          totalProfit: -1,
+        },
+        output: {
+          currentTableRank: {
+            $rank: {},
+          },
+        },
+      },
+    },
+    {
       $project: {
         successPercentage: {
           $round: [
@@ -573,7 +600,7 @@ exports.gamesByCardName = async function (req, res) {
             2,
           ],
         },
-
+        currentTableRank: 1,
         players: 1,
         team_name: 1,
         team_id: 1,
