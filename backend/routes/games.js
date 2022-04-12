@@ -37,11 +37,14 @@ router.get(
 
 // get aggregated results of top 10 profits
 router.get("/agg_profits/top-ten/:teamId", auth, gamesController.agg_profits);
+//get previous rank
+router.get("/previousRank/:teamId", auth, gamesController.previousRank);
 
 // get success%
 router.get("/success-p/:teamId", auth, gamesController.successp);
 // gets game data by card name
 router.get("/:cardName/:teamId", auth, gamesController.gamesByCardName);
+
 //update the game manager
 router.put(`/updateManager/:gameId`, gamesController.updateManager);
 // gets agg cashing of all the games for a team

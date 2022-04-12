@@ -74,6 +74,10 @@ export function fetchCashingDetails(gameId) {
   return http.get(`${apiUrl}/games/cashingDetails/${gameId}`);
 }
 
+export function previousRank(teamId) {
+  return http.get(`${apiUrl}/games/previousRank/${teamId}`);
+}
+
 export default {
   lastGame,
   table,
@@ -94,4 +98,5 @@ export default {
   statsPerHour,
   updateManager,
   fetchCashingDetails,
+  previousRank,
 };

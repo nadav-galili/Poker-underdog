@@ -618,6 +618,69 @@ exports.gamesByCardName = async function (req, res) {
 
   res.send(table);
 };
+exports.previousRank = async function (req, res) {
+  const table = await Game.aggregate([
+    {
+      $match: {
+        team_id: req.params.teamId,
+        "players.name": { $not: /Nispach/ },
+      },
+    },
+    {
+      $sort: {
+        createdAt: -1,
+      },
+    },
+    {
+      $skip: 1,
+    },
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $project: {
+        players: 1,
+        createdAt: 1,
+        team_name: 1,
+        team_id: 1,
+      },
+    },
+    {
+      $group: {
+        _id: {
+          name: "$players.name",
+          image: "$players.image",
+          player_id: "$players.id",
+          team_id: "$team_id",
+          team_name: "$team_name",
+        },
+        totalProfit: {
+          $sum: "$players.profit",
+        },
+        lastGame: {
+          $max: "$createdAt",
+        },
+      },
+    },
+    {
+      $setWindowFields: {
+        partitionBy: "$players.name",
+        sortBy: {
+          totalProfit: -1,
+        },
+        output: {
+          previousRank: {
+            $rank: {},
+          },
+        },
+      },
+    },
+  ]);
+
+  res.send(table);
+};
 exports.gameInProgress = async function (req, res) {
   let progress = await Game.find({
     team_id: req.params.teamId,

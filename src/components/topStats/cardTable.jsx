@@ -11,19 +11,37 @@ import { Link } from "react-router-dom";
 const CardTable = (props) => {
   const [data, setData] = useState([]);
   const [hero, setHero] = useState([]);
+  const [previousPlayerRank, setPreviousPlayerRank] = useState([]);
   const [headerTitle, setHeaderTitle] = useState("");
   const [teamImg, setTeamImg] = useState("");
   const [dataChartDetails, setdataChartDetails] = useState({});
   const [barChartDetails, setbarChartDetails] = useState({});
+  const [heroPreviousRank, setHeroPreviousRank] = useState({});
   const teamId = props.match.params.teamId;
   const cardName = props.match.params.cardName;
-  // const rank = props.match.params.rank;
-  console.log("hjhhhajj", props.rank);
+
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.cardsData(teamId, cardName);
       table = table.data;
 
+      if (cardName === "totalProfit") {
+        let previousRank = await gameService.previousRank(teamId);
+        setPreviousPlayerRank(previousRank.data);
+        console.log(previousPlayerRank);
+        try {
+          const previousHero = previousPlayerRank.find((player) => {
+            return player._id.player_id === hero._id.player_id;
+          });
+          setHeroPreviousRank(previousHero);
+        } catch (err) {
+          console.log("E", err);
+        }
+      }
+      table = table.map((item, i) =>
+        Object.assign({}, item, previousPlayerRank[i])
+      );
+      console.log("new", table);
       let accu = [];
       const barChart = {
         labels: [],
@@ -136,7 +154,6 @@ const CardTable = (props) => {
           setHeaderTitle("Total Profit");
       }
       setHero(myHero);
-
       setData(table);
     };
 
@@ -179,6 +196,14 @@ const CardTable = (props) => {
               <div className="statsInfo flex-fill">
                 <div className="pos">
                   {headerTitle === "Total Profit" ? hero.currentTableRank : 1}.
+                  <span class="previousPosition">
+                    (+
+                    {previousPlayerRank.length > 0
+                      ? previousPlayerRank[0].previousRank -
+                        hero.currentTableRank
+                      : ""}
+                    )
+                  </span>
                 </div>
                 <Link to={`/players-stats/${hero._id.player_id}`} id="heroName">
                   {data.length > 0 ? hero._id.name : ""}
@@ -203,7 +228,10 @@ const CardTable = (props) => {
                     {headerTitle === "Total Profit"
                       ? player.currentTableRank
                       : rank++}
-                    .
+                    .{" "}
+                    <span className="previousPosition">
+                      ({player.previousRank})
+                    </span>
                   </div>
                   <Link
                     className="rowImage"
