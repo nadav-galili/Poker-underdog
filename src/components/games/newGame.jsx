@@ -174,7 +174,6 @@ const NewGame = (props) => {
       }
     });
     await gameService.updateManager(id, me);
-    // window.location = `/#/games/${id}`;
   };
 
   if (!id) {

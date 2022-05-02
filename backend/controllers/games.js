@@ -91,6 +91,19 @@ exports.teamStats = async function (req, res) {
       },
     },
     {
+      $setWindowFields: {
+        partitionBy: "$players.name",
+        sortBy: {
+          totalProfit: -1,
+        },
+        output: {
+          currentTableRank: {
+            $rank: {},
+          },
+        },
+      },
+    },
+    {
       $project: {
         successPercentage: {
           $round: [
@@ -121,6 +134,7 @@ exports.teamStats = async function (req, res) {
         },
         lastGame: 1,
         gamesWithProfit: 1,
+        currentTableRank: 1,
       },
     },
     {
@@ -559,6 +573,19 @@ exports.gamesByCardName = async function (req, res) {
       },
     },
     {
+      $setWindowFields: {
+        partitionBy: "$players.name",
+        sortBy: {
+          totalProfit: -1,
+        },
+        output: {
+          currentTableRank: {
+            $rank: {},
+          },
+        },
+      },
+    },
+    {
       $project: {
         successPercentage: {
           $round: [
@@ -573,7 +600,7 @@ exports.gamesByCardName = async function (req, res) {
             2,
           ],
         },
-
+        currentTableRank: 1,
         players: 1,
         team_name: 1,
         team_id: 1,
@@ -585,6 +612,70 @@ exports.gamesByCardName = async function (req, res) {
     {
       $sort: {
         cardTitle: sortOrder,
+      },
+    },
+  ]);
+
+  res.send(table);
+};
+exports.previousRank = async function (req, res) {
+  const table = await Game.aggregate([
+    {
+      $match: {
+        team_id: req.params.teamId,
+        "players.name": { $not: /Nispach/ },
+      },
+    },
+    {
+      $unwind: {
+        path: "$players",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $project: {
+        players: 1,
+        createdAt: 1,
+        team_name: 1,
+        team_id: 1,
+      },
+    },
+    {
+      $sort: {
+        createdAt: -1,
+      },
+    },
+    {
+      $skip: 1,
+    },
+    {
+      $group: {
+        _id: {
+          name: "$players.name",
+          image: "$players.image",
+          player_id: "$players.id",
+          team_id: "$team_id",
+          team_name: "$team_name",
+        },
+        totalProfit: {
+          $sum: "$players.profit",
+        },
+        lastGame: {
+          $max: "$createdAt",
+        },
+      },
+    },
+    {
+      $setWindowFields: {
+        partitionBy: "$players.name",
+        sortBy: {
+          totalProfit: -1,
+        },
+        output: {
+          previousTableRank: {
+            $rank: {},
+          },
+        },
       },
     },
   ]);

@@ -6,16 +6,21 @@ import { SpinnerInfinity } from "spinners-react";
 import PageHeader from "../common/pageHeader";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut, Bar } from "react-chartjs-2";
-// import { Link } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import _ from "lodash";
+import { VscTriangleDown } from "react-icons/vsc";
+import { VscTriangleUp } from "react-icons/vsc";
+import { AiOutlineMinus } from "react-icons/ai";
 
 const CardTable = (props) => {
   const [data, setData] = useState([]);
   const [hero, setHero] = useState([]);
+  const [previousPlayerRank, setPreviousPlayerRank] = useState([]);
   const [headerTitle, setHeaderTitle] = useState("");
   const [teamImg, setTeamImg] = useState("");
   const [dataChartDetails, setdataChartDetails] = useState({});
   const [barChartDetails, setbarChartDetails] = useState({});
+  const [heroPreviousRank, setHeroPreviousRank] = useState([]);
   const teamId = props.match.params.teamId;
   const cardName = props.match.params.cardName;
 
@@ -23,6 +28,28 @@ const CardTable = (props) => {
     const getTable = async () => {
       let table = await gameService.cardsData(teamId, cardName);
       table = table.data;
+
+      if (cardName === "totalProfit") {
+        let previousRank = await gameService.previousRank(teamId);
+        setPreviousPlayerRank(previousRank.data);
+        try {
+          const previousHero = previousPlayerRank.find((player) => {
+            return player._id.player_id === hero._id.player_id;
+          });
+          setHeroPreviousRank(previousHero);
+        } catch (err) {
+          setHeroPreviousRank({ previousTableRank: 1 });
+          console.log("E", err);
+        }
+      }
+
+      //merge objects to get previous rank
+      var merged = _.merge(
+        _.keyBy(table, "_id.player_id"),
+        _.keyBy(previousPlayerRank, "_id.player_id")
+      );
+      var values = _.values(merged);
+      setData(values);
 
       let accu = [];
       const barChart = {
@@ -138,7 +165,6 @@ const CardTable = (props) => {
       setHero(myHero);
       setData(table);
     };
-
     getTable();
   }, [setData, teamId, cardName, headerTitle]);
   let rank = 2;
@@ -151,6 +177,15 @@ const CardTable = (props) => {
         <img src={`${apiImage}${teamImg.teamImage}`} alt="" />
         <span>{new Date().toLocaleDateString("en-GB")}</span>
       </div>
+      {headerTitle === "Total Profit" && (
+        <div
+          className="alert alert-info fade show w-75 py-1 alert-dismissible"
+          role="alert"
+        >
+          new update 2/5/22- <br></br>you can now see player's previous rank
+        </div>
+      )}
+
       {data.length === 0 && (
         <div className="spinner pt-2">
           <SpinnerInfinity
@@ -164,7 +199,7 @@ const CardTable = (props) => {
         </div>
       )}
 
-      {data.length > 0 && (
+      {data.length > 0 && hero._id && (
         <div className="col-lg-5 col-12" id="cardTop">
           <ol className="statsList">
             <li
@@ -176,7 +211,17 @@ const CardTable = (props) => {
               }}
             >
               <div className="statsInfo flex-fill">
-                <div className="pos">1.</div>
+                <div className="pos">
+                  {headerTitle === "Total Profit" ? hero.currentTableRank : 1}.
+                  <span className="previousPosition ps-1">
+                    {hero.previousTableRank - 1 > 0 ? <VscTriangleUp /> : ""}
+                  </span>
+                  <span className="previousPosition ps-1">
+                    {hero.previousTableRank - 1 > 0
+                      ? hero.previousTableRank - 1
+                      : ""}
+                  </span>
+                </div>
                 <Link to={`/players-stats/${hero._id.player_id}`} id="heroName">
                   {data.length > 0 ? hero._id.name : ""}
                 </Link>
@@ -196,7 +241,41 @@ const CardTable = (props) => {
             <React.Fragment>
               {data.map((player) => (
                 <li className="statsRow" key={player._id.name}>
-                  <div className="rowPos">{rank++}.</div>
+                  <div className="rowPos ps-1">
+                    {headerTitle === "Total Profit" && player.currentTableRank}.
+                    {headerTitle === "Total Profit" && (
+                      <span id="arrows">
+                        {player.previousTableRank - player.currentTableRank >
+                        0 ? (
+                          <VscTriangleUp />
+                        ) : player.previousTableRank - player.currentTableRank <
+                          0 ? (
+                          <VscTriangleDown className="text-danger" />
+                        ) : (
+                          <AiOutlineMinus className="text-warning" />
+                        )}
+                      </span>
+                    )}
+                    {headerTitle === "Total Profit" && (
+                      <span
+                        className={`previousPosition ${
+                          player.previousTableRank - player.currentTableRank < 0
+                            ? "text-danger"
+                            : player.previousTableRank -
+                                player.currentTableRank >
+                              0
+                            ? "text-success"
+                            : "text-warning"
+                        }`}
+                      >
+                        {player.previousTableRank - player.currentTableRank !==
+                        0
+                          ? player.previousTableRank - player.currentTableRank
+                          : 0}
+                      </span>
+                    )}
+                    {headerTitle !== "Total Profit" && rank++}
+                  </div>
                   <Link
                     className="rowImage"
                     to={`/players-stats/${player._id.player_id}`}
