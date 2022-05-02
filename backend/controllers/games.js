@@ -627,16 +627,9 @@ exports.previousRank = async function (req, res) {
       },
     },
     {
-      $sort: {
-        createdAt: -1,
-      },
-    },
-    {
-      $skip: 1,
-    },
-    {
       $unwind: {
         path: "$players",
+        preserveNullAndEmptyArrays: true,
       },
     },
     {
@@ -646,6 +639,14 @@ exports.previousRank = async function (req, res) {
         team_name: 1,
         team_id: 1,
       },
+    },
+    {
+      $sort: {
+        createdAt: -1,
+      },
+    },
+    {
+      $skip: 1,
     },
     {
       $group: {
@@ -671,7 +672,7 @@ exports.previousRank = async function (req, res) {
           totalProfit: -1,
         },
         output: {
-          previousRank: {
+          previousTableRank: {
             $rank: {},
           },
         },

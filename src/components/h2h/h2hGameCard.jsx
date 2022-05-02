@@ -70,7 +70,7 @@ const H2hGameCard = ({ team }) => {
               previousLinkClassName={"page-link"}
               nextClassName={"page-item"}
               nextLinkClassName={"page-link"}
-              marginPagesDisplayed={"4"}
+              marginPagesDisplayed={"3"}
               // renderOnZeroPageCount={null}
             />
           )}
