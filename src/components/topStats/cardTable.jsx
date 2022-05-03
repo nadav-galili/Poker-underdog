@@ -242,7 +242,7 @@ const CardTable = (props) => {
               {data.map((player) => (
                 <li className="statsRow" key={player._id.name}>
                   <div className="rowPos ps-1">
-                    {headerTitle === "Total Profit" && player.currentTableRank}.
+                    {headerTitle === "Total Profit" && player.currentTableRank}
                     {headerTitle === "Total Profit" && (
                       <span id="arrows">
                         {player.previousTableRank - player.currentTableRank >
@@ -274,7 +274,7 @@ const CardTable = (props) => {
                           : 0}
                       </span>
                     )}
-                    {headerTitle !== "Total Profit" && rank++}
+                    {headerTitle !== "Total Profit" && rank++}.
                   </div>
                   <Link
                     className="rowImage"
