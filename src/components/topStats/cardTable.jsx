@@ -274,7 +274,7 @@ const CardTable = (props) => {
                           : 0}
                       </span>
                     )}
-                    {headerTitle !== "Total Profit" && rank++}.
+                    {headerTitle !== "Total Profit" && rank++}
                   </div>
                   <Link
                     className="rowImage"

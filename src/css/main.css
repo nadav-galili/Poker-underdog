@@ -911,8 +911,8 @@ canvas {
 
 .playerImage {
   border: 3px solid #2752ea;
-  width: 80%;
-  height: 80%;
+  width: 3em;
+  height: 3em;
   object-fit: cover;
   background-color: #6c14b4;
   border-radius: 50%;
@@ -924,6 +924,7 @@ canvas {
 
 #selectTitle {
   color: #2752ea;
+  font-size: 0.7em;
 }
 
 .card-head {
@@ -932,7 +933,18 @@ canvas {
 }
 
 .card-body button {
-  font-size: 12px;
+  font-size: 0.5em;
+  max-width: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+#players_select {
+  height: 9.8em;
+}
+
+.playersCard {
+  max-height: 80%;
 }
 
 .MuiTableCell-root.MuiTableCell-body input {

@@ -9,6 +9,7 @@ import H2hGame from "../h2h/h2hGame";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import CashingDetails from "./cashingDetails";
+import { Link } from "react-router-dom";
 
 const NewGame = (props) => {
   const [data, setData] = useState({});
@@ -193,20 +194,8 @@ const NewGame = (props) => {
         })}`}
         </p>
         <p className="m-0 mb-1 p-0 text-primary">
-          {/* Game Manager:<span>{data.game_manager.name}</span> */}
           Game Manager:<span>{manager ? manager.name : ""}</span>
         </p>
-        {/* <div
-          className={`alert alert-success ${alert} fade show w-75 py-1`}
-          role="alert"
-        >
-          {playerName} cashed in{" "}
-          {`${new Date().toLocaleString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-          })}`}
-        </div> */}
         {data.length < 1 && (
           <div className="spinner pt-2">
             <SpinnerInfinity
@@ -222,6 +211,12 @@ const NewGame = (props) => {
 
         {data.players && manager.id === me.id && (
           <div className="col-lg-8 col-12" id="newGameTop">
+            <Link
+              className="button-72 mb-2 px-"
+              to={`/new-game/${data.team_id}`}
+            >
+              Add/Remove Players
+            </Link>
             <ol className="statsList">
               <li
                 id="gameLi"

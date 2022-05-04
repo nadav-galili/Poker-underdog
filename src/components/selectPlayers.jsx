@@ -86,17 +86,17 @@ const SelectPlayers = (props) => {
 
   return (
     <div className="container">
-      <h1>Start A New Game</h1>
+      <PageHeader titleText="Start A New Game" />
       <h2 className="teamName">{data.name}</h2>
       <h3>Team Number:{data.teamNumber}</h3>
       <img
         src={`${apiImage}${data.teamImage}`}
         alt={data.name}
-        width="200"
-        height="200"
+        width="120"
+        height="120"
       ></img>
-      <PageHeader titleText="Select players for current game" />
-      <div className="playersInGame"></div>
+      <h3 className="p-2 text-primary">Select players for current game</h3>
+      {/* <div className="playersInGame"></div> */}
       <div className="row container">
         {data.players &&
           data.players.map((player) => (
