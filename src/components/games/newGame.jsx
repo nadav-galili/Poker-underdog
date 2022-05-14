@@ -57,6 +57,7 @@ const NewGame = (props) => {
         let game = { ...data };
         game.gameId = props.match.params.gameId;
         if (game.gameId) {
+          game.isOpen = true;
           let player = data.players.find((e) => playerId === e.id);
           player.cashing += 50;
           player.numOfCashing += 1;
@@ -68,9 +69,11 @@ const NewGame = (props) => {
             playerCashing: 50,
             time: new Date(),
           };
-          game.cashing_details.push(cashingDetails);
-          if (game.isOpen == null) {
-            game.isOpen = true;
+          if (game.cashing_details) {
+            game.cashing_details.push(cashingDetails);
+          } else {
+            game.cashing_details = [];
+            game.cashing_details.push(cashingDetails);
           }
           setData(game);
 

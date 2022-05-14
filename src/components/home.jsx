@@ -37,7 +37,7 @@ const Home = () => {
           <div className="col-md-3 col-12" id="homeImg">
             <div className="homeImg1">
               <img
-                src="https://neconnected.co.uk/wp-content/uploads/2021/03/vcs_should_invest_like_poker_player-bf365a82-1280x640.jpg"
+                src="https://node.poker-underdog.com/images/flying_cards.jpg"
                 alt="poker"
               />
             </div>
@@ -45,7 +45,6 @@ const Home = () => {
               <img
                 src="https://www.telegraph.co.uk/content/dam/betting/Better-Collective/8-Classic-xlarge.jpg"
                 alt="poker-cards"
-         
               />
             </div>
           </div>
@@ -58,7 +57,6 @@ const Home = () => {
               />
             </div>
             </div> */}
-
       </div>
     </section>
   );

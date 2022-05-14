@@ -1152,7 +1152,7 @@ tfoot td {
   width: 19%;
 }
 
-.rowPos, .rowPosTop, .rowPosPerHour {
+.rowPos, #rowPosTop, .rowPosPerHour {
   font-weight: bold;
   text-align: center;
   font-size: 1em;
@@ -1161,8 +1161,8 @@ tfoot td {
   width: 15%;
 }
 
-.rowPosTop {
-  width: 11%;
+#rowPosTop {
+  width: 10% !important;
   text-align: center;
   padding-left: 0px;
 }
@@ -1299,6 +1299,11 @@ tfoot td {
 
 .rowImageH2h {
   width: 17%;
+}
+
+.rowImageH2h img {
+  width: 40px;
+  height: 40px;
 }
 
 .rowH2hAvg {
@@ -1498,7 +1503,7 @@ tfoot td {
   font-size: 0.6em;
 }
 
-.rowPos, .rowPosTop, .rowPosPerHour {
+.rowPos, #rowPosTop, .rowPosPerHour {
   font-size: 1.4em;
   width: 20%;
 }
