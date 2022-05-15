@@ -247,6 +247,9 @@ const NewGame = (props) => {
                   >
                     <div className="rowPlayer newGame">
                       <img src={`${apiImage}${player.image}`} alt="player" />
+                      <p class="playerNameOneGame m-0 text-primary">
+                        {player.name}
+                      </p>
                     </div>
                     <i
                       className="fas fa-money-bill-wave"

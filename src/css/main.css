@@ -1516,6 +1516,10 @@ tfoot td {
   font-size: 0.5em;
 }
 
+* {
+  outline: 1px solid red;
+}
+
 .form-control {
   border: none !important;
   padding: 0 !important;
@@ -1559,8 +1563,8 @@ label {
 .rowPlayer img {
   border-radius: 50%;
   border: 1px solid black;
-  height: 2.7em;
-  width: 80%;
+  height: 2.5em;
+  width: 2.5em;
   display: block;
   margin: auto;
   object-fit: cover;
@@ -1708,6 +1712,13 @@ label {
   align-self: center;
   font-size: 1.4em;
   padding-top: 0;
+}
+
+.playerNameOneGame {
+  font-size: 0.6em;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  text-align: center;
 }
 
 #lGameName {
