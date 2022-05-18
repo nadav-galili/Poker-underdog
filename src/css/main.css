@@ -1521,10 +1521,6 @@ tfoot td {
   font-size: 0.5em;
 }
 
-* {
-  outline: 1px solid red;
-}
-
 .form-control {
   border: none !important;
   padding: 0 !important;

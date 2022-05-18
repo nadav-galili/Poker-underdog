@@ -100,7 +100,7 @@ exports.addPlayersH2h = async function (req, res) {
   let h2hPlayers = h2h[0].players;
   // console.log("first", h2hPlayers);
   h2hPlayers = _.flatten(h2hPlayers);
-  // console.log("playersafter", h2hPlayers);
+  console.log("playersafter", h2hPlayers);
   // console.log("2222", h2h);
   function getDifference(selected, h2hPlayers) {
     return selected.filter((object1) => {
@@ -109,16 +109,29 @@ exports.addPlayersH2h = async function (req, res) {
       });
     });
   }
+  let monkey = {
+    id: "1234",
+    name: "monkey",
+    image: "uploads/monkey.jpg",
+    profit: 0,
+  };
   let added = getDifference(selected, h2hPlayers);
-  if (added.length % 2 !== 0) {
-    added.push({
-      id: "1234",
-      name: "monkey",
-      image: "uploads/monkey.jpg",
-      profit: 0,
-    });
+  const hasMonkey = h2hPlayers.some((ele) => {
+    return ele.id === "1234";
+  });
+  const monkeyIndex = h2hPlayers.findIndex((ele) => ele.id === "1234");
+  console.log("index", monkeyIndex);
+  if (added.length % 2 !== 0 && !hasMonkey) {
+    added.push(monkey);
   }
-  // console.log("added", added);
+  if (
+    added.length + (h2hPlayers.length % 2) !== 0 &&
+    hasMonkey &&
+    added.length === 1
+  ) {
+    h2hPlayers[monkeyIndex] = added[0];
+  }
+  console.log("added", added);
 
   var splitAt = function (i, xs) {
     var a = xs.slice(0, i);
@@ -142,20 +155,17 @@ exports.addPlayersH2h = async function (req, res) {
 
   let result = zip(splitAt(added.length / 2, shuffle(added)));
   result = _.flatten(result);
-  // console.log("result", result);
-  // console.log("h2h", h2hPlayers);
+  console.log("shuffeld added", result);
+  console.log("players in db", h2hPlayers);
   h2hPlayers = h2hPlayers.concat(result);
-  // let mergedUpdatedPlayers = h2hPlayers.push(result);
+
   let mergedUpdatedPlayers = [];
   let x = 0;
-  /////DO IT FOR THE FULL ARRAY
   for (let i = 0; i < h2hPlayers.length / 2; i++) {
     mergedUpdatedPlayers[i] = [];
     for (let j = 0; j < 2; j++) {
       mergedUpdatedPlayers[i][j] = h2hPlayers[x];
       x++;
-      // console.log("xxxxxx", x);
-      // console.log("loop", h2hPlayers);
     }
   }
   console.log("mergedUpdatedPlayers", mergedUpdatedPlayers);
