@@ -39,7 +39,7 @@ h1 {
 }
 
 #homeText p {
-  font-size: 1.7em;
+  font-size: 1em;
   color: #fcfcfc;
 }
 
@@ -88,7 +88,8 @@ h1 {
   width: 80%;
 }
 
-#create, #join {
+#create,
+#join {
   color: #2752ea;
   text-decoration: underline;
 }
@@ -1121,7 +1122,7 @@ tfoot td {
 
 .statsRow div, .statsRowAllGames div {
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
-  font-size: 1.1em;
+  font-size: 1em;
 }
 
 .statsRowAllGames :nth-child(1) {
@@ -1166,6 +1167,7 @@ tfoot td {
   width: 10% !important;
   text-align: center;
   padding-left: 0px;
+  font-size: 1.2em !important;
 }
 
 .rowImage, .rowImageTop, .rowImageH2h, .rowImagePerHour {
@@ -1321,7 +1323,6 @@ tfoot td {
 
 .rowNameH2h {
   width: 23%;
-  font-size: 0.9em;
   padding-left: 0.7em;
 }
 

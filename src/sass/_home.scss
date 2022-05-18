@@ -4,8 +4,6 @@
   transition-timing-function: ease-in;
   animation-delay: 0.8ms;
   opacity: 1;
- 
-
 }
 
 @keyframes cont {
@@ -25,13 +23,13 @@ h1 {
   font-family: $fantasyFont;
 }
 
-.row.home{
+.row.home {
   display: flex;
   justify-content: space-between;
 }
 
 #homeText p {
-  font-size: 1.7em;
+  font-size: 1em;
   color: $navbarWhite;
   // width: 80%;
 }
@@ -45,63 +43,60 @@ h1 {
   font-weight: bolder;
 }
 
-#homeImg{
+#homeImg {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.homeImg1{
+.homeImg1 {
   display: flex;
   justify-content: center;
 
   height: 12em;
 
-& img{
-  display: flex;
-  justify-content: center;
-  border: 3px solid $basecolorRed;
-  border-radius: 15px;
-  transform: rotate(-30deg);
-  object-fit: cover;
-  width: 80%;
+  & img {
+    display: flex;
+    justify-content: center;
+    border: 3px solid $basecolorRed;
+    border-radius: 15px;
+    transform: rotate(-30deg);
+    object-fit: cover;
+    width: 80%;
+  }
 }
-}
-.homeImg2{
+.homeImg2 {
   display: flex;
   justify-content: center;
   object-fit: cover;
 
   height: 12em;
-  & img{
+  & img {
     border: 3px solid $basecolorGreen;
     border-radius: 15px;
-  width: 80%;
-
+    width: 80%;
   }
-
 }
 
-
-#create, #join{
-
-  color:$headerColorBlue;
+#create,
+#join {
+  color: $headerColorBlue;
   text-decoration: underline;
 }
 
 @media screen and (max-width: 600px) {
-#homeImg{
- margin: 3em 0 3em 0;
-}
+  #homeImg {
+    margin: 3em 0 3em 0;
+  }
 
-.homeImg1{
-  margin-bottom: 3em;
-}
+  .homeImg1 {
+    margin-bottom: 3em;
+  }
 
-  .homeImg1 img{
-  width: 50%;
-}
- .homeImg2 img{
-  width: 50%;
-}
+  .homeImg1 img {
+    width: 50%;
+  }
+  .homeImg2 img {
+    width: 50%;
+  }
 }

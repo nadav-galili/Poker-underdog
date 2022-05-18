@@ -76,7 +76,7 @@
   border-bottom: 0.7px solid;
   & div {
     font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
-    font-size: 1.1em;
+    font-size: 1em;
   }
 }
 
@@ -121,6 +121,7 @@
   width: 10% !important;
   text-align: center;
   padding-left: 0px;
+  font-size: 1.2em !important;
 }
 
 .rowImage {
@@ -268,7 +269,6 @@
 .rowNameH2h {
   @extend .rowNameTop;
   width: 23%;
-  font-size: 0.9em;
   padding-left: 0.7em;
 }
 
