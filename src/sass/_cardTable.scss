@@ -309,6 +309,11 @@
   @extend .rowPos;
 }
 
+.rowPosLast {
+  width: 10% !important;
+  @extend .rowPos;
+}
+
 .rowImagePerHour {
   @extend .rowImage;
   width: 18%;
@@ -441,6 +446,6 @@
 .previousPosition {
   font-size: 0.5em;
 }
-// * {
-//   outline: 1px solid red;
-// }
+* {
+  outline: 1px solid red;
+}

@@ -79,7 +79,8 @@ const SelectPlayers = (props) => {
       };
       await gameService.updateGame(started._id, game).then((res) => {
         res.data.gameId = res.data._id;
-        h2hService.newH2h(res.data);
+        // h2hService.newH2h(res.data);
+        h2hService.addPlayersH2h(started._id, game);
         props.history.push(`/games/${res.data._id}`);
       });
     }

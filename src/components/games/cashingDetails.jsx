@@ -10,7 +10,7 @@ const CashingDetails = ({ gameId, updated }) => {
       setCashing(fetchDetails.data);
     };
     getCashingDetails();
-  }, [updated]);
+  }, [updated, cashing.length]);
 
   return (
     <div className="col-10 col-lg-6 p-2">

@@ -126,6 +126,7 @@ h1 {
 
 .totalCash {
   color: #fcfcfc;
+  font-size: 0.8em;
 }
 
 .lastGame-head {
@@ -1152,7 +1153,7 @@ tfoot td {
   width: 19%;
 }
 
-.rowPos, #rowPosTop, .rowPosPerHour {
+.rowPos, #rowPosTop, .rowPosPerHour, .rowPosLast {
   font-weight: bold;
   text-align: center;
   font-size: 1em;
@@ -1366,6 +1367,10 @@ tfoot td {
   width: 8% !important;
 }
 
+.rowPosLast {
+  width: 10% !important;
+}
+
 .rowImagePerHour {
   width: 18%;
 }
@@ -1503,7 +1508,7 @@ tfoot td {
   font-size: 0.6em;
 }
 
-.rowPos, #rowPosTop, .rowPosPerHour {
+.rowPos, #rowPosTop, .rowPosPerHour, .rowPosLast {
   font-size: 1.4em;
   width: 20%;
 }

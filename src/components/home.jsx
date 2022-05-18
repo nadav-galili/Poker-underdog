@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "./common/pageHeader";
+import { apiImage } from "../config.json";
 const Home = () => {
   return (
     <section>
@@ -36,10 +37,7 @@ const Home = () => {
           </div>
           <div className="col-md-3 col-12" id="homeImg">
             <div className="homeImg1">
-              <img
-                src="https://node.poker-underdog.com/images/flying_cards.jpg"
-                alt="poker"
-              />
+              <img src={`${apiImage}images/flying_cards.jpg`} alt="poker" />
             </div>
             <div className="homeImg2">
               <img
