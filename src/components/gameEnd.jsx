@@ -79,7 +79,7 @@ const GameEnd = (props) => {
             <React.Fragment>
               {data.map((player) => (
                 <li className="statsRow" key={player.id}>
-                  <div className="rowPos">{Rank++}.</div>
+                  <div className="rowPosLast">{Rank++}.</div>
                   <div className="rowImage">
                     <img
                       src={data.length > 0 ? `${apiImage}${player.image}` : ""}
@@ -106,7 +106,7 @@ const GameEnd = (props) => {
             </React.Fragment>
           </ol>
           <H2hGameEnd gameId={lastGame._id} header="Head 2 Head" />
-          <Link className="btn btn-primary " to={`/main-table/${teamId}`}>
+          <Link className="btn btn-primary mb-3" to={`/main-table/${teamId}`}>
             Team Tables & Statistics
             <i className="ps-2 fas fa-angle-double-right"></i>
           </Link>

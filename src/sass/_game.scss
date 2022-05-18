@@ -1,7 +1,7 @@
 .playerImage {
   border: 3px solid $headerColorBlue;
-  width: 80%;
-  height: 80%;
+  width: 3em;
+  height: 3em;
   object-fit: cover;
   background-color: $basecolorPurple;
   border-radius: 50%;
@@ -10,8 +10,9 @@
 .join {
   color: $basecolorGreen;
 }
-#selectTitle{
-  color:$headerColorBlue;
+#selectTitle {
+  color: $headerColorBlue;
+  font-size: 0.7em;
 }
 .card-head {
   width: 100px;
@@ -20,8 +21,18 @@
 
 .card-body {
   & button {
-    font-size: 12px;
+    font-size: 0.5em;
+    max-width: 60px;
+    display: flex;
+    justify-content: center;
   }
+}
+
+#players_select {
+  height: 9.8em;
+}
+.playersCard {
+  max-height: 80%;
 }
 
 .MuiTableCell-root.MuiTableCell-body {
@@ -38,14 +49,13 @@ tfoot {
     font-size: 20px;
     padding-left: 18px;
     color: $headerColorBlue;
-
   }
 }
 
-.MuiTableRow-root.last-head.MuiTableRow-head{
-  & th{
-    font-size: 17px!important;
- 
+.MuiTableRow-root.last-head.MuiTableRow-head {
+  & th {
+    font-size: 17px !important;
+
     padding: 0 7px 0 0;
   }
 }

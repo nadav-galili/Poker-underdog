@@ -116,9 +116,9 @@
   align-self: center;
   width: 15%;
 }
-.rowPosTop {
+#rowPosTop {
   @extend .rowPos;
-  width: 11%;
+  width: 10% !important;
   text-align: center;
   padding-left: 0px;
 }
@@ -245,6 +245,10 @@
 .rowImageH2h {
   @extend .rowImageTop;
   width: 17%;
+  & img {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .rowH2hAvg {
@@ -302,6 +306,11 @@
 
 .rowPosPerHour {
   width: 8% !important;
+  @extend .rowPos;
+}
+
+.rowPosLast {
+  width: 10% !important;
   @extend .rowPos;
 }
 

@@ -75,10 +75,12 @@ const SelectPlayers = (props) => {
         team_name: started.team_name,
         team_id: started.team_id,
         gameId: started._id,
+        cashing_details: started.cashing_details,
       };
       await gameService.updateGame(started._id, game).then((res) => {
         res.data.gameId = res.data._id;
-        h2hService.newH2h(res.data);
+        // h2hService.newH2h(res.data);
+        h2hService.addPlayersH2h(started._id, game);
         props.history.push(`/games/${res.data._id}`);
       });
     }
@@ -86,17 +88,16 @@ const SelectPlayers = (props) => {
 
   return (
     <div className="container">
-      <h1>Start A New Game</h1>
+      <PageHeader titleText="Start A New Game" />
       <h2 className="teamName">{data.name}</h2>
       <h3>Team Number:{data.teamNumber}</h3>
       <img
         src={`${apiImage}${data.teamImage}`}
         alt={data.name}
-        width="200"
-        height="200"
+        width="120"
+        height="120"
       ></img>
-      <PageHeader titleText="Select players for current game" />
-      <div className="playersInGame"></div>
+      <h3 className="p-2 text-primary">Select players for current game</h3>
       <div className="row container">
         {data.players &&
           data.players.map((player) => (

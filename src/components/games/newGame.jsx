@@ -9,6 +9,7 @@ import H2hGame from "../h2h/h2hGame";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import CashingDetails from "./cashingDetails";
+import { Link } from "react-router-dom";
 
 const NewGame = (props) => {
   const [data, setData] = useState({});
@@ -56,6 +57,7 @@ const NewGame = (props) => {
         let game = { ...data };
         game.gameId = props.match.params.gameId;
         if (game.gameId) {
+          game.isOpen = true;
           let player = data.players.find((e) => playerId === e.id);
           player.cashing += 50;
           player.numOfCashing += 1;
@@ -67,9 +69,11 @@ const NewGame = (props) => {
             playerCashing: 50,
             time: new Date(),
           };
-          game.cashing_details.push(cashingDetails);
-          if (game.isOpen == null) {
-            game.isOpen = true;
+          if (game.cashing_details) {
+            game.cashing_details.push(cashingDetails);
+          } else {
+            game.cashing_details = [];
+            game.cashing_details.push(cashingDetails);
           }
           setData(game);
 
@@ -193,20 +197,16 @@ const NewGame = (props) => {
         })}`}
         </p>
         <p className="m-0 mb-1 p-0 text-primary">
-          {/* Game Manager:<span>{data.game_manager.name}</span> */}
           Game Manager:<span>{manager ? manager.name : ""}</span>
         </p>
-        {/* <div
-          className={`alert alert-success ${alert} fade show w-75 py-1`}
+        <div
+          className="alert alert-info fade show w-75 py-1 alert-dismissible"
           role="alert"
         >
-          {playerName} cashed in{" "}
-          {`${new Date().toLocaleString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-          })}`}
-        </div> */}
+          <h6 class="alert-heading">New Update 18/5/22:</h6>
+          new feature:add players to the game after he game started.
+          <br></br>Head 2 Head will also update automatically.
+        </div>
         {data.length < 1 && (
           <div className="spinner pt-2">
             <SpinnerInfinity
@@ -222,6 +222,12 @@ const NewGame = (props) => {
 
         {data.players && manager.id === me.id && (
           <div className="col-lg-8 col-12" id="newGameTop">
+            <Link
+              className="button-72 mb-2 px-"
+              to={`/new-game/${data.team_id}`}
+            >
+              Add/Remove Players
+            </Link>
             <ol className="statsList">
               <li
                 id="gameLi"
@@ -249,6 +255,9 @@ const NewGame = (props) => {
                   >
                     <div className="rowPlayer newGame">
                       <img src={`${apiImage}${player.image}`} alt="player" />
+                      <p class="playerNameOnGame m-0 text-primary">
+                        {player.name}
+                      </p>
                     </div>
                     <i
                       className="fas fa-money-bill-wave"

@@ -92,6 +92,86 @@ exports.updateh2h = async function (req, res) {
   await res.send(newH2h);
 };
 
+exports.addPlayersH2h = async function (req, res) {
+  let selected = req.body.players;
+  let h2h = await H2h.find({ gameId: req.params.gameId });
+  let h2hPlayers = h2h[0].players;
+  h2hPlayers = _.flatten(h2hPlayers);
+
+  function getDifference(selected, h2hPlayers) {
+    return selected.filter((object1) => {
+      return !h2hPlayers.some((object2) => {
+        return object1.id === object2.id;
+      });
+    });
+  }
+  let monkey = {
+    id: "1234",
+    name: "monkey",
+    image: "uploads/monkey.jpg",
+    profit: 0,
+  };
+  let added = getDifference(selected, h2hPlayers);
+  const hasMonkey = h2hPlayers.some((ele) => {
+    return ele.id === "1234";
+  });
+  const monkeyIndex = h2hPlayers.findIndex((ele) => ele.id === "1234");
+  // console.log("index", monkeyIndex);
+  if (added.length % 2 !== 0 && !hasMonkey) {
+    added.push(monkey);
+  }
+  if (
+    added.length + (h2hPlayers.length % 2) !== 0 &&
+    hasMonkey &&
+    added.length === 1
+  ) {
+    h2hPlayers[monkeyIndex] = added[0];
+  }
+
+  var splitAt = function (i, xs) {
+    var a = xs.slice(0, i);
+    var b = xs.slice(i, xs.length);
+    return [a, b];
+  };
+
+  var shuffle = function (xs) {
+    return xs.slice(0).sort(function () {
+      return 0.5 - Math.random();
+    });
+  };
+
+  var zip = function (xs) {
+    return xs[0].map(function (_, i) {
+      return xs.map(function (x) {
+        return x[i];
+      });
+    });
+  };
+
+  let result = zip(splitAt(added.length / 2, shuffle(added)));
+  result = _.flatten(result);
+  // console.log("shuffeld added", result);
+  // console.log("players in db", h2hPlayers);
+  h2hPlayers = h2hPlayers.concat(result);
+
+  let mergedUpdatedPlayers = [];
+  let x = 0;
+  for (let i = 0; i < h2hPlayers.length / 2; i++) {
+    mergedUpdatedPlayers[i] = [];
+    for (let j = 0; j < 2; j++) {
+      mergedUpdatedPlayers[i][j] = h2hPlayers[x];
+      x++;
+    }
+  }
+  // console.log("mergedUpdatedPlayers", mergedUpdatedPlayers);
+  let updatedPlayers = await H2h.findOneAndUpdate(
+    { gameId: req.params.gameId },
+    { $set: { players: mergedUpdatedPlayers } },
+    { new: true }
+  );
+  await res.send(updatedPlayers);
+};
+
 exports.getplayerStats = async function (req, res) {
   const agg = await H2h.aggregate([
     {

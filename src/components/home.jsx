@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "./common/pageHeader";
+import { apiImage } from "../config.json";
 const Home = () => {
   return (
     <section>
@@ -36,16 +37,12 @@ const Home = () => {
           </div>
           <div className="col-md-3 col-12" id="homeImg">
             <div className="homeImg1">
-              <img
-                src="https://neconnected.co.uk/wp-content/uploads/2021/03/vcs_should_invest_like_poker_player-bf365a82-1280x640.jpg"
-                alt="poker"
-              />
+              <img src={`${apiImage}images/flying_cards.jpg`} alt="poker" />
             </div>
             <div className="homeImg2">
               <img
                 src="https://www.telegraph.co.uk/content/dam/betting/Better-Collective/8-Classic-xlarge.jpg"
                 alt="poker-cards"
-         
               />
             </div>
           </div>
@@ -58,7 +55,6 @@ const Home = () => {
               />
             </div>
             </div> */}
-
       </div>
     </section>
   );

@@ -110,7 +110,9 @@ const H2hTable = (props) => {
             <React.Fragment>
               {data.map((player) => (
                 <li className="statsRow d-flex" key={player._id.name}>
-                  <div className="rowPosTop">{rank++}.</div>
+                  <div className="rowPosTop" id="rowPosTop">
+                    {rank++}.
+                  </div>
                   <div className="rowImageH2h">
                     <img
                       src={`${apiImage}${player._id.image}`}
