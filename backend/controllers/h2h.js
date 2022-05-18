@@ -93,15 +93,11 @@ exports.updateh2h = async function (req, res) {
 };
 
 exports.addPlayersH2h = async function (req, res) {
-  // console.log("req", req.body.players.length);
   let selected = req.body.players;
-  // console.log("selected", selected);
   let h2h = await H2h.find({ gameId: req.params.gameId });
   let h2hPlayers = h2h[0].players;
-  // console.log("first", h2hPlayers);
   h2hPlayers = _.flatten(h2hPlayers);
-  console.log("playersafter", h2hPlayers);
-  // console.log("2222", h2h);
+
   function getDifference(selected, h2hPlayers) {
     return selected.filter((object1) => {
       return !h2hPlayers.some((object2) => {
@@ -120,7 +116,7 @@ exports.addPlayersH2h = async function (req, res) {
     return ele.id === "1234";
   });
   const monkeyIndex = h2hPlayers.findIndex((ele) => ele.id === "1234");
-  console.log("index", monkeyIndex);
+  // console.log("index", monkeyIndex);
   if (added.length % 2 !== 0 && !hasMonkey) {
     added.push(monkey);
   }
@@ -131,7 +127,6 @@ exports.addPlayersH2h = async function (req, res) {
   ) {
     h2hPlayers[monkeyIndex] = added[0];
   }
-  console.log("added", added);
 
   var splitAt = function (i, xs) {
     var a = xs.slice(0, i);
@@ -155,8 +150,8 @@ exports.addPlayersH2h = async function (req, res) {
 
   let result = zip(splitAt(added.length / 2, shuffle(added)));
   result = _.flatten(result);
-  console.log("shuffeld added", result);
-  console.log("players in db", h2hPlayers);
+  // console.log("shuffeld added", result);
+  // console.log("players in db", h2hPlayers);
   h2hPlayers = h2hPlayers.concat(result);
 
   let mergedUpdatedPlayers = [];
@@ -168,7 +163,7 @@ exports.addPlayersH2h = async function (req, res) {
       x++;
     }
   }
-  console.log("mergedUpdatedPlayers", mergedUpdatedPlayers);
+  // console.log("mergedUpdatedPlayers", mergedUpdatedPlayers);
   let updatedPlayers = await H2h.findOneAndUpdate(
     { gameId: req.params.gameId },
     { $set: { players: mergedUpdatedPlayers } },

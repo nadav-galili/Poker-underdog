@@ -60,12 +60,14 @@ const H2hGame = ({ gameId }) => {
               >
                 <div className="rowPlayer newGame">
                   <img src={`${apiImage}${p[0].image}`} alt="" />
+                  <p class="playerNameOnGame m-0 text-primary">{p[0].name}</p>
                 </div>
                 <p className="d-flex align-items-center">
                   <strong>Vs</strong>
                 </p>
                 <div className="rowPlayer newGame">
                   <img src={`${apiImage}${p[1].image}`} alt="" />
+                  <p class="playerNameOnGame m-0 text-primary">{p[1].name}</p>
                 </div>
               </div>
             ))}
