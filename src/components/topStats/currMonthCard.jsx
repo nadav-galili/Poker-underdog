@@ -4,6 +4,7 @@ import { apiImage } from "../../config.json";
 import teamService from "../../services/teamService";
 import PageHeader from "../common/pageHeader";
 import { Bar } from "react-chartjs-2";
+import _ from "lodash";
 
 const CurrMonthCard = (props) => {
   const [data, setData] = useState([]);
@@ -26,7 +27,30 @@ const CurrMonthCard = (props) => {
       );
       console.log("b4", monthlyStatsGroup.data);
       setMonthlyStats(monthlyStatsGroup.data);
-      console.log("month", monthlyStats);
+      let monthSegment = {
+        jan: 1,
+        feb: 2,
+        mar: 3,
+        apr: 4,
+        may: 5,
+        jun: 6,
+        jul: 7,
+        aug: 8,
+        sep: 9,
+        oct: 10,
+        nov: 11,
+        dec: 12,
+      };
+      console.log(
+        _.chain(monthlyStats)
+          // Group the elements of Array based on `color` property
+          .groupBy("_id.monthPlayed")
+          // `key` is group's name (color), `value` is the array of objects
+          .map((value, key) => ({ motnh: key, players: value }))
+          .value()
+      );
+      // let byMonth = _.groupBy(monthlyStats, "month");
+      // console.log("monthly", byMonth);
 
       const barChart = {
         labels: [],
@@ -83,7 +107,7 @@ const CurrMonthCard = (props) => {
     };
 
     getTable();
-  }, [setData, teamId, currentMonthNumber]);
+  }, [setData, teamId, currentMonthNumber, monthlyStats.length]);
 
   let rank = 2;
 
