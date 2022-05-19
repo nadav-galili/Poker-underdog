@@ -10,7 +10,7 @@ const CurrMonthCard = (props) => {
   const [hero, setHero] = useState([]);
   const [teamImg, setTeamImg] = useState("");
   const [barChartDetails, setbarChartDetails] = useState({});
-
+  const [monthlyStats, setMonthlyStats] = useState([]);
   let currentMonth = new Date();
   let currentMonthNumber = currentMonth.getMonth() + 1;
   currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
@@ -21,6 +21,12 @@ const CurrMonthCard = (props) => {
     const getTable = async () => {
       let table = await gameService.monthsData(teamId);
       table = table.data;
+      const monthlyStatsGroup = await gameService.monthlyStats(
+        props.match.params.teamId
+      );
+      console.log("b4", monthlyStatsGroup.data);
+      setMonthlyStats(monthlyStatsGroup.data);
+      console.log("month", monthlyStats);
 
       const barChart = {
         labels: [],

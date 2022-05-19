@@ -190,12 +190,13 @@ export default function MainTable(props) {
                 duration: 5,
                 bounce: 0.6,
               }}
-              //`${apiImage}${player.image}`
               src={`${apiImage}${teamImage.teamImage}`}
               alt="team"
             />
-            <p className="ms-2 text-white mb-0 display-6">{teamImage.name}</p>
-            <div className="container playersList ">
+            <p className="ms-2 text-white mb-2 mt-2 display-6">
+              {teamImage.name}
+            </p>
+            <div className="container playersList mb-2">
               {teams.map((player) => (
                 <motion.div
                   className=""
@@ -219,7 +220,7 @@ export default function MainTable(props) {
               duration: 2,
               bounce: 0.6,
             }}
-            className="totalCash d-flex flex-column mb-2"
+            className="totalCash d-flex flex-column mb-2 ps-1"
           >
             <p className="mb-0">
               Total Cash Played:
@@ -368,7 +369,7 @@ export default function MainTable(props) {
             {h2h.length > 0 && (
               <H2hCard
                 header="H2H Games"
-                data={h2h[0].totalPoints}
+                data={h2h[0].avgPoints.toFixed(2)}
                 name={h2h[0]._id.name}
                 image={h2h[0]._id.image}
                 team={teamId}

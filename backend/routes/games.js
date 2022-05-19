@@ -39,7 +39,8 @@ router.get(
 router.get("/agg_profits/top-ten/:teamId", auth, gamesController.agg_profits);
 //get previous rank
 router.get("/previousRank/:teamId", auth, gamesController.previousRank);
-
+//get monthly stats
+router.get("/monthlyStats/:teamId", auth, gamesController.monthlyStats);
 // get success%
 router.get("/success-p/:teamId", auth, gamesController.successp);
 // gets game data by card name

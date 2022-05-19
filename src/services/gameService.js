@@ -78,6 +78,10 @@ export function previousRank(teamId) {
   return http.get(`${apiUrl}/games/previousRank/${teamId}`);
 }
 
+export function monthlyStats(teamId) {
+  return http.get(`${apiUrl}/games/monthlyStats/${teamId}`);
+}
+
 export default {
   lastGame,
   table,
@@ -99,4 +103,5 @@ export default {
   updateManager,
   fetchCashingDetails,
   previousRank,
+  monthlyStats,
 };

@@ -4,27 +4,21 @@ import { AiOutlineDoubleRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { apiImage } from "../../config.json";
 
-const CurrMonth = ({
-  header,
-  data,
-  name,
-  image,
-  cMonth,
-  cardName,
-  team,
-  table,
-}) => {
+const CurrMonth = ({ header, data, name, image, cMonth, team }) => {
   let currentMonth = new Date(cMonth);
   currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
 
   return (
     <div className="cardDiv">
-      <div className="card " id="mainStats"
-           style={{
-            backgroundImage: `url(${
-              process.env.PUBLIC_URL + "/icons/diamond.svg"
-            })`,
-          }}>
+      <div
+        className="card "
+        id="mainStats"
+        style={{
+          backgroundImage: `url(${
+            process.env.PUBLIC_URL + "/icons/diamond.svg"
+          })`,
+        }}
+      >
         <h5 className="card-title ">{name}</h5>
         <div className="img-card">
           <img
@@ -43,22 +37,20 @@ const CurrMonth = ({
             <span>{header}</span>
             <br />
             <div className="d-flex justify-content-around">
-            <span id="month">{cMonth ? currentMonth : ""}</span>
-       <span>{data ? data : 0}</span>
+              <span id="month">{cMonth ? currentMonth : ""}</span>
+              <span>{data ? data : 0}</span>
             </div>
-    
-          
           </div>
         </div>
       </div>
       <Link
-    className="text-white btn btn-primary"
-    id="cardFooter"
+        className="text-white btn btn-primary"
+        id="cardFooter"
         to={`/tables/byMonths/${currentMonth}/${team}`}
       >
         See full table
         <GiCardAceHearts />
-        <AiOutlineDoubleRight/>
+        <AiOutlineDoubleRight />
       </Link>
     </div>
   );
