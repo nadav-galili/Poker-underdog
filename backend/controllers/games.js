@@ -271,6 +271,7 @@ exports.gameById = async function (req, res) {
   res.send(game);
 };
 exports.dataByMonths = async function (req, res) {
+  let month = parseInt(req.params.month);
   const byMonths = await Game.aggregate([
     {
       $unwind: {
@@ -282,21 +283,27 @@ exports.dataByMonths = async function (req, res) {
       $match: {
         team_id: req.params.teamId,
         $expr: {
-          $gte: [{ $month: "$createdAt" }, { $month: new Date() }],
+          $eq: [
+            {
+              $month: "$createdAt",
+            },
+            month,
+          ],
         },
       },
     },
     {
       $group: {
         _id: {
-          monthPlayed: { $month: "$createdAt" },
+          monthPlayed: {
+            $month: "$createdAt",
+          },
           name: "$players.name",
           image: "$players.image",
           player_id: "$players.id",
           team_id: "$team_id",
           team_name: "$team_name",
         },
-
         totalProfit: {
           $sum: "$players.profit",
         },

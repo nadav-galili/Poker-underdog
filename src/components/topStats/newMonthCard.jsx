@@ -4,10 +4,10 @@ import { AiOutlineDoubleRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { apiImage } from "../../config.json";
 
-const CurrMonth = ({ header, data, name, image, cMonth, team, month }) => {
+const CurrMonth = ({ header, name, team, month }) => {
   const year = new Date().getFullYear();
   const date = new Date(month.month);
-  console.log(team);
+
   let currentMonth = date.toLocaleString("en-US", { month: "long" });
   let players = month.players;
   const compare = (a, b) => {
@@ -16,7 +16,6 @@ const CurrMonth = ({ header, data, name, image, cMonth, team, month }) => {
     return 0;
   };
   players.sort(compare);
-  console.log("p", players);
   return (
     <div className="cardDiv month">
       <div

@@ -20,7 +20,7 @@ router.get("/personalGames/:uId", auth, gamesController.personalGames);
 router.get("/table/:teamId", auth, gamesController.teamStats);
 
 // gets  month stats
-router.get("/byMonths/:teamId", auth, gamesController.dataByMonths);
+router.get("/byMonths/:month/:teamId", auth, gamesController.dataByMonths);
 //game in progrerss
 router.get("/true/:teamId", auth, gamesController.gameInProgress);
 //gets the latest game

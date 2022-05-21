@@ -121,10 +121,6 @@ function App() {
               path="/tables/success/:teamId"
               component={SuccessCard}
             />
-            {/* <ProtectedRoute
-              path="/tables/monthlyStats/:year/:currentMonth/:teamId"
-              component={CurrMonthCard}
-            /> */}
             <ProtectedRoute
               path="/tables/monthlyStats/:year/:currentMonth/:teamId"
               component={CurrMonthCard}

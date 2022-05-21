@@ -7,15 +7,7 @@ import { apiImage } from "../../config.json";
 const CurrMonth = ({ header, data, name, image, cMonth, team, month }) => {
   const date = new Date();
   let currentMonth = date.toLocaleString("en-US", { month: "long" });
-  console.log("currentMonth", currentMonth);
-  // let players = month ? month.players : "";
-  // const compare = (a, b) => {
-  //   if (a.totalProfit < b.totalProfit) return 1;
-  //   if (a.totalProfit > b.totalProfit) return -1;
-  //   return 0;
-  // };
-  // players.sort(compare);
-  // console.log("p", players);
+
   return (
     <div className="cardDiv">
       <div
@@ -41,13 +33,13 @@ const CurrMonth = ({ header, data, name, image, cMonth, team, month }) => {
         </div>
         <div className="card-img-overlay"></div>
         <div className="card-body p-0" id="statsCardBody">
-          <div className="card-text" id="statsCardText">
+          <div className="card-text pt-3" id="statsCardText">
             <span>{header}</span>
             <br />
             <div className="d-flex justify-content-around">
               <span id="month">{currentMonth ? currentMonth : ""}</span>
 
-              {/* <span>{players ? players[0].totalProfit : 0}</span> */}
+              <span>{data ? data : 0}</span>
             </div>
           </div>
         </div>

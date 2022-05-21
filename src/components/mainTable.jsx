@@ -51,7 +51,6 @@ export default function MainTable(props) {
 
   //fetch data from DB
   useEffect(() => {
-    let isCancelled = true;
     const getTable = async () => {
       let table = await gameService.table(teamId);
       table = table.data;
@@ -99,15 +98,18 @@ export default function MainTable(props) {
     };
     getTable();
     return () => {
-      isCancelled = true;
+      let isCancelled = true;
     };
   }, [teamId]);
 
   useEffect(() => {
     const dataByMonths = async () => {
-      let results = await gameService.monthsData(props.match.params.teamId);
-      results = results.data;
       let thisMonth = new Date().getMonth();
+      let results = await gameService.monthsData(
+        props.match.params.teamId,
+        thisMonth + 1
+      );
+      results = results.data;
       if (results.length > 0) {
         const currMonth = results.filter(
           (e) => e._id.monthPlayed !== thisMonth
@@ -116,6 +118,14 @@ export default function MainTable(props) {
           (a, b) => b.totalProfit - a.totalProfit
         );
 
+        setMonthleader(currMonthLeader);
+      } else {
+        const currMonth = results.filter(
+          (e) => e._id.monthPlayed !== thisMonth - 1
+        );
+        const currMonthLeader = await currMonth.sort(
+          (a, b) => b.totalProfit - a.totalProfit
+        );
         setMonthleader(currMonthLeader);
       }
     };
@@ -168,7 +178,6 @@ export default function MainTable(props) {
             speed={81}
             color="rgba(108, 20, 180, 1)"
             secondaryColor="rgba(252, 252, 252, 1)"
-            // enabled={true}
             enabled={data.length < 1 ? true : false}
           />
         </div>
@@ -261,6 +270,13 @@ export default function MainTable(props) {
               </strong>
             </p>
           </motion.div>
+          <div
+            className="alert alert-info fade show w-75 py-1 alert-dismissible"
+            role="alert"
+          >
+            new update 21/5/22- <br></br>The month's card show stats by each
+            month
+          </div>
           <motion.div
             id="dashboardDisplay"
             initial={{ opacity: 0 }}
@@ -352,7 +368,7 @@ export default function MainTable(props) {
             />
             {monthleader.length > 0 && (
               <CurrMonth
-                header="Current Month"
+                header="Stats By Month's"
                 data={monthleader[0].totalProfit}
                 name={monthleader[0]._id.name}
                 image={monthleader[0]._id.image}

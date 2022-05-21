@@ -177,15 +177,6 @@ const CardTable = (props) => {
         <img src={`${apiImage}${teamImg.teamImage}`} alt="" />
         <span>{new Date().toLocaleDateString("en-GB")}</span>
       </div>
-      {/* {headerTitle === "Total Profit" && (
-        <div
-          className="alert alert-info fade show w-75 py-1 alert-dismissible"
-          role="alert"
-        >
-          new update 2/5/22- <br></br>you can now see player's previous rank
-        </div>
-      )} */}
-
       {data.length === 0 && (
         <div className="spinner pt-2">
           <SpinnerInfinity
