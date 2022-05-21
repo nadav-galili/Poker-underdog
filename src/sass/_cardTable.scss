@@ -109,12 +109,16 @@
 
 .rowPos {
   font-weight: bold;
-  // padding-left: 5px;
   text-align: center;
   font-size: 1em;
   font-weight: bold;
   align-self: center;
   width: 15%;
+  font-size: 1.4em;
+  width: 20%;
+}
+.rowPos.month {
+  width: 10%;
 }
 #rowPosTop {
   @extend .rowPos;
@@ -141,6 +145,9 @@
     background-image: linear-gradient($basecolorPurple, #4e4949);
   }
 }
+.rowImage.month {
+  width: 25%;
+}
 .rowImageTop {
   @extend .rowImage;
   width: 20%;
@@ -156,6 +163,15 @@
   flex-grow: 2;
 }
 
+.gamePlayed {
+  @extend .rowName;
+  width: 22%;
+  text-align: center;
+}
+
+.rowName.month {
+  width: 29%;
+}
 .rowNameTop {
   @extend .rowName;
   padding-left: 0;
@@ -179,6 +195,10 @@
   font-weight: bold;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
+}
+
+.rowProfit.month {
+  width: 17%;
 }
 
 .rowProfitSuccess {
@@ -436,10 +456,6 @@
   font-size: 0.6em;
 }
 
-.rowPos {
-  font-size: 1.4em;
-  width: 20%;
-}
 #arrows {
   font-size: 0.6em;
 }

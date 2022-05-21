@@ -4,6 +4,9 @@ import { apiImage } from "../../config.json";
 import teamService from "../../services/teamService";
 import PageHeader from "../common/pageHeader";
 import { Bar } from "react-chartjs-2";
+import _ from "lodash";
+import { Link } from "react-router-dom";
+import { SpinnerInfinity } from "spinners-react";
 
 const CurrMonthCard = (props) => {
   const [data, setData] = useState([]);
@@ -11,17 +14,19 @@ const CurrMonthCard = (props) => {
   const [teamImg, setTeamImg] = useState("");
   const [barChartDetails, setbarChartDetails] = useState({});
 
-  let currentMonth = new Date();
-  let currentMonthNumber = currentMonth.getMonth() + 1;
-  currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
-
+  let chosenMonth = props.match.params.currentMonth;
+  const monthNumber = (mon) => {
+    return new Date(Date.parse(mon + " 1, 2012")).getMonth() + 1;
+  };
   const teamId = props.match.params.teamId;
 
   useEffect(() => {
     const getTable = async () => {
-      let table = await gameService.monthsData(teamId);
+      let table = await gameService.monthsData(
+        teamId,
+        monthNumber(chosenMonth)
+      );
       table = table.data;
-
       const barChart = {
         labels: [],
         datasets: [
@@ -67,79 +72,120 @@ const CurrMonthCard = (props) => {
 
       let teamPic = await teamService.getTeam(teamId);
       setTeamImg(teamPic.data);
-
-      table = table.filter(
-        (month) => month._id.monthPlayed === currentMonthNumber
-      );
       let myHero = table.shift();
       setHero(myHero);
       setData(table);
     };
 
     getTable();
-  }, [setData, teamId, currentMonthNumber]);
+  }, [setData, teamId]);
 
   let rank = 2;
 
   return (
     <div className="container pb-3">
-      <PageHeader titleText={`${currentMonth} ${new Date().getFullYear()}`} />
+      <PageHeader titleText={`${chosenMonth} Profit`} />
       <div className="teamImg d-flex flex-row mb-2">
         <img src={`${apiImage}${teamImg.teamImage}`} alt="" />
         <span>{new Date().toLocaleDateString("en-GB")}</span>
       </div>
-      <div className="col-lg-4 col-12" id="cardTop">
-        <ul className="statsList ">
-          <li
-            className="statsHero d-flex"
-            style={{
-              backgroundImage: `url(${
-                process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
-              })`,
-            }}
-          >
-            <div className="statsInfo flex-fill">
-              <div className="pos">1.</div>
-              <a href="#/" id="heroName">
-                {data.length > 0 ? hero._id.name : ""}
-              </a>
-              <div id="amount" className="flex-fill">
-                {data.length > 0 ? hero.totalProfit : ""}
+      {data.length === 0 && (
+        <div className="spinner pt-2">
+          <SpinnerInfinity
+            size={130}
+            thickness={151}
+            speed={70}
+            color="rgba(252, 252, 252, 1)"
+            secondaryColor="rgba(108, 20, 180, 1)"
+            enabled={data.length === 0 ? true : false}
+          />
+        </div>
+      )}
+      {data.length > 0 && hero._id && (
+        <div className="col-lg-4 col-12" id="cardTop">
+          <ol className="statsList ">
+            <li
+              className="statsHeroPerHour d-flex w-100"
+              style={{
+                backgroundImage: `url(${
+                  process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
+                })`,
+              }}
+            >
+              <div className="statsInfo flex-fill" id="perHourHeroSide">
+                <div className="pos">1.</div>
+                <Link to={`/players-stats/${hero._id.player_id}`} id="heroName">
+                  {data.length > 0 ? hero._id.name : ""}
+                </Link>
+                <div id="amount" className="flex-fill">
+                  <div className="heroPerHour">Games Played:</div>
+                  <div className="heroPerHour ">{hero.numOfGames}</div>
+                </div>
+                <div id="amount" className="flex-fill">
+                  <p className="heroPerHour m-0">Avg Profit:</p>
+                  <p className="heroPerHour m-0">
+                    {" "}
+                    {data.length > 0 ? hero.avgProfit : ""}
+                  </p>
+                </div>
+                <div id="amount" className="flex-fill">
+                  <p className="heroPerHour m-0">Total Profit:</p>
+                  <p className="heroPerHour m-0">
+                    {" "}
+                    {data.length > 0 ? hero.totalProfit : ""}
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="heroImage ">
-              <img
-                src={data.length > 0 ? `${apiImage}${hero._id.image}` : ""}
-                alt="hero"
-              />
-            </div>
-          </li>
-          <React.Fragment>
-            {data.map((player) => (
-              <li className="statsRow d-flex" key={player._id.name}>
-                <div className="rowPos">{rank++}.</div>
-                <div className="rowImage">
+              <div className="heroImagePerHour">
+                <Link to={`/players-stats/${hero._id.player_id}`} id="heroName">
                   <img
-                    src={
-                      data.length > 0 ? `${apiImage}${player._id.image}` : ""
-                    }
-                    alt="player list row"
+                    src={data.length > 0 ? `${apiImage}${hero._id.image}` : ""}
+                    alt=""
                   />
-                </div>
-                <div className="rowName">
-                  {data.length > 0 ? player._id.name : ""}
-                </div>
-                <div className="rowProfit">
-                  {data.length > 0 ? player.totalProfit : ""}
-                </div>
-              </li>
-            ))}
-          </React.Fragment>
-        </ul>
-        {barChartDetails.datasets && (
-          <Bar data={barChartDetails} className="mb-3" />
-        )}
-      </div>
+                </Link>
+              </div>
+            </li>
+            <li className="statsHeaderPerHour d-flex w-100 justify-content-between">
+              <div>Rank</div>
+              <div>Image</div>
+              <div>Player</div>
+              <div>Games Played</div>
+              <div>Avg Profit</div>
+              <div>Total Profit</div>
+            </li>
+            <React.Fragment>
+              {data.map((player) => (
+                <li className="statsRow d-flex" key={player._id.name}>
+                  <div className="rowPos month">{rank++}.</div>
+                  <div className="rowImage month">
+                    <img
+                      src={
+                        data.length > 0 ? `${apiImage}${player._id.image}` : ""
+                      }
+                      alt="player list row"
+                    />
+                  </div>
+                  <div className="rowName month p-0">
+                    {data.length > 0 ? player._id.name : ""}
+                  </div>
+                  <div className="gamePlayed p-0">
+                    {data.length > 0 ? player.numOfGames : ""}
+                  </div>
+                  <div className="gamePlayed p-0">
+                    {data.length > 0 ? player.avgProfit.toFixed(2) : ""}
+                  </div>
+                  <div className="rowProfit month">
+                    {data.length > 0 ? player.totalProfit : ""}
+                  </div>
+                </li>
+              ))}
+            </React.Fragment>
+          </ol>
+          {barChartDetails.datasets && (
+            <Bar data={barChartDetails} className="mb-3" />
+          )}
+        </div>
+      )}
     </div>
   );
 };

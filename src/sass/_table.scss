@@ -148,7 +148,7 @@
 }
 
 #month {
-  color: $navbarWhite;
+  font-size: 1.2em !important;
 }
 
 .spinner {
@@ -159,6 +159,9 @@
 @media screen and (max-width: 600px) {
   .cardDiv {
     width: 45%;
+  }
+  .cardDiv.month {
+    width: 100% !important;
   }
   #statsCardText {
     & span:first-child {

@@ -17,8 +17,8 @@ export function personalGames(uId) {
   return http.get(`${apiUrl}/games/personalGames/${uId}`);
 }
 
-export function monthsData(teamId) {
-  return http.get(`${apiUrl}/games/byMonths/${teamId}`);
+export function monthsData(teamId, month) {
+  return http.get(`${apiUrl}/games/byMonths/${month}/${teamId}`);
 }
 
 export function statsPerHour(teamId) {
@@ -78,6 +78,10 @@ export function previousRank(teamId) {
   return http.get(`${apiUrl}/games/previousRank/${teamId}`);
 }
 
+export function monthlyStats(teamId) {
+  return http.get(`${apiUrl}/games/monthlyStats/${teamId}`);
+}
+
 export default {
   lastGame,
   table,
@@ -99,4 +103,5 @@ export default {
   updateManager,
   fetchCashingDetails,
   previousRank,
+  monthlyStats,
 };

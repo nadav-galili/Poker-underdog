@@ -262,7 +262,7 @@ h1 {
 }
 
 #month {
-  color: #fcfcfc;
+  font-size: 1.2em !important;
 }
 
 .spinner {
@@ -273,6 +273,9 @@ h1 {
 @media screen and (max-width: 600px) {
   .cardDiv {
     width: 45%;
+  }
+  .cardDiv.month {
+    width: 100% !important;
   }
   #statsCardText span:first-child {
     font-weight: bolder;
@@ -1161,6 +1164,12 @@ tfoot td {
   font-weight: bold;
   align-self: center;
   width: 15%;
+  font-size: 1.4em;
+  width: 20%;
+}
+
+.rowPos.month, .month#rowPosTop, .month.rowPosPerHour, .month.rowPosLast {
+  width: 10%;
 }
 
 #rowPosTop {
@@ -1189,11 +1198,15 @@ tfoot td {
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
+.rowImage.month, .month.rowImageTop, .month.rowImageH2h, .month.rowImagePerHour {
+  width: 25%;
+}
+
 .rowImageTop, .rowImageH2h {
   width: 20%;
 }
 
-.rowName, .rowNameTop, .rowNameH2h, .rowNamePerHour {
+.rowName, .gamePlayed, .rowNameTop, .rowNameH2h, .rowNamePerHour {
   font-size: 1em;
   font-weight: bold;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
@@ -1201,6 +1214,15 @@ tfoot td {
   align-self: center;
   text-transform: capitalize;
   flex-grow: 2;
+}
+
+.gamePlayed {
+  width: 22%;
+  text-align: center;
+}
+
+.rowName.month, .month.gamePlayed, .month.rowNameTop, .month.rowNameH2h, .month.rowNamePerHour {
+  width: 29%;
 }
 
 .rowNameTop, .rowNameH2h {
@@ -1227,6 +1249,11 @@ tfoot td {
   font-weight: bold;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
+}
+
+.rowProfit.month, .month.rowProfitSuccess, .month.rowProfitTop, .month.rowPointsTop,
+.month.rowSuccessTop, .month.rowProfitPerHour {
+  width: 17%;
 }
 
 .rowProfitSuccess {
@@ -1507,11 +1534,6 @@ tfoot td {
 
 .previousPosition {
   font-size: 0.6em;
-}
-
-.rowPos, #rowPosTop, .rowPosPerHour, .rowPosLast {
-  font-size: 1.4em;
-  width: 20%;
 }
 
 #arrows {

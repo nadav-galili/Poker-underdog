@@ -271,6 +271,7 @@ exports.gameById = async function (req, res) {
   res.send(game);
 };
 exports.dataByMonths = async function (req, res) {
+  let month = parseInt(req.params.month);
   const byMonths = await Game.aggregate([
     {
       $unwind: {
@@ -282,21 +283,27 @@ exports.dataByMonths = async function (req, res) {
       $match: {
         team_id: req.params.teamId,
         $expr: {
-          $gte: [{ $month: "$createdAt" }, { $month: new Date() }],
+          $eq: [
+            {
+              $month: "$createdAt",
+            },
+            month,
+          ],
         },
       },
     },
     {
       $group: {
         _id: {
-          monthPlayed: { $month: "$createdAt" },
+          monthPlayed: {
+            $month: "$createdAt",
+          },
           name: "$players.name",
           image: "$players.image",
           player_id: "$players.id",
           team_id: "$team_id",
           team_name: "$team_name",
         },
-
         totalProfit: {
           $sum: "$players.profit",
         },
@@ -863,4 +870,63 @@ exports.fetchCashingDetails = async function (req, res) {
   data = data.cashing_details;
   data = data.reverse();
   res.send(data);
+};
+
+exports.monthlyStats = async function (req, res) {
+  let currMonth = new Date().getMonth();
+
+  const byMonths = await Game.aggregate([
+    {
+      $unwind: {
+        path: "$players",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $match: {
+        team_id: req.params.teamId,
+      },
+    },
+    {
+      $group: {
+        _id: {
+          monthPlayed: { $month: "$createdAt" },
+          name: "$players.name",
+          image: "$players.image",
+          player_id: "$players.id",
+          team_id: "$team_id",
+          team_name: "$team_name",
+        },
+
+        totalProfit: {
+          $sum: "$players.profit",
+        },
+        avgProfit: {
+          $avg: "$players.profit",
+        },
+        numOfGames: {
+          $sum: 1,
+        },
+        avgCashing: {
+          $avg: "$players.numOfCashing",
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        totalProfit: 1,
+        roundedAvgProfit: { $round: ["$avgProfit", 2] },
+        numOfGames: 1,
+        roundedAvgCashing: { $round: ["$avgCashing", 2] },
+      },
+    },
+    {
+      $sort: {
+        _id: 1,
+        totalProfit: -1,
+      },
+    },
+  ]);
+  res.send(byMonths);
 };

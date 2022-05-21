@@ -4,27 +4,21 @@ import { AiOutlineDoubleRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { apiImage } from "../../config.json";
 
-const CurrMonth = ({
-  header,
-  data,
-  name,
-  image,
-  cMonth,
-  cardName,
-  team,
-  table,
-}) => {
-  let currentMonth = new Date(cMonth);
-  currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
+const CurrMonth = ({ header, data, name, image, cMonth, team, month }) => {
+  const date = new Date();
+  let currentMonth = date.toLocaleString("en-US", { month: "long" });
 
   return (
     <div className="cardDiv">
-      <div className="card " id="mainStats"
-           style={{
-            backgroundImage: `url(${
-              process.env.PUBLIC_URL + "/icons/diamond.svg"
-            })`,
-          }}>
+      <div
+        className="card "
+        id="mainStats"
+        style={{
+          backgroundImage: `url(${
+            process.env.PUBLIC_URL + "/icons/diamond.svg"
+          })`,
+        }}
+      >
         <h5 className="card-title ">{name}</h5>
         <div className="img-card">
           <img
@@ -38,27 +32,26 @@ const CurrMonth = ({
           />
         </div>
         <div className="card-img-overlay"></div>
-        <div className="card-body" id="statsCardBody">
-          <div className="card-text" id="statsCardText">
+        <div className="card-body p-0" id="statsCardBody">
+          <div className="card-text pt-3" id="statsCardText">
             <span>{header}</span>
             <br />
             <div className="d-flex justify-content-around">
-            <span id="month">{cMonth ? currentMonth : ""}</span>
-       <span>{data ? data : 0}</span>
+              <span id="month">{currentMonth ? currentMonth : ""}</span>
+
+              <span>{data ? data : 0}</span>
             </div>
-    
-          
           </div>
         </div>
       </div>
       <Link
-    className="text-white btn btn-primary"
-    id="cardFooter"
-        to={`/tables/byMonths/${currentMonth}/${team}`}
+        className="text-white btn btn-primary"
+        id="cardFooter"
+        to={`/tables/monthlyStats/${team}`}
       >
         See full table
         <GiCardAceHearts />
-        <AiOutlineDoubleRight/>
+        <AiOutlineDoubleRight />
       </Link>
     </div>
   );
