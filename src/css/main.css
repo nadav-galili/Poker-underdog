@@ -262,7 +262,7 @@ h1 {
 }
 
 #month {
-  color: #fcfcfc;
+  font-size: 1.2em !important;
 }
 
 .spinner {
@@ -273,6 +273,9 @@ h1 {
 @media screen and (max-width: 600px) {
   .cardDiv {
     width: 45%;
+  }
+  .cardDiv.month {
+    width: 100% !important;
   }
   #statsCardText span:first-child {
     font-weight: bolder;

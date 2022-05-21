@@ -76,7 +76,11 @@ const AllGames = ({ teamId }) => {
 
         {games &&
           items.map((g) => (
-            <div className="col-lg-4 col-12 " id="card-top" key={g.createdAt}>
+            <div
+              className="col-lg-4 col-12 "
+              id="card-top"
+              key={g[0].profit + g[0].image}
+            >
               <ol className="statsList">
                 <li
                   id="lastGameHero"
@@ -120,7 +124,7 @@ const AllGames = ({ teamId }) => {
                 {g
                   .sort((a, b) => b.profit - a.profit)
                   .map((player) => (
-                    <li className="statsRowAllGames" key={player.id}>
+                    <li className="statsRowAllGames" key={player.image}>
                       <div className="rowPos">{player.gameRank}.</div>
                       <div className="rowImage">
                         <img

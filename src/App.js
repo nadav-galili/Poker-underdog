@@ -32,6 +32,7 @@ import TeamSignUp from "./components/forms/teamSignUp";
 import EditGames from "./components/games/editGames";
 import PlayerStats from "./components/personalStats/playerStats";
 import StatsPerHourCard from "./components/topStats/statsPerHourCard";
+import MonthlyStats from "./components/topStats/monthlyStats";
 import ReactGA from "react-ga";
 
 ReactGA.initialize("G-MPD41JDBPV");
@@ -120,9 +121,17 @@ function App() {
               path="/tables/success/:teamId"
               component={SuccessCard}
             />
-            <ProtectedRoute
-              path="/tables/byMonths/:currMonth/:teamId"
+            {/* <ProtectedRoute
+              path="/tables/monthlyStats/:year/:currentMonth/:teamId"
               component={CurrMonthCard}
+            /> */}
+            <ProtectedRoute
+              path="/tables/monthlyStats/:year/:currentMonth/:teamId"
+              component={CurrMonthCard}
+            />
+            <ProtectedRoute
+              path="/tables/monthlyStats/:teamId"
+              component={MonthlyStats}
             />
             <ProtectedRoute
               path="/tables/profits/top-ten/:teamId"

@@ -4,14 +4,16 @@ import { apiImage } from "../../config.json";
 import teamService from "../../services/teamService";
 import PageHeader from "../common/pageHeader";
 import { Bar } from "react-chartjs-2";
+import NewMonthCard from "./newMonthCard";
 import _ from "lodash";
 
-const CurrMonthCard = (props) => {
+const MonthlyStats = (props) => {
   const [data, setData] = useState([]);
   const [hero, setHero] = useState([]);
   const [teamImg, setTeamImg] = useState("");
   const [barChartDetails, setbarChartDetails] = useState({});
-
+  const [monthlyStats, setMonthlyStats] = useState([]);
+  const [dataByMonth, setDataByMonth] = useState([]);
   let currentMonth = new Date();
   let currentMonthNumber = currentMonth.getMonth() + 1;
   currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
@@ -22,7 +24,20 @@ const CurrMonthCard = (props) => {
     const getTable = async () => {
       let table = await gameService.monthsData(teamId);
       table = table.data;
+      const monthlyStatsGroup = await gameService.monthlyStats(
+        props.match.params.teamId
+      );
+      setMonthlyStats(monthlyStatsGroup.data);
 
+      let dataBySeperateMonth = _.chain(monthlyStats)
+        //https://stackoverflow.com/questions/23600897/using-lodash-groupby-how-to-add-your-own-keys-for-grouped-output
+        // Group the elements of Array based on `monthPlayed` property
+        .groupBy("_id.monthPlayed")
+        // `key` is group's name (monthPlayed), `value` is the array of objects
+        .map((value, key) => ({ month: key, players: value }))
+        .value();
+      console.log("dataBySeperateMonth", dataBySeperateMonth);
+      setDataByMonth(dataBySeperateMonth);
       const barChart = {
         labels: [],
         datasets: [
@@ -78,9 +93,7 @@ const CurrMonthCard = (props) => {
     };
 
     getTable();
-  }, [setData, teamId, currentMonthNumber]);
-
-  let rank = 2;
+  }, [setData, teamId, currentMonthNumber, monthlyStats.length]);
 
   return (
     <div className="container pb-3">
@@ -89,60 +102,16 @@ const CurrMonthCard = (props) => {
         <img src={`${apiImage}${teamImg.teamImage}`} alt="" />
         <span>{new Date().toLocaleDateString("en-GB")}</span>
       </div>
-      <div className="col-lg-4 col-12" id="cardTop">
-        <ul className="statsList ">
-          <li
-            className="statsHero d-flex"
-            style={{
-              backgroundImage: `url(${
-                process.env.PUBLIC_URL + "/icons/stats-card-bg2.svg"
-              })`,
-            }}
-          >
-            <div className="statsInfo flex-fill">
-              <div className="pos">1.</div>
-              <a href="#/" id="heroName">
-                {data.length > 0 ? hero._id.name : ""}
-              </a>
-              <div id="amount" className="flex-fill">
-                {data.length > 0 ? hero.totalProfit : ""}
-              </div>
+      <div className="byMonth text-primary row ">
+        {dataByMonth.length > 0 &&
+          dataByMonth.map((month) => (
+            <div className="col-6">
+              <NewMonthCard month={month} team={teamImg} />
             </div>
-            <div className="heroImage ">
-              <img
-                src={data.length > 0 ? `${apiImage}${hero._id.image}` : ""}
-                alt="hero"
-              />
-            </div>
-          </li>
-          <React.Fragment>
-            {data.map((player) => (
-              <li className="statsRow d-flex" key={player._id.name}>
-                <div className="rowPos">{rank++}.</div>
-                <div className="rowImage">
-                  <img
-                    src={
-                      data.length > 0 ? `${apiImage}${player._id.image}` : ""
-                    }
-                    alt="player list row"
-                  />
-                </div>
-                <div className="rowName">
-                  {data.length > 0 ? player._id.name : ""}
-                </div>
-                <div className="rowProfit">
-                  {data.length > 0 ? player.totalProfit : ""}
-                </div>
-              </li>
-            ))}
-          </React.Fragment>
-        </ul>
-        {barChartDetails.datasets && (
-          <Bar data={barChartDetails} className="mb-3" />
-        )}
+          ))}
       </div>
     </div>
   );
 };
 
-export default CurrMonthCard;
+export default MonthlyStats;
