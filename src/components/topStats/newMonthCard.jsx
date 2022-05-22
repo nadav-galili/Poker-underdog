@@ -22,12 +22,10 @@ const CurrMonth = ({ header, name, team, month }) => {
         className="card "
         id="mainStats"
         style={{
-          backgroundImage: `url(${
-            process.env.PUBLIC_URL + "/icons/diamond.svg"
-          })`,
+          backgroundImage: `url(${apiImage + "images/diamond-sunset.svg"})`,
         }}
       >
-        <h5 className="card-title ">{players[0]._id.name}</h5>
+        <h5 className="card-title text-white">{players[0]._id.name}</h5>
         <div className="img-card">
           <img
             src={
