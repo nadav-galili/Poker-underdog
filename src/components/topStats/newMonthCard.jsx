@@ -10,6 +10,7 @@ const CurrMonth = ({ header, name, team, month }) => {
 
   let currentMonth = date.toLocaleString("en-US", { month: "long" });
   let players = month.players;
+  let imageUrl = apiImage + "images/diamond-sunset.svg";
   const compare = (a, b) => {
     if (a.totalProfit < b.totalProfit) return 1;
     if (a.totalProfit > b.totalProfit) return -1;
@@ -22,7 +23,7 @@ const CurrMonth = ({ header, name, team, month }) => {
         className="card "
         id="mainStats"
         style={{
-          backgroundImage: `url(${apiImage + "images/diamond-sunset.svg"})`,
+          backgroundImage: `url(${imageUrl})`,
         }}
       >
         <h5 className="card-title text-white">{players[0]._id.name}</h5>
