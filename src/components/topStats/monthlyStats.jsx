@@ -36,7 +36,6 @@ const MonthlyStats = (props) => {
         // `key` is group's name (monthPlayed), `value` is the array of objects
         .map((value, key) => ({ month: key, players: value }))
         .value();
-      console.log("dataBySeperateMonth", dataBySeperateMonth);
       setDataByMonth(dataBySeperateMonth);
       const barChart = {
         labels: [],
