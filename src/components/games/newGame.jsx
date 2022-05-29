@@ -204,8 +204,8 @@ const NewGame = (props) => {
           role="alert"
         >
           <h6 class="alert-heading">New Update 18/5/22:</h6>
-          new feature:add players to the game after he game started.
-          <br></br>Head 2 Head will also update automatically.
+          new feature:add players to the game after the game started.
+          <br></br>Head 2 Head will also be updated.
         </div>
         {data.length < 1 && (
           <div className="spinner pt-2">

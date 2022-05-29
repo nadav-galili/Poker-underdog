@@ -10,7 +10,7 @@ const CurrMonth = ({ header, name, team, month }) => {
 
   let currentMonth = date.toLocaleString("en-US", { month: "long" });
   let players = month.players;
-  let imageUrl = apiImage + "images/diamond-sunset.svg";
+
   const compare = (a, b) => {
     if (a.totalProfit < b.totalProfit) return 1;
     if (a.totalProfit > b.totalProfit) return -1;

@@ -82,6 +82,9 @@ export function monthlyStats(teamId) {
   return http.get(`${apiUrl}/games/monthlyStats/${teamId}`);
 }
 
+export function monthlyByPlayer(teamId) {
+  return http.get(`${apiUrl}/games/monthlyByPlayer/${teamId}`);
+}
 export default {
   lastGame,
   table,
@@ -104,4 +107,5 @@ export default {
   fetchCashingDetails,
   previousRank,
   monthlyStats,
+  monthlyByPlayer,
 };

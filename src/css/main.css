@@ -970,6 +970,10 @@ tfoot td {
   padding: 0 7px 0 0;
 }
 
+.line-chart {
+  height: 25em;
+}
+
 #footer {
   color: black;
   background-image: linear-gradient(to bottom right, #02d84d, #c8d3c8);
