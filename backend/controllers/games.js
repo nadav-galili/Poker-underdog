@@ -930,3 +930,74 @@ exports.monthlyStats = async function (req, res) {
   ]);
   res.send(byMonths);
 };
+
+exports.monthlyByPlayer = async function (req, res) {
+  const monthlyByPlayer = await Game.aggregate([
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $match: {
+        team_id: req.params.teamid,
+      },
+    },
+    {
+      $group: {
+        _id: {
+          monthPlayed: {
+            $month: "$createdAt",
+          },
+          name: "$players.name",
+          image: "$players.image",
+          player_id: "$players.id",
+          team_id: "$team_id",
+          team_name: "$team_name",
+        },
+        totalProfit: {
+          $sum: "$players.profit",
+        },
+        avgProfit: {
+          $avg: "$players.profit",
+        },
+        numOfGames: {
+          $sum: 1,
+        },
+        avgCashing: {
+          $avg: "$players.numOfCashing",
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        totalProfit: 1,
+        roundedAvgProfit: {
+          $round: ["$avgProfit", 2],
+        },
+        numOfGames: 1,
+        roundedAvgCashing: {
+          $round: ["$avgCashing", 2],
+        },
+      },
+    },
+    {
+      $sort: {
+        "_id.name": 1,
+        "_id.monthPlayed": 1,
+      },
+    },
+  ]);
+
+  let players = _.groupBy(monthlyByPlayer, "_id.name");
+  players = Object.entries(players);
+  for (let i = 0; i < players.length; i++) {
+    players[i][2] = [];
+    for (let j = 0; j < players[i][1].length; j++) {
+      players[i][2].push(players[i][1][j].totalProfit);
+    }
+  }
+
+  res.send(players);
+};

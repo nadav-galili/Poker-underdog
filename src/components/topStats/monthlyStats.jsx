@@ -3,7 +3,7 @@ import gameService from "../../services/gameService";
 import { apiImage } from "../../config.json";
 import teamService from "../../services/teamService";
 import PageHeader from "../common/pageHeader";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import NewMonthCard from "./newMonthCard";
 import _ from "lodash";
 
@@ -11,9 +11,11 @@ const MonthlyStats = (props) => {
   const [data, setData] = useState([]);
   const [hero, setHero] = useState([]);
   const [teamImg, setTeamImg] = useState("");
-  const [barChartDetails, setbarChartDetails] = useState({});
   const [monthlyStats, setMonthlyStats] = useState([]);
   const [dataByMonth, setDataByMonth] = useState([]);
+  const [chartDates, setChartDates] = useState([]);
+  const [chartProfitsByPlayer, setChartProfitsByPlayer] = useState([]);
+  const [profits, setProfits] = useState([]);
   let currentMonth = new Date();
   let currentMonthNumber = currentMonth.getMonth() + 1;
   currentMonth = currentMonth.toLocaleString("en-US", { month: "long" });
@@ -28,7 +30,6 @@ const MonthlyStats = (props) => {
         props.match.params.teamId
       );
       setMonthlyStats(monthlyStatsGroup.data);
-
       let dataBySeperateMonth = _.chain(monthlyStats)
         //https://stackoverflow.com/questions/23600897/using-lodash-groupby-how-to-add-your-own-keys-for-grouped-output
         // Group the elements of Array based on `monthPlayed` property
@@ -37,47 +38,19 @@ const MonthlyStats = (props) => {
         .map((value, key) => ({ month: key, players: value }))
         .value();
       setDataByMonth(dataBySeperateMonth);
-      const barChart = {
-        labels: [],
-        datasets: [
-          {
-            label: `Profit By Player`,
-            data: [],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.5)",
-              "rgba(54, 162, 235, 0.5)",
-              "rgba(255, 206, 86, 0.5)",
-              "rgba(75, 192, 192, 0.5)",
-              "rgba(153, 102, 255, 0.5)",
-              "rgba(255, 159, 64, 0.5)",
-              "rgba(39, 186, 46, 0.5)",
-              "rgba(8, 20, 107, 0.5)",
-              "rgba(8, 20, 107, 0.5)",
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-              "rgba(39, 186, 46,1)",
-              "rgba(8, 20, 107, 1)",
-              "rgba(8, 20, 107, 1)",
-            ],
-            borderWidth: 1,
-          },
-        ],
-      };
-      try {
-        await table.forEach((player) => {
-          barChart.labels.push(player._id.name);
-          barChart.datasets[0].data.push(player.totalProfit);
-        });
 
-        setbarChartDetails(barChart);
+      let dates = await gameService.monthlyByPlayer(teamId);
+      setChartProfitsByPlayer(dates.data);
+
+      let chartDates = [];
+      try {
+        await dataByMonth.forEach((e) =>
+          chartDates.push(
+            new Date(e.month).toLocaleString("en-US", { month: "short" })
+          )
+        );
       } catch {
-        console.log("err1");
+        console.log("errr");
       }
 
       let teamPic = await teamService.getTeam(teamId);
@@ -89,10 +62,51 @@ const MonthlyStats = (props) => {
       let myHero = table.shift();
       setHero(myHero);
       setData(table);
+
+      setChartDates(chartDates);
+      console.log("dd", dataByMonth);
+      console.log("kk", chartProfitsByPlayer);
+
+      setProfits(chartProfitsByPlayer);
     };
 
     getTable();
-  }, [setData, teamId, currentMonthNumber, monthlyStats.length]);
+  }, [
+    setData,
+    teamId,
+    currentMonthNumber,
+    monthlyStats.length,
+    dataByMonth.length,
+    chartProfitsByPlayer.length,
+  ]);
+
+  const options = {
+    maintainAspectRatio: false,
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "player profit by month",
+      },
+    },
+  };
+
+  let chartProfits = {};
+  chartProfits.labels = chartDates;
+  chartProfits.datasets = [];
+  profits.forEach((e) => {
+    chartProfits.datasets.push({
+      label: e[0],
+      data: e[2],
+      fill: false,
+      backgroundColor: "white",
+      borderColor: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+    });
+  });
+  console.log("chartProfits", chartProfits);
 
   return (
     <div className="container pb-3">
@@ -108,6 +122,9 @@ const MonthlyStats = (props) => {
               <NewMonthCard month={month} team={teamImg} />
             </div>
           ))}
+      </div>
+      <div className="line-chart">
+        <Line data={chartProfits} options={options} />
       </div>
     </div>
   );

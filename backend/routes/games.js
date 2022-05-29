@@ -21,6 +21,8 @@ router.get("/table/:teamId", auth, gamesController.teamStats);
 
 // gets  month stats
 router.get("/byMonths/:month/:teamId", auth, gamesController.dataByMonths);
+//get monthly by player for chart
+router.get("/monthlyByPlayer/:teamid", auth, gamesController.monthlyByPlayer);
 //game in progrerss
 router.get("/true/:teamId", auth, gamesController.gameInProgress);
 //gets the latest game
