@@ -33,6 +33,7 @@ import EditGames from "./components/games/editGames";
 import PlayerStats from "./components/personalStats/playerStats";
 import StatsPerHourCard from "./components/topStats/statsPerHourCard";
 import MonthlyStats from "./components/topStats/monthlyStats";
+import sidebetsMain from "./components/sidebets/sidebetsMain";
 import ReactGA from "react-ga";
 
 ReactGA.initialize("G-MPD41JDBPV");
@@ -141,6 +142,10 @@ function App() {
             <ProtectedRoute
               path="/stats-per-hour/:teamId"
               component={StatsPerHourCard}
+            />
+            <ProtectedRoute
+              path="/side-bets/:teamId"
+              component={sidebetsMain}
             />
 
             <Route path="/demo" component={Demo} />

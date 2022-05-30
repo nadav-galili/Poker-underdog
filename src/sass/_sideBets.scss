@@ -1,0 +1,46 @@
+.vsImage {
+  height: 22em;
+  width: 100%;
+  background-size: 100% 22em;
+  background-repeat: no-repeat;
+  border: 1px solid #fff;
+}
+
+.sideBets1 {
+  & p {
+    text-align: center;
+  }
+}
+
+.sideBets2 {
+  @extend .sideBets1;
+}
+.sideBetsPlayer1 {
+  width: 100%;
+  height: 5em;
+  & img {
+    // width: 50%;
+    width: 50%;
+    max-height: 100%;
+    border-radius: 50%;
+    border: 2px solid gold;
+    object-fit: cover;
+  }
+}
+
+.sideBetsPlayer2 {
+  @extend .sideBetsPlayer1;
+}
+
+.credit {
+  font-size: 0.5em;
+}
+
+.sidebetName {
+  color: gold;
+  font-size: 1.5em;
+  text-transform: capitalize;
+}
+// * {
+//   outline: 1px solid red;
+// }

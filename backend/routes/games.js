@@ -18,7 +18,6 @@ router.get("/personal/:uId", auth, gamesController.personalStats);
 router.get("/personalGames/:uId", auth, gamesController.personalGames);
 //gets aggregated results of the team
 router.get("/table/:teamId", auth, gamesController.teamStats);
-
 // gets  month stats
 router.get("/byMonths/:month/:teamId", auth, gamesController.dataByMonths);
 //get monthly by player for chart
@@ -30,6 +29,7 @@ router.get("/last-game/:teamId", auth, gamesController.lastGame);
 // get 10 biggest profits
 router.get("/profits/top-ten/:teamId", auth, gamesController.profits);
 
+router.get("/sideBets/riko/:teamId", auth, gamesController.sideBets);
 //get the cashing details for a game
 router.get(
   "/cashingDetails/:gameId",

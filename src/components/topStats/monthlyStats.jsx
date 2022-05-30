@@ -62,11 +62,7 @@ const MonthlyStats = (props) => {
       let myHero = table.shift();
       setHero(myHero);
       setData(table);
-
       setChartDates(chartDates);
-      console.log("dd", dataByMonth);
-      console.log("kk", chartProfitsByPlayer);
-
       setProfits(chartProfitsByPlayer);
     };
 

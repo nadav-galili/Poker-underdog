@@ -1001,3 +1001,55 @@ exports.monthlyByPlayer = async function (req, res) {
 
   res.send(players);
 };
+
+exports.sideBets = async function (req, res) {
+  console.log(req.params.teamId);
+  const agg = await Game.aggregate([
+    {
+      $match: {
+        team_id: req.params.teamId,
+        createdAt: {
+          $gte: new Date("27 May 2022 00:00:00 GMT"),
+        },
+      },
+    },
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $match: {
+        $or: [
+          {
+            "players.id": "61c440e7fef3431fa3c7b06a",
+          },
+          {
+            "players.id": "61d17080f6969223bab8acaf",
+          },
+        ],
+      },
+    },
+    {
+      $group: {
+        _id: {
+          name: "$players.name",
+          image: "$players.image",
+          player_id: "$players.id",
+          team_id: "$team_id",
+          team_name: "$team_name",
+        },
+        profit: {
+          $sum: "$players.profit",
+        },
+        numOfGames: {
+          $sum: 1,
+        },
+        avgProfit: {
+          $avg: "$players.profit",
+        },
+      },
+    },
+  ]);
+  res.send(agg);
+};
