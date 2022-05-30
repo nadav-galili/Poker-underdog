@@ -85,6 +85,10 @@ export function monthlyStats(teamId) {
 export function monthlyByPlayer(teamId) {
   return http.get(`${apiUrl}/games/monthlyByPlayer/${teamId}`);
 }
+
+export function sideBets(teamId) {
+  return http.get(`${apiUrl}/games/sideBets/riko/${teamId}`);
+}
 export default {
   lastGame,
   table,
@@ -108,4 +112,5 @@ export default {
   previousRank,
   monthlyStats,
   monthlyByPlayer,
+  sideBets,
 };

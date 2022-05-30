@@ -1797,6 +1797,41 @@ label {
   width: 30%;
 }
 
+.vsImage {
+  height: 22em;
+  width: 100%;
+  background-size: 100% 22em;
+  background-repeat: no-repeat;
+  border: 1px solid #fff;
+}
+
+.sideBets1 p, .sideBets2 p {
+  text-align: center;
+}
+
+.sideBetsPlayer1, .sideBetsPlayer2 {
+  width: 100%;
+  height: 5em;
+}
+
+.sideBetsPlayer1 img, .sideBetsPlayer2 img {
+  width: 50%;
+  max-height: 100%;
+  border-radius: 50%;
+  border: 2px solid gold;
+  object-fit: cover;
+}
+
+.credit {
+  font-size: 0.5em;
+}
+
+.sidebetName {
+  color: gold;
+  font-size: 1.5em;
+  text-transform: capitalize;
+}
+
 main {
   background-repeat: no-repeat;
   background-size: cover;

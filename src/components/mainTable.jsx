@@ -14,6 +14,7 @@ import H2hCard from "./h2h/h2hCard";
 import AllGames from "./games/allGames";
 import { IoIosTrophy } from "react-icons/io";
 import StatsPerHour from "./topStats/statsPerHour";
+import SideBetsCard from "./sidebets/sidebetsCard";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MdDateRange } from "react-icons/md";
@@ -44,6 +45,7 @@ export default function MainTable(props) {
       let game = await gameService.lastGame(teamId);
       game = game.data[0];
       setLastGame(game);
+      console.log(teamId);
     };
 
     getLastGame();
@@ -390,6 +392,9 @@ export default function MainTable(props) {
                 image={h2h[0]._id.image}
                 team={teamId}
               />
+            )}
+            {teamId === "61b243ac87b6640ad041224f" && (
+              <SideBetsCard teamId={teamId} />
             )}
           </motion.div>
           <MainLastgame teamId={teamId} />
