@@ -1202,6 +1202,17 @@ tfoot td {
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
+.rowImage.h2hGames img, .h2hGames.rowImageTop img, .h2hGames.rowImageH2h img, .h2hGames.rowImagePerHour img {
+  border-bottom-left-radius: 30px !important;
+  border-bottom-right-radius: 30px !important;
+  height: 3em;
+  width: 3em;
+  border-radius: 50%;
+  border: 1px solid black;
+  object-fit: cover;
+  background-image: linear-gradient(#6c14b4, #4e4949);
+}
+
 .rowImage.month, .month.rowImageTop, .month.rowImageH2h, .month.rowImagePerHour {
   width: 25%;
 }
@@ -1548,6 +1559,20 @@ tfoot td {
   font-size: 0.5em;
 }
 
+.teamShield {
+  height: 9.4em;
+  width: 8em;
+  background-size: contain;
+}
+
+.teamShield img {
+  width: 3.2em;
+  height: 3.2em;
+  border-radius: 50%;
+  object-fit: cover;
+  align-items: center;
+}
+
 .form-control {
   border: none !important;
   padding: 0 !important;
@@ -1810,14 +1835,9 @@ label {
   font-size: 1.1em;
 }
 
-.sideBetsPlayer1, .sideBetsPlayer2 {
-  width: 100%;
-  height: 5em;
-}
-
 .sideBetsPlayer1 img, .sideBetsPlayer2 img {
-  width: 50%;
-  max-height: 100%;
+  width: 5em;
+  max-height: 5em;
   border-radius: 50%;
   border: 2px solid gold;
   object-fit: cover;

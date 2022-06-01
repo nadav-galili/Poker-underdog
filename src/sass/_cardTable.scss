@@ -145,6 +145,19 @@
     background-image: linear-gradient($basecolorPurple, #4e4949);
   }
 }
+
+.rowImage.h2hGames {
+  img {
+    border-bottom-left-radius: 30px !important;
+    border-bottom-right-radius: 30px !important;
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+    border: 1px solid black;
+    object-fit: cover;
+    background-image: linear-gradient($basecolorPurple, #4e4949);
+  }
+}
 .rowImage.month {
   width: 25%;
 }
@@ -461,6 +474,19 @@
 }
 .previousPosition {
   font-size: 0.5em;
+}
+
+.teamShield {
+  height: 9.4em;
+  width: 8em;
+  background-size: contain;
+  & img {
+    width: 3.2em;
+    height: 3.2em;
+    border-radius: 50%;
+    object-fit: cover;
+    align-items: center;
+  }
 }
 // * {
 //   outline: 1px solid red;
