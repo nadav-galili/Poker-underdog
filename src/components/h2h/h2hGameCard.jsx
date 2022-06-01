@@ -107,7 +107,7 @@ const H2hGameCard = ({ team }) => {
                         className="statsRow w-100"
                         key={game.name + Date.now()}
                       >
-                        <div className="rowImage">
+                        <div className="rowImage h2hGames">
                           <img
                             src={`${apiImage}${game[0].image}`}
                             alt="player list row"
@@ -118,7 +118,7 @@ const H2hGameCard = ({ team }) => {
                         <span className="mt-3 pt-1">VS</span>
                         <div className="rowProfit">{game[1].points}</div>
                         <div className="rowProfit ">{game[1].profit}</div>
-                        <div className="rowImage d-flex justify-content-center">
+                        <div className="rowImage  h2hGames d-flex justify-content-center">
                           <img
                             src={`${apiImage}${game[1].image}`}
                             alt="player list row"

@@ -187,23 +187,36 @@ export default function MainTable(props) {
 
       {data.length > 1 && (
         <React.Fragment>
-          <div>
-            <motion.img
+          {/* <div className="teamImages d-flex w-100 justify-content-between"> */}
+          <motion.img
+            style={{
+              width: 150,
+              height: 150,
+              borderRadius: 30,
+              backgroundColor: "#fff",
+            }}
+            animate={{ rotate: 360 }}
+            transition={{
+              type: "spring",
+              duration: 5,
+              bounce: 0.6,
+            }}
+            src={`${apiImage}${teamImage.teamImage}`}
+            alt="team"
+          />
+          {/* <div
+              className="teamShield"
               style={{
-                width: 150,
-                height: 150,
-                borderRadius: 30,
-                backgroundColor: "#fff",
+                backgroundImage: `url(${apiImage}images/Metal_shield.jpg)`,
               }}
-              animate={{ rotate: 360 }}
-              transition={{
-                type: "spring",
-                duration: 5,
-                bounce: 0.6,
-              }}
-              src={`${apiImage}${teamImage.teamImage}`}
-              alt="team"
-            />
+            >
+              <img
+                src="http://localhost:3900/uploads/1611313641528-1641844949763.jpg"
+                alt=""
+              />
+            </div> */}
+          {/* </div> */}
+          <div>
             <p className="ms-2 text-white mb-2 mt-2 display-6">
               {teamImage.name}
             </p>
