@@ -477,15 +477,22 @@
 }
 
 .teamShield {
-  height: 9.4em;
-  width: 8em;
+  height: 10em;
+  width: 6.7em;
   background-size: contain;
+  background-repeat: no-repeat;
   & img {
     width: 3.2em;
     height: 3.2em;
     border-radius: 50%;
     object-fit: cover;
     align-items: center;
+  }
+  & p {
+    color: #ffffff;
+    font-weight: bolder;
+    font-size: 1.4em;
+    padding-top: 10px;
   }
 }
 // * {

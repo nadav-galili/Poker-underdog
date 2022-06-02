@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import gameService from "../services/gameService";
+import userService from "../services/userService";
 import PageHeader from "./common/pageHeader";
 import PlayerCard from "./topStats/playerCard";
 import SuccessP from "./topStats/successp";
@@ -38,6 +39,7 @@ export default function MainTable(props) {
   const teamId = props.match.params.teamId;
   const [teams, setTeams] = useState([]);
   const [lastGame, setLastGame] = useState([]);
+  const [user, setUser] = useState({});
   var relativeTime = require("dayjs/plugin/relativeTime");
 
   useEffect(() => {
@@ -45,7 +47,8 @@ export default function MainTable(props) {
       let game = await gameService.lastGame(teamId);
       game = game.data[0];
       setLastGame(game);
-      console.log(teamId);
+      const me = await userService.getUserDetails();
+      setUser(me.data);
     };
 
     getLastGame();
@@ -187,35 +190,35 @@ export default function MainTable(props) {
 
       {data.length > 1 && (
         <React.Fragment>
-          {/* <div className="teamImages d-flex w-100 justify-content-between"> */}
-          <motion.img
-            style={{
-              width: 150,
-              height: 150,
-              borderRadius: 30,
-              backgroundColor: "#fff",
-            }}
-            animate={{ rotate: 360 }}
-            transition={{
-              type: "spring",
-              duration: 5,
-              bounce: 0.6,
-            }}
-            src={`${apiImage}${teamImage.teamImage}`}
-            alt="team"
-          />
-          {/* <div
-              className="teamShield"
+          <div className="teamImages d-flex w-100 justify-content-between">
+            <motion.img
               style={{
-                backgroundImage: `url(${apiImage}images/Metal_shield.jpg)`,
+                width: 150,
+                height: 150,
+                borderRadius: 30,
+                backgroundColor: "#fff",
               }}
-            >
-              <img
-                src="http://localhost:3900/uploads/1611313641528-1641844949763.jpg"
-                alt=""
-              />
-            </div> */}
-          {/* </div> */}
+              animate={{ rotate: 360 }}
+              transition={{
+                type: "spring",
+                duration: 5,
+                bounce: 0.6,
+              }}
+              src={`${apiImage}${teamImage.teamImage}`}
+              alt="team"
+            />
+            <Link to={`/players-stats/${user._id}`}>
+              <div
+                className="teamShield d-flex justify-content-center flex-column align-items-center"
+                style={{
+                  backgroundImage: `url(${apiImage}images/fifaCard.png)`,
+                }}
+              >
+                <img src={`${apiImage}${user.image}`} alt="" />
+                <p className="m-0">{user.nickName}</p>
+              </div>
+            </Link>
+          </div>
           <div>
             <p className="ms-2 text-white mb-2 mt-2 display-6">
               {teamImage.name}
