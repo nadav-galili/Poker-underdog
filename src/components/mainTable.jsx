@@ -20,6 +20,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MdDateRange } from "react-icons/md";
 import * as dayjs from "dayjs";
+import addNotification from "react-push-notification";
+import { Notifications } from "react-push-notification";
 
 export default function MainTable(props) {
   //get the data for the table
@@ -40,6 +42,7 @@ export default function MainTable(props) {
   const [teams, setTeams] = useState([]);
   const [lastGame, setLastGame] = useState([]);
   const [user, setUser] = useState({});
+  // const [register, setRegister] = useState({});
   var relativeTime = require("dayjs/plugin/relativeTime");
 
   useEffect(() => {
@@ -54,7 +57,16 @@ export default function MainTable(props) {
     getLastGame();
   }, [teamId]);
 
+  // useEffect(() => {
+  //   const reg = async () => {
+  //     let sw = await navigator.serviceWorker.register("../../");
+  //     console.log("sw", sw);
+  //   };
+  //   reg();
+  // }, []);
+
   //fetch data from DB
+
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.table(teamId);
@@ -165,6 +177,24 @@ export default function MainTable(props) {
     };
     fetchTeams();
   }, []);
+  const subscribe = () => {
+    console.log("aa");
+    addNotification({
+      title: "Warning",
+      native: true,
+    });
+  };
+  function successNotification() {
+    addNotification({
+      title: "Success",
+      subtitle: "You have successfully submitted",
+      message: "Welcome to GeeksforGeeks",
+      theme: "light",
+      closeButton: "X",
+      backgroundTop: "green",
+      native: true,
+    });
+  }
 
   dayjs.extend(relativeTime);
   let daysFromGame = dayjs(lastGame.createdAt).fromNow();
@@ -220,6 +250,9 @@ export default function MainTable(props) {
             </Link>
           </div>
           <div>
+            {/* <button onClick={successNotification} className="btn btn-primary">
+              subscribe
+            </button> */}
             <p className="ms-2 text-white mb-2 mt-2 display-6">
               {teamImage.name}
             </p>

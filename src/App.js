@@ -34,6 +34,9 @@ import PlayerStats from "./components/personalStats/playerStats";
 import StatsPerHourCard from "./components/topStats/statsPerHourCard";
 import MonthlyStats from "./components/topStats/monthlyStats";
 import sidebetsMain from "./components/sidebets/sidebetsMain";
+import Test from "./components/notification/test";
+import { Notifications } from "react-push-notification";
+
 import ReactGA from "react-ga";
 
 ReactGA.initialize("G-MPD41JDBPV");
@@ -65,6 +68,8 @@ function App() {
   return (
     <React.Fragment>
       <ToastContainer />
+      <Notifications />
+
       <header>
         <SideNavbar
           user={user}
@@ -147,6 +152,7 @@ function App() {
               path="/side-bets/:teamId"
               component={sidebetsMain}
             />
+            <Route path="/test" component={Test} />
 
             <Route path="/demo" component={Demo} />
             <Route path="/about" component={About} />
