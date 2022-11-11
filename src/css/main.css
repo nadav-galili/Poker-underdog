@@ -25,7 +25,6 @@
     transform: none;
   }
 }
-
 h1 {
   font-size: 2.5em !important;
   color: #ff3030;
@@ -64,7 +63,6 @@ h1 {
   justify-content: center;
   height: 12em;
 }
-
 .homeImg1 img {
   display: flex;
   justify-content: center;
@@ -81,7 +79,6 @@ h1 {
   object-fit: cover;
   height: 12em;
 }
-
 .homeImg2 img {
   border: 3px solid #02d84d;
   border-radius: 15px;
@@ -108,11 +105,9 @@ h1 {
     width: 50%;
   }
 }
-
 .teamImg {
   height: 4em;
 }
-
 .teamImg p {
   align-self: end;
   color: #fcfcfc;
@@ -120,7 +115,6 @@ h1 {
   margin-right: 1em;
   font-size: 1.2em;
 }
-
 .teamImg span {
   align-self: end;
 }
@@ -152,7 +146,7 @@ h1 {
 #mainStats {
   height: 14.7em;
   border-radius: 30px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border-style: none;
 }
 
@@ -170,11 +164,9 @@ h1 {
   background-color: #520c8c;
   height: 4.7em;
 }
-
 #statsCardBody a {
   color: #fcfcfc;
 }
-
 #statsCardBody a svg {
   width: 1.5em;
   height: 2em;
@@ -192,17 +184,14 @@ h1 {
 #statsCardText {
   text-align: center;
 }
-
 #statsCardText p {
   margin-bottom: 0;
 }
-
 #statsCardText span:first-child {
   color: #fcfcfc;
   font-weight: bolder;
   font-size: 1.5em;
 }
-
 #statsCardText span {
   align-self: center;
   font-weight: bolder;
@@ -217,7 +206,7 @@ h1 {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
   font-size: 1em;
   font-weight: 400;
   outline: 0;
@@ -238,7 +227,6 @@ h1 {
   align-self: center;
   font-size: 1.1em;
 }
-
 #cardFooter svg {
   margin: 5px 0 0 3px;
 }
@@ -299,7 +287,6 @@ h1 {
     height: 13.5em;
   }
 }
-
 #myTeams a {
   margin-right: 20px;
   font-size: 0.7em;
@@ -389,7 +376,6 @@ span {
     margin-left: 0;
   }
 }
-
 .liveGames span {
   animation: blinker 0.8s step-start infinite;
 }
@@ -405,19 +391,16 @@ span {
     opacity: 1;
   }
 }
-
 #playerAvatar {
   font-size: 0.4em;
   padding: 0;
 }
-
 #playerAvatar p {
   margin: 0;
   text-align: center;
   text-decoration: underline;
   margin-bottom: 0.5em;
 }
-
 #playerAvatar div {
   border: 1px solid #6c14b4;
   margin: auto;
@@ -432,7 +415,7 @@ span {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
   font-size: 1em;
   font-weight: 400;
   outline: 0;
@@ -470,7 +453,6 @@ span {
     padding: 5px 10px;
   }
 }
-
 /* CSS */
 .button-72 {
   background-color: #0d6efd;
@@ -479,7 +461,7 @@ span {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
   font-size: 1em;
   font-weight: 400;
   outline: 0;
@@ -520,7 +502,7 @@ span {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
   font-size: 1em;
   font-weight: 400;
   outline: 0;
@@ -558,7 +540,6 @@ span {
     padding: 5px 12px;
   }
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -602,12 +583,10 @@ nav {
 .userDetails {
   display: flex;
 }
-
 .userDetails p {
   font-weight: bold;
   font-size: 25px;
 }
-
 .userDetails img {
   background-color: #520c8c;
 }
@@ -620,7 +599,6 @@ nav {
     padding: 0;
   }
 }
-
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: absolute;
@@ -639,7 +617,6 @@ nav {
     top: 36px;
   }
 }
-
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
   background: #fcfcfc;
@@ -722,11 +699,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
     height: 250px;
   }
 }
-
 .carousel-inner {
   height: 30em;
 }
-
 .carousel-inner img {
   height: 100%;
   object-fit: contain;
@@ -746,7 +721,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .me {
   background-color: #2752ea;
-  background: linear-gradient(90deg, #2752ea 0%, #2752ea 35%, #00d4ff 100%);
+  background: linear-gradient(90deg, #2752ea 0%, #2752ea 35%, rgb(0, 212, 255) 100%);
 }
 
 h4.ms-4,
@@ -826,7 +801,6 @@ h4.mt-4 {
   align-self: end;
   max-width: 40%;
 }
-
 .pImage img {
   height: 9em;
   width: 100%;
@@ -836,7 +810,6 @@ h4.mt-4 {
   align-self: center;
   color: #fcfcfc;
 }
-
 .pDetails p {
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   font-size: 1.5em;
@@ -855,7 +828,6 @@ h4.mt-4 {
   text-decoration: underline;
   text-align: center;
 }
-
 .personalStat :nth-child(2), .personalStatP :nth-child(2) {
   text-align: center;
   color: blue;
@@ -864,7 +836,6 @@ h4.mt-4 {
 .personalStatP :first-child {
   font-size: 0.9em;
 }
-
 .personalStatP :nth-child(2) {
   font-size: 0.8em;
 }
@@ -883,28 +854,22 @@ h4.mt-4 {
   font-size: 0.7em;
   align-items: center;
 }
-
 #personalDetails :nth-child(1), #personalheader :nth-child(1) {
   width: 15%;
 }
-
 #personalDetails :nth-child(2), #personalheader :nth-child(2) {
   width: 25%;
   padding-left: 0.5em;
 }
-
 #personalDetails :nth-child(3), #personalheader :nth-child(3) {
   width: 12%;
 }
-
 #personalDetails :nth-child(4), #personalheader :nth-child(4) {
   width: 12%;
 }
-
 #personalDetails :nth-child(5), #personalheader :nth-child(5) {
   width: 12%;
 }
-
 #personalDetails :nth-child(6), #personalheader :nth-child(6) {
   width: 10%;
 }
@@ -976,14 +941,13 @@ tfoot td {
 
 #footer {
   color: black;
-  background-image: linear-gradient(to bottom right, #02d84d, #c8d3c8);
+  background-image: linear-gradient(to bottom right, #02d84d, rgb(200, 211, 200));
   height: 10em;
 }
 
 .logoImage {
   height: 8em;
 }
-
 .logoImage img {
   height: 100%;
   border: 1px solid black;
@@ -994,7 +958,6 @@ tfoot td {
   font-size: 1.3em;
   font-weight: bolder;
 }
-
 .copyrights a {
   font-size: 1.1em;
   display: block;
@@ -1008,19 +971,16 @@ tfoot td {
   height: 5em;
   width: 25em;
 }
-
 .social-icons p {
   font-size: 1.2em;
   font-weight: bolder;
   text-decoration: underline;
   text-align: center;
 }
-
 .social-icons ul {
   list-style: none;
   height: 2.2em;
 }
-
 .social-icons ul li a img {
   height: 100%;
 }
@@ -1046,7 +1006,6 @@ tfoot td {
     font-size: 1.5em;
   }
 }
-
 .statsHero, .statsHeroPerHour {
   height: 150px;
   background-size: 100%;
@@ -1061,7 +1020,6 @@ tfoot td {
 .statsList {
   padding: 0;
 }
-
 .statsList :last-child {
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
@@ -1126,7 +1084,6 @@ tfoot td {
   height: 70px;
   border-bottom: 0.7px solid;
 }
-
 .statsRow div, .statsRowAllGames div {
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   font-size: 1em;
@@ -1135,20 +1092,16 @@ tfoot td {
 .statsRowAllGames :nth-child(1) {
   width: 14%;
 }
-
 .statsRowAllGames :nth-child(2) {
   width: 20%;
 }
-
 .statsRowAllGames :nth-child(2) img {
   width: 60px;
 }
-
 .statsRowAllGames :nth-child(3) {
   width: 20%;
   font-size: 1em;
 }
-
 .statsRowAllGames :nth-child(4) {
   width: 10%;
   text-align: center;
@@ -1156,12 +1109,11 @@ tfoot td {
   font-size: 1.2em;
   padding-top: 0;
 }
-
 .statsRowAllGames :nth-child(5) {
   width: 19%;
 }
 
-.rowPos, #rowPosTop, .rowPosPerHour, .rowPosLast {
+.rowPos, .rowPosLast, .rowPosPerHour, #rowPosTop {
   font-weight: bold;
   text-align: center;
   font-size: 1em;
@@ -1172,7 +1124,7 @@ tfoot td {
   width: 20%;
 }
 
-.rowPos.month, .month#rowPosTop, .month.rowPosPerHour, .month.rowPosLast {
+.rowPos.month, .month.rowPosLast, .month.rowPosPerHour, .month#rowPosTop {
   width: 10%;
 }
 
@@ -1183,15 +1135,14 @@ tfoot td {
   font-size: 1.2em !important;
 }
 
-.rowImage, .rowImageTop, .rowImageH2h, .rowImagePerHour {
+.rowImage, .rowImagePerHour, .rowImageTop, .rowImageH2h {
   align-self: center;
   width: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.rowImage img, .rowImageTop img, .rowImageH2h img, .rowImagePerHour img {
+.rowImage img, .rowImagePerHour img, .rowImageTop img, .rowImageH2h img {
   border-top-left-radius: 30px !important;
   border-top-right-radius: 30px !important;
   border-radius: 50%;
@@ -1202,7 +1153,7 @@ tfoot td {
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
-.rowImage.h2hGames img, .h2hGames.rowImageTop img, .h2hGames.rowImageH2h img, .h2hGames.rowImagePerHour img {
+.rowImage.h2hGames img, .h2hGames.rowImagePerHour img, .h2hGames.rowImageTop img, .h2hGames.rowImageH2h img {
   border-bottom-left-radius: 30px !important;
   border-bottom-right-radius: 30px !important;
   height: 3em;
@@ -1213,7 +1164,7 @@ tfoot td {
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
-.rowImage.month, .month.rowImageTop, .month.rowImageH2h, .month.rowImagePerHour {
+.rowImage.month, .month.rowImagePerHour, .month.rowImageTop, .month.rowImageH2h {
   width: 25%;
 }
 
@@ -1221,7 +1172,7 @@ tfoot td {
   width: 20%;
 }
 
-.rowName, .gamePlayed, .rowNameTop, .rowNameH2h, .rowNamePerHour {
+.rowName, .rowNamePerHour, .rowNameTop, .rowNameH2h, .gamePlayed {
   font-size: 1em;
   font-weight: bold;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
@@ -1236,7 +1187,7 @@ tfoot td {
   text-align: center;
 }
 
-.rowName.month, .month.gamePlayed, .month.rowNameTop, .month.rowNameH2h, .month.rowNamePerHour {
+.rowName.month, .month.rowNamePerHour, .month.rowNameTop, .month.rowNameH2h, .month.gamePlayed {
   width: 29%;
 }
 
@@ -1246,7 +1197,7 @@ tfoot td {
   width: 40%;
 }
 
-.rowDate, .rowH2hAvg, .rowH2hG {
+.rowDate, .rowH2hG, .rowH2hAvg {
   width: 25%;
   text-align: center;
   align-self: center;
@@ -1254,8 +1205,8 @@ tfoot td {
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
 
-.rowProfit, .rowProfitSuccess, .rowProfitTop, .rowPointsTop,
-.rowSuccessTop, .rowProfitPerHour {
+.rowProfit, .rowProfitPerHour, .rowProfitTop, .rowPointsTop,
+.rowSuccessTop, .rowProfitSuccess {
   width: 20%;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
   align-self: center;
@@ -1266,8 +1217,8 @@ tfoot td {
   border-bottom-right-radius: 0 !important;
 }
 
-.rowProfit.month, .month.rowProfitSuccess, .month.rowProfitTop, .month.rowPointsTop,
-.month.rowSuccessTop, .month.rowProfitPerHour {
+.rowProfit.month, .month.rowProfitPerHour, .month.rowProfitTop, .month.rowPointsTop,
+.month.rowSuccessTop, .month.rowProfitSuccess {
   width: 17%;
 }
 
@@ -1296,32 +1247,25 @@ tfoot td {
   text-align: center;
   align-items: center;
 }
-
 .h2hDetailsRow p {
   margin: 0;
   width: 10%;
 }
-
 .h2hDetailsRow :nth-child(2) {
   width: 17%;
 }
-
 .h2hDetailsRow :nth-child(3) {
   width: 23%;
 }
-
 .h2hDetailsRow :nth-child(4) {
   width: 15%;
 }
-
 .h2hDetailsRow :nth-child(5) {
   width: 15%;
 }
-
 .h2hDetailsRow :nth-child(6) {
   width: 10%;
 }
-
 .h2hDetailsRow :nth-child(7) {
   width: 15%;
 }
@@ -1345,7 +1289,6 @@ tfoot td {
 .rowImageH2h {
   width: 17%;
 }
-
 .rowImageH2h img {
   width: 40px;
   height: 40px;
@@ -1378,28 +1321,22 @@ tfoot td {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-
 #lGameMain p {
   font-size: 0.9em;
   text-align: center;
 }
-
 #lGameMain :nth-child(1) {
   width: 15%;
 }
-
 #lGameMain :nth-child(2) {
   width: 18%;
 }
-
 #lGameMain :nth-child(3) {
   width: 30%;
 }
-
 #lGameMain :nth-child(4) {
   width: 22%;
 }
-
 #lGameMain :nth-child(5) {
   width: 17%;
   border-bottom-right-radius: 0 !important;
@@ -1438,7 +1375,6 @@ tfoot td {
   list-style: none;
   height: 3.5em;
 }
-
 .statsHeaderPerHour div {
   text-align: center;
   font-size: 0.8em;
@@ -1446,27 +1382,21 @@ tfoot td {
   font-weight: bolder;
   border-right: 1px solid black;
 }
-
 .statsHeaderPerHour :nth-child(1) {
   width: 10%;
 }
-
 .statsHeaderPerHour :nth-child(2) {
   width: 25%;
 }
-
 .statsHeaderPerHour :nth-child(3) {
   width: 29%;
 }
-
 .statsHeaderPerHour :nth-child(4) {
   width: 22%;
 }
-
 .statsHeaderPerHour :nth-child(5) {
   width: 22%;
 }
-
 .statsHeaderPerHour :nth-child(6) {
   border-right: none;
 }
@@ -1483,7 +1413,6 @@ tfoot td {
 .heroImagePerHour {
   height: 80%;
 }
-
 .heroImagePerHour img {
   padding-right: 1.2em;
   margin-right: 0;
@@ -1493,33 +1422,26 @@ tfoot td {
 #lGameP2P {
   font-size: 0.8em;
 }
-
 #lGameP2P p {
   text-align: center;
   align-self: center;
 }
-
 #lGameP2P :nth-child(1) {
   width: 19%;
 }
-
 #lGameP2P :nth-child(2) {
   width: 14%;
 }
-
 #lGameP2P :nth-child(3) {
   width: 15%;
 }
-
 #lGameP2P :nth-child(4) {
   width: 19%;
   padding-left: 0.7em;
 }
-
 #lGameP2P :nth-child(5) {
   width: 14%;
 }
-
 #lGameP2P :nth-child(6) {
   width: 19%;
 }
@@ -1530,7 +1452,6 @@ tfoot td {
   padding-left: 0.5rem;
   flex-wrap: wrap;
 }
-
 .container .playersList img {
   display: inline-block;
   height: 50px;
@@ -1565,7 +1486,6 @@ tfoot td {
   background-size: contain;
   background-repeat: no-repeat;
 }
-
 .teamShield img {
   width: 3.2em;
   height: 3.2em;
@@ -1573,7 +1493,6 @@ tfoot td {
   object-fit: cover;
   align-items: center;
 }
-
 .teamShield p {
   color: #ffffff;
   font-weight: bolder;
@@ -1620,7 +1539,6 @@ label {
   align-self: center;
   width: 15%;
 }
-
 .rowPlayer img {
   border-radius: 50%;
   border: 1px solid black;
@@ -1645,7 +1563,6 @@ label {
   align-self: center;
   width: 20%;
 }
-
 .rowCashInHand input {
   max-width: 100%;
   border-bottom-left-radius: 0px !important;
@@ -1691,7 +1608,6 @@ label {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
 }
-
 #lastGameHero p {
   margin-bottom: 0;
 }
@@ -1702,25 +1618,20 @@ label {
   text-align: center;
   text-decoration: underline;
 }
-
 #lGameAllGames :nth-child(1) {
   width: 14%;
 }
-
 #lGameAllGames :nth-child(2) {
   width: 20%;
 }
-
 #lGameAllGames :nth-child(3) {
   width: 29%;
   text-align: start;
   padding-left: 0.8em;
 }
-
 #lGameAllGames :nth-child(4) {
   width: 19%;
 }
-
 #lGameAllGames :nth-child(5) {
   width: 19%;
   border-radius: 0;
@@ -1747,7 +1658,6 @@ label {
     width: 50%;
   }
 }
-
 #lGamePlayer {
   padding-left: 0.5em;
   align-self: center;
@@ -1771,15 +1681,16 @@ label {
 #liveGameRow div {
   width: 20%;
   align-self: center;
-  font-size: 1.4em;
+  font-size: 1em;
   padding-top: 0;
 }
 
 .playerNameOnGame {
-  font-size: 0.6em;
+  font-size: 0.8em;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   text-align: center;
+  font-weight: 700;
 }
 
 #lGameName {
@@ -1803,15 +1714,12 @@ label {
 #cashingList {
   border-bottom: 1px solid black;
 }
-
 #cashingList:nth-child(even) {
   background-color: #e0d9d9;
 }
-
 #cashingList p {
   margin: 0;
 }
-
 #cashingList :first-child {
   padding-left: 0.5em;
 }
@@ -1881,5 +1789,4 @@ main {
 
 .fa-minus-circle {
   color: #ff3030;
-}
-/*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=main.css.map */
