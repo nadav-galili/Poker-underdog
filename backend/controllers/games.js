@@ -4,24 +4,30 @@ const _ = require("lodash");
 const { Game, validate } = require("../models/games");
 const mongoose = require("mongoose");
 // const { Team } = require("../models/teams");
+let currentYear = new Date(new Date().getFullYear(), 0, 1);
 
 exports.totalGames = async function (req, res) {
-  let tGames = await Game.aggregate([
+  let Games = await Game.aggregate([
     {
       $match: {
         team_id: req.params.teamId,
+        createdAt: {
+          $gte: currentYear,
+        },
       },
     },
     {
       $count: "TotalGames",
     },
   ]);
-  res.send(tGames);
+  res.send(Games);
 };
 exports.byTeamId = async function (req, res) {
   let games = await Game.find({
     team_id: req.params.teamId,
-    // "players.name": { $not: /Nispach/ },
+    createdAt: {
+      $gte: currentYear,
+    },
   }).sort({
     createdAt: -1,
   });
@@ -41,6 +47,9 @@ exports.teamStats = async function (req, res) {
       $match: {
         team_id: req.params.teamId,
         "players.name": { $not: /Nispach/ },
+        createdAt: {
+          $gte: currentYear,
+        },
       },
     },
     {
@@ -159,6 +168,9 @@ exports.successp = async function (req, res) {
       $match: {
         team_id: req.params.teamId,
         "players.name": { $not: /Nispach/ },
+        createdAt: {
+          $gte: currentYear,
+        },
       },
     },
     {
@@ -226,6 +238,9 @@ exports.successp = async function (req, res) {
 exports.lastGame = async function (req, res) {
   const game = await Game.find({
     team_id: req.params.teamId,
+    createdAt: {
+      $gte: currentYear,
+    },
     // "players.name": { $not: /Nispach/ },
   })
     .sort({
@@ -247,6 +262,9 @@ exports.profits = async function (req, res) {
       $match: {
         team_id: req.params.teamId,
         "players.name": { $not: /Nispach/ },
+        createdAt: {
+          $gte: currentYear,
+        },
       },
     },
     {
@@ -262,6 +280,9 @@ exports.profits = async function (req, res) {
 exports.allGames = async function (req, res) {
   const game = await Game.find({
     team_id: req.body.team_id,
+    createdAt: {
+      $gte: currentYear,
+    },
     // "players.name": { $not: /Nispach/ },
   });
   res.send(game);
@@ -341,6 +362,9 @@ exports.agg_profits = async function (req, res) {
       $match: {
         team_id: req.params.teamId,
         "players.name": { $not: /Nispach/ },
+        createdAt: {
+          $gte: currentYear,
+        },
       },
     },
     {
@@ -376,6 +400,9 @@ exports.personalStats = async function (req, res) {
     {
       $match: {
         "players.id": req.params.uId,
+        createdAt: {
+          $gte: currentYear,
+        },
         // "players.name":{$not:/Nispach/}
       },
     },
@@ -531,6 +558,9 @@ exports.gamesByCardName = async function (req, res) {
       $match: {
         team_id: req.params.teamId,
         "players.name": { $not: /Nispach/ },
+        createdAt: {
+          $gte: currentYear,
+        },
       },
     },
     {
@@ -631,6 +661,9 @@ exports.previousRank = async function (req, res) {
       $match: {
         team_id: req.params.teamId,
         "players.name": { $not: /Nispach/ },
+        createdAt: {
+          $gte: currentYear,
+        },
       },
     },
     {
@@ -707,6 +740,9 @@ exports.totalCash = async function (req, res) {
     {
       $match: {
         team_id: req.params.teamId,
+        createdAt: {
+          $gte: currentYear,
+        },
       },
     },
     {
@@ -750,6 +786,9 @@ exports.personalGames = async function (req, res) {
     {
       $match: {
         "players.id": req.params.uId,
+        createdAt: {
+          $gte: currentYear,
+        },
       },
     },
     {
@@ -773,6 +812,9 @@ exports.statsPerHour = async function (req, res) {
       $match: {
         team_id: req.params.teamId,
         "players.name": { $not: /Nispach/ },
+        createdAt: {
+          $gte: currentYear,
+        },
       },
     },
     {
@@ -885,6 +927,9 @@ exports.monthlyStats = async function (req, res) {
     {
       $match: {
         team_id: req.params.teamId,
+        createdAt: {
+          $gte: currentYear,
+        },
       },
     },
     {
@@ -941,6 +986,9 @@ exports.monthlyByPlayer = async function (req, res) {
     {
       $match: {
         team_id: req.params.teamid,
+        createdAt: {
+          $gte: currentYear,
+        },
       },
     },
     {
