@@ -321,13 +321,13 @@ export default function MainTable(props) {
               </strong>
             </p>
           </motion.div>
-          <div
+          {/* <div
             className="alert alert-info fade show w-75 py-1 alert-dismissible"
             role="alert"
           >
             new update 21/5/22- <br></br>The month's card show stats by each
             month
-          </div>
+          </div> */}
           <motion.div
             id="dashboardDisplay"
             initial={{ opacity: 0 }}

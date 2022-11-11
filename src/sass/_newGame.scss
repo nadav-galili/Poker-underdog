@@ -152,15 +152,16 @@
   div {
     width: 20%;
     align-self: center;
-    font-size: 1.4em;
+    font-size: 1em;
     padding-top: 0;
   }
 }
 .playerNameOnGame {
-  font-size: 0.6em;
+  font-size: 0.8em;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   text-align: center;
+  font-weight: 700;
 }
 // *{
 //   outline: 1px solid red;

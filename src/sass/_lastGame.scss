@@ -1,25 +1,23 @@
-#lGame{
-
-    // & :nth-child(2){
-    //     margin-left: 8em;
-    // }
+// #lGame {
+//   // & :nth-child(2){
+//   //     margin-left: 8em;
+//   // }
+// }
+#lGameName {
+  max-width: 30%;
+  padding-left: 0.7em;
 }
-#lGameName{
-    max-width: 30%;
-    padding-left: 0.7em;
-};
-.rowCashing{
-    font-size: 0.8em;
-    font-weight: bold;
-    font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
-    // padding-left: 2.5em;
-    padding-top: 1.1em;
-    text-transform: capitalize;
-    flex-grow: 2;
+.rowCashing {
+  font-size: 0.8em;
+  font-weight: bold;
+  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
+  // padding-left: 2.5em;
+  padding-top: 1.1em;
+  text-transform: capitalize;
+  flex-grow: 2;
 }
-.rowCashingAll{
-    @extend .rowCashing;
-    width: 5%;
-    // text-align: start;
-
+.rowCashingAll {
+  @extend .rowCashing;
+  width: 5%;
+  // text-align: start;
 }

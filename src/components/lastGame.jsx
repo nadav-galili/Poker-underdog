@@ -24,11 +24,11 @@ import { Link } from "react-router-dom";
 import gameService from "../services/gameService";
 import { Avatar } from "@material-ui/core";
 import PageHeader from "../components/common/pageHeader";
-import {apiImage} from "../config.json";
+import { apiImage } from "../config.json";
 
 const columns = [
-  { id: "rank", label: "Rank", align: "center",  },
-  { id: "player", label: "Player", align: "center", },
+  { id: "rank", label: "Rank", align: "center" },
+  { id: "player", label: "Player", align: "center" },
   {
     id: "image",
     label: "Image",
@@ -68,22 +68,21 @@ export default function LastGame(props) {
 
   useEffect(() => {
     const getLastGame = async () => {
+      let game = await gameService.lastGame(props.match.params.teamId);
 
-       let game = await gameService.lastGame(props.match.params.teamId);
- 
-       game = game.data[0];
-       setData(game.players);
-       setLastGame(game);
+      game = game.data[0];
+      setData(game.players);
+      setLastGame(game);
     };
 
     getLastGame();
-  }, [setData, props.match.params.teamId]);
+  }, []);
 
   const classes = useStyles();
 
   const rows = [];
 
-  if ( data.length > 0) {
+  if (data.length > 0) {
     let rank = 1;
     data.forEach((e) => {
       rows.push(
@@ -108,56 +107,54 @@ export default function LastGame(props) {
     <div className="container-fluid pt-3">
       <div className="row">
         <div className="col-12 col-lg-6">
-        <PageHeader titleText="Last Game" />
-      <h3 className="mb-4">Played at:{formated}</h3>
-      <Paper className={classes.root}>
-        <TableContainer className={classes.container}>
-          <Table stickyHeader aria-label="sticky table" size="medium">
-            <TableHead>
-              <TableRow className="last-head">
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows
-                //.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.player}
-                    >
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-   
-      </Paper>
+          <PageHeader titleText="Last Game" />
+          <h3 className="mb-4">Played at:{formated}</h3>
+          <Paper className={classes.root}>
+            <TableContainer className={classes.container}>
+              <Table stickyHeader aria-label="sticky table" size="medium">
+                <TableHead>
+                  <TableRow className="last-head">
+                    {columns.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows
+                    //.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.player}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === "number"
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
         </div>
       </div>
-    
 
       <Link
         to={`/main-table/${props.match.params.teamId}`}

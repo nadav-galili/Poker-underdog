@@ -36,7 +36,7 @@ const NewGame = (props) => {
     };
 
     players();
-  }, [props.match.params.gameId]);
+  }, []);
 
   useEffect(() => {
     const manager = data.game_manager;
@@ -199,14 +199,6 @@ const NewGame = (props) => {
         <p className="m-0 mb-1 p-0 text-primary">
           Game Manager:<span>{manager ? manager.name : ""}</span>
         </p>
-        <div
-          className="alert alert-info fade show w-75 py-1 alert-dismissible"
-          role="alert"
-        >
-          <h6 class="alert-heading">New Update 18/5/22:</h6>
-          new feature:add players to the game after the game started.
-          <br></br>Head 2 Head will also be updated.
-        </div>
         {data.length < 1 && (
           <div className="spinner pt-2">
             <SpinnerInfinity
@@ -255,7 +247,7 @@ const NewGame = (props) => {
                   >
                     <div className="rowPlayer newGame">
                       <img src={`${apiImage}${player.image}`} alt="player" />
-                      <p class="playerNameOnGame m-0 text-primary">
+                      <p className="playerNameOnGame m-0 text-primary">
                         {player.name}
                       </p>
                     </div>
@@ -263,7 +255,7 @@ const NewGame = (props) => {
                       className="fas fa-money-bill-wave"
                       onClick={() => addCashing(player.id)}
                     >
-                      Add 50$
+                      50$
                     </i>
 
                     <div className="rowCash">{player.cashing}</div>
