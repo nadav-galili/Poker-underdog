@@ -1552,6 +1552,7 @@ label {
 
 .rowPlayer.newGame img {
   border-radius: 50%;
+  margin-top: 0.3em;
 }
 
 .rowCash {
@@ -1686,11 +1687,15 @@ label {
 }
 
 .playerNameOnGame {
-  font-size: 0.8em;
+  font-size: 0.7em;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   text-align: center;
   font-weight: 700;
+}
+
+.swal2-image {
+  border-radius: 50%;
 }
 
 #lGameName {
