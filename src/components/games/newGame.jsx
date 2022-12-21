@@ -43,15 +43,19 @@ const NewGame = (props) => {
     setManager(manager);
   }, [data.game_manager]);
 
-  const addCashing = (playerId) => {
+  const addCashing = (playerId, playerName, playerImage) => {
     Swal.fire({
-      title: "sure you want to cash in?",
-      text: "",
-      icon: "warning",
+      title: `Add Cashing to ${playerName}?`,
+      imageUrl: `${apiImage}${playerImage}`,
+      imageWidth: 100,
+      imageHeight: 100,
+      imageAlt: "Custom image",
+      showDenyButton: true,
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
+      confirmButtonColor: "#00a9ff",
+      denyButtonColor: "#08e046",
+      confirmButtonText: "50",
+      denyButtonText: `100`,
     }).then((result) => {
       if (result.isConfirmed) {
         let game = { ...data };
@@ -90,6 +94,43 @@ const NewGame = (props) => {
             progress: undefined,
           });
         }
+      } else if (result.isDenied) {
+        let game = { ...data };
+        game.gameId = props.match.params.gameId;
+        if (game.gameId) {
+          game.isOpen = true;
+          let player = data.players.find((e) => playerId === e.id);
+          player.cashing += 100;
+          player.numOfCashing += 2;
+          delete game._id;
+          delete game.__v;
+          let cashingDetails = {
+            playerId: player.id,
+            playerName: player.name,
+            playerCashing: 100,
+            time: new Date(),
+          };
+          if (game.cashing_details) {
+            game.cashing_details.push(cashingDetails);
+          } else {
+            game.cashing_details = [];
+            game.cashing_details.push(cashingDetails);
+          }
+          setData(game);
+
+          gameService.updateGame(game.gameId, game);
+          const chips = new Audio(process.env.PUBLIC_URL + `sounds/chips.mp3`);
+          chips.play();
+          toast.success(`💸 💸Added 100 to ${player.name}`, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
       }
     });
   };
@@ -97,8 +138,6 @@ const NewGame = (props) => {
   const undoCashing = (playerId) => {
     let player = data.players.find((e) => playerId === e.id);
     if (player.cashing > 0) {
-      player.cashing -= 50;
-      player.numOfCashing -= 1;
       let game = { ...data };
       game.gameId = props.match.params.gameId;
       delete game._id;
@@ -107,8 +146,14 @@ const NewGame = (props) => {
       const indexOfLastPlayerCashing = game.cashing_details
         .map((el) => el.playerId)
         .lastIndexOf(playerId);
+
+      const playersLastCashing =
+        game.cashing_details[indexOfLastPlayerCashing].playerCashing;
+
       game.cashing_details.splice(indexOfLastPlayerCashing, 1);
 
+      player.cashing -= playersLastCashing;
+      player.numOfCashing -= 1;
       setData(game);
       const cancel = new Audio(process.env.PUBLIC_URL + `sounds/cancel.mp3`);
       cancel.play();
@@ -220,6 +265,23 @@ const NewGame = (props) => {
             >
               Add/Remove Players
             </Link>
+            <div class="alert alert-primary alert-dismissible " role="alert">
+              <span
+                type="button"
+                class="close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true" className="text-black">
+                  &times;
+                </span>
+              </span>
+              <strong>New Updates 21/12/22:</strong>
+              <span className="text-primary">
+                {" "}
+                added option to cash in 100 or 50
+              </span>
+            </div>
             <ol className="statsList">
               <li
                 id="gameLi"
@@ -232,7 +294,7 @@ const NewGame = (props) => {
               >
                 <div className="gameHeaders d-flex justify-content-evenly">
                   <div className="P1">Player</div>
-                  <div className="add1">Add 50</div>
+                  <div className="add1">Add Cash</div>
                   <div className="Cashing1">Cashing</div>
                   <div className="Hand1">Cash In Hand</div>
                   <div className="Profit1">Profit</div>
@@ -253,9 +315,11 @@ const NewGame = (props) => {
                     </div>
                     <i
                       className="fas fa-money-bill-wave"
-                      onClick={() => addCashing(player.id)}
+                      onClick={() =>
+                        addCashing(player.id, player.name, player.image)
+                      }
                     >
-                      50$
+                      $$$
                     </i>
 
                     <div className="rowCash">{player.cashing}</div>

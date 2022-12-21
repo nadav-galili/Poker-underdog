@@ -18,7 +18,7 @@ const CashingDetails = ({ gameId, updated }) => {
       {cashing.length > 0 && (
         <ul className=" cashingDetails bg-white p-0">
           {cashing.map((cash) => (
-            <li className="d-flex" id="cashingList">
+            <li className="d-flex" id="cashingList" key={cash.time}>
               <p id="cashingName">{cash.playerName}</p>
               <p id="cashingAmmount">{cash.playerCashing}</p>
               <p id="cashingTime">
