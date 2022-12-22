@@ -1580,6 +1580,12 @@ label {
   font-size: 0.5em;
 }
 
+.fa-floppy-disk,
+.fa-pen-to-square {
+  font-size: 0.6em;
+  align-self: center;
+}
+
 .fas.fa-money-bill-wave {
   align-self: center;
   font-size: 0.6em;
@@ -1794,4 +1800,8 @@ main {
 
 .fa-minus-circle {
   color: #ff3030;
+}
+
+p {
+  margin-bottom: 0 !important;
 }/*# sourceMappingURL=main.css.map */

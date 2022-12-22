@@ -164,9 +164,40 @@ const NewGame = (props) => {
   const handleChange = (playerId, e) => {
     let play = { ...data };
     let player = play.players.find((e) => playerId === e.id);
+    player.cashedOut = true;
     player.cashInHand = e.target.value;
     player.profit = player.cashInHand - player.cashing;
     let game = play;
+    setData(game);
+  };
+
+  const cashOutPlayer = (playerId) => {
+    let player = data.players.find((e) => playerId === e.id);
+    player.finishedGame = true;
+    console.log("🚀 ~ file: newGame.jsx:177 ~ cashOutPlayer ~ player", player);
+
+    let game = { ...data };
+    setData(game);
+    /// ! add cashing details
+    // update game
+    /// ! update h2h
+  };
+
+  const editCashing = (playerId) => {
+    console.log(
+      "🚀 ~ file: newGame.jsx:187 ~ editCashing ~ playerId",
+      playerId
+    );
+    let player = data.players.find((e) => {
+      return playerId === e.id;
+    });
+    player.finishedGame = false;
+    player.cashInHand = 0;
+    player.profit = 0;
+    // player.profit = player.cashing - player.cashInHand;
+    console.log("🚀 ~ file: newGame.jsx:192 ~ editCashing ~ player", player);
+
+    let game = { ...data };
     setData(game);
   };
 
@@ -313,30 +344,58 @@ const NewGame = (props) => {
                         {player.name}
                       </p>
                     </div>
-                    <i
-                      className="fas fa-money-bill-wave"
-                      onClick={() =>
-                        addCashing(player.id, player.name, player.image)
-                      }
-                    >
-                      $$$
-                    </i>
+                    {!player.finishedGame ? (
+                      <i
+                        className="fas fa-money-bill-wave"
+                        onClick={() =>
+                          addCashing(player.id, player.name, player.image)
+                        }
+                      >
+                        $$$
+                      </i>
+                    ) : (
+                      <p className="text-primary playerProfit">Out</p>
+                    )}
 
                     <div className="rowCash">{player.cashing}</div>
                     <div className="rowCashInHand">
-                      <input
-                        type="number"
-                        className="cashInHand"
-                        onChange={(e) => handleChange(player.id, e)}
-                      />
+                      {player.finishedGame ? (
+                        <p className="text-primary m-0 text-center">
+                          {player.cashInHand}
+                        </p>
+                      ) : (
+                        <input
+                          type="number"
+                          className="cashInHand"
+                          onChange={(e) => handleChange(player.id, e)}
+                        />
+                      )}
                     </div>
                     <div className="playerProfit ">{player.profit}</div>
-                    <i
-                      className="fas fa-minus-circle"
-                      onClick={() => undoCashing(player.id)}
-                    >
-                      Cancel
-                    </i>
+                    {player.cashedOut && !player.finishedGame && (
+                      <i
+                        className="fa-solid fa-floppy-disk text-primary"
+                        onClick={(e) => cashOutPlayer(player.id)}
+                      >
+                        Save
+                      </i>
+                    )}
+                    {!player.cashedOut && !player.finishedGame && (
+                      <i
+                        className="fas fa-minus-circle"
+                        onClick={() => undoCashing(player.id)}
+                      >
+                        Cancel
+                      </i>
+                    )}
+                    {player.cashedOut && player.finishedGame && (
+                      <i
+                        className="fa-solid fa-pen-to-square text-success"
+                        onClick={() => editCashing(player.id)}
+                      >
+                        Edit
+                      </i>
+                    )}
                   </li>
                 ))}
               </React.Fragment>
