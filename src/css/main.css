@@ -287,6 +287,16 @@ h1 {
     height: 13.5em;
   }
 }
+.cardOdds a {
+  color: #2752ea;
+  font-size: 1.2em;
+  font-weight: 900;
+  display: flex;
+  margin: auto;
+  margin-top: 10px;
+  text-transform: capitalize;
+}
+
 #myTeams a {
   margin-right: 20px;
   font-size: 0.7em;
@@ -1580,6 +1590,12 @@ label {
   font-size: 0.5em;
 }
 
+.fa-floppy-disk,
+.fa-pen-to-square {
+  font-size: 0.6em;
+  align-self: center;
+}
+
 .fas.fa-money-bill-wave {
   align-self: center;
   font-size: 0.6em;
@@ -1698,6 +1714,13 @@ label {
   border-radius: 50%;
 }
 
+.cashedOutPlayers {
+  font-size: 0.7em;
+  font-weight: 600;
+  align-items: center;
+  align-self: center;
+}
+
 #lGameName {
   max-width: 30%;
   padding-left: 0.7em;
@@ -1794,4 +1817,8 @@ main {
 
 .fa-minus-circle {
   color: #ff3030;
+}
+
+p {
+  margin-bottom: 0 !important;
 }/*# sourceMappingURL=main.css.map */

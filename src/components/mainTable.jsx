@@ -320,14 +320,15 @@ export default function MainTable(props) {
                 </span>
               </strong>
             </p>
+            <div className="cardOdds">
+              <a
+                href="https://www.cardschat.com/poker/tools/poker-odds-calculator/"
+                target="_blank"
+              >
+                Texas Odds Calculator
+              </a>
+            </div>
           </motion.div>
-          {/* <div
-            className="alert alert-info fade show w-75 py-1 alert-dismissible"
-            role="alert"
-          >
-            new update 21/5/22- <br></br>The month's card show stats by each
-            month
-          </div> */}
           <motion.div
             id="dashboardDisplay"
             initial={{ opacity: 0 }}
