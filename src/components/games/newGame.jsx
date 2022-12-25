@@ -16,8 +16,10 @@ const NewGame = (props) => {
   const [id, setId] = useState("");
   const [me, setMe] = useState({});
   const [manager, setManager] = useState("");
+  console.log(data, "data");
 
   useEffect(() => {
+    const ac = new AbortController();
     const players = async () => {
       const getGameManager = await userService.getUserDetails();
       me.id = getGameManager.data._id;
@@ -30,6 +32,7 @@ const NewGame = (props) => {
         );
         setData(playersInGame.data);
         setId(playersInGame.data._id);
+        return () => ac.abort(); // Abort both fetches on unmount
       } catch (e) {
         console.log(e, "EE");
       }
@@ -165,7 +168,10 @@ const NewGame = (props) => {
     let play = { ...data };
     let player = play.players.find((e) => playerId === e.id);
     player.cashedOut = true;
-    player.cashInHand = e.target.value;
+
+    e.target.value
+      ? (player.cashInHand = parseInt(e.target.value))
+      : (player.cashInHand = 0);
     player.profit = player.cashInHand - player.cashing;
     let game = play;
     setData(game);
@@ -174,29 +180,25 @@ const NewGame = (props) => {
   const cashOutPlayer = (playerId) => {
     let player = data.players.find((e) => playerId === e.id);
     player.finishedGame = true;
-    console.log("🚀 ~ file: newGame.jsx:177 ~ cashOutPlayer ~ player", player);
-
+    player.cashOutTime = new Date();
     let game = { ...data };
+    game.gameId = props.match.params.gameId;
+    delete game._id;
+    delete game.__v;
+    delete game.playerCashedOut;
+    gameService.updateGame(game.gameId, game);
+    game.playerCashedOut = true;
     setData(game);
+
     /// ! add cashing details
-    // update game
-    /// ! update h2h
   };
 
   const editCashing = (playerId) => {
-    console.log(
-      "🚀 ~ file: newGame.jsx:187 ~ editCashing ~ playerId",
-      playerId
-    );
     let player = data.players.find((e) => {
       return playerId === e.id;
     });
     player.finishedGame = false;
-    player.cashInHand = 0;
-    player.profit = 0;
-    // player.profit = player.cashing - player.cashInHand;
-    console.log("🚀 ~ file: newGame.jsx:192 ~ editCashing ~ player", player);
-
+    player.edit = true;
     let game = { ...data };
     setData(game);
   };
@@ -215,6 +217,7 @@ const NewGame = (props) => {
         let game = { ...data };
         game.gameId = props.match.params.gameId;
         delete game._id;
+        delete game.playerCashedOut;
         game.isOpen = false;
         game.players.sort((a, b) => b.profit - a.profit);
         let gameRank = 1;
@@ -296,10 +299,13 @@ const NewGame = (props) => {
             >
               Add/Remove Players
             </Link>
-            <div class="alert alert-primary alert-dismissible " role="alert">
+            <div
+              className="alert alert-primary alert-dismissible "
+              role="alert"
+            >
               <span
                 type="button"
-                class="close"
+                className="close"
                 data-bs-dismiss="alert"
                 aria-label="Close"
               >
@@ -309,8 +315,12 @@ const NewGame = (props) => {
               </span>
               <strong>New Updates 21/12/22:</strong>
               <span className="text-primary">
-                {" "}
-                added option to cash in 100 or 50
+                <ol>
+                  <li>added option to cash in 100 or 50</li>
+                  <li>
+                    added option to cash out single player while game is on
+                  </li>
+                </ol>
               </span>
             </div>
             <ol className="statsList">
@@ -354,7 +364,7 @@ const NewGame = (props) => {
                         $$$
                       </i>
                     ) : (
-                      <p className="text-primary playerProfit">Out</p>
+                      <p className="text-danger playerProfit">Out</p>
                     )}
 
                     <div className="rowCash">{player.cashing}</div>
@@ -368,10 +378,19 @@ const NewGame = (props) => {
                           type="number"
                           className="cashInHand"
                           onChange={(e) => handleChange(player.id, e)}
+                          value={
+                            player.cashInHand
+                              ? player.cashInHand
+                              : !player.cashInHand && player.cashedOut
+                              ? 0
+                              : ""
+                          }
                         />
                       )}
                     </div>
-                    <div className="playerProfit ">{player.profit}</div>
+                    <div className="playerProfit ">
+                      {player.profit ? player.profit : 0}
+                    </div>
                     {player.cashedOut && !player.finishedGame && (
                       <i
                         className="fa-solid fa-floppy-disk text-primary"
@@ -407,7 +426,12 @@ const NewGame = (props) => {
                     return a + b.cashing;
                   }, 0)}
                 </div>
-                <div className="rowCashInHand"></div>
+                <div className="rowCashInHand text-center">
+                  {" "}
+                  {data.players.reduce((a, b) => {
+                    return a + b.cashInHand;
+                  }, 0)}
+                </div>
                 <div className="playerProfit text-primary">
                   {data.players.reduce((a, b) => {
                     return a + b.profit;
@@ -415,6 +439,22 @@ const NewGame = (props) => {
                 </div>
                 <div className="fas fa-minus-circle text-white">Cancel</div>
               </li>
+              {data.playerCashedOut && (
+                <li className="statsRows w-100 d-flex justify-content-evenly">
+                  <div className="cashedOutPlayers">
+                    After Cashed Out Players
+                  </div>
+                  <div className="rowCash text-primary">
+                    {data.players.reduce((a, b) => {
+                      return a + b.cashing - b.cashInHand;
+                    }, 0)}
+                  </div>
+                  <div className="rowCashInHand"></div>
+                  <div className="playerProfit text-primary"></div>
+                  <div className="fas fa-minus-circle text-white">Cancel</div>
+                </li>
+              )}
+
               <div className="buttonsGame d-flex justify-content-between">
                 <div
                   className="btn btn-primary update m-2"

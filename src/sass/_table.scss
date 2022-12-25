@@ -189,6 +189,17 @@
   }
 }
 
+.cardOdds {
+  & a {
+    color: $headerColorBlue;
+    font-size: 1.2em;
+    font-weight: 900;
+    display: flex;
+    margin: auto;
+    margin-top: 10px;
+    text-transform: capitalize;
+  }
+}
 // * {
 // //   outline: 1px solid red;
 // // }
