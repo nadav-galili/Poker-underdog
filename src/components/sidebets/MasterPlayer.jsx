@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { apiImage } from "../../config.json";
 
 const MasterPlayer = ({ user }) => {
-  console.log("🚀 ~ file11111x:8 ~ masterPlayer ~ user", user);
   return (
     <div className="container d-flex justify-content-center">
       <Link to={`/players-stats/${user._id}`}>

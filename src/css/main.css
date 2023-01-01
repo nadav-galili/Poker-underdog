@@ -1797,6 +1797,34 @@ label {
   text-transform: capitalize;
 }
 
+.sideBetPlayer {
+  color: white;
+  font-size: 0.9em;
+  text-transform: capitalize;
+}
+.sideBetPlayer img {
+  width: 2.9em;
+  height: 2.9em;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+  background-color: #6c14b4;
+}
+
+.selectedSideBet {
+  color: gold;
+  font-weight: bold;
+}
+
+.choosenPlayer img {
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  border: 2px solid gold;
+  object-fit: cover;
+  background-color: #6c14b4;
+}
+
 main {
   background-repeat: no-repeat;
   background-size: cover;

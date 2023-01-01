@@ -39,6 +39,32 @@
   font-size: 1.8em;
   text-transform: capitalize;
 }
-// * {
-//   outline: 1px solid red;
-// }
+.sideBetPlayer {
+  color: white;
+  font-size: 0.9em;
+  text-transform: capitalize;
+  & img {
+    width: 2.9em;
+    height: 2.9em;
+    border-radius: 50%;
+    border: 2px solid white;
+    object-fit: cover;
+    background-color: $basecolorPurple;
+  }
+}
+
+.selectedSideBet {
+  color: gold;
+  font-weight: bold;
+}
+
+.choosenPlayer {
+  & img {
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 50%;
+    border: 2px solid gold;
+    object-fit: cover;
+    background-color: $basecolorPurple;
+  }
+}

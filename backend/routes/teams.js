@@ -18,6 +18,11 @@ router.get("/my-teams", auth, async (req, res) => {
   res.send(teams);
 });
 
+router.get(
+  "/teamForSideBets/:teamId/:userId",
+  auth,
+  teamsController.getTeamForSideBets
+);
 //get by number
 router.get("/numbers/:teamNumber", auth, async (req, res) => {
   let teams = await Team.findOne({ teamNumber: req.params.teamNumber })
@@ -102,9 +107,4 @@ router.delete(
   teamsController.deletePlayerFromTeam
 );
 
-router.get(
-  "/teamsForSideBets/:teamId/:userId",
-  auth,
-  teamsController.getTeamsForSideBets
-);
 module.exports = router;

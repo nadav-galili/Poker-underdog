@@ -1,35 +1,57 @@
 import React, { useEffect, useState } from "react";
 import PageHeader from "../common/pageHeader";
-import { Link } from "react-router-dom";
-import MasterPlayer from "./MasterPlayer";
+import MasterPlayer from "./masterPlayer";
 import userService from "../../services/userService";
 import teamService from "../../services/teamService";
+import ChoosePlayer from "./choosePlayer";
+import SelectedPlayer from "./selectedPlayer";
 
 const NewSideBet = (props) => {
   const [user, setUser] = useState({});
+  const [team, setTeam] = useState({});
+  const [selectedPlayer, setSelectedPlayer] = useState();
+
+  const selectPlayer = (player) => {
+    setSelectedPlayer(player);
+  };
 
   const teamId = props.match.params.teamId;
   useEffect(() => {
     const getSideBets = async () => {
       const me = await userService.getUserDetails();
       setUser(me.data);
-      const teamForSideBet = await teamService.getTeamForSideBets(
+      let teamForSideBet = await teamService.getTeamForSideBets(
         teamId,
         me.data._id
       );
+      teamForSideBet = teamForSideBet.data[0].players;
+      setTeam(teamForSideBet);
     };
 
     getSideBets();
   }, []);
+
   return (
     <div className="container">
       <PageHeader titleText="New Side Bet" />
-      <div className="d-flex justify-content-center"></div>
       <MasterPlayer user={user} />
-      <p className="text-center text-primary">
-        Choose a player to offer a side-bet
-      </p>
-      {/* ///! display team members */}
+
+      {!selectedPlayer && (
+        <div className="playersContainer d-flex flex-row row mx-3">
+          <p className="text-center text-primary">
+            Choose a player to offer a side-bet
+          </p>
+          {team.length > 0 &&
+            team.map((player) => (
+              <ChoosePlayer
+                player={player}
+                key={player._id}
+                selectPlayer={selectPlayer}
+              />
+            ))}
+        </div>
+      )}
+      {selectedPlayer && <SelectedPlayer player={selectedPlayer} />}
     </div>
   );
 };

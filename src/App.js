@@ -34,7 +34,7 @@ import PlayerStats from "./components/personalStats/playerStats";
 import StatsPerHourCard from "./components/topStats/statsPerHourCard";
 import MonthlyStats from "./components/topStats/monthlyStats";
 import sidebetsMain from "./components/sidebets/sidebetsMain";
-import NewSideBet from "./components/sidebets/NewSideBet";
+import NewSideBet from "./components/sidebets/newSideBet";
 import Test from "./components/notification/test";
 
 import ReactGA from "react-ga";

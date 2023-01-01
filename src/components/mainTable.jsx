@@ -443,9 +443,7 @@ export default function MainTable(props) {
                 team={teamId}
               />
             )}
-            {/* {teamId === "61b243ac87b6640ad041224f" && (
-              <SideBetsCard teamId={teamId} />
-            )} */}
+            <SideBetsCard teamId={teamId} />
           </motion.div>
           <MainLastgame teamId={teamId} />
           <AllGames teamId={teamId} />

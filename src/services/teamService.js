@@ -39,7 +39,7 @@ export function removePlayerFromTeam(teamNumber, playerId, teamId) {
 }
 
 export function getTeamForSideBets(teamId, userId) {
-  return http.get(`${apiUrl}/teamsForSideBets/${teamId}/${userId}`);
+  return http.get(`${apiUrl}/teams/teamForSideBets/${teamId}/${userId}`);
 }
 
 export default {
