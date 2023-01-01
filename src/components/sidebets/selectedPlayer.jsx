@@ -20,14 +20,6 @@ const SelectedPlayer = (player) => {
   };
 
   const validateSideBet = (sideBetSumAmount, startDate, endDate) => {
-    console.log("sideBetSumAmount", sideBetSumAmount);
-    console.log("startDate", startDate);
-    console.log(
-      "🚀 ~ file: selectedPlayer.jsx:25 ~ validateSideBet ~ startDate",
-      moment(startDate).year()
-    );
-    console.log("endDate", endDate);
-
     if (
       sideBetSumAmount < 1 ||
       !sideBetSumAmount ||
@@ -61,6 +53,14 @@ const SelectedPlayer = (player) => {
       toast.error("Start date must be before end date");
       return;
     }
+
+    const sideBet = {
+      sideBetSum: sideBetSumAmount,
+      startDate: startDate,
+      endDate: endDate,
+      player: choosen,
+    };
+    console.log("sssside", sideBet);
   };
 
   const makeABet = () => {
