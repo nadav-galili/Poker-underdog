@@ -15,3 +15,10 @@ exports.deletePlayerFromTeam = async function (req, res) {
   );
   res.send({ Team: team, Player: player });
 };
+
+exports.getTeamsForSideBets = async function (req, res) {
+  // const team = await Team.findById(req.params.teamId);
+  // const player = await User.findById(req.params.userId);
+  // res.send({ Team: team, Player: player });
+  res.send("getTeamsForSideBets");
+};

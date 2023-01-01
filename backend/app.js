@@ -16,29 +16,29 @@ const hbs = require("nodemailer-express-handlebars");
 const { engine } = require("express-handlebars");
 
 const config = require("./config");
-mongoose
-  .connect(
-    `mongodb+srv://${config.production.database.user_name}:` +
-      `${config.production.database.pass}@${config.production.server.cluster}/${config.production.database.db}?retryWrites=true&w=majority`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    }
-  )
-  .then(() => console.log("Connected to MongoDB remote..."))
-  .catch((err) => console.error(err, "Could not connect to MongoDB..."));
-
 // mongoose
-//   .connect("mongodb://localhost:27017/myFirstDatabase", {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//   })
-//   .then(() => console.log("Connected to MongoDB local..."))
-//   .catch((err) => console.error(err, "Could not connect to MongoDB local..."));
+//   .connect(
+//     `mongodb+srv://${config.production.database.user_name}:` +
+//       `${config.production.database.pass}@${config.production.server.cluster}/${config.production.database.db}?retryWrites=true&w=majority`,
+//     {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//       useCreateIndex: true,
+//       useFindAndModify: false,
+//     }
+//   )
+//   .then(() => console.log("Connected to MongoDB remote..."))npm
+//   .catch((err) => console.error(err, "Could not connect to MongoDB..."));
+
+mongoose
+  .connect("mongodb://localhost:27017/myFirstDatabase", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log("Connected to MongoDB local..."))
+  .catch((err) => console.error(err, "Could not connect to MongoDB local..."));
 
 // let corsOptions = {
 //   origin: "https://poker-underdog.com",
@@ -63,6 +63,7 @@ app.use("/api/games", games);
 app.use("/api/teams", teams);
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use("/images", express.static(path.join(__dirname, "/images")));
+// app.use("/sounds", express.static(path.join(__dirname, "/sounds")));
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Poker-Underground application test." });

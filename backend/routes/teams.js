@@ -2,6 +2,8 @@ const express = require("express");
 const upload = require("../middleware/upload");
 const { User } = require("../models/user");
 const teamsController = require("../controllers/teams");
+const auth = require("../middleware/auth");
+const router = express.Router();
 
 const {
   Team,
@@ -9,8 +11,6 @@ const {
   validateTeamWithId,
   generateTeamNumber,
 } = require("../models/teams");
-const auth = require("../middleware/auth");
-const router = express.Router();
 
 //get all the teams of a specific user
 router.get("/my-teams", auth, async (req, res) => {
@@ -102,4 +102,9 @@ router.delete(
   teamsController.deletePlayerFromTeam
 );
 
+router.get(
+  "/teamsForSideBets/:teamId/:userId",
+  auth,
+  teamsController.getTeamsForSideBets
+);
 module.exports = router;

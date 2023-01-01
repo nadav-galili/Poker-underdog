@@ -3,6 +3,8 @@ import PageHeader from "../common/pageHeader";
 import { apiImage } from "../../config.json";
 import gameService from "../../services/gameService";
 import userService from "../../services/userService";
+import teamService from "../../services/teamService";
+import { Link } from "react-router-dom";
 
 const SidebetsMain = (props) => {
   const [data, setData] = useState([]);
@@ -11,17 +13,21 @@ const SidebetsMain = (props) => {
     const getSideBets = async () => {
       let sideB = await gameService.sideBets(props.match.params.teamId);
       setData(sideB.data);
-      // console.log(sideB.data);
-      // let players = await gameService.getSideBets();
-      // setUsers(players.data);
     };
 
     getSideBets();
   }, []);
+
   return (
     <div className="container">
       <PageHeader titleText="Side Bets" />
-      <span>Starting Date: 27/5/2022</span>
+      <div className="container d-flex justify-content-center">
+        <Link to={`/side-bets/new-sidebet/${props.match.params.teamId}`}>
+          <div className="btn btn-primary my-3">Create a new side bet</div>
+        </Link>
+      </div>
+      {/* <span>Starting Date: 27/5/2022</span> */}
+
       {data.length > 0 && (
         <div
           className="vsImage d-flex justify-content-between align-items-center"
@@ -92,7 +98,6 @@ const SidebetsMain = (props) => {
           </div>
         </div>
       )}
-
       <p className="credit">
         {" "}
         <a href="https://www.freepik.com/vectors/dual">
