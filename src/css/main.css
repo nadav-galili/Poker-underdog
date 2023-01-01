@@ -1825,6 +1825,13 @@ label {
   background-color: #6c14b4;
 }
 
+.rules li {
+  font-size: 0.8em;
+  color: white;
+  text-align: left;
+  margin-bottom: 0.5em;
+}
+
 main {
   background-repeat: no-repeat;
   background-size: cover;

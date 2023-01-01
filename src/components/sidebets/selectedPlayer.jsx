@@ -1,20 +1,71 @@
 import React, { useState } from "react";
 import { apiImage } from "../../config.json";
+import { toast } from "react-toastify";
+import moment from "moment";
 
 const SelectedPlayer = (player) => {
   const choosen = player.player;
   const [sideBetSum, setSideBetSum] = useState("");
-  console.log(
-    "🚀 ~ file: selectedPlayer.jsx:7 ~ SelectedPlayer ~ sideBetSum",
-    typeof sideBetSum
-  );
-
-  console.log("ee", player);
+  const [startDate, setStartDate] = useState("2023-01-01");
+  const [endDate, setEndDate] = useState("2023-12-31");
 
   const getSideBetSum = (e) => {
-    console.log(typeof e.target.value);
-    console.log("vv", e.target.value);
-    setSideBetSum(parseInt(e.target.value));
+    setSideBetSum(e.target.value);
+  };
+  const getStartDate = (e) => {
+    setStartDate(e.target.value);
+  };
+  const getEndDate = (e) => {
+    setEndDate(e.target.value);
+  };
+
+  const validateSideBet = (sideBetSumAmount, startDate, endDate) => {
+    console.log("sideBetSumAmount", sideBetSumAmount);
+    console.log("startDate", startDate);
+    console.log(
+      "🚀 ~ file: selectedPlayer.jsx:25 ~ validateSideBet ~ startDate",
+      moment(startDate).year()
+    );
+    console.log("endDate", endDate);
+
+    if (
+      sideBetSumAmount < 1 ||
+      !sideBetSumAmount ||
+      sideBetSumAmount === NaN ||
+      !Number.isInteger(sideBetSumAmount)
+    ) {
+      toast.error("Side bet sum must be a number greater than 0");
+      return;
+    }
+    if (
+      !moment(startDate, "YYYY-MM-DD", true).isValid() ||
+      !startDate ||
+      moment(startDate).year() !== new Date().getFullYear()
+    ) {
+      toast.error(
+        "Start date must be date in YYYY-MM-DD format and in current year"
+      );
+      return;
+    }
+    if (
+      !moment(endDate, "YYYY-MM-DD", true).isValid() ||
+      !endDate ||
+      moment(endDate).year() !== new Date().getFullYear()
+    ) {
+      toast.error(
+        "End date must be date in YYYY-MM-DD format and in current year"
+      );
+      return;
+    }
+    if (startDate > endDate) {
+      toast.error("Start date must be before end date");
+      return;
+    }
+  };
+
+  const makeABet = () => {
+    const sideBetSumAmount = parseInt(sideBetSum);
+    validateSideBet(sideBetSumAmount, startDate, endDate);
   };
 
   return (
@@ -25,7 +76,7 @@ const SelectedPlayer = (player) => {
       </div>
       <p className="selectedSideBet text-center">{choosen.nickName}</p>
       <div className="sideBetSum d-flex justify-content-center m-2">
-        <p className="text-primary pe-2">Sum:</p>
+        <p className="text-primary pe-2">$ Bet Sum:</p>
         <input
           type="number"
           className="w-25"
@@ -34,9 +85,62 @@ const SelectedPlayer = (player) => {
           onChange={(e) => getSideBetSum(e)}
         />
       </div>
+      <div className="datesSideBets">
+        <div className="d-flex flex-column justify-content-center">
+          <p className="text-primary pe-2 text-center">Start Date:</p>
+          <span className="text-center">Format: 'MM/DD/YYY'</span>
+          <div className="startDAte d-flex justify-content-center">
+            <input
+              type="date"
+              className="w-50"
+              value={startDate}
+              min="2023-01-01"
+              onChange={(e) => getStartDate(e)}
+            />
+          </div>
+          <p className="text-primary pe-2 text-center">End Date</p>
+          <span className="text-center">Format: 'MM/DD/YYY'</span>
+
+          <div className="endDate d-flex justify-content-center">
+            <input
+              type="date"
+              className="w-50"
+              value={endDate}
+              max="2023-12-31"
+              onChange={(e) => getEndDate(e)}
+            />
+          </div>
+        </div>
+      </div>
       <div className="d-flex justify-content-between mt-3">
         <button className="btn btn-danger">Cancel</button>
-        <button className="btn btn-primary ">Make A Bet</button>
+        <button className="btn btn-primary" onClick={makeABet}>
+          Make A Bet
+        </button>
+      </div>
+      <div className="rules py-3">
+        <p className="text-center text-primary mt-3 ">
+          <b>
+            <u>Rules For Side Bets:</u>
+          </b>
+        </p>
+        <ul>
+          <li>
+            You can choose the sum of side bet and the start and end date of the
+            bet (default is january 1st 2023 to december 31st 2023)
+          </li>
+          <li>
+            After you click 'Make A Bet', the second player will see a
+            notification about your side bet in the app (in the 'Side Bet'
+            section) and will have to accept it. If he accepts, the side bet
+            will be created and you will be able to see it in the 'Side Bets'
+            section.
+          </li>
+          <li>
+            If the second player doesn't accept the side bet, the side bet is
+            cancelled.
+          </li>
+        </ul>
       </div>
     </div>
   );
