@@ -1832,6 +1832,12 @@ label {
   margin-bottom: 0.5em;
 }
 
+.alert-gold {
+  background-color: gold;
+  color: black;
+  font-weight: bold;
+}
+
 main {
   background-repeat: no-repeat;
   background-size: cover;

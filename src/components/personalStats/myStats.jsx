@@ -48,7 +48,6 @@ const MyStats = () => {
             chartDetails.push(e.players.profit)
           );
           setChartData(chartDetails);
-          console.log(chartData);
           await myDetailed.data.forEach((e) =>
             chartCash.push(e.players.cashing)
           );

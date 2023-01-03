@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import gameService from "../services/gameService";
 import userService from "../services/userService";
+import sideBetsService from "../services/sideBetsService";
 import PageHeader from "./common/pageHeader";
 import PlayerCard from "./topStats/playerCard";
 import SuccessP from "./topStats/successp";
@@ -20,8 +21,6 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MdDateRange } from "react-icons/md";
 import * as dayjs from "dayjs";
-import addNotification from "react-push-notification";
-import { Notifications } from "react-push-notification";
 
 export default function MainTable(props) {
   //get the data for the table
@@ -42,7 +41,7 @@ export default function MainTable(props) {
   const [teams, setTeams] = useState([]);
   const [lastGame, setLastGame] = useState([]);
   const [user, setUser] = useState({});
-  // const [register, setRegister] = useState({});
+  const [sideBets, setSideBets] = useState([]);
   var relativeTime = require("dayjs/plugin/relativeTime");
 
   useEffect(() => {
@@ -56,16 +55,6 @@ export default function MainTable(props) {
 
     getLastGame();
   }, [teamId]);
-
-  // useEffect(() => {
-  //   const reg = async () => {
-  //     let sw = await navigator.serviceWorker.register("../../");
-  //     console.log("sw", sw);
-  //   };
-  //   reg();
-  // }, []);
-
-  //fetch data from DB
 
   useEffect(() => {
     const getTable = async () => {
@@ -174,27 +163,15 @@ export default function MainTable(props) {
       const { data } = await teamService.getMyTeam();
 
       setTeams(data[0].players);
+
+      const sideBetsData = await sideBetsService.getSidebetsForMainTable(
+        props.match.params.teamId
+      );
+      setSideBets(sideBetsData.data);
+      console.log(sideBetsData.data);
     };
     fetchTeams();
   }, []);
-  const subscribe = () => {
-    console.log("aa");
-    addNotification({
-      title: "Warning",
-      native: true,
-    });
-  };
-  function successNotification() {
-    addNotification({
-      title: "Success",
-      subtitle: "You have successfully submitted",
-      message: "Welcome to GeeksforGeeks",
-      theme: "light",
-      closeButton: "X",
-      backgroundTop: "green",
-      native: true,
-    });
-  }
 
   dayjs.extend(relativeTime);
   let daysFromGame = dayjs(lastGame.createdAt).fromNow();
@@ -250,9 +227,6 @@ export default function MainTable(props) {
             </Link>
           </div>
           <div>
-            {/* <button onClick={successNotification} className="btn btn-primary">
-              subscribe
-            </button> */}
             <p className="ms-2 text-white mb-2 mt-2 display-6">
               {teamImage.name}
             </p>
@@ -282,6 +256,32 @@ export default function MainTable(props) {
             }}
             className="totalCash d-flex flex-column mb-2 ps-1"
           >
+            {sideBets.length > 0 && (
+              <div className="alert alert-gold alert-dismissible " role="alert">
+                <span
+                  type="button"
+                  className="close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true" className="text-black">
+                    &times;
+                  </span>
+                </span>
+                <strong>New Side Bets Offered!!!</strong>
+                <span className="text-primary">
+                  <ol>
+                    {sideBets.map((bet) => (
+                      <li>
+                        {bet.masterPlayer.nickName} VS{" "}
+                        {bet.slavePlayer.nickName} -
+                        {new Date(bet.createdAt).toLocaleDateString("en-GB")}
+                      </li>
+                    ))}
+                  </ol>
+                </span>
+              </div>
+            )}
             <p className="mb-0">
               Total Cash Played:
               <strong>
@@ -320,6 +320,7 @@ export default function MainTable(props) {
                 </span>
               </strong>
             </p>
+
             <div className="cardOdds">
               <a
                 href="https://www.cardschat.com/poker/tools/poker-odds-calculator/"

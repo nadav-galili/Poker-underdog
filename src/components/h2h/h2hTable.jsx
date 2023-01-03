@@ -18,7 +18,6 @@ const H2hTable = (props) => {
       table = table.data.filter((player) => player._id.name !== "Nispach");
 
       setData(table);
-      console.log(table);
       let myHero = table.shift();
       setHero(myHero);
 

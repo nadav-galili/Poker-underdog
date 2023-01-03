@@ -19,7 +19,6 @@ exports.deletePlayerFromTeam = async function (req, res) {
 
 exports.getTeamForSideBets = async function (req, res) {
   const teamId = mongoose.Types.ObjectId(req.params.teamId);
-  console.log("re", req.params);
 
   const teamWithoutPlayer = await Team.aggregate([
     {

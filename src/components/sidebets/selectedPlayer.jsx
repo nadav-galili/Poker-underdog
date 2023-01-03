@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import userService from "../../services/userService";
 import sideBetsService from "../../services/sideBetsService";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 const SelectedPlayer = (props) => {
   const choosen = props.player;
@@ -73,15 +74,34 @@ const SelectedPlayer = (props) => {
       endDate: endDate,
       masterPlayer: masterPlayer,
       slavePlayer: choosen,
+      approvedBySlavePlayer: false,
       teamId: teamId,
     };
-    console.log("sssside", sideBet);
-    sideBetsService.createSideBet(sideBet);
+    Swal.fire({
+      title: `create a side bet with ${choosen.nickName}?`,
+      imageUrl: `${apiImage}${choosen.image}`,
+      imageWidth: 100,
+      imageHeight: 100,
+      imageAlt: "Custom image",
+      showCancelButton: true,
+      confirmButtonColor: "#00a9ff",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        sideBetsService.createSideBet(sideBet);
+        toast.success("Side bet created");
+        window.location = `/#/main-table/${teamId}`;
+      }
+    });
   };
 
   const makeABet = () => {
     const sideBetSumAmount = parseInt(sideBetSum);
     validateSideBet(sideBetSumAmount, startDate, endDate);
+  };
+
+  const cancelBet = () => {
+    window.location = `/#/side-bets/${teamId}`;
   };
 
   return (
@@ -129,7 +149,9 @@ const SelectedPlayer = (props) => {
         </div>
       </div>
       <div className="d-flex justify-content-between mt-3">
-        <button className="btn btn-danger">Cancel</button>
+        <button className="btn btn-danger" onClick={cancelBet}>
+          Cancel
+        </button>
         <button className="btn btn-primary" onClick={makeABet}>
           Make A Bet
         </button>

@@ -23,7 +23,14 @@ const sidebetSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    teamId: { type: mongoose.Schema.Types.ObjectId, ref: "Team" },
+    approvedBySlavePlayer: {
+      type: Boolean,
+      required: false,
+    },
+    teamId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Team",
+    },
   },
   { timestamps: true }
 );
@@ -38,6 +45,7 @@ function validateSideBet(game) {
     startDate: Joi.date().required(),
     endDate: Joi.date().required(),
     teamId: Joi.string().required(),
+    approvedBySlavePlayer: Joi.boolean().required(),
   });
   return schema.validate(game);
 }
