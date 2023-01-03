@@ -10,16 +10,18 @@ const NewSideBet = (props) => {
   const [user, setUser] = useState({});
   const [team, setTeam] = useState({});
   const [selectedPlayer, setSelectedPlayer] = useState();
+  const [sideBetTeamId, setSideBetTeamId] = useState();
 
   const selectPlayer = (player) => {
     setSelectedPlayer(player);
   };
 
-  const teamId = props.match.params.teamId;
   useEffect(() => {
     const getSideBets = async () => {
       const me = await userService.getUserDetails();
       setUser(me.data);
+      const teamId = props.match.params.teamId;
+      setSideBetTeamId(teamId);
       let teamForSideBet = await teamService.getTeamForSideBets(
         teamId,
         me.data._id
@@ -35,7 +37,6 @@ const NewSideBet = (props) => {
     <div className="container">
       <PageHeader titleText="New Side Bet" />
       <MasterPlayer user={user} />
-
       {!selectedPlayer && (
         <div className="playersContainer d-flex flex-row row mx-3">
           <p className="text-center text-primary">
@@ -47,11 +48,14 @@ const NewSideBet = (props) => {
                 player={player}
                 key={player._id}
                 selectPlayer={selectPlayer}
+                teamId={sideBetTeamId}
               />
             ))}
         </div>
       )}
-      {selectedPlayer && <SelectedPlayer player={selectedPlayer} />}
+      {selectedPlayer && (
+        <SelectedPlayer player={selectedPlayer} teamId={sideBetTeamId} />
+      )}
     </div>
   );
 };

@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { apiImage } from "../../config.json";
 import { toast } from "react-toastify";
+import userService from "../../services/userService";
+import sideBetsService from "../../services/sideBetsService";
 import moment from "moment";
 
-const SelectedPlayer = (player) => {
-  const choosen = player.player;
+const SelectedPlayer = (props) => {
+  const choosen = props.player;
+  const teamId = props.teamId;
+
   const [sideBetSum, setSideBetSum] = useState("");
   const [startDate, setStartDate] = useState("2023-01-01");
   const [endDate, setEndDate] = useState("2023-12-31");
+  const [masterPlayer, setMasterPlayer] = useState({});
 
+  useEffect(() => {
+    const getMasterPlayer = async () => {
+      const me = await userService.getUserDetails();
+      setMasterPlayer(me.data);
+    };
+
+    getMasterPlayer();
+  }, []);
   const getSideBetSum = (e) => {
     setSideBetSum(e.target.value);
   };
@@ -58,9 +71,12 @@ const SelectedPlayer = (player) => {
       sideBetSum: sideBetSumAmount,
       startDate: startDate,
       endDate: endDate,
-      player: choosen,
+      masterPlayer: masterPlayer,
+      slavePlayer: choosen,
+      teamId: teamId,
     };
     console.log("sssside", sideBet);
+    sideBetsService.createSideBet(sideBet);
   };
 
   const makeABet = () => {
