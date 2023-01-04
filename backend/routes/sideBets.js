@@ -13,4 +13,24 @@ router.get(
   sideBetsController.getsidebetsForMainTable
 );
 
+router.get(
+  "/gotOfferedSidebet/:userId",
+  auth,
+  sideBetsController.gotOfferedSidebet
+);
+
+router.put("/acceptSideBet/:sideBetId", auth, sideBetsController.acceptSideBet);
+
+router.put(
+  "/dismissSideBet/:sideBetId",
+  auth,
+  sideBetsController.dismissSideBet
+);
+
+router.get(
+  "/getAllApprovedSideBets/:teamId",
+  auth,
+  sideBetsController.getAllApprovedSideBets
+);
+
 module.exports = router;

@@ -20,7 +20,9 @@ import SideBetsCard from "./sidebets/sidebetsCard";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MdDateRange } from "react-icons/md";
+import Swal from "sweetalert2";
 import * as dayjs from "dayjs";
+import { toast } from "react-toastify";
 
 export default function MainTable(props) {
   //get the data for the table
@@ -44,6 +46,35 @@ export default function MainTable(props) {
   const [sideBets, setSideBets] = useState([]);
   var relativeTime = require("dayjs/plugin/relativeTime");
 
+  const alertGotOfferedSideBet = (sideBetData) => {
+    sideBetData.map((sideBet) => {
+      console.log("deddd", sideBet.slavePlayer.dissmissDate);
+      Swal.fire({
+        title: `You got offered a side bet from ${sideBet.masterPlayer.nickName}!`,
+        text: `  for ${sideBet.sideBetSum}$ from ${new Date(
+          sideBet.startDate
+        ).toLocaleDateString("en-GB")} to ${new Date(
+          sideBet.endDate
+        ).toLocaleDateString("en-GB")} Do you accept?`,
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, accept it!",
+        cancelButtonText: "No, dismiss it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          toast.success("You accepted the side bet 🔥🔥🔥");
+          sideBetsService.acceptSideBet(sideBet._id);
+        } else if (result.isDismissed) {
+          toast.error("You dismissed the side bet 😢");
+          console.log("disssmissed");
+          sideBetsService.dismissSideBet(sideBet._id);
+        }
+      });
+    });
+  };
+
   useEffect(() => {
     const getLastGame = async () => {
       let game = await gameService.lastGame(teamId);
@@ -54,7 +85,7 @@ export default function MainTable(props) {
     };
 
     getLastGame();
-  }, [teamId]);
+  }, []);
 
   useEffect(() => {
     const getTable = async () => {
@@ -106,7 +137,7 @@ export default function MainTable(props) {
     return () => {
       let isCancelled = true;
     };
-  }, [teamId]);
+  }, []);
 
   useEffect(() => {
     const dataByMonths = async () => {
@@ -136,7 +167,7 @@ export default function MainTable(props) {
       }
     };
     dataByMonths();
-  }, [props.match.params.teamId]);
+  }, []);
 
   useEffect(() => {
     const profits = async () => {
@@ -145,7 +176,7 @@ export default function MainTable(props) {
       setProfits(results);
     };
     profits();
-  }, [props.match.params.teamId]);
+  }, []);
 
   useEffect(() => {
     const statsPerHour = async () => {
@@ -155,7 +186,7 @@ export default function MainTable(props) {
       setstatsPerHour(dataPerHour.data);
     };
     statsPerHour();
-  }, [props.match.params.teamId]);
+  }, []);
 
   //get team players for avatars
   useEffect(() => {
@@ -168,10 +199,19 @@ export default function MainTable(props) {
         props.match.params.teamId
       );
       setSideBets(sideBetsData.data);
-      console.log(sideBetsData.data);
+
+      ///check if user got offered a side bet he didnt approved yet
+      const gotOfferedSideBet = await sideBetsService.gotOfferedSidebet(
+        user._id
+      );
+      console.log("ll", gotOfferedSideBet.data);
+      if (gotOfferedSideBet.data.length > 0) {
+        alertGotOfferedSideBet(gotOfferedSideBet.data);
+      }
+      console.log("gotoffered", gotOfferedSideBet.data);
     };
     fetchTeams();
-  }, []);
+  }, [user]);
 
   dayjs.extend(relativeTime);
   let daysFromGame = dayjs(lastGame.createdAt).fromNow();
@@ -268,20 +308,23 @@ export default function MainTable(props) {
                     &times;
                   </span>
                 </span>
-                <strong>New Side Bets Offered!!!</strong>
+                <strong>New Side Bets Offered!!!💥💥💥</strong>
                 <span className="text-primary">
                   <ol>
                     {sideBets.map((bet) => (
                       <li>
-                        {bet.masterPlayer.nickName} VS{" "}
-                        {bet.slavePlayer.nickName} -
-                        {new Date(bet.createdAt).toLocaleDateString("en-GB")}
+                        {`${bet.masterPlayer.nickName} VS ${
+                          bet.slavePlayer.nickName
+                        }  ${bet.sideBetSum}$  date: ${new Date(
+                          bet.createdAt
+                        ).toLocaleDateString("en-GB")} `}
                       </li>
                     ))}
                   </ol>
                 </span>
               </div>
             )}
+
             <p className="mb-0">
               Total Cash Played:
               <strong>
@@ -320,7 +363,6 @@ export default function MainTable(props) {
                 </span>
               </strong>
             </p>
-
             <div className="cardOdds">
               <a
                 href="https://www.cardschat.com/poker/tools/poker-odds-calculator/"
