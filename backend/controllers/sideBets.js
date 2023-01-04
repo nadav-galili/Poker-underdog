@@ -1,11 +1,7 @@
-// const { Game, validate } = require("../models/games");
-// const { Team } = require("../models/teams");
-// const { User } = require("../models/user");
+const { Game } = require("../models/games");
 const { SideBet, validate } = require("../models/sideBets");
 const mongoose = require("mongoose");
-// const {
-//   default: MasterPlayer,
-// } = require("../../src/components/sidebets/masterPlayer");
+const { ContactsOutlined } = require("@material-ui/icons");
 
 exports.newSideBet = async function (req, res) {
   const { error } = validate(req.body);
@@ -38,7 +34,6 @@ exports.getsidebetsForMainTable = async function (req, res) {
     approvedBySlavePlayer: false,
     "slavePlayer.dissmissDate": { $eq: null },
   });
-  console.log(sideBets);
   res.send(sideBets);
 };
 
@@ -84,9 +79,88 @@ exports.dismissSideBet = async function (req, res) {
 
 exports.getAllApprovedSideBets = async (req, res) => {
   const teamId = mongoose.Types.ObjectId(req.params.teamId);
-  const sideBets = await SideBet.find({
+  let sideBets = await SideBet.find({
     teamId: mongoose.Types.ObjectId(teamId),
     approvedBySlavePlayer: true,
   });
+
   res.send(sideBets);
+};
+
+exports.getExtraDetais = async (req, res) => {
+  const teamId = req.body.teamId;
+  const sideBetMAsterPlayerId = req.body.sideBetMasterPlayerId;
+  const sideBetSlavePlayerId = req.body.sideBetsSlavePlayerId;
+  const startDate = req.body.sideBetStartDate;
+  const endDate = req.body.sideBetEndDate;
+
+  const getExtraDetail = await Game.aggregate([
+    {
+      $match: {
+        team_id: teamId,
+      },
+    },
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $match: {
+        $and: [
+          {
+            $or: [
+              {
+                "players.id": sideBetMAsterPlayerId,
+              },
+              {
+                "players.id": sideBetSlavePlayerId,
+              },
+            ],
+          },
+          {
+            $and: [
+              {
+                createdAt: {
+                  $gte: new Date(startDate),
+                },
+              },
+              {
+                updatedAt: {
+                  $lte: new Date(endDate),
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+    {
+      $group: {
+        _id: {
+          playerId: "$players.id",
+          playerName: "$players.name",
+          playerImage: "$players.image",
+          team_id: "$team_id",
+        },
+        totalProfit: {
+          $sum: "$players.profit",
+        },
+        totalCashing: {
+          $sum: "$players.cashing",
+        },
+        totalGames: {
+          $sum: 1,
+        },
+        avgProfit: {
+          $avg: "$players.profit",
+        },
+        lastGame: {
+          $max: "$updatedAt",
+        },
+      },
+    },
+  ]);
+
+  res.send(getExtraDetail);
 };

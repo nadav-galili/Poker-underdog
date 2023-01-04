@@ -24,6 +24,22 @@ export function dismissSideBet(sideBetId) {
 export function getAllApprovedSideBets(teamId) {
   return http.get(`${apiUrl}/sideBets/getAllApprovedSideBets/${teamId}`);
 }
+
+export function getExtraDetais(
+  teamId,
+  sideBetMasterPlayerId,
+  sideBetsSlavePlayerId,
+  sideBetStartDate,
+  sideBetEndDate
+) {
+  return http.post(`${apiUrl}/sideBets/getExtraDetais/${teamId}`, {
+    teamId,
+    sideBetMasterPlayerId,
+    sideBetsSlavePlayerId,
+    sideBetStartDate,
+    sideBetEndDate,
+  });
+}
 export default {
   createSideBet,
   getSidebetsForMainTable,
@@ -31,4 +47,5 @@ export default {
   acceptSideBet,
   dismissSideBet,
   getAllApprovedSideBets,
+  getExtraDetais,
 };

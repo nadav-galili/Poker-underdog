@@ -17,7 +17,9 @@ const SelectedPlayer = (props) => {
 
   useEffect(() => {
     const getMasterPlayer = async () => {
-      const me = await userService.getUserDetails();
+      let me = await userService.getUserDetails();
+      delete me.data.password;
+      delete me.data.email;
       setMasterPlayer(me.data);
     };
 

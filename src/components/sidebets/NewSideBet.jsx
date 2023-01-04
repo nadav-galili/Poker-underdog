@@ -13,6 +13,8 @@ const NewSideBet = (props) => {
   const [sideBetTeamId, setSideBetTeamId] = useState();
 
   const selectPlayer = (player) => {
+    delete player.password;
+    delete player.email;
     setSelectedPlayer(player);
   };
 

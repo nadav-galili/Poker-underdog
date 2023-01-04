@@ -33,4 +33,9 @@ router.get(
   sideBetsController.getAllApprovedSideBets
 );
 
+router.post(
+  "/getExtraDetais/:sideBetId",
+  auth,
+  sideBetsController.getExtraDetais
+);
 module.exports = router;
