@@ -55,15 +55,7 @@ export default function MainTable(props) {
     };
 
     getLastGame();
-  }, [teamId]);
-
-  // useEffect(() => {
-  //   const reg = async () => {
-  //     let sw = await navigator.serviceWorker.register("../../");
-  //     console.log("sw", sw);
-  //   };
-  //   reg();
-  // }, []);
+  }, []);
 
   //fetch data from DB
 
@@ -197,7 +189,7 @@ export default function MainTable(props) {
   }
 
   dayjs.extend(relativeTime);
-  let daysFromGame = dayjs(lastGame.createdAt).fromNow();
+  let daysFromGame = lastGame ? dayjs(lastGame.createdAt).fromNow() : null;
 
   return (
     <div className="container" id="dashboard">

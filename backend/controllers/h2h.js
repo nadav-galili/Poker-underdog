@@ -249,7 +249,16 @@ exports.h2hGamesByTeam = async function (req, res) {
             {
               $multiply: [
                 {
-                  $divide: ["$totalPoints", { $multiply: ["$numOfGames", 3] }],
+                  $cond: [
+                    { $eq: ["$numOfGames", 0] },
+                    0,
+                    {
+                      $divide: [
+                        "$totalPoints",
+                        { $multiply: ["$numOfGames", 3] },
+                      ],
+                    },
+                  ],
                 },
                 100,
               ],
@@ -267,6 +276,25 @@ exports.h2hGamesByTeam = async function (req, res) {
   ]);
   await res.send(agg);
 };
+
+//               $divide: ["$totalPoints", { $multiply: ["$numOfGames", 3] }],
+//             },
+//             100,
+//           ],
+//         },
+//         2,
+//       ],
+//     },
+//   },
+// },
+// {
+//       $sort: {
+//         avgPoints: -1,
+//       },
+//     },
+//   ]);
+//   await res.send(agg);
+// };
 
 exports.teamAllGames = async function (req, res) {
   let game = await H2h.find({ team_id: req.params.teamId }).sort({

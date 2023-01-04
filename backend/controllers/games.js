@@ -118,11 +118,14 @@ exports.teamStats = async function (req, res) {
           $round: [
             {
               $multiply: [
-                {
-                  $divide: ["$gamesWithProfit", "$numOfGames"],
-                },
+                { $cond: [{ $eq: ["$numOfGames", 0] }, 0, 1] },
+                { $divide: ["$gamesWithProfit", "$numOfGames"] },
                 100,
               ],
+              //     $divide: ["$gamesWithProfit", "$numOfGames"],
+              //   },
+              //   100,
+              // ],
             },
             2,
           ],
@@ -212,6 +215,7 @@ exports.successp = async function (req, res) {
           $round: [
             {
               $multiply: [
+                { $cond: [{ $eq: ["$numOfGames", 0] }, 0, 1] },
                 { $divide: ["$gamesWithProfit", "$numOfGames"] },
                 100,
               ],
@@ -293,6 +297,10 @@ exports.gameById = async function (req, res) {
 };
 exports.dataByMonths = async function (req, res) {
   let month = parseInt(req.params.month);
+  // let month = new Date().getMonth() + 1;
+  // console.log("🚀 ~ file: games.js:301 ~ month", month);
+  // console.log("month", new Date().getMonth());
+
   const byMonths = await Game.aggregate([
     {
       $unwind: {
@@ -302,6 +310,9 @@ exports.dataByMonths = async function (req, res) {
     },
     {
       $match: {
+        createdAt: {
+          $gte: currentYear,
+        },
         team_id: req.params.teamId,
         $expr: {
           $eq: [
@@ -466,7 +477,15 @@ exports.personalStats = async function (req, res) {
             {
               $multiply: [
                 {
-                  $divide: ["$gamesWithProfit", "$numOfGames"],
+                  $cond: {
+                    if: {
+                      $eq: ["$numOfGames", 0],
+                    },
+                    then: 0,
+                    else: {
+                      $divide: ["$gamesWithProfit", "$numOfGames"],
+                    },
+                  },
                 },
                 100,
               ],
@@ -629,8 +648,17 @@ exports.gamesByCardName = async function (req, res) {
             {
               $multiply: [
                 {
-                  $divide: ["$gamesWithProfit", "$numOfGames"],
+                  $cond: {
+                    if: {
+                      $eq: ["$numOfGames", 0],
+                    },
+                    then: 0,
+                    else: {
+                      $divide: ["$gamesWithProfit", "$numOfGames"],
+                    },
+                  },
                 },
+
                 100,
               ],
             },
@@ -874,23 +902,49 @@ exports.statsPerHour = async function (req, res) {
         profitPerHour: {
           $round: [
             {
-              $divide: ["$totalProfit", "$hoursPlayed"],
+              $cond: [
+                {
+                  $eq: ["$hoursPlayed", 0],
+                },
+                0,
+                {
+                  $divide: ["$totalProfit", "$hoursPlayed"],
+                },
+              ],
             },
+
             2,
           ],
         },
         cashingPerHour: {
           $round: [
             {
-              $divide: ["$totalCashing", "$hoursPlayed"],
+              $cond: [
+                {
+                  $eq: ["$hoursPlayed", 0],
+                },
+                0,
+                {
+                  $divide: ["$totalCashing", "$hoursPlayed"],
+                },
+              ],
             },
+
             2,
           ],
         },
         nuOfCashingPerHour: {
           $round: [
             {
-              $divide: ["$totalNumOfCashing", "$hoursPlayed"],
+              $cond: [
+                {
+                  $eq: ["$hoursPlayed", 0],
+                },
+                0,
+                {
+                  $divide: ["$totalNumOfCashing", "$hoursPlayed"],
+                },
+              ],
             },
             2,
           ],
