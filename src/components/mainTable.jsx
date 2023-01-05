@@ -87,6 +87,8 @@ export default function MainTable(props) {
     getLastGame();
   }, []);
 
+  //fetch data from DB
+
   useEffect(() => {
     const getTable = async () => {
       let table = await gameService.table(teamId);
@@ -214,7 +216,7 @@ export default function MainTable(props) {
   }, [user]);
 
   dayjs.extend(relativeTime);
-  let daysFromGame = dayjs(lastGame.createdAt).fromNow();
+  let daysFromGame = lastGame ? dayjs(lastGame.createdAt).fromNow() : null;
 
   return (
     <div className="container" id="dashboard">
