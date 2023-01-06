@@ -83,7 +83,18 @@ exports.getAllApprovedSideBets = async (req, res) => {
     teamId: mongoose.Types.ObjectId(teamId),
     approvedBySlavePlayer: true,
   });
+  sideBets = sideBets.length == 0 ? "No side Bets yet" : sideBets;
+  res.send(sideBets);
+};
 
+exports.getAllDismissedSideBets = async (req, res) => {
+  const teamId = mongoose.Types.ObjectId(req.params.teamId);
+  let sideBets = await SideBet.find({
+    teamId: mongoose.Types.ObjectId(teamId),
+    approvedBySlavePlayer: false,
+    "slavePlayer.dissmissDate": { $ne: null },
+  });
+  sideBets = sideBets.length == 0 ? "No dismissed" : sideBets;
   res.send(sideBets);
 };
 
@@ -160,7 +171,13 @@ exports.getExtraDetais = async (req, res) => {
         },
       },
     },
+    {
+      $sort: {
+        totalProfit: -1,
+      },
+    },
   ]);
+  getExtraDetail[0].leader = true;
 
   res.send(getExtraDetail);
 };

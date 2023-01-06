@@ -38,4 +38,11 @@ router.post(
   auth,
   sideBetsController.getExtraDetais
 );
+
+router.get(
+  "/getAllDismissedSideBets/:teamId",
+  auth,
+  sideBetsController.getAllDismissedSideBets
+);
+
 module.exports = router;

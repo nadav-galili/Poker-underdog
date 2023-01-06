@@ -171,10 +171,9 @@ const SelectedPlayer = (props) => {
           </li>
           <li>
             After you click 'Make A Bet', the second player will see a
-            notification about your side bet in the app (in the 'Side Bet'
-            section) and will have to accept it. If he accepts, the side bet
-            will be created and you will be able to see it in the 'Side Bets'
-            section.
+            notification about your side bet in the app and will have to accept
+            it. If he accepts, the side bet will be created and you will be able
+            to see it in the 'Side Bets' section.
           </li>
           <li>
             If the second player doesn't accept the side bet, the side bet is

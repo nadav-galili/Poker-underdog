@@ -34,7 +34,7 @@
   font-size: 0.5em;
 }
 
-.sidebetName {
+.sidebetTitles {
   color: gold;
   font-size: 1.8em;
   text-transform: capitalize;
@@ -80,4 +80,24 @@
   background-color: gold;
   color: black;
   font-weight: bold;
+}
+
+.sideBetLeader {
+  color: $basecolorGreen;
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 1.2em !important;
+}
+.sideBetLoser {
+  padding-bottom: 1.7em;
+}
+
+.sideBetsVsStats {
+  font-weight: bolder;
+}
+.goldText {
+  color: $baseColorGold;
+  text-decoration: underline;
+  font-weight: bolder;
+  font-size: 1.4em;
 }

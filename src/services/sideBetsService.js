@@ -40,6 +40,11 @@ export function getExtraDetais(
     sideBetEndDate,
   });
 }
+
+export function getAllDismissedSideBets(teamId) {
+  return http.get(`${apiUrl}/sideBets/getAllDismissedSideBets/${teamId}`);
+}
+
 export default {
   createSideBet,
   getSidebetsForMainTable,
@@ -48,4 +53,5 @@ export default {
   dismissSideBet,
   getAllApprovedSideBets,
   getExtraDetais,
+  getAllDismissedSideBets,
 };
