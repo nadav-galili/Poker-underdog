@@ -1275,6 +1275,9 @@ exports.profitsStats = async function (req, res) {
         avgProfit: {
           $avg: "$players.profit",
         },
+        avgCashing: {
+          $avg: "$players.cashing",
+        },
       },
     },
     {
@@ -1285,6 +1288,9 @@ exports.profitsStats = async function (req, res) {
         gamesWithPlus: 1,
         avgProfit: {
           $round: ["$avgProfit", 2],
+        },
+        avgCashing: {
+          $round: ["$avgCashing", 2],
         },
       },
     },

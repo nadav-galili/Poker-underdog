@@ -2,7 +2,14 @@ import React, { useState, useEffect } from "react";
 import gameService from "../../services/gameService";
 import { apiImage } from "../../config.json";
 
-const BigCard = ({ teamId, cardTitle, stats, data, playersData }) => {
+const BigCard = ({
+  teamId,
+  cardTitle,
+  stats,
+  data,
+  playersData,
+  leaderData,
+}) => {
   console.log("🚀 ~ file: bigCard.jsx:6 ~ BigCard ~ data", data);
 
   const [cardStats, setCardStats] = useState([]);
@@ -32,26 +39,51 @@ const BigCard = ({ teamId, cardTitle, stats, data, playersData }) => {
                 <p>1.</p>
                 <p className="leaderName">{cardStats[0]._id.name}</p>
                 <p className="leaderProfit">
-                  Profit: <span>{cardStats[0][data[0]]}</span>
+                  {leaderData[0]}: <span>{cardStats[0][data[0]]}</span>
                 </p>
-                <p className="">Total Games: {cardStats[0][data[1]]}</p>
-                <p className="">Games In Plus:{cardStats[0][data[2]]}</p>
-                <p className="">Avg Profit: {cardStats[0][data[3]]}</p>
+                <p className="">
+                  {leaderData[1]}: {cardStats[0][data[1]]}
+                </p>
+                <p className="">
+                  {leaderData[2]}:{cardStats[0][data[2]]}
+                </p>
+                <p className="">
+                  {leaderData[3]}: {cardStats[0][data[3]]}
+                </p>
+                <p className="">
+                  {leaderData[4]}: {cardStats[0][data[4]]}
+                </p>
               </div>
             </div>
           </div>
-          <ol start="2" className="bg-white m-0 secondPlayer">
-            <li>
-              <span>{cardStats[1]._id.name}</span>-{playersData[0]}:{" "}
-              <span>{cardStats[1][data[0]]}</span> {playersData[1]}:
-              {cardStats[1][data[1]]} {playersData[2]}:{cardStats[1][data[2]]}{" "}
-              {playersData[3]}:{cardStats[1][data[3]]}
+          <ol start="2" className="bg-white m-0 pt-2 ps-1 secondPlayer">
+            <li className="d-flex flex-row">
+              2.
+              <div className="secondPlayerImage mx-1">
+                <img src={`${apiImage}${cardStats[1]._id.image}`} alt="" />
+              </div>
+              <span className="mx-1">{cardStats[1]._id.name}- </span>
+              {playersData[0]}:
+              <span className="mx-1 playersNewProfit">
+                {cardStats[1][data[0]]}
+              </span>{" "}
+              {playersData[1]}:{cardStats[1][data[1]]} {playersData[2]}:
+              {cardStats[1][data[2]]} {playersData[3]}:{cardStats[1][data[3]]}{" "}
+              {playersData[4]}:{cardStats[1][data[4]]}
             </li>
-            <li>
-              <span>{cardStats[2]._id.name}</span>-{playersData[0]}:{" "}
-              <span>{cardStats[2][data[0]]} </span>
+            <li className="d-flex flex-row mt-2">
+              3.
+              <div className="secondPlayerImage mx-1">
+                <img src={`${apiImage}${cardStats[2]._id.image}`} alt="" />
+              </div>
+              <span className="mx-1">{cardStats[2]._id.name}- </span>
+              {playersData[0]}:
+              <span className="mx-1 playersNewProfit">
+                {cardStats[2][data[0]]}
+              </span>{" "}
               {playersData[1]}:{cardStats[2][data[1]]} {playersData[2]}:
-              {cardStats[2][data[2]]} {playersData[3]}:{cardStats[2][data[3]]}
+              {cardStats[2][data[2]]} {playersData[3]}:{cardStats[2][data[3]]}{" "}
+              {playersData[4]}:{cardStats[2][data[4]]}
             </li>
           </ol>
           <p className="bg-white">View Full Table</p>

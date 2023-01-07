@@ -1870,6 +1870,7 @@ label {
 
 .leaderDetail {
   font-weight: bolder;
+  font-size: 0.9em;
 }
 
 .leaderImage {
@@ -1885,18 +1886,24 @@ label {
   background-image: linear-gradient(#2752ea, #fcfcfc);
 }
 
-.leaderProfit span, .secondPlayer span {
+.leaderProfit span {
   color: gold;
   font-size: 1.3em;
   font-weight: 900;
 }
 
 .secondPlayer {
-  font-size: 0.9em;
+  font-size: 0.8em !important;
 }
 .secondPlayer span:first-of-type {
   font-size: 1em;
   color: black;
+  font-weight: bolder;
+}
+.secondPlayer span:nth-of-type(2) {
+  font-size: 1em;
+  color: gold;
+  font-weight: 900;
 }
 
 .odds a {
@@ -1946,6 +1953,19 @@ label {
   padding: 10px;
   border-radius: 5px;
   overflow: hidden;
+}
+
+.secondPlayerImage {
+  width: 1.8em;
+  height: 1.8em !important;
+}
+.secondPlayerImage img {
+  border: 1px solid gold;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background-image: linear-gradient(#2752ea, #fcfcfc);
 }
 
 .totalStatsForTeam > * {

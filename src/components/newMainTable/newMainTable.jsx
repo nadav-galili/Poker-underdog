@@ -73,8 +73,21 @@ const NewMainTable = (props) => {
             teamId={teamId}
             cardTitle="Total Profit"
             stats="profitsStats"
-            data={["totalProfit", "totalGames", "gamesWithPlus", "avgProfit"]}
-            playersData={["Total Profit", "TG", "GIP", "AP"]}
+            data={[
+              "totalProfit",
+              "totalGames",
+              "gamesWithPlus",
+              "avgProfit",
+              "avgCashing",
+            ]}
+            playersData={["Total Profit", "TG", "GIP", "AP", "AC"]}
+            leaderData={[
+              "Profit",
+              "Total Games",
+              "Games In Plus",
+              "Average Profit",
+              "Average Cashing",
+            ]}
           />
         </div>
       </div>

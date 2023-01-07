@@ -1,6 +1,7 @@
 @import "config";
 .leaderDetail {
   font-weight: bolder;
+  font-size: 0.9em;
 }
 
 .leaderImage {
@@ -26,11 +27,16 @@
 }
 
 .secondPlayer {
-  @extend .leaderProfit;
-  font-size: 0.9em;
+  font-size: 0.8em !important;
   & span:first-of-type {
     font-size: 1em;
     color: black;
+    font-weight: bolder;
+  }
+  & span:nth-of-type(2) {
+    font-size: 1em;
+    color: $baseColorGold;
+    font-weight: 900;
   }
 }
 
@@ -83,6 +89,20 @@
   padding: 10px;
   border-radius: 5px;
   overflow: hidden;
+}
+.secondPlayerImage {
+  width: 1.8em;
+  height: 1.8em !important;
+  // margin-bottom: 0.5em;
+
+  & img {
+    border: 1px solid $baseColorGold;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    background-image: linear-gradient($headerColorBlue, $navbarWhite);
+  }
 }
 
 .totalStatsForTeam > * {
