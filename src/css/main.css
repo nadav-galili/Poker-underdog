@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Andada+Pro:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Andada+Pro:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Andada+Pro:wght@400;500;600;700&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
@@ -1791,10 +1792,91 @@ label {
   font-size: 0.5em;
 }
 
-.sidebetName {
+.sidebetTitles {
   color: gold;
   font-size: 1.8em;
   text-transform: capitalize;
+}
+
+.sideBetPlayer {
+  color: white;
+  font-size: 0.9em;
+  text-transform: capitalize;
+}
+.sideBetPlayer img {
+  width: 2.9em;
+  height: 2.9em;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+  background-color: #6c14b4;
+}
+
+.selectedSideBet {
+  color: gold;
+  font-weight: bold;
+}
+
+.choosenPlayer img {
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  border: 2px solid gold;
+  object-fit: cover;
+  background-color: #6c14b4;
+}
+
+.rules li {
+  font-size: 0.8em;
+  color: white;
+  text-align: left;
+  margin-bottom: 0.5em;
+}
+
+.alert-gold {
+  background-color: gold;
+  color: black;
+  font-weight: bold;
+}
+
+.sideBetLeader {
+  color: #02d84d;
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 1.2em !important;
+}
+
+.sideBetLoser {
+  padding-bottom: 1.7em;
+}
+
+.sideBetsVsStats {
+  font-weight: bolder;
+}
+
+.goldText {
+  color: gold;
+  text-decoration: underline;
+  font-weight: bolder;
+  font-size: 1.4em;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.teamLogo {
+  height: 7em;
+  border-radius: 15%;
+  border: 4px solid gold;
+}
+.teamLogo img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
 }
 
 main {

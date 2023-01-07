@@ -2,6 +2,8 @@ const express = require("express");
 const upload = require("../middleware/upload");
 const { User } = require("../models/user");
 const teamsController = require("../controllers/teams");
+const auth = require("../middleware/auth");
+const router = express.Router();
 
 const {
   Team,
@@ -9,8 +11,6 @@ const {
   validateTeamWithId,
   generateTeamNumber,
 } = require("../models/teams");
-const auth = require("../middleware/auth");
-const router = express.Router();
 
 //get all the teams of a specific user
 router.get("/my-teams", auth, async (req, res) => {
@@ -18,6 +18,11 @@ router.get("/my-teams", auth, async (req, res) => {
   res.send(teams);
 });
 
+router.get(
+  "/teamForSideBets/:teamId/:userId",
+  auth,
+  teamsController.getTeamForSideBets
+);
 //get by number
 router.get("/numbers/:teamNumber", auth, async (req, res) => {
   let teams = await Team.findOne({ teamNumber: req.params.teamNumber })
@@ -101,5 +106,10 @@ router.delete(
   auth,
   teamsController.deletePlayerFromTeam
 );
+
+//new ROUTES ////********
+////***** */ * /
+
+router.get("/newGetTeam/:teamId", auth, teamsController.newGetTeam);
 
 module.exports = router;

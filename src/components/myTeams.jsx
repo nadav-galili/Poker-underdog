@@ -21,8 +21,8 @@ const MyTeams = () => {
     fetchTeams();
   }, []);
 
-  let removeTeam = (teamId) => {
-    let chosenTeam = teams.filter((team) => team._id === teamId);
+  let removeTeam = (teamid) => {
+    let chosenTeam = teams.filter((team) => team._id === teamid);
 
     if (user._id !== chosenTeam[0].user_id) {
       Swal.fire({
@@ -41,8 +41,8 @@ const MyTeams = () => {
         confirmButtonText: "Yes",
       }).then((result) => {
         if (result.isConfirmed) {
-          let myTeams = teams.filter((team) => team._id !== teamId);
-          teamService.deleteTeam(teamId);
+          let myTeams = teams.filter((team) => team._id !== teamid);
+          teamService.deleteTeam(teamid);
           setTeams(myTeams);
           toast("This team was deleted succesfully");
         }

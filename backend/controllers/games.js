@@ -1105,7 +1105,6 @@ exports.monthlyByPlayer = async function (req, res) {
 };
 
 exports.sideBets = async function (req, res) {
-  console.log(req.params.teamId);
   const agg = await Game.aggregate([
     {
       $match: {

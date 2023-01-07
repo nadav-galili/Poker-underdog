@@ -99,7 +99,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
                 data-placement="top"
                 title="Only Team Manger can edit games details"
                 to={`/games/${liveGame._id}`}
-                takeControl="yes"
+                takecontrol="yes"
               >
                 Take Control Of Game
                 <i className="ps-2 fas fa-angle-double-right"></i>
@@ -177,7 +177,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
             </Link>
             {captain[0]._id === user._id && (
               <div className="d-flex flex-column">
-                <Link
+                {/* <Link
                   className="button-75 mt-2 "
                   to={`/edit-games/${team._id}`}
                   teamId={team._id}
@@ -186,7 +186,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
                   Edit Games
                   <AiFillEdit color="white" className="ms-1" />
                   <i className="ps-2 fas fa-angle-double-right"></i>
-                </Link>
+                </Link> */}
                 <button
                   type="button"
                   className="btn btn-outline-danger mt-2 w-75"

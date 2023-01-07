@@ -34,8 +34,9 @@ import PlayerStats from "./components/personalStats/playerStats";
 import StatsPerHourCard from "./components/topStats/statsPerHourCard";
 import MonthlyStats from "./components/topStats/monthlyStats";
 import sidebetsMain from "./components/sidebets/sidebetsMain";
+import NewSideBet from "./components/sidebets/newSideBet";
+import NewMainTable from "./components/newMainTable/newMainTable";
 import Test from "./components/notification/test";
-import { Notifications } from "react-push-notification";
 
 import ReactGA from "react-ga";
 
@@ -68,7 +69,6 @@ function App() {
   return (
     <React.Fragment>
       <ToastContainer />
-      <Notifications />
 
       <header>
         <SideNavbar
@@ -149,8 +149,16 @@ function App() {
               component={StatsPerHourCard}
             />
             <ProtectedRoute
+              path="/side-bets/new-sidebet/:teamId"
+              component={NewSideBet}
+            />
+            <ProtectedRoute
               path="/side-bets/:teamId"
               component={sidebetsMain}
+            />
+            <ProtectedRoute
+              path="/newMainTable/:teamId"
+              component={NewMainTable}
             />
             <Route path="/test" component={Test} />
 

@@ -34,11 +34,70 @@
   font-size: 0.5em;
 }
 
-.sidebetName {
+.sidebetTitles {
   color: gold;
   font-size: 1.8em;
   text-transform: capitalize;
 }
-// * {
-//   outline: 1px solid red;
-// }
+.sideBetPlayer {
+  color: white;
+  font-size: 0.9em;
+  text-transform: capitalize;
+  & img {
+    width: 2.9em;
+    height: 2.9em;
+    border-radius: 50%;
+    border: 2px solid white;
+    object-fit: cover;
+    background-color: $basecolorPurple;
+  }
+}
+
+.selectedSideBet {
+  color: gold;
+  font-weight: bold;
+}
+
+.choosenPlayer {
+  & img {
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 50%;
+    border: 2px solid gold;
+    object-fit: cover;
+    background-color: $basecolorPurple;
+  }
+}
+
+.rules li {
+  font-size: 0.8em;
+  color: white;
+  text-align: left;
+  margin-bottom: 0.5em;
+}
+
+.alert-gold {
+  background-color: gold;
+  color: black;
+  font-weight: bold;
+}
+
+.sideBetLeader {
+  color: $basecolorGreen;
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 1.2em !important;
+}
+.sideBetLoser {
+  padding-bottom: 1.7em;
+}
+
+.sideBetsVsStats {
+  font-weight: bolder;
+}
+.goldText {
+  color: $baseColorGold;
+  text-decoration: underline;
+  font-weight: bolder;
+  font-size: 1.4em;
+}

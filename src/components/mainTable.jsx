@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import gameService from "../services/gameService";
 import userService from "../services/userService";
+import sideBetsService from "../services/sideBetsService";
 import PageHeader from "./common/pageHeader";
 import PlayerCard from "./topStats/playerCard";
 import SuccessP from "./topStats/successp";
@@ -19,9 +20,9 @@ import SideBetsCard from "./sidebets/sidebetsCard";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MdDateRange } from "react-icons/md";
+import Swal from "sweetalert2";
 import * as dayjs from "dayjs";
-import addNotification from "react-push-notification";
-import { Notifications } from "react-push-notification";
+import { toast } from "react-toastify";
 
 export default function MainTable(props) {
   //get the data for the table
@@ -42,8 +43,36 @@ export default function MainTable(props) {
   const [teams, setTeams] = useState([]);
   const [lastGame, setLastGame] = useState([]);
   const [user, setUser] = useState({});
-  // const [register, setRegister] = useState({});
+  const [sideBets, setSideBets] = useState([]);
   var relativeTime = require("dayjs/plugin/relativeTime");
+
+  const alertGotOfferedSideBet = (sideBetData) => {
+    sideBetData.map((sideBet) => {
+      Swal.fire({
+        title: `You got offered a side bet from ${sideBet.masterPlayer.nickName}!`,
+        text: `  for ${sideBet.sideBetSum}$ from ${new Date(
+          sideBet.startDate
+        ).toLocaleDateString("en-GB")} to ${new Date(
+          sideBet.endDate
+        ).toLocaleDateString("en-GB")} Do you accept?`,
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, accept it!",
+        cancelButtonText: "No, dismiss it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          toast.success("You accepted the side bet 🔥🔥🔥");
+          sideBetsService.acceptSideBet(sideBet._id);
+        } else if (result.isDismissed) {
+          toast.error("You dismissed the side bet 😢");
+          console.log("disssmissed");
+          sideBetsService.dismissSideBet(sideBet._id);
+        }
+      });
+    });
+  };
 
   useEffect(() => {
     const getLastGame = async () => {
@@ -109,7 +138,7 @@ export default function MainTable(props) {
     return () => {
       let isCancelled = true;
     };
-  }, [teamId]);
+  }, []);
 
   useEffect(() => {
     const dataByMonths = async () => {
@@ -139,7 +168,7 @@ export default function MainTable(props) {
       }
     };
     dataByMonths();
-  }, [props.match.params.teamId]);
+  }, []);
 
   useEffect(() => {
     const profits = async () => {
@@ -148,7 +177,7 @@ export default function MainTable(props) {
       setProfits(results);
     };
     profits();
-  }, [props.match.params.teamId]);
+  }, []);
 
   useEffect(() => {
     const statsPerHour = async () => {
@@ -158,7 +187,7 @@ export default function MainTable(props) {
       setstatsPerHour(dataPerHour.data);
     };
     statsPerHour();
-  }, [props.match.params.teamId]);
+  }, []);
 
   //get team players for avatars
   useEffect(() => {
@@ -166,27 +195,22 @@ export default function MainTable(props) {
       const { data } = await teamService.getMyTeam();
 
       setTeams(data[0].players);
+
+      const sideBetsData = await sideBetsService.getSidebetsForMainTable(
+        props.match.params.teamId
+      );
+      setSideBets(sideBetsData.data);
+
+      ///check if user got offered a side bet he didnt approved yet
+      const gotOfferedSideBet = await sideBetsService.gotOfferedSidebet(
+        user._id
+      );
+      if (gotOfferedSideBet.data.length > 0) {
+        alertGotOfferedSideBet(gotOfferedSideBet.data);
+      }
     };
     fetchTeams();
-  }, []);
-  const subscribe = () => {
-    console.log("aa");
-    addNotification({
-      title: "Warning",
-      native: true,
-    });
-  };
-  function successNotification() {
-    addNotification({
-      title: "Success",
-      subtitle: "You have successfully submitted",
-      message: "Welcome to GeeksforGeeks",
-      theme: "light",
-      closeButton: "X",
-      backgroundTop: "green",
-      native: true,
-    });
-  }
+  }, [user]);
 
   dayjs.extend(relativeTime);
   let daysFromGame = lastGame ? dayjs(lastGame.createdAt).fromNow() : null;
@@ -242,9 +266,6 @@ export default function MainTable(props) {
             </Link>
           </div>
           <div>
-            {/* <button onClick={successNotification} className="btn btn-primary">
-              subscribe
-            </button> */}
             <p className="ms-2 text-white mb-2 mt-2 display-6">
               {teamImage.name}
             </p>
@@ -274,6 +295,35 @@ export default function MainTable(props) {
             }}
             className="totalCash d-flex flex-column mb-2 ps-1"
           >
+            {sideBets.length > 0 && (
+              <div className="alert alert-gold alert-dismissible " role="alert">
+                <span
+                  type="button"
+                  className="close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true" className="text-black">
+                    &times;
+                  </span>
+                </span>
+                <strong>New Side Bets Offered!!!💥💥💥</strong>
+                <span className="text-primary">
+                  <ol>
+                    {sideBets.map((bet) => (
+                      <li>
+                        {`${bet.masterPlayer.nickName} VS ${
+                          bet.slavePlayer.nickName
+                        }  ${bet.sideBetSum}$  date: ${new Date(
+                          bet.createdAt
+                        ).toLocaleDateString("en-GB")} `}
+                      </li>
+                    ))}
+                  </ol>
+                </span>
+              </div>
+            )}
+
             <p className="mb-0">
               Total Cash Played:
               <strong>
@@ -435,9 +485,7 @@ export default function MainTable(props) {
                 team={teamId}
               />
             )}
-            {teamId === "61b243ac87b6640ad041224f" && (
-              <SideBetsCard teamId={teamId} />
-            )}
+            <SideBetsCard teamId={teamId} />
           </motion.div>
           <MainLastgame teamId={teamId} />
           <AllGames teamId={teamId} />

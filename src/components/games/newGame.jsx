@@ -16,7 +16,6 @@ const NewGame = (props) => {
   const [id, setId] = useState("");
   const [me, setMe] = useState({});
   const [manager, setManager] = useState("");
-  console.log(data, "data");
 
   useEffect(() => {
     const ac = new AbortController();
