@@ -50,6 +50,35 @@ const SmallCard = ({
               </div>
             </div>
           </div>
+          <ol start="2" className="bg-white m-0 pt-2 ps-1 secondPlayerSmall">
+            <li className="d-flex flex-row">
+              2.
+              <div className="secondPlayerImage mx-1">
+                <img src={`${apiImage}${cardStats[1]._id.image}`} alt="" />
+              </div>
+              <span className="mx-1">{cardStats[1]._id.name}- </span>
+              {playersData[0]}
+              <span className="mx-1 playersNewProfit">
+                {cardStats[1][data[0]]}
+              </span>{" "}
+              {playersData[1]}
+              {cardStats[1][data[1]]}
+            </li>
+            <li className="d-flex flex-row mt-2">
+              3.
+              <div className="secondPlayerImage mx-1">
+                <img src={`${apiImage}${cardStats[2]._id.image}`} alt="" />
+              </div>
+              <span className="mx-1">{cardStats[2]._id.name}- </span>
+              {playersData[0]}
+              <span className="mx-1 playersNewProfit">
+                {cardStats[2][data[0]]}
+              </span>{" "}
+              {playersData[1]}
+              {cardStats[2][data[1]]}
+            </li>
+          </ol>
+          <p className="bg-white">View Full Table</p>
         </div>
       )}
     </>

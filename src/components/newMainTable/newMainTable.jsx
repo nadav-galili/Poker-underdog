@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
+import { SpinnerDiamond } from "spinners-react";
 import teamService from "../../services/teamService";
 import gameServices from "../../services/gameService";
 import { apiImage } from "../../config.json";
@@ -37,6 +38,18 @@ const NewMainTable = (props) => {
         className="mb-0"
         titleText={new Date().getFullYear() + " Top Stats"}
       />
+      {_.isEmpty(totalStats) && (
+        <div className="spinner mt-5">
+          <SpinnerDiamond
+            size={130}
+            thickness={151}
+            speed={81}
+            color="rgba(108, 20, 180, 1)"
+            secondaryColor="rgba(252, 252, 252, 1)"
+            enabled={_.isEmpty(totalStats) ? true : false}
+          />
+        </div>
+      )}
       {!_.isEmpty(team) && (
         <div className="teamDetails">
           <div className="logoContainer d-flex justify-content-center ">
@@ -58,16 +71,20 @@ const NewMainTable = (props) => {
           </div>
         </div>
       )}
-      <span className="text-center">Season:2023</span>
-      {!_.isEmpty(totalStats) && <TotalStatsForTeam totalStats={totalStats} />}
-      <div className="odds text-center">
-        <a
-          href="https://www.cardschat.com/poker/tools/poker-odds-calculator/"
-          target="_blank"
-        >
-          Texas Odds Calculator
-        </a>
-      </div>
+      {/* <span className="text-center">Season:2023</span> */}
+      {!_.isEmpty(totalStats) && (
+        <>
+          <TotalStatsForTeam totalStats={totalStats} />
+          <div className="odds text-center">
+            <a
+              href="https://www.cardschat.com/poker/tools/poker-odds-calculator/"
+              target="_blank"
+            >
+              Texas Odds Calculator
+            </a>
+          </div>
+        </>
+      )}
       <div className="playersCardsNew mt-3">
         <div className="row mx-2">
           <BigCard
@@ -90,13 +107,13 @@ const NewMainTable = (props) => {
               "Average Cashing",
             ]}
           />
-          <div className="col-6 mt-3">
+          <div className="col-6 my-3">
             <SmallCard
               teamId={teamId}
               cardTitle="Top Ten profits"
               stats="topTenProfits"
               data={["profit", "date", "cashInHand", "cashing"]}
-              playersData={["Profit", "Date", "CIN", "C"]}
+              playersData={["P:", "D:", "CIN", "C"]}
               leaderData={["Profit", "Date", "Cash In Hand", "cashing"]}
             />
           </div>

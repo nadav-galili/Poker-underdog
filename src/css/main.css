@@ -1901,21 +1901,25 @@ label {
   font-weight: 900;
 }
 
-.secondPlayer {
+.secondPlayer, .secondPlayerSmall {
   font-size: 0.8em !important;
 }
-.secondPlayer span:first-of-type {
+.secondPlayer span:first-of-type, .secondPlayerSmall span:first-of-type {
   font-size: 1em;
   color: black;
   font-weight: bolder;
 }
-.secondPlayer span:nth-of-type(2) {
+.secondPlayer span:nth-of-type(2), .secondPlayerSmall span:nth-of-type(2) {
   font-size: 1em;
   color: gold;
   font-weight: 900;
 }
-.secondPlayer li {
+.secondPlayer li, .secondPlayerSmall li {
   border-bottom: 1px solid rgb(168, 164, 164);
+}
+
+.secondPlayerSmall {
+  font-size: 0.6em !important;
 }
 
 .odds a {
@@ -1961,7 +1965,7 @@ label {
   background-image: linear-gradient(to bottom right, #2752ea, #d7d5d5);
 }
 
-.profitsContainer {
+.profitsContainer, .smallCardContainer {
   padding: 10px;
   border-radius: 5px;
   overflow: hidden;
@@ -1978,6 +1982,10 @@ label {
   object-fit: cover;
   border-radius: 50%;
   background-image: linear-gradient(#2752ea, #fcfcfc);
+}
+
+.smallCardContainer {
+  padding: 0;
 }
 
 .totalStatsForTeam > * {

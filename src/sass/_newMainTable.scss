@@ -55,6 +55,11 @@
   }
 }
 
+.secondPlayerSmall {
+  @extend .secondPlayer;
+  font-size: 0.6em !important;
+}
+
 .odds {
   & a {
     color: $headerColorBlue !important;
@@ -118,6 +123,11 @@
     border-radius: 50%;
     background-image: linear-gradient($headerColorBlue, $navbarWhite);
   }
+}
+
+.smallCardContainer {
+  @extend .profitsContainer;
+  padding: 0;
 }
 
 .totalStatsForTeam > * {
