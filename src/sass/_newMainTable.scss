@@ -4,6 +4,11 @@
   font-size: 0.9em;
 }
 
+.leaderDetailSmall {
+  @extend .leaderDetail;
+  font-size: 0.5em;
+}
+
 .leaderImage {
   height: 7em;
   width: 7em;
@@ -16,6 +21,12 @@
     border: 1px solid $baseColorGold;
     background-image: linear-gradient($headerColorBlue, $navbarWhite);
   }
+}
+
+.leaderImageSmall {
+  @extend .leaderImage;
+  height: 4em;
+  width: 4em;
 }
 
 .leaderProfit {
@@ -37,6 +48,10 @@
     font-size: 1em;
     color: $baseColorGold;
     font-weight: 900;
+  }
+
+  & li {
+    border-bottom: 1px solid rgb(168, 164, 164);
   }
 }
 

@@ -10,8 +10,6 @@ const BigCard = ({
   playersData,
   leaderData,
 }) => {
-  console.log("🚀 ~ file: bigCard.jsx:6 ~ BigCard ~ data", data);
-
   const [cardStats, setCardStats] = useState([]);
   useEffect(() => {
     async function getCardStats() {

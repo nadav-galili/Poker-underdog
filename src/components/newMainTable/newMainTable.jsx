@@ -7,6 +7,7 @@ import { apiImage } from "../../config.json";
 import BigCard from "./bigCard";
 import PageHeader from "../common/pageHeader";
 import PlayersImages from "./playersImages";
+import SmallCard from "./smallCard";
 import TotalStatsForTeam from "./totalStatsForTeam";
 
 const NewMainTable = (props) => {
@@ -89,6 +90,38 @@ const NewMainTable = (props) => {
               "Average Cashing",
             ]}
           />
+          <div className="col-6 mt-3">
+            <SmallCard
+              teamId={teamId}
+              cardTitle="Top Ten profits"
+              stats="topTenProfits"
+              data={["profit", "date", "cashInHand", "cashing"]}
+              playersData={["Profit", "Date", "CIN", "C"]}
+              leaderData={["Profit", "Date", "Cash In Hand", "cashing"]}
+            />
+          </div>
+          <div className="col-6 mt-3">
+            {/* <SmallCard
+              teamId={teamId}
+              cardTitle="Head To Head"
+              stats="head2head"
+              data={[
+                "totalProfit",
+                "totalGames",
+                "gamesWithPlus",
+                "avgProfit",
+                "avgCashing",
+              ]}
+              playersData={["Total Profit", "TG", "GIP", "AP", "AC"]}
+              leaderData={[
+                "Profit",
+                "Total Games",
+                "Games In Plus",
+                "Average Profit",
+                "Average Cashing",
+              ]}
+            /> */}
+          </div>
         </div>
       </div>
     </div>

@@ -102,6 +102,12 @@ export function getCardStats(teamId, stats) {
   if (stats == "profitsStats") {
     return http.get(`${apiUrl}/games/newMainStats/profitsStats/${teamId}`);
   }
+  if (stats == "topTenProfits") {
+    return http.get(`${apiUrl}/games/newMainStats/topTenProfits/${teamId}`);
+  }
+  if (stats == "head2head") {
+    return http.get(`${apiUrl}/h2h/newMainStats/head2head/${teamId}`);
+  }
 }
 export default {
   lastGame,
@@ -128,6 +134,5 @@ export default {
   monthlyByPlayer,
   sideBets,
   getTotalStatsForTeam,
-  // profitsStats,
   getCardStats,
 };

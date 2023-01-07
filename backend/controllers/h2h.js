@@ -1,6 +1,7 @@
 const _ = require("lodash");
 const { H2h, validate } = require("../models/h2h");
 const { Game } = require("../models/games");
+let currentYear = new Date(new Date().getFullYear(), 0, 1);
 
 exports.newH2h = async function (req, res) {
   const { error } = validate(req.body);
@@ -277,28 +278,93 @@ exports.h2hGamesByTeam = async function (req, res) {
   await res.send(agg);
 };
 
-//               $divide: ["$totalPoints", { $multiply: ["$numOfGames", 3] }],
-//             },
-//             100,
-//           ],
-//         },
-//         2,
-//       ],
-//     },
-//   },
-// },
-// {
-//       $sort: {
-//         avgPoints: -1,
-//       },
-//     },
-//   ]);
-//   await res.send(agg);
-// };
-
 exports.teamAllGames = async function (req, res) {
   let game = await H2h.find({ team_id: req.params.teamId }).sort({
     createdAt: -1,
   });
   res.send(game);
+};
+
+exports.getH2hStats = async function (req, res) {
+  const teamId = req.params.teamId;
+  const h2h = await H2h.aggregate([
+    {
+      $match: {
+        team_id: teamId,
+        createdAt: {
+          $gte: new Date(currentYear),
+        },
+      },
+    },
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $group: {
+        _id: {
+          id: "$players.id",
+          name: "$players.name",
+          image: "$players.image",
+        },
+        totalPoints: {
+          $sum: "$players.points",
+        },
+        totalGames: {
+          $sum: 1,
+        },
+        avgPoints: {
+          $avg: "$players.points",
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        totalPoints: 1,
+        totalGames: 1,
+        avgPoints: {
+          $round: ["$avgPoints", 2],
+        },
+        successPercentage: {
+          $round: [
+            {
+              $multiply: [
+                {
+                  $cond: [
+                    {
+                      $eq: ["$totalGames", 0],
+                    },
+                    0,
+                    {
+                      $divide: [
+                        "$totalPoints",
+                        {
+                          $multiply: ["$totalGames", 3],
+                        },
+                      ],
+                    },
+                  ],
+                },
+                100,
+              ],
+            },
+            2,
+          ],
+        },
+      },
+    },
+    {
+      $sort: {
+        avgPoints: -1,
+      },
+    },
+  ]);
+  res.send(h2h);
 };

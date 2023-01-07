@@ -1302,3 +1302,52 @@ exports.profitsStats = async function (req, res) {
   ]);
   res.send(stats);
 };
+
+exports.topTenProfits = async function (req, res) {
+  const teamId = req.params.teamId;
+  const topTen = await Game.aggregate([
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $match: {
+        team_id: teamId,
+        createdAt: {
+          $gt: new Date(currentYear),
+        },
+        "players.profit": {
+          $gt: 0,
+        },
+      },
+    },
+    {
+      $project: {
+        _id: {
+          id: "$players.id",
+          name: "$players.name",
+          image: "$players.image",
+        },
+        profit: "$players.profit",
+        date: {
+          $dateToString: {
+            format: "%Y-%m-%d",
+            date: "$createdAt",
+          },
+        },
+        cashInHand: "$players.cashInHand",
+        cashing: "$players.cashing",
+      },
+    },
+    {
+      $sort: {
+        profit: -1,
+      },
+    },
+    {
+      $limit: 10,
+    },
+  ]);
+  res.send(topTen);
+};
