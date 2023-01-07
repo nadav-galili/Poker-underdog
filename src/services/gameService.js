@@ -89,6 +89,26 @@ export function monthlyByPlayer(teamId) {
 export function sideBets(teamId) {
   return http.get(`${apiUrl}/games/sideBets/riko/${teamId}`);
 }
+
+//NEW SERVICES
+////////////////**************** */
+
+export function getTotalStatsForTeam(teamId) {
+  return http.get(`${apiUrl}/games/newMainStats/totalStatsForTeam/${teamId}`);
+}
+
+export function getCardStats(teamId, stats) {
+  console.log("🚀 ~ file: gameService.js:101 ~ stats", stats);
+  if (stats == "profitsStats") {
+    return http.get(`${apiUrl}/games/newMainStats/profitsStats/${teamId}`);
+  }
+  if (stats == "topTenProfits") {
+    return http.get(`${apiUrl}/games/newMainStats/topTenProfits/${teamId}`);
+  }
+  if (stats == "head2head") {
+    return http.get(`${apiUrl}/h2h/newMainStats/head2head/${teamId}`);
+  }
+}
 export default {
   lastGame,
   table,
@@ -113,4 +133,6 @@ export default {
   monthlyStats,
   monthlyByPlayer,
   sideBets,
+  getTotalStatsForTeam,
+  getCardStats,
 };

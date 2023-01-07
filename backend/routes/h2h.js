@@ -13,4 +13,8 @@ router.get("/byTeam/:teamId", auth, h2hController.h2hGamesByTeam);
 //add/remove players from h2h
 router.put("/addPlayersH2h/:gameId", auth, h2hController.addPlayersH2h);
 
+//NEW ROUTES
+//***** */
+router.get("/newMainStats/head2head/:teamId", auth, h2hController.getH2hStats);
+
 module.exports = router;

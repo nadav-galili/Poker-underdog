@@ -57,6 +57,27 @@ router.get("/:gameId", auth, gamesController.gameById);
 
 //games by team
 router.get("/teams/byTeamId/:teamId", auth, gamesController.byTeamId);
+//NEW ROUTES
+///******* */
+
+router.get(
+  "/newMainStats/totalStatsForTeam/:teamId",
+  auth,
+  gamesController.totalStatsForTeam
+);
+
+router.get(
+  "/newMainStats/profitsStats/:teamId",
+  auth,
+  gamesController.profitsStats
+);
+
+router.get(
+  "/newMainStats/topTenProfits/:teamId",
+  auth,
+  gamesController.topTenProfits
+);
+
 // gets back all the games
 router.get("/", auth, gamesController.allGames);
 
