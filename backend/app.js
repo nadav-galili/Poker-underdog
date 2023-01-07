@@ -28,7 +28,7 @@ mongoose
       useFindAndModify: false,
     }
   )
-  .then(() => console.log("Connected to MongoDB remote..."))npm
+  .then(() => console.log("Connected to MongoDB remote..."))
   .catch((err) => console.error(err, "Could not connect to MongoDB..."));
 
 // mongoose
