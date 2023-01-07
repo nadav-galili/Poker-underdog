@@ -1885,10 +1885,18 @@ label {
   background-image: linear-gradient(#2752ea, #fcfcfc);
 }
 
-.leaderProfit span {
+.leaderProfit span, .secondPlayer span {
   color: gold;
   font-size: 1.3em;
   font-weight: 900;
+}
+
+.secondPlayer {
+  font-size: 0.9em;
+}
+.secondPlayer span:first-of-type {
+  font-size: 1em;
+  color: black;
 }
 
 .odds a {
@@ -1917,8 +1925,8 @@ label {
 }
 
 .playersImage {
-  width: 2.5em;
-  height: 2.5em;
+  width: 2.5rem;
+  height: 2.5rem !important;
   margin-bottom: 0.5em;
 }
 .playersImage img {

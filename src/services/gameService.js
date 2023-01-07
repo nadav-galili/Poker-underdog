@@ -97,8 +97,11 @@ export function getTotalStatsForTeam(teamId) {
   return http.get(`${apiUrl}/games/newMainStats/totalStatsForTeam/${teamId}`);
 }
 
-export function getNewProfitsStats(teamId) {
-  return http.get(`${apiUrl}/games/newMainStats/profitsStats/${teamId}`);
+export function getCardStats(teamId, stats) {
+  console.log("🚀 ~ file: gameService.js:101 ~ stats", stats);
+  if (stats == "profitsStats") {
+    return http.get(`${apiUrl}/games/newMainStats/profitsStats/${teamId}`);
+  }
 }
 export default {
   lastGame,
@@ -125,5 +128,6 @@ export default {
   monthlyByPlayer,
   sideBets,
   getTotalStatsForTeam,
-  getNewProfitsStats,
+  // profitsStats,
+  getCardStats,
 };

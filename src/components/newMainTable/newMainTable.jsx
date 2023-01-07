@@ -4,9 +4,9 @@ import teamService from "../../services/teamService";
 import gameServices from "../../services/gameService";
 import { apiImage } from "../../config.json";
 
+import BigCard from "./bigCard";
 import PageHeader from "../common/pageHeader";
 import PlayersImages from "./playersImages";
-import ProfitCard from "./profitCard";
 import TotalStatsForTeam from "./totalStatsForTeam";
 
 const NewMainTable = (props) => {
@@ -69,7 +69,13 @@ const NewMainTable = (props) => {
       </div>
       <div className="playersCardsNew mt-3">
         <div className="row mx-2">
-          <ProfitCard teamId={teamId} />
+          <BigCard
+            teamId={teamId}
+            cardTitle="Total Profit"
+            stats="profitsStats"
+            data={["totalProfit", "totalGames", "gamesWithPlus", "avgProfit"]}
+            playersData={["Total Profit", "TG", "GIP", "AP"]}
+          />
         </div>
       </div>
     </div>
