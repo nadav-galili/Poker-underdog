@@ -1,13 +1,88 @@
 @import "config";
+.leaderDetail {
+  font-weight: bolder;
+}
 
+.leaderImage {
+  height: 7em;
+  width: 7em;
+
+  & img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid $baseColorGold;
+    background-image: linear-gradient($headerColorBlue, $navbarWhite);
+  }
+}
+
+.leaderProfit {
+  & span {
+    color: $baseColorGold;
+    font-size: 1.3em;
+    font-weight: 900;
+  }
+}
+.odds {
+  & a {
+    color: $headerColorBlue !important;
+  }
+}
+
+#teamName {
+  color: $baseColorGold;
+  font-size: 1.2em;
+  text-decoration: underline;
+  font-weight: 800;
+}
 .teamLogo {
   height: 7em;
+  width: 7em;
+  border: 1px solid $baseColorGold;
   border-radius: 15%;
-  border: 4px solid $baseColorGold;
 
   & img {
     height: 100%;
     width: 100%;
     object-fit: contain;
+    overflow: hidden;
+    border-radius: 15%;
   }
+}
+
+.playersImage {
+  width: 2.5em;
+  height: 2.5em;
+  margin-bottom: 0.5em;
+
+  & img {
+    border: 1px solid $baseColorGold;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    background-image: linear-gradient($headerColorBlue, $navbarWhite);
+  }
+}
+.profitCard {
+  background-image: linear-gradient(to bottom right, $headerColorBlue, #d7d5d5);
+}
+
+.profitsContainer {
+  padding: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.totalStatsForTeam > * {
+  color: $baseColorGold;
+  text-align: center;
+  font-size: 0.8em;
+}
+
+.totalProfitNewCard {
+  font-size: 1.2em;
+  text-decoration: underline;
+  font-weight: 900;
 }

@@ -89,6 +89,17 @@ export function monthlyByPlayer(teamId) {
 export function sideBets(teamId) {
   return http.get(`${apiUrl}/games/sideBets/riko/${teamId}`);
 }
+
+//NEW SERVICES
+////////////////**************** */
+
+export function getTotalStatsForTeam(teamId) {
+  return http.get(`${apiUrl}/games/newMainStats/totalStatsForTeam/${teamId}`);
+}
+
+export function getNewProfitsStats(teamId) {
+  return http.get(`${apiUrl}/games/newMainStats/profitsStats/${teamId}`);
+}
 export default {
   lastGame,
   table,
@@ -113,4 +124,6 @@ export default {
   monthlyStats,
   monthlyByPlayer,
   sideBets,
+  getTotalStatsForTeam,
+  getNewProfitsStats,
 };

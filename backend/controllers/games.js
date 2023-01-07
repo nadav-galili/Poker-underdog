@@ -1154,3 +1154,145 @@ exports.sideBets = async function (req, res) {
   ]);
   res.send(agg);
 };
+
+///NEW CONTROLELERS
+///*********** * /
+exports.totalStatsForTeam = async function (req, res) {
+  const teamId = req.params.teamId;
+  const teamStats = await Game.aggregate([
+    {
+      $match: {
+        team_id: teamId,
+        createdAt: {
+          $gte: currentYear,
+        },
+      },
+    },
+    {
+      $project: {
+        team_name: 1,
+        createdAt: 1,
+        team_id: 1,
+        totalHoursPlayed: {
+          $divide: [
+            {
+              $subtract: ["$updatedAt", "$createdAt"],
+            },
+            60 * 60 * 1000,
+          ],
+        },
+        totalCashing: {
+          $sum: "$players.cashing",
+        },
+      },
+    },
+    {
+      $group: {
+        _id: {
+          teamName: "$team_name",
+          teamId: "$team_id",
+        },
+        totalGames: {
+          $sum: 1,
+        },
+        totalHoursPlayed: {
+          $sum: "$totalHoursPlayed",
+        },
+        totalCashing: {
+          $sum: "$totalCashing",
+        },
+        lastGamePlayed: {
+          $max: "$createdAt",
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        totalGames: 1,
+        totalHoursPlayed: {
+          $round: ["$totalHoursPlayed", 2],
+        },
+        totalCashing: 1,
+        lastGamePlayed: {
+          $dateToString: {
+            format: "%Y-%m-%d",
+            date: "$lastGamePlayed",
+          },
+        },
+      },
+    },
+  ]);
+  res.send(teamStats);
+};
+
+exports.profitsStats = async function (req, res) {
+  const teamId = req.params.teamId;
+  const stats = await Game.aggregate([
+    {
+      $match: {
+        team_id: teamId,
+        createdAt: {
+          $gt: new Date(currentYear),
+        },
+      },
+    },
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $project: {
+        players: 1,
+        gamesWithPlus: {
+          $cond: {
+            if: {
+              $gt: ["$players.profit", 0],
+            },
+            then: 1,
+            else: 0,
+          },
+        },
+      },
+    },
+    {
+      $group: {
+        _id: {
+          name: "$players.name",
+          id: "$players.id",
+          image: "$players.image",
+        },
+        totalProfit: {
+          $sum: "$players.profit",
+        },
+        totalGames: {
+          $sum: 1,
+        },
+        gamesWithPlus: {
+          $sum: "$gamesWithPlus",
+        },
+        avgProfit: {
+          $avg: "$players.profit",
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        totalProfit: 1,
+        totalGames: 1,
+        gamesWithPlus: 1,
+        avgProfit: {
+          $round: ["$avgProfit", 2],
+        },
+      },
+    },
+    {
+      $sort: {
+        totalProfit: -1,
+      },
+    },
+  ]);
+  res.send(stats);
+};

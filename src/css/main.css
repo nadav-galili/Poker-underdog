@@ -1868,15 +1868,88 @@ label {
   font-family: "Noto Sans JP", sans-serif;
 }
 
+.leaderDetail {
+  font-weight: bolder;
+}
+
+.leaderImage {
+  height: 7em;
+  width: 7em;
+}
+.leaderImage img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid gold;
+  background-image: linear-gradient(#2752ea, #fcfcfc);
+}
+
+.leaderProfit span {
+  color: gold;
+  font-size: 1.3em;
+  font-weight: 900;
+}
+
+.odds a {
+  color: #2752ea !important;
+}
+
+#teamName {
+  color: gold;
+  font-size: 1.2em;
+  text-decoration: underline;
+  font-weight: 800;
+}
+
 .teamLogo {
   height: 7em;
+  width: 7em;
+  border: 1px solid gold;
   border-radius: 15%;
-  border: 4px solid gold;
 }
 .teamLogo img {
   height: 100%;
   width: 100%;
   object-fit: contain;
+  overflow: hidden;
+  border-radius: 15%;
+}
+
+.playersImage {
+  width: 2.5em;
+  height: 2.5em;
+  margin-bottom: 0.5em;
+}
+.playersImage img {
+  border: 1px solid gold;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background-image: linear-gradient(#2752ea, #fcfcfc);
+}
+
+.profitCard {
+  background-image: linear-gradient(to bottom right, #2752ea, #d7d5d5);
+}
+
+.profitsContainer {
+  padding: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.totalStatsForTeam > * {
+  color: gold;
+  text-align: center;
+  font-size: 0.8em;
+}
+
+.totalProfitNewCard {
+  font-size: 1.2em;
+  text-decoration: underline;
+  font-weight: 900;
 }
 
 main {
