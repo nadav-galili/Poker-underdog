@@ -107,4 +107,9 @@ router.delete(
   teamsController.deletePlayerFromTeam
 );
 
+//new ROUTES ////********
+////***** */ * /
+
+router.get("/newGetTeam/:teamId", auth, teamsController.newGetTeam);
+
 module.exports = router;

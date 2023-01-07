@@ -48,7 +48,6 @@ export default function MainTable(props) {
 
   const alertGotOfferedSideBet = (sideBetData) => {
     sideBetData.map((sideBet) => {
-      console.log("deddd", sideBet.slavePlayer.dissmissDate);
       Swal.fire({
         title: `You got offered a side bet from ${sideBet.masterPlayer.nickName}!`,
         text: `  for ${sideBet.sideBetSum}$ from ${new Date(
@@ -206,11 +205,9 @@ export default function MainTable(props) {
       const gotOfferedSideBet = await sideBetsService.gotOfferedSidebet(
         user._id
       );
-      console.log("ll", gotOfferedSideBet.data);
       if (gotOfferedSideBet.data.length > 0) {
         alertGotOfferedSideBet(gotOfferedSideBet.data);
       }
-      console.log("gotoffered", gotOfferedSideBet.data);
     };
     fetchTeams();
   }, [user]);

@@ -42,6 +42,13 @@ export function getTeamForSideBets(teamId, userId) {
   return http.get(`${apiUrl}/teams/teamForSideBets/${teamId}/${userId}`);
 }
 
+///NEW SERVICES
+// ////**************************** */
+
+export function newGetTeam(teamId) {
+  return http.get(`${apiUrl}/teams/newGetTeam/${teamId}`);
+}
+
 export default {
   createTeam,
   getMyTeam,
@@ -51,4 +58,5 @@ export default {
   getTeamByNumber,
   removePlayerFromTeam,
   getTeamForSideBets,
+  newGetTeam,
 };

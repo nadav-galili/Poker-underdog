@@ -56,3 +56,10 @@ exports.getTeamForSideBets = async function (req, res) {
 
   res.send(teamWithoutPlayer);
 };
+
+//NEW CONTORLLERSSSSS
+
+exports.newGetTeam = async function (req, res) {
+  const team = await Team.findById(req.params.teamId);
+  res.send(team);
+};
