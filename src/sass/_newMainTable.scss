@@ -25,8 +25,12 @@
 
 .leaderImageSmall {
   @extend .leaderImage;
-  height: 4em;
-  width: 4em;
+  height: 5em;
+  width: 5em;
+  & img {
+    height: 90%;
+    width: 90%;
+  }
 }
 
 .leaderProfit {
@@ -58,6 +62,11 @@
 .secondPlayerSmall {
   @extend .secondPlayer;
   font-size: 0.6em !important;
+}
+
+.newSmallCard {
+  text-decoration: underline;
+  font-weight: bolder;
 }
 
 .odds {
@@ -101,6 +110,18 @@
     background-image: linear-gradient($headerColorBlue, $navbarWhite);
   }
 }
+.rounded-circle {
+  height: 2em;
+  width: 2em;
+  border: 1px solid $baseColorGold;
+  object-fit: cover;
+  background-image: linear-gradient(to bottom right, $headerColorBlue, #d7d5d5);
+}
+
+.playerName {
+  color: white;
+  font-size: 0.5em;
+}
 .profitCard {
   background-image: linear-gradient(to bottom right, $headerColorBlue, #d7d5d5);
 }
@@ -110,6 +131,7 @@
   border-radius: 5px;
   overflow: hidden;
 }
+
 .secondPlayerImage {
   width: 1.8em;
   height: 1.8em !important;
@@ -125,9 +147,18 @@
   }
 }
 
+.Small {
+  height: 10em;
+}
+
 .smallCardContainer {
   @extend .profitsContainer;
   padding: 0;
+}
+.smallCardLastDetail {
+  font-size: 0.8em;
+  text-align: center;
+  align-self: center;
 }
 
 .totalStatsForTeam > * {
