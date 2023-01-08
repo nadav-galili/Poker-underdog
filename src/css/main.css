@@ -1891,8 +1891,12 @@ label {
 }
 
 .leaderImageSmall {
-  height: 4em;
-  width: 4em;
+  height: 5em;
+  width: 5em;
+}
+.leaderImageSmall img {
+  height: 90%;
+  width: 90%;
 }
 
 .leaderProfit span {
@@ -1920,6 +1924,11 @@ label {
 
 .secondPlayerSmall {
   font-size: 0.6em !important;
+}
+
+.newSmallCard {
+  text-decoration: underline;
+  font-weight: bolder;
 }
 
 .odds a {
@@ -1961,6 +1970,19 @@ label {
   background-image: linear-gradient(#2752ea, #fcfcfc);
 }
 
+.rounded-circle {
+  height: 2em;
+  width: 2em;
+  border: 1px solid gold;
+  object-fit: cover;
+  background-image: linear-gradient(to bottom right, #2752ea, #d7d5d5);
+}
+
+.playerName {
+  color: white;
+  font-size: 0.5em;
+}
+
 .profitCard {
   background-image: linear-gradient(to bottom right, #2752ea, #d7d5d5);
 }
@@ -1984,8 +2006,18 @@ label {
   background-image: linear-gradient(#2752ea, #fcfcfc);
 }
 
+.Small {
+  height: 10em;
+}
+
 .smallCardContainer {
   padding: 0;
+}
+
+.smallCardLastDetail {
+  font-size: 0.8em;
+  text-align: center;
+  align-self: center;
 }
 
 .totalStatsForTeam > * {

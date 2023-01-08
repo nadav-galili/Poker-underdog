@@ -1332,7 +1332,7 @@ exports.topTenProfits = async function (req, res) {
         profit: "$players.profit",
         date: {
           $dateToString: {
-            format: "%d-%m",
+            format: "%Y-%d-%m",
             date: "$createdAt",
           },
         },

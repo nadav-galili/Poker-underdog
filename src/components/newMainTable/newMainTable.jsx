@@ -60,10 +60,10 @@ const NewMainTable = (props) => {
           <p className="text-center mt-2" id="teamName">
             {team.name}
           </p>
-          <div className="playersImages">
+          <div className="playersImages my-2">
             <div className="row">
               {team.players.map((player) => (
-                <div className="playersImage col-2">
+                <div className="col-2 playersImagesRounded d-flex justify-content-center">
                   <PlayersImages key={player._id} player={player} />
                 </div>
               ))}
@@ -114,31 +114,30 @@ const NewMainTable = (props) => {
               stats="topTenProfits"
               data={["profit", "date", "cashInHand", "cashing"]}
               playersData={["P:", "D:", "CIN", "C"]}
-              leaderData={["Profit", "Date", "Cash In Hand", "cashing"]}
+              leaderData={["Profit", "Date", "Cash In Hand", "Cashing"]}
             />
           </div>
           <div className="col-6 mt-3">
-            {/* <SmallCard
+            <SmallCard
               teamId={teamId}
               cardTitle="Head To Head"
               stats="head2head"
               data={[
-                "totalProfit",
+                "totalPoints",
                 "totalGames",
-                "gamesWithPlus",
-                "avgProfit",
-                "avgCashing",
+                "avgPoints",
+                "successPercentage",
               ]}
-              playersData={["Total Profit", "TG", "GIP", "AP", "AC"]}
+              playersData={["Points: ", "AP: ", "", ""]}
               leaderData={[
-                "Profit",
+                "Total Points",
                 "Total Games",
-                "Games In Plus",
-                "Average Profit",
-                "Average Cashing",
+                "Avg Points",
+                "Success Percentage",
               ]}
-            /> */}
+            />
           </div>
+          {/* <BigCard /> */}
         </div>
       </div>
     </div>

@@ -23,18 +23,18 @@ const SmallCard = ({
     <>
       {cardStats.length > 0 && (
         <div className="smallCardContainer">
-          <p className="pt-3 ps-3 bg-white newSmallCard">{cardTitle}</p>
+          <p className="text-center pt-2 bg-white newSmallCard">{cardTitle}</p>
           <div className="col-12 profitCard">
-            <div className="leaderContainer d-flex justify-content-between">
-              <div className="leaderImageSmall m-3">
+            <div className="Small">
+              <div className="leaderImageSmall mx-auto">
                 <img
                   src={`${apiImage}${cardStats[0]._id.image}`}
                   alt="leader"
+                  className="mt-1"
                 />
               </div>
-              <div className="leaderDetailSmall pe-1">
-                <p>1.</p>
-                <p className="leaderName">{cardStats[0]._id.name}</p>
+              <div className="leaderDetailSmall d-flex  flex-column text-center mt-1">
+                <p className="leaderName">1.{cardStats[0]._id.name}</p>
                 <p className="leaderProfit">
                   {leaderData[0]}: <span>{cardStats[0][data[0]]}</span>
                 </p>
@@ -50,8 +50,8 @@ const SmallCard = ({
               </div>
             </div>
           </div>
-          <ol start="2" className="bg-white m-0 pt-2 ps-1 secondPlayerSmall">
-            <li className="d-flex flex-row">
+          <ol start="2" className="bg-white m-0 p-0  secondPlayerSmall">
+            <li className="d-flex flex-row py-1">
               2.
               <div className="secondPlayerImage mx-1">
                 <img src={`${apiImage}${cardStats[1]._id.image}`} alt="" />
@@ -61,8 +61,11 @@ const SmallCard = ({
               <span className="mx-1 playersNewProfit">
                 {cardStats[1][data[0]]}
               </span>{" "}
-              {playersData[1]}
-              {cardStats[1][data[1]]}
+              <p className="smallCardLastDetail">
+                {" "}
+                {playersData[1]}
+                {cardStats[1][data[1]]}
+              </p>
             </li>
             <li className="d-flex flex-row mt-2">
               3.
@@ -74,8 +77,10 @@ const SmallCard = ({
               <span className="mx-1 playersNewProfit">
                 {cardStats[2][data[0]]}
               </span>{" "}
-              {playersData[1]}
-              {cardStats[2][data[1]]}
+              <p className="smallCardLastDetail">
+                {playersData[1]}
+                {cardStats[2][data[1]]}
+              </p>
             </li>
           </ol>
           <p className="bg-white">View Full Table</p>
