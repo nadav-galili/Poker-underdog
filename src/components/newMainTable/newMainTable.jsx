@@ -85,7 +85,7 @@ const NewMainTable = (props) => {
           </div>
         </>
       )}
-      <div className="playersCardsNew mt-3">
+      <div className="playersCardsNew mt-3 pb-3">
         <div className="row mx-2">
           <BigCard
             teamId={teamId}
@@ -110,7 +110,7 @@ const NewMainTable = (props) => {
           <div className="col-6 my-3">
             <SmallCard
               teamId={teamId}
-              cardTitle="Top Ten profits"
+              cardTitle="Top Ten Profits"
               stats="topTenProfits"
               data={["profit", "date", "cashInHand", "cashing"]}
               playersData={["P:", "D:", "CIN", "C"]}
@@ -137,7 +137,26 @@ const NewMainTable = (props) => {
               ]}
             />
           </div>
-          {/* <BigCard /> */}
+          <BigCard
+            teamId={teamId}
+            cardTitle="Hourly Stats"
+            stats="getHourlyStats"
+            data={[
+              "profitPerHour",
+              "cashingPerHour",
+              "hoursPlayed",
+              "totalGames",
+              "avgHourPerGame",
+            ]}
+            playersData={["Profit/Hour", "CPH", "HP", "TG", "AHPG"]}
+            leaderData={[
+              "Profit Per Hour",
+              "Cashing Per Hour",
+              "Hours Played",
+              "Total Games",
+              "Average Hour Per Game",
+            ]}
+          />
         </div>
       </div>
     </div>

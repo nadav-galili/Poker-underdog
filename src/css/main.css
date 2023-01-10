@@ -28,7 +28,7 @@
 }
 h1 {
   font-size: 2.5em !important;
-  color: #ff3030;
+  color: #009dff;
   font-weight: bolder !important;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
@@ -1874,7 +1874,7 @@ label {
 }
 
 .leaderDetailSmall {
-  font-size: 0.5em;
+  font-size: 0.6em;
 }
 
 .leaderImage, .leaderImageSmall {
@@ -1915,7 +1915,7 @@ label {
 }
 .secondPlayer span:nth-of-type(2), .secondPlayerSmall span:nth-of-type(2) {
   font-size: 1em;
-  color: gold;
+  color: #0015ff;
   font-weight: 900;
 }
 .secondPlayer li, .secondPlayerSmall li {
@@ -2033,8 +2033,7 @@ label {
 }
 
 main {
-  background-repeat: no-repeat;
-  background-size: cover;
+  min-height: 780;
   background-color: #1c1515;
 }
 

@@ -1351,3 +1351,159 @@ exports.topTenProfits = async function (req, res) {
   ]);
   res.send(topTen);
 };
+
+exports.getHourlyStats = async function (req, res) {
+  const teamId = req.params.teamId;
+  const getHourlydata = await Game.aggregate([
+    {
+      $match: {
+        team_id: teamId,
+        createdAt: {
+          $gte: new Date(currentYear),
+        },
+      },
+    },
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $project: {
+        players: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        playerCashOutTime: {
+          $ifNull: ["$players.cashOutTime", "$updatedAt"],
+        },
+        team_id: 1,
+        team_name: 1,
+      },
+    },
+    {
+      $addFields: {
+        playerCashOutTime: {
+          $toDate: "$playerCashOutTime",
+        },
+      },
+    },
+    {
+      $project: {
+        players: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        hoursPlayed: {
+          $round: [
+            {
+              $divide: [
+                {
+                  $subtract: ["$playerCashOutTime", "$createdAt"],
+                },
+                3600000,
+              ],
+            },
+            2,
+          ],
+        },
+      },
+    },
+    {
+      $group: {
+        _id: {
+          id: "$players.id",
+          name: "$players.name",
+          image: "$players.image",
+        },
+        totalProfit: {
+          $sum: "$players.profit",
+        },
+        hoursPlayed: {
+          $sum: "$hoursPlayed",
+        },
+        totalCashing: {
+          $sum: "$players.cashing",
+        },
+        totalNumOfCashing: {
+          $sum: "$players.numOfCashing",
+        },
+        totalGames: {
+          $sum: 1,
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        totalProfit: 1,
+        totalCashing: 1,
+        totalNumOfCashing: 1,
+        totalGames: 1,
+        hoursPlayed: {
+          $round: ["$hoursPlayed", 2],
+        },
+        profitPerHour: {
+          $round: [
+            {
+              $cond: [
+                {
+                  $eq: ["$hoursPlayed", 0],
+                },
+                0,
+                {
+                  $divide: ["$totalProfit", "$hoursPlayed"],
+                },
+              ],
+            },
+            2,
+          ],
+        },
+        cashingPerHour: {
+          $round: [
+            {
+              $cond: [
+                {
+                  $eq: ["$hoursPlayed", 0],
+                },
+                0,
+                {
+                  $divide: ["$totalCashing", "$hoursPlayed"],
+                },
+              ],
+            },
+            2,
+          ],
+        },
+        numOfCashingPerHour: {
+          $round: [
+            {
+              $cond: [
+                {
+                  $eq: ["$hoursPlayed", 0],
+                },
+                0,
+                {
+                  $divide: ["$totalNumOfCashing", "$hoursPlayed"],
+                },
+              ],
+            },
+            2,
+          ],
+        },
+        avgHourPerGame: {
+          $round: [
+            {
+              $divide: ["$hoursPlayed", "$totalGames"],
+            },
+            2,
+          ],
+        },
+      },
+    },
+    {
+      $sort: {
+        profitPerHour: -1,
+      },
+    },
+  ]);
+  res.send(getHourlydata);
+};

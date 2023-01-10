@@ -6,7 +6,7 @@
 
 .leaderDetailSmall {
   @extend .leaderDetail;
-  font-size: 0.5em;
+  font-size: 0.6em;
 }
 
 .leaderImage {
@@ -50,7 +50,7 @@
   }
   & span:nth-of-type(2) {
     font-size: 1em;
-    color: $baseColorGold;
+    color: #0015ff;
     font-weight: 900;
   }
 

@@ -19,9 +19,16 @@
 @import "newMainTable";
 
 main {
-  background-repeat: no-repeat;
-  background-size: cover;
+  min-height: 780;
+  // background-repeat: no-repeat;
+  // background-size: cover;
   background-color: $backgroundBlack;
+  // display: table;
+  // width: 100%;
+  // background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  //   url("http://localhost:3900/images/neon.jpg");
+  // background-position: center top;
+  // height: 350px;
 }
 
 .teams p {
