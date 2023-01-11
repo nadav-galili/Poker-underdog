@@ -157,6 +157,26 @@ const NewMainTable = (props) => {
               "Average Hour Per Game",
             ]}
           />
+          <div className="col-6 mt-3">
+            <SmallCard
+              teamId={teamId}
+              cardTitle="Stats By Month"
+              stats="getStatsByMonth"
+              data={[
+                "totalProfit",
+                "roundedAvgProfit",
+                "numOfGames",
+                "roundedAvgCashing",
+              ]}
+              playersData={["Profit: ", "AP: ", "", ""]}
+              leaderData={[
+                "Total Porfit",
+                "Avg Profit",
+                "Total Games",
+                "Avg Cashing",
+              ]}
+            />
+          </div>
         </div>
       </div>
     </div>

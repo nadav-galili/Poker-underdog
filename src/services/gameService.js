@@ -112,6 +112,9 @@ export function getCardStats(teamId, stats) {
   if (stats == "getHourlyStats") {
     return http.get(`${apiUrl}/games/newMainStats/getHourlyStats/${teamId}`);
   }
+  if (stats == "getStatsByMonth") {
+    return http.get(`${apiUrl}/games/newMainStats/getStatsByMonth/${teamId}`);
+  }
 }
 
 export default {

@@ -83,6 +83,11 @@ router.get(
   auth,
   gamesController.getHourlyStats
 );
+router.get(
+  "/newMainStats/getStatsByMonth/:teamId",
+  auth,
+  gamesController.getStatsByMonth
+);
 
 // gets back all the games
 router.get("/", auth, gamesController.allGames);

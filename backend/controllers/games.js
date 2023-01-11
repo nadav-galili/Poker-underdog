@@ -1507,3 +1507,69 @@ exports.getHourlyStats = async function (req, res) {
   ]);
   res.send(getHourlydata);
 };
+
+exports.getStatsByMonth = async function (req, res) {
+  const teamId = req.params.teamId;
+  const getStatsByMonth = await Game.aggregate([
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $match: {
+        team_id: teamId,
+        createdAt: {
+          $gte: new Date(currentYear),
+        },
+      },
+    },
+    {
+      $group: {
+        _id: {
+          monthPlayed: {
+            $month: "$createdAt",
+          },
+          name: "$players.name",
+          image: "$players.image",
+          player_id: "$players.id",
+          team_id: "$team_id",
+          team_name: "$team_name",
+        },
+        totalProfit: {
+          $sum: "$players.profit",
+        },
+        avgProfit: {
+          $avg: "$players.profit",
+        },
+        numOfGames: {
+          $sum: 1,
+        },
+        avgCashing: {
+          $avg: "$players.numOfCashing",
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        totalProfit: 1,
+        roundedAvgProfit: {
+          $round: ["$avgProfit", 2],
+        },
+        numOfGames: 1,
+        roundedAvgCashing: {
+          $round: ["$avgCashing", 2],
+        },
+      },
+    },
+    {
+      $sort: {
+        "_id.monthPlayed": 1,
+        totalProfit: -1,
+        "_id.name": 1,
+      },
+    },
+  ]);
+  res.send(getStatsByMonth);
+};
