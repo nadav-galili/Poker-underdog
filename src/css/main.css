@@ -1872,7 +1872,12 @@ label {
   font-size: 0.8em;
 }
 
-.leaderDetail, .leaderDetailSmall {
+.fullTable {
+  padding-left: 0.5em;
+  padding-top: 0.5em;
+}
+
+.leaderDetail, .leaderDetailSmall, .fullTable {
   font-weight: bolder;
   font-size: 0.9em;
 }
@@ -1987,7 +1992,7 @@ label {
   font-size: 0.5em;
 }
 
-.profitCard {
+.profitCard, .vsContainer {
   background-image: linear-gradient(to bottom right, #2752ea, #d7d5d5);
 }
 
@@ -2024,7 +2029,7 @@ label {
   align-self: center;
 }
 
-.totalStatsForTeam > * {
+.totalStatsForTeam > *, .vsData > * {
   color: gold;
   text-align: center;
   font-size: 0.8em;

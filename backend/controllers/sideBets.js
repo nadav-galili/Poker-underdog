@@ -82,7 +82,7 @@ exports.getAllApprovedSideBets = async (req, res) => {
   let sideBets = await SideBet.find({
     teamId: mongoose.Types.ObjectId(teamId),
     approvedBySlavePlayer: true,
-  });
+  }).sort({ updatedAt: -1 });
   sideBets = sideBets.length == 0 ? "No side Bets yet" : sideBets;
   res.send(sideBets);
 };
