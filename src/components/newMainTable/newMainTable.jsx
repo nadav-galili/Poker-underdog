@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
-import { SpinnerDiamond } from "spinners-react";
+import { SpinnerDotted } from "spinners-react";
 import teamService from "../../services/teamService";
 import gameServices from "../../services/gameService";
 import { apiImage } from "../../config.json";
@@ -40,13 +40,11 @@ const NewMainTable = (props) => {
       />
       {_.isEmpty(totalStats) && (
         <div className="spinner mt-5">
-          <SpinnerDiamond
-            size={130}
-            thickness={151}
-            speed={81}
-            color="rgba(108, 20, 180, 1)"
-            secondaryColor="rgba(252, 252, 252, 1)"
-            enabled={_.isEmpty(totalStats) ? true : false}
+          <SpinnerDotted
+            size={50}
+            thickness={100}
+            speed={100}
+            color="rgba(0, 157, 255, 1)"
           />
         </div>
       )}
@@ -160,7 +158,7 @@ const NewMainTable = (props) => {
           <div className="col-6 mt-3">
             <SmallCard
               teamId={teamId}
-              cardTitle="Stats By Month"
+              cardTitle="Stats By Months"
               stats="getStatsByMonth"
               data={[
                 "totalProfit",
@@ -174,6 +172,39 @@ const NewMainTable = (props) => {
                 "Avg Profit",
                 "Total Games",
                 "Avg Cashing",
+              ]}
+              extraHeader={new Date().toLocaleString("default", {
+                month: "long",
+              })}
+            />
+          </div>
+          <div className="col-6 mt-3">
+            <SmallCard
+              teamId={teamId}
+              cardTitle="Top Ten Comebacks"
+              stats="getTopComebacks"
+              data={["cashing", "profit", "date", "cashInHand"]}
+              playersData={["Cashing: ", "P: ", "", ""]}
+              leaderData={["Cashing", "Profit", "Date", "CashinHand"]}
+            />
+          </div>
+          <div className="col-6 mt-3">
+            <SmallCard
+              teamId={teamId}
+              cardTitle="Winning Streak"
+              stats="getWiningStreak"
+              data={[
+                "maxWinStreak",
+                "currWinStreak",
+                "successPercentage",
+                "won",
+              ]}
+              playersData={["MWS: ", "CWS: ", "", ""]}
+              leaderData={[
+                "Max Win Streak",
+                "Current Win Streak",
+                "% Success",
+                "Total Games In Plus",
               ]}
             />
           </div>

@@ -1216,7 +1216,7 @@ exports.totalStatsForTeam = async function (req, res) {
         totalCashing: 1,
         lastGamePlayed: {
           $dateToString: {
-            format: "%Y-%m-%d",
+            format: "%d-%m-%Y",
             date: "$lastGamePlayed",
           },
         },
@@ -1332,7 +1332,7 @@ exports.topTenProfits = async function (req, res) {
         profit: "$players.profit",
         date: {
           $dateToString: {
-            format: "%Y-%d-%m",
+            format: "%d-%m-%Y",
             date: "$createdAt",
           },
         },
@@ -1519,8 +1519,29 @@ exports.getStatsByMonth = async function (req, res) {
     {
       $match: {
         team_id: teamId,
-        createdAt: {
-          $gte: new Date(currentYear),
+        $expr: {
+          $and: [
+            {
+              $eq: [
+                {
+                  $year: "$createdAt",
+                },
+                {
+                  $year: new Date(),
+                },
+              ],
+            },
+            {
+              $eq: [
+                {
+                  $month: "$createdAt",
+                },
+                {
+                  $month: new Date(),
+                },
+              ],
+            },
+          ],
         },
       },
     },
@@ -1572,4 +1593,285 @@ exports.getStatsByMonth = async function (req, res) {
     },
   ]);
   res.send(getStatsByMonth);
+};
+
+exports.getTopComebacks = async function (req, res) {
+  const teamId = req.params.teamId;
+  const getTopComebacks = await Game.aggregate([
+    {
+      $match: {
+        team_id: teamId,
+        createdAt: {
+          $gte: new Date(currentYear),
+        },
+      },
+    },
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $match: {
+        "players.profit": {
+          $gte: 0,
+        },
+      },
+    },
+    {
+      $project: {
+        _id: {
+          id: "$players.id",
+          name: "$players.name",
+          image: "$players.image",
+        },
+        profit: "$players.profit",
+        date: {
+          $dateToString: {
+            format: "%d-%m-%Y",
+            date: "$createdAt",
+          },
+        },
+        cashInHand: "$players.cashInHand",
+        cashing: "$players.cashing",
+      },
+    },
+    {
+      $sort: {
+        cashing: -1,
+        profit: -1,
+      },
+    },
+    {
+      $limit: 10,
+    },
+  ]);
+  res.send(getTopComebacks);
+};
+
+exports.getWiningStreak = async function (req, res) {
+  const teamId = req.params.teamId;
+  const getWiningStreaks = await Game.aggregate([
+    {
+      $match: {
+        team_id: teamId,
+        createdAt: {
+          $gte: new Date(currentYear),
+        },
+      },
+    },
+    {
+      $unwind: {
+        path: "$players",
+      },
+    },
+    {
+      $project: {
+        "players.name": 1,
+        "players.id": 1,
+        "players.image": 1,
+        "players.profit": 1,
+        gamesWithPlus: {
+          $cond: {
+            if: {
+              $gt: ["$players.profit", 0],
+            },
+            then: 1,
+            else: 0,
+          },
+        },
+        createdAt: 1,
+      },
+    },
+    {
+      $group: {
+        _id: {
+          id: "$players.id",
+          name: "$players.name",
+          image: "$players.image",
+        },
+        numOfGames: {
+          $sum: 1,
+        },
+        gamesWithProfit: {
+          $sum: "$gamesWithPlus",
+        },
+        streaks: {
+          $push: {
+            max: 0,
+            curr: 0,
+            gid: "$_id",
+            s: "$players.profit",
+          },
+        },
+      },
+    },
+    {
+      $project: {
+        "players.name": 1,
+        "players.id": 1,
+        "players.profit": 1,
+        "players.image": 1,
+        successPercentage: {
+          $round: [
+            {
+              $multiply: [
+                {
+                  $cond: [
+                    {
+                      $eq: ["$numOfGames", 0],
+                    },
+                    0,
+                    1,
+                  ],
+                },
+                {
+                  $divide: ["$gamesWithProfit", "$numOfGames"],
+                },
+                100,
+              ],
+            },
+            2,
+          ],
+        },
+        won: {
+          $size: {
+            $filter: {
+              input: "$streaks",
+              as: "zz",
+              cond: {
+                $gt: ["$$zz.s", 0],
+              },
+            },
+          },
+        },
+        lost: {
+          $size: {
+            $filter: {
+              cond: {
+                $lt: ["$$zz.s", 0],
+              },
+              input: "$streaks",
+              as: "zz",
+            },
+          },
+        },
+        winStreak: {
+          $reduce: {
+            input: "$streaks",
+            initialValue: {
+              max: 0,
+              curr: 0,
+              gid: 0,
+            },
+            in: {
+              $cond: {
+                if: {
+                  $gt: ["$$this.s", 0],
+                },
+                then: {
+                  $cond: {
+                    then: {
+                      gid: "$$this.gid",
+                      max: {
+                        $add: ["$$value.max", 1],
+                      },
+                      curr: {
+                        $add: ["$$value.curr", 1],
+                      },
+                    },
+                    else: {
+                      gid: "$$value.gid",
+                      max: "$$value.max",
+                      curr: {
+                        $add: ["$$value.curr", 1],
+                      },
+                    },
+                    if: {
+                      $eq: ["$$value.max", "$$value.curr"],
+                    },
+                  },
+                },
+                else: {
+                  curr: 0,
+                  gid: "$$value.gid",
+                  max: "$$value.max",
+                },
+              },
+            },
+          },
+        },
+        loseStreak: {
+          $reduce: {
+            input: "$streaks",
+            initialValue: {
+              gid: 0,
+              max: 0,
+              curr: 0,
+            },
+            in: {
+              $cond: {
+                if: {
+                  $lt: ["$$this.s", 0],
+                },
+                then: {
+                  $cond: {
+                    else: {
+                      gid: "$$value.gid",
+                      max: "$$value.max",
+                      curr: {
+                        $add: ["$$value.curr", 1],
+                      },
+                    },
+                    if: {
+                      $eq: ["$$value.max", "$$value.curr"],
+                    },
+                    then: {
+                      gid: "$$this.gid",
+                      max: {
+                        $add: ["$$value.max", 1],
+                      },
+                      curr: {
+                        $add: ["$$value.curr", 1],
+                      },
+                    },
+                  },
+                },
+                else: {
+                  gid: "$$value.gid",
+                  max: "$$value.max",
+                  curr: 0,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    {
+      $addFields: {
+        maxWinStreak: {
+          $sum: "$winStreak.max",
+        },
+        currWinStreak: {
+          $sum: "$winStreak.curr",
+        },
+        lossStreakMax: {
+          $sum: "$loseStreak.max",
+        },
+      },
+    },
+    {
+      $project: {
+        winStreak: 0,
+        loseStreak: 0,
+      },
+    },
+    {
+      $sort: {
+        maxWinStreak: -1,
+      },
+    },
+  ]);
+  res.send(getWiningStreaks);
 };

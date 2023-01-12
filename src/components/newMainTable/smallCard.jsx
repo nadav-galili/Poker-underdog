@@ -9,6 +9,7 @@ const SmallCard = ({
   data,
   playersData,
   leaderData,
+  extraHeader = null,
 }) => {
   const [cardStats, setCardStats] = useState([]);
   useEffect(() => {
@@ -26,6 +27,11 @@ const SmallCard = ({
           <p className="text-center pt-2 bg-white newSmallCard">{cardTitle}</p>
           <div className="col-12 profitCard">
             <div className="Small">
+              {extraHeader && (
+                <div className="extraHeaderSmall text-center">
+                  <span>{extraHeader}</span>
+                </div>
+              )}
               <div className="leaderImageSmall mx-auto">
                 <img
                   src={`${apiImage}${cardStats[0]._id.image}`}

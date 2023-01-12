@@ -115,6 +115,12 @@ export function getCardStats(teamId, stats) {
   if (stats == "getStatsByMonth") {
     return http.get(`${apiUrl}/games/newMainStats/getStatsByMonth/${teamId}`);
   }
+  if (stats == "getTopComebacks") {
+    return http.get(`${apiUrl}/games/newMainStats/getTopComebacks/${teamId}`);
+  }
+  if (stats == "getWiningStreak") {
+    return http.get(`${apiUrl}/games/newMainStats/getWiningStreak/${teamId}`);
+  }
 }
 
 export default {

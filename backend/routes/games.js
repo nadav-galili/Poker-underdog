@@ -88,6 +88,16 @@ router.get(
   auth,
   gamesController.getStatsByMonth
 );
+router.get(
+  "/newMainStats/getTopComebacks/:teamId",
+  auth,
+  gamesController.getTopComebacks
+);
+router.get(
+  "/newMainStats/getWiningStreak/:teamId",
+  auth,
+  gamesController.getWiningStreak
+);
 
 // gets back all the games
 router.get("/", auth, gamesController.allGames);
