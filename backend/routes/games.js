@@ -78,6 +78,27 @@ router.get(
   gamesController.topTenProfits
 );
 
+router.get(
+  "/newMainStats/getHourlyStats/:teamId",
+  auth,
+  gamesController.getHourlyStats
+);
+router.get(
+  "/newMainStats/getStatsByMonth/:teamId",
+  auth,
+  gamesController.getStatsByMonth
+);
+router.get(
+  "/newMainStats/getTopComebacks/:teamId",
+  auth,
+  gamesController.getTopComebacks
+);
+router.get(
+  "/newMainStats/getWiningStreak/:teamId",
+  auth,
+  gamesController.getWiningStreak
+);
+
 // gets back all the games
 router.get("/", auth, gamesController.allGames);
 

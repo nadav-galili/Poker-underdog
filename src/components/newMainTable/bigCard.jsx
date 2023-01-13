@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import gameService from "../../services/gameService";
 import { apiImage } from "../../config.json";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 const BigCard = ({
   teamId,
@@ -84,7 +85,9 @@ const BigCard = ({
               {playersData[4]}:{cardStats[2][data[4]]}
             </li>
           </ol>
-          <p className="bg-white">View Full Table</p>
+          <p className="bg-white fullTable">
+            View Full Table <AiOutlineArrowRight />
+          </p>
         </div>
       )}
     </>

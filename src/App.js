@@ -63,9 +63,9 @@ function App() {
   }, []);
 
   // console.log(details);
-  const style = {
-    minHeight: 780,
-  };
+  // const style = {
+  //   minHeight: 780,
+  // };
   return (
     <React.Fragment>
       <ToastContainer />
@@ -78,7 +78,7 @@ function App() {
           outerContainerId={"App"}
         />
       </header>
-      <main style={style} className="main">
+      <main className="main">
         <HashRouter user={user}>
           <Switch>
             <ProtectedRoute path="/my-stats/edit/:id" component={EditPlayer} />

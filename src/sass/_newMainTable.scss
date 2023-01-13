@@ -1,4 +1,15 @@
 @import "config";
+
+.extraHeaderSmall {
+  @extend .leaderProfit;
+  font-size: 0.8em;
+}
+
+.fullTable {
+  @extend .leaderDetail;
+  padding-left: 0.5em;
+  padding-top: 0.5em;
+}
 .leaderDetail {
   font-weight: bolder;
   font-size: 0.9em;
@@ -6,7 +17,7 @@
 
 .leaderDetailSmall {
   @extend .leaderDetail;
-  font-size: 0.5em;
+  font-size: 0.7em;
 }
 
 .leaderImage {
@@ -50,7 +61,7 @@
   }
   & span:nth-of-type(2) {
     font-size: 1em;
-    color: $baseColorGold;
+    color: #0015ff;
     font-weight: 900;
   }
 
@@ -148,7 +159,7 @@
 }
 
 .Small {
-  height: 10em;
+  height: 13em;
 }
 
 .smallCardContainer {
@@ -171,4 +182,10 @@
   font-size: 1.2em;
   text-decoration: underline;
   font-weight: 900;
+}
+.vsContainer {
+  @extend .profitCard;
+}
+.vsData {
+  @extend .totalStatsForTeam;
 }

@@ -28,7 +28,7 @@
 }
 h1 {
   font-size: 2.5em !important;
-  color: #ff3030;
+  color: #009dff;
   font-weight: bolder !important;
   font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
@@ -1868,13 +1868,22 @@ label {
   font-family: "Noto Sans JP", sans-serif;
 }
 
-.leaderDetail, .leaderDetailSmall {
+.extraHeaderSmall {
+  font-size: 0.8em;
+}
+
+.fullTable {
+  padding-left: 0.5em;
+  padding-top: 0.5em;
+}
+
+.leaderDetail, .leaderDetailSmall, .fullTable {
   font-weight: bolder;
   font-size: 0.9em;
 }
 
 .leaderDetailSmall {
-  font-size: 0.5em;
+  font-size: 0.7em;
 }
 
 .leaderImage, .leaderImageSmall {
@@ -1899,7 +1908,7 @@ label {
   width: 90%;
 }
 
-.leaderProfit span {
+.leaderProfit span, .extraHeaderSmall span {
   color: gold;
   font-size: 1.3em;
   font-weight: 900;
@@ -1915,7 +1924,7 @@ label {
 }
 .secondPlayer span:nth-of-type(2), .secondPlayerSmall span:nth-of-type(2) {
   font-size: 1em;
-  color: gold;
+  color: #0015ff;
   font-weight: 900;
 }
 .secondPlayer li, .secondPlayerSmall li {
@@ -1983,7 +1992,7 @@ label {
   font-size: 0.5em;
 }
 
-.profitCard {
+.profitCard, .vsContainer {
   background-image: linear-gradient(to bottom right, #2752ea, #d7d5d5);
 }
 
@@ -2007,7 +2016,7 @@ label {
 }
 
 .Small {
-  height: 10em;
+  height: 13em;
 }
 
 .smallCardContainer {
@@ -2020,7 +2029,7 @@ label {
   align-self: center;
 }
 
-.totalStatsForTeam > * {
+.totalStatsForTeam > *, .vsData > * {
   color: gold;
   text-align: center;
   font-size: 0.8em;
@@ -2033,8 +2042,7 @@ label {
 }
 
 main {
-  background-repeat: no-repeat;
-  background-size: cover;
+  min-height: 780;
   background-color: #1c1515;
 }
 

@@ -108,7 +108,21 @@ export function getCardStats(teamId, stats) {
   if (stats == "head2head") {
     return http.get(`${apiUrl}/h2h/newMainStats/head2head/${teamId}`);
   }
+
+  if (stats == "getHourlyStats") {
+    return http.get(`${apiUrl}/games/newMainStats/getHourlyStats/${teamId}`);
+  }
+  if (stats == "getStatsByMonth") {
+    return http.get(`${apiUrl}/games/newMainStats/getStatsByMonth/${teamId}`);
+  }
+  if (stats == "getTopComebacks") {
+    return http.get(`${apiUrl}/games/newMainStats/getTopComebacks/${teamId}`);
+  }
+  if (stats == "getWiningStreak") {
+    return http.get(`${apiUrl}/games/newMainStats/getWiningStreak/${teamId}`);
+  }
 }
+
 export default {
   lastGame,
   table,

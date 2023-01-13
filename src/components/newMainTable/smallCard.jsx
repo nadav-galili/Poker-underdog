@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import gameService from "../../services/gameService";
 import { apiImage } from "../../config.json";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 const SmallCard = ({
   teamId,
@@ -9,6 +10,7 @@ const SmallCard = ({
   data,
   playersData,
   leaderData,
+  extraHeader = null,
 }) => {
   const [cardStats, setCardStats] = useState([]);
   useEffect(() => {
@@ -33,6 +35,11 @@ const SmallCard = ({
                   className="mt-1"
                 />
               </div>
+              {extraHeader && (
+                <div className="extraHeaderSmall text-center">
+                  <span>{extraHeader}</span>
+                </div>
+              )}
               <div className="leaderDetailSmall d-flex  flex-column text-center mt-1">
                 <p className="leaderName">1.{cardStats[0]._id.name}</p>
                 <p className="leaderProfit">
@@ -83,7 +90,9 @@ const SmallCard = ({
               </p>
             </li>
           </ol>
-          <p className="bg-white">View Full Table</p>
+          <p className="bg-white fullTable">
+            View Full Table <AiOutlineArrowRight />
+          </p>
         </div>
       )}
     </>
