@@ -99,6 +99,18 @@ router.get(
   gamesController.getWiningStreak
 );
 
+router.get(
+  "/newMainStats/getAllMonthsByMonth/:teamId",
+  auth,
+  gamesController.getAllMonthsByMonth
+);
+
+router.get(
+  "/newMainStats/getThisMonthStats/:teamId/:month",
+  auth,
+  gamesController.getThisMonthStats
+);
+
 // gets back all the games
 router.get("/", auth, gamesController.allGames);
 

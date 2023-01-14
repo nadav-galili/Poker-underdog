@@ -97,7 +97,7 @@ export function getTotalStatsForTeam(teamId) {
   return http.get(`${apiUrl}/games/newMainStats/totalStatsForTeam/${teamId}`);
 }
 
-export function getCardStats(teamId, stats) {
+export function getCardStats(teamId, stats, month = null) {
   if (stats === "profitsStats") {
     return http.get(`${apiUrl}/games/newMainStats/profitsStats/${teamId}`);
   }
@@ -120,6 +120,15 @@ export function getCardStats(teamId, stats) {
   if (stats === "getWiningStreak") {
     return http.get(`${apiUrl}/games/newMainStats/getWiningStreak/${teamId}`);
   }
+  if (stats === "getThisMonthStats") {
+    return http.get(
+      `${apiUrl}/games/newMainStats/getThisMonthStats/${teamId}/${month}`
+    );
+  }
+}
+
+export function getAllMonthsByMonth(teamId) {
+  return http.get(`${apiUrl}/games/newMainStats/getAllMonthsByMonth/${teamId}`);
 }
 
 export default {
@@ -148,4 +157,5 @@ export default {
   sideBets,
   getTotalStatsForTeam,
   getCardStats,
+  getAllMonthsByMonth,
 };

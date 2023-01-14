@@ -169,7 +169,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
               className="button-72 p-2"
               data-toggle="tooltip"
               data-placement="top"
-              to={`/main-table/${team._id}`}
+              to={`/newMainTable/${team._id}`}
             >
               Team Tables & Stats
               <IoMdStats className="ms-2" />

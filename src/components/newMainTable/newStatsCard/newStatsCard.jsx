@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ClockSpinner from "../clockSpinner";
 import gameService from "../../../services/gameService";
 import { apiImage } from "../../../config.json";
 import PageHeader from "../../common/pageHeader";
@@ -8,7 +9,6 @@ const NewStatsCard = (props) => {
   const [cardHeader, setCardHeader] = useState("");
   const [leaderData, setLeaderData] = useState([]);
   const [data, setData] = useState([]);
-  // const [playersData, setPlayersData] = useState([]);
   const [headerDetails, setHeaderDetails] = useState([]);
 
   useEffect(() => {
@@ -19,20 +19,16 @@ const NewStatsCard = (props) => {
       const cardTitle = query.get("cardTitle");
       let dataParam = query.get("data");
       setData(dataParam.split(","));
-      // const playersParam = query.get("playersData");
-      // setPlayersData(playersParam.split(","));
       let leaderParam = query.get("leaderData");
       setLeaderData(leaderParam.split(","));
       let headerData = query.get("headerData");
-
       setHeaderDetails(headerData.split(","));
-      const { data: cardStats } = await gameService.getCardStats(teamId, stats);
-      console.log(
-        "🚀 ~ file: newstatsCard.jsx:30 ~ getCardData ~ cardStats",
-        cardStats
+      let month = query.get("month");
+      const { data: cardStats } = await gameService.getCardStats(
+        teamId,
+        stats,
+        month
       );
-      // console.log("dd", leaderData);
-      // console.log("pdata", playersData);
       setCardData(cardStats);
       setCardHeader(cardTitle);
     }
@@ -40,7 +36,12 @@ const NewStatsCard = (props) => {
   }, []);
 
   return (
-    <div className="statsCardContainer">
+    <div className="statsCardContainer py-3">
+      {cardData.length === 0 && (
+        <div className="my-5 py-5">
+          <ClockSpinner />
+        </div>
+      )}
       {cardData.length > 0 && (
         <div className="statsDashboard pb-3">
           <div className="ps-3">
@@ -64,7 +65,11 @@ const NewStatsCard = (props) => {
                   {leaderData[2]}:{cardData[0][data[2]]}
                 </p>
                 <p className="">
-                  {leaderData[3]}: {cardData[0][data[3]]}
+                  {leaderData[3] && (
+                    <p className="p-0">
+                      {leaderData[3]}:{cardData[0][data[3]]}
+                    </p>
+                  )}
                 </p>
                 <p className="">
                   {leaderData[4] && (
@@ -100,7 +105,7 @@ const NewStatsCard = (props) => {
                     <p className="ms-1 listPlayersName">{card._id.name}</p>
                   </div>
                   <div className="dynamicStatsCard d-flex justify-content-between">
-                    <p>{card[data[0]]}</p>
+                    <p className="text-bold">{card[data[0]]}</p>
                     <p>{card[data[1]]}</p>
                     <p>{card[data[2]]}</p>
                     <p className="thirdList">{card[data[3]]}</p>
