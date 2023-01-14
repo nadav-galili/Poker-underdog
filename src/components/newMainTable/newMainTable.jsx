@@ -104,15 +104,17 @@ const NewMainTable = (props) => {
                   "Average Profit",
                   "Average Cashing",
                 ]}
+                headerData={["P", "TG", "GIP", "AP", "AC"]}
               />
               <div className="col-6 my-3">
                 <SmallCard
                   teamId={teamId}
-                  cardTitle="Top Ten Profits"
+                  cardTitle="Top 10 Profits"
                   stats="topTenProfits"
                   data={["profit", "date", "cashInHand", "cashing"]}
                   playersData={["P:", "D:", "CIN", "C"]}
                   leaderData={["Profit", "Date", "Cash In Hand", "Cashing"]}
+                  headerData={["P", "D", "CIH", "C"]}
                 />
               </div>
               <div className="col-6 mt-3">
@@ -133,6 +135,7 @@ const NewMainTable = (props) => {
                     "Avg Points",
                     "Success Percentage",
                   ]}
+                  headerData={["TP", "TG", "AP", "SP"]}
                 />
               </div>
               <BigCard
@@ -146,7 +149,7 @@ const NewMainTable = (props) => {
                   "totalGames",
                   "avgHourPerGame",
                 ]}
-                playersData={["Profit/Hour", "CPH", "HP", "TG", "AHPG"]}
+                playersData={["Profit/H", "CPH", "HP", "TG", "AHPG"]}
                 leaderData={[
                   "Profit Per Hour",
                   "Cashing Per Hour",
@@ -154,6 +157,7 @@ const NewMainTable = (props) => {
                   "Total Games",
                   "Average Hour Per Game",
                 ]}
+                headerData={["P/H", "CPH", "HP", "TG", "AHPG"]}
               />
               <div className="col-6 mt-3">
                 <SmallCard
@@ -181,11 +185,12 @@ const NewMainTable = (props) => {
               <div className="col-6 mt-3">
                 <SmallCard
                   teamId={teamId}
-                  cardTitle="Top Ten Comebacks"
+                  cardTitle="Top 10 Comebacks"
                   stats="getTopComebacks"
                   data={["cashing", "profit", "date", "cashInHand"]}
                   playersData={["Cashing: ", "P: ", "", ""]}
                   leaderData={["Cashing", "Profit", "Date", "CashinHand"]}
+                  headerData={["C", "P", "D", "CIH"]}
                 />
               </div>
               <div className="col-12 mt-3">
@@ -209,6 +214,7 @@ const NewMainTable = (props) => {
                     "% Success",
                     "Total Games In Plus",
                   ]}
+                  headerData={["MWS", "CWS", "%S", "TGIP"]}
                 />
               </div>
             </div>

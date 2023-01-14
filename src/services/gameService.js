@@ -98,27 +98,26 @@ export function getTotalStatsForTeam(teamId) {
 }
 
 export function getCardStats(teamId, stats) {
-  console.log("🚀 ~ file: gameService.js:101 ~ stats", stats);
-  if (stats == "profitsStats") {
+  if (stats === "profitsStats") {
     return http.get(`${apiUrl}/games/newMainStats/profitsStats/${teamId}`);
   }
-  if (stats == "topTenProfits") {
+  if (stats === "topTenProfits") {
     return http.get(`${apiUrl}/games/newMainStats/topTenProfits/${teamId}`);
   }
-  if (stats == "head2head") {
+  if (stats === "head2head") {
     return http.get(`${apiUrl}/h2h/newMainStats/head2head/${teamId}`);
   }
 
-  if (stats == "getHourlyStats") {
+  if (stats === "getHourlyStats") {
     return http.get(`${apiUrl}/games/newMainStats/getHourlyStats/${teamId}`);
   }
-  if (stats == "getStatsByMonth") {
+  if (stats === "getStatsByMonth") {
     return http.get(`${apiUrl}/games/newMainStats/getStatsByMonth/${teamId}`);
   }
-  if (stats == "getTopComebacks") {
+  if (stats === "getTopComebacks") {
     return http.get(`${apiUrl}/games/newMainStats/getTopComebacks/${teamId}`);
   }
-  if (stats == "getWiningStreak") {
+  if (stats === "getWiningStreak") {
     return http.get(`${apiUrl}/games/newMainStats/getWiningStreak/${teamId}`);
   }
 }

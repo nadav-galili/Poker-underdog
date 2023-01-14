@@ -1914,6 +1914,11 @@ label {
   font-weight: 900;
 }
 
+.linkToNewCard {
+  text-decoration: none;
+  color: #1c1515;
+}
+
 .secondPlayer, .secondPlayerSmall {
   font-size: 0.8em !important;
 }
@@ -2039,6 +2044,75 @@ label {
   font-size: 1.2em;
   text-decoration: underline;
   font-weight: 900;
+}
+
+.newLeaderContainer {
+  background-image: linear-gradient(to bottom right, #2752ea, #d7d5d5);
+}
+
+.listPlayers {
+  align-items: center;
+}
+.listPlayers li {
+  border-bottom: 1px solid rgb(168, 164, 164);
+}
+
+.listPlayerStats {
+  width: 2.5em;
+  height: 2.5em !important;
+}
+.listPlayerStats img {
+  border: 1px solid gold;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background-image: linear-gradient(#2752ea, #fcfcfc);
+}
+
+.listPlayersName {
+  font-size: 0.8em;
+  min-width: 40%;
+  text-align: start;
+}
+
+.headerName {
+  min-width: 40%;
+}
+
+.rank {
+  min-width: 20%;
+}
+
+.fixedHeader, .fixedPlayerStats {
+  width: 40%;
+}
+
+.dynamicStatsCardHeader {
+  width: 55%;
+}
+.dynamicStatsCardHeader p {
+  min-width: 15%;
+  text-align: center;
+}
+
+.dynamicStatsCard {
+  width: 55%;
+  align-items: center;
+  font-size: 0.75em;
+}
+.dynamicStatsCard p {
+  min-width: 20%;
+  text-align: center;
+}
+
+.fixedPlayerStats {
+  align-items: center;
+}
+
+.newCardContainer {
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 main {
