@@ -3,6 +3,7 @@ import "../src/css/main.css";
 import Footer from "./components/footer";
 import Home from "./components/home";
 import SideNavbar from "./components/sideNavbar";
+import ByMonthsDashboard from "./components/newMainTable/byMonthsDashboard";
 import Signin from "./components/signin";
 import Logout from "./components/logout";
 import EditUser from "./components/forms/editUser";
@@ -37,7 +38,6 @@ import MonthlyStats from "./components/topStats/monthlyStats";
 import sidebetsMain from "./components/sidebets/sidebetsMain";
 import NewSideBet from "./components/sidebets/newSideBet";
 import NewMainTable from "./components/newMainTable/newMainTable";
-import Test from "./components/notification/test";
 
 import ReactGA from "react-ga";
 
@@ -93,7 +93,6 @@ function App() {
               component={MyStats}
               user={user}
             />
-
             <ProtectedRoute
               path="/my-teams/edit/:teamId"
               component={EditTeam}
@@ -119,7 +118,6 @@ function App() {
               user={user}
             />
             <ProtectedRoute path="/edit-games/:teamId" component={EditGames} />
-
             <ProtectedRoute path="/games/:gameId" component={NewGame} />
             <ProtectedRoute path="/last-game/:teamId" component={GameEnd} />
             <ProtectedRoute path="/tables/h2h/:teamId" component={H2hTable} />
@@ -162,18 +160,18 @@ function App() {
               component={NewStatsCard}
             />
             <ProtectedRoute
+              path="/newMainTable/newByMonths/:teamId"
+              component={ByMonthsDashboard}
+            />
+            <ProtectedRoute
               path="/newMainTable/:teamId"
               component={NewMainTable}
             />
-            <Route path="/test" component={Test} />
-
             <Route path="/demo" component={Demo} />
             <Route path="/about" component={About} />
             <Route path="/logout" component={Logout} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={SignUp} user={user} />
-            {/* <Route path="/sign-up" component={SignUp} user={user} /> */}
-
             <Route exact path="/" component={Home} user={user} d={details} />
           </Switch>
         </HashRouter>

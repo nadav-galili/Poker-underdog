@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
-import { SpinnerDotted } from "spinners-react";
+import ClockSpinner from "./clockSpinner";
 import teamService from "../../services/teamService";
 import gameServices from "../../services/gameService";
 import { apiImage } from "../../config.json";
@@ -34,21 +34,12 @@ const NewMainTable = (props) => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container pb-3">
       <PageHeader
         className="mb-0"
         titleText={new Date().getFullYear() + " Top Stats"}
       />
-      {_.isEmpty(totalStats) && (
-        <div className="spinner mt-5">
-          <SpinnerDotted
-            size={50}
-            thickness={100}
-            speed={100}
-            color="rgba(0, 157, 255, 1)"
-          />
-        </div>
-      )}
+      {_.isEmpty(totalStats) && <ClockSpinner />}
       {!_.isEmpty(team) && (
         <div className="teamDetails">
           <div className="logoContainer d-flex justify-content-center ">

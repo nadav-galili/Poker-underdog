@@ -30,7 +30,7 @@ h1 {
   font-size: 2.5em !important;
   color: #009dff;
   font-weight: bolder !important;
-  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
+  font-family: "Noto Sans JP", "sans-serif";
 }
 
 .row.home {
@@ -1879,7 +1879,7 @@ label {
 
 .leaderDetail, .leaderDetailSmall, .fullTable {
   font-weight: bolder;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 .leaderDetailSmall {
@@ -2007,6 +2007,11 @@ label {
   overflow: hidden;
 }
 
+.vsContainerFather {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
 .secondPlayerImage {
   width: 1.8em;
   height: 1.8em !important;
@@ -2113,6 +2118,11 @@ label {
 .newCardContainer {
   border-radius: 5px;
   overflow: hidden;
+}
+
+.text-bold {
+  font-weight: 900;
+  font-size: 1.1em;
 }
 
 main {
