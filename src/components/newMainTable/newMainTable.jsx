@@ -133,9 +133,9 @@ const NewMainTable = (props) => {
                     "Total Points",
                     "Total Games",
                     "Avg Points",
-                    "Success Percentage",
+                    "Success %",
                   ]}
-                  headerData={["TP", "TG", "AP", "SP"]}
+                  headerData={["TP", "TG", "AP", "SP %"]}
                 />
               </div>
               <BigCard
