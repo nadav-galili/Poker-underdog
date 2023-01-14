@@ -26,6 +26,7 @@ import CurrMonthCard from "./components/topStats/currMonthCard";
 import ProfitsCard from "./components/topStats/profitsCard";
 import SignUp from "./components/forms/signUp";
 import NewGame from "./components/games/newGame";
+import NewStatsCard from "./components/newMainTable/newStatsCard/newStatsCard";
 import GameEnd from "./components/gameEnd";
 import H2hTable from "./components/h2h/h2hTable";
 import TeamSignUp from "./components/forms/teamSignUp";
@@ -155,6 +156,10 @@ function App() {
             <ProtectedRoute
               path="/side-bets/:teamId"
               component={sidebetsMain}
+            />
+            <ProtectedRoute
+              path="/newMainTable/newStatsCard/:teamId"
+              component={NewStatsCard}
             />
             <ProtectedRoute
               path="/newMainTable/:teamId"

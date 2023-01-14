@@ -52,6 +52,11 @@
   }
 }
 
+.linkToNewCard {
+  text-decoration: none;
+  color: $backgroundBlack;
+}
+
 .secondPlayer {
   font-size: 0.8em !important;
   & span:first-of-type {

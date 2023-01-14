@@ -1332,7 +1332,7 @@ exports.topTenProfits = async function (req, res) {
         profit: "$players.profit",
         date: {
           $dateToString: {
-            format: "%d-%m-%Y",
+            format: "%d-%m",
             date: "$createdAt",
           },
         },
@@ -1628,7 +1628,7 @@ exports.getTopComebacks = async function (req, res) {
         profit: "$players.profit",
         date: {
           $dateToString: {
-            format: "%d-%m-%Y",
+            format: "%d-%m",
             date: "$createdAt",
           },
         },

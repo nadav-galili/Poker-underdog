@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import gameService from "../../services/gameService";
 import { apiImage } from "../../config.json";
 import { AiOutlineArrowRight } from "react-icons/ai";
@@ -11,13 +12,13 @@ const SmallCard = ({
   playersData,
   leaderData,
   extraHeader = null,
+  headerData,
 }) => {
   const [cardStats, setCardStats] = useState([]);
   useEffect(() => {
     async function getCardStats() {
       const { data: cardStats } = await gameService.getCardStats(teamId, stats);
       setCardStats(cardStats);
-      console.log("cardStats11", cardStats);
     }
     getCardStats();
   }, []);
@@ -60,7 +61,7 @@ const SmallCard = ({
           <ol start="2" className="bg-white m-0 p-0  secondPlayerSmall">
             <li className="d-flex flex-row py-1">
               2.
-              <div className="secondPlayerImage mx-1">
+              <div className="secondPlayerImage ">
                 <img src={`${apiImage}${cardStats[1]._id.image}`} alt="" />
               </div>
               <span className="mx-1">{cardStats[1]._id.name}- </span>
@@ -76,7 +77,7 @@ const SmallCard = ({
             </li>
             <li className="d-flex flex-row mt-2">
               3.
-              <div className="secondPlayerImage mx-1">
+              <div className="secondPlayerImage">
                 <img src={`${apiImage}${cardStats[2]._id.image}`} alt="" />
               </div>
               <span className="mx-1">{cardStats[2]._id.name}- </span>
@@ -91,7 +92,12 @@ const SmallCard = ({
             </li>
           </ol>
           <p className="bg-white fullTable">
-            View Full Table <AiOutlineArrowRight />
+            <Link
+              className="linkToNewCard"
+              to={`/newMainTable/newStatsCard/${teamId}?stats=${stats}&cardTitle=${cardTitle}&data=${data}&leaderData=${leaderData}&headerData=${headerData}`}
+            >
+              View Full Table <AiOutlineArrowRight />
+            </Link>
           </p>
         </div>
       )}

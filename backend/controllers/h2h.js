@@ -361,6 +361,27 @@ exports.getH2hStats = async function (req, res) {
       },
     },
     {
+      $group: {
+        _id: {
+          id: "$_id.id",
+          name: "$_id.name",
+          image: "$_id.image",
+        },
+        totalPoints: {
+          $sum: "$totalPoints",
+        },
+        totalGames: {
+          $sum: "$totalGames",
+        },
+        avgPoints: {
+          $sum: "$avgPoints",
+        },
+        successPercentage: {
+          $sum: "$successPercentage",
+        },
+      },
+    },
+    {
       $sort: {
         avgPoints: -1,
       },

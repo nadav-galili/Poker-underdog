@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import gameService from "../../services/gameService";
 import { apiImage } from "../../config.json";
 import { AiOutlineArrowRight } from "react-icons/ai";
@@ -10,13 +11,14 @@ const BigCard = ({
   data,
   playersData,
   leaderData,
+  headerData,
 }) => {
   const [cardStats, setCardStats] = useState([]);
   useEffect(() => {
     async function getCardStats() {
       const { data: cardStats } = await gameService.getCardStats(teamId, stats);
       setCardStats(cardStats);
-      console.log("cardStats", cardStats);
+      console.log("headerData", headerData);
     }
     getCardStats();
   }, []);
@@ -58,7 +60,7 @@ const BigCard = ({
           <ol start="2" className="bg-white m-0 pt-2 ps-1 secondPlayer">
             <li className="d-flex flex-row">
               2.
-              <div className="secondPlayerImage mx-1">
+              <div className="secondPlayerImage ">
                 <img src={`${apiImage}${cardStats[1]._id.image}`} alt="" />
               </div>
               <span className="mx-1">{cardStats[1]._id.name}- </span>
@@ -72,7 +74,7 @@ const BigCard = ({
             </li>
             <li className="d-flex flex-row mt-2">
               3.
-              <div className="secondPlayerImage mx-1">
+              <div className="secondPlayerImage ">
                 <img src={`${apiImage}${cardStats[2]._id.image}`} alt="" />
               </div>
               <span className="mx-1">{cardStats[2]._id.name}- </span>
@@ -86,7 +88,12 @@ const BigCard = ({
             </li>
           </ol>
           <p className="bg-white fullTable">
-            View Full Table <AiOutlineArrowRight />
+            <Link
+              className="linkToNewCard"
+              to={`/newMainTable/newStatsCard/${teamId}?stats=${stats}&cardTitle=${cardTitle}&data=${data}&leaderData=${leaderData}&headerData=${headerData}`}
+            >
+              View Full Table <AiOutlineArrowRight />
+            </Link>
           </p>
         </div>
       )}

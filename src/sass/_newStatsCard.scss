@@ -1,0 +1,84 @@
+.newLeaderContainer {
+  background-image: linear-gradient(to bottom right, $headerColorBlue, #d7d5d5);
+}
+.listPlayers {
+  align-items: center;
+  // text-align: center;
+  // font-size: 0.9em;
+  // font-weight: bolder;
+  // width: 40%; // & > * {
+  //   // outline: 1px solid red;
+  //   min-width: 6%;
+  //   text-align: center;
+  // }
+  & li {
+    border-bottom: 1px solid rgb(168, 164, 164);
+  }
+}
+
+.listPlayerStats {
+  width: 2.5em;
+  height: 2.5em !important;
+  & img {
+    border: 1px solid $baseColorGold;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    background-image: linear-gradient($headerColorBlue, $navbarWhite);
+  }
+}
+.listPlayersName {
+  font-size: 0.8em;
+  min-width: 40%;
+  text-align: start;
+}
+.headerName {
+  min-width: 40%;
+}
+
+.rank {
+  // font-size: 1.3em;/
+  min-width: 20%;
+}
+
+/////
+.fixedHeader {
+  width: 40%;
+}
+.dynamicStatsCardHeader {
+  width: 55%;
+  & p {
+    min-width: 15%;
+    text-align: center;
+  }
+}
+.dynamicStatsCard {
+  // @extend .dynamicStatsCardHeader;
+  width: 55%;
+  align-items: center;
+  font-size: 0.75em;
+  & p {
+    min-width: 20%;
+    text-align: center;
+  }
+}
+.fixedPlayerStats {
+  @extend .fixedHeader;
+  // text-align: center;
+  align-items: center;
+}
+.newCardContainer {
+  // padding: 10px;
+
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+// .newPlayersDetails {
+//   width: 40%;
+//   font-size: 0.9em;
+// }
+* {
+  // outline: 1px solid red;
+}
