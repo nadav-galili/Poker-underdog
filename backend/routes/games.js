@@ -111,6 +111,12 @@ router.get(
   gamesController.getThisMonthStats
 );
 
+router.get(
+  "/newMainStats/getAllGamesByTeam/:teamId",
+  auth,
+  gamesController.getAllGamesByTeam
+);
+
 // gets back all the games
 router.get("/", auth, gamesController.allGames);
 

@@ -2049,6 +2049,22 @@ label {
   font-size: 1.2em;
   text-decoration: underline;
   font-weight: 900;
+  background-color: gold;
+}
+
+.allGamesTitle {
+  color: #009dff;
+  text-decoration: underline;
+  font-size: 2em;
+  font-weight: 900;
+}
+
+.gameHeaders {
+  background-color: gold;
+}
+
+.gamePlayersDetails p {
+  align-self: center;
 }
 
 .newLeaderContainer {
@@ -2123,6 +2139,23 @@ label {
 .text-bold {
   font-weight: 900;
   font-size: 1.1em;
+}
+
+.singleGame {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.singleGameDetails, .singleGameHeader {
+  border-bottom: 1px solid black;
+}
+.singleGameDetails p, .singleGameHeader p {
+  width: 20%;
+}
+
+.singleGameHeader {
+  font-weight: 900;
+  color: #2752ea;
 }
 
 main {

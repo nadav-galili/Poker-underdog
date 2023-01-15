@@ -1,3 +1,18 @@
+.allGamesTitle {
+  color: $newBlue;
+  text-decoration: underline;
+  font-size: 2em;
+  font-weight: 900;
+}
+.gameHeaders {
+  background-color: $baseColorGold;
+}
+
+.gamePlayersDetails {
+  & p {
+    align-self: center;
+  }
+}
 .newLeaderContainer {
   background-image: linear-gradient(to bottom right, $headerColorBlue, #d7d5d5);
 }
@@ -78,4 +93,19 @@
 .text-bold {
   font-weight: 900;
   font-size: 1.1em;
+}
+.singleGame {
+  border-radius: 5px;
+  overflow: hidden;
+}
+.singleGameDetails {
+  border-bottom: 1px solid black;
+  & p {
+    width: 20%;
+  }
+}
+.singleGameHeader {
+  @extend .singleGameDetails;
+  font-weight: 900;
+  color: $headerColorBlue;
 }

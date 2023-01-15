@@ -5,6 +5,7 @@ import teamService from "../../services/teamService";
 import gameServices from "../../services/gameService";
 import { apiImage } from "../../config.json";
 
+import AllGamesList from "./allGamesList";
 import BigCard from "./bigCard";
 import PageHeader from "../common/pageHeader";
 import PlayersImages from "./playersImages";
@@ -78,7 +79,7 @@ const NewMainTable = (props) => {
             <div className="row mx-2">
               <BigCard
                 teamId={teamId}
-                cardTitle="Total Profit"
+                cardTitle="Total Profit 💸"
                 stats="profitsStats"
                 data={[
                   "totalProfit",
@@ -100,7 +101,7 @@ const NewMainTable = (props) => {
               <div className="col-6 my-3">
                 <SmallCard
                   teamId={teamId}
-                  cardTitle="Top 10 Profits"
+                  cardTitle="Top 10 Profits 🔝"
                   stats="topTenProfits"
                   data={["profit", "date", "cashInHand", "cashing"]}
                   playersData={["P:", "D:", "CIN", "C"]}
@@ -111,7 +112,7 @@ const NewMainTable = (props) => {
               <div className="col-6 mt-3">
                 <SmallCard
                   teamId={teamId}
-                  cardTitle="Head To Head"
+                  cardTitle="Head To Head 👊"
                   stats="head2head"
                   data={[
                     "totalPoints",
@@ -131,7 +132,7 @@ const NewMainTable = (props) => {
               </div>
               <BigCard
                 teamId={teamId}
-                cardTitle="Hourly Stats"
+                cardTitle="Hourly Stats ⏳"
                 stats="getHourlyStats"
                 data={[
                   "profitPerHour",
@@ -153,7 +154,7 @@ const NewMainTable = (props) => {
               <div className="col-6 mt-3">
                 <SmallCard
                   teamId={teamId}
-                  cardTitle="Stats By Months"
+                  cardTitle="Stats By Months 💵"
                   stats="getStatsByMonth"
                   data={[
                     "totalProfit",
@@ -176,7 +177,7 @@ const NewMainTable = (props) => {
               <div className="col-6 mt-3">
                 <SmallCard
                   teamId={teamId}
-                  cardTitle="Top 10 Comebacks"
+                  cardTitle="Top 10 Comebacks 🔝"
                   stats="getTopComebacks"
                   data={["cashing", "profit", "date", "cashInHand"]}
                   playersData={["Cashing: ", "P: ", "", ""]}
@@ -190,7 +191,7 @@ const NewMainTable = (props) => {
               <div className="col-6 mt-3">
                 <SmallCard
                   teamId={teamId}
-                  cardTitle="Winning Streak"
+                  cardTitle="Winning Streak 🤫"
                   stats="getWiningStreak"
                   data={[
                     "maxWinStreak",
@@ -207,6 +208,9 @@ const NewMainTable = (props) => {
                   ]}
                   headerData={["MWS", "CWS", "%S", "TGIP"]}
                 />
+              </div>
+              <div className="col-12 mt-3">
+                <AllGamesList teamId={teamId} />
               </div>
             </div>
           </div>

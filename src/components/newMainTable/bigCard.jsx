@@ -27,7 +27,7 @@ const BigCard = ({
     <>
       {cardStats.length > 0 && (
         <div className="profitsContainer p-0">
-          <p className="pt-3 ps-3 bg-white totalProfitNewCard">{cardTitle}</p>
+          <p className="pt-3 ps-3  totalProfitNewCard">{cardTitle}</p>
           <div className="col-12 profitCard">
             <div className="leaderContainer d-flex justify-content-between">
               <div className="leaderImage m-3">

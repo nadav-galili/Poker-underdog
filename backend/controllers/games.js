@@ -2072,3 +2072,52 @@ exports.getThisMonthStats = async function (req, res) {
 
   res.send(getThisMonthStats);
 };
+
+exports.getAllGamesByTeam = async function (req, res) {
+  const teamId = req.params.teamId;
+  const getAllGamesByTeam = await Game.aggregate([
+    {
+      $match: {
+        team_id: teamId,
+        createdAt: {
+          $gte: new Date(currentYear),
+        },
+      },
+    },
+    {
+      $project: {
+        isOpen: 1,
+        players: 1,
+        game_manager: 1,
+        date: {
+          $dateToString: {
+            date: "$createdAt",
+            format: "%d-%m-%Y",
+          },
+        },
+        startTime: {
+          $dateToString: {
+            date: "$createdAt",
+            format: "%H:%M:%S",
+            timezone: "Asia/Jerusalem",
+          },
+        },
+        endTime: {
+          $dateToString: {
+            date: "$updatedAt",
+            format: "%H:%M:%S",
+            timezone: "Asia/Jerusalem",
+          },
+        },
+      },
+    },
+    {
+      $sort: {
+        createdAt: -1,
+
+        "players.profit": -1,
+      },
+    },
+  ]);
+  res.send(getAllGamesByTeam);
+};
