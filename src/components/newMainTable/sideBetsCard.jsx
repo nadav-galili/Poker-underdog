@@ -20,7 +20,7 @@ const SideBetsCard = ({ teamId }) => {
       {approvedSideBets.length > 0 && Array.isArray(approvedSideBets) && (
         <div className="vsContainerFather">
           <div className="sideBetContainer vsContainer">
-            <p className="pt-3 ps-3 bg-white totalProfitNewCard ">Side Bets</p>
+            <p className="pt-3 ps-3  totalProfitNewCard ">Side Bets 🫵🏻</p>
             <div className=" d-flex justify-content-around">
               <div className="sideBetPlayerOne">
                 <div className="leaderImageSmall mx-auto">

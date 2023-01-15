@@ -131,6 +131,10 @@ export function getAllMonthsByMonth(teamId) {
   return http.get(`${apiUrl}/games/newMainStats/getAllMonthsByMonth/${teamId}`);
 }
 
+export function getAllGamesByTeam(teamId) {
+  return http.get(`${apiUrl}/games/newMainStats/getAllGamesByTeam/${teamId}`);
+}
+
 export default {
   lastGame,
   table,
@@ -158,4 +162,5 @@ export default {
   getTotalStatsForTeam,
   getCardStats,
   getAllMonthsByMonth,
+  getAllGamesByTeam,
 };
