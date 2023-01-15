@@ -93,7 +93,7 @@ const SmallCard = ({
             </li>
           </ol>
           <p className="bg-white fullTable">
-            {cardTitle === "Stats By Months" && (
+            {cardTitle === "Stats By Months 💵" && (
               <Link
                 className="linkToNewCard"
                 to={`/newMainTable/newByMonths/${teamId}`}
@@ -101,7 +101,7 @@ const SmallCard = ({
                 View Full Table <AiOutlineArrowRight />
               </Link>
             )}
-            {cardTitle !== "Stats By Months" && (
+            {cardTitle !== "Stats By Months 💵" && (
               <Link
                 className="linkToNewCard"
                 to={`/newMainTable/newStatsCard/${teamId}?stats=${stats}&cardTitle=${cardTitle}&data=${data}&leaderData=${leaderData}&headerData=${headerData}`}

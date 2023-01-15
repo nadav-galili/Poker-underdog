@@ -177,7 +177,7 @@ const NewMainTable = (props) => {
               <div className="col-6 mt-3">
                 <SmallCard
                   teamId={teamId}
-                  cardTitle="Top 10 Comebacks 🔝"
+                  cardTitle="Top 10 Comebacks🔝"
                   stats="getTopComebacks"
                   data={["cashing", "profit", "date", "cashInHand"]}
                   playersData={["Cashing: ", "P: ", "", ""]}

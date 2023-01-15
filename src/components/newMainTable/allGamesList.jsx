@@ -45,7 +45,7 @@ const AllGamesList = ({ teamId }) => {
                   className="singleGameDetails d-flex justify-content-around text-center"
                 >
                   <p>{player.gameRank}</p>
-                  <div className="ms-2 listPlayerStats my-1">
+                  <div className="listPlayerStats my-1">
                     <img src={`${apiImage}${player.image}`} alt="" />
                   </div>
                   <p>{player.name}</p>
