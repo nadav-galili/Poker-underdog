@@ -2113,8 +2113,7 @@ exports.getAllGamesByTeam = async function (req, res) {
     },
     {
       $sort: {
-        createdAt: -1,
-
+        date: -1,
         "players.profit": -1,
       },
     },
