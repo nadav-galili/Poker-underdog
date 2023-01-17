@@ -2075,6 +2075,9 @@ exports.getThisMonthStats = async function (req, res) {
 
 exports.getAllGamesByTeam = async function (req, res) {
   const teamId = req.params.teamId;
+  let pagination = req.query.pagination;
+  pagination = parseInt(pagination);
+  const page = req.query.page;
   const getAllGamesByTeam = await Game.aggregate([
     {
       $match: {
@@ -2116,6 +2119,12 @@ exports.getAllGamesByTeam = async function (req, res) {
         date: -1,
         "players.profit": -1,
       },
+    },
+    {
+      $skip: (page - 1) * pagination,
+    },
+    {
+      $limit: pagination,
     },
   ]);
   res.send(getAllGamesByTeam);

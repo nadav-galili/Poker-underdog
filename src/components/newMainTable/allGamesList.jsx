@@ -1,61 +1,43 @@
 import React, { useState, useEffect } from "react";
 import gameService from "../../services/gameService";
-import { apiImage } from "../../config.json";
+import SingleGame from "./singleGame";
+import ReactPaginate from "react-paginate";
 
 const AllGamesList = ({ teamId }) => {
   const [allGames, setAllGames] = useState([]);
+  const [page, setPage] = useState(1);
+  console.log("🚀 ~ file: allGamesList.jsx:9 ~ AllGamesList ~ page", page);
+  const pagination = 3;
   useEffect(() => {
     async function getAllGames() {
-      const { data: allGames } = await gameService.getAllGamesByTeam(teamId);
-      console.log(
-        "🚀 ~ file: allGamesList.jsx:10 ~ getAllGames ~ allGames",
-        allGames
+      const { data: allGames } = await gameService.getAllGamesByTeam(
+        teamId,
+        pagination,
+        page
       );
       setAllGames(allGames);
     }
     getAllGames();
-  }, []);
+  }, [page]);
+
+  const handlePageClick = (event) => {
+    let pageC = event.selected + 1;
+    pageC === 0 ? setPage(1) : setPage(pageC);
+  };
   return (
     <div className="container">
       <h2 className="allGamesTitle text-center">All Games</h2>
+      <ReactPaginate
+        previousLabel={"prev"}
+        nextLabel={"next"}
+        pageCount={allGames.length % pagination === 0 ? page + 1 : page}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination text-white justify-content-center"}
+        pageClassName={"page-item"}
+        pageLinkClassName={"page-link"}
+      />
       {allGames.length > 0 &&
-        allGames.map((game) => (
-          <div className="singleGame  my-2" key={game._id}>
-            <div className="gameHeaders text-black">
-              <p className="text-center">
-                Game Manager:{game.game_manager.name}
-              </p>
-              <p className="text-center">{game.date}</p>
-              <div className="d-flex justify-content-center">
-                <p className="d">{game.startTime} - </p>
-                <p>{game.endTime}</p>
-              </div>
-            </div>
-            <div className="gamePlayersDetails bg-white ">
-              <div className="singleGameHeader d-flex justify-content-around">
-                <p>Rank</p>
-                <p>Image</p>
-                <p>Player</p>
-                <p>Profit</p>
-                <p>Cashing</p>
-              </div>
-              {game.players.map((player) => (
-                <div
-                  key={player.id}
-                  className="singleGameDetails d-flex justify-content-around text-center"
-                >
-                  <p>{player.gameRank}</p>
-                  <div className="listPlayerStats my-1">
-                    <img src={`${apiImage}${player.image}`} alt="" />
-                  </div>
-                  <p>{player.name}</p>
-                  <p>{player.profit}</p>
-                  <p>{player.cashing}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+        allGames.map((game) => <SingleGame game={game} key={game._id} />)}
     </div>
   );
 };

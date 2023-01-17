@@ -1943,6 +1943,12 @@ label {
 .newSmallCard {
   text-decoration: underline;
   font-weight: bolder;
+  background-color: gold;
+}
+
+.next a,
+.previous a {
+  align-self: center;
 }
 
 .odds a {
@@ -2049,7 +2055,7 @@ label {
   font-size: 1.2em;
   text-decoration: underline;
   font-weight: 900;
-  background-color: gold;
+  background-color: #02d84d;
 }
 
 .allGamesTitle {
@@ -2059,12 +2065,19 @@ label {
   font-weight: 900;
 }
 
+.green {
+  color: #02b84d;
+}
+
 .gameHeaders {
   background-color: gold;
+  font-size: 0.9em;
+  font-weight: bolder;
 }
 
 .gamePlayersDetails p {
   align-self: center;
+  font-weight: bold;
 }
 
 .newLeaderContainer {
@@ -2158,8 +2171,12 @@ label {
   color: #2752ea;
 }
 
+.red {
+  color: #ff3030;
+}
+
 main {
-  min-height: 780;
+  min-height: 780px;
   background-color: #1c1515;
 }
 

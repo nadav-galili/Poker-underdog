@@ -4,13 +4,19 @@
   font-size: 2em;
   font-weight: 900;
 }
+.green {
+  color: $darkerGreen;
+}
 .gameHeaders {
   background-color: $baseColorGold;
+  font-size: 0.9em;
+  font-weight: bolder;
 }
 
 .gamePlayersDetails {
   & p {
     align-self: center;
+    font-weight: bold;
   }
 }
 .newLeaderContainer {
@@ -18,14 +24,6 @@
 }
 .listPlayers {
   align-items: center;
-  // text-align: center;
-  // font-size: 0.9em;
-  // font-weight: bolder;
-  // width: 40%; // & > * {
-  //   // outline: 1px solid red;
-  //   min-width: 6%;
-  //   text-align: center;
-  // }
   & li {
     border-bottom: 1px solid rgb(168, 164, 164);
   }
@@ -108,4 +106,8 @@
   @extend .singleGameDetails;
   font-weight: 900;
   color: $headerColorBlue;
+}
+
+.red {
+  color: $basecolorRed;
 }

@@ -27,7 +27,7 @@ const SmallCard = ({
     <>
       {cardStats.length > 0 && (
         <div className="smallCardContainer">
-          <p className="text-center pt-2 bg-white newSmallCard">{cardTitle}</p>
+          <p className="text-center pt-2  newSmallCard">{cardTitle}</p>
           <div className="col-12 profitCard">
             <div className="Small">
               <div className="leaderImageSmall mx-auto">
