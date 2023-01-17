@@ -83,6 +83,14 @@
 .newSmallCard {
   text-decoration: underline;
   font-weight: bolder;
+  background-color: $baseColorGold;
+}
+
+.next,
+.previous {
+  & a {
+    align-self: center;
+  }
 }
 
 .odds {
@@ -192,7 +200,7 @@
   font-size: 1.2em;
   text-decoration: underline;
   font-weight: 900;
-  background-color: $baseColorGold;
+  background-color: $basecolorGreen;
 }
 .vsContainer {
   @extend .profitCard;

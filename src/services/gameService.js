@@ -131,8 +131,10 @@ export function getAllMonthsByMonth(teamId) {
   return http.get(`${apiUrl}/games/newMainStats/getAllMonthsByMonth/${teamId}`);
 }
 
-export function getAllGamesByTeam(teamId) {
-  return http.get(`${apiUrl}/games/newMainStats/getAllGamesByTeam/${teamId}`);
+export function getAllGamesByTeam(teamId, pagination, page) {
+  return http.get(
+    `${apiUrl}/games/newMainStats/getAllGamesByTeam/${teamId}?pagination=${pagination}&page=${page}`
+  );
 }
 
 export default {
