@@ -14,7 +14,6 @@ const SmallCard = ({
   extraHeader = null,
   headerData,
 }) => {
-  console.log("cardStitle", cardTitle);
   const [cardStats, setCardStats] = useState([]);
   useEffect(() => {
     async function getCardStats() {

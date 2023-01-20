@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ClockSpinner from "../clockSpinner";
+import { Link } from "react-router-dom";
 import gameService from "../../../services/gameService";
 import { apiImage } from "../../../config.json";
 import PageHeader from "../../common/pageHeader";
@@ -10,6 +11,7 @@ const NewStatsCard = (props) => {
   const [leaderData, setLeaderData] = useState([]);
   const [data, setData] = useState([]);
   const [headerDetails, setHeaderDetails] = useState([]);
+  const [seasonData, setSeasonData] = useState([]);
 
   useEffect(() => {
     async function getCardData() {
@@ -50,7 +52,12 @@ const NewStatsCard = (props) => {
           <div className="mx-3 newCardContainer">
             <div className="newLeaderContainer d-flex justify-content-around">
               <div className="leaderImage m-3">
-                <img src={`${apiImage}${cardData[0]._id.image}`} alt="leader" />
+                <Link to={`/players-stats/${cardData[0]._id.id}`}>
+                  <img
+                    src={`${apiImage}${cardData[0]._id.image}`}
+                    alt="leader"
+                  />
+                </Link>
               </div>
               <div className="leaderDetail pe-4">
                 <p>1.</p>
@@ -100,7 +107,9 @@ const NewStatsCard = (props) => {
                   <div className="ms-2 fixedPlayerStats d-flex justify-content-around">
                     <p className="rank text-center">{index + 2}.</p>
                     <div className="ms-2 listPlayerStats my-1">
-                      <img src={`${apiImage}${card._id.image}`} alt="" />
+                      <Link to={`/players-stats/${card._id.id}`}>
+                        <img src={`${apiImage}${card._id.image}`} alt="" />
+                      </Link>
                     </div>
                     <p className="ms-1 listPlayersName">{card._id.name}</p>
                   </div>

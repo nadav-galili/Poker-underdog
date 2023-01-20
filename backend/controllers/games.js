@@ -2129,3 +2129,32 @@ exports.getAllGamesByTeam = async function (req, res) {
   ]);
   res.send(getAllGamesByTeam);
 };
+
+exports.GetSeasonYear = async function (req, res) {
+  const teamId = req.params.teamId;
+  const getSeasonYear = await Game.aggregate([
+    {
+      $match: {
+        team_id: teamId,
+      },
+    },
+    {
+      $project: {
+        year: {
+          $year: "$createdAt",
+        },
+      },
+    },
+    {
+      $group: {
+        _id: "$year",
+      },
+    },
+    {
+      $sort: {
+        _id: -1,
+      },
+    },
+  ]);
+  res.send(getSeasonYear);
+};

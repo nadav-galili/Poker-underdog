@@ -18,7 +18,6 @@ const BigCard = ({
     async function getCardStats() {
       const { data: cardStats } = await gameService.getCardStats(teamId, stats);
       setCardStats(cardStats);
-      console.log("headerData", headerData);
     }
     getCardStats();
   }, []);

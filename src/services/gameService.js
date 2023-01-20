@@ -137,6 +137,10 @@ export function getAllGamesByTeam(teamId, pagination, page) {
   );
 }
 
+export function GetSeasonYears(teamId) {
+  return http.get(`${apiUrl}/games/newMainStats/GetSeasonYear/${teamId}`);
+}
+
 export default {
   lastGame,
   table,
@@ -165,4 +169,5 @@ export default {
   getCardStats,
   getAllMonthsByMonth,
   getAllGamesByTeam,
+  GetSeasonYears,
 };
