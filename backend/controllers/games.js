@@ -1230,18 +1230,25 @@ exports.totalStatsForTeam = async function (req, res) {
             },
         },
     ]);
-    console.log("🚀 ~ file: games.js:1230 ~ teamStats", teamStats);
     res.send(teamStats);
 };
 
 exports.profitsStats = async function (req, res) {
+    console.log("re", req.query);
     const teamId = req.params.teamId;
+    let startDate =
+        req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
+    let endDate =
+        req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear() + 1;
+    // console.log("🚀 ~ file: games.js:1239 ~ startDate", startDate);
+    // console.log("🚀 ~ file: games.js:1242 ~ endDate", endDate);
     const stats = await Game.aggregate([
         {
             $match: {
                 team_id: teamId,
                 createdAt: {
-                    $gt: new Date(currentYear),
+                    $gte: new Date(startDate.toString()),
+                    $lte: new Date(endDate.toString()),
                 },
             },
         },
@@ -1308,6 +1315,8 @@ exports.profitsStats = async function (req, res) {
             },
         },
     ]);
+
+    // console.log("🚀 ~ file: games.js:1316 ~ stats", stats);
     res.send(stats);
 };
 

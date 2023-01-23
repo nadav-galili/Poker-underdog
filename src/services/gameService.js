@@ -99,9 +99,16 @@ export function getTotalStatsForTeam(teamId, dates = { startDate: null, endDate:
     );
 }
 
-export function getCardStats(teamId, stats, month = null) {
+export function getCardStats(
+    teamId,
+    stats,
+    month = null,
+    dates = { startDate: null, endDate: null }
+) {
     if (stats === "profitsStats") {
-        return http.get(`${apiUrl}/games/newMainStats/profitsStats/${teamId}`);
+        return http.get(
+            `${apiUrl}/games/newMainStats/profitsStats/${teamId}?startDate=${dates.startDate}&endDate=${dates.endDate}`
+        );
     }
     if (stats === "topTenProfits") {
         return http.get(`${apiUrl}/games/newMainStats/topTenProfits/${teamId}`);

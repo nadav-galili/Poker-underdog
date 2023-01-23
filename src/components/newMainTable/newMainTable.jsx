@@ -42,12 +42,8 @@ const NewMainTable = (props) => {
 
     const updateSeasonDates = (startDate, endDate, seasonPick) => {
         startDate = startDate || `${seasonPick}-01-01`;
-        console.log(
-            "🚀 ~ file: newMainTable.jsx:36 ~ updateSeasonDates ~ startDate, endDate",
-            startDate,
-            endDate
-        );
         const dates = { startDate, endDate };
+        console.log("🚀 ~ file: newMainTable.jsx:46 ~ updateSeasonDates ~ dates", dates);
         setSeasonDates(dates);
     };
 
@@ -114,6 +110,7 @@ const NewMainTable = (props) => {
                                     "Average Cashing",
                                 ]}
                                 headerData={["P", "TG", "GIP", "AP", "AC"]}
+                                seasonDates={seasonDates}
                             />
                             <div className="col-6 my-3">
                                 <SmallCard
