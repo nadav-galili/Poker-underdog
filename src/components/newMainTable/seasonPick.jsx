@@ -24,7 +24,7 @@ const SeasonPick = ({ teamId, updateSeasonDates }) => {
 
     const getEndDate = (e) => {
         setEndDate(e.target.value);
-        console.log("🚀 ~ file: seasonPick.jsx:30 ~ getEndDate ~ startDate", startDate);
+        // console.log("🚀 ~ file: seasonPick.jsx:30 ~ getEndDate ~ startDate", startDate);
         updateSeasonDates(startDate, e.target.value, seasonPick);
     };
 
@@ -70,6 +70,7 @@ const SeasonPick = ({ teamId, updateSeasonDates }) => {
                             max={`${seasonPick}-12-31`}
                             onChange={(e) => getEndDate(e)}
                         />
+                        <p className="text-white">pick end date to see stats</p>
                     </div>
                 </div>
             )}

@@ -27,11 +27,18 @@ const NewMainTable = (props) => {
         }
         getTeam();
         async function getTotalStatsForTeam() {
-            const { data: totalStats } = await gameServices.getTotalStatsForTeam(teamId);
+            const { data: totalStats } = await gameServices.getTotalStatsForTeam(
+                teamId,
+                seasonDates
+            );
+            console.log(
+                "🚀 ~ file: newMainTable.jsx:33 ~ getTotalStatsForTeam ~ totalStats",
+                seasonDates
+            );
             setTotalStats(totalStats);
         }
         getTotalStatsForTeam();
-    }, []);
+    }, [seasonDates]);
 
     const updateSeasonDates = (startDate, endDate, seasonPick) => {
         startDate = startDate || `${seasonPick}-01-01`;
@@ -40,7 +47,8 @@ const NewMainTable = (props) => {
             startDate,
             endDate
         );
-        setSeasonDates(startDate, endDate);
+        const dates = { startDate, endDate };
+        setSeasonDates(dates);
     };
 
     return (
@@ -60,8 +68,11 @@ const NewMainTable = (props) => {
                     <div className="playersImages my-2">
                         <div className="row">
                             {team.players.map((player) => (
-                                <div className="col-2 playersImagesRounded d-flex justify-content-center">
-                                    <PlayersImages key={player._id} player={player} />
+                                <div
+                                    className="col-2 playersImagesRounded d-flex justify-content-center"
+                                    key={player._id}
+                                >
+                                    <PlayersImages player={player} />
                                 </div>
                             ))}
                         </div>
