@@ -29,11 +29,11 @@ const SeasonPick = ({ teamId, updateSeasonDates }) => {
         console.log("start date", startDate);
         if (startDate) {
             if (e.target.value <= startDate) {
-                toast.error("End date must be greater than start date");
+                toast.error("End date must be greater than start date...change your pick");
             }
         } else {
             if (e.target.value <= `${seasonPick}-01-01`) {
-                toast.error("End date must be greater than start date");
+                toast.error("End date must be greater than start date...change your pick");
             }
         }
         updateSeasonDates(startDate, e.target.value, seasonPick);
