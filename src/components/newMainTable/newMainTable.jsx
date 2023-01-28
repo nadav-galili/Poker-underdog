@@ -82,7 +82,7 @@ const NewMainTable = (props) => {
                     <SeasonPick teamId={teamId} updateSeasonDates={updateSeasonDates} />
                 </>
             )}
-            {totalStats == "No Games Played In These Dates" && <p className="text-center text-danger">{totalStats}</p>}
+            {totalStats == "No Games Played On These Dates" && <p className="text-center text-danger">{totalStats}</p>}
             {!_.isEmpty(totalStats) && Array.isArray(totalStats) && (
                 <div className="playersCardsNew mt-3 pb-3">
                     <div className="row mx-2">

@@ -1221,7 +1221,7 @@ exports.totalStatsForTeam = async function (req, res) {
             },
         },
     ]);
-    teamStats = teamStats.length == 0 ? "No Games Played In These Dates" : teamStats;
+    teamStats = teamStats.length == 0 ? "No Games Played On These Dates" : teamStats;
 
     res.send(teamStats);
 };

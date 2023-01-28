@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import gameService from "../../services/gameService";
 import _ from "lodash";
+import { toast } from "react-toastify";
 
 const SeasonPick = ({ teamId, updateSeasonDates }) => {
     const [seasons, setSeasons] = useState({});
@@ -28,13 +29,11 @@ const SeasonPick = ({ teamId, updateSeasonDates }) => {
         console.log("start date", startDate);
         if (startDate) {
             if (e.target.value <= startDate) {
-                alert("End date cannot be less than start date");
-                return;
+                toast.error("End date must be greater than start date");
             }
         } else {
             if (e.target.value <= `${seasonPick}-01-01`) {
-                alert("End date cannot be less than start date");
-                return;
+                toast.error("End date must be greater than start date");
             }
         }
         updateSeasonDates(startDate, e.target.value, seasonPick);
@@ -78,7 +77,7 @@ const SeasonPick = ({ teamId, updateSeasonDates }) => {
                             max={`${seasonPick}-12-31`}
                             onChange={(e) => getEndDate(e)}
                         />
-                        <p className="text-white">pick end date to see stats</p>
+                        <p className="text-white">Pick end date to see stats</p>
                     </div>
                 </div>
             )}
