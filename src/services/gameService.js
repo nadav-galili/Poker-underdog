@@ -99,32 +99,37 @@ export function getTotalStatsForTeam(teamId, dates = { startDate: null, endDate:
     );
 }
 
-export function getCardStats(
-    teamId,
-    stats,
-    month = null,
-    dates = { startDate: null, endDate: null }
-) {
+export function getCardStats(teamId, stats, month = null, dates = { startDate: null, endDate: null }) {
     if (stats === "profitsStats") {
         return http.get(
             `${apiUrl}/games/newMainStats/profitsStats/${teamId}?startDate=${dates.startDate}&endDate=${dates.endDate}`
         );
     }
     if (stats === "topTenProfits") {
-        return http.get(`${apiUrl}/games/newMainStats/topTenProfits/${teamId}`);
+        return http.get(
+            `${apiUrl}/games/newMainStats/topTenProfits/${teamId}?startDate=${dates.startDate}&endDate=${dates.endDate}`
+        );
     }
     if (stats === "head2head") {
-        return http.get(`${apiUrl}/h2h/newMainStats/head2head/${teamId}`);
+        return http.get(
+            `${apiUrl}/h2h/newMainStats/head2head/${teamId}?startDate=${dates.startDate}&endDate=${dates.endDate}`
+        );
     }
 
     if (stats === "getHourlyStats") {
-        return http.get(`${apiUrl}/games/newMainStats/getHourlyStats/${teamId}`);
+        return http.get(
+            `${apiUrl}/games/newMainStats/getHourlyStats/${teamId}?startDate=${dates.startDate}&endDate=${dates.endDate}`
+        );
     }
     if (stats === "getStatsByMonth") {
-        return http.get(`${apiUrl}/games/newMainStats/getStatsByMonth/${teamId}`);
+        return http.get(
+            `${apiUrl}/games/newMainStats/getStatsByMonth/${teamId}?startDate=${dates.startDate}&endDate=${dates.endDate}`
+        );
     }
     if (stats === "getTopComebacks") {
-        return http.get(`${apiUrl}/games/newMainStats/getTopComebacks/${teamId}`);
+        return http.get(
+            `${apiUrl}/games/newMainStats/getTopComebacks/${teamId}?startDate=${dates.startDate}&endDate=${dates.endDate}`
+        );
     }
     if (stats === "getWiningStreak") {
         return http.get(`${apiUrl}/games/newMainStats/getWiningStreak/${teamId}`);
@@ -139,9 +144,7 @@ export function getAllMonthsByMonth(teamId) {
 }
 
 export function getAllGamesByTeam(teamId, pagination, page) {
-    return http.get(
-        `${apiUrl}/games/newMainStats/getAllGamesByTeam/${teamId}?pagination=${pagination}&page=${page}`
-    );
+    return http.get(`${apiUrl}/games/newMainStats/getAllGamesByTeam/${teamId}?pagination=${pagination}&page=${page}`);
 }
 
 export function GetSeasonYears(teamId) {

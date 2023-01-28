@@ -4,26 +4,11 @@ import gameService from "../../services/gameService";
 import { apiImage } from "../../config.json";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
-const BigCard = ({
-    teamId,
-    cardTitle,
-    stats,
-    data,
-    playersData,
-    leaderData,
-    headerData,
-    seasonDates,
-}) => {
+const BigCard = ({ teamId, cardTitle, stats, data, playersData, leaderData, headerData, seasonDates }) => {
     const [cardStats, setCardStats] = useState([]);
     useEffect(() => {
         async function getCardStats() {
-            console.log("🚀 ~ file: bigCard.jsx:18 ~ seasonDates", seasonDates);
-            const { data: cardStats } = await gameService.getCardStats(
-                teamId,
-                stats,
-                null,
-                seasonDates
-            );
+            const { data: cardStats } = await gameService.getCardStats(teamId, stats, null, seasonDates);
             setCardStats(cardStats);
         }
         getCardStats();
@@ -67,11 +52,9 @@ const BigCard = ({
                                 <img src={`${apiImage}${cardStats[1]._id.image}`} alt="" />
                             </div>
                             <span className="mx-1">{cardStats[1]._id.name}- </span>
-                            {playersData[0]}:
-                            <span className="mx-1 playersNewProfit">{cardStats[1][data[0]]}</span>{" "}
-                            {playersData[1]}:{cardStats[1][data[1]]} {playersData[2]}:
-                            {cardStats[1][data[2]]} {playersData[3]}:{cardStats[1][data[3]]}{" "}
-                            {playersData[4]}:{cardStats[1][data[4]]}
+                            {playersData[0]}:<span className="mx-1 playersNewProfit">{cardStats[1][data[0]]}</span>{" "}
+                            {playersData[1]}:{cardStats[1][data[1]]} {playersData[2]}:{cardStats[1][data[2]]}{" "}
+                            {playersData[3]}:{cardStats[1][data[3]]} {playersData[4]}:{cardStats[1][data[4]]}
                         </li>
                         <li className="d-flex flex-row mt-2">
                             3.
@@ -79,11 +62,9 @@ const BigCard = ({
                                 <img src={`${apiImage}${cardStats[2]._id.image}`} alt="" />
                             </div>
                             <span className="mx-1">{cardStats[2]._id.name}- </span>
-                            {playersData[0]}:
-                            <span className="mx-1 playersNewProfit">{cardStats[2][data[0]]}</span>{" "}
-                            {playersData[1]}:{cardStats[2][data[1]]} {playersData[2]}:
-                            {cardStats[2][data[2]]} {playersData[3]}:{cardStats[2][data[3]]}{" "}
-                            {playersData[4]}:{cardStats[2][data[4]]}
+                            {playersData[0]}:<span className="mx-1 playersNewProfit">{cardStats[2][data[0]]}</span>{" "}
+                            {playersData[1]}:{cardStats[2][data[1]]} {playersData[2]}:{cardStats[2][data[2]]}{" "}
+                            {playersData[3]}:{cardStats[2][data[3]]} {playersData[4]}:{cardStats[2][data[4]]}
                         </li>
                     </ol>
                     <p className="bg-white fullTable">

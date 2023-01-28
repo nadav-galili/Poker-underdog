@@ -9,11 +9,7 @@ const AllGamesList = ({ teamId }) => {
     const pagination = 3;
     useEffect(() => {
         async function getAllGames() {
-            const { data: allGames } = await gameService.getAllGamesByTeam(
-                teamId,
-                pagination,
-                page
-            );
+            const { data: allGames } = await gameService.getAllGamesByTeam(teamId, pagination, page);
             setAllGames(allGames);
         }
         getAllGames();
@@ -24,7 +20,7 @@ const AllGamesList = ({ teamId }) => {
         pageC === 0 ? setPage(1) : setPage(pageC);
     };
     return (
-        <div className="container">
+        <div>
             <h2 className="allGamesTitle text-center">All Games</h2>
             <ReactPaginate
                 previousLabel={"prev"}
@@ -35,8 +31,7 @@ const AllGamesList = ({ teamId }) => {
                 pageClassName={"page-item"}
                 pageLinkClassName={"page-link"}
             />
-            {allGames.length > 0 &&
-                allGames.map((game) => <SingleGame game={game} key={game._id} />)}
+            {allGames.length > 0 && allGames.map((game) => <SingleGame game={game} key={game._id} />)}
         </div>
     );
 };

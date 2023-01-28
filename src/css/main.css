@@ -2162,6 +2162,9 @@ label {
 .singleGameDetails, .singleGameHeader {
   border-bottom: 1px solid black;
 }
+.singleGameDetails p:first-child, .singleGameHeader p:first-child {
+  width: 15%;
+}
 .singleGameDetails p, .singleGameHeader p {
   width: 20%;
 }

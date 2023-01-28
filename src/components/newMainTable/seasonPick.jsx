@@ -24,7 +24,19 @@ const SeasonPick = ({ teamId, updateSeasonDates }) => {
 
     const getEndDate = (e) => {
         setEndDate(e.target.value);
-        // console.log("🚀 ~ file: seasonPick.jsx:30 ~ getEndDate ~ startDate", startDate);
+        console.log("end date", e.target.value);
+        console.log("start date", startDate);
+        if (startDate) {
+            if (e.target.value <= startDate) {
+                alert("End date cannot be less than start date");
+                return;
+            }
+        } else {
+            if (e.target.value <= `${seasonPick}-01-01`) {
+                alert("End date cannot be less than start date");
+                return;
+            }
+        }
         updateSeasonDates(startDate, e.target.value, seasonPick);
     };
 
@@ -33,11 +45,7 @@ const SeasonPick = ({ teamId, updateSeasonDates }) => {
             <p className="text-white text-center">Select A Season</p>
             <div className="season d-flex justify-content-center">
                 <div className="col-6 mt-2">
-                    <select
-                        className="form-select"
-                        aria-label="Default select example"
-                        onChange={handleSeasonPick}
-                    >
+                    <select className="form-select" aria-label="Default select example" onChange={handleSeasonPick}>
                         {!_.isEmpty(seasons) &&
                             seasons.map((season) => (
                                 <option value={season._id} key={season._id}>

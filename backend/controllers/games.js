@@ -532,14 +532,7 @@ exports.newGame = async function (req, res) {
     if (error) return res.status(400).send(error.details[0].message);
 
     let game = new Game(
-        _.pick(req.body, [
-            "team_name",
-            "team_id",
-            "players",
-            "isOpen",
-            "game_manager",
-            "cashing_details",
-        ])
+        _.pick(req.body, ["team_name", "team_id", "players", "isOpen", "game_manager", "cashing_details"])
     );
     await game.save();
     res.send(_.pick(game, ["_id", "team_name", "players", "isOpen", "team_id"]));
@@ -1161,11 +1154,9 @@ exports.sideBets = async function (req, res) {
 exports.totalStatsForTeam = async function (req, res) {
     const teamId = req.params.teamId;
 
-    let startDate =
-        req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
-    let endDate =
-        req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear() + 1;
-    const teamStats = await Game.aggregate([
+    let startDate = req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
+    let endDate = req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear() + 1;
+    let teamStats = await Game.aggregate([
         {
             $match: {
                 team_id: teamId,
@@ -1230,18 +1221,15 @@ exports.totalStatsForTeam = async function (req, res) {
             },
         },
     ]);
+    teamStats = teamStats.length == 0 ? "No Games Played In These Dates" : teamStats;
+
     res.send(teamStats);
 };
 
 exports.profitsStats = async function (req, res) {
-    console.log("re", req.query);
     const teamId = req.params.teamId;
-    let startDate =
-        req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
-    let endDate =
-        req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear() + 1;
-    // console.log("🚀 ~ file: games.js:1239 ~ startDate", startDate);
-    // console.log("🚀 ~ file: games.js:1242 ~ endDate", endDate);
+    let startDate = req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
+    let endDate = req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear() + 1;
     const stats = await Game.aggregate([
         {
             $match: {
@@ -1316,11 +1304,12 @@ exports.profitsStats = async function (req, res) {
         },
     ]);
 
-    // console.log("🚀 ~ file: games.js:1316 ~ stats", stats);
     res.send(stats);
 };
 
 exports.topTenProfits = async function (req, res) {
+    let startDate = req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
+    let endDate = req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear() + 1;
     const teamId = req.params.teamId;
     const topTen = await Game.aggregate([
         {
@@ -1332,7 +1321,8 @@ exports.topTenProfits = async function (req, res) {
             $match: {
                 team_id: teamId,
                 createdAt: {
-                    $gt: new Date(currentYear),
+                    $gte: new Date(startDate.toString()),
+                    $lte: new Date(endDate.toString()),
                 },
                 "players.profit": {
                     $gt: 0,
@@ -1371,12 +1361,15 @@ exports.topTenProfits = async function (req, res) {
 
 exports.getHourlyStats = async function (req, res) {
     const teamId = req.params.teamId;
+    let startDate = req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
+    let endDate = req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear() + 1;
     const getHourlydata = await Game.aggregate([
         {
             $match: {
                 team_id: teamId,
                 createdAt: {
-                    $gte: new Date(currentYear),
+                    $gte: new Date(startDate.toString()),
+                    $lte: new Date(endDate.toString()),
                 },
             },
         },
@@ -1527,6 +1520,8 @@ exports.getHourlyStats = async function (req, res) {
 
 exports.getStatsByMonth = async function (req, res) {
     const teamId = req.params.teamId;
+    let startDate = req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
+    let endDate = req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear();
     const getStatsByMonth = await Game.aggregate([
         {
             $unwind: {
@@ -1544,7 +1539,7 @@ exports.getStatsByMonth = async function (req, res) {
                                     $year: "$createdAt",
                                 },
                                 {
-                                    $year: new Date(),
+                                    $year: new Date(endDate.toString()),
                                 },
                             ],
                         },
@@ -1554,7 +1549,7 @@ exports.getStatsByMonth = async function (req, res) {
                                     $month: "$createdAt",
                                 },
                                 {
-                                    $month: new Date(),
+                                    $month: new Date(endDate.toString()),
                                 },
                             ],
                         },
@@ -1609,17 +1604,21 @@ exports.getStatsByMonth = async function (req, res) {
             },
         },
     ]);
+    console.log("🚀 ~ file: games.js:1610 ~ getStatsByMonth", getStatsByMonth);
     res.send(getStatsByMonth);
 };
 
 exports.getTopComebacks = async function (req, res) {
     const teamId = req.params.teamId;
+    let startDate = req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
+    let endDate = req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear() + 1;
     const getTopComebacks = await Game.aggregate([
         {
             $match: {
                 team_id: teamId,
                 createdAt: {
-                    $gte: new Date(currentYear),
+                    $gte: new Date(startDate.toString()),
+                    $lte: new Date(endDate.toString()),
                 },
             },
         },
