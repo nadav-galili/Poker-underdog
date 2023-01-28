@@ -145,8 +145,10 @@ export function getAllMonthsByMonth(teamId) {
     return http.get(`${apiUrl}/games/newMainStats/getAllMonthsByMonth/${teamId}`);
 }
 
-export function getAllGamesByTeam(teamId, pagination, page) {
-    return http.get(`${apiUrl}/games/newMainStats/getAllGamesByTeam/${teamId}?pagination=${pagination}&page=${page}`);
+export function getAllGamesByTeam(teamId, pagination, page, dates = { startDate: null, endDate: null }) {
+    return http.get(
+        `${apiUrl}/games/newMainStats/getAllGamesByTeam/${teamId}?pagination=${pagination}&page=${page}&startDate=${dates.startDate}&endDate=${dates.endDate}`
+    );
 }
 
 export function GetSeasonYears(teamId) {

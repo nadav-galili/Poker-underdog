@@ -1890,7 +1890,6 @@ exports.getWiningStreak = async function (req, res) {
             },
         },
     ]);
-    console.log("🚀 ~ file: games.js:1894 ~ getWiningStreaks", getWiningStreaks);
     res.send(getWiningStreaks);
 };
 
@@ -2094,13 +2093,16 @@ exports.getAllGamesByTeam = async function (req, res) {
     const teamId = req.params.teamId;
     let pagination = req.query.pagination;
     pagination = parseInt(pagination);
+    let startDate = req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
+    let endDate = req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear() + 1;
     const page = req.query.page;
     const getAllGamesByTeam = await Game.aggregate([
         {
             $match: {
                 team_id: teamId,
                 createdAt: {
-                    $gte: new Date(currentYear),
+                    $gte: new Date(startDate.toString()),
+                    $lte: new Date(endDate.toString()),
                 },
             },
         },
@@ -2109,6 +2111,7 @@ exports.getAllGamesByTeam = async function (req, res) {
                 isOpen: 1,
                 players: 1,
                 game_manager: 1,
+                createdAt: 1,
                 date: {
                     $dateToString: {
                         date: "$createdAt",
@@ -2133,7 +2136,7 @@ exports.getAllGamesByTeam = async function (req, res) {
         },
         {
             $sort: {
-                date: -1,
+                createdAt: -1,
                 "players.profit": -1,
             },
         },

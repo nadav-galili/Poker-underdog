@@ -3,17 +3,17 @@ import gameService from "../../services/gameService";
 import SingleGame from "./singleGame";
 import ReactPaginate from "react-paginate";
 
-const AllGamesList = ({ teamId }) => {
+const AllGamesList = ({ teamId, seasonDates }) => {
     const [allGames, setAllGames] = useState([]);
     const [page, setPage] = useState(1);
     const pagination = 3;
     useEffect(() => {
         async function getAllGames() {
-            const { data: allGames } = await gameService.getAllGamesByTeam(teamId, pagination, page);
+            const { data: allGames } = await gameService.getAllGamesByTeam(teamId, pagination, page, seasonDates);
             setAllGames(allGames);
         }
         getAllGames();
-    }, [page]);
+    }, [seasonDates, page]);
 
     const handlePageClick = (event) => {
         let pageC = event.selected + 1;

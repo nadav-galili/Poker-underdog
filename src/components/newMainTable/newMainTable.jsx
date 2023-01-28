@@ -189,7 +189,7 @@ const NewMainTable = (props) => {
                             />
                         </div>
                         <div className="col-12 mt-3">
-                            <AllGamesList teamId={teamId} />
+                            <AllGamesList teamId={teamId} seasonDates={seasonDates} />
                         </div>
                     </div>
                 </div>
