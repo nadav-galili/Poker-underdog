@@ -132,7 +132,9 @@ export function getCardStats(teamId, stats, month = null, dates = { startDate: n
         );
     }
     if (stats === "getWiningStreak") {
-        return http.get(`${apiUrl}/games/newMainStats/getWiningStreak/${teamId}`);
+        return http.get(
+            `${apiUrl}/games/newMainStats/getWiningStreak/${teamId}?startDate=${dates.startDate}&endDate=${dates.endDate}`
+        );
     }
     if (stats === "getThisMonthStats") {
         return http.get(`${apiUrl}/games/newMainStats/getThisMonthStats/${teamId}/${month}`);

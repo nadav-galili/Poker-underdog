@@ -1520,7 +1520,6 @@ exports.getHourlyStats = async function (req, res) {
 
 exports.getStatsByMonth = async function (req, res) {
     const teamId = req.params.teamId;
-    let startDate = req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
     let endDate = req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear();
     const getStatsByMonth = await Game.aggregate([
         {
@@ -1604,7 +1603,6 @@ exports.getStatsByMonth = async function (req, res) {
             },
         },
     ]);
-    console.log("🚀 ~ file: games.js:1610 ~ getStatsByMonth", getStatsByMonth);
     res.send(getStatsByMonth);
 };
 
@@ -1667,12 +1665,15 @@ exports.getTopComebacks = async function (req, res) {
 
 exports.getWiningStreak = async function (req, res) {
     const teamId = req.params.teamId;
+    let startDate = req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
+    let endDate = req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear() + 1;
     const getWiningStreaks = await Game.aggregate([
         {
             $match: {
                 team_id: teamId,
                 createdAt: {
-                    $gte: new Date(currentYear),
+                    $gte: new Date(startDate.toString()),
+                    $lte: new Date(endDate.toString()),
                 },
             },
         },
@@ -1889,13 +1890,13 @@ exports.getWiningStreak = async function (req, res) {
             },
         },
     ]);
+    console.log("🚀 ~ file: games.js:1894 ~ getWiningStreaks", getWiningStreaks);
     res.send(getWiningStreaks);
 };
 
 exports.getAllMonthsByMonth = async function (req, res) {
     const teamId = req.params.teamId;
     const thisMonth = new Date().getMonth() + 1;
-    // console.log("🚀 ~ file: games.js:1882 ~ thisMonth", thisMonth);
     let wholeYear = [];
     for (let i = 1; i <= thisMonth; i++) {
         let getMonths = await Game.aggregate([

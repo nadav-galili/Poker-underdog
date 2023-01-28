@@ -185,6 +185,7 @@ const NewMainTable = (props) => {
                                     "Total Games In Plus",
                                 ]}
                                 headerData={["MWS", "CWS", "%S", "TGIP"]}
+                                seasonDates={seasonDates}
                             />
                         </div>
                         <div className="col-12 mt-3">
