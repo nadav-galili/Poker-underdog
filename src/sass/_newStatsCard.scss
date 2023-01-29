@@ -1,113 +1,122 @@
 .allGamesTitle {
-  color: $newBlue;
-  text-decoration: underline;
-  font-size: 2em;
-  font-weight: 900;
+    color: $newBlue;
+    text-decoration: underline;
+    font-size: 2em;
+    font-weight: 900;
+}
+.cardHeaderDates p {
+    font-size: 0.9em;
+    font-weight: bolder;
+    color: $baseColorGold;
 }
 .green {
-  color: $darkerGreen;
+    color: $darkerGreen;
 }
 .gameHeaders {
-  background-color: $baseColorGold;
-  font-size: 0.9em;
-  font-weight: bolder;
+    background-color: $baseColorGold;
+    font-size: 0.9em;
+    font-weight: bolder;
 }
 
 .gamePlayersDetails {
-  & p {
-    align-self: center;
-    font-weight: bold;
-  }
+    & p {
+        align-self: center;
+        font-weight: bold;
+    }
 }
 .newLeaderContainer {
-  background-image: linear-gradient(to bottom right, $headerColorBlue, #d7d5d5);
+    background-image: linear-gradient(to bottom right, $headerColorBlue, #d7d5d5);
 }
 .listPlayers {
-  align-items: center;
-  & li {
-    border-bottom: 1px solid rgb(168, 164, 164);
-  }
+    align-items: center;
+    & li {
+        border-bottom: 1px solid rgb(168, 164, 164);
+    }
 }
 
 .listPlayerStats {
-  width: 2.5em;
-  height: 2.5em !important;
-  & img {
-    border: 1px solid $baseColorGold;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    background-image: linear-gradient($headerColorBlue, $navbarWhite);
-  }
+    width: 2.5em;
+    height: 2.5em !important;
+    & img {
+        border: 1px solid $baseColorGold;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        background-image: linear-gradient($headerColorBlue, $navbarWhite);
+    }
 }
 .listPlayersName {
-  font-size: 0.8em;
-  min-width: 40%;
-  text-align: start;
+    font-size: 0.8em;
+    min-width: 40%;
+    text-align: start;
 }
 .headerName {
-  min-width: 40%;
+    min-width: 40%;
 }
 
 .rank {
-  // font-size: 1.3em;/
-  min-width: 20%;
+    // font-size: 1.3em;/
+    min-width: 20%;
 }
 
 /////
 .fixedHeader {
-  width: 40%;
+    width: 40%;
 }
 .dynamicStatsCardHeader {
-  width: 55%;
-  & p {
-    min-width: 15%;
-    text-align: center;
-  }
+    width: 55%;
+    & p {
+        min-width: 15%;
+        text-align: center;
+    }
 }
 .dynamicStatsCard {
-  // @extend .dynamicStatsCardHeader;
-  width: 55%;
-  align-items: center;
-  font-size: 0.75em;
-  & p {
-    min-width: 20%;
-    text-align: center;
-  }
+    // @extend .dynamicStatsCardHeader;
+    width: 55%;
+    align-items: center;
+    font-size: 0.75em;
+    & p {
+        min-width: 20%;
+        text-align: center;
+    }
 }
 .fixedPlayerStats {
-  @extend .fixedHeader;
-  // text-align: center;
-  align-items: center;
+    @extend .fixedHeader;
+    // text-align: center;
+    align-items: center;
 }
 .newCardContainer {
-  // padding: 10px;
+    // padding: 10px;
 
-  border-radius: 5px;
-  overflow: hidden;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .text-bold {
-  font-weight: 900;
-  font-size: 1.1em;
+    font-weight: 900;
+    font-size: 1.1em;
 }
+
 .singleGame {
-  border-radius: 5px;
-  overflow: hidden;
+    border-radius: 5px;
+    overflow: hidden;
 }
 .singleGameDetails {
-  border-bottom: 1px solid black;
-  & p {
-    width: 20%;
-  }
+    border-bottom: 1px solid black;
+    & p:first-child {
+        width: 15%;
+    }
+    & p {
+        width: 20%;
+    }
 }
 .singleGameHeader {
-  @extend .singleGameDetails;
-  font-weight: 900;
-  color: $headerColorBlue;
+    @extend .singleGameDetails;
+    font-weight: 900;
+    color: $headerColorBlue;
 }
 
 .red {
-  color: $basecolorRed;
+    color: $basecolorRed;
 }

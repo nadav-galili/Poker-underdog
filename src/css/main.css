@@ -1919,6 +1919,12 @@ label {
   color: #1c1515;
 }
 
+.seasonEndDate :nth-child(3) {
+  font-weight: 900;
+  color: gold;
+  text-decoration: underline;
+}
+
 .secondPlayer, .secondPlayerSmall {
   font-size: 0.8em !important;
 }
@@ -2049,6 +2055,7 @@ label {
   color: gold;
   text-align: center;
   font-size: 0.8em;
+  font-weight: bolder;
 }
 
 .totalProfitNewCard {
@@ -2063,6 +2070,12 @@ label {
   text-decoration: underline;
   font-size: 2em;
   font-weight: 900;
+}
+
+.cardHeaderDates p {
+  font-size: 0.9em;
+  font-weight: bolder;
+  color: gold;
 }
 
 .green {
@@ -2161,6 +2174,9 @@ label {
 
 .singleGameDetails, .singleGameHeader {
   border-bottom: 1px solid black;
+}
+.singleGameDetails p:first-child, .singleGameHeader p:first-child {
+  width: 15%;
 }
 .singleGameDetails p, .singleGameHeader p {
   width: 20%;
