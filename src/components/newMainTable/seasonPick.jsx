@@ -77,7 +77,7 @@ const SeasonPick = ({ teamId, updateSeasonDates }) => {
                             max={`${seasonPick}-12-31`}
                             onChange={(e) => getEndDate(e)}
                         />
-                        <p className="text-white">Pick end date to see stats</p>
+                        <p>Pick end date to see stats</p>
                     </div>
                 </div>
             )}

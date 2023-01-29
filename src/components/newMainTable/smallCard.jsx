@@ -15,7 +15,6 @@ const SmallCard = ({
     headerData,
     seasonDates,
 }) => {
-    console.log("sssss", seasonDates, stats);
     const [cardStats, setCardStats] = useState([]);
     useEffect(() => {
         async function getCardStats() {
@@ -94,7 +93,8 @@ const SmallCard = ({
                         {cardTitle !== "Stats By Months 💵" && (
                             <Link
                                 className="linkToNewCard"
-                                to={`/newMainTable/newStatsCard/${teamId}?stats=${stats}&cardTitle=${cardTitle}&data=${data}&leaderData=${leaderData}&headerData=${headerData}`}
+                                to={`/newMainTable/newStatsCard/${teamId}?stats=${stats}&cardTitle=${cardTitle}&data=${data}&leaderData=${leaderData}&headerData=${headerData}
+                                &seasonDates=${JSON.stringify(seasonDates)}`}
                             >
                                 View Full Table <AiOutlineArrowRight />
                             </Link>

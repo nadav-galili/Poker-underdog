@@ -70,7 +70,9 @@ const BigCard = ({ teamId, cardTitle, stats, data, playersData, leaderData, head
                     <p className="bg-white fullTable">
                         <Link
                             className="linkToNewCard"
-                            to={`/newMainTable/newStatsCard/${teamId}?stats=${stats}&cardTitle=${cardTitle}&data=${data}&leaderData=${leaderData}&headerData=${headerData}`}
+                            to={`/newMainTable/newStatsCard/${teamId}?stats=${stats}&cardTitle=${cardTitle}&data=${data}&leaderData=${leaderData}&headerData=${headerData}&seasonDates=${JSON.stringify(
+                                seasonDates
+                            )}`}
                         >
                             View Full Table <AiOutlineArrowRight />
                         </Link>

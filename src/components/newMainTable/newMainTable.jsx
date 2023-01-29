@@ -28,7 +28,6 @@ const NewMainTable = (props) => {
         getTeam();
         async function getTotalStatsForTeam() {
             const { data: totalStats } = await gameServices.getTotalStatsForTeam(teamId, seasonDates);
-            console.log("🚀 ~ seaeson dates", seasonDates);
             setTotalStats(totalStats);
         }
         getTotalStatsForTeam();
@@ -37,7 +36,6 @@ const NewMainTable = (props) => {
     const updateSeasonDates = (startDate, endDate, seasonPick) => {
         startDate = startDate || `${seasonPick}-01-01`;
         const dates = { startDate, endDate };
-        console.log("🚀 ~ file: newMainTable.jsx:46 ~ updateSeasonDates ~ dates", dates);
         setSeasonDates(dates);
     };
 
