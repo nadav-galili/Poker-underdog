@@ -4,6 +4,7 @@ import ClockSpinner from "./clockSpinner";
 import teamService from "../../services/teamService";
 import gameServices from "../../services/gameService";
 import { apiImage } from "../../config.json";
+import { motion } from "framer-motion";
 
 import AllGamesList from "./allGamesList";
 import BigCard from "./bigCard";
@@ -47,9 +48,26 @@ const NewMainTable = (props) => {
             {!_.isEmpty(team) && (
                 <div className="teamDetails">
                     <div className="logoContainer d-flex justify-content-center ">
-                        <div className="teamLogo">
+                        <motion.img
+                            style={{
+                                width: 120,
+                                height: 120,
+                                borderRadius: 30,
+                                backgroundColor: "#fff",
+                                border: "2px solid gold",
+                            }}
+                            animate={{ rotate: 360 }}
+                            transition={{
+                                type: "spring",
+                                duration: 5,
+                                bounce: 0.6,
+                            }}
+                            src={`${apiImage}${team.teamImage}`}
+                            alt="team"
+                        />
+                        {/* <div className="teamLogo">
                             <img src={`${apiImage}${team.teamImage}`} alt="" />
-                        </div>
+                        </div> */}
                     </div>
                     <p className="text-center mt-2" id="teamName">
                         {team.name}
@@ -144,7 +162,7 @@ const NewMainTable = (props) => {
                                 leaderData={["Total Profit", "Avg Profit", "Total Games", "Avg Cashing"]}
                                 extraHeader={
                                     !_.isEmpty(seasonDates)
-                                        ? new Date(seasonDates.endDate).toLocaleString("default", {
+                                        ? new Date(seasonDates.endDate).toLocaleString("en-US", {
                                               month: "long",
                                           })
                                         : new Date().toLocaleString("default", {
@@ -159,7 +177,7 @@ const NewMainTable = (props) => {
                                 teamId={teamId}
                                 cardTitle="Top 10 Comebacks"
                                 stats="getTopComebacks"
-                                data={["cashing", "profit", "date", "cash In Hand"]}
+                                data={["cashing", "profit", "date", "cashInHand"]}
                                 playersData={["Cashing: ", "P: ", "", ""]}
                                 leaderData={["Cashing", "Profit", "Date", "Cash In Hand"]}
                                 headerData={["C", "P", "D", "CIH"]}
