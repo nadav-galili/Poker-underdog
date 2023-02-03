@@ -1519,91 +1519,98 @@ exports.getHourlyStats = async function (req, res) {
 };
 
 exports.getStatsByMonth = async function (req, res) {
+    // const thisMonth = new Date().getMonth() + 2;
+    // console.log("🚀 ~ file: games.js:1526 ~ thisMonth", thisMonth);
     const teamId = req.params.teamId;
-    let endDate = req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear();
-    const getStatsByMonth = await Game.aggregate([
+    // const thisMonth = new Date().getMonth() + 1;
+    let startDate = req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
+    let endDate = req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear() + 1;
+    const allGamesByMonth = await Game.aggregate([
         {
-            $unwind: {
-                path: "$players",
-            },
+            $unwind: "$players",
         },
         {
             $match: {
                 team_id: teamId,
-                $expr: {
-                    $and: [
-                        {
-                            $eq: [
-                                {
-                                    $year: "$createdAt",
-                                },
-                                {
-                                    $year: new Date(endDate.toString()),
-                                },
-                            ],
-                        },
-                        {
-                            $eq: [
-                                {
-                                    $month: "$createdAt",
-                                },
-                                {
-                                    $month: new Date(endDate.toString()),
-                                },
-                            ],
-                        },
-                    ],
+                createdAt: {
+                    $gte: new Date(startDate.toString()),
+                    $lte: new Date(endDate.toString()),
                 },
             },
         },
         {
             $group: {
                 _id: {
-                    monthPlayed: {
-                        $month: "$createdAt",
-                    },
-                    name: "$players.name",
+                    month: { $month: "$createdAt" },
+                    player: "$players.name",
+                    id: "$players.id",
                     image: "$players.image",
-                    player_id: "$players.id",
-                    team_id: "$team_id",
-                    team_name: "$team_name",
                 },
-                totalProfit: {
-                    $sum: "$players.profit",
-                },
-                avgProfit: {
-                    $avg: "$players.profit",
-                },
-                numOfGames: {
-                    $sum: 1,
-                },
-                avgCashing: {
-                    $avg: "$players.numOfCashing",
-                },
+                totalProfit: { $sum: "$players.profit" },
+                totalCashing: { $sum: "$players.cashing" },
+                avgProfit: { $avg: "$players.profit" },
+                totalGames: { $sum: 1 },
+                avgCashing: { $avg: "$players.cashing" },
             },
         },
         {
             $project: {
-                _id: 1,
-                totalProfit: 1,
+                roundedAvgCashing: {
+                    $round: ["$avgCashing", 2],
+                },
                 roundedAvgProfit: {
                     $round: ["$avgProfit", 2],
                 },
-                numOfGames: 1,
-                roundedAvgCashing: {
-                    $round: ["$avgCashing", 2],
+                totalProfit: 1,
+                totalCashing: 1,
+                avgProfit: 1,
+                totalGames: 1,
+                avgCashing: 1,
+            },
+        },
+        {
+            $group: {
+                _id: "$_id.month",
+                players: {
+                    $push: {
+                        name: "$_id.player",
+                        id: "$_id.id",
+                        image: "$_id.image",
+                        totalProfit: "$totalProfit",
+                        totalCashing: "$totalCashing",
+                        totalGames: "$totalGames",
+                        roundedAvgCashing: "$roundedAvgCashing",
+                        roundedAvgProfit: "$roundedAvgProfit",
+                    },
+                },
+            },
+        },
+        {
+            $unwind: "$players",
+        },
+        {
+            $sort: {
+                _id: -1,
+                "players.totalProfit": -1,
+            },
+        },
+        {
+            $group: {
+                _id: "$_id",
+                players: {
+                    $push: "$players",
                 },
             },
         },
         {
             $sort: {
-                "_id.monthPlayed": 1,
-                totalProfit: -1,
-                "_id.name": 1,
+                _id: -1,
             },
         },
     ]);
-    res.send(getStatsByMonth);
+
+    console.log("🚀 ~ file: games.js:1588 ~ allGamesByMonth", allGamesByMonth);
+    res.send(allGamesByMonth);
 };
 
 exports.getTopComebacks = async function (req, res) {
@@ -1895,103 +1902,69 @@ exports.getWiningStreak = async function (req, res) {
 
 exports.getAllMonthsByMonth = async function (req, res) {
     const teamId = req.params.teamId;
-    const thisMonth = new Date().getMonth() + 1;
-    let wholeYear = [];
-    for (let i = 1; i <= thisMonth; i++) {
-        let getMonths = await Game.aggregate([
-            [
-                {
-                    $unwind: {
-                        path: "$players",
+    // const thisMonth = new Date().getMonth() + 1;
+    let startDate = req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
+    let endDate = req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear() + 1;
+    const allGamesByMonth = await Game.aggregate([
+        {
+            $unwind: "$players",
+        },
+        {
+            $match: {
+                team_id: teamId,
+                createdAt: {
+                    $gte: new Date(startDate.toString()),
+                    $lte: new Date(endDate.toString()),
+                },
+            },
+        },
+        {
+            $group: {
+                _id: { month: { $month: "$createdAt" }, player: "$players.name", id: "$players.id" },
+                totalProfit: { $sum: "$players.profit" },
+                totalCashing: { $sum: "$players.cashing" },
+                avgProfit: { $avg: "$players.profit" },
+                totalGames: { $sum: 1 },
+                avgCashing: { $avg: "$players.cashing" },
+            },
+        },
+        {
+            $group: {
+                _id: "$_id.month",
+                players: {
+                    $push: {
+                        name: "$_id.player",
+                        id: "$_id.id",
+                        totalProfit: "$totalProfit",
+                        totalCashing: "$totalCashing",
+                        // avgProfit:"$avgProfit",
+                        totalGames: "$totalGames",
+                        // avgCashing:"$avgCashing",
+                        roundedAvgCashing: "$roundedAvgCashing",
+                        roundedAvgProfit: "$roundedAvgProfit",
                     },
                 },
-                {
-                    $match: {
-                        team_id: teamId,
-                        createdAt: {
-                            $gte: new Date(currentYear),
-                        },
-                        // $and: [
-                        //   {
-                        //     createdAt: {
-                        //       $gte: new Date("2022"),
-                        //     },
-                        //   },
-                        //   {
-                        //     createdAt: {
-                        //       $lt: new Date("2023"),
-                        //     },
-                        //   },
-                        // ],
-                    },
+            },
+        },
+        {
+            $unwind: "$players",
+        },
+        {
+            $sort: {
+                "players.totalProfit": -1,
+            },
+        },
+        {
+            $group: {
+                _id: "$_id",
+                players: {
+                    $push: "$players",
                 },
-                {
-                    $project: {
-                        monthPlayed: {
-                            $month: "$createdAt",
-                        },
-                        "players.name": 1,
-                        "players.id": 1,
-                        "players.image": 1,
-                        "players.profit": 1,
-                        "players.cashing": 1,
-                        "players.numOfCashing": 1,
-                    },
-                },
-                {
-                    $match: {
-                        monthPlayed: thisMonth,
-                    },
-                },
-                {
-                    $group: {
-                        _id: {
-                            id: "$players.id",
-                            name: "$players.name",
-                            image: "$players.image",
-                        },
-                        totalProfit: {
-                            $sum: "$players.profit",
-                        },
-                        avgCashing: {
-                            $avg: "$players.cashing",
-                        },
-                        avgNumOfCashing: {
-                            $avg: "$players.numOfCashing",
-                        },
-                        totalGames: {
-                            $sum: 1,
-                        },
-                        monthPlayed: {
-                            $first: "$monthPlayed",
-                        },
-                    },
-                },
-                {
-                    $project: {
-                        _id: 1,
-                        totalProfit: 1,
-                        avgCashing: {
-                            $round: ["$avgCashing", 2],
-                        },
-                        avgNumOfCashing: {
-                            $round: ["$avgNumOfCashing", 2],
-                        },
-                        totalGames: 1,
-                        monthPlayed: 1,
-                    },
-                },
-                {
-                    $sort: {
-                        totalProfit: -1,
-                    },
-                },
-            ],
-        ]);
-        wholeYear.push(getMonths);
-    }
+            },
+        },
+    ]);
 
-    res.send(wholeYear);
+    res.send(allGamesByMonth);
 };
 
 exports.getThisMonthStats = async function (req, res) {
@@ -2086,6 +2059,7 @@ exports.getThisMonthStats = async function (req, res) {
         },
     ]);
 
+    // console.log("🚀 ~ file: games.js:2091 ~ getThisMonthStats", getThisMonthStats);
     res.send(getThisMonthStats);
 };
 

@@ -20,12 +20,18 @@ const SmallCard = ({
         async function getCardStats() {
             const { data: cardStats } = await gameService.getCardStats(teamId, stats, null, seasonDates);
             setCardStats(cardStats);
+            // console.log("🚀 ~ file: smallCard.jsx:24 ~ getCardStats ~ cardStats", cardStats);
         }
         getCardStats();
     }, [seasonDates]);
     return (
         <>
-            {cardStats.length > 0 && (
+            {/* {cardStats === "No data found" && (
+                <div className="container mt-5">
+                    <p className="text-danger text-center">No Games Played This Month</p>
+                </div>
+            )} */}
+            {cardStats.length > 0 && Array.isArray(cardStats) && (
                 <div className="smallCardContainer">
                     <p className="text-center pt-2  newSmallCard">{cardTitle}</p>
                     <div className="col-12 profitCard">
