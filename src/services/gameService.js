@@ -121,11 +121,11 @@ export function getCardStats(teamId, stats, month = null, dates = { startDate: n
             `${apiUrl}/games/newMainStats/getHourlyStats/${teamId}?startDate=${dates.startDate}&endDate=${dates.endDate}`
         );
     }
-    if (stats === "getStatsByMonth") {
-        return http.get(
-            `${apiUrl}/games/newMainStats/getStatsByMonth/${teamId}?startDate=${dates.startDate}&endDate=${dates.endDate}`
-        );
-    }
+    // if (stats === "getStatsByMonth") {
+    //     return http.get(
+    //         `${apiUrl}/games/newMainStats/getStatsByMonth/${teamId}?startDate=${dates.startDate}&endDate=${dates.endDate}`
+    //     );
+    // }
     if (stats === "getTopComebacks") {
         return http.get(
             `${apiUrl}/games/newMainStats/getTopComebacks/${teamId}?startDate=${dates.startDate}&endDate=${dates.endDate}`
@@ -139,6 +139,13 @@ export function getCardStats(teamId, stats, month = null, dates = { startDate: n
     if (stats === "getThisMonthStats") {
         return http.get(`${apiUrl}/games/newMainStats/getThisMonthStats/${teamId}/${month}`);
     }
+}
+
+export function getStatsByMonth(teamId, dates = { startDate: null, endDate: null }) {
+    console.log("dates", dates);
+    return http.get(
+        `${apiUrl}/games/newMainStats/getStatsByMonth/${teamId}?startDate=${dates?.startDate}&endDate=${dates?.endDate}`
+    );
 }
 
 export function getAllMonthsByMonth(teamId) {
@@ -184,4 +191,5 @@ export default {
     getAllMonthsByMonth,
     getAllGamesByTeam,
     GetSeasonYears,
+    getStatsByMonth,
 };

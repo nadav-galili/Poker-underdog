@@ -14,6 +14,7 @@ import SmallCard from "./smallCard";
 import SideBetsCard from "./sideBetsCard";
 import TotalStatsForTeam from "./totalStatsForTeam";
 import SeasonPick from "./seasonPick";
+import SmallMonthsCard from "./smallMonthsCard";
 
 const NewMainTable = (props) => {
     const teamId = props.match.params.teamId;
@@ -153,7 +154,9 @@ const NewMainTable = (props) => {
                             seasonDates={seasonDates}
                         />
                         <div className="col-6 mt-3">
-                            <SmallCard
+                            <SmallMonthsCard teamId={teamId} seasonDates={seasonDates} />
+
+                            {/* <SmallCard
                                 teamId={teamId}
                                 cardTitle="Stats By Months 💵"
                                 stats="getStatsByMonth"
@@ -170,7 +173,7 @@ const NewMainTable = (props) => {
                                           })
                                 }
                                 seasonDates={seasonDates}
-                            />
+                            /> */}
                         </div>
                         <div className="col-6 mt-3">
                             <SmallCard

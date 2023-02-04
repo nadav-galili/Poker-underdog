@@ -25,7 +25,12 @@ const SmallCard = ({
     }, [seasonDates]);
     return (
         <>
-            {cardStats.length > 0 && (
+            {/* {cardStats === "No data found" && (
+                <div className="container mt-5">
+                    <p className="text-danger text-center">No Games Played This Month</p>
+                </div>
+            )} */}
+            {cardStats.length > 0 && Array.isArray(cardStats) && (
                 <div className="smallCardContainer">
                     <p className="text-center pt-2  newSmallCard">{cardTitle}</p>
                     <div className="col-12 profitCard">
@@ -85,20 +90,20 @@ const SmallCard = ({
                         </li>
                     </ol>
                     <p className="bg-white fullTable">
-                        {cardTitle === "Stats By Months 💵" && (
+                        {/* {cardTitle === "Stats By Months 💵" && (
                             <Link className="linkToNewCard" to={`/newMainTable/newByMonths/${teamId}`}>
                                 View Full Table <AiOutlineArrowRight />
                             </Link>
-                        )}
-                        {cardTitle !== "Stats By Months 💵" && (
-                            <Link
-                                className="linkToNewCard"
-                                to={`/newMainTable/newStatsCard/${teamId}?stats=${stats}&cardTitle=${cardTitle}&data=${data}&leaderData=${leaderData}&headerData=${headerData}
+                        )} */}
+                        {/* {cardTitle !== "Stats By Months 💵" && ( */}
+                        <Link
+                            className="linkToNewCard"
+                            to={`/newMainTable/newStatsCard/${teamId}?stats=${stats}&cardTitle=${cardTitle}&data=${data}&leaderData=${leaderData}&headerData=${headerData}
                                 &seasonDates=${JSON.stringify(seasonDates)}`}
-                            >
-                                View Full Table <AiOutlineArrowRight />
-                            </Link>
-                        )}
+                        >
+                            View Full Table <AiOutlineArrowRight />
+                        </Link>
+                        {/* )} */}
                     </p>
                 </div>
             )}
