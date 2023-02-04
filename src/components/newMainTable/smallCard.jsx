@@ -20,7 +20,6 @@ const SmallCard = ({
         async function getCardStats() {
             const { data: cardStats } = await gameService.getCardStats(teamId, stats, null, seasonDates);
             setCardStats(cardStats);
-            // console.log("🚀 ~ file: smallCard.jsx:24 ~ getCardStats ~ cardStats", cardStats);
         }
         getCardStats();
     }, [seasonDates]);
@@ -91,20 +90,20 @@ const SmallCard = ({
                         </li>
                     </ol>
                     <p className="bg-white fullTable">
-                        {cardTitle === "Stats By Months 💵" && (
+                        {/* {cardTitle === "Stats By Months 💵" && (
                             <Link className="linkToNewCard" to={`/newMainTable/newByMonths/${teamId}`}>
                                 View Full Table <AiOutlineArrowRight />
                             </Link>
-                        )}
-                        {cardTitle !== "Stats By Months 💵" && (
-                            <Link
-                                className="linkToNewCard"
-                                to={`/newMainTable/newStatsCard/${teamId}?stats=${stats}&cardTitle=${cardTitle}&data=${data}&leaderData=${leaderData}&headerData=${headerData}
+                        )} */}
+                        {/* {cardTitle !== "Stats By Months 💵" && ( */}
+                        <Link
+                            className="linkToNewCard"
+                            to={`/newMainTable/newStatsCard/${teamId}?stats=${stats}&cardTitle=${cardTitle}&data=${data}&leaderData=${leaderData}&headerData=${headerData}
                                 &seasonDates=${JSON.stringify(seasonDates)}`}
-                            >
-                                View Full Table <AiOutlineArrowRight />
-                            </Link>
-                        )}
+                        >
+                            View Full Table <AiOutlineArrowRight />
+                        </Link>
+                        {/* )} */}
                     </p>
                 </div>
             )}

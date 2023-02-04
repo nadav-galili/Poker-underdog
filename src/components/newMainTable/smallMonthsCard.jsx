@@ -23,11 +23,9 @@ const SmallMonthsCard = ({ teamId, seasonDates }) => {
     const d = new Date();
     const monthIndex = d.getMonth();
     const monthName = monthNames[monthIndex];
-    // console.log("🚀 ~ file: smallMonthsCard.jsx:24 ~ SmallMonthsCard ~ teamId", seasonDates);
     useEffect(() => {
         async function getCardStats() {
             const { data: allGamesByMonth } = await gameService.getStatsByMonth(teamId, seasonDates);
-            // console.log("🚀 ~ file: smallMonthsCard.jsx:24 ~ getCardStats ~ cardStats", allGamesByMonth);
             setMonthsStats(allGamesByMonth);
         }
         getCardStats();
@@ -94,7 +92,10 @@ const SmallMonthsCard = ({ teamId, seasonDates }) => {
                         </li>
                     </ol>
                     <p className="bg-white fullTable">
-                        <Link className="linkToNewCard" to={`/newMainTable/newByMonths/${teamId}`}>
+                        <Link
+                            className="linkToNewCard"
+                            to={`/newMainTable/newByMonths/${teamId}?seasonDates=${JSON.stringify(seasonDates)}`}
+                        >
                             View Full Table <AiOutlineArrowRight />
                         </Link>
                     </p>

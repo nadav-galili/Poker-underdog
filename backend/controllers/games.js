@@ -298,10 +298,6 @@ exports.gameById = async function (req, res) {
 };
 exports.dataByMonths = async function (req, res) {
     let month = parseInt(req.params.month);
-    // let month = new Date().getMonth() + 1;
-    // console.log("🚀 ~ file: games.js:301 ~ month", month);
-    // console.log("month", new Date().getMonth());
-
     const byMonths = await Game.aggregate([
         {
             $unwind: {
@@ -1519,10 +1515,7 @@ exports.getHourlyStats = async function (req, res) {
 };
 
 exports.getStatsByMonth = async function (req, res) {
-    // const thisMonth = new Date().getMonth() + 2;
-    // console.log("🚀 ~ file: games.js:1526 ~ thisMonth", thisMonth);
     const teamId = req.params.teamId;
-    // const thisMonth = new Date().getMonth() + 1;
     let startDate = req.query.startDate !== "undefined" ? req.query.startDate : new Date().getFullYear();
     let endDate = req.query.endDate !== "undefined" ? req.query.endDate : new Date().getFullYear() + 1;
     const allGamesByMonth = await Game.aggregate([
@@ -1609,7 +1602,6 @@ exports.getStatsByMonth = async function (req, res) {
         },
     ]);
 
-    console.log("🚀 ~ file: games.js:1588 ~ allGamesByMonth", allGamesByMonth);
     res.send(allGamesByMonth);
 };
 
@@ -2059,7 +2051,6 @@ exports.getThisMonthStats = async function (req, res) {
         },
     ]);
 
-    // console.log("🚀 ~ file: games.js:2091 ~ getThisMonthStats", getThisMonthStats);
     res.send(getThisMonthStats);
 };
 

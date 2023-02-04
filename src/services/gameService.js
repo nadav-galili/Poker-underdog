@@ -142,8 +142,9 @@ export function getCardStats(teamId, stats, month = null, dates = { startDate: n
 }
 
 export function getStatsByMonth(teamId, dates = { startDate: null, endDate: null }) {
+    console.log("dates", dates);
     return http.get(
-        `${apiUrl}/games/newMainStats/getStatsByMonth/${teamId}?startDate=${dates.startDate}&endDate=${dates.endDate}`
+        `${apiUrl}/games/newMainStats/getStatsByMonth/${teamId}?startDate=${dates?.startDate}&endDate=${dates?.endDate}`
     );
 }
 
