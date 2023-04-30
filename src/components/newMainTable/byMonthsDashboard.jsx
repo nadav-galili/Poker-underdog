@@ -35,7 +35,7 @@ const ByMonthsDashboard = (props) => {
             {monthsStats.length > 0 && (
                 <div className="row">
                     {monthsStats.map((month) => (
-                        <div className="col-4">
+                        <div className="col-4 mt-4">
                             <div className="smallCardContainer">
                                 <p className="text-center pt-2 bg-white newSmallCard">{getMonthName(month._id)}</p>
                                 <div className="col-12 profitCard">

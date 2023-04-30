@@ -1,499 +1,493 @@
 .statsHero {
-  height: 150px;
-  background-size: 100%;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+    height: 150px;
+    background-size: 100%;
 }
 
 .statsHeroPerHour {
-  @extend .statsHero;
-  height: 215px;
+    @extend .statsHero;
+    height: 215px;
 }
 .statsList {
-  padding: 0;
-  :last-child {
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-  }
+    padding: 0;
 }
 
 .heroImage {
-  & img {
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-    object-fit: cover;
-    // height: 90%;
-    margin-right: 2em;
-    margin-top: 10px;
-    max-width: 80%;
-    max-height: 80%;
-  }
+    & img {
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        object-fit: cover;
+        // height: 90%;
+        margin-right: 2em;
+        margin-top: 10px;
+        max-width: 80%;
+        max-height: 80%;
+    }
 }
 
 .pos {
-  color: $navbarWhite;
-  margin-left: 0.5em;
-  font-size: 1.5em;
-  font-weight: bolder;
+    color: $navbarWhite;
+    margin-left: 0.5em;
+    font-size: 1.5em;
+    font-weight: bolder;
 }
 #profit {
-  color: $navbarWhite;
-  margin-left: 0.8em;
-  font-size: 2.7em;
-  font-family: $fantasyFont;
+    color: $navbarWhite;
+    margin-left: 0.8em;
+    font-size: 2.7em;
+    font-family: $fantasyFont;
 }
 #heroName {
-  text-decoration: none;
-  font-size: 1.8em;
-  margin-left: 0.5em;
-  color: $navbarWhite;
-  font-family: $fantasyFont;
-  text-transform: capitalize;
+    text-decoration: none;
+    font-size: 1.8em;
+    margin-left: 0.5em;
+    color: $navbarWhite;
+    font-family: $fantasyFont;
+    text-transform: capitalize;
 }
 .heroDate {
-  font-size: 1.2em;
-  margin-left: 0.5em;
-  color: $navbarWhite;
+    font-size: 1.2em;
+    margin-left: 0.5em;
+    color: $navbarWhite;
 }
 
 #amount {
-  margin-left: 0.5em;
-  font-size: 1.7em;
-  font-weight: 900;
-  color: $basecolorGreen;
+    margin-left: 0.5em;
+    font-size: 1.7em;
+    font-weight: 900;
+    color: $basecolorGreen;
 }
 #cardTop {
-  background-color: $basecolorPurple;
-  border-top-right-radius: 30px;
-  border-top-left-radius: 30px;
+    background-color: $basecolorPurple;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
 }
 
 .statsRow {
-  background-color: $navbarWhite;
-  display: flex;
-  align-content: end;
-  height: 70px;
-  border-bottom: 0.7px solid;
-  & div {
-    font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
-    font-size: 1em;
-  }
+    background-color: $navbarWhite;
+    display: flex;
+    align-content: end;
+    height: 70px;
+    border-bottom: 0.7px solid;
+    & div {
+        font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
+        font-size: 1em;
+    }
 }
 
 .statsRowAllGames {
-  @extend .statsRow;
-  & :nth-child(1) {
-    width: 14%;
-  }
-  & :nth-child(2) {
-    width: 20%;
-    & img {
-      width: 60px;
+    @extend .statsRow;
+    & :nth-child(1) {
+        width: 14%;
     }
-  }
-  & :nth-child(3) {
-    width: 20%;
-    font-size: 1em;
-  }
-  & :nth-child(4) {
-    width: 10%;
-    text-align: center;
-    align-self: center;
-    font-size: 1.2em;
-    padding-top: 0;
-  }
-  & :nth-child(5) {
-    width: 19%;
-  }
+    & :nth-child(2) {
+        width: 20%;
+        & img {
+            width: 60px;
+        }
+    }
+    & :nth-child(3) {
+        width: 20%;
+        font-size: 1em;
+    }
+    & :nth-child(4) {
+        width: 10%;
+        text-align: center;
+        align-self: center;
+        font-size: 1.2em;
+        padding-top: 0;
+    }
+    & :nth-child(5) {
+        width: 19%;
+    }
 }
 
 .rowPos {
-  font-weight: bold;
-  text-align: center;
-  font-size: 1em;
-  font-weight: bold;
-  align-self: center;
-  width: 15%;
-  font-size: 1.4em;
-  width: 20%;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    align-self: center;
+    width: 15%;
+    font-size: 1.4em;
+    width: 20%;
 }
 .rowPos.month {
-  width: 10%;
+    width: 10%;
 }
 #rowPosTop {
-  @extend .rowPos;
-  width: 10% !important;
-  text-align: center;
-  padding-left: 0px;
-  font-size: 1.2em !important;
+    @extend .rowPos;
+    width: 10% !important;
+    text-align: center;
+    padding-left: 0px;
+    font-size: 1.2em !important;
 }
 
 .rowImage {
-  align-self: center;
-  width: 20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  img {
-    border-top-left-radius: 30px !important;
-    border-top-right-radius: 30px !important;
-    border-radius: 50%;
-    border: 1px solid black;
-    height: 60px;
-    width: 60px;
-    object-fit: cover;
-    background-image: linear-gradient($basecolorPurple, #4e4949);
-  }
+    align-self: center;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        border-top-left-radius: 30px !important;
+        border-top-right-radius: 30px !important;
+        border-radius: 50%;
+        border: 1px solid black;
+        height: 60px;
+        width: 60px;
+        object-fit: cover;
+        background-image: linear-gradient($basecolorPurple, #4e4949);
+    }
 }
 
 .rowImage.h2hGames {
-  img {
-    border-bottom-left-radius: 30px !important;
-    border-bottom-right-radius: 30px !important;
-    height: 3em;
-    width: 3em;
-    border-radius: 50%;
-    border: 1px solid black;
-    object-fit: cover;
-    background-image: linear-gradient($basecolorPurple, #4e4949);
-  }
+    img {
+        border-bottom-left-radius: 30px !important;
+        border-bottom-right-radius: 30px !important;
+        height: 3em;
+        width: 3em;
+        border-radius: 50%;
+        border: 1px solid black;
+        object-fit: cover;
+        background-image: linear-gradient($basecolorPurple, #4e4949);
+    }
 }
 .rowImage.month {
-  width: 25%;
+    width: 25%;
 }
 .rowImageTop {
-  @extend .rowImage;
-  width: 20%;
+    @extend .rowImage;
+    width: 20%;
 }
 
 .rowName {
-  font-size: 1em;
-  font-weight: bold;
-  font-family: $fantasyFont;
-  padding-left: 0.8em;
-  align-self: center;
-  text-transform: capitalize;
-  flex-grow: 2;
+    font-size: 1em;
+    font-weight: bold;
+    font-family: $fantasyFont;
+    padding-left: 0.8em;
+    align-self: center;
+    text-transform: capitalize;
+    flex-grow: 2;
 }
 
 .gamePlayed {
-  @extend .rowName;
-  width: 22%;
-  text-align: center;
+    @extend .rowName;
+    width: 22%;
+    text-align: center;
 }
 
 .rowName.month {
-  width: 29%;
+    width: 29%;
 }
 .rowNameTop {
-  @extend .rowName;
-  padding-left: 0;
-  text-align: start;
-  width: 40%;
+    @extend .rowName;
+    padding-left: 0;
+    text-align: start;
+    width: 40%;
 }
 .rowDate {
-  width: 25%;
-  text-align: center;
-  align-self: center;
-  font-size: 0.9em;
-  font-family: $fantasyFont;
+    width: 25%;
+    text-align: center;
+    align-self: center;
+    font-size: 0.9em;
+    font-family: $fantasyFont;
 }
 
 .rowProfit {
-  width: 20%;
-  font-family: $fantasyFont;
-  align-self: center;
-  text-align: center;
-  font-size: 1.2em;
-  font-weight: bold;
-  border-bottom-left-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
+    width: 20%;
+    font-family: $fantasyFont;
+    align-self: center;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
 }
 
 .rowProfit.month {
-  width: 17%;
+    width: 17%;
 }
 
 .rowProfitSuccess {
-  @extend .rowProfit;
-  font-size: 0.9em;
+    @extend .rowProfit;
+    font-size: 0.9em;
 }
 
 .rowProfitTop {
-  @extend .rowProfit;
-  text-align: center;
-  width: 14%;
+    @extend .rowProfit;
+    text-align: center;
+    width: 14%;
 }
 
 .avgP {
-  color: $navbarWhite;
+    color: $navbarWhite;
 }
 #h2hLi {
-  list-style: none;
+    list-style: none;
 }
 
 .h2hDetailsRow {
-  height: 3.5em;
-  color: $navbarWhite;
-  font-size: 0.6em;
-  text-align: center;
-  align-items: center;
-  & p {
-    margin: 0;
-    width: 10%;
-  }
-  & :nth-child(2) {
-    width: 17%;
-  }
-  & :nth-child(3) {
-    width: 23%;
-  }
-  & :nth-child(4) {
-    width: 15%;
-  }
-  & :nth-child(5) {
-    width: 15%;
-  }
-  & :nth-child(6) {
-    width: 10%;
-  }
-  & :nth-child(7) {
-    width: 15%;
-  }
+    height: 3.5em;
+    color: $navbarWhite;
+    font-size: 0.6em;
+    text-align: center;
+    align-items: center;
+    & p {
+        margin: 0;
+        width: 10%;
+    }
+    & :nth-child(2) {
+        width: 17%;
+    }
+    & :nth-child(3) {
+        width: 23%;
+    }
+    & :nth-child(4) {
+        width: 15%;
+    }
+    & :nth-child(5) {
+        width: 15%;
+    }
+    & :nth-child(6) {
+        width: 10%;
+    }
+    & :nth-child(7) {
+        width: 15%;
+    }
 }
 
 .rowPointsTop,
 .rowSuccessTop {
-  @extend .rowProfitTop;
-  font-weight: normal;
-  width: 13%;
-  padding-right: 0.3em;
-  font-size: 1em;
+    @extend .rowProfitTop;
+    font-weight: normal;
+    width: 13%;
+    padding-right: 0.3em;
+    font-size: 1em;
 }
 .rowSuccessTop {
-  font-size: 0.85em;
+    font-size: 0.85em;
 }
 .rowPointsTop {
-  font-weight: bolder;
+    font-weight: bolder;
 }
 .rowImageH2h {
-  @extend .rowImageTop;
-  width: 17%;
-  & img {
-    width: 40px;
-    height: 40px;
-  }
+    @extend .rowImageTop;
+    width: 17%;
+    & img {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 .rowH2hAvg {
-  @extend .rowDate;
-  font-size: 1em;
-  text-align: center;
-  width: 15%;
+    @extend .rowDate;
+    font-size: 1em;
+    text-align: center;
+    width: 15%;
 }
 
 .rowH2hG {
-  @extend .rowDate;
-  width: 15%;
-  font-size: 1em;
-  padding-left: 1em;
+    @extend .rowDate;
+    width: 15%;
+    font-size: 1em;
+    padding-left: 1em;
 }
 
 .rowNameH2h {
-  @extend .rowNameTop;
-  width: 23%;
-  padding-left: 0.7em;
+    @extend .rowNameTop;
+    width: 23%;
+    padding-left: 0.7em;
 }
 
 #lGame {
-  width: 90%;
-  font-size: 0.7em;
-  justify-content: start;
+    width: 90%;
+    font-size: 0.7em;
+    justify-content: start;
 }
 
 #lGameMain {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  & p {
-    font-size: 0.9em;
-    text-align: center;
-  }
-  & :nth-child(1) {
-    width: 15%;
-  }
-  & :nth-child(2) {
-    width: 18%;
-  }
-  & :nth-child(3) {
-    width: 30%;
-  }
-  & :nth-child(4) {
-    width: 22%;
-  }
-  & :nth-child(5) {
-    width: 17%;
-    border-bottom-right-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
-  }
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    & p {
+        font-size: 0.9em;
+        text-align: center;
+    }
+    & :nth-child(1) {
+        width: 15%;
+    }
+    & :nth-child(2) {
+        width: 18%;
+    }
+    & :nth-child(3) {
+        width: 30%;
+    }
+    & :nth-child(4) {
+        width: 22%;
+    }
+    & :nth-child(5) {
+        width: 17%;
+        border-bottom-right-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+    }
 }
 
 .rowPosPerHour {
-  width: 8% !important;
-  @extend .rowPos;
+    width: 8% !important;
+    @extend .rowPos;
 }
 
 .rowPosLast {
-  width: 10% !important;
-  @extend .rowPos;
+    width: 10% !important;
+    @extend .rowPos;
 }
 
 .rowImagePerHour {
-  @extend .rowImage;
-  width: 18%;
+    @extend .rowImage;
+    width: 18%;
 }
 .rowNamePerHour {
-  @extend .rowName;
-  padding-left: 0.4em;
-  width: 15%;
-  font-size: 0.9em;
+    @extend .rowName;
+    padding-left: 0.4em;
+    width: 15%;
+    font-size: 0.9em;
 }
 
 .rowHours {
-  width: 15%;
-  text-align: center;
-  align-self: center;
-  font-size: 1.2em;
-  font-weight: bolder;
-  font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
+    width: 15%;
+    text-align: center;
+    align-self: center;
+    font-size: 1.2em;
+    font-weight: bolder;
+    font-family: "PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif";
 }
 .statsHeaderPerHour {
-  background-color: $perHourGreen;
-  list-style: none;
-  height: 3.5em;
-  & div {
-    text-align: center;
-    font-size: 0.8em;
-    align-self: center;
-    font-weight: bolder;
-    border-right: 1px solid black;
-  }
-  & :nth-child(1) {
-    width: 10%;
-  }
-  & :nth-child(2) {
-    width: 25%;
-  }
-  & :nth-child(3) {
-    width: 29%;
-  }
-  & :nth-child(4) {
-    width: 22%;
-  }
-  & :nth-child(5) {
-    width: 22%;
-  }
-  & :nth-child(6) {
-    border-right: none;
-  }
+    background-color: $perHourGreen;
+    list-style: none;
+    height: 3.5em;
+    & div {
+        text-align: center;
+        font-size: 0.8em;
+        align-self: center;
+        font-weight: bolder;
+        border-right: 1px solid black;
+    }
+    & :nth-child(1) {
+        width: 10%;
+    }
+    & :nth-child(2) {
+        width: 25%;
+    }
+    & :nth-child(3) {
+        width: 29%;
+    }
+    & :nth-child(4) {
+        width: 22%;
+    }
+    & :nth-child(5) {
+        width: 22%;
+    }
+    & :nth-child(6) {
+        border-right: none;
+    }
 }
 .rowProfitPerHour {
-  @extend .rowProfit;
-  width: 18%;
+    @extend .rowProfit;
+    width: 18%;
 }
 
 .heroPerHour {
-  color: gold;
-  font-size: 0.5em;
-  // padding: 0;
+    color: gold;
+    font-size: 0.5em;
+    // padding: 0;
 }
 .heroImagePerHour {
-  @extend .heroImage;
-  height: 80%;
-  & img {
-    padding-right: 1.2em;
-    margin-right: 0;
-    margin-top: 1em;
-  }
+    @extend .heroImage;
+    height: 80%;
+    & img {
+        padding-right: 1.2em;
+        margin-right: 0;
+        margin-top: 1em;
+    }
 }
 
 #lGameP2P {
-  font-size: 0.8em;
-  p {
-    text-align: center;
-    align-self: center;
-  }
+    font-size: 0.8em;
+    p {
+        text-align: center;
+        align-self: center;
+    }
 
-  :nth-child(1) {
-    width: 19%;
-  }
-  :nth-child(2) {
-    width: 14%;
-  }
-  :nth-child(3) {
-    width: 15%;
-  }
-  :nth-child(4) {
-    width: 19%;
-    padding-left: 0.7em;
-  }
-  :nth-child(5) {
-    width: 14%;
-  }
-  :nth-child(6) {
-    width: 19%;
-  }
+    :nth-child(1) {
+        width: 19%;
+    }
+    :nth-child(2) {
+        width: 14%;
+    }
+    :nth-child(3) {
+        width: 15%;
+    }
+    :nth-child(4) {
+        width: 19%;
+        padding-left: 0.7em;
+    }
+    :nth-child(5) {
+        width: 14%;
+    }
+    :nth-child(6) {
+        width: 19%;
+    }
 }
 
 .container .playersList {
-  display: flex;
-  overflow: hidden;
-  padding-left: 0.5rem;
-  flex-wrap: wrap;
-  img {
-    display: inline-block;
-    height: 50px;
-    width: 50px;
-    border-radius: 100%;
-    border: 2px solid #666;
-    margin-right: 0;
-    margin-left: -0.5rem;
-    object-fit: cover;
-    background-image: linear-gradient(#6c14b4, #4e4949);
-  }
+    display: flex;
+    overflow: hidden;
+    padding-left: 0.5rem;
+    flex-wrap: wrap;
+    img {
+        display: inline-block;
+        height: 50px;
+        width: 50px;
+        border-radius: 100%;
+        border: 2px solid #666;
+        margin-right: 0;
+        margin-left: -0.5rem;
+        object-fit: cover;
+        background-image: linear-gradient(#6c14b4, #4e4949);
+    }
 }
 #perHourHeroSide {
-  min-width: 40%;
+    min-width: 40%;
 }
 
 .previousPosition {
-  font-size: 0.6em;
+    font-size: 0.6em;
 }
 
 #arrows {
-  font-size: 0.6em;
+    font-size: 0.6em;
 }
 .previousPosition {
-  font-size: 0.5em;
+    font-size: 0.5em;
 }
 
 .teamShield {
-  height: 10em;
-  width: 6.7em;
-  background-size: contain;
-  background-repeat: no-repeat;
-  & img {
-    width: 3.2em;
-    height: 3.2em;
-    border-radius: 50%;
-    object-fit: cover;
-    align-items: center;
-  }
-  & p {
-    color: #ffffff;
-    font-weight: bolder;
-    font-size: 1.4em;
-    padding-top: 10px;
-  }
+    height: 10em;
+    width: 6.7em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    & img {
+        width: 3.2em;
+        height: 3.2em;
+        border-radius: 50%;
+        object-fit: cover;
+        align-items: center;
+    }
+    & p {
+        color: #ffffff;
+        font-weight: bolder;
+        font-size: 1.4em;
+        padding-top: 10px;
+    }
 }
 // * {
 //   outline: 1px solid red;

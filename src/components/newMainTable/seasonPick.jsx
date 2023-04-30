@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 const SeasonPick = ({ teamId, updateSeasonDates }) => {
     const [seasons, setSeasons] = useState({});
-    const [seasonPick, setSeasonPick] = useState(0);
+    const [seasonPick, setSeasonPick] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     useEffect(() => {
