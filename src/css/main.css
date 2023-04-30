@@ -1020,8 +1020,6 @@ tfoot td {
 .statsHero, .statsHeroPerHour {
   height: 150px;
   background-size: 100%;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
 }
 
 .statsHeroPerHour {
@@ -1030,10 +1028,6 @@ tfoot td {
 
 .statsList {
   padding: 0;
-}
-.statsList :last-child {
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
 }
 
 .heroImage img, .heroImagePerHour img {
