@@ -6,6 +6,7 @@
 /backend/node_modules
 /backend/config.js
 /backend/uploads
+/backend/mykey.pem
 
 /backup/node_modules
 /backup/config
