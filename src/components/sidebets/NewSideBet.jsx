@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PageHeader from "../common/pageHeader";
-import MasterPlayer from "./masterPlayer";
+import MasterPlayer from "./MasterPlayer";
 import userService from "../../services/userService";
 import teamService from "../../services/teamService";
 import ChoosePlayer from "./choosePlayer";
