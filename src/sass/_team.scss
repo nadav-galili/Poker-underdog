@@ -1,10 +1,3 @@
-#myTeams {
-  & a {
-    margin-right: 20px;
-    font-size: 0.7em;
-  }
-}
-
 .team-list {
   font-weight: 700;
   font-size: 1.5em;
@@ -22,7 +15,7 @@ h3 {
 
 #share {
   font-size: 0.6em;
-  color: $basecolorRed;
+  color: $basecolorPurple;
 }
 
 #playersList {
@@ -40,12 +33,29 @@ h3 {
   text-decoration: none;
 }
 
+.card-img-top {
+  object-fit: fill;
+}
 .start {
   color: $basecolorGreen !important;
 }
 
 .teamName {
   color: $navbarWhite;
+}
+
+.myTeamsContainer {
+  height: 10rem;
+  width: 5rem;
+  margin: 0 auto;
+
+  & img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid gold;
+  }
 }
 
 .steps {
@@ -267,6 +277,6 @@ span {
   }
 }
 
-// *{
-//   outline: 1px solid red;
-// }
+.teamText {
+  font-size: 0.6em;
+}

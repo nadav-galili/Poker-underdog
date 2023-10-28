@@ -60,19 +60,17 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
     });
   };
   return (
-    <div className=" col-12 col-md-6 col-lg-4 mt-3">
-      <div className="card mb-3">
+    <div className="col-12 col-md-6 col-lg-4 mt-3 text-center mb-4">
+      <div className="card">
         <img
-          className="p-2"
+          className="card-img-top"
           src={`${apiImage}${team.teamImage}`}
           alt={team.name}
-          width="100"
-          height="100"
+          width={150}
+          height={150}
         />
         <div className="card-body pt-0">
-          <h3 className="card-title ">
-            <u className="text-primary">{team.name}</u>
-          </h3>
+          <h3 className="text-primary">{team.name}</h3>
           <p className="card-text info">
             <strong>
               <u>Team Number:</u>
@@ -164,9 +162,9 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
               </div>
             </div>
           )}
-          <div className="teamBtns d-flex flex-column w-75 ">
+          <div className="d-flex flex-column col-8 m-auto justify-content-around">
             <Link
-              className="button-72 p-2"
+              className="button-72"
               data-toggle="tooltip"
               data-placement="top"
               to={`/newMainTable/${team._id}`}
@@ -176,26 +174,14 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
               <i className="ps-2 fas fa-angle-double-right"></i>
             </Link>
             {captain[0]._id === user._id && (
-              <div className="d-flex flex-column">
-                {/* <Link
-                  className="button-75 mt-2 "
-                  to={`/edit-games/${team._id}`}
-                  teamId={team._id}
-                  title="Only Team Manger can edit games details"
-                >
-                  Edit Games
-                  <AiFillEdit color="white" className="ms-1" />
-                  <i className="ps-2 fas fa-angle-double-right"></i>
-                </Link> */}
-                <button
-                  type="button"
-                  className="btn btn-outline-danger mt-2 w-75"
-                  onClick={() => displayRemoveButtons()}
-                >
-                  <AiFillEdit color="red" className="ms-1" />
-                  Remove Players From Team
-                </button>
-              </div>
+              <button
+                type="button"
+                className="btn btn-outline-danger mt-2"
+                onClick={() => displayRemoveButtons()}
+              >
+                <AiFillEdit color="red" className="" />
+                Remove Players From Team
+              </button>
             )}
           </div>
 

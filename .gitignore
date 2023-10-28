@@ -5,8 +5,10 @@
 # /config
 /backend/node_modules
 /backend/config.js
-/backend/uploads
+/backend/uploads/*
 /backend/mykey.pem
+/backend/.env
+
 
 /backup/node_modules
 /backup/config

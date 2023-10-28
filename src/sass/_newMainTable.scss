@@ -1,218 +1,218 @@
 @import "config";
 
 .extraHeaderSmall {
-    @extend .leaderProfit;
-    font-size: 0.8em;
+  @extend .leaderProfit;
+  font-size: 0.8em;
 }
 
 .fullTable {
-    @extend .leaderDetail;
-    padding-left: 0.5em;
-    padding-top: 0.5em;
+  @extend .leaderDetail;
+  padding-left: 0.5em;
+  padding-top: 0.5em;
 }
 .leaderDetail {
-    font-weight: bolder;
-    font-size: 0.8em;
+  font-weight: bolder;
+  font-size: 0.8em;
 }
 
 .leaderDetailSmall {
-    @extend .leaderDetail;
-    font-size: 0.7em;
+  @extend .leaderDetail;
+  font-size: 0.7em;
 }
 
 .leaderImage {
-    height: 7em;
-    width: 7em;
+  height: 7em;
+  width: 7em;
 
-    & img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        border-radius: 5px;
-        border: 1px solid $baseColorGold;
-        background-image: linear-gradient($headerColorBlue, $navbarWhite);
-    }
+  & img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid $baseColorGold;
+    background-image: linear-gradient($headerColorBlue, $navbarWhite);
+  }
 }
 
 .leaderImageSmall {
-    @extend .leaderImage;
-    height: 5em;
-    width: 5em;
-    & img {
-        height: 90%;
-        width: 90%;
-    }
+  @extend .leaderImage;
+  height: 5em;
+  width: 5em;
+  & img {
+    height: 90%;
+    width: 90%;
+  }
 }
 
 .leaderProfit {
-    & span {
-        color: $baseColorGold;
-        font-size: 1.3em;
-        font-weight: 900;
-    }
+  & span {
+    color: $baseColorGold;
+    font-size: 1.3em;
+    font-weight: 900;
+  }
 }
 
 .linkToNewCard {
-    text-decoration: none;
-    color: $backgroundBlack;
+  text-decoration: none;
+  color: $backgroundBlack;
 }
 .seasonEndDate {
-    & :nth-child(3) {
-        font-weight: 900;
-        color: $baseColorGold;
-        text-decoration: underline;
-    }
+  & :nth-child(3) {
+    font-weight: 900;
+    color: $baseColorGold;
+    text-decoration: underline;
+  }
 }
 
 .secondPlayer {
-    font-size: 0.8em !important;
-    & span:first-of-type {
-        font-size: 1em;
-        color: black;
-        font-weight: bolder;
-    }
-    & span:nth-of-type(2) {
-        font-size: 1em;
-        color: #0015ff;
-        font-weight: 900;
-    }
+  font-size: 0.8em !important;
+  & span:first-of-type {
+    font-size: 1em;
+    color: black;
+    font-weight: bolder;
+  }
+  & span:nth-of-type(2) {
+    font-size: 1em;
+    color: #0015ff;
+    font-weight: 900;
+  }
 
-    & li {
-        border-bottom: 1px solid rgb(168, 164, 164);
-    }
+  & li {
+    border-bottom: 1px solid rgb(168, 164, 164);
+  }
 }
 
 .secondPlayerSmall {
-    @extend .secondPlayer;
-    font-size: 0.6em !important;
+  @extend .secondPlayer;
+  font-size: 0.6em !important;
 }
 
 .newSmallCard {
-    text-decoration: underline;
-    font-weight: bolder;
-    background-color: $baseColorGold;
+  text-decoration: underline;
+  font-weight: bolder;
+  background-color: $baseColorGold;
 }
 
 .next,
 .previous {
-    & a {
-        align-self: center;
-    }
+  & a {
+    align-self: center;
+  }
 }
 
 .odds {
-    & a {
-        color: $headerColorBlue !important;
-    }
+  & a {
+    color: $basecolorGreen;
+  }
 }
 
 #teamName {
-    color: $baseColorGold;
-    font-size: 1.2em;
-    text-decoration: underline;
-    font-weight: 800;
+  color: $baseColorGold;
+  font-size: 1.2em;
+  text-decoration: underline;
+  font-weight: 800;
 }
 .teamLogo {
-    height: 7em;
-    width: 7em;
-    border: 1px solid $baseColorGold;
-    border-radius: 15%;
+  height: 7em;
+  width: 7em;
+  border: 1px solid $baseColorGold;
+  border-radius: 15%;
 
-    & img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-        overflow: hidden;
-        border-radius: 15%;
-    }
+  & img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    overflow: hidden;
+    border-radius: 15%;
+  }
 }
 
 .playersImage {
-    width: 2.5rem;
-    height: 2.5rem !important;
-    margin-bottom: 0.5em;
+  width: 2.5rem;
+  height: 2.5rem !important;
+  margin-bottom: 0.5em;
 
-    & img {
-        border: 1px solid $baseColorGold;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        border-radius: 50%;
-        background-image: linear-gradient($headerColorBlue, $navbarWhite);
-    }
+  & img {
+    border: 1px solid $baseColorGold;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    background-image: linear-gradient($headerColorBlue, $navbarWhite);
+  }
 }
 .rounded-circle {
-    height: 2em;
-    width: 2em;
-    border: 1px solid $baseColorGold;
-    object-fit: cover;
-    background-image: linear-gradient(to bottom right, $headerColorBlue, #d7d5d5);
+  height: 2em;
+  width: 2em;
+  border: 1px solid $baseColorGold;
+  object-fit: cover;
+  background-image: linear-gradient(to bottom right, $headerColorBlue, #d7d5d5);
 }
 
 .playerName {
-    color: white;
-    font-size: 0.5em;
+  color: white;
+  font-size: 0.5em;
 }
 .profitCard {
-    background-image: linear-gradient(to bottom right, $headerColorBlue, #d7d5d5);
+  background-image: linear-gradient(to bottom right, $headerColorBlue, #d7d5d5);
 }
 
 .profitsContainer {
-    padding: 10px;
-    border-radius: 5px;
-    overflow: hidden;
+  padding: 10px;
+  border-radius: 5px;
+  overflow: hidden;
 }
 .vsContainerFather {
-    // padding: 10px;
-    border-radius: 5px;
-    overflow: hidden;
+  // padding: 10px;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .secondPlayerImage {
-    width: 1.8em;
-    height: 1.8em !important;
-    // margin-bottom: 0.5em;
+  width: 1.8em;
+  height: 1.8em !important;
+  // margin-bottom: 0.5em;
 
-    & img {
-        border: 1px solid $baseColorGold;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        border-radius: 50%;
-        background-image: linear-gradient($headerColorBlue, $navbarWhite);
-    }
+  & img {
+    border: 1px solid $baseColorGold;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    background-image: linear-gradient($headerColorBlue, $navbarWhite);
+  }
 }
 
 .Small {
-    height: 13em;
+  height: 13em;
 }
 
 .smallCardContainer {
-    @extend .profitsContainer;
-    padding: 0;
+  @extend .profitsContainer;
+  padding: 0;
 }
 .smallCardLastDetail {
-    font-size: 0.8em;
-    text-align: center;
-    align-self: center;
+  font-size: 0.8em;
+  text-align: center;
+  align-self: center;
 }
 
 .totalStatsForTeam > * {
-    color: $baseColorGold;
-    text-align: center;
-    font-size: 0.9em;
-    font-weight: 900;
+  color: $baseColorGold;
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: 900;
 }
 
 .totalProfitNewCard {
-    font-size: 1.2em;
-    text-decoration: underline;
-    font-weight: 900;
-    background-color: $basecolorGreen;
+  font-size: 1.2em;
+  text-decoration: underline;
+  font-weight: 900;
+  background-color: $basecolorGreen;
 }
 .vsContainer {
-    @extend .profitCard;
+  @extend .profitCard;
 }
 .vsData {
-    @extend .totalStatsForTeam;
+  @extend .totalStatsForTeam;
 }
