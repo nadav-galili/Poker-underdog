@@ -6,6 +6,7 @@ import Team from "./team";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { apiImage } from "../config.json";
 
 const MyTeams = () => {
   const [teams, setTeams] = useState([]);
@@ -52,27 +53,26 @@ const MyTeams = () => {
   return (
     <div className="container about">
       <PageHeader titleText="My Teams Page" />
-      <img
-        src={process.env.PUBLIC_URL + "/icons/teams.png"}
-        alt="teams icon"
-        className="aboutIcon"
-      />
       <div className="row">
-        <div className="col-12" id="myTeams">
-          <Link className="btn btn-primary  mb-3" to="/create-team">
+        <div className="myTeamsContainer col-6 my-3">
+          <img src={apiImage + "images/teamsPage.png"} alt="teams icon" />
+        </div>
+      </div>
+      <div className="row">
+        <div className=" d-flex justify-content-around">
+          <Link className="btn btn-primary" to="/create-team">
             +Add A New Team
           </Link>
-          <Link className="btn btn-primary  mb-3" to="/join-team">
+          <Link className="btn btn-primary" to="/join-team">
             Join An Existing Team
           </Link>
-          <div className="teamText">
-            You can try a test team.
-            <br /> enter "Join an existing team" and try out
-          </div>
-          <p className="mt-3 team-list">
-            {teams.length > 0 && <span>Your teams are in the list below:</span>}
-          </p>
         </div>
+        <p className="text-white teamText mt-2 text-center">
+          You can try a test team. enter "Join an existing team" and try out
+        </p>
+        <p className="mt-3 team-list text-center">
+          {teams.length > 0 && <span>Your teams are in the list below:</span>}
+        </p>
       </div>
       <div className="row">
         {teams.length > 0 &&

@@ -10,17 +10,15 @@ const app = express();
 const http = require("http").Server(app);
 const mongoose = require("mongoose");
 const path = require("path");
+require("dotenv").config();
 // const nodemailer = require("nodemailer");
 // const exphbs = require("express-handlebars");
 // const hbs = require("nodemailer-express-handlebars");
 //  const hbs = require("hbs")
-const { engine } = require("express-handlebars");
-
-const config = require("./config");
+// const { engine } = require("express-handlebars");
 mongoose
   .connect(
-    `mongodb+srv://${config.production.database.user_name}:` +
-      `${config.production.database.pass}@${config.production.server.cluster}/${config.production.database.db}?retryWrites=true&w=majority`,
+    `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@${process.env.CLUSTER}/${process.env.DB}?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -53,9 +51,9 @@ app.use(express.static(path.join(__dirname, "public")));
 // app.engine('.hbs', exphbs({extname: '.hbs'}));
 // app.set('view engine', '.hbs');
 // app.engine('handlebars', exphbs());
-app.engine("handlebars", engine());
-app.set("view engine", "hbs");
-app.set("views", "./views/");
+// app.engine("handlebars", engine());
+// app.set("view engine", "hbs");
+// app.set("views", "./views/");
 
 app.use("/api/h2h", h2h);
 app.use("/api/users", users);

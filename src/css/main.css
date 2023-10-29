@@ -70,14 +70,16 @@ h1 {
   border: 3px solid #ff3030;
   border-radius: 15px;
   transform: rotate(-30deg);
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   width: 80%;
 }
 
 .homeImg2 {
   display: flex;
   justify-content: center;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   height: 12em;
 }
 .homeImg2 img {
@@ -179,7 +181,8 @@ h1 {
 
 #mainStats img {
   height: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 #statsCardText {
@@ -216,7 +219,8 @@ h1 {
   text-align: center;
   text-decoration: none;
   transition: all 0.3s;
-  user-select: none;
+  -moz-user-select: none;
+       user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   width: 100%;
@@ -298,11 +302,6 @@ h1 {
   text-transform: capitalize;
 }
 
-#myTeams a {
-  margin-right: 20px;
-  font-size: 0.7em;
-}
-
 .team-list {
   font-weight: 700;
   font-size: 1.5em;
@@ -320,7 +319,7 @@ h3 {
 
 #share {
   font-size: 0.6em;
-  color: #ff3030;
+  color: #6c14b4;
 }
 
 #playersList {
@@ -338,12 +337,31 @@ h3 {
   text-decoration: none;
 }
 
+.card-img-top {
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+
 .start {
   color: #02d84d !important;
 }
 
 .teamName {
   color: #fcfcfc;
+}
+
+.myTeamsContainer {
+  height: 10rem;
+  width: 5rem;
+  margin: 0 auto;
+}
+.myTeamsContainer img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 15px;
+  border: 2px solid gold;
 }
 
 .steps {
@@ -354,7 +372,8 @@ h3 {
 .teams img {
   height: 80px;
   width: 80px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 15px;
   border: 2px solid #2752ea;
   background-image: linear-gradient(#6c14b4, #4e4949);
@@ -435,7 +454,8 @@ span {
   text-align: center;
   text-decoration: none;
   transition: all 0.3s;
-  user-select: none;
+  -moz-user-select: none;
+       user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
@@ -481,7 +501,8 @@ span {
   text-align: center;
   text-decoration: none;
   transition: all 0.3s;
-  user-select: none;
+  -moz-user-select: none;
+       user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
@@ -522,7 +543,8 @@ span {
   text-align: center;
   text-decoration: none;
   transition: all 0.3s;
-  user-select: none;
+  -moz-user-select: none;
+       user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
@@ -551,6 +573,10 @@ span {
     padding: 5px 12px;
   }
 }
+.teamText {
+  font-size: 0.6em;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -715,7 +741,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 .carousel-inner img {
   height: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .carousel-item {
@@ -894,7 +921,8 @@ canvas {
   border: 3px solid #2752ea;
   width: 3em;
   height: 3em;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   background-color: #6c14b4;
   border-radius: 50%;
 }
@@ -911,13 +939,6 @@ canvas {
 .card-head {
   width: 100px;
   height: 100px;
-}
-
-.card-body button {
-  font-size: 0.5em;
-  max-width: 60px;
-  display: flex;
-  justify-content: center;
 }
 
 #players_select {
@@ -1033,7 +1054,8 @@ tfoot td {
 .heroImage img, .heroImagePerHour img {
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   margin-right: 2em;
   margin-top: 10px;
   max-width: 80%;
@@ -1154,7 +1176,8 @@ tfoot td {
   border: 1px solid black;
   height: 60px;
   width: 60px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
@@ -1165,7 +1188,8 @@ tfoot td {
   width: 3em;
   border-radius: 50%;
   border: 1px solid black;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
@@ -1465,7 +1489,8 @@ tfoot td {
   border: 2px solid #666;
   margin-right: 0;
   margin-left: -0.5rem;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
@@ -1495,7 +1520,8 @@ tfoot td {
   width: 3.2em;
   height: 3.2em;
   border-radius: 50%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   align-items: center;
 }
 .teamShield p {
@@ -1551,7 +1577,8 @@ label {
   width: 2.5em;
   display: block;
   margin: auto;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   background-image: linear-gradient(#6c14b4, #4e4949);
 }
 
@@ -1779,7 +1806,8 @@ label {
   max-height: 5em;
   border-radius: 50%;
   border: 2px solid gold;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .credit {
@@ -1802,7 +1830,8 @@ label {
   height: 2.9em;
   border-radius: 50%;
   border: 2px solid white;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   background-color: #6c14b4;
 }
 
@@ -1816,7 +1845,8 @@ label {
   height: 3.5em;
   border-radius: 50%;
   border: 2px solid gold;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   background-color: #6c14b4;
 }
 
@@ -1887,7 +1917,8 @@ label {
 .leaderImage img, .leaderImageSmall img {
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 5px;
   border: 1px solid gold;
   background-image: linear-gradient(#2752ea, #fcfcfc);
@@ -1952,7 +1983,7 @@ label {
 }
 
 .odds a {
-  color: #2752ea !important;
+  color: #02d84d;
 }
 
 #teamName {
@@ -1971,7 +2002,8 @@ label {
 .teamLogo img {
   height: 100%;
   width: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   overflow: hidden;
   border-radius: 15%;
 }
@@ -1985,7 +2017,8 @@ label {
   border: 1px solid gold;
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
   background-image: linear-gradient(#2752ea, #fcfcfc);
 }
@@ -1994,7 +2027,8 @@ label {
   height: 2em;
   width: 2em;
   border: 1px solid gold;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   background-image: linear-gradient(to bottom right, #2752ea, #d7d5d5);
 }
 
@@ -2026,7 +2060,8 @@ label {
   border: 1px solid gold;
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
   background-image: linear-gradient(#2752ea, #fcfcfc);
 }
@@ -2106,7 +2141,8 @@ label {
   border: 1px solid gold;
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
   background-image: linear-gradient(#2752ea, #fcfcfc);
 }
