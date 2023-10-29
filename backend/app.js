@@ -15,7 +15,7 @@ require("dotenv").config();
 // const exphbs = require("express-handlebars");
 // const hbs = require("nodemailer-express-handlebars");
 //  const hbs = require("hbs")
-const { engine } = require("express-handlebars");
+// const { engine } = require("express-handlebars");
 mongoose
   .connect(
     `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@${process.env.CLUSTER}/${process.env.DB}?retryWrites=true&w=majority`,
@@ -51,9 +51,9 @@ app.use(express.static(path.join(__dirname, "public")));
 // app.engine('.hbs', exphbs({extname: '.hbs'}));
 // app.set('view engine', '.hbs');
 // app.engine('handlebars', exphbs());
-app.engine("handlebars", engine());
-app.set("view engine", "hbs");
-app.set("views", "./views/");
+// app.engine("handlebars", engine());
+// app.set("view engine", "hbs");
+// app.set("views", "./views/");
 
 app.use("/api/h2h", h2h);
 app.use("/api/users", users);

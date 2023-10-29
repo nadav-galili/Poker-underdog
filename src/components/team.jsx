@@ -162,14 +162,14 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
               </div>
             </div>
           )}
-          <div className="d-flex flex-column col-8 m-auto justify-content-around">
+          <div className="d-flex flex-column col-10 m-auto justify-content-around">
             <Link
               className="button-72"
               data-toggle="tooltip"
               data-placement="top"
               to={`/newMainTable/${team._id}`}
             >
-              Team Tables & Stats
+              Team Stats
               <IoMdStats className="ms-2" />
               <i className="ps-2 fas fa-angle-double-right"></i>
             </Link>
@@ -221,7 +221,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
             </ul>
           </div>
           {!liveGame && (
-            <Link className="mb-2 button-71" to={`/new-game/${team._id}`}>
+            <Link className="mb-2 button-71 w-75" to={`/new-game/${team._id}`}>
               Start a new game
               <GiCardKingClubs className="ms-2" />
               <i className="ps-2 fas fa-angle-double-right"></i>
