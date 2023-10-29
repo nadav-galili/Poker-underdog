@@ -53,11 +53,11 @@ const MyTeams = () => {
   return (
     <div className="container about">
       <PageHeader titleText="My Teams Page" />
-      <div className="row">
-        <div className="myTeamsContainer col-6 my-3">
-          <img src={apiImage + "images/teamsPage.png"} alt="teams icon" />
-        </div>
+
+      <div className="myTeamsContainer col-6 my-3">
+        <img src={apiImage + "images/teamsPage.png"} alt="teams icon" />
       </div>
+
       <div className="row">
         <div className=" d-flex justify-content-around">
           <Link className="btn btn-primary" to="/create-team">
