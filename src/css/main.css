@@ -940,6 +940,10 @@ canvas {
   height: 100px;
 }
 
+#selectButton {
+  font-size: 0.5em;
+}
+
 #players_select {
   height: 9.8em;
 }
