@@ -28,14 +28,15 @@ const Player = ({ player, selectPlayers, selected }) => {
           >
             {player.nickName}
           </h5>
-          <button
-            type="button"
-            className="btn btn-sm btn-primary card-title d-flex p-0 "
-            onClick={selectPlayers}
-          >
-            +Add/Remove player
-          </button>
         </div>
+        <button
+          type="button"
+          className="btn btn-primary col-8 d-flex w-100 justify-content-center"
+          id="selectButton"
+          onClick={selectPlayers}
+        >
+          +Add/Remove player
+        </button>
       </div>
     </div>
   );
