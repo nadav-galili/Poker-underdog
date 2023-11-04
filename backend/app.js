@@ -63,7 +63,7 @@ app.use("/api/teams", teams);
 app.use("/api/sideBets", sideBets);
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use("/images", express.static(path.join(__dirname, "/images")));
-// app.use("/sounds", express.static(path.join(__dirname, "/sounds")));
+app.use("/israel", express.static(path.join(__dirname, "/israel")));
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Poker-Underground application test." });
