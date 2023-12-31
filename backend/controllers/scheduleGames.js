@@ -44,3 +44,25 @@ exports.saveNewScheduledGame = async (req, res) => {
   await newGame.save();
   res.status(200).send(newGame);
 };
+
+exports.getLatestScheduleGame = async (req, res) => {
+  let teamId = req.params.teamId;
+  ///convert teamId to ObjectId
+  teamId = mongoose.Types.ObjectId(teamId);
+  console.log(typeof teamId);
+  // If teamId is not a valid ObjectId, handle the error
+  if (!mongoose.Types.ObjectId.isValid(teamId)) {
+    return res.status(404).send("Invalid teamId");
+  }
+
+  // Find the latest game for the team
+  const latestGame = await ScheduleGames.find({ teamId: teamId })
+    .sort({ gameDate: -1 })
+    .limit(1);
+
+  if (!latestGame) {
+    return res.status(404).send("Game not found");
+  }
+
+  res.status(200).send(latestGame);
+};

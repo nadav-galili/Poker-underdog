@@ -15,10 +15,10 @@ const SchedulaGameForm = (props) => {
   console.log("dd", team);
 
   useEffect(() => {
-    async function getTeam() {
+    const getTeam = async () => {
       const { data: team } = await teamService.newGetTeam(teamId);
       setTeam(team);
-    }
+    };
     getTeam();
     const fetchUser = async () => {
       const me = await userService.getUserDetails();
@@ -67,7 +67,7 @@ const SchedulaGameForm = (props) => {
           );
           console.log(data);
           if (data._id) {
-            props.history.push(`/scheduledGame/${data._id}`);
+            props.history.push(`/scheduledGame/${teamId}`);
           }
         }}
       >

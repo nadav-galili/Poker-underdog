@@ -9,4 +9,10 @@ router.post(
   scheduleGamesController.saveNewScheduledGame
 );
 
+router.get(
+  "/getLatestScheduleGame/:teamId",
+  auth,
+  scheduleGamesController.getLatestScheduleGame
+);
+
 module.exports = router;
