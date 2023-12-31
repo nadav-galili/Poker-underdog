@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import html2canvas from "html2canvas";
 
 import PageHeader from "../common/pageHeader";
 import { apiImage } from "../../config.json";
@@ -8,11 +9,11 @@ import userService from "../../services/userService";
 import scheduleGameService from "../../services/scheduleGameService";
 
 const SchedulaGame = (props) => {
-  const teamId = props.match.params.teamId;
-  console.log("teamId", teamId);
+  const teamId = props?.match?.params?.teamId || props?.teamId;
+
   const [team, setTeam] = useState({});
   const [game, setGame] = useState({}); // [
-  console.log("dd", team);
+  console.log("dd", game);
   useEffect(() => {
     const getTeam = async () => {
       const { data: team } = await teamService.newGetTeam(teamId);
@@ -29,6 +30,24 @@ const SchedulaGame = (props) => {
     getLatestScheduleGame();
   }, []);
 
+  const captureScreen = () => {
+    html2canvas(document.body).then((canvas) => {
+      canvas.toBlob((blob) => {
+        const file = new File([blob], "screenshot.png", { type: "image/png" });
+        if (navigator.share) {
+          navigator
+            .share({
+              files: [file],
+              title: "Check out this screenshot",
+              text: "Here is a screenshot I wanted to share with you.",
+              link: "https://example.com/screenshot.png",
+            })
+            .catch((err) => console.error("Error sharing:", err));
+        }
+      });
+    });
+  };
+
   return (
     //put team image here
     <div className="container pb-3">
@@ -36,15 +55,15 @@ const SchedulaGame = (props) => {
       <div className="row">
         <div className="col-12 col-lg-6">
           {game.length > 0 && (
-            <div class="card">
-              <img src="..." class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h3 class="card-title goldFont justify-content-center">
+            <div className="card">
+              {/* <img src="..." class="card-img-top" alt="..." /> */}
+              <div className="card-body">
+                <h3 className="card-title text-primary justify-content-center">
                   Date: {new Date(game[0].gameDate).toLocaleDateString()}
                 </h3>
                 <h5 className="text-center">
                   Host:
-                  <div className="hostDetails text-primary d-flex flex-column justify-content-center">
+                  <div className="hostDetails goldFont d-flex flex-column justify-content-center">
                     <Avatar
                       alt={game[0]?.host?.nickName}
                       src={`${apiImage}${game[0]?.host?.image}`}
@@ -54,14 +73,17 @@ const SchedulaGame = (props) => {
                   </div>
                 </h5>
               </div>
-              <p class="card-text text-success">
+              <p className="card-text text-success">
                 <b>Players approved:</b>
               </p>
-              <ul class="list-group list-group-flush">
+              <ul className="list-group list-group-flush">
                 {game[0]?.guests?.map((guest) => {
                   if (guest.guestAnswer === "Yes") {
                     return (
-                      <li class="list-group-item d-flex align-items-center">
+                      <li
+                        className="list-group-item d-flex align-items-center"
+                        key={guest._id}
+                      >
                         <Avatar
                           alt={guest.nickName}
                           src={`${apiImage}${guest.image}`}
@@ -73,14 +95,17 @@ const SchedulaGame = (props) => {
                   return null;
                 })}
               </ul>
-              <p class="card-text text-danger">
+              <p className="card-text text-danger">
                 <b>Players declined:</b>
               </p>
-              <ul class="list-group list-group-flush">
+              <ul className="list-group list-group-flush">
                 {game[0]?.guests?.map((guest) => {
-                  if (guest.guestAnswer === "Yes") {
+                  if (guest.guestAnswer === "No") {
                     return (
-                      <li class="list-group-item d-flex align-items-center">
+                      <li
+                        className="list-group-item d-flex align-items-center"
+                        key={guest._id}
+                      >
                         <Avatar
                           alt={guest.nickName}
                           src={`${apiImage}${guest.image}`}
@@ -92,14 +117,12 @@ const SchedulaGame = (props) => {
                   return null;
                 })}
               </ul>
-              <div class="card-body">
-                <a href="#" class="card-link">
-                  Card link
-                </a>
-                <a href="#" class="card-link">
-                  Another link
-                </a>
-              </div>
+              <button
+                className="btn btn-success"
+                onClick={async () => captureScreen()}
+              >
+                share
+              </button>
             </div>
           )}
         </div>

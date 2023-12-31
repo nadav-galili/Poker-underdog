@@ -15,4 +15,10 @@ router.get(
   scheduleGamesController.getLatestScheduleGame
 );
 
+router.get(
+  "/getScheduledGameById/:gameId",
+  auth,
+  scheduleGamesController.getScheduledGameById
+);
+
 module.exports = router;

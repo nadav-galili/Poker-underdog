@@ -66,3 +66,14 @@ exports.getLatestScheduleGame = async (req, res) => {
 
   res.status(200).send(latestGame);
 };
+
+exports.getScheduledGameById = async (req, res) => {
+  // Find the game by id
+  const game = await ScheduleGames.findById(req.params.gameId);
+
+  if (!game) {
+    return res.status(404).send("Game not found");
+  }
+
+  res.status(200).send(game);
+};
