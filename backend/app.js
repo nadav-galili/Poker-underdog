@@ -4,6 +4,7 @@ const games = require("./routes/games");
 const teams = require("./routes/teams");
 const h2h = require("./routes/h2h");
 const sideBets = require("./routes/sideBets");
+const scheduleGames = require("./routes/scheduleGames");
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -16,28 +17,28 @@ require("dotenv").config();
 // const hbs = require("nodemailer-express-handlebars");
 //  const hbs = require("hbs")
 // const { engine } = require("express-handlebars");
-mongoose
-  .connect(
-    `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@${process.env.CLUSTER}/${process.env.DB}?retryWrites=true&w=majority`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    }
-  )
-  .then(() => console.log("Connected to MongoDB remote..."))
-  .catch((err) => console.error(err, "Could not connect to MongoDB..."));
-
 // mongoose
-//   .connect("mongodb://localhost:27017/myFirstDatabase", {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//   })
-//   .then(() => console.log("Connected to MongoDB local..."))
-//   .catch((err) => console.error(err, "Could not connect to MongoDB local..."));
+//   .connect(
+//     `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@${process.env.CLUSTER}/${process.env.DB}?retryWrites=true&w=majority`,
+//     {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//       useCreateIndex: true,
+//       useFindAndModify: false,
+//     }
+//   )
+//   .then(() => console.log("Connected to MongoDB remote..."))
+//   .catch((err) => console.error(err, "Could not connect to MongoDB..."));
+
+mongoose
+  .connect("mongodb://localhost:27017/myFirstDatabase", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log("Connected to MongoDB local..."))
+  .catch((err) => console.error(err, "Could not connect to MongoDB local..."));
 
 // let corsOptions = {
 //   origin: "https://poker-underdog.com",
@@ -61,6 +62,7 @@ app.use("/api/auth", auth);
 app.use("/api/games", games);
 app.use("/api/teams", teams);
 app.use("/api/sideBets", sideBets);
+app.use("/api/scheduleGames", scheduleGames);
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use("/images", express.static(path.join(__dirname, "/images")));
 app.use("/israel", express.static(path.join(__dirname, "/israel")));
