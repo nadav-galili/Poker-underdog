@@ -7,7 +7,6 @@ const scheduleGamesSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
-
     teamId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Team",
@@ -16,21 +15,21 @@ const scheduleGamesSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    hostId: {
-      type: String,
+    host: {
+      type: Object,
       required: true,
     },
-    hostName: {
-      type: String,
-    },
+
     guests: {
       type: Array,
+      required: true,
+      default: [],
     },
   },
   { timestamps: true }
 );
 
-const scheduleGames = mongoose.model("scheduleGames", scheduleGamesSchema);
+const ScheduleGames = mongoose.model("ScheduleGames", scheduleGamesSchema);
 
 function validateScheduleGames(game) {
   const schema = Joi.object({
@@ -38,10 +37,9 @@ function validateScheduleGames(game) {
     teamId: Joi.string().required(),
     teamName: Joi.string().required(),
     hostId: Joi.string().required(),
-    hostName: Joi.string(),
-    guests: Joi.array(),
+    guests: Joi.array().required(),
   });
   return schema.validate(game);
 }
-exports.scheduleGames = scheduleGames;
+exports.ScheduleGames = ScheduleGames;
 exports.validate = validateScheduleGames;

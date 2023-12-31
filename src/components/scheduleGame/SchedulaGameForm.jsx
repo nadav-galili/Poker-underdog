@@ -48,22 +48,27 @@ const SchedulaGameForm = (props) => {
           }
           return errors;
         }}
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
           // Handle form submission here
-          console.log(values);
+          //console.log(values);
           const answer = {};
           answer.gameDate = values.date;
-          answer.hostId = values.host;
-          answer.guestAnswer = values.guest;
+          answer.hostId = values.host ? values.host : "TBA";
           answer.teamId = teamId;
           answer.teamName = team.name;
-          answer.guestId = user._id;
-          answer.guestNickName = user.nickName;
-          answer.guestImage = user.image;
-          answer.hostName = team.players.find(
-            (player) => player._id === values.host
-          )?.nickName;
-          scheduleGameService.saveNewScheduledGame(answer);
+          answer.guests = [];
+          const guest1 = {};
+          guest1.guestId = user._id;
+          guest1.guestAnswer = values.guest;
+          answer.guests.push(guest1);
+
+          const { data } = await scheduleGameService.saveNewScheduledGame(
+            answer
+          );
+          console.log(data);
+          if (data._id) {
+            props.history.push(`/scheduledGame/${data._id}`);
+          }
         }}
       >
         <div className="row">
@@ -113,15 +118,18 @@ const SchedulaGameForm = (props) => {
                   <Avatar src={`${apiImage}${user.image}`} alt={user.name} />
                   <p className="ms-2 text-primary">{user.nickName}</p>
                 </div>
-                <div className="d-flex justify-content-around col-6">
+                <div className="d-flex justify-content-around col-6 mt-2">
                   <Field
                     type="radio"
                     name="guest"
                     id="guest-yes"
                     className="form-check-input"
-                    value="yes"
+                    value="Yes"
                   />
-                  <label htmlFor="guest-yes" className="text-success">
+                  <label
+                    htmlFor="guest-yes"
+                    className="text-success bg-white px-2"
+                  >
                     Yes
                   </label>
                   <Field
@@ -129,9 +137,12 @@ const SchedulaGameForm = (props) => {
                     name="guest"
                     id="guest-no"
                     className="form-check-input"
-                    value="no"
+                    value="No"
                   />
-                  <label htmlFor="guest-no" className="text-danger">
+                  <label
+                    htmlFor="guest-no"
+                    className="text-danger bg-white px-2"
+                  >
                     No
                   </label>
                 </div>
