@@ -16,7 +16,7 @@ const JoinScheduledGame = (props) => {
   const [guest, setGuest] = useState("");
   console.log(
     "🚀 ~ file: JoinScheduledGame.jsx:17 ~ JoinScheduledGame ~ guest:",
-    guest
+    guest.guestAnswer
   );
 
   useEffect(() => {
@@ -34,18 +34,21 @@ const JoinScheduledGame = (props) => {
     };
     fetchUser();
   }, []);
-  console.log("game", game);
   useEffect(() => {
     if (game && game.guests) {
       game.guests.forEach((guest) => {
         if (guest.guestId === user._id) {
-          console.log("guest", guest);
           //populate the radio button with the guest answer
           setGuest(guest);
+        } else {
+          setGuest([{ guestAnswer: "" }]);
         }
       });
     }
   }, [game, user]);
+  if (!guest) {
+    return null; // Render nothing until guest is set
+  }
 
   return (
     <div className="container">
@@ -53,8 +56,8 @@ const JoinScheduledGame = (props) => {
 
       <Formik
         initialValues={{
-          //if game.guests array has _id that equals to user._id then set guest to game.guests.guestAnswer
-          guest: guest ? guest.guestAnswer : false,
+          //check the radio button with the guest answer
+          guest: guest ? guest.guestAnswer : undefined,
         }}
         validate={(values) => {
           const errors = {};
@@ -78,7 +81,7 @@ const JoinScheduledGame = (props) => {
               },
             ],
           };
-          console.log(answer);
+          console.log("aaa", answer);
           // const { data } = await scheduleGameService.joinScheduledGame(answer);
           // console.log(data);
           //window.location = "/scheduleGame/" + game.teamId;
@@ -104,7 +107,7 @@ const JoinScheduledGame = (props) => {
                         id="guest-yes"
                         className="form-check-input"
                         value="Yes"
-                        checked={guest.guestAnswer === "Yes"}
+                        //checked={guest.guestAnswer === "Yes"}
                       />
                       <label
                         htmlFor="guest-yes"
@@ -118,7 +121,7 @@ const JoinScheduledGame = (props) => {
                         id="guest-no"
                         className="form-check-input"
                         value="No"
-                        checked={guest.guestAnswer === "No"}
+                        //  checked={guest.guestAnswer === "No"}
                       />
                       <label
                         htmlFor="guest-no"
