@@ -13,7 +13,6 @@ const SchedulaGame = (props) => {
 
   const [team, setTeam] = useState({});
   const [game, setGame] = useState({}); // [
-  console.log("dd", game);
   useEffect(() => {
     const getTeam = async () => {
       const { data: team } = await teamService.newGetTeam(teamId);
