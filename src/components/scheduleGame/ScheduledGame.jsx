@@ -5,14 +5,16 @@ import PageHeader from "../common/pageHeader";
 import { apiImage } from "../../config.json";
 import Avatar from "@material-ui/core/Avatar";
 import teamService from "../../services/teamService";
-import userService from "../../services/userService";
+// import userService from "../../services/userService";
 import scheduleGameService from "../../services/scheduleGameService";
 
 const SchedulaGame = (props) => {
   const teamId = props?.match?.params?.teamId || props?.teamId;
 
   const [team, setTeam] = useState({});
+  console.log("🚀 ~ file: ScheduledGame.jsx:15 ~ SchedulaGame ~ team:", team);
   const [game, setGame] = useState({}); // [
+
   useEffect(() => {
     const getTeam = async () => {
       const { data: team } = await teamService.newGetTeam(teamId);
@@ -65,10 +67,19 @@ const SchedulaGame = (props) => {
                   <div className="hostDetails goldFont d-flex flex-column justify-content-center">
                     <Avatar
                       alt={game[0]?.host?.nickName}
-                      src={`${apiImage}${game[0]?.host?.image}`}
+                      src={
+                        game[0]?.host?.nickName === "TBA"
+                          ? `${apiImage}images/donkey.webp`
+                          : game[0]?.host?.image
+                      }
                       className="mx-auto"
+                      style={{ width: "4em", height: "4em" }}
                     />
-                    {game[0]?.host?.nickName}
+                    {game[0]?.host?.nickName === "TBA" ? (
+                      <p className="text-center">Decide Later...</p>
+                    ) : (
+                      <p className="text-center">{game[0]?.host?.nickName}</p>
+                    )}
                   </div>
                 </h5>
               </div>
@@ -80,14 +91,26 @@ const SchedulaGame = (props) => {
                   if (guest.guestAnswer === "Yes") {
                     return (
                       <li
-                        className="list-group-item d-flex align-items-center"
+                        className="list-group-item d-flex align-items-center justify-content-between w-50"
                         key={guest._id}
                       >
-                        <Avatar
-                          alt={guest.nickName}
-                          src={`${apiImage}${guest.image}`}
-                        />
-                        {guest.nickName}
+                        {" "}
+                        <span className="d-flex align-items-center">
+                          <Avatar
+                            alt={guest.nickName}
+                            src={`${apiImage}${guest.image}`}
+                          />
+                          {guest.nickName}
+                        </span>
+                        <span>
+                          {new Date(guest.createdAt).toLocaleString("en-GB", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "2-digit",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </span>
                       </li>
                     );
                   }

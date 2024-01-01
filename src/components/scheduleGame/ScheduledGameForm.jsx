@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FormGroup, FormLabel, FormControl, Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 import PageHeader from "../common/pageHeader";
 import { apiImage } from "../../config.json";
 import Avatar from "@material-ui/core/Avatar";
@@ -12,7 +13,6 @@ const SchedulaGameForm = (props) => {
   const teamId = props.match.params.teamId;
   const [team, setTeam] = useState({});
   const [user, setUser] = useState({});
-  console.log("dd", team);
 
   useEffect(() => {
     const getTeam = async () => {
@@ -65,9 +65,11 @@ const SchedulaGameForm = (props) => {
           const { data } = await scheduleGameService.saveNewScheduledGame(
             answer
           );
-          console.log(data);
           if (data._id) {
+            toast.success("Game Scheduled Successfully");
             props.history.push(`/scheduledGame/${teamId}`);
+          } else {
+            toast.error("Something went wrong");
           }
         }}
       >

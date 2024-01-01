@@ -12,8 +12,16 @@ export function getLatestScheduleGame(teamId) {
 export function getScheduledGameById(gameId) {
   return http.get(`${apiUrl}/scheduleGames/getScheduledGameById/${gameId}`);
 }
+
+export function updateScheduledGame(gameData) {
+  return http.put(
+    `${apiUrl}/scheduleGames/updateScheduledGame/${gameData.gameId}`,
+    gameData
+  );
+}
 export default {
   saveNewScheduledGame,
   getLatestScheduleGame,
   getScheduledGameById,
+  updateScheduledGame,
 };

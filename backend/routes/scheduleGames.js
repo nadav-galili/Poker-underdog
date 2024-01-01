@@ -21,4 +21,9 @@ router.get(
   scheduleGamesController.getScheduledGameById
 );
 
+router.put(
+  "/updateScheduledGame/:gameId",
+  auth,
+  scheduleGamesController.updateScheduledGame
+);
 module.exports = router;
