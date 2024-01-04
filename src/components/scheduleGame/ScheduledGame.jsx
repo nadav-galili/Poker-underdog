@@ -150,7 +150,7 @@ const SchedulaGame = (props) => {
                   if (guest.guestAnswer === "Yes") {
                     return (
                       <li
-                        className="list-group-item d-flex align-items-center justify-content-between w-75"
+                        className="list-group-item d-flex align-items-center justify-content-between "
                         key={guest._id}
                       >
                         {" "}
@@ -159,6 +159,7 @@ const SchedulaGame = (props) => {
                           <Avatar
                             alt={guest.nickName}
                             src={`${apiImage}${guest.image}`}
+                            className="ms-2"
                           />
                           {guest.nickName}
                         </span>
@@ -193,6 +194,7 @@ const SchedulaGame = (props) => {
                           <Avatar
                             alt={guest.nickName}
                             src={`${apiImage}${guest.image}`}
+                            className="ms-2"
                           />
                           {guest.nickName}
                         </span>
