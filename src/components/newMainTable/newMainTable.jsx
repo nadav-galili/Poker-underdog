@@ -3,8 +3,11 @@ import _ from "lodash";
 import ClockSpinner from "./clockSpinner";
 import teamService from "../../services/teamService";
 import gameServices from "../../services/gameService";
+import scheduleGameService from "../../services/scheduleGameService";
 import { apiImage } from "../../config.json";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { MdDateRange } from "react-icons/md";
 
 import AllGamesList from "./allGamesList";
 import BigCard from "./bigCard";
@@ -21,6 +24,7 @@ const NewMainTable = (props) => {
   const [team, setTeam] = useState({});
   const [totalStats, setTotalStats] = useState({});
   const [seasonDates, setSeasonDates] = useState({});
+  const [latestScheduledGame, setLatestScheduledGame] = useState("");
 
   useEffect(() => {
     async function getTeam() {
@@ -37,6 +41,15 @@ const NewMainTable = (props) => {
     }
     getTotalStatsForTeam();
   }, [seasonDates]);
+
+  useEffect(() => {
+    const getLatestScheduledGame = async () => {
+      const { data: scheduleGame } =
+        await scheduleGameService.getLatestScheduleGame(teamId);
+      setLatestScheduledGame(scheduleGame);
+    };
+    getLatestScheduledGame();
+  }, []);
 
   const updateSeasonDates = (startDate, endDate, seasonPick) => {
     startDate = startDate || `${seasonPick}-01-01`;
@@ -109,6 +122,32 @@ const NewMainTable = (props) => {
       {!_.isEmpty(totalStats) && (
         <>
           <TotalStatsForTeam totalStats={totalStats} />
+          <div className="d-flex flex-column w-75  mx-auto mt-3">
+            {latestScheduledGame.length < 1 && (
+              <Link
+                className="button-73 py-2 mb-2"
+                data-toggle="tooltip"
+                data-placement="top"
+                to={`/scheduleGame/${team._id}`}
+              >
+                Schedule A New Game
+                <MdDateRange className="ms-2" />
+                <i className="ps-2 fas fa-angle-double-right"></i>
+              </Link>
+            )}
+            {latestScheduledGame.length > 0 && (
+              <Link
+                className="button-77 py-2 mb-2"
+                data-toggle="tooltip"
+                data-placement="top"
+                to={`/JoinScheduledGame/${latestScheduledGame[0]?._id}`}
+              >
+                Join a scheduled game
+                <MdDateRange className="ms-2" />
+                <i className="ps-2 fas fa-angle-double-right"></i>
+              </Link>
+            )}
+          </div>
           <div className="odds text-center">
             <a
               href="https://www.cardschat.com/poker/tools/poker-odds-calculator/"

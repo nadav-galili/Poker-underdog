@@ -26,4 +26,10 @@ router.put(
   auth,
   scheduleGamesController.updateScheduledGame
 );
+
+router.put(
+  "/updateHost/:gameId/:hostId",
+  auth,
+  scheduleGamesController.updateHost
+);
 module.exports = router;

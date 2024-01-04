@@ -15,6 +15,10 @@ const scheduleGamesSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    teamImage: {
+      type: String,
+      required: true,
+    },
     host: {
       type: Object,
       required: true,
@@ -36,6 +40,7 @@ function validateScheduleGames(game) {
     gameDate: Joi.date().required(),
     teamId: Joi.string().required(),
     teamName: Joi.string().required(),
+    teamImage: Joi.string().required(),
     hostId: Joi.string().required(),
     guests: Joi.array().required(),
   });

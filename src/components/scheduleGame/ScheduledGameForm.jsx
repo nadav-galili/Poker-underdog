@@ -56,6 +56,7 @@ const SchedulaGameForm = (props) => {
           answer.hostId = values.host ? values.host : "TBA";
           answer.teamId = teamId;
           answer.teamName = team.name;
+          answer.teamImage = team.teamImage;
           answer.guests = [];
           const guest1 = {};
           guest1.guestId = user._id;
@@ -74,6 +75,16 @@ const SchedulaGameForm = (props) => {
         }}
       >
         <div className="row">
+          <div
+            className="logoContainer w-50 h-50  d-flex  mx-auto mt-2"
+            id="logoContainer"
+          >
+            <img
+              src={`${apiImage}${team.teamImage}`}
+              alt="teamLogo"
+              className="h-100 w-100 "
+            />
+          </div>
           <div className="col-12 d-flex justify-content-center">
             <Form>
               <FormGroup className="d-flex flex-column">

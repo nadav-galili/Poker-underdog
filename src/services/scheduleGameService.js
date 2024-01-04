@@ -19,9 +19,14 @@ export function updateScheduledGame(gameData) {
     gameData
   );
 }
+
+export function updateHost(gamId, hostId) {
+  return http.put(`${apiUrl}/scheduleGames/updateHost/${gamId}/${hostId}`);
+}
 export default {
   saveNewScheduledGame,
   getLatestScheduleGame,
   getScheduledGameById,
   updateScheduledGame,
+  updateHost,
 };

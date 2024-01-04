@@ -10,10 +10,6 @@ exports.saveNewScheduledGame = async (req, res) => {
 
   const game = req.body;
   let hostId = req.body.hostId;
-  console.log(
-    "🚀 ~ file: scheduleGames.js:12 ~ exports.saveNewScheduledGame= ~ m:",
-    hostId
-  );
 
   // Find guest and host details and convert them to plain objects
   let guest = await User.findById(game.guests[0].guestId)
@@ -49,6 +45,7 @@ exports.saveNewScheduledGame = async (req, res) => {
     gameDate: game.gameDate,
     teamId: game.teamId,
     teamName: game.teamName,
+    teamImage: game.teamImage,
     host: host,
     guests: [guest],
   });
@@ -66,8 +63,15 @@ exports.getLatestScheduleGame = async (req, res) => {
     return res.status(404).send("Invalid teamId");
   }
 
-  // Find the latest game for the team
-  const latestGame = await ScheduleGames.find({ teamId: teamId })
+  // Get today's date
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Set the time to 00:00:00
+
+  // Find the latest game for the team where gameDate is equal to or larger than today
+  const latestGame = await ScheduleGames.find({
+    teamId: teamId,
+    gameDate: { $gte: today },
+  })
     .sort({ gameDate: -1 })
     .limit(1);
 
@@ -139,6 +143,43 @@ exports.updateScheduledGame = async (req, res) => {
     {
       new: true,
       arrayFilters: [{ "element._id": mongoose.Types.ObjectId(guestId) }],
+    }
+  );
+
+  res.status(200).send(updatedGame);
+};
+
+exports.updateHost = async (req, res) => {
+  const gameId = req.params.gameId;
+  const hostId = req.params.hostId;
+  let host = "";
+  const scheduledGame = await ScheduleGames.findById(gameId);
+
+  if (!scheduledGame) {
+    return res.status(404).send("Game not found");
+  }
+
+  if (hostId !== "TBA") {
+    // Find the host in the guests array
+    host = await User.findById(hostId).select("_id nickName image").lean();
+
+    if (!host) {
+      return res.status(404).send("Host not found");
+    }
+  } else {
+    host = { _id: "TBA", nickName: "TBA", image: "TBA" };
+  }
+
+  // Update the game
+  const updatedGame = await ScheduleGames.findByIdAndUpdate(
+    gameId,
+    {
+      $set: {
+        host: host,
+      },
+    },
+    {
+      new: true,
     }
   );
 

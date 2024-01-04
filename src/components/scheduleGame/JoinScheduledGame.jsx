@@ -71,16 +71,13 @@ const JoinScheduledGame = (props) => {
               guestId: user._id,
               gameId: game._id,
             };
-            console.log("aaa", answer);
+
             const { data } = await scheduleGameService.updateScheduledGame(
               answer
             );
-            console.log(
-              "🚀 ~ file: JoinScheduledGame.jsx:78 ~ onSubmit={ ~ data:",
-              data
-            );
+
             if (data) {
-              toast("Your answer was saved successfully");
+              toast.success("Your answer was saved successfully");
               props.history.push(`/scheduledGame/${game.teamId}`);
             } else {
               toast.error("Something went wrong");
