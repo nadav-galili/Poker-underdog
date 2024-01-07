@@ -1,4 +1,8 @@
 {
   "apiUrl": "https://pokerunder.net/api",
-  "apiImage": "https://pokerunder.net/"
+  "apiImage": "https://pokerunder.net/",
+  "apiUrlProd": "https://pokerunder.net/api",
+  "apiImageProd": "https://pokerunder.net/",
+  "apiUrlDev": "http://localhost:3900/api",
+  "apiImageDev": "http://localhost:3900/"
 }

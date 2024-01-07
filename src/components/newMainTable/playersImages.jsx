@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { apiImage } from "../../config.json";
 import { Link } from "react-router-dom";
 

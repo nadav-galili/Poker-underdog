@@ -38,6 +38,9 @@ import MonthlyStats from "./components/topStats/monthlyStats";
 import sidebetsMain from "./components/sidebets/sidebetsMain";
 import NewSideBet from "./components/sidebets/NewSideBet";
 import NewMainTable from "./components/newMainTable/newMainTable";
+import SchedulaGameForm from "./components/scheduleGame/ScheduledGameForm";
+import SchedulaGame from "./components/scheduleGame/ScheduledGame";
+import JoinScheduledGame from "./components/scheduleGame/JoinScheduledGame";
 
 import ReactGA from "react-ga";
 
@@ -166,6 +169,18 @@ function App() {
             <ProtectedRoute
               path="/newMainTable/:teamId"
               component={NewMainTable}
+            />
+            <ProtectedRoute
+              path="/scheduleGame/:teamId"
+              component={SchedulaGameForm}
+            />
+            <ProtectedRoute
+              path="/scheduledGame/:teamId"
+              component={SchedulaGame}
+            />
+            <ProtectedRoute
+              path="/joinScheduledGame/:teamId"
+              component={JoinScheduledGame}
             />
             <Route path="/demo" component={Demo} />
             <Route path="/about" component={About} />

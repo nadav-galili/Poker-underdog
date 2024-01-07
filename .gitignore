@@ -6,7 +6,7 @@
 /backend/node_modules
 /backend/config.js
 /backend/uploads/*
-/backend/images/
+
 /backend/mykey.pem
 /backend/.env
 

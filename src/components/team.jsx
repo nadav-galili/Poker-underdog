@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { apiImage } from "../config.json";
 import { GiCardKingClubs } from "react-icons/gi";
 import { IoMdStats } from "react-icons/io";
+import { MdDateRange } from "react-icons/md";
 import { AiFillEdit } from "react-icons/ai";
 import gameService from "../services/gameService";
 import teamService from "../services/teamService";
@@ -89,6 +90,7 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
               </span>
             </b>
           </p>
+
           {liveGame && (
             <div className="liveGames ">
               <Link
@@ -163,6 +165,16 @@ const Team = ({ team, removeTeam, teamid, user, teamNumber }) => {
             </div>
           )}
           <div className="d-flex flex-column col-10 m-auto justify-content-around">
+            <Link
+              className="button-73 py-2 mb-2"
+              data-toggle="tooltip"
+              data-placement="top"
+              to={`/scheduleGame/${team._id}`}
+            >
+              Schedule A New Game
+              <MdDateRange className="ms-2" />
+              <i className="ps-2 fas fa-angle-double-right"></i>
+            </Link>
             <Link
               className="button-72 py-2"
               data-toggle="tooltip"
