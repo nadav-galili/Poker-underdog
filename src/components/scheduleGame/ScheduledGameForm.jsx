@@ -50,7 +50,7 @@ const SchedulaGameForm = (props) => {
         }}
         onSubmit={async (values) => {
           // Handle form submission here
-          //console.log(values);
+
           const answer = {};
           answer.gameDate = values.date;
           answer.hostId = values.host ? values.host : "TBA";

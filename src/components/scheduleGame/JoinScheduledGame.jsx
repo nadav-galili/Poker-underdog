@@ -11,10 +11,7 @@ import SchedulaGame from "./ScheduledGame";
 const JoinScheduledGame = (props) => {
   const gameid = props.match.params.teamId;
   const [game, setGame] = useState({});
-  console.log(
-    "🚀 ~ file: JoinScheduledGame.jsx:14 ~ JoinScheduledGame ~ game:",
-    game
-  );
+
   const [user, setUser] = useState({});
   const [guest, setGuest] = useState("");
 
@@ -88,7 +85,7 @@ const JoinScheduledGame = (props) => {
             <Form>
               <div className="row">
                 <div className="col-12 col-md-6 d-flex justify-content-center">
-                  <FormGroup className="d-flex flex-column my-3">
+                  <FormGroup className="d-flex flex-column mb-3">
                     <FormLabel htmlFor="guest" className="goldFont">
                       Check the box to register to the game
                     </FormLabel>

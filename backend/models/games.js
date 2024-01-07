@@ -37,6 +37,10 @@ const gameSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    scheduledGame: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ScheduleGames", //reference to the ScheduleGames collection
+    },
   },
   { timestamps: true }
 );

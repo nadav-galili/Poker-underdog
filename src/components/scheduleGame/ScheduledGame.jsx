@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import html2canvas from "html2canvas";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-
+import ClockSpinner from "../newMainTable/clockSpinner";
+import _ from "lodash";
 import PageHeader from "../common/pageHeader";
 import { apiImage } from "../../config.json";
 import Avatar from "@material-ui/core/Avatar";
 import teamService from "../../services/teamService";
-// import userService from "../../services/userService";
 import scheduleGameService from "../../services/scheduleGameService";
 
 const SchedulaGame = (props) => {
@@ -15,6 +14,7 @@ const SchedulaGame = (props) => {
 
   const [team, setTeam] = useState({});
   const [game, setGame] = useState({});
+  console.log("🚀 ~ file: ScheduledGame.jsx:18 ~ game:", game);
   const [host, setHost] = useState({});
 
   useEffect(() => {
@@ -32,27 +32,8 @@ const SchedulaGame = (props) => {
     getLatestScheduleGame();
   }, []);
 
-  const captureScreen = () => {
-    html2canvas(document.body).then((canvas) => {
-      canvas.toBlob((blob) => {
-        const file = new File([blob], "screenshot.png", { type: "image/png" });
-        if (navigator.share) {
-          navigator
-            .share({
-              files: [file],
-              title: "Check out this screenshot",
-              text: "Here is a screenshot I wanted to share with you.",
-              link: "https://example.com/screenshot.png",
-            })
-            .catch((err) => console.error("Error sharing:", err));
-        }
-      });
-    });
-  };
-
   const updateHost = async () => {
     const hostId = host._id;
-    //console.log(game[0]._id, hostId);
     const updateHost = await scheduleGameService.updateHost(game._id, hostId);
     if (updateHost.status === 200) {
       const saveBtn = document.querySelector(".btn-primary");
@@ -81,6 +62,7 @@ const SchedulaGame = (props) => {
     //put team image here
     <div className="container pb-3">
       <PageHeader titleText="Scheduled Games" />
+      {_.isEmpty(game) && <ClockSpinner />}
       <div className="row">
         <div className="col-12 col-lg-6">
           {game && (
@@ -96,7 +78,7 @@ const SchedulaGame = (props) => {
                 />
               </div>
               <div className="card-body">
-                <h3 className="card-title text-primary justify-content-center">
+                <h3 className="card-title text-primary justify-content-center mt-0">
                   Date: {new Date(game.gameDate).toLocaleDateString()}
                 </h3>
                 <h4 className="text-center">Host:</h4>
@@ -106,7 +88,7 @@ const SchedulaGame = (props) => {
                     src={
                       game?.host?.nickName === "TBA"
                         ? `${apiImage}images/donkey.webp`
-                        : game?.host?.image
+                        : `${apiImage}${game?.host?.image}`
                     }
                     className="mx-auto"
                     style={{ width: "4em", height: "4em" }}
@@ -138,15 +120,11 @@ const SchedulaGame = (props) => {
                   </button>
                 </div>
               </div>
-              <p className="card-text text-success">
-                <b>Players approved:</b>
+              <p className="card-text text-success fw-bolder text-decoration-underline">
+                Players approved:
               </p>
               <ul className="list-group list-group-flush">
                 {game?.guests?.map((guest) => {
-                  console.log(
-                    "🚀 ~ file: ScheduledGame.jsx:91 ~ {game?.guests?.map ~ guest:",
-                    guest
-                  );
                   if (guest.guestAnswer === "Yes") {
                     return (
                       <li
@@ -178,7 +156,7 @@ const SchedulaGame = (props) => {
                   return null;
                 })}
               </ul>
-              <p className="card-text text-danger">
+              <p className="card-text text-danger  fw-bolder text-decoration-underline">
                 <b>Players declined:</b>
               </p>
               <ul className="list-group list-group-flush">
@@ -186,7 +164,7 @@ const SchedulaGame = (props) => {
                   if (guest.guestAnswer === "No") {
                     return (
                       <li
-                        className="list-group-item d-flex align-items-center justify-content-between w-75"
+                        className="list-group-item d-flex align-items-center justify-content-between "
                         key={guest._id}
                       >
                         <span className="d-flex align-items-center ">
@@ -213,12 +191,6 @@ const SchedulaGame = (props) => {
                   return null;
                 })}
               </ul>
-              <button
-                className="btn btn-success"
-                onClick={async () => captureScreen()}
-              >
-                share
-              </button>
             </div>
           )}
         </div>

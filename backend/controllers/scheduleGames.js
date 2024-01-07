@@ -98,10 +98,7 @@ exports.updateScheduledGame = async (req, res) => {
   const { guestAnswer, guestId } = req.body;
 
   const scheduledGame = await ScheduleGames.findById(gameId);
-  console.log(
-    "🚀 ~ file: scheduleGames.js:87 ~ exports.updateScheduledGame= ~ scheduledGame:",
-    scheduledGame.guests
-  );
+
   if (!scheduledGame) {
     return res.status(404).send("Game not found");
   }

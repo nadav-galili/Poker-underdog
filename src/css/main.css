@@ -2002,7 +2002,7 @@ label {
      object-fit: cover;
   border-radius: 5px;
   border: 1px solid gold;
-  background-image: linear-gradient(#2752ea, #fcfcfc);
+  background-image: linear-gradient(to bottom right, #2752ea, #b587f1);
 }
 
 .leaderImageSmall {
@@ -2110,7 +2110,7 @@ label {
   border: 1px solid gold;
   -o-object-fit: cover;
      object-fit: cover;
-  background-image: linear-gradient(to bottom right, #2752ea, #d7d5d5);
+  background-image: linear-gradient(to bottom right, #2752ea, #b587f1);
 }
 
 .playerName {
@@ -2119,7 +2119,7 @@ label {
 }
 
 .profitCard, .vsContainer {
-  background-image: linear-gradient(to bottom right, #2752ea, #d7d5d5);
+  background-image: linear-gradient(to bottom right, #2752ea, #b587f1);
 }
 
 .profitsContainer, .smallCardContainer {
@@ -2318,6 +2318,10 @@ label {
 
 .list-group-item:nth-child(odd) {
   background-color: #d0d6da; /* Light gray color, adjust as needed */
+}
+
+#shareBtn {
+  background-color: #25d366;
 }
 
 main {

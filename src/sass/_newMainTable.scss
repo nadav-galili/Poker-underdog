@@ -30,7 +30,11 @@
     object-fit: cover;
     border-radius: 5px;
     border: 1px solid $baseColorGold;
-    background-image: linear-gradient($headerColorBlue, $navbarWhite);
+    background-image: linear-gradient(
+      to bottom right,
+      $headerColorBlue,
+      #b587f1
+    );
   }
 }
 
@@ -146,7 +150,7 @@
   width: 2em;
   border: 1px solid $baseColorGold;
   object-fit: cover;
-  background-image: linear-gradient(to bottom right, $headerColorBlue, #d7d5d5);
+  background-image: linear-gradient(to bottom right, $headerColorBlue, #b587f1);
 }
 
 .playerName {
@@ -154,7 +158,7 @@
   font-size: 0.5em;
 }
 .profitCard {
-  background-image: linear-gradient(to bottom right, $headerColorBlue, #d7d5d5);
+  background-image: linear-gradient(to bottom right, $headerColorBlue, #b587f1);
 }
 
 .profitsContainer {

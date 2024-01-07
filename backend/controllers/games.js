@@ -2,6 +2,7 @@
 
 const _ = require("lodash");
 const { Game, validate } = require("../models/games");
+const { ScheduleGames } = require("../models/scheduleGames");
 const mongoose = require("mongoose");
 const c = require("config");
 // const { Team } = require("../models/teams");
@@ -527,6 +528,22 @@ exports.newGame = async function (req, res) {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
+  const teamId = mongoose.Types.ObjectId(req.body.team_id);
+
+  const start = new Date();
+  start.setUTCHours(0, 0, 0, 0);
+
+  const end = new Date();
+  end.setUTCHours(23, 59, 59, 999);
+
+  const scheduledGame = await ScheduleGames.findOne({
+    teamId: teamId,
+    gameDate: {
+      $gte: start,
+      $lte: end,
+    },
+  });
+
   let game = new Game(
     _.pick(req.body, [
       "team_name",
@@ -537,6 +554,12 @@ exports.newGame = async function (req, res) {
       "cashing_details",
     ])
   );
+
+  if (scheduledGame) {
+    //create a refrence to scheduledgame
+    game["scheduledGame"] = scheduledGame;
+  }
+
   await game.save();
   res.send(_.pick(game, ["_id", "team_name", "players", "isOpen", "team_id"]));
 };
@@ -2138,9 +2161,18 @@ exports.getAllGamesByTeam = async function (req, res) {
       },
     },
     {
+      $lookup: {
+        from: "schedulegames", // Replace with the actual name of the collection
+        localField: "scheduledGame",
+        foreignField: "_id",
+        as: "scheduledGameDetails",
+      },
+    },
+    {
       $project: {
         isOpen: 1,
         players: 1,
+        scheduledGameDetails: 1,
         game_manager: 1,
         createdAt: 1,
         date: {
