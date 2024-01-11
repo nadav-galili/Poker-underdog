@@ -59,6 +59,7 @@ function validateGame(game) {
     gameId: Joi.string(),
     game_manager: Joi.object(),
     cashing_details: Joi.array(),
+    scheduledGame: Joi.string(),
   });
   return schema.validate(game);
 }
