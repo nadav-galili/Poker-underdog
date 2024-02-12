@@ -11,8 +11,10 @@ const SelectedPlayer = (props) => {
   const teamId = props.teamId;
 
   const [sideBetSum, setSideBetSum] = useState("");
-  const [startDate, setStartDate] = useState("2023-01-01");
-  const [endDate, setEndDate] = useState("2023-12-31");
+  const [startDate, setStartDate] = useState(
+    `01/01/${new Date().getFullYear()}`
+  );
+  const [endDate, setEndDate] = useState(`31/12/${new Date().getFullYear()}`);
   const [masterPlayer, setMasterPlayer] = useState({});
 
   useEffect(() => {
@@ -132,7 +134,7 @@ const SelectedPlayer = (props) => {
               type="date"
               className="w-50"
               value={startDate}
-              min="2023-01-01"
+              min={`01/01/${new Date().getFullYear()}`}
               onChange={(e) => getStartDate(e)}
             />
           </div>
@@ -144,7 +146,7 @@ const SelectedPlayer = (props) => {
               type="date"
               className="w-50"
               value={endDate}
-              max="2023-12-31"
+              max={`31/12/${new Date().getFullYear()}`}
               onChange={(e) => getEndDate(e)}
             />
           </div>
@@ -167,7 +169,7 @@ const SelectedPlayer = (props) => {
         <ul>
           <li>
             You can choose the sum of side bet and the start and end date of the
-            bet (default is january 1st 2023 to december 31st 2023)
+            bet (default is january 1st to december 31st )
           </li>
           <li>
             After you click 'Make A Bet', the second player will see a
